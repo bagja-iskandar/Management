@@ -1,0 +1,175 @@
+/* ============================= */
+/* Tipografi kecil               */
+/* ============================= */
+h1, h3 {
+    margin: 0 0 8px;
+    color: #e8ecf4;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+p {
+    margin: 0 0 10px;
+    color: #cfd4e0;
+}
+
+/* ============================= */
+/* Blok 1: Toolbar (div pertama) */
+/* ============================= */
+div:nth-of-type(1) {
+    display: flex;
+    justify-content: center; /* pusat horizontal */
+    align-items: center;     /* pusat vertikal */
+    gap: 16px;               /* jarak antar elemen */
+    flex-wrap: wrap;
+    margin-bottom: 16px;     /* beri jarak dari KPI cards */
+}
+
+div:nth-of-type(1) input[type="search"] {
+    background: #121c34;
+    color: #f0f2f7;
+    border: 1px solid #1f2a45;
+    border-radius: 12px;
+    padding: 10px 14px;
+    min-width: 240px;
+    transition: border 0.2s;
+}
+
+div:nth-of-type(1) input[type="search"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+div:nth-of-type(1) a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #2f3a5c;
+    background: #111928;
+    color: #f0f2f7;
+    text-decoration: none;
+    transition: background 0.2s, border 0.2s;
+}
+
+div:nth-of-type(1) a:hover {
+    background: #1e2a44;
+    border-color: #4a90e2;
+}
+
+/* ============================= */
+/* Blok 2: KPI Grid              */
+/* ============================= */
+div:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+div:nth-of-type(2) > div {
+    background: #111826;
+    border: 1px solid #1f2738;
+    border-radius: 14px;
+    padding: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+div:nth-of-type(2) > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+div:nth-of-type(2) > div h3 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+div:nth-of-type(2) > div p {
+    margin: 0;
+}
+
+/* ============================= */
+/* Blok 3: Dua kolom             */
+/* ============================= */
+div:nth-of-type(3) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+@media (min-width: 900px) {
+    div:nth-of-type(3) {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+
+div:nth-of-type(3) > div {
+    background: #111826;
+    border: 1px solid #1f2738;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+/* ---- Quick actions (kolom kiri) ---- */
+div:nth-of-type(3) > div:first-child button,
+div:nth-of-type(3) > div:first-child a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #2f3a5c;
+    background: #111928;
+    color: #f0f2f7;
+    text-decoration: none;
+    margin-top: 8px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: background 0.2s, border 0.2s;
+}
+
+div:nth-of-type(3) > div:first-child button:hover,
+div:nth-of-type(3) > div:first-child a:hover {
+    background: #1e2a44;
+    border-color: #4a90e2;
+}
+
+/* ---- Tabel aktivitas (kolom kanan) ---- */
+div:nth-of-type(3) > div:last-child > div > div {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.8fr;
+    gap: 12px;
+    align-items: center;
+}
+
+div:nth-of-type(3) > div:last-child > div > div:first-child {
+    opacity: 0.8;
+    border-bottom: 1px solid #1f2738;
+    padding-bottom: 6px;
+}
+
+div:nth-of-type(3) > div:last-child > div > div:not(:first-child) {
+    padding: 8px 0;
+    border-bottom: 1px dashed #15203a;
+}
+
+/* Badge style untuk span kedua setiap row */
+div:nth-of-type(3) > div:last-child > div > div:not(:first-child) > span:nth-of-type(2) {
+    justify-self: start;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    border: 1px solid #2f3a5c;
+    background: #1a2a3a;
+    color: #e8ecf4;
+}
+
+/* Potong nama panjang di kolom pertama */
+div:nth-of-type(3) > div:last-child > div > div > span:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

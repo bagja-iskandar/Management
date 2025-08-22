@@ -1,0 +1,46 @@
+/* header wrapper */
+header{
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 20px; background: rgba(9,14,27,.6); color: #e8ecf4;
+    border-bottom: 1px solid #1b2235; backdrop-filter: blur(8px);
+}
+
+/* brand */
+header > a:first-of-type{
+    text-decoration: none; color: inherit; font-weight: 900; letter-spacing: .3px;
+}
+
+/* menu (nav sebelum tombol) */
+header > nav{ display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* link menu */
+header > nav a{
+    text-decoration: none; color: inherit; opacity: .9;
+    padding: 6px 10px; border-radius: 10px; border: 1px solid transparent;
+}
+
+header > nav a.router-link-exact-active{ background: #101a31; border-color: #2a3557; }
+/* tombol toggle */
+header > button{
+    border: 1px solid #2a3557; border-radius: 10px; background: #0d1427;
+    color: #e8ecf4; padding: 6px 10px; cursor: pointer;
+}
+
+/* mobile: pakai tombol + nav terakhir (menu mobile) */
+@media (max-width: 820px){
+    header{ flex-wrap: wrap; }
+    header > nav:first-of-type{ display: none; }
+    header > button{ display: inline-flex; }
+    header > nav:last-of-type{
+        display: grid; gap: 8px; width: 100%;
+        padding: 10px 0; border-top: 1px solid #1b2235;
+    }
+}
+
+/* desktop: sembunyikan menu mobile & tombol */
+@media (min-width: 821px){
+    header > nav:first-of-type{ display: flex; }
+    header > button{ display: none; }
+    header > nav:last-of-type{ display: none !important; }
+}
