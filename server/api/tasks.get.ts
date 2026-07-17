@@ -1,8 +1,10 @@
-import { getArray } from "../utils/store"
+import { getArray } from '../utils/store'
+import { withApiHandler } from '../utils/handler'
+import type { Task } from '~/types'
 
-export default defineEventHandler(async () => {
-    const tasks = await getArray<any>('tasks')
-    return tasks
+export default withApiHandler(async () => {
+  const tasks = await getArray<Task>('tasks')
+  return tasks.slice().sort((a, b) => b.date.localeCompare(a.date))
 })
 
 

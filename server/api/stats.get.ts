@@ -1,16 +1,19 @@
-export default defineEventHandler( async () => {
-    const storage = useStorage('data:')
-    const tasks    = (await storage.getItem<any[]>('tasks'))    ?? []
-    const projects = (await storage.getItem<any[]>('projects')) ?? []
-    const visits   = (await storage.getItem<number>('visits'))  ?? 0
+import type { Project, Task } from '~/types'
+import { getArray, getValue } from '../utils/store'
+import { withApiHandler } from '../utils/handler'
 
-    const selesai = tasks.filter(t=> t.status === 'selesai').length
-    const bugs    = tasks.filter(t=> /bug/i.test(t.name) || t.status === 'todo').length // simple proxy
+export default withApiHandler(async () => {
+  const tasks = await getArray<Task>('tasks')
+  const projects = await getArray<Project>('projects')
+  const visits = (await getValue<number>('visits')) ?? 0
 
-    return [
-        { label: 'Total Project', value: projects.length, delta: '+2', trend: 'up' },
-        { label: 'Task Selesai',  value: selesai,         delta: '+1', trend: 'up' },
-        { label: 'Bug Terbuka',   value: bugs,            delta: '-1', trend: 'down' },
-        { label: 'Pengunjung',    value: visits,          delta: '+10', trend: 'up' },
-    ]
+  const selesai = tasks.filter((t) => t.status === 'selesai').length
+  const openTasks = tasks.filter((t) => t.status === 'todo').length
+
+  return [
+    { label: 'Total Project', value: projects.length, delta: '+2', trend: 'up' },
+    { label: 'Task Selesai', value: selesai, delta: '+1', trend: 'up' },
+    { label: 'Task Terbuka', value: openTasks, delta: '-1', trend: 'down' },
+    { label: 'Pengunjung', value: visits, delta: '+10', trend: 'up' },
+  ]
 })

@@ -1,86 +1,95 @@
 // server/utils/store.ts
-import { promises as fs } from 'fs'
-import { dirname, join } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
+import { createStorageAdapter } from './storage-adapter'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
-const DATA_DIR = join(__dirname, '..', '..', '.data')
-
-async function ensureDir() {
-    await fs.mkdir(DATA_DIR, { recursive: true })
-}
-
-async function readJson<T>(file: string): Promise<T | null> {
-    try {
-        const raw = await fs.readFile(file, 'utf8')
-        return JSON.parse(raw) as T
-    } catch (e: any) {
-        if (e.code === 'ENOENT') return null
-        throw e
-    }
-}
-
-async function writeJson(file: string, data: any) {
-    await ensureDir()
-    await fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8')
-}
-
-function fileFor(key: string) {
-    return join(DATA_DIR, `${key}.json`)
+function storage() {
+  return createStorageAdapter()
 }
 
 export async function getArray<T = any>(key: string): Promise<T[]> {
-    const file = fileFor(key)
-    const data = await readJson<T[]>(file)
-    return Array.isArray(data) ? data : []
+  const data = await storage().getItem<T[]>(key)
+  return Array.isArray(data) ? data : []
 }
 
 export async function setArray<T = any>(key: string, arr: T[]) {
-    const file = fileFor(key)
-    await writeJson(file, arr)
+  await storage().setItem(key, arr)
+}
+
+export async function getValue<T = unknown>(key: string): Promise<T | null> {
+  return await storage().getItem<T>(key)
+}
+
+export async function setValue<T = unknown>(key: string, value: T) {
+  await storage().setItem(key, value)
 }
 
 export function genId() {
-    return randomUUID()
+  return randomUUID()
 }
 
-export async function getById<T = any>(key: string, id: string): Promise<T | null> {
-    const arr = await getArray<T>(key)
-    return (arr as any[]).find((x) => x.id === id) ?? null
+const normalizeId = (value: string | number) => String(value)
+
+export async function migrateNumericIds<T extends { id?: string | number }>(key: string): Promise<void> {
+  const items = await getArray<T>(key)
+  let changed = false
+
+  const normalized = items.map((item) => {
+    const id = item.id
+    const needsMigration =
+      id === undefined ||
+      typeof id === 'number' ||
+      (typeof id === 'string' && id.trim() !== '' && /^[0-9]+$/.test(id))
+
+    if (!needsMigration) {
+      return item
+    }
+
+    changed = true
+    return { ...item, id: genId() } as T
+  })
+
+  if (changed) {
+    await setArray(key, normalized)
+  }
 }
 
-export async function createItem<T extends { id?: string; createdAt?: string; updatedAt?: string }>(
-    key: string,
-    item: Omit<T, 'id' | 'createdAt' | 'updatedAt'>
+export async function getById<T = any>(key: string, id: string | number): Promise<T | null> {
+  const arr = await getArray<T>(key)
+  return arr.find((item) => normalizeId((item as any).id) === normalizeId(id)) ?? null
+}
+
+export async function createItem<T extends { id?: string | number; createdAt?: string; updatedAt?: string }>(
+  key: string,
+  item: Omit<T, 'id' | 'createdAt' | 'updatedAt'>
 ): Promise<T> {
-    const arr = await getArray<T>(key)
-    const now = new Date().toISOString()
-    const newItem = { ...(item as any), id: genId(), createdAt: now, updatedAt: now } as T
-    arr.push(newItem)
-    await setArray(key, arr)
-    return newItem
+  const arr = await getArray<T>(key)
+  const now = new Date().toISOString()
+  const newItem = { ...(item as any), id: genId(), createdAt: now, updatedAt: now } as T
+  arr.push(newItem)
+  await setArray(key, arr)
+  return newItem
 }
 
-export async function updateItem<T extends { id: string; updatedAt?: string }>(
-    key: string,
-    id: string,
-    patch: Partial<T>
+export async function updateItem<T extends { id: string | number; updatedAt?: string }>(
+  key: string,
+  id: string | number,
+  patch: Partial<T>
 ): Promise<T | null> {
-    const arr = await getArray<T>(key)
-    const idx = (arr as any[]).findIndex((x) => (x as any).id === id)
-    if (idx === -1) return null
-    const now = new Date().toISOString()
-    const updated = { ...(arr as any[])[idx], ...patch, id, updatedAt: now }
-    ;(arr as any[])[idx] = updated
-    await setArray(key, arr)
-    return updated as T
+  const arr = await getArray<T>(key)
+  const idx = arr.findIndex((item) => normalizeId((item as any).id) === normalizeId(id))
+  if (idx === -1) return null
+  const now = new Date().toISOString()
+  const existing = arr[idx] as any
+  const updated = { ...existing, ...patch, id: existing.id, updatedAt: now } as T
+  arr[idx] = updated
+  await setArray(key, arr)
+  return updated
 }
 
-export async function removeItem(key: string, id: string): Promise<boolean> {
-    const arr = await getArray<any>(key)
-    const next = arr.filter((x) => x.id !== id)
-    const changed = next.length !== arr.length
-    if (changed) await setArray(key, next)
-    return changed
+export async function removeItem<T = any>(key: string, id: string | number): Promise<boolean> {
+  const arr = await getArray<T>(key)
+  const next = arr.filter((item) => normalizeId((item as any).id) !== normalizeId(id))
+  const changed = next.length !== arr.length
+  if (changed) await setArray(key, next)
+  return changed
 }

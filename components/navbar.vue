@@ -2,25 +2,25 @@
 
 <template>
   <header>
-    <NuxtLink to="/">Dashboard</NuxtLink>
+    <div class="brand">
+      <span class="brand-mark">M</span>
+      <NuxtLink to="/">Dashboard</NuxtLink>
+    </div>
 
-
-    <!-- Menu utama (desktop/umum) -->
     <nav v-if="!open">
       <NuxtLink to="/">Dashboard</NuxtLink>
       <NuxtLink to="/projects">Projects</NuxtLink>
       <NuxtLink to="/contact">Contact</NuxtLink>
     </nav>
 
+    <div class="header-end">
+      <button aria-label="Toggle menu" @click="open = !open">
+        {{ open ? 'Tutup' : 'Menu' }}
+      </button>
+      <div class="avatar" aria-label="User profile">B</div>
+    </div>
 
-    <!-- Tombol toggle untuk mobile -->
-    <button aria-label="Toggle menu" @click="open = !open">
-      {{ open ? 'Tutup' : 'Menu' }}
-    </button>
-
-
-    <!-- Menu versi mobile -->
-    <nav v-if="open">
+    <nav class="mobile-menu" v-if="open">
       <NuxtLink to="/" @click="open=false">Dashboard</NuxtLink>
       <NuxtLink to="/projects" @click="open=false">Projects</NuxtLink>
       <NuxtLink to="/contact" @click="open=false">Contact</NuxtLink>

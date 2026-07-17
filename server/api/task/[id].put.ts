@@ -1,14 +1,23 @@
-import { getArray, setArray } from '@@/server/utils/store'
+import { getArray, updateItem } from '../../utils/store'
+import { withApiHandler } from '../../utils/handler'
+import { readJsonBody, requireString, validateStatus, validateDate } from '../../utils/validation'
+import type { Task } from '~/types'
 
-export default defineEventHandler( async (event) => {
-    const id = Number(getRouterParam(event, 'id'))
-    const patch = await readBody<Partial<{ name:string; status:'todo'|'proses'|'selesai'; date:string }>>(event)
+export default withApiHandler(async (event) => {
+  const id = getRouterParam(event, 'id')
+  const patch = await readJsonBody<Partial<{ name: string; status: 'todo' | 'proses' | 'selesai'; date: string }>>(event)
 
-    const tasks = await getArray<any>('tasks')
-    const idx = tasks.findIndex((t:any)=> t.id === id)
-    if (idx === -1) throw createError({ statusCode:404, statusMessage:'task not found' })
+  const tasks = await getArray<Task>('tasks')
+  const existing = tasks.find((t) => String(t.id) === String(id))
+  if (!existing) throw createError({ statusCode: 404, statusMessage: 'task not found' })
 
-    tasks[idx] = { ...tasks[idx], ...patch }
-    await setArray('tasks', tasks)
-    return tasks[idx]
+  // Validate patch fields if present
+  const validatedPatch: Partial<Task> = {}
+  if (patch.name !== undefined) validatedPatch.name = requireString(patch.name, 'name')
+  if (patch.status !== undefined) validatedPatch.status = validateStatus(patch.status) as Task['status']
+  if (patch.date !== undefined) validatedPatch.date = validateDate(patch.date) ?? existing.date
+
+  const updated = await updateItem<Task>('tasks', id, validatedPatch)
+  if (!updated) throw createError({ statusCode: 404, statusMessage: 'task not found' })
+  return updated
 })

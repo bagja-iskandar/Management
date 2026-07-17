@@ -1,84 +1,158 @@
-/* dashboard.vue*/
-
 <template>
-  <!-- Aksi cepat (search + tombol) -->
-  <div>
-    <input v-model="q" type="search" placeholder="Cari…" />
-    <NuxtLink to="/projects">Tambah Project</NuxtLink>
-  </div>
-
-  <!-- KPI Cards sederhana -->
-  <div>
-    <div v-for="s in stats" :key="s.label">
-      <p>{{ s.label }}</p>
-      <h3>{{ s.value }}</h3>
-      <p>{{ s.delta }} ({{ s.trend }})</p>
-    </div>
-  </div>
-
-  <!-- Kolom: Quick Actions & Tabel Aktivitas -->
-  <div>
-    <div>
-      <h3>Quick Actions</h3>
-      <button @click="newTask()">+ Task baru</button>
-      <NuxtLink to="/projects">Kelola projects</NuxtLink>
-      <NuxtLink to="/contact">Hubungi saya</NuxtLink>
-    </div>
-
-    <div>
-      <h3>Aktivitas Terbaru</h3>
+  <section class="dashboard">
+    <div class="dashboard-header">
       <div>
-        <div>
-          <span>Nama</span>
-          <span>Status</span>
-          <span>Tanggal</span>
-        </div>
+        <div class="page-badge">Dashboard</div>
+        <h1>Management Dashboard</h1>
+        <p>Ringkasan aktivitas, performa proyek, dan tugas terbaru dalam satu tampilan.</p>
+      </div>
 
-        <div v-for="r in filtered" :key="r.id">
-          <span>{{ r.name }}</span>
-          <span>{{ r.status }}</span>
-          <span>{{ r.date }}</span>
-        </div>
+      <div class="dashboard-actions">
+        <TaskForm class="task-form-top" v-model="taskName" @create="createTask" :disabled="isBusy" />
+        <button class="button secondary" type="button" @click="createTask" :disabled="isBusy || !taskName.trim()">
+          + Tambah Task
+        </button>
       </div>
     </div>
-  </div>
+
+    <div class="dashboard-toolbar">
+      <input v-model="q" type="search" placeholder="Cari tugas..." aria-label="Cari tugas" />
+      <NuxtLink to="/projects" class="button secondary">Lihat Projects</NuxtLink>
+    </div>
+
+    <div class="stats-grid">
+      <StatCard v-for="s in stats" :key="s.label" :stat="s" />
+    </div>
+
+    <div class="dashboard-body">
+      <QuickPanel :disabled="isBusy" @add="createTask" />
+
+      <section class="activity-panel">
+        <div class="activity-title">
+          <div>
+            <h2>Aktivitas Terbaru</h2>
+            <p>Daftar tugas yang paling baru diupdate.</p>
+          </div>
+          <p class="activity-count">{{ filtered.length }} tugas</p>
+        </div>
+
+        <ActivityTable :rows="filtered" @toggle="toggleStatus" @delete="deleteTask" />
+      </section>
+    </div>
+
+    <ConfirmDialog
+      v-if="confirmOpen"
+      :title="'Konfirmasi Hapus'"
+      :message="`Hapus tugas: ${confirmTarget?.name}?`"
+      :confirmText="'Hapus'"
+      :cancelText="'Batal'"
+      :busy="isBusy"
+      @confirm="onConfirmDelete"
+      @cancel="() => { confirmOpen = false; confirmTarget = null }"
+    />
+  </section>
 </template>
 
 <script setup lang="ts">
-type Stat = { label: string; value: string | number; delta: string; trend: 'up' | 'down' }
-type Row  = { id: number; name: string; status: 'selesai' | 'proses' | 'todo'; date: string }
+import ConfirmDialog from './ConfirmDialog.vue'
+import TaskForm from './TaskForm.vue'
+import StatCard from './StatCard.vue'
+import ActivityTable from './ActivityTable.vue'
+import QuickPanel from './QuickPanel.vue'
+import { useTasks } from '../composables/useTasks'
+import { useStats } from '../composables/useStats'
+
+type Status = 'todo' | 'proses' | 'selesai'
+
+type Stat = {
+  label: string
+  value: string | number
+  delta: string
+  trend: 'up' | 'down'
+}
+
+type Row = {
+  id: string
+  name: string
+  status: Status
+  date: string
+}
 
 const q = ref('')
+const taskName = ref('')
+const isBusy = ref(false)
+const confirmOpen = ref(false)
+const confirmTarget = ref<Row | null>(null)
 
-// Ambil data dari API (SSR-friendly)
-const { data: stats }      = await useAsyncData<Stat[]>('stats',      () => $fetch('/api/stats'))
-const { data: activities } = await useAsyncData<Row[]> ('activities', () => $fetch('/api/activities'))
+const tasksApi = useTasks()
+const statsApi = useStats()
 
-// Tabel yang tampil (disaring)
-const filtered = computed(() =>
-    (activities.value ?? []).filter(r => r.name.toLowerCase().includes(q.value.toLowerCase()))
-)
+const { data: stats } = await useAsyncData<Stat[]>('stats', () => statsApi.getStats())
+const { data: activities } = await useAsyncData<Row[]>('activities', () => tasksApi.getActivities())
 
-// ========== Aksi ==========
-async function newTask() {
-  const name = prompt('Nama task baru?')
-  if (!name) return
-  await $fetch('/api/tasks', { method: 'POST', body: { name } })
-  // refresh data
+const filtered = computed(() => {
+  return (activities.value ?? []).filter((row) =>
+    row.name.toLowerCase().includes(q.value.toLowerCase())
+  )
+})
+
+async function refreshData() {
   await Promise.all([
     refreshNuxtData('activities'),
-    refreshNuxtData('stats'),
+    refreshNuxtData('stats')
   ])
 }
 
-// (opsional) toggle status saat diklik — perlu sedikit ubah template: @click
+async function createTask(name?: string) {
+  const finalName = (name ?? taskName.value).trim()
+  if (!finalName) return
+  isBusy.value = true
+  try {
+    await tasksApi.createTask({ name: finalName })
+    // clear the bound input only when no explicit name passed (e.g., QuickPanel)
+    taskName.value = ''
+    await refreshData()
+  } finally {
+    isBusy.value = false
+  }
+}
+
 async function toggleStatus(row: Row) {
-  const next = row.status === 'todo' ? 'proses' : row.status === 'proses' ? 'selesai' : 'todo'
-  await $fetch(`/api/tasks/${row.id}`, { method: 'PUT', body: { status: next } })
-  await Promise.all([
-    refreshNuxtData('activities'),
-    refreshNuxtData('stats'),
-  ])
+  const next: Status = row.status === 'todo' ? 'proses' : row.status === 'proses' ? 'selesai' : 'todo'
+  isBusy.value = true
+  try {
+    await tasksApi.updateTask(row.id, { status: next })
+    await refreshData()
+  } finally {
+    isBusy.value = false
+  }
+}
+
+// Open confirm dialog instead of using window.confirm()
+function deleteTask(row: Row) {
+  confirmTarget.value = row
+  confirmOpen.value = true
+}
+
+async function onConfirmDelete() {
+  if (!confirmTarget.value) return
+  isBusy.value = true
+  try {
+    await tasksApi.deleteTask(confirmTarget.value.id)
+    confirmOpen.value = false
+    confirmTarget.value = null
+    await refreshData()
+  } finally {
+    isBusy.value = false
+  }
+}
+
+function statusClass(status: Status) {
+  return {
+    todo: 'todo',
+    proses: 'proses',
+    selesai: 'selesai'
+  }[status]
 }
 </script>
 
