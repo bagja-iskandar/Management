@@ -8,6 +8,10 @@
       <NuxtLink to="/" class="button">Kembali ke Dashboard</NuxtLink>
     </div>
 
+    <div v-if="projectsError" class="feedback error" role="alert">
+      Failed to load projects. Please refresh the page.
+    </div>
+
     <div class="projects-grid">
       <article v-for="project in projects" :key="project.slug" class="project-card">
         <h2>{{ project.title }}</h2>
@@ -28,5 +32,5 @@
 import { useProjects } from '../../composables/useProjects'
 
 const projectsApi = useProjects()
-const { data: projects } = await useAsyncData('projects', () => projectsApi.getProjects())
+const { data: projects, error: projectsError } = await useAsyncData('projects', () => projectsApi.getProjects())
 </script>

@@ -16,9 +16,9 @@
       <span>
         <span :class="['status-badge', statusClass(row.status)]">{{ row.status }}</span>
       </span>
-      <span>{{ row.date }}</span>
+      <span class="date-cell">{{ row.date }}</span>
       <span class="actions-cell">
-        <button class="button small" type="button" @click="$emit('toggle', row)" :aria-label="`Ubah status ${row.name}`">Ubah Status</button>
+        <button class="button small secondary" type="button" @click="$emit('toggle', row)" :aria-label="`Ubah status ${row.name}`" :aria-pressed="row.status === 'selesai'">Ubah Status</button>
         <button class="button small danger" type="button" @click="$emit('delete', row)" :aria-label="`Hapus ${row.name}`">Hapus</button>
       </span>
     </div>

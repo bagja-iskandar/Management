@@ -20,6 +20,10 @@
       <NuxtLink to="/projects" class="button secondary">Lihat Projects</NuxtLink>
     </div>
 
+    <div v-if="statsError || activitiesError" class="feedback error" role="alert">
+      Failed to load dashboard data. Please refresh the page.
+    </div>
+
     <div class="stats-grid">
       <StatCard v-for="s in stats" :key="s.label" :stat="s" />
     </div>
@@ -61,34 +65,19 @@ import ActivityTable from './ActivityTable.vue'
 import QuickPanel from './QuickPanel.vue'
 import { useTasks } from '../composables/useTasks'
 import { useStats } from '../composables/useStats'
-
-type Status = 'todo' | 'proses' | 'selesai'
-
-type Stat = {
-  label: string
-  value: string | number
-  delta: string
-  trend: 'up' | 'down'
-}
-
-type Row = {
-  id: string
-  name: string
-  status: Status
-  date: string
-}
+import type { Task, Stat } from '../types'
 
 const q = ref('')
 const taskName = ref('')
 const isBusy = ref(false)
 const confirmOpen = ref(false)
-const confirmTarget = ref<Row | null>(null)
+const confirmTarget = ref<Task | null>(null)
 
 const tasksApi = useTasks()
 const statsApi = useStats()
 
-const { data: stats } = await useAsyncData<Stat[]>('stats', () => statsApi.getStats())
-const { data: activities } = await useAsyncData<Row[]>('activities', () => tasksApi.getActivities())
+const { data: stats, error: statsError } = await useAsyncData<Stat[]>('stats', () => statsApi.getStats())
+const { data: activities, error: activitiesError } = await useAsyncData<Task[]>('activities', () => tasksApi.getActivities())
 
 const filtered = computed(() => {
   return (activities.value ?? []).filter((row) =>
@@ -117,8 +106,8 @@ async function createTask(name?: string) {
   }
 }
 
-async function toggleStatus(row: Row) {
-  const next: Status = row.status === 'todo' ? 'proses' : row.status === 'proses' ? 'selesai' : 'todo'
+async function toggleStatus(row: Task) {
+  const next: Task['status'] = row.status === 'todo' ? 'proses' : row.status === 'proses' ? 'selesai' : 'todo'
   isBusy.value = true
   try {
     await tasksApi.updateTask(row.id, { status: next })
@@ -129,7 +118,7 @@ async function toggleStatus(row: Row) {
 }
 
 // Open confirm dialog instead of using window.confirm()
-function deleteTask(row: Row) {
+function deleteTask(row: Task) {
   confirmTarget.value = row
   confirmOpen.value = true
 }
@@ -147,7 +136,7 @@ async function onConfirmDelete() {
   }
 }
 
-function statusClass(status: Status) {
+function statusClass(status: Task['status']) {
   return {
     todo: 'todo',
     proses: 'proses',

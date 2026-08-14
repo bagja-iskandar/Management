@@ -73,6 +73,13 @@ button, .button, a.button, .btn{
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* small button variant */
+.button.small{ padding:8px 12px; font-size:0.95rem; border-radius:12px }
+
+/* secondary small */
+.button.small.secondary{ background: var(--secondary); border-color: rgba(255,255,255,0.02); color:#fff }
+.button.small.secondary:hover{ filter:brightness(0.95) }
+
 button:hover, .button:hover, a.button:hover{ background: #2f4060; }
 button:disabled, .button:disabled {
     opacity:0.6; cursor:not-allowed;
@@ -120,52 +127,11 @@ button:disabled, .button:disabled {
 .feedback {
     color: var(--success); background: rgba(31,109,59,0.12); border:1px solid rgba(31,109,59,0.16); border-radius:14px; padding:16px;
 }
+.feedback.error {
+    color: var(--danger); background: rgba(184,0,31,0.08); border-color: rgba(184,0,31,0.18);
+}
 
 @media (max-width: 720px) {
     .page-heading { flex-direction: column; align-items: flex-start; }
 }
 
-/* ====== Dashboard.vue tanpa class ====== */
-
-/* 1) Baris 2: search + tombol sejajar */
-section > div:nth-of-type(2){
-    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
-}
-
-/* 2) KPI cards (blok ke-3) jadi grid */
-section > div:nth-of-type(3){
-    display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
-    gap:16px; margin-top:12px;
-}
-section > div:nth-of-type(3) > div{
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:18px;
-    box-shadow: var(--shadow);
-}
-section > div:nth-of-type(3) > div h3{ margin:4px 0 6px; font-size:1.4rem; font-weight:800; color:var(--text); }
-section > div:nth-of-type(3) > div p{ margin:0; color:var(--muted); }
-
-/* 3) Kolom bawah (blok ke-4): kiri Quick Actions, kanan Tabel */
-section > div:nth-of-type(4){
-    display:grid; grid-template-columns:1fr; gap:16px; margin-top:18px;
-}
-@media (min-width:900px){ section > div:nth-of-type(4){ grid-template-columns:1fr 2fr; } }
-section > div:nth-of-type(4) > div{
-    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; box-shadow: var(--shadow);
-}
-
-/* Quick Actions: tombol/link berjarak */
-section > div:nth-of-type(4) > div:first-child > button,
-section > div:nth-of-type(4) > div:first-child > a{
-    display:inline-block; margin-right:10px; margin-top:10px;
-}
-
-/* 4) Tabel Aktivitas Terbaru: 3 kolom grid */
-section > div:nth-of-type(4) > div:last-child > div > div{
-    display:grid; grid-template-columns: 1.4fr .9fr .9fr 1.1fr; gap:14px; align-items:center;
-}
-section > div:nth-of-type(4) > div:last-child > div > div:first-child{
-    opacity:.8; border-bottom:1px solid var(--border); padding-bottom:8px; color:var(--muted);
-}
-section > div:nth-of-type(4) > div:last-child > div > div:not(:first-child){
-    padding:10px 0; border-bottom:1px solid rgba(56,75,112,0.08);
-}

@@ -1,19 +1,19 @@
 <template>
-  <div class="cd-overlay" role="dialog" aria-modal="true" :aria-label="title">
+  <div class="cd-overlay" role="dialog" aria-modal="true" :aria-label="displayTitle">
     <div class="cd-panel" ref="panel" tabindex="-1" @keydown.esc="onCancel">
-      <h3 class="cd-title">{{ title }}</h3>
-      <p class="cd-message">{{ message }}</p>
+      <h3 class="cd-title">{{ displayTitle }}</h3>
+      <p class="cd-message">{{ displayMessage }}</p>
 
       <div class="cd-actions">
-        <button class="button" @click="onCancel" :disabled="busy">{{ cancelText }}</button>
-        <button class="button" @click="onConfirm" :disabled="busy" aria-pressed="false">{{ confirmText }}</button>
+        <button class="button" @click="onCancel" :disabled="displayBusy">{{ displayCancelText }}</button>
+        <button class="button" @click="onConfirm" :disabled="displayBusy" aria-pressed="false">{{ displayConfirmText }}</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
 
 const props = defineProps<{
   title?: string
@@ -28,11 +28,11 @@ const emits = defineEmits<{
   (e: 'cancel'): void
 }>()
 
-const title = props.title ?? 'Konfirmasi'
-const message = props.message ?? 'Apakah Anda yakin?'
-const confirmText = props.confirmText ?? 'Ya'
-const cancelText = props.cancelText ?? 'Batal'
-const busy = props.busy ?? false
+const displayTitle = computed(() => props.title ?? 'Konfirmasi')
+const displayMessage = computed(() => props.message ?? 'Apakah Anda yakin?')
+const displayConfirmText = computed(() => props.confirmText ?? 'Ya')
+const displayCancelText = computed(() => props.cancelText ?? 'Batal')
+const displayBusy = computed(() => props.busy ?? false)
 
 const panel = ref<HTMLElement | null>(null)
 

@@ -193,7 +193,9 @@
   grid-template-columns: 1.4fr 0.9fr 0.9fr 1.1fr;
   gap: 14px;
   align-items: center;
-  padding: 14px 0;
+  padding: 12px 0;
+  border-radius: 8px;
+  transition: background 0.12s ease, transform 0.12s ease;
 }
 
 .table-row.header {
@@ -206,6 +208,11 @@
 
 .table-row:not(.header) {
   border-bottom: 1px solid rgba(56,75,112,0.08);
+}
+
+.table-row:not(.header):hover {
+  background: rgba(56,75,112,0.03);
+  transform: translateY(-1px);
 }
 
 .table-row span:first-child {
@@ -221,6 +228,8 @@
   border-radius: 50%;
   background: rgba(56,75,112,0.35);
 }
+
+.date-cell { text-align: right; color: var(--muted); }
 
 .actions-cell {
   display: flex;
