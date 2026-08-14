@@ -1,5 +1,3 @@
-/* navbar.vue*/
-
 <template>
   <header>
     <div class="brand">
@@ -15,7 +13,7 @@
 
     <div class="header-end">
       <button aria-label="Toggle menu" @click="open = !open">
-        {{ open ? 'Tutup' : 'Menu' }}
+        {{ open ? 'Close' : 'Menu' }}
       </button>
       <div class="avatar" aria-label="User profile">B</div>
     </div>

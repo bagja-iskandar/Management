@@ -4,10 +4,10 @@
       :value="value"
       @input="onInput"
       type="text"
-      placeholder="Tambahkan task baru..."
-      aria-label="Nama task baru"
+      placeholder="Add a new task..."
+      aria-label="New task name"
     />
-    <button type="submit" class="button" :disabled="disabled || !value.trim()">Tambah Task</button>
+    <button type="submit" class="button" :disabled="disabled || !value.trim()">Add Task</button>
   </form>
 </template>
 

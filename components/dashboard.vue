@@ -4,20 +4,20 @@
       <div>
         <div class="page-badge">Dashboard</div>
         <h1>Management Dashboard</h1>
-        <p>Ringkasan aktivitas, performa proyek, dan tugas terbaru dalam satu tampilan.</p>
+        <p>Overview of recent activity, project performance, and tasks in one place.</p>
       </div>
 
       <div class="dashboard-actions">
         <TaskForm class="task-form-top" v-model="taskName" @create="createTask" :disabled="isBusy" />
         <button class="button secondary" type="button" @click="createTask" :disabled="isBusy || !taskName.trim()">
-          + Tambah Task
+          + Add Task
         </button>
       </div>
     </div>
 
     <div class="dashboard-toolbar">
-      <input v-model="q" type="search" placeholder="Cari tugas..." aria-label="Cari tugas" />
-      <NuxtLink to="/projects" class="button secondary">Lihat Projects</NuxtLink>
+      <input v-model="q" type="search" placeholder="Search tasks..." aria-label="Search tasks" />
+      <NuxtLink to="/projects" class="button secondary">View Projects</NuxtLink>
     </div>
 
     <div v-if="statsError || activitiesError" class="feedback error" role="alert">
@@ -34,10 +34,10 @@
       <section class="activity-panel">
         <div class="activity-title">
           <div>
-            <h2>Aktivitas Terbaru</h2>
-            <p>Daftar tugas yang paling baru diupdate.</p>
+            <h2>Recent Activity</h2>
+            <p>List of most recently updated tasks.</p>
           </div>
-          <p class="activity-count">{{ filtered.length }} tugas</p>
+          <p class="activity-count">{{ filtered.length }} tasks</p>
         </div>
 
         <ActivityTable :rows="filtered" @toggle="toggleStatus" @delete="deleteTask" />
@@ -46,10 +46,10 @@
 
     <ConfirmDialog
       v-if="confirmOpen"
-      :title="'Konfirmasi Hapus'"
-      :message="`Hapus tugas: ${confirmTarget?.name}?`"
-      :confirmText="'Hapus'"
-      :cancelText="'Batal'"
+      :title="'Confirm Delete'"
+      :message="`Delete task: ${confirmTarget?.name}?`"
+      :confirmText="'Delete'"
+      :cancelText="'Cancel'"
       :busy="isBusy"
       @confirm="onConfirmDelete"
       @cancel="() => { confirmOpen = false; confirmTarget = null }"
@@ -134,14 +134,6 @@ async function onConfirmDelete() {
   } finally {
     isBusy.value = false
   }
-}
-
-function statusClass(status: Task['status']) {
-  return {
-    todo: 'todo',
-    proses: 'proses',
-    selesai: 'selesai'
-  }[status]
 }
 </script>
 

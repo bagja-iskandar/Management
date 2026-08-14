@@ -1,7 +1,10 @@
+import type { Stat } from '~/types'
+
 export function useStats() {
   async function getStats() {
-    return await $fetch('/api/stats')
+    return await $fetch<Stat[]>('/api/stats')
   }
 
   return { getStats }
 }
+

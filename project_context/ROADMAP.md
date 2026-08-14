@@ -69,7 +69,7 @@ Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus disel
 ---
 
 ## Phase 2 — Code Quality, TypeScript & Server Optimization
-**Status**: 🔄 In Progress (2a ✅)
+**Status**: ✅ Completed (2026-08-14)
 
 ### 2a. ✅ Perbaiki CSS Path di `nuxt.config.ts`
 - **File**: `nuxt.config.ts` baris 6
@@ -77,63 +77,76 @@ Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus disel
 - **Change**: Ubah `'../assets/css/main.css'` menjadi `'~~/assets/css/main.css'`. Menggunakan alias rootDir resmi Nuxt 4 (`~~/`) yang idiomatis dan konsisten dengan lokasi folder `assets/` di root.
 - **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
 
-### 2b. Tambahkan Generic Return Types pada Composables
+### 2b. ✅ Tambahkan Generic Return Types pada Composables
 - **Files**: `composables/useStats.ts`, `composables/useProjects.ts`
-- **Issue**: `$fetch` tanpa generic type mengembalikan `unknown`
-- **Fix**: Tambahkan type parameter eksplisit `$fetch<Stat[]>('/api/stats')` dan `$fetch<Project[]>('/api/projects')`
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Tambah `import type { Stat }` dan `import type { Project }` dari `~/types`. Tambahkan generic type parameter `$fetch<Stat[]>('/api/stats')` dan `$fetch<Project[]>('/api/projects')` sehingga consumer (`dashboard.vue` dan `projects.vue`) me-resolve inferred types secara akurat dan konsisten dengan `useTasks.ts`.
+- **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
 
-### 2c. Standarisasi Nuxt Auto-Imports
-- **Files**: `app/app.vue`, `app/pages/index.vue`
-- **Issue**: Manual import `Navbar` dan `Dashboard` — Nuxt 4 mendukung auto-import
-- **Fix**: Verifikasi dan bersihkan manual import redundant jika auto-import aktif
+### 2c. ✅ Standarisasi Nuxt Auto-Imports
+- **Files**: `nuxt.config.ts`, `app/app.vue`, `app/pages/index.vue`
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Daftarkan `components: ['~~/components']` dan `imports: { dirs: ['../composables'] }` di `nuxt.config.ts`. Hapus manual import redundant `Navbar` di `app/app.vue` dan `Dashboard` di `app/pages/index.vue`.
+- **Verification**: `npm run build` — exit code 0; auto-import metadata `node_modules/.cache/nuxt/.nuxt/components.d.ts` mendaftarkan `Navbar`, `Dashboard`, dan semua komponen root; `types/imports.d.ts` mendaftarkan `useTasks`, `useStats`, `useProjects`.
 
-### 2d. Hapus redundant `statusClass()` di `dashboard.vue`
-- **File**: `components/dashboard.vue` (baris 135–141)
-- **Issue**: `statusClass()` tidak digunakan di template `dashboard.vue` (hanya dipakai di `ActivityTable.vue`)
-- **Fix**: Hapus fungsi yang tidak terpakai dari `dashboard.vue`
+### 2d. ✅ Hapus redundant `statusClass()` di `dashboard.vue`
+- **File**: `components/dashboard.vue` (baris 139–145 dihapus)
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Hapus fungsi `statusClass()` yang tidak terpakai dari `dashboard.vue` (dead code peninggalan ekstraksi `ActivityTable.vue`).
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 2e. Optimasi Query Ganda di `[id].put.ts`
+### 2e. ✅ Optimasi Query Ganda di `[id].put.ts`
 - **File**: `server/api/task/[id].put.ts`
-- **Issue**: Array dibaca 2x via manual `find()` lalu `updateItem()`
-- **Fix**: Serahkan lookup dan update sepenuhnya ke `updateItem()`, tangani 404 dari return `null`
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Hapus redundant `getArray()` & manual `find()` lookup. Delegasikan lookup, update, dan 404 handling sepenuhnya ke `updateItem()`. Pertahankan validasi date & fallback behavior.
+- **Verification**: `npm run build` — exit code 0; test suite verifikasi behavior date edge-cases lolos 100%.
 
-### 2f. Bersihkan Duplikasi Styling Dasar
-- **Files**: `assets/css/main.css`, `assets/css/dashboard.css`
-- **Issue**: Duplikasi deklarasi `.button`, `.cd-overlay`, `.cd-panel`
-- **Fix**: Konsolidasikan aturan base/modal ke `main.css` dan pastikan `dashboard.css` hanya memuat styling spesifik dashboard
+### 2f. ✅ Bersihkan Duplikasi Styling Dasar
+- **Files**: `assets/css/main.css`, `assets/css/dashboard.css` (baris 132–171 dihapus)
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Hapus 39 baris duplikasi deklarasi `.button` dari `dashboard.css`. Semua elemen tombol di dashboard fully-covered oleh rule global `main.css`.
+- **Verification**: `npm run build` — exit code 0; bundle CSS berkurang; git diff verified.
 
 ---
 
 ## Phase 3 — Core Accessibility & Foundation UX Fixes
-**Status**: ⏳ Menunggu Phase 2 selesai
+**Status**: ✅ Completed (2026-08-14)
 
-### 3a. Focus Trap pada `ConfirmDialog`
+### 3a. ✅ Focus Trap pada `ConfirmDialog`
 - **File**: `components/ConfirmDialog.vue`
-- **Issue**: Navigasi keyboard (Tab) dapat keluar dari batas modal yang sedang aktif
-- **Fix**: Implementasi focus trap handler agar fokus tetap berada di dalam panel dialog
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Implementasi keyboard focus trap (`Tab` dan `Shift+Tab` cyclic navigation), initial focus ke tombol Cancel, dan robust focus restoration ke trigger element saat modal ditutup via Escape/Batal dengan fallback ke elemen interaktif dashboard (`.activity-table button`, `.dashboard-toolbar input`) jika baris telah terhapus.
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 3b. ARIA Accessibility Improvements pada `ConfirmDialog`
+### 3b. ✅ ARIA Accessibility Improvements pada `ConfirmDialog`
 - **File**: `components/ConfirmDialog.vue`
-- **Fix**: Tambahkan `aria-labelledby` dan `aria-describedby` yang menunjuk ke ID judul dan pesan modal
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Gunakan `useId()` untuk ID deterministik `titleId` dan `descId`, tetapkan `role="alertdialog"`, hubungkan `aria-labelledby` dan `aria-describedby`, serta bersihkan atribut redundant `:aria-label` dan `aria-pressed="false"`.
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 3c. Visually-hidden Text pada Status Badge
-- **File**: `components/ActivityTable.vue`
-- **Issue**: Status hanya dibedakan via warna — tidak accessible untuk screen reader
-- **Fix**: Tambahkan teks deskriptif dengan class `.sr-only`
+### 3c. ✅ Visually-hidden Text pada Status Badge
+- **Files**: `assets/css/main.css`, `components/ActivityTable.vue`
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Tambahkan utilitas `.sr-only` standar WCAG ke `assets/css/main.css` dan sematkan `<span class="sr-only">Status: </span>` pada status badge di `ActivityTable.vue` untuk aksesibilitas screen reader.
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 3d. Perbaiki Tampilan & Navigasi `projects.vue`
-- **File**: `app/pages/projects.vue`
-- **Issue**: Menampilkan raw `slug:`, tombol "Lihat ringkasan" mengarah ke `/`, tidak ada empty state
-- **Fix**: Hapus tampilan slug raw, perbaiki link navigasi, dan tambahkan fallback visual saat data proyek kosong
+### 3d. ✅ Perbaiki Tampilan & Navigasi `projects.vue`
+- **Files**: `app/pages/projects.vue`, `assets/css/main.css`
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Hapus tampilan raw `slug:`, tampilkan deskripsi proyek yang informatif, perbaiki navigasi "Lihat Ringkasan" menuju anchor `#summary`, tambahkan fallback empty state yang ramah pengguna, dan bersihkan manual import `useProjects`.
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 3e. Auto-dismiss Feedback pada `contact.vue`
+### 3e. ✅ Auto-dismiss Feedback pada `contact.vue`
 - **File**: `app/pages/contact.vue`
-- **Issue**: Pesan feedback form submission tetap muncul permanen hingga page reload
-- **Fix**: Tambahkan auto-dismiss timer (misal 5 detik) setelah submit berhasil
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Tambahkan auto-dismiss timer 5 detik untuk feedback form submission dengan timer reset saat submit ulang dan lifecycle cleanup pada `onUnmounted`.
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
-### 3f. Standardisasi Bahasa UI ke English
-- **Files**: Seluruh template komponen dan halaman
-- **Keputusan**: Sesuai `PENDING-01`, standarisasi teks UI ke Bahasa Inggris untuk konsistensi portfolio
+### 3f. ✅ Standardisasi Bahasa UI ke English
+- **Files**: Seluruh template komponen dan halaman (10 files)
+- **Status**: Implemented & Verified 2026-08-14
+- **Change**: Sesuai keputusan `PENDING-01`, standardisasi seluruh user-facing UI text (headings, button labels, placeholders, aria-labels, notes, feedback messages, empty states) ke Bahasa Inggris dengan tetap menjaga integritas data model backend (`todo | proses | selesai` dipetakan ke display text `To Do / In Progress / Completed`).
+- **Verification**: `npm run build` — exit code 0; git diff verified.
 
 ---
 

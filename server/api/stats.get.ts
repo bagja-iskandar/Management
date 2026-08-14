@@ -11,9 +11,9 @@ export default withApiHandler(async () => {
   const openTasks = tasks.filter((t) => t.status === 'todo').length
 
   return [
-    { label: 'Total Project', value: projects.length, delta: '+2', trend: 'up' },
-    { label: 'Task Selesai', value: selesai, delta: '+1', trend: 'up' },
-    { label: 'Task Terbuka', value: openTasks, delta: '-1', trend: 'down' },
-    { label: 'Pengunjung', value: visits, delta: '+10', trend: 'up' },
+    { label: 'Total Projects', value: projects.length, delta: '+2', trend: 'up' },
+    { label: 'Completed Tasks', value: selesai, delta: '+1', trend: 'up' },
+    { label: 'Open Tasks', value: openTasks, delta: '-1', trend: 'down' },
+    { label: 'Total Visitors', value: visits, delta: '+10', trend: 'up' },
   ]
 })

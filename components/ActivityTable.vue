@@ -1,25 +1,27 @@
 <template>
   <div class="activity-table">
     <div class="table-row header">
-      <span>Nama tugas</span>
+      <span>Task Name</span>
       <span>Status</span>
-      <span>Tanggal</span>
-      <span class="actions-cell">Aksi</span>
+      <span>Date</span>
+      <span class="actions-cell">Actions</span>
     </div>
 
     <div v-if="!rows?.length" class="empty-state">
-      Tidak ada tugas saat ini. Tambahkan tugas baru untuk memulai.
+      No tasks available. Add a new task to get started.
     </div>
 
     <div v-for="row in rows" :key="row.id" class="table-row">
       <span>{{ row.name }}</span>
       <span>
-        <span :class="['status-badge', statusClass(row.status)]">{{ row.status }}</span>
+        <span :class="['status-badge', statusClass(row.status)]">
+          <span class="sr-only">Status: </span>{{ statusLabel(row.status) }}
+        </span>
       </span>
       <span class="date-cell">{{ row.date }}</span>
       <span class="actions-cell">
-        <button class="button small secondary" type="button" @click="$emit('toggle', row)" :aria-label="`Ubah status ${row.name}`" :aria-pressed="row.status === 'selesai'">Ubah Status</button>
-        <button class="button small danger" type="button" @click="$emit('delete', row)" :aria-label="`Hapus ${row.name}`">Hapus</button>
+        <button class="button small secondary" type="button" @click="$emit('toggle', row)" :aria-label="`Update status for ${row.name}`">Update Status</button>
+        <button class="button small danger" type="button" @click="$emit('delete', row)" :aria-label="`Delete ${row.name}`">Delete</button>
       </span>
     </div>
   </div>
@@ -35,6 +37,14 @@ function statusClass(status: Task['status']) {
     proses: 'proses',
     selesai: 'selesai'
   }[status]
+}
+
+function statusLabel(status: Task['status']) {
+  return {
+    todo: 'To Do',
+    proses: 'In Progress',
+    selesai: 'Completed'
+  }[status] ?? status
 }
 </script>
 

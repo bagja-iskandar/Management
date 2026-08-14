@@ -19,8 +19,8 @@ const props = defineProps<{ stat: Stat }>()
 const icon = computed(() => {
   const label = props.stat.label.toLowerCase()
   if (label.includes('project')) return '📁'
-  if (label.includes('selesai')) return '✅'
-  if (label.includes('terbuka')) return '📝'
+  if (label.includes('selesai') || label.includes('complete')) return '✅'
+  if (label.includes('terbuka') || label.includes('open') || label.includes('pending') || label.includes('todo')) return '📝'
   if (label.includes('pengunjung') || label.includes('visitor')) return '👥'
   return '📊'
 })

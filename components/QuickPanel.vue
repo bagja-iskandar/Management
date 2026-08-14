@@ -1,19 +1,19 @@
 <template>
   <section class="quick-panel">
     <h2>Quick Actions</h2>
-    <p>Buat tugas baru atau buka halaman lain untuk mengelola proyek dan kontak.</p>
+    <p>Create a new task or navigate to manage projects and contact the team.</p>
     <div class="quick-actions">
       <button type="button" class="action-card" @click="$emit('add')" :disabled="disabled">
         <span class="action-icon">+</span>
-        <span>Tambah Task</span>
+        <span>Add Task</span>
       </button>
       <NuxtLink to="/projects" class="action-card secondary">
         <span class="action-icon">📁</span>
-        <span>Kelola Projects</span>
+        <span>Manage Projects</span>
       </NuxtLink>
       <NuxtLink to="/contact" class="action-card tertiary">
         <span class="action-icon">👤</span>
-        <span>Hubungi Tim</span>
+        <span>Contact Team</span>
       </NuxtLink>
     </div>
   </section>

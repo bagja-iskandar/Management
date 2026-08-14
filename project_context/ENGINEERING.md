@@ -16,10 +16,10 @@ _Last updated: 2026-08-14. Diisi berdasarkan investigasi langsung ke source code
 | ID | File | Masalah | Status |
 |---|---|---|---|
 | TS-01 | `components/dashboard.vue` | Mendefinisikan `type Status`, `type Stat`, `type Row` secara lokal padahal sudah ada di `types/` | ✅ **Resolved (Phase 1c)** |
-| TS-02 | `composables/useStats.ts` | `$fetch('/api/stats')` tanpa generic type — return type `unknown` | ⏳ Target Phase 2b |
-| TS-03 | `composables/useProjects.ts` | `$fetch('/api/projects')` tanpa generic type — return type `unknown` | ⏳ Target Phase 2b |
+| TS-02 | `composables/useStats.ts` | `$fetch('/api/stats')` tanpa generic type — return type `unknown` | ✅ **Resolved (Phase 2b)** — `$fetch<Stat[]>` |
+| TS-03 | `composables/useProjects.ts` | `$fetch('/api/projects')` tanpa generic type — return type `unknown` | ✅ **Resolved (Phase 2b)** — `$fetch<Project[]>` |
 | TS-04 | `components/ConfirmDialog.vue` | Props di-destructure ke `const` biasa — nilai tidak reaktif | ✅ **Resolved (Phase 1b)** via `computed` |
-| TS-05 | `components/dashboard.vue` | `statusClass()` function didefinisikan di baris 135–141 tapi tidak pernah dipanggil di template komponen ini | ⏳ Target Phase 2d |
+| TS-05 | `components/dashboard.vue` | `statusClass()` function didefinisikan di baris 135–141 tapi tidak pernah dipanggil di template komponen ini | ✅ **Resolved (Phase 2d)** — Dead code dihapus |
 
 ### Composables
 - Pattern: plain function returns object dengan async methods — bukan Vue composable idiomatis (`ref`, `computed`, dll.)
@@ -35,10 +35,11 @@ _Last updated: 2026-08-14. Diisi berdasarkan investigasi langsung ke source code
 - `storage-adapter.ts` mendefinisikan `StorageAdapter` interface — desain testable (injectable)
 - `migrateNumericIds` di `store.ts` menunjukkan awareness backward compatibility
 
-**Masalah yang ditemukan:**
+**Status Masalah Server:**
 | ID | File | Masalah | Status |
 |---|---|---|---|
-| SRV-01 | `server/api/task/[id].put.ts` | Baris 11: query manual `tasks.find()` lalu baris 20: `updateItem()` juga melakukan find — dua kali baca array | ⏳ Target Phase 2e |
+| SVR-01 | `server/api/task/[id].put.ts` | Membaca array tasks 2x (manual `getArray` + `updateItem`) | ✅ **Resolved (Phase 2e)** — Single storage query |
+| SVR-02 | `server/utils/store.ts` | Data disimpan di generic key-value memory/storage | ℹ️ Sesuai scope arsitektur saat ini |
 | SRV-02 | `server/utils/validation.ts` | `readJsonBody` call `throwApiError` yang return `never` tapi TypeScript tidak inferring return type `never` dengan benar | ⏳ Backlog |
 | SRV-03 | `server/utils/store.ts` | `createStorageAdapter()` di-call setiap operasi dari `storage()` function — membuat instance baru setiap call | ⏳ Backlog |
 
@@ -53,8 +54,8 @@ _Last updated: 2026-08-14. Diisi berdasarkan investigasi langsung ke source code
 **Status Masalah Client:**
 | ID | File | Masalah | Status |
 |---|---|---|---|
-| CLT-01 | `app/pages/index.vue` | Manual `import Dashboard from '../../components/dashboard.vue'` — seharusnya Nuxt auto-import | ⏳ Target Phase 2c |
-| CLT-02 | `app/app.vue` | Manual `import Navbar from '../components/navbar.vue'` — seharusnya Nuxt auto-import | ⏳ Target Phase 2c |
+| CLT-01 | `app/pages/index.vue` | Manual `import Dashboard from '../../components/dashboard.vue'` | ✅ **Resolved (Phase 2c)** — Auto-imported |
+| CLT-02 | `app/app.vue` | Manual `import Navbar from '../components/navbar.vue'` | ✅ **Resolved (Phase 2c)** — Auto-imported |
 | CLT-03 | `components/dashboard.vue` | Tidak ada `error` handling dari `useAsyncData` | ✅ **Resolved (Phase 1d)** |
 | CLT-04 | `app/pages/projects.vue` | Tidak ada `error` handling dari `useAsyncData` | ✅ **Resolved (Phase 1d)** |
 | CLT-05 | `components/dashboard.vue` | Double entry point untuk create task: `<TaskForm>` di header + button "+ Tambah Task" | ⏳ Target Phase 3 |
@@ -63,10 +64,11 @@ _Last updated: 2026-08-14. Diisi berdasarkan investigasi langsung ke source code
 **Status Masalah CSS:**
 | ID | File | Masalah | Status |
 |---|---|---|---|
-| CSS-01 | `main.css` | `section > div:nth-of-type(2/3/4)` selectors — fragile | ✅ **Resolved (Phase 1e)** — dihapus |
-| CSS-02 | `main.css` vs `dashboard.css` | `.button`, `.cd-overlay`, `.cd-panel` didefinisikan di dua file — duplikasi | ⏳ Target Phase 2 |
-| CSS-03 | `assets/css/base.css` | File tidak di-import — orphan dark theme variables | ✅ **Resolved (Phase 1f)** — dihapus |
-| CSS-04 | `nuxt.config.ts` baris 6 | CSS path: `'../assets/css/main.css'` — relative path non-idiomatis | ✅ **Resolved (Phase 2a)** — `'~~/assets/css/main.css'` |
+| CSS-01 | `assets/css/main.css` | Fragile selector `section > div:nth-of-type(2)` dsb. | ✅ **Resolved (Phase 1e)** |
+| CSS-02 | `assets/css/main.css` | Import file orphan `base.css` | ✅ **Resolved (Phase 1f)** |
+| CSS-03 | `assets/css/dashboard.css` | Duplikasi `.cd-overlay` dan `.cd-panel` | ✅ **Resolved (Phase 2f)** — Scoped di `ConfirmDialog.vue` & base di `main.css` |
+| CSS-04 | `nuxt.config.ts` | CSS path `../assets/css/main.css` non-idiomatis | ✅ **Resolved (Phase 2a)** — `~~/assets/css/main.css` |
+| CSS-05 | `assets/css/dashboard.css` | Duplikasi deklarasi `.button` (39 baris) dengan `main.css` | ✅ **Resolved (Phase 2f)** — Single source di `main.css` |
 
 ---
 
@@ -115,16 +117,16 @@ Untuk portfolio-grade project, minimal perlu:
 - [x] Ghost files di `pages/` root diselesaikan (Phase 1a ✅)
 
 ### Should (Quality)
-- [ ] Composables menggunakan return types eksplisit (Phase 2b)
-- [ ] Manual imports yang seharusnya auto-import dihapus (Phase 2c)
-- [ ] Tidak ada duplikasi CSS rules (Phase 2)
+- [x] Composables menggunakan return types eksplisit (Phase 2b ✅)
+- [x] Manual imports yang seharusnya auto-import dihapus (Phase 2c ✅)
+- [x] Tidak ada duplikasi CSS rules (Phase 2f ✅)
 - [x] CSS path di nuxt.config menggunakan alias `~~` (Phase 2a ✅)
-- [ ] `statusClass()` function tidak duplikat antar komponen (Phase 2d)
-- [ ] Optimasi query ganda di `[id].put.ts` (Phase 2e)
+- [x] `statusClass()` function tidak duplikat antar komponen (Phase 2d ✅)
+- [x] Optimasi query ganda di `[id].put.ts` (Phase 2e ✅)
 
 ### Could (Portfolio Polish)
 - [ ] Unit tests untuk server utilities
 - [ ] JSDoc pada public composable functions
 - [ ] `<NuxtLoadingIndicator>` untuk navigasi
-- [ ] Focus trap pada ConfirmDialog
-- [ ] Visually-hidden text pada status badges
+- [x] Focus trap pada ConfirmDialog (Phase 3a ✅)
+- [x] Visually-hidden text pada status badges (Phase 3c ✅)

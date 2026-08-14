@@ -1,19 +1,19 @@
 <template>
-  <div class="cd-overlay" role="dialog" aria-modal="true" :aria-label="displayTitle">
-    <div class="cd-panel" ref="panel" tabindex="-1" @keydown.esc="onCancel">
-      <h3 class="cd-title">{{ displayTitle }}</h3>
-      <p class="cd-message">{{ displayMessage }}</p>
+  <div class="cd-overlay" role="alertdialog" aria-modal="true" :aria-labelledby="titleId" :aria-describedby="descId">
+    <div class="cd-panel" ref="panel" tabindex="-1" @keydown="handleKeydown">
+      <h3 :id="titleId" class="cd-title">{{ displayTitle }}</h3>
+      <p :id="descId" class="cd-message">{{ displayMessage }}</p>
 
       <div class="cd-actions">
-        <button class="button" @click="onCancel" :disabled="displayBusy">{{ displayCancelText }}</button>
-        <button class="button" @click="onConfirm" :disabled="displayBusy" aria-pressed="false">{{ displayConfirmText }}</button>
+        <button ref="cancelButton" class="button" @click="onCancel" :disabled="displayBusy">{{ displayCancelText }}</button>
+        <button class="button" @click="onConfirm" :disabled="displayBusy">{{ displayConfirmText }}</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, useId } from 'vue'
 
 const props = defineProps<{
   title?: string
@@ -28,13 +28,54 @@ const emits = defineEmits<{
   (e: 'cancel'): void
 }>()
 
-const displayTitle = computed(() => props.title ?? 'Konfirmasi')
-const displayMessage = computed(() => props.message ?? 'Apakah Anda yakin?')
-const displayConfirmText = computed(() => props.confirmText ?? 'Ya')
-const displayCancelText = computed(() => props.cancelText ?? 'Batal')
+const displayTitle = computed(() => props.title ?? 'Confirmation')
+const displayMessage = computed(() => props.message ?? 'Are you sure?')
+const displayConfirmText = computed(() => props.confirmText ?? 'Confirm')
+const displayCancelText = computed(() => props.cancelText ?? 'Cancel')
 const displayBusy = computed(() => props.busy ?? false)
 
+const titleId = useId()
+const descId = useId()
+
 const panel = ref<HTMLElement | null>(null)
+const cancelButton = ref<HTMLButtonElement | null>(null)
+let previouslyFocusedElement: HTMLElement | null = null
+
+function getFocusableElements(): HTMLElement[] {
+  if (!panel.value) return []
+  const selector = 'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  return Array.from(panel.value.querySelectorAll<HTMLElement>(selector))
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    onCancel()
+    return
+  }
+
+  if (e.key === 'Tab') {
+    const focusable = getFocusableElements()
+    if (focusable.length === 0) {
+      e.preventDefault()
+      return
+    }
+
+    const firstElement = focusable[0]
+    const lastElement = focusable[focusable.length - 1]
+
+    if (e.shiftKey) {
+      if (document.activeElement === firstElement || document.activeElement === panel.value) {
+        e.preventDefault()
+        lastElement.focus()
+      }
+    } else {
+      if (document.activeElement === lastElement) {
+        e.preventDefault()
+        firstElement.focus()
+      }
+    }
+  }
+}
 
 function onConfirm() {
   emits('confirm')
@@ -43,9 +84,29 @@ function onCancel() {
   emits('cancel')
 }
 
-// Focus management: focus panel when mounted
 onMounted(() => {
-  if (panel.value) panel.value.focus()
+  if (typeof document !== 'undefined') {
+    previouslyFocusedElement = document.activeElement as HTMLElement | null
+  }
+  nextTick(() => {
+    if (cancelButton.value) {
+      cancelButton.value.focus()
+    } else if (panel.value) {
+      panel.value.focus()
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (typeof window === 'undefined') return
+  window.setTimeout(() => {
+    if (previouslyFocusedElement && document.body.contains(previouslyFocusedElement)) {
+      previouslyFocusedElement.focus()
+    } else {
+      const nextInteractiveTarget = document.querySelector<HTMLElement>('.activity-table button, .dashboard-toolbar input')
+      nextInteractiveTarget?.focus()
+    }
+  }, 0)
 })
 </script>
 

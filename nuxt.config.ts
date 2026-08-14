@@ -4,6 +4,10 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   css: ['~~/assets/css/main.css'],
+  components: ['~~/components'],
+  imports: {
+    dirs: ['../composables']
+  },
   app: {
     head: {
       title: 'Management Dashboard',
