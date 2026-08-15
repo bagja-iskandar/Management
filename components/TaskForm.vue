@@ -38,5 +38,14 @@ function onSubmit() {
 </script>
 
 <style scoped>
-/* Reuse existing .task-form styles */
+.task-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.task-form input {
+  flex: 1;
+  min-width: 220px;
+}
 </style>

@@ -1,115 +1,62 @@
 # DESIGN.md — Kondisi dan Arah UI/UX
 
-_Last updated: 2026-08-14. Diisi berdasarkan investigasi langsung ke source code dan CSS._
+_Last updated: 2026-08-15. Diisi berdasarkan implementasi Polymorphism Dark Glass dan eksplorasi Stitch (Project ID: 9689375760914620032)._
 
 ---
 
-## 1. Kondisi UI/UX Saat Ini
+## 1. Design System — Polymorphism Dark Glass
 
-### Design System
-Project menggunakan CSS custom properties (variables) sebagai dasar design token, didefinisikan di `assets/css/main.css`:
+Project menggunakan visual language **Dark Polymorphism / Dark Glassmorphism** pada canvas `#0B0F19` dengan token CSS terpusat di `assets/css/main.css`:
 
 ```css
---background: #FCFAEE   /* Krem/off-white — background halaman */
---surface:    #FFFFFF   /* Putih — kartu, panel */
---surface-muted: #F2F4F7
---panel:      #F8F9FB
---border:     rgba(56,75,112,0.12)
---text:        #1F2937  /* Slate dark */
---muted:       #556179
---primary:     #384B70  /* Navy/slate blue */
---secondary:   #507687
---danger:      #B8001F
---success:     #1F6D3B
---shadow:      0 20px 60px rgba(56,75,112,0.08)
---radius:      14px
+--glass-bg: #0B0F19;                         /* Deep Canvas Navy */
+--glass-surface: rgba(17, 24, 39, 0.75);      /* Frosted Card Surface */
+--glass-border: rgba(255, 255, 255, 0.08);    /* Subtle Glass Border */
+--glass-border-focus: rgba(99, 102, 241, 0.6);/* Indigo Focus Ring */
+--glass-input: rgba(15, 23, 42, 0.85);        /* Tactile Glass Well */
+--accent-indigo: #6366F1;                     /* Primary Accent */
+--accent-cyan: #06B6D4;                       /* Secondary Accent / Progress */
+--accent-violet: #A855F7;                     /* Tertiary Accent */
+--color-danger: #F43F5E;                      /* Rose Error / Danger */
+--color-success: #10B981;                     /* Emerald Success */
+--font-family: 'Inter', system-ui, sans-serif;
 ```
 
-Tema yang dihasilkan: **Light mode** dengan palet biru-navy sebagai primary. Nuansa hangat dari `--background: #FCFAEE` memberikan kesan premium.
-
-> **Catatan**: `assets/css/base.css` mendefinisikan dark theme variables yang berbeda (`--bg:#0b0f19`) namun file ini **tidak di-import** — ini adalah orphan dari iterasi sebelumnya dan tidak mempengaruhi UI saat ini.
-
-### Typography
-Menggunakan system font stack (tidak ada Google Fonts):
-```
-system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Helvetica Neue, Arial, Noto Sans
-```
-
-### Layout
-- Navbar sticky di atas (dark: `rgba(9,14,27,0.95)`) dengan backdrop blur
-- Main content max-width `1160px` (dari `main.css`)
-- Dashboard: wrapper card dengan padding 30px, border-radius 17.5px
-- Stats grid: `repeat(auto-fit, minmax(220px, 1fr))`
-- Dashboard body: 1 kolom di mobile, 2 kolom di ≥900px (QuickPanel | ActivityTable)
-
-### Komponen Visual yang Ada
-| Komponen | Kondisi |
-|---|---|
-| **StatCard** | Ada icon (emoji) + delta badge (up/down) + value + label |
-| **ActivityTable** | Grid layout 4 kolom, status badge berwarna, row hover effect |
-| **QuickPanel** | 3 action cards dalam grid 3 kolom |
-| **ConfirmDialog** | Modal overlay dengan panel, keyboard dismiss (Escape), focus management, props reaktif via `computed` ✅ |
-| **TaskForm** | Input + button inline |
-| **Navbar** | Brand + desktop nav + mobile menu toggle + avatar placeholder |
-
-### Animasi & Transisi
-- Hover: `transform: translateY(-2px)` + `box-shadow` pada StatCard dan action cards
-- Button: `transition: background 0.2s ease, transform 0.2s ease`
-- Semua transisi minimal dan functional — belum ada micro-animation yang elaborate
+### Karakteristik Visual
+- **Canvas Ambien**: Background gelap dengan radial glow mesh (indigo di top-left, violet di right, cyan di bottom-right).
+- **Glass Surfaces**: Kartu semi-transparan dengan `backdrop-filter: blur(16px)` dan border highlight 1px pemantul cahaya.
+- **Left Sidebar Navigation (230px)**: Terkunci di sisi kiri pada desktop (`position: fixed; width: 230px; height: 100vh;`) dan responsif drawer di mobile.
+- **Centered Layout**: Konten utama dibatasi `max-width: 1450px; margin: 0 auto;` dengan whitespace seimbang untuk kenyamanan visual di monitor ultrawide (3440px+).
 
 ---
 
-## 2. Masalah UI/UX yang Teridentifikasi
+## 2. Struktur Halaman & Komponen
 
-### CSS Architecture (Teknikal)
-- **Duplikasi rules**: `.button`, `.cd-overlay`, `.cd-panel` didefinisikan di **dua tempat**: `main.css` dan `dashboard.css`. Ini menyebabkan potensi specificity conflict dan maintenance burden (Target Phase 2).
-- **Fragile selectors di `main.css`**: Telah **dibersihkan** di Phase 1e — layout dashboard kini 100% menggunakan class-based selectors di `dashboard.css`.
-- **`base.css` orphan**: Telah **dihapus** di Phase 1f.
+### Halaman Aktif
+1. **Dashboard (`/`)**:
+   - Welcome Banner dengan highlight cyan (`#38BDF8`).
+   - 4 Kartu KPI (`StatCard.vue`) dengan typography 2.4rem bold dan circular glowing icon.
+   - Action Pills Toolbar (`⊕ New Task`, `📁 Manage Projects`, `📋 Tasks Hub`, sync button, live search).
+   - Middle Analytics Grid: Task Overview SVG curve chart (`Weekly|Monthly` toggle) dan Project Status SVG dynamic donut gauge.
+   - Recent Activity Table (`ActivityTable.vue`) dengan task icon tiles (`❖`, `</>`, `🚀`) dan semantik status pills.
+2. **Projects Hub (`/projects`)**:
+   - Status Filter Tabs (`All`, `Active`, `Planned`, `On Hold`, `Completed` dengan count badges).
+   - Live search input dan sorting dropdown.
+   - Scalable 3-column project cards dengan task count, due date, dan derived progress bar.
+   - Tombol pemicu `⊕ New Project` (`AddProjectModal.vue`).
+3. **Project Detail (`/projects/[slug]`)**:
+   - Breadcrumb navigasi: `Projects / [Project Title]`.
+   - Hero metadata card dengan status & priority pills.
+   - Derived Progress metric card (68%) dan 4-stat breakdown chips.
+   - Associated project tasks table dengan inline status toggle.
+4. **Tasks Hub (`/tasks`)**:
+   - Multi-filter toolbar (Live search, Project selector, Priority selector, Status tabs, Sort).
+   - Task Management Table lengkap dengan rotasi status instan dan konfirmasi hapus.
+   - Tombol pemicu `⊕ New Task` (`AddTaskModal.vue`).
 
-### Navbar
-- Komentar `/* navbar.vue*/` ditempatkan di baris 1 file Vue, sebelum `<template>` — ini bukan HTML/Vue yang valid (meskipun mungkin tidak crash, tidak lazim).
-- Mobile menu toggle menggunakan teks literal `"Menu"` / `"Tutup"` — tidak mengikuti konvensi hamburger icon standar.
-- Di mobile (≤820px): avatar disembunyikan, desktop nav disembunyikan, toggle button muncul. Logika benar tapi implementasi JS dan CSS terpisah (toggle state di Vue, hide/show di CSS media query).
+### Modals & Dialogs
+- **`AddProjectModal.vue`**: Form pembuatan proyek baru dengan fokus trap dan penjelasan derived progress.
+- **`AddTaskModal.vue`**: Form pembuatan task baru dengan project selector combobox, priority pills, dan due date.
+- **`ConfirmDialog.vue`**: Alertdialog konfirmasi hapus destruktif dengan warning icon rose glowing dan focus trap.
 
-### Halaman Projects
-- Menampilkan `Slug: <code>project.slug</code>` — developer-facing data tampil ke end user.
-- Tombol "Lihat ringkasan" di setiap project card mengarah ke `/` (bukan ke halaman detail project).
-- Tidak ada handling state kosong (jika projects array kosong).
-- *(Note: Error banner state sudah ditambahkan di Phase 1d via `.feedback.error`)*
-
-### Halaman Contact
-- Form tidak mereset `feedback` message — pesan sukses persists sampai page reload atau form disubmit ulang.
-- Nota "Form ini bersifat demo..." tampil di dalam card yang sama — posisi dan visibilitas perlu dipertimbangkan.
-
-### Dashboard
-- `TaskForm` di header (`.task-form-top`) dan button "+ Tambah Task" di sebelahnya keduanya ada — ada dua entry point untuk aksi yang sama (form dengan input dan tombol terpisah yang memanggil `createTask()` tanpa nama).
-- Tidak ada empty state yang informatif saat `filtered` (hasil search) kosong tapi ada tasks — pesan "Tidak ada tugas" muncul hanya saat `rows` kosong total.
-- *(Note: Error banner state sudah ditambahkan di Phase 1d via `.feedback.error`)*
-
-### Accessibility
-- `ConfirmDialog`: `role="dialog"` ada, tapi tidak ada focus trap — Tab key bisa keluar dari dialog (Target Phase 3).
-- Status badge di ActivityTable hanya dibedakan dengan warna — tidak ada visually-hidden text untuk screen reader (Target Phase 3).
-- Search input menggunakan `aria-label` (acceptable) tapi tidak ada associated `<label>` element.
-
----
-
-## 3. Arah UI/UX untuk Rework
-
-### Prioritas Tinggi (Correctness)
-1. [x] Bersihkan CSS architecture: ganti/hapus nth-of-type selector dengan class-based (Selesai di Phase 1e ✅)
-2. [x] Reaktivitas props ConfirmDialog (Selesai di Phase 1b ✅)
-3. [x] Error handling & visual error feedback banner di Dashboard & Projects (Selesai di Phase 1d ✅)
-4. [ ] Perbaiki focus trap di ConfirmDialog (Phase 3a)
-5. [ ] Tambahkan visually-hidden text pada status badge (Phase 3c)
-6. [ ] Perbaiki projects.vue — jangan tampilkan raw slug (Phase 3d)
-
-### Prioritas Sedang (UX Quality)
-1. [ ] Standarisasi bahasa UI ke English (Diputuskan PENDING-01, Phase 3)
-2. [ ] Hamburger icon di mobile navbar
-3. [ ] Auto-dismiss feedback message di contact form (Phase 3e)
-4. [ ] Empty state yang lebih informatif (search no results vs benar-benar kosong)
-
-### Prioritas Rendah (Polish)
-1. [ ] Google Fonts (misal: Inter) untuk tipografi yang lebih konsisten lintas OS
-2. [ ] Loading indicator antar navigasi (`<NuxtLoadingIndicator>`)
-3. [ ] Micro-animation yang lebih elaborat pada StatCard atau table rows
+> **Catatan Cakupan**: Halaman **Contact** telah dihapus sepenuhnya karena website ini difokuskan sebagai personal project & task management dashboard. Fitur multi-user SaaS (Team, Roles, Settings, Calendar) dikecualikan.

@@ -147,6 +147,25 @@ _Last updated: 2026-08-14._
 **Alasan**: Memenuhi keputusan `PENDING-01` untuk menyelaraskan antarmuka dengan standar portfolio engineering internasional.
 **Dampak**: 10 file frontend & API stats, UI 100% konsisten dalam Bahasa Inggris.
 
+### [2026-08-15] Phase 4 — Visual Exploration & Polymorphism Design System (Stitch)
+**Keputusan**: Menetapkan estetika visual Polymorphism (Dark Mode Glassmorphism) pada canvas `#0B0F19` dengan pencahayaan ambien radial mesh (Indigo `#6366F1`, Cyan `#06B6D4`, Violet `#A855F7`), lapisan kaca buram semi-transparan `rgba(255, 255, 255, 0.04)` blur 16px, border 1px pemantul cahaya, dan struktur Left Sidebar Navigation (230px) yang ringkas untuk aplikasi Personal Project Management (3 rute: Dashboard, Projects, Contact).
+**Alasan**: Menghasilkan antarmuka portfolio-grade berdaya pikat tinggi, fokus pada kebutuhan pengembang tunggal tanpa bloat multi-user SaaS, serta menjaga keterbacaan data dengan kontras tinggi.
+**Dampak**: Panduan visual token untuk implementasi Phase 5 (Stitch Project ID: `9689375760914620032`).
+
+### [2026-08-15] Phase 5 — UI Implementation & Visual Modernization
+**Keputusan**: Mengimplementasikan design system Polymorphism Dark Glass secara menyeluruh pada aplikasi Nuxt 4:
+1. `assets/css/main.css` & `assets/css/dashboard.css`: Integrasi font Google Inter, token CSS canvas `#0B0F19`, glass surfaces `rgba(17, 24, 39, 0.75)`, ambient glow mesh, border highlights, dan button/input primitives.
+2. `components/dashboard.vue`: Penyelarasan presisi 1-to-1 dengan desain eksplorasi Stitch: Welcome Banner (`Welcome back, Bagja` dengan highlight cyan `#38BDF8`), 4 kartu KPI StatCard (label & icon top, bold 2.4rem number, trend indicator bottom), Action Pills toolbar (`⊕ New Task`, `📁 Manage Projects`, `✉ Contact`, search box), Grid analitik 2 kolom tengah (Task Overview glowing SVG curves & Project Status dynamic SVG donut gauge), serta Recent Activity full-width data card.
+3. `components/ActivityTable.vue` & `components/ConfirmDialog.vue`: Data table dengan task icon tiles (`❖`, `</>`, `🚀`), subtitle project, status pills berkilau neon, circular assignee avatar, tanggal, dan tombol aksi yang mempertahankan 100% perbaikan aksesibilitas Phase 3.
+4. `app/pages/projects.vue` & `app/pages/contact.vue`: Kartu proyek scalable dengan progress bar neon indigo-cyan dan instant filter, serta form kontak personal dengan feedback banner auto-dismiss 5 detik.
+**Alasan**: Memenuhi seluruh arahan desain Stitch untuk portfolio personal project management berkualitas tinggi, responsif, dan mudah dipindai tanpa mengubah contract API backend.
+**Dampak**: 12 file frontend/style termodernisasi, build lulus 100% tanpa regresi.
+
+### [2026-08-15] Navigation Performance Optimization via useLazyAsyncData & Payload Caching
+**Keputusan**: Ganti top-level `await useAsyncData` dengan `useLazyAsyncData` disertai `getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]` pada seluruh halaman dan komponen utama (`dashboard.vue`, `projects.vue`, `projects/[slug].vue`, `tasks.vue`), serta hubungkan `refreshNuxtData` pada seluruh mutation handler.
+**Alasan**: Mengeliminasi Vue Suspense route transition blocking saat navigasi client-side (Dashboard $\leftrightarrow$ Projects $\leftrightarrow$ Tasks), membuat pergantian halaman seketika (0ms) tanpa network latency blocking, sekaligus menjaga data freshness reaktif saat operasi CRUD dilakukan.
+**Dampak**: 4 file dioptimasi (`components/dashboard.vue`, `app/pages/projects.vue`, `app/pages/projects/[slug].vue`, `app/pages/tasks.vue`). Build lulus 100% (exit code 0).
+
 ---
 
 ## Log Format untuk Keputusan Baru

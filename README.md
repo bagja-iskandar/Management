@@ -35,9 +35,10 @@ npm run preview
 
 ## Fitur Utama
 
-- Dashboard utama dengan statistik proyek dan tugas.
-- Pencarian tugas dan manajemen status tugas.
-- Halaman `Projects` untuk melihat daftar proyek.
-- Halaman `Contact` dengan form demo.
+- Personal Dashboard dengan KPI cards, visual curve analytics, dan donut gauge status.
+- Pencarian tugas client-side dan manajemen lifecycle status (*To Do*, *In Progress*, *Completed*).
+- Halaman `Projects` & `Project Detail` (`/projects/:slug`) dengan dynamic milestone progress bars.
+- Halaman `Tasks` (`/tasks`) untuk manajemen task terpusat dan multi-dimensi filter.
+- Modals interaktif: Add Project Modal & Add Task Modal.
 - API Nitro untuk tugas, aktivitas, proyek, dan statistik.
-- Data disimpan secara konsisten menggunakan Nitro storage.
+- Data disimpan secara konsisten menggunakan Nitro unstorage KV file di `.data/kv/`.

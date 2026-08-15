@@ -26,20 +26,24 @@ Browser
 ```
 Management/
 ├── app/                          # Nuxt 4 app directory (aktif)
-│   ├── app.vue                   # Root layout: <Navbar> + <NuxtPage>
+│   ├── app.vue                   # Root layout: <Navbar> (Left Sidebar) + <NuxtPage>
 │   └── pages/
 │       ├── index.vue             # Route /  → render <Dashboard>
 │       ├── projects.vue          # Route /projects
-│       └── contact.vue          # Route /contact
+│       ├── projects/
+│       │   └── [slug].vue        # Route /projects/:slug (Project Detail)
+│       └── tasks.vue             # Route /tasks
 │
-├── components/                   # Di root, BUKAN di app/ (lihat catatan)
-│   ├── dashboard.vue             # Komponen utama dashboard (orchestrator)
-│   ├── navbar.vue                # Header navigasi
+├── components/                   # Di root
+│   ├── dashboard.vue             # Komponen utama dashboard
+│   ├── navbar.vue                # Left Sidebar navigation (230px)
 │   ├── ActivityTable.vue         # Tabel daftar tasks
 │   ├── StatCard.vue              # KPI card individual
 │   ├── QuickPanel.vue            # Panel quick actions
-│   ├── ConfirmDialog.vue         # Modal konfirmasi hapus
-│   └── TaskForm.vue              # Form input task baru
+│   ├── ConfirmDialog.vue         # Modal konfirmasi hapus aksesibel
+│   ├── TaskForm.vue              # Form input task
+│   ├── AddProjectModal.vue       # Modal create new project
+│   └── AddTaskModal.vue          # Modal create new task
 │
 ├── composables/                  # Di root, BUKAN di app/
 │   ├── useTasks.ts               # API calls: getTasks, getActivities, createTask, updateTask, deleteTask

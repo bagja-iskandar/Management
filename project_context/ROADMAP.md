@@ -1,70 +1,65 @@
 # ROADMAP.md — Rework Roadmap Berdasarkan Temuan Aktual
 
-_Last updated: 2026-08-14. Dibuat berdasarkan investigasi baseline — belum ada fase yang disetujui._
-
-> **Catatan**: Roadmap ini adalah **proposal** berdasarkan temuan investigasi. Setiap fase membutuhkan persetujuan sebelum implementasi dimulai. Urutan dan scope setiap fase dapat diubah berdasarkan keputusan reviewer.
+_Last updated: 2026-08-15._
 
 ---
 
 ## Prinsip Rework
 
-1. **Preserve function** — tidak menghapus atau mengubah fitur yang sudah berjalan tanpa alasan
+1. **Preserve function** — tidak mengubah atau merusak fitur yang sudah berjalan tanpa justifikasi teknis
 2. **Bertahap** — setiap fase mandiri, dapat di-test, dan dapat di-review secara independen
-3. **Correctness first** — perbaiki yang broken sebelum polish yang kosmetik
-4. **Evidence-based** — setiap perubahan berdasarkan temuan konkret dari codebase, bukan asumsi
+3. **Correctness first** — perbaiki fungsionalitas dan aksesibilitas sebelum memoles estetika
+4. **Evidence-based** — setiap perubahan didasarkan pada temuan konkret dari codebase dan design source of truth
 
 ---
 
-## Phase 0 — Baseline Documentation (Saat Ini)
-**Status**: ✅ Selesai (file project_context/ sedang diisi)
+## Phase 0 — Baseline Documentation
+**Status**: ✅ Completed
 
 - [x] Investigasi seluruh source code
-- [x] Isi `PROJECT.md`, `ARCHITECTURE.md`, `DESIGN.md`, `ENGINEERING.md`, `DECISIONS.md`
-- [x] Identifikasi semua issues dengan evidence
+- [x] Dokumentasi `PROJECT.md`, `ARCHITECTURE.md`, `DESIGN.md`, `ENGINEERING.md`, `DECISIONS.md`
+- [x] Identifikasi semua issues dengan evidence aktual
 
 ---
 
-## Phase 1 — Critical Fixes (Prerequisite)
+## Phase 1 — Critical Fixes & Cleanup
 **Status**: ✅ Completed (1a ✅, 1b ✅, 1c ✅, 1d ✅, 1e ✅, 1f ✅)
-
-Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus diselesaikan sebelum perbaikan lain.
 
 ### 1a. ✅ Hapus Ghost Files di `pages/` Root
 - **Files**: `pages/index.vue`, `pages/projects.vue`, `pages/contact.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Ketiga file 0-bytes dihapus setelah verifikasi routing eksplisit membuktikan Nuxt 4 sepenuhnya mengabaikannya — tidak ada route, compile, atau import yang dihasilkan dari root `pages/`. Build tetap menghasilkan 3 routes identik dari `app/pages/`.
-- **Evidence**: Source maps build output → `app/pages/contact.vue`, `app/pages/projects.vue`; tsconfig `include` hanya `app/**/*`; tidak ada referensi ke root `pages/` di seluruh codebase.
-- **Verification**: `npm run build` — exit code 0, total size 1.96 MB, routes `/`, `/contact`, `/projects` identik.
+- **Change**: Ketiga file 0-bytes dihapus setelah verifikasi routing membuktikan Nuxt 4 sepenuhnya mengabaikannya. Build tetap menghasilkan routes identik dari `app/pages/`.
+- **Verification**: `npm run build` — exit code 0.
 
 ### 1b. ✅ Perbaiki Reaktivitas ConfirmDialog Props
 - **File**: `components/ConfirmDialog.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Ganti 5 non-reactive `const` declarations dengan `computed` (`displayTitle`, `displayMessage`, `displayConfirmText`, `displayCancelText`, `displayBusy`). Template diupdate untuk menggunakan computed refs. Public interface (`defineProps`, `defineEmits`) tidak berubah.
-- **Verification**: `npm run build` — exit code 0, 175 modules transformed, no errors.
+- **Change**: Ganti 5 non-reactive `const` declarations dengan `computed` (`displayTitle`, `displayMessage`, `displayConfirmText`, `displayCancelText`, `displayBusy`).
+- **Verification**: `npm run build` — exit code 0.
 
 ### 1c. ✅ Hapus Tipe Duplikat di `dashboard.vue`
 - **File**: `components/dashboard.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus local `type Status`, `type Stat`, `type Row` (15 baris). Tambah `import type { Task, Stat } from '../types'`. Update 6 call sites: `Row→Task`, `Status→Task['status']`. `statusClass()` dipertahankan (out of scope).
-- **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
+- **Change**: Hapus local `type Status`, `type Stat`, `type Row`. Gunakan shared types dari `types/`.
+- **Verification**: `npm run build` — exit code 0.
 
 ### 1d. ✅ Tambahkan Error Handling di `useAsyncData`
 - **Files**: `components/dashboard.vue`, `app/pages/projects.vue`, `assets/css/main.css`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Destructure `error` dari `useAsyncData` di dashboard (statsError, activitiesError) dan projects (projectsError). Tambah `.feedback.error` CSS variant di `main.css` (modifier dari class existing). Banner `role="alert"` di template masing-masing. Semua template usage sudah null-safe (verified pre-implementation).
-- **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
+- **Change**: Tangani `error` dari `useAsyncData` dengan banner `role="alert"` dan CSS variant `.feedback.error`.
+- **Verification**: `npm run build` — exit code 0.
 
 ### 1e. ✅ Bersihkan CSS Fragile Selectors di `main.css`
-- **File**: `assets/css/main.css` (baris 138–182 dihapus)
+- **File**: `assets/css/main.css`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus seluruh blok fragile selectors (`section > div:nth-of-type(2/3/4)` dsb.) beserta komentarnya (45 baris). Seluruh layout & styling dashboard terbukti fully-covered oleh class-based CSS di `dashboard.css` dan scoped component styles (`StatCard.vue`, `QuickPanel.vue`).
-- **Verification**: `npm run build` — exit code 0, 1.96 MB, HTTP 200 response.
+- **Change**: Hapus seluruh blok fragile selectors (`section > div:nth-of-type(2/3/4)`). Seluruh layout dashboard di-handle oleh class-based CSS.
+- **Verification**: `npm run build` — exit code 0.
 
 ### 1f. ✅ Hapus File Orphan
 - **Files**: `assets/css/base.css`, `assets/javascript/navbar.js`, `.data/tasks.json`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Ketiga file orphan berhasil dihapus setelah audit mendalam memverifikasi tidak ada seed, fixture, fallback, nitro adapter, atau script yang menggunakannya. Folder kosong `assets/javascript` dibersihkan.
-- **Verification**: `npm run build` — exit code 0, 1.96 MB; git status verified.
+- **Change**: Ketiga file orphan berhasil dihapus setelah audit memverifikasi tidak ada dependency aktif.
+- **Verification**: `npm run build` — exit code 0.
 
 ---
 
@@ -72,40 +67,34 @@ Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus disel
 **Status**: ✅ Completed (2026-08-14)
 
 ### 2a. ✅ Perbaiki CSS Path di `nuxt.config.ts`
-- **File**: `nuxt.config.ts` baris 6
+- **File**: `nuxt.config.ts`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Ubah `'../assets/css/main.css'` menjadi `'~~/assets/css/main.css'`. Menggunakan alias rootDir resmi Nuxt 4 (`~~/`) yang idiomatis dan konsisten dengan lokasi folder `assets/` di root.
-- **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
+- **Change**: Gunakan alias rootDir resmi Nuxt 4 (`~~/assets/css/main.css`).
 
 ### 2b. ✅ Tambahkan Generic Return Types pada Composables
 - **Files**: `composables/useStats.ts`, `composables/useProjects.ts`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Tambah `import type { Stat }` dan `import type { Project }` dari `~/types`. Tambahkan generic type parameter `$fetch<Stat[]>('/api/stats')` dan `$fetch<Project[]>('/api/projects')` sehingga consumer (`dashboard.vue` dan `projects.vue`) me-resolve inferred types secara akurat dan konsisten dengan `useTasks.ts`.
-- **Verification**: `npm run build` — exit code 0, 1.96 MB, no errors.
+- **Change**: Tambahkan generic `$fetch<Stat[]>('/api/stats')` dan `$fetch<Project[]>('/api/projects')`.
 
 ### 2c. ✅ Standarisasi Nuxt Auto-Imports
 - **Files**: `nuxt.config.ts`, `app/app.vue`, `app/pages/index.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Daftarkan `components: ['~~/components']` dan `imports: { dirs: ['../composables'] }` di `nuxt.config.ts`. Hapus manual import redundant `Navbar` di `app/app.vue` dan `Dashboard` di `app/pages/index.vue`.
-- **Verification**: `npm run build` — exit code 0; auto-import metadata `node_modules/.cache/nuxt/.nuxt/components.d.ts` mendaftarkan `Navbar`, `Dashboard`, dan semua komponen root; `types/imports.d.ts` mendaftarkan `useTasks`, `useStats`, `useProjects`.
+- **Change**: Daftarkan auto-imports untuk components dan composables di `nuxt.config.ts`. Hapus manual imports redundant.
 
 ### 2d. ✅ Hapus redundant `statusClass()` di `dashboard.vue`
-- **File**: `components/dashboard.vue` (baris 139–145 dihapus)
+- **File**: `components/dashboard.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus fungsi `statusClass()` yang tidak terpakai dari `dashboard.vue` (dead code peninggalan ekstraksi `ActivityTable.vue`).
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Hapus dead code fungsi `statusClass()` dari `dashboard.vue`.
 
 ### 2e. ✅ Optimasi Query Ganda di `[id].put.ts`
 - **File**: `server/api/task/[id].put.ts`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus redundant `getArray()` & manual `find()` lookup. Delegasikan lookup, update, dan 404 handling sepenuhnya ke `updateItem()`. Pertahankan validasi date & fallback behavior.
-- **Verification**: `npm run build` — exit code 0; test suite verifikasi behavior date edge-cases lolos 100%.
+- **Change**: Hapus redundant `getArray()` lookup. Delegasikan sepenuhnya ke `updateItem()`.
 
 ### 2f. ✅ Bersihkan Duplikasi Styling Dasar
-- **Files**: `assets/css/main.css`, `assets/css/dashboard.css` (baris 132–171 dihapus)
+- **Files**: `assets/css/main.css`, `assets/css/dashboard.css`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus 39 baris duplikasi deklarasi `.button` dari `dashboard.css`. Semua elemen tombol di dashboard fully-covered oleh rule global `main.css`.
-- **Verification**: `npm run build` — exit code 0; bundle CSS berkurang; git diff verified.
+- **Change**: Hapus 39 baris duplikasi `.button` di `dashboard.css`.
 
 ---
 
@@ -115,86 +104,113 @@ Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus disel
 ### 3a. ✅ Focus Trap pada `ConfirmDialog`
 - **File**: `components/ConfirmDialog.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Implementasi keyboard focus trap (`Tab` dan `Shift+Tab` cyclic navigation), initial focus ke tombol Cancel, dan robust focus restoration ke trigger element saat modal ditutup via Escape/Batal dengan fallback ke elemen interaktif dashboard (`.activity-table button`, `.dashboard-toolbar input`) jika baris telah terhapus.
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Cyclic focus trap (`Tab`/`Shift+Tab`), initial focus pada Cancel button, dan robust focus restoration.
 
 ### 3b. ✅ ARIA Accessibility Improvements pada `ConfirmDialog`
 - **File**: `components/ConfirmDialog.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Gunakan `useId()` untuk ID deterministik `titleId` dan `descId`, tetapkan `role="alertdialog"`, hubungkan `aria-labelledby` dan `aria-describedby`, serta bersihkan atribut redundant `:aria-label` dan `aria-pressed="false"`.
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Deterministic IDs (`useId()`), `role="alertdialog"`, `aria-labelledby`, dan `aria-describedby`.
 
 ### 3c. ✅ Visually-hidden Text pada Status Badge
 - **Files**: `assets/css/main.css`, `components/ActivityTable.vue`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Tambahkan utilitas `.sr-only` standar WCAG ke `assets/css/main.css` dan sematkan `<span class="sr-only">Status: </span>` pada status badge di `ActivityTable.vue` untuk aksesibilitas screen reader.
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Utilitas `.sr-only` standar WCAG dan label screen reader pada status badge.
 
 ### 3d. ✅ Perbaiki Tampilan & Navigasi `projects.vue`
 - **Files**: `app/pages/projects.vue`, `assets/css/main.css`
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Hapus tampilan raw `slug:`, tampilkan deskripsi proyek yang informatif, perbaiki navigasi "Lihat Ringkasan" menuju anchor `#summary`, tambahkan fallback empty state yang ramah pengguna, dan bersihkan manual import `useProjects`.
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Hapus tampilan raw `slug:`, ganti dengan deskripsi dan fallback empty state.
 
-### 3e. ✅ Auto-dismiss Feedback pada `contact.vue`
+### 3e. ✅ [Deprecated / Feature Removed] Auto-dismiss Feedback pada `contact.vue`
 - **File**: `app/pages/contact.vue`
-- **Status**: Implemented & Verified 2026-08-14
-- **Change**: Tambahkan auto-dismiss timer 5 detik untuk feedback form submission dengan timer reset saat submit ulang dan lifecycle cleanup pada `onUnmounted`.
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Status**: Historical (Fitur Contact kemudian dihapus sepenuhnya pada 2026-08-15 karena di luar scope personal management dashboard).
 
 ### 3f. ✅ Standardisasi Bahasa UI ke English
-- **Files**: Seluruh template komponen dan halaman (10 files)
+- **Files**: Seluruh template komponen dan halaman
 - **Status**: Implemented & Verified 2026-08-14
-- **Change**: Sesuai keputusan `PENDING-01`, standardisasi seluruh user-facing UI text (headings, button labels, placeholders, aria-labels, notes, feedback messages, empty states) ke Bahasa Inggris dengan tetap menjaga integritas data model backend (`todo | proses | selesai` dipetakan ke display text `To Do / In Progress / Completed`).
-- **Verification**: `npm run build` — exit code 0; git diff verified.
+- **Change**: Standardisasi user-facing text ke Bahasa Inggris standar.
 
 ---
 
 ## Phase 4 — UI/UX Design System & Exploration (Stitch)
-**Status**: ⏳ Menunggu Phase 3 selesai
-**Prinsip**: Seluruh color palette, typography (Google Fonts), dan visual style adalah *kandidat eksplorasi* yang memerlukan audit & approval eksplisit sebelum implementasi.
+**Status**: ✅ Completed (Design Source of Truth)
+**Prinsip**: Seluruh visual style, tokenisasi warna, typography scale, dan layout shell dieksplorasi dan disetujui di Stitch (**Project: `Management - Polymorphism UI Exploration`, Project ID: `9689375760914620032`**) sebagai single source of truth:
 
-### 4a. Visual Audit & Baseline Design Review
-- Evaluasi visual hierarchy, contrast ratio, spacing, dan layout flow yang ada saat ini.
-- Identifikasi area perbaikan estetika (cards elevation, typography pairing, micro-interactions).
+### 4a. ✅ Visual Audit & Baseline Design Review
+- Evaluasi visual hierarchy, contrast ratio, spacing, dan layout flow.
+- Penyusunan kebutuhan antarmuka personal project management yang ringkas dan fokus untuk single developer.
 
-### 4b. Stitch Design Exploration & Mockups
-- Eksplorasi mockup high-fidelity menggunakan Stitch untuk:
-  - Top Navigation & Brand Header
-  - Dashboard KPI Metrics & Overview Section
-  - Interactive Activity Table & Quick Action Cards
-  - Project Showcase & Contact View
-- Pengujian kandidat color scheme (e.g. curated slate/indigo/emerald vs existing navy palette) dan font pairing (e.g. Inter / Plus Jakarta Sans).
+### 4b. ✅ Stitch Design Mockups & Specification
+- Pembuatan blueprint visual high-fidelity: Dashboard, Projects Hub, Project Detail (`/projects/[slug]`), Tasks Hub (`/tasks`), Add Project Modal, Add Task Modal, UI Lifecycle States (Loading shimmer, Empty state, Error retry, Delete alertdialog), dan Multi-Device Responsive Showcase.
 
-### 4c. Spesifikasi Design Tokens
-- Perumusan design tokens yang disetujui (CSS Custom Properties): semantic color roles, typography scale, border radii, dan shadow elevation.
-- Penyusunan panduan interaksi dan state visual (hover, active, disabled, focus-visible).
+### 4c. ✅ Spesifikasi Design Tokens
+- Perumusan design tokens Dark Polymorphism (CSS Custom Properties): background `#0B0F19`, glass surface `rgba(17, 24, 39, 0.75)`, primary indigo `#6366F1`, cyan `#06B6D4`, violet `#A855F7`, semantic neon glows, typography scale Inter, radius `16px` cards dan `8px` inputs.
 
 ---
 
-## Phase 5 — UI Implementation & Visual Modernization
-**Status**: ⏳ Menunggu Phase 4 selesai
-**Prinsip**: Hanya mengimplementasikan design dan interaction yang telah disetujui pada Phase 4. Fitur tambahan apa pun (seperti pagination, mobile drawer, atau `<NuxtLoadingIndicator>`) wajib diajukan dengan justifikasi teknis dan approval tersendiri.
+## Phase 5 — UI Implementation & UX Refinement
+**Status**: 🔄 In Progress (UI/UX Refinement)
+**Prinsip**: Implementasi dan penyempurnaan codebase secara presisi 1-to-1 terhadap blueprint Stitch tanpa mengubah API contract atau business logic backend.
 
-### 5a. Integrasi Design Tokens ke `main.css`
-- Implementasikan token CSS variabel final (warna, font-family, spacing, elevation) ke `assets/css/main.css`.
+### 5a. ✅ Global Layout & Centered Container
+- **Files**: `assets/css/main.css`, `app/app.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Canvas `#0B0F19`, glass surfaces `rgba(17, 24, 39, 0.75)`, ambient radial glow mesh, Google Inter typography, dan centered container (`max-width: 1450px; margin: 0 auto;`).
 
-### 5b. Modernisasi Komponen Navbar
-- Implementasi styling navbar modern, active route indicator, dan responsive menu icon/toggle yang disepakati.
+### 5b. ✅ Left Sidebar Navigation (230px)
+- **Files**: `components/navbar.vue`, `assets/css/navbar.css`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Fixed 230px Left Sidebar dengan brand mark M, navigasi personal workspace (*Dashboard*, *Projects*, *Tasks*), personal developer profile card (Bagja Iskandar), dan mobile toggle drawer. Fitur Contact dihapus sepenuhnya.
 
-### 5c. Modernisasi Komponen Dashboard (StatCard, QuickPanel, TaskForm)
-- Terapkan visual styling baru, icon badges, dan micro-interaction transitions pada kartu KPI dan form aksi.
+### 5c. ✅ Dashboard Hierarchy & Visual Analytics
+- **Files**: `components/dashboard.vue`, `components/StatCard.vue`, `components/ActivityTable.vue`, `assets/css/dashboard.css`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Welcome Banner dengan highlight cyan (`#38BDF8`), 4 kartu KPI StatCard (bold 2.4rem), Action Pills bar (`⊕ New Task`, `📁 Manage Projects`, `📋 Tasks Hub`, sync), Task Overview SVG curve chart, Donut Gauge reaktif, dan Recent Activity table dengan task icons (`❖`, `</>`, `🚀`).
 
-### 5d. Modernisasi ActivityTable & Filter Toolbar
-- Terapkan styling data table modern, refined status badges, hover feedback, serta empty state informatif saat pencarian tanpa hasil.
+### 5d. ✅ Scalable Projects Hub
+- **Files**: `app/pages/projects.vue`, `assets/css/main.css`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Multi-filter status tabs (`All`, `Active`, `Planned`, `On Hold`, `Completed` dengan counter badges), live search, sorting dropdown, 3-col scalable grid, derived progress bars, dan trigger modal `⊕ New Project`.
 
-### 5e. Modernisasi Visual Halaman Projects & Contact
-- Terapkan card showcase proyek modern dan layout contact form terstruktur.
+### 5e. ✅ Dynamic Project Detail Route (`/projects/[slug]`)
+- **File**: `app/pages/projects/[slug].vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Breadcrumbs, Hero Metadata Card, Derived Progress Card (68%), 4-stat metric breakdown, dan associated tasks management table.
+
+### 5f. ✅ Add Project Modal Form
+- **Files**: `components/AddProjectModal.vue`, `app/pages/projects.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Modal gelap (`620px`) dengan Project Name, Description, Status Selector pills, Priority Selector pills, Timeline dates, penjelasan derived progress, focus trap, dan Escape key dismissal.
+
+### 5g. ✅ Add Task Modal Form
+- **Files**: `components/AddTaskModal.vue`, `components/dashboard.vue`, `app/pages/tasks.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Modal gelap (`600px`) dengan Searchable Project Picker, Task Name, Description, Status Selector, Priority Selector, Due Date, focus trap, dan real-time metric refresh.
+
+### 5h. ✅ Dedicated Tasks Hub Page (`/tasks`)
+- **Files**: `app/pages/tasks.vue`, `components/navbar.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Dedicated Tasks Hub dengan live search, project filter, priority filter, status tabs, sort selector, task table dengan inline status rotation, dan delete alertdialog.
+
+### 5i. ✅ UI Lifecycle States & Accessibility Polish
+- **Files**: `assets/css/main.css`, `components/ActivityTable.vue`, `components/ConfirmDialog.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Shimmer skeleton animations (`.skeleton-shimmer`), rich empty states dengan icon tile ilustratif (`📋`), warning icon dengan red glow pada delete alertdialog, dan error banner dengan interactive *Try Again* action.
+
+### 5j. ✅ Navigation Performance Optimization (Non-blocking Lazy Data & Payload Caching)
+- **Files**: `components/dashboard.vue`, `app/pages/projects.vue`, `app/pages/projects/[slug].vue`, `app/pages/tasks.vue`
+- **Status**: Implemented & Verified 2026-08-15
+- **Change**: Mengganti `await useAsyncData` dengan `useLazyAsyncData` disertai `getCachedData` in-memory payload cache. Mengeliminasi Suspense transition blocking saat navigasi client-side (Dashboard $\leftrightarrow$ Projects $\leftrightarrow$ Tasks), menghasilkan transisi instan (0ms) tanpa network blocking sambil mempertahankan data freshness melalui invalidasi `refreshNuxtData`.
+- **Verification**: `npm run build` — exit code 0; navigasi instan terverifikasi.
+
+### 5k. 🔄 UI/UX Visual Fidelity Refinement (Current Focus)
+- **Status**: In Progress
+- **Target**: Penyempurnaan mikro-interaksi, kerapihan padding & typography scale, dynamic status linking, dan audit visual menyeluruh berdasarkan Stitch Source of Truth sebelum finalisasi.
 
 ---
 
 ## Phase 6 — Documentation & Portfolio Readiness
-**Status**: ⏳ Tahap Akhir (Setelah UI & Engineering Rework Selesai)
+**Status**: ⏳ Queued (Menunggu Penyelesaian UI/UX Refinement Phase 5)
 
 ### 6a. Update `DOCUMENTATION.md`
 - Perbarui dokumentasi arsitektur final, API contracts, Unstorage KV schema, dan data flow.
@@ -211,8 +227,6 @@ Memperbaiki hal-hal yang benar-benar broken atau berisiko tinggi — harus disel
 ---
 
 ## Backlog (Belum Diprioritaskan)
-
-Item-item berikut diidentifikasi tapi belum diprioritaskan — membutuhkan keputusan & justifikasi tersendiri:
 
 - **Unit Testing**: Vitest untuk `server/utils/` (store, validation) dan composables
 - **State Management**: Evaluasi Pinia Store jika kebutuhan shared client-state meningkat
