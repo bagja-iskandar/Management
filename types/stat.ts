@@ -3,4 +3,5 @@ export interface Stat {
   value: string | number
   delta: string
   trend: 'up' | 'down'
+  subtitle?: string
 }

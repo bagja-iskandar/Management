@@ -1,163 +1,145 @@
-<template>
-  <div class="modal-overlay" @click.self="onCancel" role="presentation">
-    <div 
-      ref="dialogRef" 
-      class="modal-card" 
-      role="dialog" 
-      aria-modal="true" 
+﻿<template>
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto" @click.self="onCancel" role="presentation">
+    <div
+      ref="dialogRef"
+      class="w-full max-w-lg bg-[#111114] border border-white/[0.1] rounded-xl p-6 sm:p-7 shadow-[0_25px_50px_rgba(0,0,0,0.8)] flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
       aria-labelledby="modal-task-title"
       tabindex="-1"
     >
       <!-- Header -->
-      <div class="modal-header">
+      <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <h2 id="modal-task-title">Create New Task</h2>
-          <p class="modal-subtitle">Assign a personal task to a project to track milestones and derived progress.</p>
+          <h2 id="modal-task-title" class="font-mono text-lg font-semibold text-[#F5F2EB]">Create New Task</h2>
+          <p class="font-sans text-xs text-[#756F68] mt-1">Assign an engineering task to a project to track milestones and velocity.</p>
         </div>
-        <button type="button" class="close-btn" @click="onCancel" aria-label="Close modal">✕</button>
+        <button
+          type="button"
+          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#756F68] hover:text-[#F5F2EB] transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
+          aria-label="Close modal"
+          @click="onCancel"
+        >
+          ✕
+        </button>
       </div>
 
       <!-- Form -->
-      <form @submit.prevent="onSubmit" class="modal-form" novalidate>
+      <form class="flex flex-col gap-4" @submit.prevent="onSubmit" novalidate>
         <!-- Validation Error Alert -->
-        <div v-if="validationError" class="modal-alert" role="alert">
+        <div v-if="validationError" class="p-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-400 text-xs font-mono" role="alert">
           {{ validationError }}
         </div>
 
-        <!-- Project Selector (Combobox / Select) -->
-        <div class="form-group">
-          <label for="task-project-select">
-            Project Association <span class="required">*</span>
+        <!-- Project Association (only shown if not already scoped to a specific project) -->
+        <div v-if="!projectSlug" class="flex flex-col gap-1.5">
+          <label for="task-project-select" class="font-sans text-xs font-semibold text-[#F5F2EB]">
+            Project Association <span class="text-red-400">*</span>
           </label>
-          <select id="task-project-select" v-model="selectedProject" class="modal-select" required>
-            <option value="Project Alpha • TF-HiTNet">📁 Project Alpha • TF-HiTNet Fusion</option>
-            <option value="Project Beta • Management Web">📁 Project Beta • Management SaaS Web</option>
-            <option value="Project Gamma • Neural Signal">📁 Project Gamma • Neural Signal Transformer</option>
-            <option value="Personal Portfolio & Docs">📁 Personal Portfolio & Docs</option>
+          <select
+            id="task-project-select"
+            v-model="selectedProject"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer"
+            required
+          >
+            <option value="management">📁 Nexura Management Workspace</option>
+            <option value="tf-hitnet-eeg">📁 TF-HiTNet EEG Emotion</option>
+            <option value="neural-signal-lab">📁 Neural Signal Lab</option>
           </select>
         </div>
 
         <!-- Task Name -->
-        <div class="form-group">
-          <label for="task-name-input">
-            Task Name <span class="required">*</span>
+        <div class="flex flex-col gap-1.5">
+          <label for="task-name-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">
+            Task Name <span class="text-red-400">*</span>
           </label>
-          <input 
+          <input
             id="task-name-input"
             ref="nameInputRef"
             v-model="name"
-            type="text" 
-            placeholder="e.g. Implement neural co-attention module" 
-            :class="{ 'has-error': !!validationError && !name.trim() }"
-            required 
+            type="text"
+            placeholder="e.g. Implement neural co-attention module"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            :class="{ 'border-red-500/60 focus:ring-red-500': !!validationError && !name.trim() }"
+            required
           />
         </div>
 
         <!-- Description -->
-        <div class="form-group">
-          <label for="task-desc-input">Description</label>
-          <textarea 
+        <div class="flex flex-col gap-1.5">
+          <label for="task-desc-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Description</label>
+          <textarea
             id="task-desc-input"
             v-model="description"
-            rows="3"
-            placeholder="e.g. Build multi-head spatial attention mechanism to align multi-modal EEG feature maps."
+            rows="2"
+            placeholder="Build multi-head spatial attention mechanism to align multi-modal EEG feature maps."
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
           ></textarea>
         </div>
 
-        <!-- Status Selector -->
-        <div class="form-group">
-          <label>Status</label>
-          <div class="pill-selector" role="radiogroup" aria-label="Task Status">
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: status === 'todo' }" 
-              @click="status = 'todo'"
-              role="radio"
-              :aria-checked="status === 'todo'"
-            >
-              To Do
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice active-pill" 
-              :class="{ selected: status === 'proses' }" 
-              @click="status = 'proses'"
-              role="radio"
-              :aria-checked="status === 'proses'"
-            >
-              In Progress
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice completed-pill" 
-              :class="{ selected: status === 'selesai' }" 
-              @click="status = 'selesai'"
-              role="radio"
-              :aria-checked="status === 'selesai'"
-            >
-              Completed
-            </button>
-          </div>
+        <!-- Tech Tags (comma separated) -->
+        <div class="flex flex-col gap-1.5">
+          <label for="task-tags-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Tech Tags (comma separated)</label>
+          <input
+            id="task-tags-input"
+            v-model="techTagsInput"
+            type="text"
+            placeholder="e.g. vue, typescript, telemetry"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+          />
         </div>
 
         <!-- Priority Selector -->
-        <div class="form-group">
-          <label>Priority Level</label>
-          <div class="pill-selector" role="radiogroup" aria-label="Priority Level">
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: priority === 'low' }" 
-              @click="priority = 'low'"
+        <div class="flex flex-col gap-1.5">
+          <label class="font-sans text-xs font-semibold text-[#F5F2EB]">Priority Level</label>
+          <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Priority Level">
+            <button
+              v-for="p in [
+                { id: 'low', label: 'Low' },
+                { id: 'medium', label: 'Medium' },
+                { id: 'high', label: 'High' },
+                { id: 'critical', label: 'Critical' }
+              ]"
+              :key="p.id"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-xs font-mono capitalize transition-all border"
+              :class="priority === p.id ? 'bg-[#C98A4B]/20 text-[#C98A4B] border-[#C98A4B]' : 'bg-[#09090B] text-[#756F68] border-white/[0.08] hover:text-[#F5F2EB]'"
               role="radio"
-              :aria-checked="priority === 'low'"
+              :aria-checked="priority === p.id"
+              @click="priority = p.id as any"
             >
-              🟢 Low
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: priority === 'medium' }" 
-              @click="priority = 'medium'"
-              role="radio"
-              :aria-checked="priority === 'medium'"
-            >
-              🟡 Medium
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice high-priority-pill" 
-              :class="{ selected: priority === 'high' }" 
-              @click="priority = 'high'"
-              role="radio"
-              :aria-checked="priority === 'high'"
-            >
-              🔴 High
+              {{ p.label }}
             </button>
           </div>
         </div>
 
         <!-- Due Date -->
-        <div class="form-group">
-          <label for="task-due-date">Due Date</label>
-          <input id="task-due-date" v-model="dueDate" type="date" />
-        </div>
-
-        <!-- Dynamic Progress Notice Box -->
-        <div class="derived-info-box">
-          <div class="info-icon" aria-hidden="true">💡</div>
-          <div class="info-text">
-            <strong>Dynamic Progress:</strong> Creating this task will automatically link to <em>{{ selectedProject }}</em> and recalculate its derived milestone velocity.
-          </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F5F2EB]">Due Date</label>
+          <input
+            id="task-due-date"
+            v-model="dueDate"
+            type="date"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+          />
         </div>
 
         <!-- Actions -->
-        <div class="modal-actions">
-          <button type="button" class="button secondary" @click="onCancel">Cancel</button>
-          <button type="submit" class="button primary" :disabled="isSubmitting || disabled">
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#756F68] hover:text-[#F5F2EB] transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            @click="onCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-lg bg-[#C98A4B] hover:bg-[#8B6535] text-xs font-mono font-semibold text-[#09090B] transition-colors disabled:opacity-50 focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            :disabled="isSubmitting || disabled"
+          >
             <span v-if="isSubmitting">Creating...</span>
-            <span v-else>Create Task</span>
+            <span v-else>⊕ Create Task</span>
           </button>
         </div>
       </form>
@@ -166,23 +148,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
 
-const props = defineProps<{
-  disabled?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    disabled?: boolean
+    projectSlug?: string
+  }>(),
+  {
+    disabled: false,
+    projectSlug: ''
+  }
+)
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'create', task: { name: string; description: string; project: string; status: 'todo' | 'proses' | 'selesai'; priority: string; dueDate: string }): void
+  (e: 'create', task: {
+    name: string
+    description: string
+    project?: string
+    projectSlug: string
+    status: 'in_queue'
+    priority: 'low' | 'medium' | 'high' | 'critical'
+    dueDate: string
+    techTags: string[]
+  }): void
 }>()
 
-const selectedProject = ref('Project Alpha • TF-HiTNet')
+const selectedProject = ref(props.projectSlug || 'management')
+
+watch(() => props.projectSlug, (newSlug) => {
+  if (newSlug) {
+    selectedProject.value = newSlug
+  }
+})
+
 const name = ref('')
 const description = ref('')
-const status = ref<'todo' | 'proses' | 'selesai'>('todo')
-const priority = ref<'low' | 'medium' | 'high'>('medium')
-const dueDate = ref('2026-11-20')
+const techTagsInput = ref('')
+const priority = ref<'low' | 'medium' | 'high' | 'critical'>('medium')
+const dueDate = ref('2026-09-30')
 const validationError = ref('')
 const isSubmitting = ref(false)
 
@@ -239,207 +244,22 @@ function onSubmit() {
     return
   }
 
+  const techTags = techTagsInput.value
+    ? techTagsInput.value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean)
+    : []
+
+  const targetSlug = props.projectSlug || selectedProject.value || 'management'
+
   isSubmitting.value = true
   emit('create', {
     name: name.value.trim(),
     description: description.value.trim(),
-    project: selectedProject.value,
-    status: status.value,
+    project: targetSlug,
+    projectSlug: targetSlug,
+    status: 'in_queue',
     priority: priority.value,
-    dueDate: dueDate.value
+    dueDate: dueDate.value,
+    techTags
   })
 }
 </script>
-
-<style scoped>
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(5, 8, 15, 0.78);
-  backdrop-filter: blur(16px);
-  z-index: 100;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.modal-card {
-  background: rgba(17, 24, 39, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-card);
-  padding: 30px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  outline: none;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.modal-header h2 {
-  margin: 0 0 6px;
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-.modal-subtitle {
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.close-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: var(--text-muted);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-}
-
-.modal-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.modal-alert {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  color: #fca5a5;
-  padding: 10px 14px;
-  border-radius: var(--radius-input);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-heading);
-}
-
-.modal-select {
-  background: var(--glass-input);
-  color: var(--text-heading);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-input);
-  padding: 11px 14px;
-  font-size: 0.92rem;
-  font-family: inherit;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.modal-select:focus {
-  border-color: var(--glass-border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-.required {
-  color: #f43f5e;
-}
-
-.has-error {
-  border-color: #f43f5e !important;
-  box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2) !important;
-}
-
-.pill-selector {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.pill-choice {
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-muted);
-  font-size: 0.84rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.pill-choice:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-heading);
-}
-
-.pill-choice.selected {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: rgba(99, 102, 241, 0.6);
-  color: #c0c1ff;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
-}
-
-.pill-choice.active-pill.selected {
-  background: rgba(168, 85, 247, 0.2);
-  border-color: rgba(168, 85, 247, 0.6);
-  color: #c084fc;
-}
-
-.pill-choice.completed-pill.selected {
-  background: rgba(6, 182, 212, 0.2);
-  border-color: rgba(6, 182, 212, 0.6);
-  color: #67e8f9;
-}
-
-.derived-info-box {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 12px 14px;
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  border-radius: var(--radius-input);
-  font-size: 0.82rem;
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
-.info-icon {
-  font-size: 1.1rem;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--glass-border);
-}
-</style>

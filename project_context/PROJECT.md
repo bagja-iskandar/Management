@@ -1,6 +1,6 @@
-# PROJECT.md — Identitas, Tujuan, Scope, dan Stack
+# PROJECT.md — Identitas, Tujuan, Scope, dan Target Sistem Nexura
 
-_Last updated: 2026-08-15. Diisi berdasarkan investigasi langsung ke source code._
+_Last updated: 2026-09-17. Refactored into Charcoal-Ochre Engineering Command Center._
 
 ---
 
@@ -8,57 +8,100 @@ _Last updated: 2026-08-15. Diisi berdasarkan investigasi langsung ke source code
 
 | Field | Value |
 |---|---|
-| **Nama** | Management Dashboard (Personal Workspace) |
-| **Tipe** | Personal Project & Task Management Dashboard — Portfolio-Grade Web App |
-| **Package name** | `nuxt-app` (dari `package.json`) |
-| **Repo root** | `d:\Project\REWORK\Management` |
-| **Status** | Phase 5 (UI Implementation & UX Refinement) — In Progress |
+| **Nama** | Nexura (Personal Engineering Command Center) |
+| **Tipe** | Solo-Developer Project Management & GitHub Integration Hub |
+| **Package name** | `nexura` (dari `package.json`) |
+| **Repo root** | `d:\Project\REWORK\Management` (Git Remote: `bagja-iskandar/Management`) |
+| **Status** | Phase 6–9 Implementation — Design System Overhaul & Feature Build |
 
 ---
 
-## 2. Tujuan
+## 2. Visi & Tujuan Sistem
 
-Project ini adalah **Personal Project & Task Management Dashboard** mandiri yang digunakan oleh seorang developer/user tunggal untuk mengelola proyek dan task secara berkesinambungan. Fokus pengembangan saat ini adalah visual refinement berbasis desain Polymorphism Dark Glass (Stitch Project ID: `9689375760914620032`), efisiensi alur kerja task, dan performa tinggi tanpa bloat multi-user SaaS.
+**Nexura** adalah personal engineering command center yang dirancang untuk mengelola **semua project GitHub, deployment, dan sprint kerja** di satu tempat — menggantikan workflow manual berpindah antar GitHub, Vercel dashboard, dan spreadsheet.
 
-Fungsi inti yang ada:
-- Menampilkan statistik ringkasan (KPI) dari data tasks dan projects
-- Visualisasi analitik Task Overview (SVG curve) dan Project Status (SVG donut gauge)
-- CRUD tasks dengan status lifecycle (*To Do*, *In Progress*, *Completed*), priority (*Low*, *Medium*, *High*), dan filter multi-dimensi
-- Scalable Projects Hub dengan dynamic derived milestone progress bar (*Completed Tasks / Total Tasks*)
-- Dynamic route Project Detail (`/projects/[slug]`) dengan hero metrics dan associated task management
-- Modals interaktif dengan focus trap WCAG: Add Project Modal & Add Task Modal
-- Navigasi Left Sidebar terpusat: Dashboard, Projects, Tasks
-
----
-
-## 3. Scope Aktual
-
-### Yang Ada (Verified dari Codebase)
-- **4 halaman aktif** di `app/pages/`: `index.vue` (Dashboard), `projects.vue` (Projects Hub), `projects/[slug].vue` (Project Detail), `tasks.vue` (Tasks Hub)
-- **9 komponen** di `components/`: `dashboard.vue`, `navbar.vue`, `ActivityTable.vue`, `StatCard.vue`, `QuickPanel.vue`, `ConfirmDialog.vue`, `TaskForm.vue`, `AddProjectModal.vue`, `AddTaskModal.vue`
-- **3 composables** di `composables/`: `useTasks`, `useStats`, `useProjects`
-- **6 API endpoints** di `server/api/`: GET activities, GET tasks, POST tasks, GET stats, GET projects, PUT task/:id, DELETE task/:id
-- **1 server plugin**: `seed.ts` — inisialisasi data awal jika storage kosong
-- **1 server middleware**: `visit.ts` — counter kunjungan halaman
-- **TypeScript types** di `types/`: `Task`, `Project`, `Stat`
-
-### Yang TIDAK Ada (Eksplisit Dikecualikan dari Scope)
-- Fitur Contact (dihapus karena tidak relevan untuk personal management dashboard)
-- Team, Roles, Multi-user, dan Corporate SaaS Administration
-- Calendar, Reports, dan Settings yang tidak diperlukan
-- Integrasi backend/GitHub eksternal baru
+**Tujuan Inti:**
+1. **Single Pane of Glass** — Satu dashboard untuk melihat status semua project, task, repos, dan deployments tanpa berpindah tab.
+2. **Real GitHub Integration** — Terhubung langsung dengan akun GitHub `bagja-iskandar` untuk monitoring repos, commits, branches secara real-time.
+3. **Zero-Ceremony Task Management** — Kanban board 3-kolom (`IN_QUEUE` → `RUNNING_SPRINT` → `DEPLOYED`) untuk mengelola task tanpa birokrasi Jira.
+4. **Engineering Telemetry** — Real-time metrics: active tasks, blockers, sprint velocity — bukan angka mock/dummy.
+5. **Pluggable Backend** — Storage layer yang bisa di-swap dari local KV ke Supabase PostgreSQL tanpa mengubah API contract.
+6. **Deploy-Ready** — Target deploy ke Vercel untuk frontend, dengan optional VPS/Docker.
 
 ---
 
-## 4. Tech Stack (Verified)
+## 3. Scope Matriks
 
-| Layer | Teknologi | Versi |
-|---|---|---|
-| **Framework** | Nuxt | ^4.0.3 |
-| **UI Runtime** | Vue | ^3.5.18 |
-| **Routing** | Vue Router (Nuxt Pages) | ^4.5.1 |
-| **Server/API** | Nitro (bundled dengan Nuxt) | — |
-| **Storage** | Unstorage KV file di `.data/kv/` | — |
-| **Language** | TypeScript (via Nuxt) | — |
-| **Styling** | Vanilla CSS (Polymorphism Dark Glass) | — |
-| **Design System** | Google Inter Typography, Dark Navy `#0B0F19`, Glass Blur 16px | — |
+### A. Yang Diubah (Refactored)
+
+| Aspek | Sebelum | Sesudah |
+|-------|---------|---------|
+| Design System | Polymorphism Dark Glass (Indigo `#6366F1`) | Charcoal-Ochre Console (`#0B0A09` + `#C98A4B`) |
+| Styling | CSS Custom Properties (~1400 LOC) | Tailwind CSS utility classes |
+| Navigasi | 3 item sidebar (Dashboard, Projects, Tasks) | 5 item compact sidebar + telemetry header |
+| Dashboard | Welcome banner + mock charts | Command Center + real Kanban board |
+| Data | Mock stats (`Math.max(...)`) | Real calculations dari actual data |
+| Task Status | `'todo' \| 'proses' \| 'selesai'` (ID) | `'in_queue' \| 'running_sprint' \| 'deployed' \| 'blocked'` (EN) |
+| Task Schema | 6 fields | 12+ fields (taskId, projectSlug, priority, techTags, etc.) |
+| Project Schema | 5 fields | 12+ fields (githubRepo, deployUrl, techStack, etc.) |
+| Project CRUD | Read-only (GET) | Full CRUD (GET, POST, PUT, DELETE) |
+
+### B. Yang Ditambahkan (New)
+
+- **Sidebar.vue** — Compact 5-item navigation (replaces navbar.vue)
+- **HeaderBar.vue** — Live clock (UTC/WIB), branch indicator, sprint KPI, search
+- **KanbanBoard.vue** — 3-column task board with drag-and-drop
+- **TaskCard.vue** — Rich task card with monospace ID, priority pill, tech tags
+- **GitHub API Gateway** — `/api/github/repos`, `/commits`, `/branches`
+- **Pages**: `/sprints`, `/roadmap`, `/repos`, `/telemetry`
+- **Sprint model** — Sprint management (create, assign tasks, track velocity)
+- **`.env.example`** — Environment variables template
+- **`tailwind.config.ts`** — Tailwind configuration with custom tokens
+
+### C. Yang Dikecualikan (Anti-Bloat)
+
+- Tidak ada multi-user, team invitations, atau RBAC
+- Tidak ada time-tracking atau billing
+- Tidak ada form kaku atau mandatory fields
+- Tidak ada CI/CD pipeline execution (hanya monitoring status)
+- Tidak ada code editor / terminal in-browser
+
+---
+
+## 4. Tech Stack
+
+| Layer | Teknologi | Versi | Status |
+|---|---|---|---|
+| **Framework** | Nuxt | ^4.0.3 | ✅ Active |
+| **UI Runtime** | Vue | ^3.5.18 | ✅ Active |
+| **Routing** | Vue Router (Nuxt Pages) | ^4.5.1 | ✅ Active |
+| **Server/API** | Nitro (bundled with Nuxt) | — | ✅ Active |
+| **Styling** | Tailwind CSS + @nuxtjs/tailwindcss | — | 📋 Phase 6 |
+| **Font** | Inter (sans) + JetBrains Mono (mono) | — | 📋 Phase 6 |
+| **Storage (current)** | Nitro Unstorage KV (`.data/kv/`) | — | ✅ Active |
+| **Storage (planned)** | Supabase PostgreSQL | — | ⏳ Phase 10 |
+| **External: GitHub** | GitHub REST API v3 | — | 📋 Phase 9 |
+| **External: Vercel** | Vercel API | — | ⏳ Phase 11 |
+| **State Management** | Pinia (registered, unused) | ^3.0.3 | ⏳ Evaluate |
+| **Language** | TypeScript (via Nuxt) | — | ✅ Active |
+| **Deploy Target** | Vercel (frontend) | — | ⏳ Phase 12 |
+
+---
+
+## 5. Integrasi External Services
+
+### GitHub (Ready — Phase 9)
+- **Username**: `bagja-iskandar`
+- **Auth**: Personal Access Token via `.env`
+- **Scope**: `repo`, `read:user`
+- **Features**: List repos, fetch commits, fetch branches, link projects to repos
+- **Caching**: In-memory TTL 5 menit (rate limit protection)
+
+### Supabase (Planned — Phase 10)
+- **Purpose**: PostgreSQL menggantikan local KV storage
+- **Why**: Persistent data yang bisa diakses dari mana saja, termasuk setelah deploy
+- **Migration**: Drop-in swap via `StorageAdapter` interface
+
+### Vercel (Planned — Phase 11)
+- **Purpose**: Deployment monitoring — status, build logs
+- **Features**: List deployments, project health, build status per project

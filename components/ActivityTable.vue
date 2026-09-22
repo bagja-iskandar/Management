@@ -1,69 +1,118 @@
-<template>
-  <div class="activity-table">
-    <div class="table-row header">
-      <span>TASK / PROJECT</span>
-      <span>STATUS</span>
-      <span>ASSIGNEE</span>
-      <span>DATE</span>
-      <span class="actions-cell">ACTION</span>
+﻿<template>
+  <div class="w-full space-y-2">
+    <!-- Table Header (desktop) -->
+    <div class="hidden md:grid md:grid-cols-12 gap-4 px-4 py-2.5 font-mono text-xs tracking-wider uppercase text-[#756F68] border-b border-white/[0.06]">
+      <span class="col-span-2">Task ID</span>
+      <span class="col-span-3">Task Name</span>
+      <span class="col-span-2">Project</span>
+      <span class="col-span-2">Priority</span>
+      <span class="col-span-1">Status</span>
+      <span class="col-span-1">Date</span>
+      <span class="col-span-1 text-right">Actions</span>
     </div>
 
-    <div v-if="!rows?.length" class="empty-state">
-      <div class="empty-state-icon" aria-hidden="true">📋</div>
-      <h3 class="empty-state-title">No tasks found</h3>
-      <p class="empty-state-desc">No tasks match your current filter or query. Create a new task to see activity.</p>
-    </div>
-
-    <div v-for="(row, idx) in rows" :key="row.id" class="table-row">
-      <div class="task-info-cell">
-        <div class="task-icon-tile" aria-hidden="true">
-          <span v-if="idx % 3 === 0">❖</span>
-          <span v-else-if="idx % 3 === 1">&lt;/&gt;</span>
-          <span v-else>🚀</span>
-        </div>
-        <div class="task-title-group">
-          <span class="task-name">{{ row.name }}</span>
-          <span class="task-project">{{ getProjectLabel(row) }}</span>
-        </div>
+    <!-- Empty State -->
+    <div v-if="!rows?.length" class="py-12 px-4 text-center rounded-xl bg-[#111114] border border-white/[0.06]">
+      <div class="w-10 h-10 mx-auto mb-3 rounded-lg bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#756F68] text-lg font-mono" aria-hidden="true">
+        ∅
       </div>
+      <h3 class="font-mono text-sm font-semibold text-[#F5F2EB]">No tasks recorded</h3>
+      <p class="font-sans text-xs text-[#756F68] mt-1 max-w-sm mx-auto">No tasks match your current filter or query. Create a new task to see activity telemetry.</p>
+    </div>
 
-      <div>
-        <span :class="['status-badge', statusClass(row.status)]">
-          <span class="sr-only">Status: </span>{{ statusLabel(row.status) }}
+    <!-- Rows -->
+    <div
+      v-for="row in rows"
+      :key="row.id"
+      class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center p-3.5 md:px-4 rounded-lg bg-[#111114] border border-white/[0.06] hover:border-white/[0.12] transition-colors"
+    >
+      <!-- Task ID -->
+      <div class="col-span-2 flex items-center gap-2">
+        <span class="font-mono text-xs font-semibold text-[#C98A4B] bg-[#C98A4B]/10 px-2 py-0.5 rounded border border-[#C98A4B]/20">
+          #{{ formatTaskId(row) }}
         </span>
       </div>
 
-      <div class="assignee-cell">
-        <div class="assignee-avatar" title="Bagja Iskandar" aria-label="Assignee Bagja">
-          <span>B</span>
+      <!-- Task Name & Tech tags -->
+      <div class="col-span-3 min-w-0">
+        <div class="font-sans text-sm font-medium text-[#F5F2EB] truncate" :title="row.name">
+          {{ row.name }}
+        </div>
+        <div v-if="row.techTags?.length" class="flex items-center gap-1.5 mt-1 flex-wrap">
+          <span
+            v-for="tag in row.techTags.slice(0, 3)"
+            :key="tag"
+            class="font-mono text-[10px] bg-[#C98A4B]/10 text-[#C98A4B] rounded px-1.5 py-0.2"
+          >
+            {{ tag }}
+          </span>
+          <span v-if="row.techTags.length > 3" class="font-mono text-[10px] text-[#756F68]">
+            +{{ row.techTags.length - 3 }}
+          </span>
         </div>
       </div>
 
-      <div class="date-cell">{{ formatDate(row.date) }}</div>
+      <!-- Project Badge -->
+      <div class="col-span-2">
+        <span class="inline-flex items-center gap-1 font-mono text-xs bg-white/5 text-[#F5F2EB] px-2 py-0.5 rounded border border-white/[0.06] truncate max-w-full">
+          📁 {{ getProjectLabel(row) }}
+        </span>
+      </div>
 
-      <div class="actions-cell">
-        <button 
-          class="action-btn toggle-btn" 
-          type="button" 
-          @click="$emit('toggle', row)" 
-          :aria-label="`Update status for ${row.name}`"
-          title="Toggle status"
+      <!-- Priority Pill -->
+      <div class="col-span-2">
+        <span
+          class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-mono text-xs uppercase"
+          :class="getPriorityClass(row)"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+          <span
+            class="w-1.5 h-1.5 rounded-full"
+            :class="[getPriorityDotClass(row), isCritical(row) ? 'animate-pulse' : '']"
+            aria-hidden="true"
+          ></span>
+          <span>{{ getPriorityLabel(row) }}</span>
+        </span>
+      </div>
+
+      <!-- Status Pill -->
+      <div class="col-span-1">
+        <span
+          class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono capitalize"
+          :class="getStatusClass(row.status)"
+        >
+          {{ getStatusLabel(row.status) }}
+        </span>
+      </div>
+
+      <!-- Date -->
+      <div class="col-span-1 font-mono text-xs text-[#756F68] whitespace-nowrap">
+        {{ formatDate(row.date || row.createdAt) }}
+      </div>
+
+      <!-- Actions -->
+      <div class="col-span-1 flex items-center justify-end gap-1.5">
+        <button
+          type="button"
+          class="p-1.5 rounded bg-white/[0.03] border border-white/[0.08] text-[#756F68] hover:text-[#C98A4B] hover:border-[#C98A4B]/40 hover:bg-[#C98A4B]/10 transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+          :aria-label="`Update status for ${row.name}`"
+          title="Toggle status (Queue → Sprint → Deployed)"
+          @click="$emit('toggle', row)"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="23 4 23 10 17 10" />
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
           </svg>
         </button>
-        <button 
-          class="action-btn delete-btn" 
-          type="button" 
-          @click="$emit('delete', row)" 
+        <button
+          type="button"
+          class="p-1.5 rounded bg-white/[0.03] border border-white/[0.08] text-[#756F68] hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/10 transition-colors focus:ring-1 focus:ring-red-500 focus:outline-none"
           :aria-label="`Delete ${row.name}`"
           title="Delete task"
+          @click="$emit('delete', row)"
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
           </svg>
         </button>
       </div>
@@ -74,239 +123,88 @@
 <script setup lang="ts">
 import type { Task } from '../types'
 
-const props = defineProps<{ rows: Task[] }>()
+defineProps<{ rows: Task[] }>()
 
-function statusClass(status: Task['status']) {
-  return {
-    todo: 'todo',
-    proses: 'proses',
-    selesai: 'selesai'
-  }[status]
+defineEmits<{
+  (e: 'toggle', row: Task): void
+  (e: 'delete', row: Task): void
+}>()
+
+function formatTaskId(row: Task): string {
+  if (row.taskId) {
+    return row.taskId.replace(/^#/, '')
+  }
+  return `ENG-${String(row.id).slice(-3).padStart(3, '0')}`
 }
 
-function statusLabel(status: Task['status']) {
-  return {
-    todo: 'To Do',
-    proses: 'In Progress',
-    selesai: 'Completed'
-  }[status] ?? status
-}
-
-function getProjectLabel(row: Task) {
+function getProjectLabel(row: Task): string {
+  if (row.projectSlug) {
+    return row.projectSlug
+  }
   const n = row.name.toLowerCase()
-  if (n.includes('hitnet') || n.includes('eeg')) return 'Project Alpha • TF-HiTNet'
-  if (n.includes('portfolio') || n.includes('web') || n.includes('deploy')) return 'Project Beta • Management Web'
-  return 'Project Core • Workspace'
+  if (n.includes('hitnet') || n.includes('eeg')) return 'tf-hitnet'
+  if (n.includes('management') || n.includes('telemetry') || n.includes('token')) return 'management'
+  if (n.includes('signal') || n.includes('impedance')) return 'neural-signal'
+  return 'general'
+}
+
+function getPriorityLabel(row: Task): string {
+  const p = (row.priority || '').toLowerCase()
+  if (p === 'critical') return 'Critical'
+  if (p === 'high') return 'High'
+  if (p === 'medium') return 'Medium'
+  if (p === 'low') return 'Low'
+  const n = row.name.toLowerCase()
+  if (n.includes('hitnet') || n.includes('attention') || n.includes('critical')) return 'High'
+  return 'Medium'
+}
+
+function isCritical(row: Task): boolean {
+  return getPriorityLabel(row) === 'Critical'
+}
+
+function getPriorityClass(row: Task): string {
+  const p = getPriorityLabel(row).toLowerCase()
+  if (p === 'critical') return 'bg-red-500/15 text-red-400 border border-red-500/30'
+  if (p === 'high') return 'bg-orange-500/15 text-orange-400 border border-orange-500/30'
+  if (p === 'medium') return 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/30'
+  return 'bg-white/5 text-[#756F68] border border-white/[0.06]'
+}
+
+function getPriorityDotClass(row: Task): string {
+  const p = getPriorityLabel(row).toLowerCase()
+  if (p === 'critical') return 'bg-red-500'
+  if (p === 'high') return 'bg-orange-500'
+  if (p === 'medium') return 'bg-yellow-500'
+  return 'bg-[#756F68]'
+}
+
+function getStatusLabel(status?: string): string {
+  if (!status) return 'Queue'
+  const s = status.toLowerCase()
+  if (s === 'deployed' || s === 'selesai') return 'Deployed'
+  if (s === 'running_sprint' || s === 'proses') return 'Running'
+  if (s === 'blocked') return 'Blocked'
+  return 'In Queue'
+}
+
+function getStatusClass(status?: string): string {
+  if (!status) return 'bg-white/5 text-[#756F68] border border-white/[0.06]'
+  const s = status.toLowerCase()
+  if (s === 'deployed' || s === 'selesai') return 'bg-green-500/15 text-green-400 border border-green-500/30'
+  if (s === 'running_sprint' || s === 'proses') return 'bg-blue-500/15 text-blue-400 border border-blue-500/30'
+  if (s === 'blocked') return 'bg-red-500/15 text-red-400 border border-red-500/30'
+  return 'bg-white/5 text-[#756F68] border border-white/[0.06]'
 }
 
 function formatDate(d?: string) {
-  if (!d) return 'Today'
+  if (!d) return 'Recent'
   try {
     const date = new Date(d)
     if (isNaN(date.getTime())) return d
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   } catch {
     return d
   }
 }
 </script>
-
-<style scoped>
-.activity-table {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-.table-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 0.8fr 1fr 0.8fr;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transition: all 0.15s ease;
-}
-
-.table-row.header {
-  color: var(--text-muted);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  background: transparent;
-  padding: 8px 16px 12px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-}
-
-.table-row:not(.header):hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.task-info-cell {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.task-icon-tile {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.88rem;
-  color: #c084fc;
-  flex-shrink: 0;
-}
-
-.task-title-group {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.task-name {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.task-project {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-.assignee-cell {
-  display: flex;
-  align-items: center;
-}
-
-.assignee-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(99, 102, 241, 0.2);
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  color: #c0c1ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.date-cell {
-  color: #94a3b8;
-  font-size: 0.88rem;
-}
-
-.actions-cell {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.15s ease;
-  box-shadow: none;
-}
-
-.action-btn svg {
-  width: 15px;
-  height: 15px;
-}
-
-.toggle-btn {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.25);
-  color: #a5b4fc;
-}
-
-.toggle-btn:hover {
-  background: rgba(99, 102, 241, 0.25);
-  color: #ffffff;
-}
-
-.delete-btn {
-  background: rgba(244, 63, 94, 0.1);
-  border-color: rgba(244, 63, 94, 0.25);
-  color: #fca5a5;
-}
-
-.delete-btn:hover {
-  background: rgba(244, 63, 94, 0.25);
-  color: #ffffff;
-}
-
-/* Status Badges with Stitch Styling */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 0.78rem;
-  font-weight: 600;
-  width: fit-content;
-}
-
-.status-badge.selesai {
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  color: #38bdf8;
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
-}
-
-.status-badge.proses {
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  color: #c084fc;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.15);
-}
-
-.status-badge.todo {
-  background: rgba(100, 116, 139, 0.15);
-  border: 1px solid rgba(100, 116, 139, 0.35);
-  color: #94a3b8;
-}
-
-@media (max-width: 840px) {
-  .table-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .table-row.header {
-    display: none;
-  }
-  .assignee-cell {
-    display: none;
-  }
-  .actions-cell {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-  }
-}
-</style>

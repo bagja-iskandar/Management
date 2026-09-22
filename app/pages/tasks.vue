@@ -1,216 +1,286 @@
-<template>
-  <section class="tasks-page">
+﻿<template>
+  <div class="space-y-6">
     <!-- Header -->
-    <div class="page-heading">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
       <div>
-        <div class="page-badge">Tasks Hub</div>
-        <h1>Tasks</h1>
-        <p>Manage personal tasks, track project deliverables, and monitor milestone progress.</p>
+        <div class="inline-flex items-center gap-1.5 font-mono text-xs text-[#C98A4B] bg-[#C98A4B]/10 px-2.5 py-0.5 rounded border border-[#C98A4B]/20 uppercase tracking-wider mb-2">
+          <span>❖</span>
+          <span>Tasks Hub</span>
+        </div>
+        <h1 class="font-mono text-2xl font-bold text-[#F5F2EB]">Tasks Matrix</h1>
+        <p class="font-sans text-xs text-[#756F68] mt-1">Manage personal tasks, track project deliverables, and monitor milestone progress.</p>
       </div>
-      <div class="heading-actions">
-        <button type="button" class="button primary" @click="showAddModal = true">
-          <span>⊕ New Task</span>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#C98A4B] hover:bg-[#8B6535] text-[#09090B] font-mono text-xs font-semibold transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+          @click="showAddModal = true"
+        >
+          <span>⊕</span>
+          <span>New Task</span>
         </button>
-        <NuxtLink to="/" class="button secondary">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="15 18 9 12 15 6"></polyline>
+        <NuxtLink
+          to="/"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-[#F5F2EB] font-sans text-xs font-medium border border-white/[0.08] transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+        >
+          <svg class="w-3.5 h-3.5 text-[#756F68]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6" />
           </svg>
-          <span>Back to Dashboard</span>
+          <span>Dashboard</span>
         </NuxtLink>
       </div>
     </div>
 
-    <!-- Feedback Message -->
-    <div v-if="successFeedback" class="feedback" role="status">
-      {{ successFeedback }}
+    <!-- Success Feedback Alert -->
+    <div
+      v-if="successFeedback"
+      class="p-3 rounded-lg bg-[#C98A4B]/10 border border-[#C98A4B]/30 text-[#C98A4B] text-xs font-mono flex items-center justify-between"
+      role="status"
+    >
+      <span>{{ successFeedback }}</span>
+      <button type="button" class="text-xs text-[#C98A4B] hover:underline" @click="successFeedback = ''">Dismiss</button>
     </div>
 
-    <!-- Multi-Filter & Search Toolbar -->
-    <div class="tasks-toolbar-card">
-      <div class="toolbar-top-row">
+    <!-- Multi-Filter & Search Toolbar Card -->
+    <div class="p-4 rounded-xl bg-[#111114] border border-white/[0.06] space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
         <!-- Search -->
-        <div class="search-wrap">
-          <svg class="search-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input 
-            v-model="search" 
-            type="search" 
-            placeholder="Search tasks by name or description..." 
-            aria-label="Search tasks" 
+        <div class="lg:col-span-5 relative">
+          <input
+            v-model="search"
+            type="search"
+            placeholder="Search tasks by name, ID, or description..."
+            class="w-full bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            aria-label="Search tasks"
           />
         </div>
 
-        <!-- Project Filter Dropdown -->
-        <select v-model="projectFilter" class="filter-select" aria-label="Filter by Project">
-          <option value="all">📁 All Projects</option>
-          <option value="hitnet">Project Alpha • TF-HiTNet</option>
-          <option value="portfolio">Project Beta • Management Web</option>
-          <option value="gamma">Project Gamma • Neural Signal</option>
-        </select>
+        <!-- Project Selector -->
+        <div class="lg:col-span-3">
+          <select
+            v-model="projectFilter"
+            class="w-full bg-[#09090B] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer"
+            aria-label="Filter by Project"
+          >
+            <option value="all">📁 All Projects</option>
+            <option value="management">management</option>
+            <option value="tf-hitnet-eeg">tf-hitnet-eeg</option>
+            <option value="neural-signal-lab">neural-signal-lab</option>
+          </select>
+        </div>
 
-        <!-- Priority Filter Dropdown -->
-        <select v-model="priorityFilter" class="filter-select" aria-label="Filter by Priority">
-          <option value="all">⚡ All Priorities</option>
-          <option value="high">🔴 High Priority</option>
-          <option value="medium">🟡 Medium Priority</option>
-          <option value="low">🟢 Low Priority</option>
-        </select>
+        <!-- Priority Selector -->
+        <div class="lg:col-span-2">
+          <select
+            v-model="priorityFilter"
+            class="w-full bg-[#09090B] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer"
+            aria-label="Filter by Priority"
+          >
+            <option value="all">⚡ All Priority</option>
+            <option value="critical">Critical</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
 
         <!-- Sort Dropdown -->
-        <select v-model="sortBy" class="filter-select" aria-label="Sort tasks">
-          <option value="date-desc">Date: Newest First</option>
-          <option value="date-asc">Date: Oldest First</option>
-          <option value="priority-desc">Priority: High to Low</option>
-          <option value="name-asc">Name: A to Z</option>
-        </select>
+        <div class="lg:col-span-2">
+          <select
+            v-model="sortBy"
+            class="w-full bg-[#09090B] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer"
+            aria-label="Sort tasks"
+          >
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="priority-desc">Priority: High to Low</option>
+            <option value="status">By Status</option>
+            <option value="name-asc">Name: A to Z</option>
+          </select>
+        </div>
       </div>
 
       <!-- Status Filter Tabs -->
-      <div class="status-tabs-row" role="tablist" aria-label="Task Status Filter">
-        <button 
-          type="button" 
-          class="filter-tab" 
-          :class="{ active: statusFilter === 'all' }" 
-          @click="statusFilter = 'all'"
+      <div class="flex items-center gap-2 overflow-x-auto pt-3 border-t border-white/[0.04]" role="tablist" aria-label="Task Status Filter">
+        <button
+          v-for="tab in [
+            { id: 'all', label: 'All', count: allCount },
+            { id: 'in_queue', label: 'In Queue', count: inQueueCount },
+            { id: 'running_sprint', label: 'Running Sprint', count: runningSprintCount },
+            { id: 'deployed', label: 'Deployed', count: deployedCount },
+            { id: 'blocked', label: 'Blocked', count: blockedCount }
+          ]"
+          :key="tab.id"
+          type="button"
+          class="px-3 py-1.5 rounded-lg font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border"
+          :class="statusFilter === tab.id ? 'bg-[#C98A4B]/10 text-[#C98A4B] border-[#C98A4B]/40 font-semibold' : 'bg-[#09090B] text-[#756F68] border-white/[0.06] hover:text-[#F5F2EB]'"
+          @click="statusFilter = tab.id as any"
         >
-          <span>All</span>
-          <span class="tab-badge">{{ allCount }}</span>
-        </button>
-        <button 
-          type="button" 
-          class="filter-tab" 
-          :class="{ active: statusFilter === 'todo' }" 
-          @click="statusFilter = 'todo'"
-        >
-          <span>To Do</span>
-          <span class="tab-badge">{{ todoCount }}</span>
-        </button>
-        <button 
-          type="button" 
-          class="filter-tab" 
-          :class="{ active: statusFilter === 'proses' }" 
-          @click="statusFilter = 'proses'"
-        >
-          <span>In Progress</span>
-          <span class="tab-badge">{{ inProgressCount }}</span>
-        </button>
-        <button 
-          type="button" 
-          class="filter-tab" 
-          :class="{ active: statusFilter === 'selesai' }" 
-          @click="statusFilter = 'selesai'"
-        >
-          <span>Completed</span>
-          <span class="tab-badge">{{ completedCount }}</span>
+          <span>{{ tab.label }}</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-white/5">{{ tab.count }}</span>
         </button>
       </div>
     </div>
 
     <!-- Error State -->
-    <div v-if="tasksError" class="feedback error" role="alert">
+    <div v-if="tasksError" class="p-4 rounded-xl bg-red-500/15 border border-red-500/30 text-red-400 text-xs font-mono flex items-center justify-between" role="alert">
       <span>Failed to load tasks from server.</span>
-      <button type="button" class="retry-inline-btn" @click="refreshNuxtData('tasks-page')">Try Again</button>
+      <button type="button" class="underline hover:no-underline" @click="refreshNuxtData('tasks-page')">Try Again</button>
     </div>
 
-    <!-- Empty State / No Match -->
-    <div v-if="!filteredTasks.length && !tasksError" class="empty-state">
-      <div class="empty-state-icon" aria-hidden="true">📋</div>
-      <h3 class="empty-state-title">No tasks found</h3>
-      <p class="empty-state-desc">No tasks match your current filter or query criteria.</p>
-      <div class="empty-state-actions">
-        <button type="button" class="button small secondary" @click="resetFilters">Clear Filters</button>
+    <!-- Empty State -->
+    <div v-if="!filteredTasks.length && !tasksError" class="py-16 text-center rounded-xl bg-[#111114] border border-white/[0.06] space-y-3">
+      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#756F68] text-xl font-mono">
+        ∅
       </div>
+      <h3 class="font-mono text-sm font-semibold text-[#F5F2EB]">No tasks match query</h3>
+      <p class="font-sans text-xs text-[#756F68] max-w-sm mx-auto">Try resetting your status or project filters.</p>
+      <button
+        type="button"
+        class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans text-[#F5F2EB] border border-white/[0.08] transition-colors"
+        @click="resetFilters"
+      >
+        Clear Filters
+      </button>
     </div>
 
     <!-- Tasks Table Card -->
-    <div v-else class="tasks-table-card">
-      <div class="table-header-row">
-        <span>TASK NAME & DESCRIPTION</span>
-        <span>PROJECT</span>
-        <span>PRIORITY</span>
-        <span>DUE DATE</span>
-        <span>STATUS</span>
-        <span class="actions-cell">ACTION</span>
+    <div v-else class="rounded-xl bg-[#111114] border border-white/[0.06] p-4 sm:p-5 space-y-3">
+      <!-- Table Header (Desktop) -->
+      <div class="hidden md:grid md:grid-cols-12 gap-4 px-4 py-2 font-mono text-xs tracking-wider uppercase text-[#756F68] border-b border-white/[0.06]">
+        <span class="col-span-2">Task ID</span>
+        <span class="col-span-4">Task Name & Tech</span>
+        <span class="col-span-2">Project</span>
+        <span class="col-span-1">Priority</span>
+        <span class="col-span-1">Status</span>
+        <span class="col-span-1">Date</span>
+        <span class="col-span-1 text-right">Action</span>
       </div>
 
-      <div v-for="t in filteredTasks" :key="t.id" class="task-table-row">
-        <!-- Task Info -->
-        <div class="task-main-cell">
-          <div class="task-icon-badge" aria-hidden="true">
-            <span v-if="t.status === 'selesai'">✓</span>
-            <span v-else-if="t.status === 'proses'">⚡</span>
-            <span v-else>❖</span>
+      <!-- Rows -->
+      <div
+        v-for="t in filteredTasks"
+        :key="t.id"
+        class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center p-3.5 md:px-4 rounded-lg bg-[#09090B] border border-white/[0.04] hover:border-white/[0.1] transition-colors"
+      >
+        <!-- Task ID Monospace -->
+        <div class="col-span-2 flex items-center gap-2">
+          <span class="font-mono text-xs font-semibold text-[#C98A4B] bg-[#C98A4B]/10 px-2 py-0.5 rounded border border-[#C98A4B]/20">
+            #{{ formatTaskId(t) }}
+          </span>
+        </div>
+
+        <!-- Task Title & Description -->
+        <div class="col-span-4 min-w-0">
+          <div class="font-sans text-sm font-medium text-[#F5F2EB] truncate" :title="t.name">
+            {{ t.name }}
           </div>
-          <div class="task-texts">
-            <span class="task-title-text">{{ t.name }}</span>
-            <span class="task-desc-text">{{ getTaskDescription(t) }}</span>
+          <div class="font-sans text-xs text-[#756F68] truncate mt-0.5" :title="t.description">
+            {{ t.description || 'Milestone deliverable for personal engineering workspace.' }}
+          </div>
+          <!-- Tech Tags -->
+          <div v-if="t.techTags?.length" class="flex items-center gap-1.5 mt-1.5 flex-wrap">
+            <span
+              v-for="tag in t.techTags"
+              :key="tag"
+              class="font-mono text-[10px] bg-[#C98A4B]/10 text-[#C98A4B] rounded px-1.5 py-0.2 border border-[#C98A4B]/20"
+            >
+              {{ tag }}
+            </span>
           </div>
         </div>
 
         <!-- Project Badge -->
-        <div class="project-tag-cell">
-          <span class="project-badge">{{ getProjectName(t) }}</span>
-        </div>
-
-        <!-- Priority -->
-        <div>
-          <span class="priority-pill" :class="getPriority(t)">
-            {{ getPriority(t).toUpperCase() }}
+        <div class="col-span-2">
+          <span class="inline-flex items-center gap-1 font-mono text-xs bg-white/5 text-[#F5F2EB] px-2 py-0.5 rounded border border-white/[0.06] truncate max-w-full">
+            📁 {{ getProjectName(t) }}
           </span>
         </div>
 
-        <!-- Due Date -->
-        <div class="date-cell">{{ formatDate(t.date) }}</div>
+        <!-- Priority Pill -->
+        <div class="col-span-1">
+          <span
+            class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-mono text-xs uppercase"
+            :class="getPriorityBadgeClass(t.priority)"
+          >
+            <span
+              class="w-1.5 h-1.5 rounded-full bg-current"
+              :class="t.priority === 'critical' ? 'animate-pulse' : ''"
+              aria-hidden="true"
+            ></span>
+            <span>{{ t.priority || 'Medium' }}</span>
+          </span>
+        </div>
 
         <!-- Status Pill -->
-        <div>
-          <span :class="['status-badge', t.status]">
-            {{ t.status === 'selesai' ? 'Completed' : t.status === 'proses' ? 'In Progress' : 'To Do' }}
+        <div class="col-span-1">
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono capitalize"
+            :class="getStatusBadgeClass(t.status)"
+          >
+            {{ getStatusLabel(t.status) }}
           </span>
+        </div>
+
+        <!-- Date -->
+        <div class="col-span-1 font-mono text-xs text-[#756F68] whitespace-nowrap">
+          {{ formatDate(t.date || t.dueDate) }}
         </div>
 
         <!-- Actions -->
-        <div class="actions-cell">
-          <button 
-            class="action-btn toggle-btn" 
-            type="button" 
-            @click="toggleStatus(t)" 
+        <div class="col-span-1 flex items-center justify-end gap-1.5">
+          <button
+            type="button"
+            class="p-1.5 rounded bg-white/5 hover:bg-[#C98A4B]/15 hover:text-[#C98A4B] text-[#756F68] transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
             :aria-label="`Toggle status for ${t.name}`"
-            title="Toggle status"
+            title="Toggle status (Queue → Sprint → Deployed)"
+            @click="toggleStatus(t)"
           >
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"></polyline>
-              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="23 4 23 10 17 10" />
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
             </svg>
           </button>
-          <button 
-            class="action-btn delete-btn" 
-            type="button" 
-            @click="deleteTask(t)" 
+          <button
+            type="button"
+            class="p-1.5 rounded bg-white/5 hover:bg-red-500/15 hover:text-red-400 text-[#756F68] transition-colors focus:ring-1 focus:ring-red-500 focus:outline-none"
             :aria-label="`Delete ${t.name}`"
             title="Delete task"
+            @click="deleteTask(t)"
           >
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="3 6 5 6 21 6"></polyline>
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
             </svg>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Summary Panel -->
-    <section class="tasks-summary-card">
-      <h2>Tasks Analytics Summary</h2>
-      <div class="summary-badges">
-        <span class="summary-chip">Total Tasks: {{ allCount }}</span>
-        <span class="summary-chip">Completed: {{ completedCount }}</span>
-        <span class="summary-chip">In Progress: {{ inProgressCount }}</span>
-        <span class="summary-chip">To Do: {{ todoCount }}</span>
+    <!-- Analytics Summary Panel -->
+    <section class="p-5 rounded-xl bg-[#111114] border border-white/[0.06] space-y-3">
+      <h2 class="font-mono text-sm font-semibold text-[#F5F2EB] uppercase tracking-wider">Tasks Analytics Summary</h2>
+      <div class="flex items-center gap-3 flex-wrap font-mono text-xs">
+        <span class="px-2.5 py-1 rounded bg-white/5 text-[#F5F2EB] border border-white/[0.08]">
+          Total Tasks: {{ allCount }}
+        </span>
+        <span class="px-2.5 py-1 rounded bg-green-500/15 text-green-400 border border-green-500/30">
+          Deployed: {{ deployedCount }}
+        </span>
+        <span class="px-2.5 py-1 rounded bg-blue-500/15 text-blue-400 border border-blue-500/30">
+          Running Sprint: {{ runningSprintCount }}
+        </span>
+        <span class="px-2.5 py-1 rounded bg-white/5 text-[#756F68] border border-white/[0.06]">
+          In Queue: {{ inQueueCount }}
+        </span>
+        <span v-if="blockedCount > 0" class="px-2.5 py-1 rounded bg-red-500/15 text-red-400 border border-red-500/30">
+          Blocked: {{ blockedCount }}
+        </span>
       </div>
-      <p>Tasks are automatically linked with managed projects to calculate derived milestone velocities.</p>
+      <p class="font-sans text-xs text-[#756F68] leading-relaxed">
+        Tasks are systematically linked with managed projects to calculate derived milestone velocities and burn-down rates.
+      </p>
     </section>
 
     <!-- Add Task Modal Dialog -->
@@ -232,18 +302,18 @@
       @confirm="onConfirmDelete"
       @cancel="() => { confirmOpen = false; confirmTarget = null }"
     />
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import type { Task } from '../types'
+import type { Task, TaskPriority, TaskStatus } from '~/types'
 
 const search = ref('')
 const projectFilter = ref('all')
 const priorityFilter = ref('all')
-const statusFilter = ref<'all' | 'todo' | 'proses' | 'selesai'>('all')
-const sortBy = ref<'date-desc' | 'date-asc' | 'priority-desc' | 'name-asc'>('date-desc')
+const statusFilter = ref<'all' | 'in_queue' | 'running_sprint' | 'deployed' | 'blocked'>('all')
+const sortBy = ref<'date-desc' | 'date-asc' | 'priority-desc' | 'status' | 'name-asc'>('date-desc')
 
 const showAddModal = ref(false)
 const confirmOpen = ref(false)
@@ -252,38 +322,62 @@ const isBusy = ref(false)
 const successFeedback = ref('')
 
 const tasksApi = useTasks()
-const { data: tasks, error: tasksError } = useLazyAsyncData<Task[]>('tasks-page', () => tasksApi.getActivities(), {
-  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]
-})
+const { data: tasks, error: tasksError } = useLazyAsyncData<Task[]>('tasks-page', () => tasksApi.getTasks())
+
+function formatTaskId(t: Task): string {
+  if (t.taskId) return t.taskId.replace(/^#/, '')
+  return `ENG-${String(t.id).slice(-3).padStart(3, '0')}`
+}
 
 function getProjectName(task: Task): string {
+  if (task.projectSlug) return task.projectSlug
   const n = task.name.toLowerCase()
-  if (n.includes('hitnet') || n.includes('eeg')) return 'Project Alpha • TF-HiTNet'
-  if (n.includes('portfolio') || n.includes('web') || n.includes('deploy')) return 'Project Beta • Management Web'
-  if (n.includes('gamma') || n.includes('neural')) return 'Project Gamma • Neural Signal'
-  return 'Personal Portfolio & Docs'
+  if (n.includes('hitnet') || n.includes('eeg')) return 'tf-hitnet-eeg'
+  if (n.includes('management') || n.includes('telemetry')) return 'management'
+  if (n.includes('signal') || n.includes('impedance')) return 'neural-signal-lab'
+  return 'management'
 }
 
-function getTaskDescription(task: Task): string {
-  const n = task.name.toLowerCase()
-  if (n.includes('hitnet')) return 'Spatial pyramid pooling and depth inference refinement.'
-  if (n.includes('portfolio')) return 'Nuxt 4 Dark Polymorphism interface integration.'
-  return 'Milestone deliverable for personal engineering workspace.'
+function getStatusLabel(status?: string): string {
+  if (!status) return 'In Queue'
+  const s = status.toLowerCase()
+  if (s === 'deployed' || s === 'selesai') return 'Deployed'
+  if (s === 'running_sprint' || s === 'proses') return 'Running Sprint'
+  if (s === 'blocked') return 'Blocked'
+  return 'In Queue'
 }
 
-function getPriority(task: Task): 'high' | 'medium' | 'low' {
-  const n = task.name.toLowerCase()
-  if (n.includes('hitnet') || n.includes('eeg') || n.includes('attention')) return 'high'
-  if (n.includes('portfolio') || n.includes('web')) return 'medium'
-  return 'low'
+function normalizeStatus(status?: string): TaskStatus {
+  if (!status) return 'in_queue'
+  const s = status.toLowerCase()
+  if (s === 'deployed' || s === 'selesai') return 'deployed'
+  if (s === 'running_sprint' || s === 'proses') return 'running_sprint'
+  if (s === 'blocked') return 'blocked'
+  return 'in_queue'
+}
+
+function getStatusBadgeClass(status?: string): string {
+  const s = normalizeStatus(status)
+  if (s === 'deployed') return 'bg-green-500/15 text-green-400 border border-green-500/30'
+  if (s === 'running_sprint') return 'bg-blue-500/15 text-blue-400 border border-blue-500/30'
+  if (s === 'blocked') return 'bg-red-500/15 text-red-400 border border-red-500/30'
+  return 'bg-white/5 text-[#756F68] border border-white/[0.06]'
+}
+
+function getPriorityBadgeClass(priority?: string): string {
+  const p = (priority || '').toLowerCase()
+  if (p === 'critical') return 'bg-red-500/15 text-red-400 border border-red-500/30'
+  if (p === 'high') return 'bg-orange-500/15 text-orange-400 border border-orange-500/30'
+  if (p === 'medium') return 'bg-yellow-500/15 text-yellow-400 border border-yellow-500/30'
+  return 'bg-white/5 text-[#756F68] border border-white/[0.06]'
 }
 
 function formatDate(d?: string) {
-  if (!d) return 'Nov 15, 2026'
+  if (!d) return 'Sep 2026'
   try {
     const date = new Date(d)
     if (isNaN(date.getTime())) return d
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   } catch {
     return d
   }
@@ -291,43 +385,57 @@ function formatDate(d?: string) {
 
 // Counts
 const allCount = computed(() => (tasks.value ?? []).length)
-const todoCount = computed(() => (tasks.value ?? []).filter(t => t.status === 'todo').length)
-const inProgressCount = computed(() => (tasks.value ?? []).filter(t => t.status === 'proses').length)
-const completedCount = computed(() => (tasks.value ?? []).filter(t => t.status === 'selesai').length)
+const inQueueCount = computed(() => (tasks.value ?? []).filter(t => normalizeStatus(t.status) === 'in_queue').length)
+const runningSprintCount = computed(() => (tasks.value ?? []).filter(t => normalizeStatus(t.status) === 'running_sprint').length)
+const deployedCount = computed(() => (tasks.value ?? []).filter(t => normalizeStatus(t.status) === 'deployed').length)
+const blockedCount = computed(() => (tasks.value ?? []).filter(t => normalizeStatus(t.status) === 'blocked').length)
 
 // Filter & Sort
 const filteredTasks = computed(() => {
   let list = [...(tasks.value ?? [])]
 
-  // Status
+  // Status Filter
   if (statusFilter.value !== 'all') {
-    list = list.filter(t => t.status === statusFilter.value)
+    list = list.filter(t => normalizeStatus(t.status) === statusFilter.value)
   }
 
-  // Project
+  // Project Filter
   if (projectFilter.value !== 'all') {
-    list = list.filter(t => getProjectName(t).toLowerCase().includes(projectFilter.value))
+    list = list.filter(t => getProjectName(t).toLowerCase() === projectFilter.value.toLowerCase())
   }
 
-  // Priority
+  // Priority Filter
   if (priorityFilter.value !== 'all') {
-    list = list.filter(t => getPriority(t) === priorityFilter.value)
+    list = list.filter(t => (t.priority || 'medium').toLowerCase() === priorityFilter.value.toLowerCase())
   }
 
-  // Search
+  // Search Filter
   if (search.value.trim()) {
     const q = search.value.toLowerCase()
-    list = list.filter(t => t.name.toLowerCase().includes(q) || getProjectName(t).toLowerCase().includes(q))
+    list = list.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      (t.description ?? '').toLowerCase().includes(q) ||
+      (t.taskId ?? '').toLowerCase().includes(q) ||
+      getProjectName(t).toLowerCase().includes(q)
+    )
   }
 
   // Sort
   list.sort((a, b) => {
     if (sortBy.value === 'name-asc') return a.name.localeCompare(b.name)
     if (sortBy.value === 'priority-desc') {
-      const pMap = { high: 3, medium: 2, low: 1 }
-      return pMap[getPriority(b)] - pMap[getPriority(a)]
+      const pMap: Record<string, number> = { critical: 4, high: 3, medium: 2, low: 1 }
+      return (pMap[b.priority || 'medium'] || 0) - (pMap[a.priority || 'medium'] || 0)
     }
-    return 0
+    if (sortBy.value === 'status') {
+      const sMap: Record<string, number> = { blocked: 4, in_queue: 3, running_sprint: 2, deployed: 1 }
+      return (sMap[normalizeStatus(b.status)] || 0) - (sMap[normalizeStatus(a.status)] || 0)
+    }
+    if (sortBy.value === 'date-asc') {
+      return (a.date || a.createdAt || '').localeCompare(b.date || b.createdAt || '')
+    }
+    // Default date-desc
+    return (b.date || b.createdAt || '').localeCompare(a.date || a.createdAt || '')
   })
 
   return list
@@ -335,16 +443,36 @@ const filteredTasks = computed(() => {
 
 function resetFilters() {
   search.value = ''
-  projectFilter = ref('all')
-  priorityFilter = ref('all')
+  projectFilter.value = 'all'
+  priorityFilter.value = 'all'
   statusFilter.value = 'all'
   sortBy.value = 'date-desc'
 }
 
-async function onTaskCreated(payload: { name: string; description: string; project: string; status: 'todo' | 'proses' | 'selesai'; priority: string; dueDate: string }) {
+async function onTaskCreated(payload: {
+  name: string
+  description: string
+  projectSlug: string
+  status: TaskStatus
+  priority: TaskPriority
+  dueDate: string
+  techTags: string[]
+}) {
   isBusy.value = true
   try {
-    await tasksApi.createTask({ name: payload.name })
+    const created = await tasksApi.createTask({
+      name: payload.name,
+      description: payload.description,
+      projectSlug: payload.projectSlug,
+      status: payload.status,
+      priority: payload.priority,
+      dueDate: payload.dueDate,
+      techTags: payload.techTags,
+      date: new Date().toISOString().slice(0, 10)
+    })
+    if (created && tasks.value) {
+      tasks.value = [created, ...tasks.value.filter(t => t.id !== created.id)]
+    }
     showAddModal.value = false
     successFeedback.value = `Task '${payload.name}' created successfully.`
     await Promise.all([
@@ -360,13 +488,18 @@ async function onTaskCreated(payload: { name: string; description: string; proje
 
 async function toggleStatus(task: Task) {
   isBusy.value = true
-  const next: Record<Task['status'], Task['status']> = {
-    todo: 'proses',
-    proses: 'selesai',
-    selesai: 'todo'
+  const current = normalizeStatus(task.status)
+  // Transition: in_queue → running_sprint → deployed → in_queue (and blocked → in_queue)
+  const nextMap: Record<TaskStatus, TaskStatus> = {
+    in_queue: 'running_sprint',
+    running_sprint: 'deployed',
+    deployed: 'in_queue',
+    blocked: 'in_queue'
   }
+  const nextStatus = nextMap[current]
+
   try {
-    await tasksApi.updateTask(task.id, { status: next[task.status] })
+    await tasksApi.updateTask(task.id, { status: nextStatus })
     await Promise.all([
       refreshNuxtData('tasks-page'),
       refreshNuxtData('activities'),
@@ -401,289 +534,3 @@ async function onConfirmDelete() {
   }
 }
 </script>
-
-<style scoped>
-.tasks-page {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  max-width: 1450px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.heading-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* Toolbar Card */
-.tasks-toolbar-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 20px 24px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-ambient);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.toolbar-top-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.search-wrap {
-  display: flex;
-  align-items: center;
-  position: relative;
-  flex: 1;
-  min-width: 240px;
-}
-
-.search-svg {
-  position: absolute;
-  left: 12px;
-  color: var(--text-muted);
-  pointer-events: none;
-}
-
-.search-wrap input {
-  width: 100%;
-  padding-left: 36px;
-}
-
-.filter-select {
-  background: var(--glass-input);
-  color: var(--text-heading);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-input);
-  padding: 10px 14px;
-  font-size: 0.88rem;
-  font-family: inherit;
-  outline: none;
-  cursor: pointer;
-  backdrop-filter: var(--glass-blur);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.filter-select:focus {
-  border-color: var(--glass-border-focus);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-.status-tabs-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* Table Card */
-.tasks-table-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 20px 24px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-ambient);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.table-header-row {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr 0.8fr 1fr 1fr 0.8fr;
-  gap: 16px;
-  align-items: center;
-  padding: 8px 16px 14px;
-  color: var(--text-muted);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.task-table-row {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr 0.8fr 1fr 1fr 0.8fr;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transition: all 0.15s ease;
-}
-
-.task-table-row:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.task-main-cell {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-}
-
-.task-icon-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.9rem;
-  color: #c084fc;
-  flex-shrink: 0;
-}
-
-.task-texts {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.task-title-text {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #ffffff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.task-desc-text {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.project-badge {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: #c0c1ff;
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  padding: 3px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-.priority-pill {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.priority-pill.high {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #fca5a5;
-}
-
-.priority-pill.medium {
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  color: #fde047;
-}
-
-.priority-pill.low {
-  background: rgba(148, 163, 184, 0.15);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  color: #cbd5e1;
-}
-
-.actions-cell {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.15s ease;
-}
-
-.toggle-btn {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.25);
-  color: #a5b4fc;
-}
-
-.toggle-btn:hover {
-  background: rgba(99, 102, 241, 0.25);
-  color: #ffffff;
-}
-
-.delete-btn {
-  background: rgba(244, 63, 94, 0.1);
-  border-color: rgba(244, 63, 94, 0.25);
-  color: #fca5a5;
-}
-
-.delete-btn:hover {
-  background: rgba(244, 63, 94, 0.25);
-  color: #ffffff;
-}
-
-/* Tasks Summary Card */
-.tasks-summary-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 24px 28px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-ambient);
-}
-
-.tasks-summary-card h2 {
-  margin: 0 0 8px;
-  font-size: 1.25rem;
-  color: var(--text-heading);
-}
-
-@media (max-width: 900px) {
-  .table-header-row {
-    display: none;
-  }
-  .task-table-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .project-tag-cell {
-    grid-column: 1 / -1;
-  }
-  .actions-cell {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-  }
-}
-</style>

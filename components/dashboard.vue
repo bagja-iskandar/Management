@@ -1,349 +1,335 @@
 <template>
-  <section class="dashboard-wrapper">
-    <!-- 1. Welcome Header Banner -->
-    <div class="welcome-banner">
-      <h1>Welcome back, <span class="highlight-name">Bagja</span></h1>
-      <p>Here is the overview of your projects and tasks.</p>
-    </div>
-
-    <!-- Feedback / Alert Banner if error -->
-    <div v-if="statsError || activitiesError" class="feedback error" role="alert">
-      <span>Failed to synchronize dashboard data from server.</span>
-      <button type="button" class="retry-inline-btn" @click="refreshData">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="23 4 23 10 17 10"></polyline>
-          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-        </svg>
-        <span>Try Again</span>
-      </button>
-    </div>
-
-    <!-- 2. KPI Stat Cards Row -->
-    <div class="stats-grid">
-      <StatCard v-for="s in stats" :key="s.label" :stat="s" />
-    </div>
-
-    <!-- 3. Action Pills Toolbar -->
-    <div class="action-pills-bar">
-      <div class="pills-group">
-        <button type="button" class="pill-btn primary" @click="showAddTaskModal = true">
-          <span class="pill-icon">⊕</span>
-          <span>New Task</span>
-        </button>
-        <NuxtLink to="/projects" class="pill-btn">
-          <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-          </svg>
-          <span>Manage Projects</span>
-        </NuxtLink>
-        <NuxtLink to="/tasks" class="pill-btn">
-          <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M9 11l3 3L22 4"></path>
-            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-          </svg>
-          <span>All Tasks</span>
-        </NuxtLink>
-        <button type="button" class="pill-btn" @click="refreshData" title="Refresh metrics">
-          <svg class="pill-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
-          </svg>
-          <span>Sync</span>
-        </button>
-      </div>
-
-      <div class="search-box">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input v-model="q" type="search" placeholder="Search tasks..." aria-label="Search tasks" />
-      </div>
-    </div>
-
-    <!-- 4. Middle Section: Task Overview + Project Status -->
-    <div class="middle-analytics-grid">
-      <!-- Task Overview Card -->
-      <div class="analytics-card task-overview-card">
-        <div class="card-header-row">
-          <h3>Task Overview</h3>
-          <div class="period-toggle" role="group" aria-label="Chart Period Toggle">
-            <button 
-              type="button" 
-              class="toggle-chip" 
-              :class="{ active: chartPeriod === 'weekly' }" 
-              @click="chartPeriod = 'weekly'"
-            >
-              Weekly
-            </button>
-            <button 
-              type="button" 
-              class="toggle-chip" 
-              :class="{ active: chartPeriod === 'monthly' }" 
-              @click="chartPeriod = 'monthly'"
-            >
-              Monthly
-            </button>
-          </div>
-        </div>
-
-        <!-- Glowing Neon Curves Visual Container -->
-        <div class="curve-chart-wrapper">
-          <svg class="curve-svg" viewBox="0 0 600 220" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="glow-violet-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#a855f7" stop-opacity="0.35" />
-                <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
-              </linearGradient>
-              <linearGradient id="glow-cyan-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.2" />
-                <stop offset="100%" stop-color="#06b6d4" stop-opacity="0" />
-              </linearGradient>
-              <filter id="neon-glow-violet" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            <!-- Background area fills -->
-            <path 
-              :d="chartPeriod === 'weekly' ? 'M 0,165 C 130,150 250,110 380,75 S 500,45 600,28 L 600,220 L 0,220 Z' : 'M 0,180 C 140,160 260,85 390,60 S 520,30 600,15 L 600,220 L 0,220 Z'" 
-              fill="url(#glow-violet-grad)" 
-            />
-
-            <!-- Dashed cyan bottom wave -->
-            <path 
-              :d="chartPeriod === 'weekly' ? 'M 0,185 C 140,130 280,185 410,175 S 520,115 600,70' : 'M 0,195 C 150,140 270,165 420,150 S 530,95 600,50'" 
-              fill="none" 
-              stroke="#06b6d4" 
-              stroke-width="2.5" 
-              stroke-dasharray="6,6" 
-              opacity="0.85" 
-            />
-
-            <!-- Solid glowing violet top line -->
-            <path 
-              :d="chartPeriod === 'weekly' ? 'M 0,165 C 130,150 250,110 380,75 S 500,45 600,28' : 'M 0,180 C 140,160 260,85 390,60 S 520,30 600,15'" 
-              fill="none" 
-              stroke="#c084fc" 
-              stroke-width="3" 
-              filter="url(#neon-glow-violet)" 
-            />
-          </svg>
-
-          <span class="compact-view-text" aria-hidden="true">COMPACT VIEW</span>
-        </div>
-      </div>
-
-      <!-- Project Status Donut Card -->
-      <div class="analytics-card project-status-card">
-        <div class="card-header-row">
-          <h3>Project Status</h3>
-        </div>
-
-        <div class="donut-section">
-          <!-- Circular Donut SVG -->
-          <div class="donut-chart-box">
-            <svg class="donut-svg" viewBox="0 0 120 120" aria-hidden="true">
-              <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="12" />
-              <!-- Slate arc (To Do) -->
-              <circle 
-                cx="60" cy="60" r="46" 
-                fill="none" 
-                stroke="#475569" 
-                stroke-width="12" 
-                :stroke-dasharray="`${todoArc} 289`" 
-                stroke-dashoffset="0"
-                stroke-linecap="round"
-              />
-              <!-- Cyan arc (In Progress) -->
-              <circle 
-                cx="60" cy="60" r="46" 
-                fill="none" 
-                stroke="#06b6d4" 
-                stroke-width="12" 
-                :stroke-dasharray="`${inProgressArc} 289`" 
-                :stroke-dashoffset="`-${todoArc}`"
-                stroke-linecap="round"
-              />
-              <!-- Violet arc (Completed) -->
-              <circle 
-                cx="60" cy="60" r="46" 
-                fill="none" 
-                stroke="#c084fc" 
-                stroke-width="12" 
-                :stroke-dasharray="`${completedArc} 289`" 
-                :stroke-dashoffset="`-${todoArc + inProgressArc}`"
-                stroke-linecap="round"
-              />
-            </svg>
-            <div class="donut-center">
-              <span class="donut-total">{{ totalTasksCount }}</span>
-              <span class="donut-label">TOTAL</span>
-            </div>
-          </div>
-
-          <!-- Legend List -->
-          <div class="donut-legend">
-            <div class="legend-item">
-              <div class="legend-dot-label">
-                <span class="legend-dot violet" aria-hidden="true"></span>
-                <span>Completed</span>
-              </div>
-              <strong class="legend-value">{{ completedCount }}</strong>
-            </div>
-
-            <div class="legend-item">
-              <div class="legend-dot-label">
-                <span class="legend-dot cyan" aria-hidden="true"></span>
-                <span>In Progress</span>
-              </div>
-              <strong class="legend-value">{{ inProgressCount }}</strong>
-            </div>
-
-            <div class="legend-item">
-              <div class="legend-dot-label">
-                <span class="legend-dot slate" aria-hidden="true"></span>
-                <span>To Do</span>
-              </div>
-              <strong class="legend-value">{{ todoCount }}</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. Bottom Section: Recent Activity Container -->
-    <div class="recent-activity-card">
-      <div class="card-header-row">
-        <h2>Recent Activity</h2>
-        <NuxtLink to="/projects" class="view-all-link">View All</NuxtLink>
-      </div>
-
-      <ActivityTable :rows="filtered" @toggle="toggleStatus" @delete="deleteTask" />
-    </div>
-
-    <!-- Accessible Confirmation Alertdialog -->
-    <ConfirmDialog
-      v-if="confirmOpen"
-      :title="'Confirm Delete'"
-      :message="`Are you sure you want to delete '${confirmTarget?.name}'?`"
-      :confirmText="'Delete'"
-      :cancelText="'Cancel'"
-      :busy="isBusy"
-      @confirm="onConfirmDelete"
-      @cancel="() => { confirmOpen = false; confirmTarget = null }"
+  <div class="h-full flex flex-col gap-4 min-h-0">
+    <!-- Top Alert Bar (Only shown if blockers or overdue/due tomorrow exist) -->
+    <AlertBar
+      :blocked-tasks="blockedTasks"
+      :urgent-tasks="urgentTasks"
+      @task-click="openTaskModal"
     />
 
-    <!-- Add Task Modal Dialog -->
+    <!-- Error State -->
+    <div
+      v-if="tasksError || projectsError"
+      class="p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center justify-between text-xs text-red-400 font-mono shrink-0"
+      role="alert"
+    >
+      <span>Failed to synchronize mission briefing data from server.</span>
+      <button type="button" class="underline hover:no-underline font-medium" @click="refreshData">Retry</button>
+    </div>
+
+    <!-- Main Content Area: Stacked & Bento Grid Layout -->
+    <div class="flex-1 overflow-y-auto pr-1 custom-scrollbar space-y-4 pb-4">
+      <!-- 1. Global Recent Commits Stream Table (Full width / Lebih panjang, max 6 items) -->
+      <GlobalCommitsTable
+        :projects="activeProjects"
+      />
+
+      <!-- 2. Middle Row: Priority Tasks Radar (7 cols) + Compact Projects Hub (5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <div class="lg:col-span-7">
+          <!-- High Priority & Error Tasks Radar (Max 6 items) -->
+          <PriorityTasksRadar
+            :tasks="tasks || []"
+            @task-click="openTaskModal"
+          />
+        </div>
+        <div class="lg:col-span-5">
+          <!-- Compact Projects Command Hub (Bento) -->
+          <CompactProjectsHub
+            :projects="activeProjects"
+            :tasks="tasks || []"
+            @create-project="showAddProjectModal = true"
+          />
+        </div>
+      </div>
+
+      <!-- 3. Bottom: Weekly Focus & In-Flight Snapshot (Moved to bottom per user request) -->
+      <WeeklyFocusSnapshot
+        :tasks="tasks || []"
+        :sprint="activeSprint"
+        @task-click="openTaskModal"
+      />
+    </div>
+
+    <!-- Centered Full-Rounded Task Modal -->
+    <TaskDrawer
+      v-if="activeDrawerTask"
+      :task="activeDrawerTask"
+      :busy="isBusy"
+      @close="activeDrawerTask = null"
+      @save="onSaveDrawerTask"
+      @delete="deleteTaskFromDrawer"
+    />
+
+    <!-- Add Task Modal -->
     <AddTaskModal
       v-if="showAddTaskModal"
-      :disabled="isBusy"
+      :initial-status="selectedStatus"
+      :projects="projectOptions"
       @close="showAddTaskModal = false"
       @create="onTaskModalCreated"
     />
-  </section>
+
+    <!-- Add Project Modal -->
+    <AddProjectModal
+      v-if="showAddProjectModal"
+      @close="showAddProjectModal = false"
+      @create="onProjectModalCreated"
+    />
+
+    <!-- Delete Confirmation Modal -->
+    <ConfirmDialog
+      v-if="confirmOpen"
+      title="Delete Task Deliverable"
+      :message="`Are you sure you want to permanently delete '${confirmTarget?.name}'? This action cannot be reversed.`"
+      confirm-text="Delete Deliverable"
+      cancel-text="Keep Task"
+      :busy="isBusy"
+      @confirm="onConfirmDelete"
+      @cancel="confirmOpen = false"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import ConfirmDialog from './ConfirmDialog.vue'
+import type { Task, TaskStatus, Project, Sprint } from '../types'
+import AlertBar from './AlertBar.vue'
+import GlobalCommitsTable from './dashboard/GlobalCommitsTable.vue'
+import PriorityTasksRadar from './dashboard/PriorityTasksRadar.vue'
+import WeeklyFocusSnapshot from './dashboard/WeeklyFocusSnapshot.vue'
+import CompactProjectsHub from './dashboard/CompactProjectsHub.vue'
+import TaskDrawer from './TaskDrawer.vue'
 import AddTaskModal from './AddTaskModal.vue'
-import StatCard from './StatCard.vue'
-import ActivityTable from './ActivityTable.vue'
-import { useTasks } from '../composables/useTasks'
-import { useStats } from '../composables/useStats'
-import type { Task, Stat } from '../types'
+import AddProjectModal from './AddProjectModal.vue'
+import ConfirmDialog from './ConfirmDialog.vue'
 
-const q = ref('')
+// Composables
+const tasksApi = useTasks()
+const projectsApi = useProjects()
+const sprintsApi = useSprints()
+
+// State
 const isBusy = ref(false)
 const showAddTaskModal = ref(false)
-const chartPeriod = ref<'weekly' | 'monthly'>('weekly')
-
+const showAddProjectModal = ref(false)
+const selectedStatus = ref<TaskStatus>('in_queue')
+const activeDrawerTask = ref<Task | null>(null)
 const confirmOpen = ref(false)
 const confirmTarget = ref<Task | null>(null)
 
-const tasksApi = useTasks()
-const statsApi = useStats()
+// Fetch tasks
+const { data: tasks, error: tasksError, refresh: refreshTasks } = useLazyAsyncData<Task[]>(
+  'tasks-data',
+  () => tasksApi.getTasks()
+)
 
-const { data: stats, error: statsError } = useLazyAsyncData<Stat[]>('stats', () => statsApi.getStats(), {
-  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+// Fetch projects
+const { data: projects, error: projectsError, pending, refresh: refreshProjects } = useLazyAsyncData<Project[]>(
+  'projects-data',
+  () => projectsApi.getProjects()
+)
+
+// Fetch sprints
+const { data: sprints, refresh: refreshSprints } = useLazyAsyncData<Sprint[]>(
+  'sprints-data',
+  () => sprintsApi.getSprints()
+)
+
+const activeSprint = computed(() => {
+  if (!sprints.value || sprints.value.length === 0) return null
+  return sprints.value.find((s) => s.status === 'active') || sprints.value[0] || null
 })
-const { data: activities, error: activitiesError } = useLazyAsyncData<Task[]>('activities', () => tasksApi.getActivities(), {
-  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+
+const activeProjects = computed(() => {
+  return (projects.value || []).filter(
+    (p) => p.status === 'active' || !p.status
+  )
 })
 
-const filtered = computed(() => {
-  const list = activities.value ?? []
-  if (!q.value.trim()) return list
-  const query = q.value.toLowerCase()
-  return list.filter((row) => row.name.toLowerCase().includes(query))
+const projectOptions = computed(() => {
+  return (projects.value || []).map((p) => ({
+    slug: p.slug,
+    title: p.title
+  }))
 })
 
-// Calculations for Donut Chart
-const totalTasksCount = computed(() => (activities.value ?? []).length || 8)
-const completedCount = computed(() => (activities.value ?? []).filter(t => t.status === 'selesai').length || 4)
-const inProgressCount = computed(() => (activities.value ?? []).filter(t => t.status === 'proses').length || 3)
-const todoCount = computed(() => (activities.value ?? []).filter(t => t.status === 'todo').length || 1)
+// Blocked Tasks (across all active projects)
+const blockedTasks = computed(() => {
+  if (!tasks.value) return []
+  return tasks.value.filter((t) => t.status === 'blocked')
+})
 
-const circumference = 289 // 2 * pi * 46
-const completedArc = computed(() => Math.max(10, (completedCount.value / totalTasksCount.value) * circumference))
-const inProgressArc = computed(() => Math.max(10, (inProgressCount.value / totalTasksCount.value) * circumference))
-const todoArc = computed(() => Math.max(10, (todoCount.value / totalTasksCount.value) * circumference))
+// Critical Tasks Count (excluding deployed)
+const criticalTasksCount = computed(() => {
+  if (!tasks.value) return 0
+  return tasks.value.filter((t) => t.priority === 'critical' && t.status !== 'deployed').length
+})
+
+// Urgent / Overdue Tasks (across all active projects)
+const urgentTasks = computed(() => {
+  if (!tasks.value) return []
+  const now = new Date()
+  const todayStr = now.toISOString().slice(0, 10)
+  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000)
+  const tomorrowStr = tomorrow.toISOString().slice(0, 10)
+
+  const list: { task: Task; label: string }[] = []
+
+  for (const t of tasks.value) {
+    if (t.status === 'deployed') continue
+    if (!t.dueDate) continue
+
+    const due = t.dueDate.slice(0, 10)
+    if (due < todayStr) {
+      list.push({ task: t, label: 'OVERDUE' })
+    } else if (due === todayStr) {
+      list.push({ task: t, label: 'due today' })
+    } else if (due === tomorrowStr) {
+      list.push({ task: t, label: 'due tomorrow' })
+    }
+  }
+
+  return list
+})
+
+function openTaskModal(task: Task) {
+  activeDrawerTask.value = task
+}
 
 async function refreshData() {
-  await Promise.all([
-    refreshNuxtData('activities'),
-    refreshNuxtData('stats'),
-    refreshNuxtData('tasks-page')
-  ])
-}
-
-async function onTaskModalCreated(payload: { name: string; description: string; project: string; status: 'todo' | 'proses' | 'selesai'; priority: string; dueDate: string }) {
   isBusy.value = true
   try {
-    await tasksApi.createTask({ name: payload.name })
-    showAddTaskModal.value = false
-    await refreshData()
+    await Promise.all([refreshTasks(), refreshProjects(), refreshSprints()])
   } finally {
     isBusy.value = false
   }
 }
 
-async function toggleStatus(task: Task) {
+async function onSaveDrawerTask(payload: Partial<Task>) {
+  if (!activeDrawerTask.value) return
+  const currentId = activeDrawerTask.value.id
   isBusy.value = true
-  const next: Record<Task['status'], Task['status']> = {
-    todo: 'proses',
-    proses: 'selesai',
-    selesai: 'todo'
+
+  // Optimistic update in-memory (0ms)
+  if (tasks.value) {
+    tasks.value = tasks.value.map(t => t.id === currentId ? { ...t, ...payload } : t)
   }
+
   try {
-    await tasksApi.updateTask(task.id, { status: next[task.status] })
+    await tasksApi.updateTask(currentId, payload)
+    activeDrawerTask.value = null
     await refreshData()
+  } catch (err) {
+    console.error('Failed to save drawer task:', err)
   } finally {
     isBusy.value = false
   }
 }
 
-function deleteTask(task: Task) {
+function deleteTaskFromDrawer(task: Task) {
+  activeDrawerTask.value = null
   confirmTarget.value = task
   confirmOpen.value = true
 }
 
 async function onConfirmDelete() {
   if (!confirmTarget.value) return
+  const deleteId = confirmTarget.value.id
   isBusy.value = true
+
+  // Optimistic deletion in-memory (0ms)
+  if (tasks.value) {
+    tasks.value = tasks.value.filter(t => t.id !== deleteId)
+  }
+
   try {
-    await tasksApi.deleteTask(confirmTarget.value.id)
+    await tasksApi.deleteTask(deleteId)
     confirmOpen.value = false
     confirmTarget.value = null
     await refreshData()
+  } catch (err) {
+    console.error('Failed to delete task:', err)
+  } finally {
+    isBusy.value = false
+  }
+}
+
+async function onTaskModalCreated(data: any) {
+  isBusy.value = true
+  try {
+    const created = await tasksApi.createTask({
+      name: data.name,
+      description: data.description,
+      projectSlug: data.projectSlug,
+      status: data.status || 'in_queue',
+      priority: data.priority || 'medium',
+      techTags: data.techTags || [],
+      dueDate: data.dueDate
+    })
+
+    // Instant optimistic in-memory insertion (0ms)
+    if (created) {
+      if (tasks.value) {
+        tasks.value = [created, ...tasks.value.filter(t => t.id !== created.id)]
+      } else {
+        tasks.value = [created]
+      }
+    }
+
+    showAddTaskModal.value = false
+    await refreshData()
+  } catch (err) {
+    console.error('Failed to create task:', err)
+  } finally {
+    isBusy.value = false
+  }
+}
+
+async function onProjectModalCreated(data: any) {
+  isBusy.value = true
+  const title = (data.title || data.name || '').trim()
+  const derivedSlug = (data.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || `proj-${Date.now()}`).trim()
+
+  try {
+    const created = await projectsApi.createProject({
+      title,
+      slug: derivedSlug,
+      description: data.description,
+      status: data.status || 'active',
+      priority: data.priority || 'medium',
+      githubRepo: data.githubRepo,
+      deployUrl: data.deployUrl,
+      techStack: data.techStack || []
+    })
+
+    // Instant optimistic in-memory insertion (0ms)
+    const newProj = created || {
+      id: String(Date.now()),
+      slug: derivedSlug,
+      title,
+      description: data.description,
+      status: data.status || 'active',
+      priority: data.priority || 'medium',
+      githubRepo: data.githubRepo,
+      deployUrl: data.deployUrl,
+      techStack: data.techStack || [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }
+
+    if (projects.value) {
+      projects.value = [newProj, ...projects.value.filter(p => p.slug !== newProj.slug)]
+    } else {
+      projects.value = [newProj]
+    }
+
+    showAddProjectModal.value = false
+    await refreshData()
+  } catch (err) {
+    console.error('Failed to create project:', err)
   } finally {
     isBusy.value = false
   }
 }
 </script>
-
-<style src="../assets/css/dashboard.css" scoped></style>

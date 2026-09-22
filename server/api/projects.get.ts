@@ -1,8 +1,7 @@
-import { getArray } from '../utils/store'
+import { projectRepository } from '../repositories'
 import { withApiHandler } from '../utils/handler'
 import type { Project } from '~/types'
 
-export default withApiHandler(async () => {
-  const projects = await getArray<Project>('projects')
-  return projects
+export default withApiHandler(async (): Promise<Project[]> => {
+  return await projectRepository.findAll()
 })

@@ -1,834 +1,753 @@
 <template>
-  <section class="project-detail-page">
-    <!-- 1. Breadcrumbs -->
-    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-      <NuxtLink to="/projects" class="breadcrumb-link">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        <span>Projects</span>
-      </NuxtLink>
-      <span class="breadcrumb-separator">/</span>
-      <span class="breadcrumb-current">{{ currentProject.title }}</span>
-    </nav>
+  <div class="space-y-6 pb-20 lg:pb-12 relative">
+    <!-- Project Hero (Dashboard Tab Only) -->
+    <ProjectHeroHeader
+      v-if="activeTab === 'dashboard'"
+      :project="currentProject"
+      :completed-count="completedCount"
+      :total-tasks-count="totalTasksCount"
+      :derived-percentage="derivedPercentage"
+    />
 
-    <!-- 2. Project Hero Card -->
-    <div class="project-hero-card">
-      <div class="hero-header-row">
-        <div class="hero-title-group">
-          <div class="project-badge-row">
-            <span class="project-type-tag">Personal Workstream</span>
-            <span class="status-badge" :class="statusClass">{{ currentProject.status || 'Active' }}</span>
-            <span class="priority-pill" :class="priorityClass">{{ currentProject.priority || 'High' }} Priority</span>
-          </div>
-          <h1>{{ currentProject.title }}</h1>
-          <p class="hero-description">{{ currentProject.description || 'High-performance architecture with derived task milestone velocity tracking.' }}</p>
+    <!-- ================================================================= -->
+    <!-- VIEW 1: PROJECT DASHBOARD (DEFAULT)                               -->
+    <!-- ================================================================= -->
+    <div v-if="activeTab === 'dashboard'" class="space-y-6">
+      <!-- 4-Pillar DevOps Bento Cockpit Matrix -->
+      <div class="space-y-4">
+        <!-- Top DevOps Row: CI/CD Pipeline & Live Production Tracker -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <ProjectCicdCard
+            :repo="currentProject.githubRepo || ''"
+            :workflows="projectWorkflows || []"
+            :pending="workflowsPending"
+            :is-rerunning="rerunningRunId !== null"
+            @open-log="openTabRunLogModal"
+            @rerun="onRerunWorkflowById"
+            @refresh="refreshWorkflows"
+          />
+
+          <ProjectLiveDeploymentCard
+            :repo="currentProject.githubRepo || ''"
+            :deploy-url="currentProject.deployUrl || ''"
+            :deployments="projectDeployments"
+            :pending="deploymentsPending"
+            @open-modal="isDeploymentModalOpen = true"
+            @refresh="refreshDeployments"
+          />
         </div>
 
-        <div class="hero-actions">
-          <button type="button" class="button primary" @click="showTaskDrawer = !showTaskDrawer">
-            <span>⊕ Add Task</span>
-          </button>
-          <NuxtLink to="/projects" class="button secondary">
-            <span>Edit Project</span>
-          </NuxtLink>
-          <button type="button" class="button danger" @click="confirmDeleteProject = true">
-            <span>Delete</span>
-          </button>
+        <!-- Middle DevOps Row: Security & Packages -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <ProjectSecurityCard
+            :repo="currentProject.githubRepo || ''"
+            :security="projectSecurity"
+            :pending="securityPending"
+            @open-modal="isSecurityModalOpen = true"
+            @refresh="refreshSecurity"
+          />
+
+          <ProjectPackageCard
+            :repo="currentProject.githubRepo || ''"
+            :packages="projectPackages"
+            :pending="packagesPending"
+            @open-modal="isPackageModalOpen = true"
+            @refresh="refreshPackages"
+          />
         </div>
       </div>
 
-      <div class="hero-meta-footer">
-        <div class="meta-item">
-          <span class="meta-label">Timeline:</span>
-          <span class="meta-val">Oct 15 - Dec 20, 2026</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Repository:</span>
-          <span class="meta-val code">{{ currentProject.slug }}</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Lead Developer:</span>
-          <span class="meta-val">Bagja Iskandar</span>
-        </div>
-      </div>
-    </div>
+      <!-- Bottom Bento Row: GitHub Pulse & Project Focus Deliverables -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <ProjectCommitsPreview
+          :commits="commits || []"
+          @view-all-commits="activeTab = 'github'"
+        />
 
-    <!-- Quick Add Task Drawer if toggled -->
-    <div v-if="showTaskDrawer" class="quick-task-drawer">
-      <div class="drawer-header">
-        <h3>Quick Add Task to {{ currentProject.title }}</h3>
-        <button type="button" class="close-drawer-btn" @click="showTaskDrawer = false" aria-label="Close">✕</button>
-      </div>
-      <div class="drawer-inputs">
-        <input v-model="newTaskName" type="text" placeholder="Task name (e.g. Implement EEG spatial pooling layer)..." />
-        <button type="button" class="button primary small" :disabled="!newTaskName.trim()" @click="addTaskLocally">Create Task</button>
-      </div>
-    </div>
-
-    <!-- 3. Metrics & Derived Progress Grid -->
-    <div class="project-metrics-grid">
-      <!-- Big Progress Card -->
-      <div class="progress-metric-card">
-        <div class="metric-card-header">
-          <span class="metric-label">Overall Progress</span>
-          <span class="derived-tag">Derived Metric</span>
-        </div>
-        <div class="progress-number-row">
-          <strong class="big-progress-value">{{ derivedPercentage }}%</strong>
-          <span class="progress-subtext">Derived from {{ localTasks.length }} associated tasks</span>
-        </div>
-        <div class="progress-track large">
-          <div class="progress-fill" :style="{ width: `${derivedPercentage}%` }"></div>
-        </div>
-      </div>
-
-      <!-- 4 Task Breakdown Chips -->
-      <div class="breakdown-chips-card">
-        <div class="breakdown-item violet">
-          <span class="breakdown-count">{{ completedCount }}</span>
-          <span class="breakdown-label">Completed</span>
-        </div>
-        <div class="breakdown-item cyan">
-          <span class="breakdown-count">{{ inProgressCount }}</span>
-          <span class="breakdown-label">In Progress</span>
-        </div>
-        <div class="breakdown-item slate">
-          <span class="breakdown-count">{{ todoCount }}</span>
-          <span class="breakdown-label">To Do</span>
-        </div>
-        <div class="breakdown-item total">
-          <span class="breakdown-count">{{ localTasks.length }}</span>
-          <span class="breakdown-label">Total Tasks</span>
-        </div>
+        <ProjectPriorityDeliverables
+          :priority-tasks="priorityTasksList"
+          @open-matrix="activeTab = 'matrix'"
+          @task-click="onTaskClick"
+        />
       </div>
     </div>
 
-    <!-- 4. Associated Project Tasks Table -->
-    <div class="project-tasks-card">
-      <div class="tasks-card-header">
-        <div class="tasks-title-group">
-          <h2>Project Tasks</h2>
-          <span class="tasks-count-pill">{{ filteredTasks.length }} tasks</span>
-        </div>
+    <!-- ================================================================= -->
+    <!-- VIEW 2: DEDICATED FULL KANBAN BOARD                               -->
+    <!-- ================================================================= -->
+    <section v-else-if="activeTab === 'kanban'" aria-label="Dedicated Kanban Board" class="space-y-4">
+      <KanbanBoard
+        :tasks="projectTasks"
+        @update-status="onUpdateTaskStatus"
+        @add-task="onAddTaskToColumn"
+        @task-click="onTaskClick"
+      />
+    </section>
 
-        <div class="tasks-toolbar">
-          <input v-model="taskSearch" type="search" placeholder="Search tasks in project..." aria-label="Search project tasks" />
-          <div class="filter-tabs" role="tablist">
-            <button type="button" class="filter-tab" :class="{ active: taskFilter === 'all' }" @click="taskFilter = 'all'">
-              All ({{ localTasks.length }})
-            </button>
-            <button type="button" class="filter-tab" :class="{ active: taskFilter === 'todo' }" @click="taskFilter = 'todo'">
-              To Do ({{ todoCount }})
-            </button>
-            <button type="button" class="filter-tab" :class="{ active: taskFilter === 'proses' }" @click="taskFilter = 'proses'">
-              In Progress ({{ inProgressCount }})
-            </button>
-            <button type="button" class="filter-tab" :class="{ active: taskFilter === 'selesai' }" @click="taskFilter = 'selesai'">
-              Completed ({{ completedCount }})
-            </button>
-          </div>
-        </div>
-      </div>
+    <!-- ================================================================= -->
+    <!-- VIEW 3: ASSOCIATED TASK MATRIX                                    -->
+    <!-- ================================================================= -->
+    <ProjectTaskMatrix
+      v-else-if="activeTab === 'matrix'"
+      :tasks="projectTasks"
+      @task-click="onTaskClick"
+      @toggle-status="toggleMatrixTaskStatus"
+      @delete-task="deleteTaskFromDrawer"
+    />
 
-      <!-- Task Table -->
-      <div class="project-tasks-table">
-        <div class="task-row header">
-          <span>TASK NAME & DESCRIPTION</span>
-          <span>PRIORITY</span>
-          <span>DUE DATE</span>
-          <span>STATUS</span>
-          <span class="actions-cell">ACTION</span>
-        </div>
-
-        <div v-if="!filteredTasks.length" class="empty-state">
-          No tasks match your search or filter criteria.
-        </div>
-
-        <div v-for="(t, idx) in filteredTasks" :key="t.id || idx" class="task-row">
-          <div class="task-info">
-            <span class="task-name">{{ t.name }}</span>
-            <span class="task-desc">{{ t.description || 'Milestone deliverable for personal workspace.' }}</span>
-          </div>
-
+    <!-- ================================================================= -->
+    <!-- VIEW 4: GITHUB INTEGRATION DEEP COCKPIT                           -->
+    <!-- ================================================================= -->
+    <section v-else-if="activeTab === 'github'" aria-label="GitHub Integration" class="p-6 rounded-2xl bg-[#111114] border border-white/[0.06] space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-5 h-5 text-[#C98A4B]" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+          </svg>
           <div>
-            <span class="priority-badge" :class="t.priority || 'high'">
-              {{ (t.priority || 'high').toUpperCase() }}
-            </span>
-          </div>
-
-          <div class="date-cell">{{ t.dueDate || 'Nov 15, 2026' }}</div>
-
-          <div>
-            <span class="status-badge" :class="t.status">
-              {{ t.status === 'selesai' ? 'Completed' : t.status === 'proses' ? 'In Progress' : 'To Do' }}
-            </span>
-          </div>
-
-          <div class="actions-cell">
-            <button 
-              class="action-btn toggle-btn" 
-              type="button" 
-              @click="toggleTaskStatus(idx)" 
-              :aria-label="`Toggle status for ${t.name}`"
-              title="Toggle task status"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-              </svg>
-            </button>
-            <button 
-              class="action-btn delete-btn" 
-              type="button" 
-              @click="removeTask(idx)" 
-              :aria-label="`Delete ${t.name}`"
-              title="Delete task"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="3 6 5 6 21 6"></polyline>
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-              </svg>
-            </button>
+            <h2 class="font-mono text-sm font-semibold text-[#F5F2EB]">GitHub Repository Integration</h2>
+            <p class="text-xs text-[#756F68]">
+              Live branch telemetry and latest commit log from {{ currentProject.githubRepo || 'linked repository' }}.
+            </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Delete Project Confirmation Modal -->
+        <a
+          v-if="currentProject.githubRepo"
+          :href="`https://github.com/${currentProject.githubRepo}`"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group font-mono text-xs text-[#C98A4B] hover:underline flex items-center gap-1"
+        >
+          <span>Open on GitHub</span>
+          <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </a>
+      </div>
+
+      <!-- Pull Requests & Issues Feed -->
+      <ProjectPullsIssuesFeed
+        :project-pulls-issues="projectPullsIssues || null"
+        :pulls-issues-pending="pullsIssuesPending"
+        :in-panel-importing-id="inPanelImportingId"
+        :in-panel-imported-issues="inPanelImportedIssues"
+        :open-prs-count="tabOpenPrsCount"
+        :open-issues-count="tabOpenIssuesCount"
+        :merged-prs-count="tabMergedPrsCount"
+        :closed-issues-count="tabClosedIssuesCount"
+        @open-modal="isPullsIssuesModalOpen = true"
+        @refresh="refreshPullsIssues"
+        @import-issue="importIssueFromFeed"
+      />
+
+      <!-- GitHub Actions Telemetry -->
+      <ProjectWorkflowRunsFeed
+        :workflows="projectWorkflows || []"
+        :workflows-pending="workflowsPending"
+        :rerunning-run-id="rerunningRunId"
+        @refresh="refreshWorkflows"
+        @open-log="openTabRunLogModal"
+        @rerun="handleTabWorkflowRerun"
+      />
+
+      <!-- Deployments & Environments Cockpit -->
+      <ProjectDeploymentFeed
+        :deployments="projectDeployments || null"
+        :pending="deploymentsPending"
+        :deploy-url="currentProject.deployUrl || ''"
+        :target-environment-name="targetEnvironmentName"
+        :live-url="activeTabLiveUrl"
+        :deployment-status-dot-class="tabDeploymentStatusDotClass"
+        :commit-check-badge-class="tabCommitCheckBadgeClass"
+        :passed-checks-count="tabPassedChecksCount"
+        :total-checks-count="tabTotalChecksCount"
+        :commit-check-summary-text="tabCommitCheckSummaryText"
+        @open-modal="isDeploymentModalOpen = true"
+        @refresh="refreshDeployments"
+      />
+
+      <!-- Security & Vulnerability Audit -->
+      <ProjectSecurityFeed
+        :security="projectSecurity || null"
+        :pending="securityPending"
+        :repo="currentProject.githubRepo || ''"
+        :status-dot-class="tabSecurityStatusDotClass"
+        :scanner-secret-class="scannerSecretClass"
+        :scanner-secret-status-text="scannerSecretStatusText"
+        @open-modal="isSecurityModalOpen = true"
+        @refresh="refreshSecurity"
+      />
+
+      <!-- Package & Container Registry Feed -->
+      <ProjectPackageFeed
+        :packages="projectPackages || null"
+        :pending="packagesPending"
+        :status-dot-class="tabPackageStatusDotClass"
+        :docker-snippet="tabDockerSnippet"
+        :copied-snippet="tabCopiedSnippet"
+        @open-modal="isPackageModalOpen = true"
+        @refresh="refreshPackages"
+        @copy-snippet="copyTabSnippet"
+      />
+
+      <!-- Commits Stream & Branches List -->
+      <ProjectGitActivityFeed
+        :commits="commits || []"
+        :commits-pending="commitsPending"
+        :branches="branches || []"
+        :branches-pending="branchesPending"
+      />
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 5: VERCEL CLOUD TELEMETRY                                    -->
+    <!-- ================================================================= -->
+    <section v-else-if="activeTab === 'vercel'" aria-label="Vercel Cloud Telemetry">
+      <ProjectVercelTab
+        :project="currentProject"
+        :deployments="projectDeployments"
+      />
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- VIEW 6: SUPABASE CLOUD INFRASTRUCTURE                             -->
+    <!-- ================================================================= -->
+    <section v-else-if="activeTab === 'supabase'" aria-label="Supabase Cloud Infrastructure">
+      <ProjectSupabaseTab
+        :project="currentProject"
+      />
+    </section>
+
+    <!-- Modals & Drawers -->
+    <TaskDrawer
+      v-if="activeDrawerTask"
+      :task="activeDrawerTask"
+      :busy="isDrawerBusy"
+      :repo="currentProject.githubRepo"
+      @close="activeDrawerTask = null"
+      @save="onSaveDrawerTask"
+      @delete="deleteTaskFromDrawer"
+    />
+
+    <AddTaskModal
+      v-if="showAddTaskModal"
+      :project-slug="currentProject.slug"
+      :disabled="isBusy"
+      @close="showAddTaskModal = false"
+      @create="onTaskModalCreated"
+    />
+
+    <ConfirmDialog
+      v-if="confirmDeleteTask"
+      title="Delete Task?"
+      :message="`Are you sure you want to delete task '${taskToDelete?.name}'? This action cannot be undone.`"
+      confirm-text="Delete Task"
+      cancel-text="Cancel"
+      :busy="isBusy"
+      @confirm="onConfirmDeleteTask"
+      @cancel="() => { confirmDeleteTask = false; taskToDelete = null }"
+    />
+
     <ConfirmDialog
       v-if="confirmDeleteProject"
       title="Delete Project?"
-      :message="`Deleting '${currentProject.title}' will affect its ${localTasks.length} associated tasks. This action cannot be undone.`"
-      confirmText="Delete Project"
-      cancelText="Cancel"
+      :message="`Deleting '${currentProject.title}' will remove its milestone link. This action cannot be undone.`"
+      confirm-text="Delete Project"
+      cancel-text="Cancel"
       :busy="false"
       @confirm="onProjectDeleted"
       @cancel="confirmDeleteProject = false"
     />
-  </section>
+
+    <WorkflowLogModal
+      :is-open="isLogModalOpen"
+      :repo="currentProject.githubRepo || ''"
+      :run="selectedRunForModal"
+      @close="isLogModalOpen = false"
+    />
+
+    <SecurityAlertModal
+      :is-open="isSecurityModalOpen"
+      :repo="currentProject.githubRepo || ''"
+      :summary="projectSecurity || null"
+      @close="isSecurityModalOpen = false"
+    />
+
+    <DeploymentModal
+      :is-open="isDeploymentModalOpen"
+      :repo="currentProject.githubRepo || ''"
+      :deploy-url="currentProject.deployUrl"
+      :summary="projectDeployments || null"
+      @close="isDeploymentModalOpen = false"
+    />
+
+    <PullRequestsIssuesModal
+      :is-open="isPullsIssuesModalOpen"
+      :repo="targetRepo"
+      :project-slug="currentProject.slug"
+      :summary="projectPullsIssues || null"
+      @close="isPullsIssuesModalOpen = false"
+      @issue-created="onCockpitIssueCreated"
+      @task-imported="onCockpitTaskImported"
+    />
+
+    <PackageModal
+      :is-open="isPackageModalOpen"
+      :repo="targetRepo"
+      :summary="projectPackages"
+      @close="isPackageModalOpen = false"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive, onMounted, watch, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import type {
+  Project,
+  Task,
+  TaskStatus,
+  TaskPriority,
+  GitHubWorkflowRun,
+  GitHubIssueItem
+} from '~/types'
 
 const route = useRoute()
 const router = useRouter()
-const slug = computed(() => (route.params.slug as string) || 'project-alpha')
+const slug = computed(() => (route.params.slug as string) || 'management')
+
+const projectNav = useProjectNav()
+const activeTab = projectNav.activeTab
+
+onMounted(() => {
+  if (route.query.view === 'kanban') {
+    projectNav.setActiveTab('kanban')
+  } else if (!route.query.view) {
+    projectNav.setActiveTab('dashboard')
+  }
+})
+
+watch(() => route.params.slug, () => {
+  if (route.query.view === 'kanban') {
+    projectNav.setActiveTab('kanban')
+  } else {
+    projectNav.setActiveTab('dashboard')
+  }
+})
+
+watch(() => route.query.view, (newVal) => {
+  if (newVal === 'kanban') {
+    projectNav.setActiveTab('kanban')
+  } else if (!newVal && activeTab.value === 'kanban') {
+    projectNav.setActiveTab('dashboard')
+  }
+})
+
+const isBusy = ref(false)
+const isDrawerBusy = ref(false)
+const showAddTaskModal = ref(false)
+const defaultColumnStatus = ref<TaskStatus>('in_queue')
+const activeDrawerTask = ref<Task | null>(null)
+const confirmDeleteTask = ref(false)
+const taskToDelete = ref<Task | null>(null)
+const confirmDeleteProject = ref(false)
 
 const projectsApi = useProjects()
-const { data: projects } = useLazyAsyncData('projects-detail', () => projectsApi.getProjects(), {
-  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] || nuxtApp.static.data[key]
-})
+const tasksApi = useTasks()
 
-const currentProject = computed(() => {
+const { data: projects, refresh: refreshProjects } = useLazyAsyncData('projects-detail', () => projectsApi.getProjects())
+const { data: serverTasks, refresh: refreshTasks } = useLazyAsyncData('project-tasks', () => tasksApi.getTasks())
+
+const currentProject = computed<Project>(() => {
   const list = projects.value ?? []
-  const found = list.find(p => p.slug === slug.value)
+  const currentSlug = slug.value.toLowerCase()
+  const found = list.find(p => p.slug.toLowerCase() === currentSlug)
   if (found) return found
+
+  const titleFromSlug = slug.value.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
   return {
+    id: slug.value,
     slug: slug.value,
-    title: slug.value.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    title: titleFromSlug,
     description: 'High-performance stereoscopic depth estimation and neural signal processing architecture.',
-    status: 'Active',
-    priority: 'High'
+    status: 'active',
+    priority: 'high',
+    githubRepo: slug.value === 'management' ? 'bagja-iskandar/Management' : undefined,
+    techStack: ['Nuxt 4', 'Tailwind', 'TypeScript'],
+    startDate: '2026-08-01',
+    dueDate: '2026-12-31',
+    createdAt: '2026-08-01T00:00:00.000Z',
+    updatedAt: '2026-09-17T00:00:00.000Z'
   }
 })
 
-const statusClass = computed(() => {
-  const s = (currentProject.value.status || 'Active').toLowerCase()
-  if (s === 'completed') return 'selesai'
-  if (s === 'on hold') return 'proses'
-  return 'selesai'
+// GitHub integration
+const targetRepo = computed(() => currentProject.value.githubRepo || '')
+const { commits, pending: commitsPending } = useGitHubCommits(targetRepo, 5)
+const { branches, pending: branchesPending } = useGitHubBranches(targetRepo)
+const { workflows: projectWorkflows, pending: workflowsPending, refresh: refreshWorkflows } = useGitHubWorkflows(targetRepo, 5)
+const { data: projectSecurity, pending: securityPending, refresh: refreshSecurity } = useGitHubSecurity(computed(() => currentProject.value.githubRepo || ''))
+const { deployments: projectDeployments, pending: deploymentsPending, refresh: refreshDeployments } = useGitHubDeployments(targetRepo, 5)
+const { activity: projectPullsIssues, pending: pullsIssuesPending, refresh: refreshPullsIssues } = useGitHubPullsAndIssues(targetRepo, 10)
+const { packages: projectPackages, pending: packagesPending, refresh: refreshPackages } = useGitHubPackages(targetRepo)
+
+// Tab Modals state & Rerun state
+const isLogModalOpen = ref(false)
+const isSecurityModalOpen = ref(false)
+const isDeploymentModalOpen = ref(false)
+const isPullsIssuesModalOpen = ref(false)
+const isPackageModalOpen = ref(false)
+const selectedRunForModal = ref<GitHubWorkflowRun | null>(null)
+const rerunningRunId = ref<number | null>(null)
+
+function onRerunWorkflowById(runId: number) {
+  const run = (projectWorkflows.value || []).find(r => r.id === runId)
+  if (run) {
+    handleTabWorkflowRerun(run)
+  }
+}
+
+// Package feed helpers
+const tabPackageStatusDotClass = computed(() => {
+  if (!projectPackages.value) return 'bg-[#756F68]'
+  if (!projectPackages.value.hasScope) return 'bg-[#C98A4B]'
+  if ((projectPackages.value.packages || []).length > 0) return 'bg-emerald-400'
+  return 'bg-[#756F68]'
 })
 
-const priorityClass = computed(() => {
-  const p = (currentProject.value.priority || 'High').toLowerCase()
-  if (p === 'high') return 'high'
-  if (p === 'medium') return 'medium'
-  return 'low'
+const tabDockerSnippet = computed(() => {
+  const r = currentProject.value.githubRepo ? currentProject.value.githubRepo.toLowerCase() : 'bagja-iskandar/management'
+  return `docker push ghcr.io/${r}:latest`
 })
 
-// Associated Tasks data
-interface LocalTask {
-  id: string
+const tabCopiedSnippet = ref(false)
+async function copyTabSnippet(text: string) {
+  try {
+    if (navigator?.clipboard) {
+      await navigator.clipboard.writeText(text)
+      tabCopiedSnippet.value = true
+      setTimeout(() => {
+        tabCopiedSnippet.value = false
+      }, 2000)
+    }
+  } catch (err) {
+    console.error('Failed to copy snippet:', err)
+  }
+}
+
+// PRs & Issues Computeds & Handlers
+const tabOpenPrsCount = computed(() => projectPullsIssues.value?.openPrCount || 0)
+const tabOpenIssuesCount = computed(() => projectPullsIssues.value?.openIssueCount || 0)
+const tabMergedPrsCount = computed(() => {
+  return projectPullsIssues.value?.pullRequests?.filter(p => p.state === 'merged').length || 0
+})
+const tabClosedIssuesCount = computed(() => projectPullsIssues.value?.closedIssueCount || 0)
+
+const inPanelImportingId = ref<number | null>(null)
+const inPanelImportedIssues = reactive<Record<number, boolean>>({})
+
+async function importIssueFromFeed(issue: GitHubIssueItem) {
+  if (inPanelImportingId.value || inPanelImportedIssues[issue.number]) return
+  inPanelImportingId.value = issue.id
+  try {
+    const techTags = (issue.labels || []).map(l => l.name)
+    const taskPayload = {
+      name: issue.title,
+      description: `Imported from GitHub Issue #${issue.number}\nURL: ${issue.htmlUrl}`,
+      projectSlug: currentProject.value.slug,
+      githubIssueUrl: issue.htmlUrl,
+      githubIssueNumber: issue.number,
+      techTags: techTags.length > 0 ? techTags : ['github-issue'],
+      status: 'in_queue' as TaskStatus,
+      priority: 'medium' as TaskPriority
+    }
+
+    const created = await tasksApi.createTask(taskPayload)
+    if (created && serverTasks.value) {
+      serverTasks.value = [created, ...serverTasks.value.filter(t => t.id !== created.id)]
+    }
+    inPanelImportedIssues[issue.number] = true
+    await refreshTasks()
+  } catch (err) {
+    console.error('Failed to import issue from feed:', err)
+  } finally {
+    inPanelImportingId.value = null
+  }
+}
+
+async function onCockpitTaskImported(task: any) {
+  if (task && serverTasks.value) {
+    serverTasks.value = [task, ...serverTasks.value.filter(t => t.id !== task.id)]
+  }
+  await refreshTasks()
+  await refreshPullsIssues()
+}
+
+async function onCockpitIssueCreated(_issue: any) {
+  await refreshPullsIssues()
+}
+
+// Deployments Computeds
+const activeTabLiveUrl = computed(() => {
+  return projectDeployments.value?.latestDeployment?.environmentUrl || currentProject.value.deployUrl || ''
+})
+
+const targetEnvironmentName = computed(() => {
+  if (projectDeployments.value?.latestDeployment?.environment) {
+    return projectDeployments.value.latestDeployment.environment
+  }
+  if (currentProject.value.deployUrl) return 'Production'
+  return 'None Configured'
+})
+
+const tabDeploymentStatusDotClass = computed(() => {
+  const latest = projectDeployments.value?.latestDeployment
+  if (latest) {
+    if (latest.state === 'success') return 'bg-emerald-400'
+    if (latest.state === 'in_progress' || latest.state === 'queued' || latest.state === 'pending') {
+      return 'bg-[#C98A4B] animate-pulse'
+    }
+    if (latest.state === 'failure' || latest.state === 'error') return 'bg-red-400'
+  }
+  if (currentProject.value.deployUrl) return 'bg-emerald-400'
+  return 'bg-[#756F68]'
+})
+
+const tabTotalChecksCount = computed(() => projectDeployments.value?.commitStatus?.totalCount || 0)
+const tabPassedChecksCount = computed(() => {
+  return projectDeployments.value?.commitStatus?.checks?.filter(c => c.state === 'success').length || 0
+})
+
+const tabCommitCheckBadgeClass = computed(() => {
+  const s = projectDeployments.value?.commitStatus?.state
+  if (s === 'success') return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+  if (s === 'pending') return 'bg-[#C98A4B]/15 text-[#C98A4B] border-[#C98A4B]/30'
+  if (s === 'failure') return 'bg-red-500/15 text-red-400 border-red-500/30'
+  return 'bg-white/5 text-[#756F68] border-white/10'
+})
+
+const tabCommitCheckSummaryText = computed(() => {
+  const status = projectDeployments.value?.commitStatus
+  if (!status || status.totalCount === 0) return 'No status checks recorded'
+  if (status.state === 'success') return 'All commit checks passed'
+  if (status.state === 'pending') return 'Checks currently running'
+  if (status.state === 'failure') return 'Commit checks failing'
+  return `State: ${status.state}`
+})
+
+// Security Computeds
+const tabSecurityStatusDotClass = computed(() => {
+  if (!projectSecurity.value) return 'bg-[#756F68]'
+  if (projectSecurity.value.criticalCount > 0) return 'bg-red-400 animate-pulse'
+  if (projectSecurity.value.highCount > 0) return 'bg-orange-400'
+  if (projectSecurity.value.totalAlerts > 0) return 'bg-yellow-400'
+  if (!projectSecurity.value.enabled.dependabot) return 'bg-[#C98A4B]'
+  return 'bg-emerald-400'
+})
+
+const scannerSecretClass = computed(() => {
+  if (!projectSecurity.value || !projectSecurity.value.enabled.secretScanning) {
+    return 'border-white/[0.06] bg-white/[0.02] text-[#756F68]'
+  }
+  const hasLeaks = projectSecurity.value.alerts.some(a => a.type === 'secret_scanning')
+  return hasLeaks ? 'border-red-500/30 bg-red-500/10 text-red-400' : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+})
+
+const scannerSecretStatusText = computed(() => {
+  if (!projectSecurity.value || !projectSecurity.value.enabled.secretScanning) {
+    return 'Disabled'
+  }
+  const hasLeaks = projectSecurity.value.alerts.some(a => a.type === 'secret_scanning')
+  return hasLeaks ? 'Leaks Detected' : 'Active • Clean'
+})
+
+function openTabRunLogModal(run: GitHubWorkflowRun) {
+  selectedRunForModal.value = run
+  isLogModalOpen.value = true
+}
+
+async function handleTabWorkflowRerun(run: GitHubWorkflowRun) {
+  if (!currentProject.value.githubRepo || rerunningRunId.value === run.id) return
+  rerunningRunId.value = run.id
+  try {
+    await rerunWorkflow(currentProject.value.githubRepo, run.id)
+    await refreshWorkflows()
+  } catch (err) {
+    console.error('Failed to rerun workflow:', err)
+  } finally {
+    rerunningRunId.value = null
+  }
+}
+
+// Tasks filtered specifically for this project
+const projectTasks = computed<Task[]>(() => {
+  if (serverTasks.value) {
+    const currentSlug = currentProject.value.slug.toLowerCase()
+    return serverTasks.value.filter(t => (t.projectSlug || '').toLowerCase() === currentSlug)
+  }
+  return []
+})
+
+const sortByPriority = (a: Task, b: Task) => {
+  const pWeight: Record<string, number> = { critical: 4, high: 3, medium: 2, low: 1 }
+  const diff = (pWeight[b.priority] || 0) - (pWeight[a.priority] || 0)
+  if (diff !== 0) return diff
+  return (a.taskId || a.id).localeCompare(b.taskId || b.id)
+}
+
+const priorityTasksList = computed(() => {
+  return projectTasks.value
+    .filter(t => t.priority === 'critical' || t.priority === 'high')
+    .sort(sortByPriority)
+})
+
+const completedCount = computed(() => projectTasks.value.filter(t => t.status === 'deployed').length)
+const totalTasksCount = computed(() => projectTasks.value.length)
+const derivedPercentage = computed(() => {
+  if (!totalTasksCount.value) return 0
+  return Math.round((completedCount.value / totalTasksCount.value) * 100)
+})
+
+watchEffect(() => {
+  projectNav.setCounts({
+    tasks: projectTasks.value.length,
+    matrix: projectTasks.value.length,
+    commits: (commits.value || []).length,
+    hasGithub: !!currentProject.value?.githubRepo
+  })
+})
+
+async function onUpdateTaskStatus(taskId: string, newStatus: TaskStatus) {
+  if (serverTasks.value) {
+    serverTasks.value = serverTasks.value.map(t =>
+      (t.id === taskId || t.taskId === taskId) ? { ...t, status: newStatus } : t
+    )
+  }
+
+  try {
+    const matchedServerTask = (serverTasks.value || []).find(t => t.id === taskId || t.taskId === taskId)
+    const apiId = matchedServerTask?.id || taskId
+    await tasksApi.updateTask(apiId, { status: newStatus })
+  } catch (err) {
+    console.error('Failed to update task status:', err)
+  } finally {
+    await refreshTasks()
+  }
+}
+
+function onTaskClick(task: Task) {
+  activeDrawerTask.value = task
+}
+
+function onAddTaskToColumn(status: TaskStatus = 'in_queue') {
+  defaultColumnStatus.value = status
+  showAddTaskModal.value = true
+}
+
+async function onTaskModalCreated(payload: {
   name: string
   description?: string
-  status: 'todo' | 'proses' | 'selesai'
-  priority?: 'high' | 'medium' | 'low'
+  status?: TaskStatus
+  priority: TaskPriority
+  techTags: string[]
   dueDate?: string
-}
+  projectSlug?: string
+}) {
+  isBusy.value = true
+  try {
+    const createdTask = await tasksApi.createTask({
+      name: payload.name,
+      description: payload.description,
+      projectSlug: currentProject.value.slug,
+      status: defaultColumnStatus.value || 'in_queue',
+      priority: payload.priority || 'medium',
+      techTags: payload.techTags || [],
+      dueDate: payload.dueDate
+    })
 
-const localTasks = ref<LocalTask[]>([
-  { id: '1', name: 'Refactor TF-HiTNet fusion layer', description: 'Build spatial feature pyramid pooling for stereoscopic inference.', status: 'selesai', priority: 'high', dueDate: 'Oct 24, 2026' },
-  { id: '2', name: 'Implement co-attention EEG module', description: 'Align multi-modal latent representations across temporal steps.', status: 'proses', priority: 'high', dueDate: 'Oct 28, 2026' },
-  { id: '3', name: 'Optimize spatial pyramid pooling', description: 'Reduce memory footprint on high-resolution feature tensors.', status: 'proses', priority: 'medium', dueDate: 'Nov 02, 2026' },
-  { id: '4', name: 'Write latency and throughput benchmarks', description: 'Evaluate TensorRT runtime latency under batch size 16.', status: 'todo', priority: 'low', dueDate: 'Nov 10, 2026' },
-  { id: '5', name: 'Update technical architecture documentation', description: 'Complete API reference and Unstorage schema guides.', status: 'todo', priority: 'low', dueDate: 'Nov 15, 2026' }
-])
+    if (createdTask) {
+      if (serverTasks.value) {
+        serverTasks.value = [createdTask, ...serverTasks.value.filter(t => t.id !== createdTask.id)]
+      } else {
+        serverTasks.value = [createdTask]
+      }
+    }
 
-const showTaskDrawer = ref(false)
-const newTaskName = ref('')
-const confirmDeleteProject = ref(false)
-const taskSearch = ref('')
-const taskFilter = ref<'all' | 'todo' | 'proses' | 'selesai'>('all')
-
-// Derived calculation
-const completedCount = computed(() => localTasks.value.filter(t => t.status === 'selesai').length)
-const inProgressCount = computed(() => localTasks.value.filter(t => t.status === 'proses').length)
-const todoCount = computed(() => localTasks.value.filter(t => t.status === 'todo').length)
-const derivedPercentage = computed(() => {
-  if (!localTasks.value.length) return 0
-  return Math.round((completedCount.value / localTasks.value.length) * 100)
-})
-
-// Filtered tasks
-const filteredTasks = computed(() => {
-  let list = localTasks.value
-  if (taskFilter.value !== 'all') {
-    list = list.filter(t => t.status === taskFilter.value)
+    showAddTaskModal.value = false
+    await refreshTasks()
+  } catch (err) {
+    console.error('Failed to create task:', err)
+  } finally {
+    isBusy.value = false
   }
-  if (taskSearch.value.trim()) {
-    const q = taskSearch.value.toLowerCase()
-    list = list.filter(t => t.name.toLowerCase().includes(q) || (t.description ?? '').toLowerCase().includes(q))
+}
+
+async function onSaveDrawerTask(payload: Partial<Task>) {
+  if (!activeDrawerTask.value) return
+  const currentId = activeDrawerTask.value.id
+  isDrawerBusy.value = true
+
+  if (serverTasks.value) {
+    serverTasks.value = serverTasks.value.map(t => t.id === currentId ? { ...t, ...payload } : t)
   }
-  return list
-})
 
-function toggleTaskStatus(idx: number) {
-  const target = filteredTasks.value[idx]
-  if (!target) return
-  const next: Record<LocalTask['status'], LocalTask['status']> = {
-    todo: 'proses',
-    proses: 'selesai',
-    selesai: 'todo'
+  try {
+    await tasksApi.updateTask(currentId, payload)
+    activeDrawerTask.value = null
+    await refreshTasks()
+  } catch (err) {
+    console.error('Failed to save drawer task:', err)
+  } finally {
+    isDrawerBusy.value = false
   }
-  target.status = next[target.status]
 }
 
-function removeTask(idx: number) {
-  const target = filteredTasks.value[idx]
-  if (!target) return
-  localTasks.value = localTasks.value.filter(t => t.id !== target.id)
+function deleteTaskFromDrawer(task: Task) {
+  taskToDelete.value = task
+  confirmDeleteTask.value = true
 }
 
-function addTaskLocally() {
-  if (!newTaskName.value.trim()) return
-  localTasks.value.unshift({
-    id: String(Date.now()),
-    name: newTaskName.value.trim(),
-    description: 'Newly created milestone task.',
-    status: 'todo',
-    priority: 'medium',
-    dueDate: 'Nov 20, 2026'
-  })
-  newTaskName.value = ''
-  showTaskDrawer.value = false
+async function onConfirmDeleteTask() {
+  if (!taskToDelete.value) return
+  const deleteId = taskToDelete.value.id
+  isBusy.value = true
+
+  if (serverTasks.value) {
+    serverTasks.value = serverTasks.value.filter(t => t.id !== deleteId)
+  }
+
+  try {
+    await tasksApi.deleteTask(deleteId)
+    confirmDeleteTask.value = false
+    if (activeDrawerTask.value?.id === deleteId) {
+      activeDrawerTask.value = null
+    }
+    taskToDelete.value = null
+    await refreshTasks()
+  } catch (err) {
+    console.error('Failed to delete task:', err)
+  } finally {
+    isBusy.value = false
+  }
 }
 
-function onProjectDeleted() {
+async function toggleMatrixTaskStatus(task: Task) {
+  const next: Record<TaskStatus, TaskStatus> = {
+    in_queue: 'running_sprint',
+    running_sprint: 'deployed',
+    deployed: 'in_queue',
+    blocked: 'in_queue'
+  }
+  const newStatus = next[task.status] || 'in_queue'
+  await onUpdateTaskStatus(task.id, newStatus)
+}
+
+async function onProjectDeleted() {
   confirmDeleteProject.value = false
+  try {
+    await projectsApi.deleteProject(slug.value)
+  } catch {
+    // Ignore error
+  }
   router.push('/projects')
 }
 </script>
-
-<style scoped>
-.project-detail-page {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  max-width: 1450px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* Breadcrumb */
-.breadcrumb-nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-}
-
-.breadcrumb-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #c0c1ff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease;
-}
-
-.breadcrumb-link:hover {
-  color: #ffffff;
-}
-
-.breadcrumb-separator {
-  color: rgba(255, 255, 255, 0.2);
-}
-
-.breadcrumb-current {
-  color: var(--text-heading);
-  font-weight: 600;
-}
-
-/* Hero Card */
-.project-hero-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 30px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.hero-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.hero-title-group {
-  flex: 1;
-  min-width: 320px;
-}
-
-.project-badge-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.project-type-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #c0c1ff;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.priority-pill {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: var(--radius-pill);
-}
-
-.priority-pill.high {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #fca5a5;
-}
-
-.priority-pill.medium {
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  color: #fde047;
-}
-
-.priority-pill.low {
-  background: rgba(148, 163, 184, 0.15);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  color: #cbd5e1;
-}
-
-.hero-title-group h1 {
-  margin: 0 0 10px;
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #ffffff;
-}
-
-.hero-description {
-  margin: 0;
-  color: var(--text-body);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.hero-meta-footer {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  padding-top: 18px;
-  border-top: 1px solid var(--glass-border);
-  flex-wrap: wrap;
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.85rem;
-}
-
-.meta-label {
-  color: var(--text-muted);
-}
-
-.meta-val {
-  color: var(--text-heading);
-  font-weight: 600;
-}
-
-.meta-val.code {
-  font-family: monospace;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-/* Quick Add Task Drawer */
-.quick-task-drawer {
-  background: rgba(15, 19, 29, 0.95);
-  border: 1px solid var(--glass-border-highlight);
-  border-radius: var(--radius-card);
-  padding: 20px 24px;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.drawer-header h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #ffffff;
-}
-
-.close-drawer-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 4px 8px;
-}
-
-.drawer-inputs {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.drawer-inputs input {
-  flex: 1;
-}
-
-/* Metrics & Progress Grid */
-.project-metrics-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 20px;
-}
-
-.progress-metric-card,
-.breakdown-chips-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 24px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-ambient);
-}
-
-.progress-metric-card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.metric-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.metric-label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.derived-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.progress-number-row {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-}
-
-.big-progress-value {
-  font-size: 2.8rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  line-height: 1;
-}
-
-.progress-subtext {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.progress-track.large {
-  height: 10px;
-}
-
-.breakdown-chips-card {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-.breakdown-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.breakdown-count {
-  font-size: 1.6rem;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.breakdown-item.violet .breakdown-count { color: #c084fc; }
-.breakdown-item.cyan .breakdown-count { color: #38bdf8; }
-.breakdown-item.slate .breakdown-count { color: #94a3b8; }
-.breakdown-item.total .breakdown-count { color: #ffffff; }
-
-.breakdown-label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-/* Associated Tasks Card */
-.project-tasks-card {
-  background: var(--glass-surface);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 24px;
-  backdrop-filter: var(--glass-blur);
-  box-shadow: var(--shadow-ambient);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.tasks-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.tasks-title-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.tasks-title-group h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #ffffff;
-}
-
-.tasks-count-pill {
-  font-size: 0.78rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-heading);
-  padding: 2px 8px;
-  border-radius: 999px;
-}
-
-.tasks-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.tasks-toolbar input {
-  width: 220px;
-}
-
-/* Tasks Table */
-.project-tasks-table {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-.task-row {
-  display: grid;
-  grid-template-columns: 2fr 0.8fr 1fr 1fr 0.8fr;
-  gap: 16px;
-  align-items: center;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.015);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transition: all 0.15s ease;
-}
-
-.task-row.header {
-  color: var(--text-muted);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  background: transparent;
-  padding: 8px 16px 12px;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-}
-
-.task-row:not(.header):hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.task-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.task-name {
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.task-desc {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.priority-badge {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.priority-badge.high {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.4);
-  color: #fca5a5;
-}
-
-.priority-badge.medium {
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  color: #fde047;
-}
-
-.priority-badge.low {
-  background: rgba(148, 163, 184, 0.15);
-  border: 1px solid rgba(148, 163, 184, 0.4);
-  color: #cbd5e1;
-}
-
-.actions-cell {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-heading);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.action-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-.action-btn.delete-btn:hover {
-  background: rgba(244, 63, 94, 0.25);
-  border-color: rgba(244, 63, 94, 0.5);
-  color: #fca5a5;
-}
-
-@media (max-width: 900px) {
-  .project-metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  .task-row {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .task-row.header {
-    display: none;
-  }
-}
-</style>

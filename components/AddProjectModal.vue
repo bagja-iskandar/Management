@@ -1,166 +1,177 @@
-<template>
-  <div class="modal-overlay" @click.self="onCancel" role="presentation">
-    <div 
-      ref="dialogRef" 
-      class="modal-card" 
-      role="dialog" 
-      aria-modal="true" 
+﻿<template>
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto" @click.self="onCancel" role="presentation">
+    <div
+      ref="dialogRef"
+      class="w-full max-w-xl bg-[#111114] border border-white/[0.1] rounded-xl p-6 sm:p-7 shadow-[0_25px_50px_rgba(0,0,0,0.8)] flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
       aria-labelledby="modal-project-title"
       tabindex="-1"
     >
       <!-- Header -->
-      <div class="modal-header">
+      <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <h2 id="modal-project-title">Create New Project</h2>
-          <p class="modal-subtitle">Define project scope, timeline, and priorities. Associated tasks will automatically feed into project progress.</p>
+          <h2 id="modal-project-title" class="font-mono text-lg font-semibold text-[#F5F2EB]">Create New Project</h2>
+          <p class="font-sans text-xs text-[#756F68] mt-1">Define repository scope, tech stack, and milestone targets.</p>
         </div>
-        <button type="button" class="close-btn" @click="onCancel" aria-label="Close modal">✕</button>
+        <button
+          type="button"
+          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#756F68] hover:text-[#F5F2EB] transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
+          aria-label="Close modal"
+          @click="onCancel"
+        >
+          ✕
+        </button>
       </div>
 
       <!-- Form -->
-      <form @submit.prevent="onSubmit" class="modal-form" novalidate>
-        <!-- Validation Error Message -->
-        <div v-if="validationError" class="modal-alert" role="alert">
+      <form class="flex flex-col gap-4" @submit.prevent="onSubmit" novalidate>
+        <!-- Validation Alert -->
+        <div v-if="validationError" class="p-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-400 text-xs font-mono" role="alert">
           {{ validationError }}
         </div>
 
-        <!-- Project Name -->
-        <div class="form-group">
-          <label for="project-name-input">
-            Project Name <span class="required">*</span>
+        <!-- Project Title -->
+        <div class="flex flex-col gap-1.5">
+          <label for="project-name-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">
+            Project Name <span class="text-red-400">*</span>
           </label>
-          <input 
+          <input
             id="project-name-input"
             ref="nameInputRef"
             v-model="name"
-            type="text" 
-            placeholder="e.g. Project Gamma • Neural Signal Transformer" 
-            :class="{ 'has-error': !!validationError && !name.trim() }"
-            required 
+            type="text"
+            placeholder="e.g. TF-HiTNet EEG Transformer"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            :class="{ 'border-red-500/60 focus:ring-red-500': !!validationError && !name.trim() }"
+            required
           />
         </div>
 
         <!-- Description -->
-        <div class="form-group">
-          <label for="project-desc-input">Short Description</label>
-          <textarea 
+        <div class="flex flex-col gap-1.5">
+          <label for="project-desc-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Description</label>
+          <textarea
             id="project-desc-input"
             v-model="description"
-            rows="3"
-            placeholder="e.g. Deep learning architecture for multi-modal spatial feature pyramid pooling."
+            rows="2"
+            placeholder="High-performance architecture with derived task milestone velocity tracking."
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
           ></textarea>
         </div>
 
+        <!-- GitHub Repo & Deploy URL (Row) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label for="project-repo-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">GitHub Repository</label>
+            <input
+              id="project-repo-input"
+              v-model="githubRepo"
+              type="text"
+              placeholder="e.g. bagja-iskandar/TF-HiTNet"
+              class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="project-deploy-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Deployment URL</label>
+            <input
+              id="project-deploy-input"
+              v-model="deployUrl"
+              type="url"
+              placeholder="https://app.vercel.app"
+              class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <!-- Tech Stack Tags (comma separated) -->
+        <div class="flex flex-col gap-1.5">
+          <label for="project-tech-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Tech Stack (comma-separated)</label>
+          <input
+            id="project-tech-input"
+            v-model="techStackInput"
+            type="text"
+            placeholder="e.g. Nuxt 4, Vue 3, Tailwind, TypeScript"
+            class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-sm text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+          />
+        </div>
+
         <!-- Status Selector -->
-        <div class="form-group">
-          <label>Project Status</label>
-          <div class="pill-selector" role="radiogroup" aria-label="Project Status">
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: status === 'Planned' }" 
-              @click="status = 'Planned'"
+        <div class="flex flex-col gap-1.5">
+          <label class="font-sans text-xs font-semibold text-[#F5F2EB]">Status</label>
+          <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Project Status">
+            <button
+              v-for="s in ['active', 'maintenance', 'planned', 'on-hold', 'completed']"
+              :key="s"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-xs font-mono capitalize transition-all border"
+              :class="status === s ? 'bg-[#C98A4B]/20 text-[#C98A4B] border-[#C98A4B]' : 'bg-[#09090B] text-[#756F68] border-white/[0.08] hover:text-[#F5F2EB]'"
               role="radio"
-              :aria-checked="status === 'Planned'"
+              :aria-checked="status === s"
+              @click="status = s as any"
             >
-              Planned
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice active-pill" 
-              :class="{ selected: status === 'Active' }" 
-              @click="status = 'Active'"
-              role="radio"
-              :aria-checked="status === 'Active'"
-            >
-              Active
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice on-hold-pill" 
-              :class="{ selected: status === 'On Hold' }" 
-              @click="status = 'On Hold'"
-              role="radio"
-              :aria-checked="status === 'On Hold'"
-            >
-              On Hold
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice completed-pill" 
-              :class="{ selected: status === 'Completed' }" 
-              @click="status = 'Completed'"
-              role="radio"
-              :aria-checked="status === 'Completed'"
-            >
-              Completed
+              {{ s }}
             </button>
           </div>
         </div>
 
         <!-- Priority Selector -->
-        <div class="form-group">
-          <label>Priority Level</label>
-          <div class="pill-selector" role="radiogroup" aria-label="Priority Level">
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: priority === 'Low' }" 
-              @click="priority = 'Low'"
+        <div class="flex flex-col gap-1.5">
+          <label class="font-sans text-xs font-semibold text-[#F5F2EB]">Priority</label>
+          <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Project Priority">
+            <button
+              v-for="p in ['low', 'medium', 'high', 'critical']"
+              :key="p"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-xs font-mono capitalize transition-all border"
+              :class="priority === p ? 'bg-[#C98A4B]/20 text-[#C98A4B] border-[#C98A4B]' : 'bg-[#09090B] text-[#756F68] border-white/[0.08] hover:text-[#F5F2EB]'"
               role="radio"
-              :aria-checked="priority === 'Low'"
+              :aria-checked="priority === p"
+              @click="priority = p as any"
             >
-              🟢 Low
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice" 
-              :class="{ selected: priority === 'Medium' }" 
-              @click="priority = 'Medium'"
-              role="radio"
-              :aria-checked="priority === 'Medium'"
-            >
-              🟡 Medium
-            </button>
-            <button 
-              type="button" 
-              class="pill-choice high-priority-pill" 
-              :class="{ selected: priority === 'High' }" 
-              @click="priority = 'High'"
-              role="radio"
-              :aria-checked="priority === 'High'"
-            >
-              🔴 High
+              {{ p }}
             </button>
           </div>
         </div>
 
         <!-- Timeline: Start & Target Date -->
-        <div class="form-row-2">
-          <div class="form-group">
-            <label for="start-date-input">Start Date</label>
-            <input id="start-date-input" v-model="startDate" type="date" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label for="start-date-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Start Date</label>
+            <input
+              id="start-date-input"
+              v-model="startDate"
+              type="date"
+              class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            />
           </div>
-          <div class="form-group">
-            <label for="due-date-input">Target Due Date</label>
-            <input id="due-date-input" v-model="dueDate" type="date" />
+          <div class="flex flex-col gap-1.5">
+            <label for="due-date-input" class="font-sans text-xs font-semibold text-[#F5F2EB]">Target Due Date</label>
+            <input
+              id="due-date-input"
+              v-model="dueDate"
+              type="date"
+              class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs font-mono text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            />
           </div>
         </div>
 
-        <!-- Derived Progress Explanation Callout -->
-        <div class="derived-info-box">
-          <div class="info-icon" aria-hidden="true">💡</div>
-          <div class="info-text">
-            <strong>Dynamic Derived Progress:</strong> Project progress is dynamically calculated from associated tasks (Completed Tasks / Total Tasks). You can create tasks immediately after saving this project.
-          </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="modal-actions">
-          <button type="button" class="button secondary" @click="onCancel">Cancel</button>
-          <button type="submit" class="button primary" :disabled="isSubmitting">
+        <!-- Modal Actions -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#756F68] hover:text-[#F5F2EB] transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            @click="onCancel"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-lg bg-[#C98A4B] hover:bg-[#8B6535] text-xs font-mono font-semibold text-[#09090B] transition-colors disabled:opacity-50 focus:ring-1 focus:ring-[#C98A4B] focus:outline-none"
+            :disabled="isSubmitting"
+          >
             <span v-if="isSubmitting">Creating...</span>
-            <span v-else>Create Project</span>
+            <span v-else>⊕ Create Project</span>
           </button>
         </div>
       </form>
@@ -173,14 +184,27 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'create', project: { title: string; description: string; status: string; priority: string; startDate: string; dueDate: string }): void
+  (e: 'create', project: {
+    title: string
+    description: string
+    status: 'active' | 'planned' | 'on-hold' | 'completed' | 'archived'
+    priority: 'low' | 'medium' | 'high' | 'critical'
+    startDate: string
+    dueDate: string
+    githubRepo?: string
+    deployUrl?: string
+    techStack?: string[]
+  }): void
 }>()
 
 const name = ref('')
 const description = ref('')
-const status = ref<'Planned' | 'Active' | 'On Hold' | 'Completed'>('Active')
-const priority = ref<'Low' | 'Medium' | 'High'>('High')
-const startDate = ref('2026-08-01')
+const status = ref<'active' | 'planned' | 'on-hold' | 'completed' | 'archived'>('active')
+const priority = ref<'low' | 'medium' | 'high' | 'critical'>('high')
+const githubRepo = ref('')
+const deployUrl = ref('')
+const techStackInput = ref('')
+const startDate = ref('2026-09-01')
 const dueDate = ref('2026-12-31')
 const validationError = ref('')
 const isSubmitting = ref(false)
@@ -238,6 +262,10 @@ function onSubmit() {
     return
   }
 
+  const techStack = techStackInput.value
+    ? techStackInput.value.split(',').map(s => s.trim()).filter(Boolean)
+    : []
+
   isSubmitting.value = true
   emit('create', {
     title: name.value.trim(),
@@ -245,201 +273,10 @@ function onSubmit() {
     status: status.value,
     priority: priority.value,
     startDate: startDate.value,
-    dueDate: dueDate.value
+    dueDate: dueDate.value,
+    githubRepo: githubRepo.value.trim() || undefined,
+    deployUrl: deployUrl.value.trim() || undefined,
+    techStack
   })
 }
 </script>
-
-<style scoped>
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(5, 8, 15, 0.78);
-  backdrop-filter: blur(16px);
-  z-index: 100;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.modal-card {
-  background: rgba(17, 24, 39, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-card);
-  padding: 30px;
-  width: 100%;
-  max-width: 620px;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  outline: none;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.modal-header h2 {
-  margin: 0 0 6px;
-  font-size: 1.45rem;
-  font-weight: 800;
-  color: #ffffff;
-}
-
-.modal-subtitle {
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.close-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  color: var(--text-muted);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
-}
-
-.modal-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.modal-alert {
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  color: #fca5a5;
-  padding: 10px 14px;
-  border-radius: var(--radius-input);
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-heading);
-}
-
-.required {
-  color: #f43f5e;
-}
-
-.has-error {
-  border-color: #f43f5e !important;
-  box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2) !important;
-}
-
-.form-row-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.pill-selector {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.pill-choice {
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-muted);
-  font-size: 0.84rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.pill-choice:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-heading);
-}
-
-.pill-choice.selected {
-  background: rgba(99, 102, 241, 0.2);
-  border-color: rgba(99, 102, 241, 0.6);
-  color: #c0c1ff;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
-}
-
-.pill-choice.active-pill.selected {
-  background: rgba(16, 185, 129, 0.2);
-  border-color: rgba(16, 185, 129, 0.6);
-  color: #6ee7b7;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
-}
-
-.pill-choice.on-hold-pill.selected {
-  background: rgba(245, 158, 11, 0.2);
-  border-color: rgba(245, 158, 11, 0.6);
-  color: #fde047;
-}
-
-.pill-choice.completed-pill.selected {
-  background: rgba(6, 182, 212, 0.2);
-  border-color: rgba(6, 182, 212, 0.6);
-  color: #67e8f9;
-}
-
-.derived-info-box {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 12px 14px;
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.2);
-  border-radius: var(--radius-input);
-  font-size: 0.82rem;
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
-.info-icon {
-  font-size: 1.1rem;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--glass-border);
-}
-
-@media (max-width: 600px) {
-  .form-row-2 {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

@@ -1,3 +1,5 @@
 export * from './task'
 export * from './project'
+export * from './sprint'
 export * from './stat'
+export * from './github'

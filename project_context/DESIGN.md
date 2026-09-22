@@ -1,62 +1,212 @@
-# DESIGN.md — Kondisi dan Arah UI/UX
+# DESIGN.md — Charcoal-Ochre Engineering Console Design System
 
-_Last updated: 2026-08-15. Diisi berdasarkan implementasi Polymorphism Dark Glass dan eksplorasi Stitch (Project ID: 9689375760914620032)._
+_Last updated: 2026-09-17. Migrasi dari Polymorphism Dark Glass ke Charcoal-Ochre Console._
 
 ---
 
-## 1. Design System — Polymorphism Dark Glass
+## 1. Design Philosophy
 
-Project menggunakan visual language **Dark Polymorphism / Dark Glassmorphism** pada canvas `#0B0F19` dengan token CSS terpusat di `assets/css/main.css`:
+Nexura beralih dari estetika **Polymorphism Dark Glass** (Indigo/Violet/Cyan glassmorphism) ke **Charcoal-Ochre Engineering Console** — sebuah visual language yang terinspirasi oleh terminal, engineering dashboards, dan industrial control panels.
 
-```css
---glass-bg: #0B0F19;                         /* Deep Canvas Navy */
---glass-surface: rgba(17, 24, 39, 0.75);      /* Frosted Card Surface */
---glass-border: rgba(255, 255, 255, 0.08);    /* Subtle Glass Border */
---glass-border-focus: rgba(99, 102, 241, 0.6);/* Indigo Focus Ring */
---glass-input: rgba(15, 23, 42, 0.85);        /* Tactile Glass Well */
---accent-indigo: #6366F1;                     /* Primary Accent */
---accent-cyan: #06B6D4;                       /* Secondary Accent / Progress */
---accent-violet: #A855F7;                     /* Tertiary Accent */
---color-danger: #F43F5E;                      /* Rose Error / Danger */
---color-success: #10B981;                     /* Emerald Success */
---font-family: 'Inter', system-ui, sans-serif;
+**Prinsip Visual:**
+- **Density over Decoration** — setiap piksel menyajikan informasi, bukan ornamen.
+- **Monospace for Telemetry** — semua identifier, metrics, dan data numerik menggunakan `font-mono` (JetBrains Mono).
+- **Warm Accent on Cold Surface** — ochre gold (`#C98A4B`) sebagai satu-satunya warna aksen hangat di atas permukaan charcoal dingin.
+- **Minimal Elevation** — bedakan layer dengan border hairline (`border-white/[0.06]`) bukan shadow berat.
+
+---
+
+## 2. Color Tokens (Tailwind CSS)
+
+### Primary Palette
+
+| Token | Hex | RGB | Penggunaan |
+|-------|-----|-----|-----------|
+| `canvas` | `#0B0A09` | `11, 10, 9` | Deepest background — body, page canvas |
+| `surface` | `#141210` | `20, 18, 16` | Sidebar, card surfaces, panels, inputs |
+| `surface-elevated` | `#1C1A17` | `28, 26, 23` | Hover states, elevated cards, active items |
+| `bone` | `#F5F2EB` | `245, 242, 235` | Primary text — headings, values, titles (bone-ivory) |
+| `muted` | `#756F68` | `117, 111, 104` | Secondary text — labels, timestamps, descriptions |
+| `ochre` | `#C98A4B` | `201, 138, 75` | Accent — focus rings, active nav, highlights, CTAs |
+| `ochre-dim` | `#8B6535` | `139, 101, 53` | Muted accent — inactive borders, subtle accents |
+
+### Semantic Colors
+
+| Token | Hex | Penggunaan |
+|-------|-----|-----------|
+| `status-critical` | `#EF4444` (red-500) | Critical priority, errors, destructive actions |
+| `status-high` | `#F97316` (orange-500) | High priority |
+| `status-medium` | `#EAB308` (yellow-500) | Medium priority |
+| `status-low` | `#756F68` (muted) | Low priority |
+| `status-success` | `#22C55E` (green-500) | Deployed, completed, online |
+| `status-running` | `#3B82F6` (blue-500) | In progress, running sprint |
+
+### Alpha Variants (untuk backgrounds)
+
+```
+ochre/10  → bg-[#C98A4B]/10    // active nav item background
+ochre/15  → bg-[#C98A4B]/15    // branch pill, tag backgrounds
+white/[0.06] → border-white/[0.06]  // hairline borders
+white/5   → bg-white/5         // subtle surface differentiation
 ```
 
-### Karakteristik Visual
-- **Canvas Ambien**: Background gelap dengan radial glow mesh (indigo di top-left, violet di right, cyan di bottom-right).
-- **Glass Surfaces**: Kartu semi-transparan dengan `backdrop-filter: blur(16px)` dan border highlight 1px pemantul cahaya.
-- **Left Sidebar Navigation (230px)**: Terkunci di sisi kiri pada desktop (`position: fixed; width: 230px; height: 100vh;`) dan responsif drawer di mobile.
-- **Centered Layout**: Konten utama dibatasi `max-width: 1450px; margin: 0 auto;` dengan whitespace seimbang untuk kenyamanan visual di monitor ultrawide (3440px+).
+---
+
+## 3. Typography
+
+### Font Families
+
+| Token | Stack | Penggunaan |
+|-------|-------|-----------|
+| `font-sans` | `'Inter', system-ui, -apple-system, sans-serif` | Body text, labels, descriptions |
+| `font-mono` | `'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace` | **Semua telemetry identifiers**: task IDs, metrics, clocks, branch names, stats, deltas, KPI values |
+
+### Scale
+
+| Element | Class | Size |
+|---------|-------|------|
+| Page title | `font-mono text-lg font-semibold text-bone` | 18px |
+| Section header | `font-mono text-xs tracking-wider uppercase text-muted` | 12px |
+| KPI value | `font-mono text-3xl font-bold text-bone` | 30px |
+| KPI delta | `font-mono text-xs text-ochre` | 12px |
+| Task ID | `font-mono text-xs text-muted` | 12px |
+| Task title | `font-sans text-sm font-medium text-bone` | 14px |
+| Body text | `font-sans text-sm text-muted` | 14px |
+| Navigation label | `font-sans text-sm font-medium` | 14px |
+| Clock display | `font-mono text-xs text-muted` | 12px |
 
 ---
 
-## 2. Struktur Halaman & Komponen
+## 4. Layout Specifications
 
-### Halaman Aktif
-1. **Dashboard (`/`)**:
-   - Welcome Banner dengan highlight cyan (`#38BDF8`).
-   - 4 Kartu KPI (`StatCard.vue`) dengan typography 2.4rem bold dan circular glowing icon.
-   - Action Pills Toolbar (`⊕ New Task`, `📁 Manage Projects`, `📋 Tasks Hub`, sync button, live search).
-   - Middle Analytics Grid: Task Overview SVG curve chart (`Weekly|Monthly` toggle) dan Project Status SVG dynamic donut gauge.
-   - Recent Activity Table (`ActivityTable.vue`) dengan task icon tiles (`❖`, `</>`, `🚀`) dan semantik status pills.
-2. **Projects Hub (`/projects`)**:
-   - Status Filter Tabs (`All`, `Active`, `Planned`, `On Hold`, `Completed` dengan count badges).
-   - Live search input dan sorting dropdown.
-   - Scalable 3-column project cards dengan task count, due date, dan derived progress bar.
-   - Tombol pemicu `⊕ New Project` (`AddProjectModal.vue`).
-3. **Project Detail (`/projects/[slug]`)**:
-   - Breadcrumb navigasi: `Projects / [Project Title]`.
-   - Hero metadata card dengan status & priority pills.
-   - Derived Progress metric card (68%) dan 4-stat breakdown chips.
-   - Associated project tasks table dengan inline status toggle.
-4. **Tasks Hub (`/tasks`)**:
-   - Multi-filter toolbar (Live search, Project selector, Priority selector, Status tabs, Sort).
-   - Task Management Table lengkap dengan rotasi status instan dan konfirmasi hapus.
-   - Tombol pemicu `⊕ New Task` (`AddTaskModal.vue`).
+### Sidebar
+- **Width**: Compact, `w-56` (224px) desktop / collapsible on mobile
+- **Surface**: `bg-[#141210]`
+- **Border**: `border-r border-white/[0.06]` — thin hairline right border
+- **Position**: Fixed left, full height
+- **Brand**: Top — monogram + "NEXURA" in `font-mono text-xs tracking-[0.2em] uppercase`
+- **Navigation**: 5 items — icon (20px) + label, vertical stack
+- **Active Item**: `bg-[#C98A4B]/10 text-[#C98A4B] border-l-2 border-[#C98A4B]`
+- **Inactive Item**: `text-[#756F68] hover:text-[#F5F2EB] hover:bg-white/5`
+- **Footer**: System status tile — `● Online • KV Storage`
+
+### Header Bar
+- **Height**: `h-14` (56px)
+- **Surface**: `bg-[#141210]/80 backdrop-blur-xl`
+- **Border**: `border-b border-white/[0.06]`
+- **Contents** (left to right):
+  1. Live clock — `font-mono text-xs text-muted` — UTC + WIB dual display
+  2. Active branch pill — `font-mono text-xs bg-[#C98A4B]/15 text-[#C98A4B] rounded-full px-3 py-1`
+  3. Sprint velocity KPI — `font-mono text-sm text-bone`
+  4. Search input — `bg-[#141210] border border-white/[0.08] rounded-lg focus:ring-1 focus:ring-[#C98A4B]`
+
+### Main Workspace
+- **Background**: `bg-[#0B0A09]`
+- **Padding**: `p-6`
+- **Max width**: `max-w-7xl` (1280px) centered
+- **Overflow**: `overflow-y-auto`
+
+---
+
+## 5. Component Design Specs
+
+### Telemetry Stat Card
+```
+┌─────────────────────────────────┐
+│  ACTIVE TASKS        ↑12%      │  ← font-mono text-xs text-muted (label) + text-ochre (delta)
+│  47                            │  ← font-mono text-3xl font-bold text-bone
+│  from current sprint           │  ← font-sans text-xs text-muted
+└─────────────────────────────────┘
+Surface: bg-[#141210] border border-white/[0.06] rounded-xl p-5
+```
+
+### Task Card (Kanban)
+```
+┌─────────────────────────────────┐
+│  #ENG-104                      │  ← font-mono text-xs text-muted
+│  Implement OAuth flow          │  ← text-bone font-medium text-sm
+│  ●  HIGH        vue  nuxt     │  ← priority pill + tech tags
+└─────────────────────────────────┘
+Surface: bg-[#141210] border border-white/[0.06] rounded-lg p-4
+Hover:   hover:border-[#C98A4B] hover:shadow-[0_0_12px_rgba(201,138,75,0.15)]
+```
+
+### Priority Pills
+| Priority | Dot | Background | Text |
+|----------|-----|-----------|------|
+| Critical | Pulsing red dot (animation) | `bg-red-500/15` | `text-red-400` |
+| High | Static orange dot | `bg-orange-500/15` | `text-orange-400` |
+| Medium | Static yellow dot | `bg-yellow-500/15` | `text-yellow-400` |
+| Low | Static gray dot | `bg-white/5` | `text-muted` |
+
+### Tech Stack Tags
+```
+font-mono text-[10px] bg-[#C98A4B]/10 text-[#C98A4B] rounded px-1.5 py-0.5
+```
+
+### Kanban Column
+```
+Column Header: font-mono text-xs tracking-wider uppercase text-muted + count badge
+Column Body:   bg-[#0B0A09] rounded-xl min-h-[400px] p-3 space-y-3
+Count Badge:   font-mono text-[10px] bg-white/5 text-muted rounded-full px-2 py-0.5
+```
+
+---
+
+## 6. Interaction & Animation
+
+### Focus States
+- All interactive elements: `focus:ring-1 focus:ring-[#C98A4B] focus:outline-none`
+- Search input: `focus:ring-1 focus:ring-[#C98A4B]` — 1px ochre focus ring
+
+### Hover Effects
+- Task Card: `transition-all duration-200 hover:border-[#C98A4B] hover:shadow-[0_0_12px_rgba(201,138,75,0.15)]`
+- Nav Item: `transition-colors duration-150 hover:text-bone hover:bg-white/5`
+- Button: `transition-all duration-150 hover:bg-surface-elevated`
+
+### Animations
+- **Pulse Dot** (critical priority): `@keyframes pulse-dot { 0%, 100% { opacity: 1 } 50% { opacity: 0.4 } }` — 2s infinite
+- **Clock tick**: Real-time update setiap detik via `setInterval`
+
+### Transitions
+- Page navigation: instant (0ms) via `useLazyAsyncData` + `getCachedData` payload caching
+
+---
+
+## 7. Halaman & Komponen
+
+### Navigasi (5 halaman utama)
+1. **Dashboard** (`/`) — Command Center: telemetry row + Kanban board
+2. **Active Sprints** (`/sprints`) — Sprint management & velocity tracking
+3. **Architecture Roadmap** (`/roadmap`) — Visual timeline & milestones
+4. **Code Repos** (`/repos`) — GitHub repos browser, commits, branches
+5. **System Telemetry** (`/telemetry`) — Service health & API rate limits
+
+### Halaman Pendukung (existing, redesigned)
+- **Projects Hub** (`/projects`) — Project cards dengan GitHub repo linking
+- **Project Detail** (`/projects/[slug]`) — Tabs: Overview | Tasks | GitHub | Deployments
+- **Tasks Hub** (`/tasks`) — Full task matrix & multi-dimension filters
 
 ### Modals & Dialogs
-- **`AddProjectModal.vue`**: Form pembuatan proyek baru dengan fokus trap dan penjelasan derived progress.
-- **`AddTaskModal.vue`**: Form pembuatan task baru dengan project selector combobox, priority pills, dan due date.
-- **`ConfirmDialog.vue`**: Alertdialog konfirmasi hapus destruktif dengan warning icon rose glowing dan focus trap.
+- **AddTaskModal** — Extended fields (projectSlug, priority, techTags, dueDate)
+- **AddProjectModal** — Extended fields (githubRepo, deployUrl, techStack)
+- **ConfirmDialog** — Destructive action confirmation (preserved dari Phase 3)
 
-> **Catatan Cakupan**: Halaman **Contact** telah dihapus sepenuhnya karena website ini difokuskan sebagai personal project & task management dashboard. Fitur multi-user SaaS (Team, Roles, Settings, Calendar) dikecualikan.
+---
+
+## 8. Migrasi dari Design Lama
+
+| Aspek | Polymorphism Dark Glass (Lama) | Charcoal-Ochre Console (Baru) |
+|-------|-------------------------------|-------------------------------|
+| Canvas BG | `#0B0F19` (navy) | `#0B0A09` (charcoal) |
+| Surface | `rgba(17, 24, 39, 0.75)` glass | `#141210` solid |
+| Primary Accent | `#6366F1` (indigo) | `#C98A4B` (ochre) |
+| Secondary | `#06B6D4` (cyan) + `#A855F7` (violet) | Tidak ada — single accent |
+| Text Primary | `#DFE2F1` (blue-tinted white) | `#F5F2EB` (bone-ivory) |
+| Text Muted | `#908FA0` (lavender) | `#756F68` (warm gray) |
+| Borders | `rgba(255,255,255,0.08)` + blur | `border-white/[0.06]` hairline, no blur |
+| Effects | Glass blur, radial glow mesh, neon SVG | Minimal — border glow on hover only |
+| Styling | CSS Custom Properties (~700 LOC) | Tailwind CSS utility classes |
+| Font | Inter only | Inter (prose) + JetBrains Mono (telemetry) |
+
+> **Catatan**: Seluruh aksesibilitas dari Phase 3 (focus trap, ARIA, sr-only) dipertahankan di design baru.
