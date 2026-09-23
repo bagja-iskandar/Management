@@ -1,17 +1,17 @@
-# Graph Report - Management  (2026-09-23)
+# Graph Report - Management  (2026-09-20)
 
 ## Corpus Check
-- 178 files · ~124,663 words
+- 171 files · ~121,477 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: .example 1, (none) 1, .css 1)
 
 ## Summary
-- 1656 nodes · 2160 edges · 121 communities (89 shown, 15 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 48 edges (avg confidence: 0.85)
+- 1611 nodes · 2049 edges · 112 communities (83 shown, 12 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a7ee0d7b`
+- Built from commit: `943bce03`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -111,15 +111,6 @@
 - SecurityBadge.vue
 - types/index.ts
 - ProjectCommitsPreview.vue
-- IProjectRepository
-- ITaskRepository
-- ISprintRepository
-- getSupabaseClient
-- NitroSprintRepository
-- NitroProjectRepository
-- NitroTaskRepository
-- RecentActivityTimeline.vue
-- StorageAdapter
 
 ## God Nodes (most connected - your core abstractions)
 1. `vue` - 58 edges
@@ -128,10 +119,10 @@
 4. `createGitHubClient()` - 26 edges
 5. `useGitHub()` - 18 edges
 6. `Capabilities` - 14 edges
-7. `IProjectRepository` - 13 edges
-8. `Instructions` - 13 edges
-9. `ITaskRepository` - 12 edges
-10. `SupabaseProjectRepository` - 12 edges
+7. `Instructions` - 13 edges
+8. `Code Review Excellence Implementation Playbook` - 12 edges
+9. `IProjectRepository` - 11 edges
+10. `Historical Decisions (Phase 0–5)` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `submitNewIssue()` --calls--> `createGitHubIssue()`  [EXTRACTED]
@@ -148,7 +139,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (121 total, 15 thin omitted)
+## Communities (112 total, 12 thin omitted)
 
 ### Community 0 - "WorkflowBadge.vue"
 Cohesion: 0.12
@@ -156,7 +147,7 @@ Nodes (15): badgeContainerClasses, badgeText, badgeTooltip, dotClasses, handleRe
 
 ### Community 1 - "repositories/index.ts"
 Cohesion: 0.06
-Nodes (59): zod, fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages, fetchCachedPullsAndIssues (+51 more)
+Nodes (58): zod, fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedPackages, fetchCachedPullsAndIssues, fetchCachedRepos (+50 more)
 
 ### Community 2 - "tasks.vue"
 Cohesion: 0.08
@@ -199,8 +190,8 @@ Cohesion: 0.13
 Nodes (13): close(), emit, errorMessage, isLoading, jobs, loadJobTelemetry(), onKeyDown(), props (+5 more)
 
 ### Community 12 - "store.ts"
-Cohesion: 0.24
-Nodes (17): createStorageAdapter(), createItem(), genId(), getArray(), getById(), getBySlug(), getNextTaskId(), getValue() (+9 more)
+Cohesion: 0.05
+Nodes (29): fetchCachedGlobalCommits, IProjectRepository, ProjectFilterOptions, ISprintRepository, ITaskRepository, TaskFilterOptions, NitroProjectRepository, NitroSprintRepository (+21 more)
 
 ### Community 13 - "optimizer/SKILL.md"
 Cohesion: 0.05
@@ -411,8 +402,8 @@ Cohesion: 0.16
 Nodes (15): cancelButton, descId, displayBusy, displayCancelText, displayConfirmText, displayMessage, displayTitle, emits (+7 more)
 
 ### Community 83 - "vue"
-Cohesion: 0.17
-Nodes (9): { data: telemetryData, refresh: refreshTelemetry }, ratePercent, resetMinutes, TelemetryResponse, formattedVelocity, props, props, svgClass (+1 more)
+Cohesion: 0.12
+Nodes (12): { data: telemetryData, refresh: refreshTelemetry }, ratePercent, resetMinutes, TelemetryResponse, formattedVelocity, props, ActivityTimelineItem, displayItems (+4 more)
 
 ### Community 84 - "CrossRepoTelemetryWatchdog.vue"
 Cohesion: 0.29
@@ -463,8 +454,8 @@ Cohesion: 0.33
 Nodes (6): scripts, build, dev, generate, postinstall, preview
 
 ### Community 99 - "dependencies"
-Cohesion: 0.33
-Nodes (6): dependencies, nuxt, @supabase/supabase-js, vue, vue-router, zod
+Cohesion: 0.40
+Nodes (5): dependencies, nuxt, vue, vue-router, zod
 
 ### Community 100 - "devDependencies"
 Cohesion: 0.40
@@ -482,49 +473,25 @@ Nodes (9): badgeContainerClasses, badgeIcon, badgeText, badgeTooltip, hasAlerts,
 Cohesion: 0.11
 Nodes (14): cardType, formattedValue, iconBgClass, isBlocker, isNegative, numericValue, props, subtitleText (+6 more)
 
-### Community 112 - "IProjectRepository"
-Cohesion: 0.16
-Nodes (5): IProjectRepository, ProjectFilterOptions, mapProjectRow(), mapProjectToRow(), SupabaseProjectRepository
-
-### Community 113 - "ITaskRepository"
-Cohesion: 0.18
-Nodes (5): ITaskRepository, TaskFilterOptions, mapTaskRow(), mapTaskToRow(), SupabaseTaskRepository
-
-### Community 114 - "ISprintRepository"
-Cohesion: 0.19
-Nodes (4): ISprintRepository, mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository
-
-### Community 115 - "getSupabaseClient"
-Cohesion: 0.22
-Nodes (3): @supabase/supabase-js, supabase, getSupabaseClient()
-
-### Community 116 - "NitroSprintRepository"
-Cohesion: 0.20
-Nodes (5): getProjectRepo(), getSprintRepo(), getTaskRepo(), hasSupabase(), NitroSprintRepository
-
-### Community 119 - "RecentActivityTimeline.vue"
-Cohesion: 0.50
-Nodes (3): ActivityTimelineItem, displayItems, props
-
 ## Knowledge Gaps
-- **917 isolated node(s):** `route`, `isProjectPage`, `route`, `router`, `slug` (+912 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1138 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **915 isolated node(s):** `route`, `isProjectPage`, `route`, `router`, `slug` (+910 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1134 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `TaskQueue.vue`, `AddTaskModal.vue`, `GlobalCommitsTable.vue`, `AddProjectModal.vue`, `CommitList.vue`, `WorkflowLogModal.vue`, `PackageBadge.vue`, `dashboard.vue`, `PackageModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `useSprintCalendar`, `ProjectTaskMatrix.vue`, `TaskDrawer.vue`, `ProjectCard.vue`, `DeploymentBadge.vue`, `SprintObjectiveBanner.vue`, `package.json`, `RepoActivityBadge.vue`, `ProjectsOverviewTable.vue`, `TodaysFocusCard.vue`, `ProjectNavDock.vue`, `HealthBadge.vue`, `ProjectLiveDeploymentCard.vue`, `TaskForm.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `CrossRepoTelemetryWatchdog.vue`, `PriorityTasksRadar.vue`, `WeeklyFocusSnapshot.vue`, `CompactProjectsHub.vue`, `Task`, `vue-router`, `ProjectPackageCard.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectSecurityCard.vue`, `ProjectSupabaseTab.vue`, `UpcomingDeadlinesCard.vue`, `SecurityBadge.vue`, `types/index.ts`, `RecentActivityTimeline.vue`?**
-  _High betweenness centrality (0.337) - this node is a cross-community bridge._
+- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `TaskQueue.vue`, `AddTaskModal.vue`, `GlobalCommitsTable.vue`, `AddProjectModal.vue`, `CommitList.vue`, `WorkflowLogModal.vue`, `PackageBadge.vue`, `dashboard.vue`, `PackageModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `useSprintCalendar`, `ProjectTaskMatrix.vue`, `TaskDrawer.vue`, `ProjectCard.vue`, `DeploymentBadge.vue`, `SprintObjectiveBanner.vue`, `package.json`, `RepoActivityBadge.vue`, `ProjectsOverviewTable.vue`, `TodaysFocusCard.vue`, `ProjectNavDock.vue`, `HealthBadge.vue`, `ProjectLiveDeploymentCard.vue`, `TaskForm.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `CrossRepoTelemetryWatchdog.vue`, `PriorityTasksRadar.vue`, `WeeklyFocusSnapshot.vue`, `CompactProjectsHub.vue`, `Task`, `vue-router`, `ProjectPackageCard.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectSecurityCard.vue`, `ProjectSupabaseTab.vue`, `UpcomingDeadlinesCard.vue`, `SecurityBadge.vue`, `types/index.ts`?**
+  _High betweenness centrality (0.334) - this node is a cross-community bridge._
 - **Why does `zod` connect `repositories/index.ts` to `package.json`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
-- **Why does `@supabase/supabase-js` connect `getSupabaseClient` to `package.json`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+  _High betweenness centrality (0.087) - this node is a cross-community bridge._
+- **Why does `vue-router` connect `vue-router` to `HeaderBar.vue`, `[slug].vue`, `TaskQueue.vue`, `package.json`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Are the 16 inferred relationships involving `useGitHub()` (e.g. with `createGitHubIssue()` and `fetchDeployments()`) actually correct?**
   _`useGitHub()` has 16 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `route`, `isProjectPage`, `route` to the rest of the system?**
-  _917 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _915 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `WorkflowBadge.vue` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `repositories/index.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05668934240362812 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05777491408934708 - nodes in this community are weakly interconnected._

@@ -243,8 +243,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "iprojectrepository",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -256,25 +256,25 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "projectfilteroptions",
       "source_file": "server/repositories/contracts/project.repository.ts",
       "source_location": "L3"
     },
     {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "label": "SupabaseProjectRepository",
+      "id": "server_repositories_contracts_sprint_repository_isprintrepository",
+      "label": "ISprintRepository",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
-      "norm_label": "supabaseprojectrepository",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L38"
+      "norm_label": "isprintrepository",
+      "source_file": "server/repositories/contracts/sprint.repository.ts",
+      "source_location": "L3"
     },
     {
       "id": "server_repositories_contracts_task_repository_itaskrepository",
@@ -282,8 +282,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "itaskrepository",
       "source_file": "server/repositories/contracts/task.repository.ts",
@@ -295,64 +295,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "taskfilteroptions",
       "source_file": "server/repositories/contracts/task.repository.ts",
       "source_location": "L3"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "label": "SupabaseTaskRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": "supabasetaskrepository",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L44"
-    },
-    {
-      "id": "server_repositories_contracts_sprint_repository_isprintrepository",
-      "label": "ISprintRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "isprintrepository",
-      "source_file": "server/repositories/contracts/sprint.repository.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "label": "SupabaseSprintRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "supabasesprintrepository",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L31"
-    },
-    {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository",
-      "label": "NitroSprintRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": "nitrosprintrepository",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
-      "source_location": "L11"
     },
     {
       "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository",
@@ -360,12 +308,25 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "nitroprojectrepository",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
       "source_location": "L13"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository",
+      "label": "NitroSprintRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "nitrosprintrepository",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L11"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository",
@@ -373,25 +334,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "nitrotaskrepository",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L13"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_activitytimelineitem",
-      "label": "ActivityTimelineItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "activitytimelineitem",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L58"
     },
     {
       "id": "server_utils_storage_adapter_storageadapter",
@@ -399,8 +347,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 120,
-      "community_name": "StorageAdapter",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": "storageadapter",
       "source_file": "server/utils/storage-adapter.ts",
@@ -782,6 +730,19 @@
       "norm_label": "telemetryresponse",
       "source_file": "app/pages/telemetry.vue",
       "source_location": "L241"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline_activitytimelineitem",
+      "label": "ActivityTimelineItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "activitytimelineitem",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L58"
     },
     {
       "id": "types_task_task",
@@ -1330,8 +1291,8 @@
       "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1342,8 +1303,8 @@
       "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1354,8 +1315,8 @@
       "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1366,8 +1327,8 @@
       "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1378,8 +1339,8 @@
       "label": ".findBySlug()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyslug()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1390,8 +1351,8 @@
       "label": ".slugExists()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".slugexists()",
       "source_file": "server/repositories/contracts/project.repository.ts",
@@ -1402,296 +1363,20 @@
       "label": ".update()",
       "_callable": true,
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/contracts/project.repository.ts",
       "source_location": "L13"
     },
     {
-      "id": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "label": "mapProjectRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "mapprojectrow()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_mapprojecttorow",
-      "label": "mapProjectToRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "mapprojecttorow()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L98"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L136"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L45"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L83"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyslug",
-      "label": ".findBySlug()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findbyslug()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L68"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_slugexists",
-      "label": ".slugExists()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".slugexists()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L150"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L117"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L12"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_nexttaskid",
-      "label": ".nextTaskId()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".nexttaskid()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L16"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository_itaskrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "label": "mapTaskRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": "maptaskrow()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_maptasktorow",
-      "label": "mapTaskToRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": "maptasktorow()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L103"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L150"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L51"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L82"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_nexttaskid",
-      "label": ".nextTaskId()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".nexttaskid()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L171"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L126"
-    },
-    {
       "id": "server_repositories_contracts_sprint_repository_isprintrepository_create",
       "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/contracts/sprint.repository.ts",
@@ -1702,8 +1387,8 @@
       "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/contracts/sprint.repository.ts",
@@ -1714,8 +1399,8 @@
       "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/contracts/sprint.repository.ts",
@@ -1726,8 +1411,8 @@
       "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/contracts/sprint.repository.ts",
@@ -1738,272 +1423,92 @@
       "label": ".update()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/contracts/sprint.repository.ts",
       "source_location": "L7"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "label": "mapSprintRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "mapsprintrow()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
-      "label": "mapSprintToRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "mapsprinttorow()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_create",
       "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L67"
+      "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L13"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_delete",
       "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L105"
+      "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L15"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_findall",
       "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L38"
+      "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L11"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_findbyid",
       "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L52"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L86"
-    },
-    {
-      "id": "scripts_verify_supabase_verify",
-      "label": "verify()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "verify()",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L18"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L39"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L45"
-    },
-    {
-      "id": "server_utils_supabase_getsupabaseclient",
-      "label": "getSupabaseClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "getsupabaseclient()",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_index_getprojectrepo",
-      "label": "getProjectRepo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": "getprojectrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L41"
-    },
-    {
-      "id": "server_repositories_index_getsprintrepo",
-      "label": "getSprintRepo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": "getsprintrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L50"
-    },
-    {
-      "id": "server_repositories_index_gettaskrepo",
-      "label": "getTaskRepo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": "gettaskrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "server_repositories_index_hassupabase",
-      "label": "hasSupabase()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": "hassupabase()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L24"
-    },
-    {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_file": "server/repositories/contracts/task.repository.ts",
       "source_location": "L12"
     },
     {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_findbyid",
-      "label": ".findById()",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_nexttaskid",
+      "label": ".nextTaskId()",
       "_callable": true,
       "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
-      "source_location": "L17"
+      "norm_label": ".nexttaskid()",
+      "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L16"
     },
     {
-      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_update",
+      "id": "server_repositories_contracts_task_repository_itaskrepository_update",
       "label": ".update()",
       "_callable": true,
       "_origin": "ast",
-      "community": 116,
-      "community_name": "NitroSprintRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".update()",
-      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
-      "source_location": "L25"
+      "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L14"
     },
     {
       "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_create",
       "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2014,8 +1519,8 @@
       "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2026,8 +1531,8 @@
       "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2038,8 +1543,8 @@
       "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2050,8 +1555,8 @@
       "label": ".findBySlug()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyslug()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2062,8 +1567,8 @@
       "label": ".slugExists()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".slugexists()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -2074,32 +1579,80 @@
       "label": ".update()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
       "source_location": "L46"
     },
     {
-      "id": "server_utils_store_normalizeproject",
-      "label": "normalizeProject()",
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_create",
+      "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 117,
-      "community_name": "NitroProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
-      "norm_label": "normalizeproject()",
-      "source_file": "server/utils/store.ts",
-      "source_location": "L74"
+      "norm_label": ".create()",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_delete",
+      "label": ".delete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_findall",
+      "label": ".findAll()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".findall()",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_findbyid",
+      "label": ".findById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".findbyid()",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_update",
+      "label": ".update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".update()",
+      "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
+      "source_location": "L25"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_create",
       "label": ".create()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
@@ -2110,8 +1663,8 @@
       "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
@@ -2122,8 +1675,8 @@
       "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
@@ -2134,8 +1687,8 @@
       "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
@@ -2146,8 +1699,8 @@
       "label": ".nextTaskId()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".nexttaskid()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
@@ -2158,24 +1711,12 @@
       "label": ".update()",
       "_callable": true,
       "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L59"
-    },
-    {
-      "id": "server_utils_store_normalizetask",
-      "label": "normalizeTask()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 118,
-      "community_name": "NitroTaskRepository",
-      "file_type": "code",
-      "norm_label": "normalizetask()",
-      "source_file": "server/utils/store.ts",
-      "source_location": "L40"
     },
     {
       "id": "server_utils_storage_adapter_createstorageadapter",
@@ -2188,6 +1729,30 @@
       "norm_label": "createstorageadapter()",
       "source_file": "server/utils/storage-adapter.ts",
       "source_location": "L6"
+    },
+    {
+      "id": "server_utils_storage_adapter_storageadapter_getitem",
+      "label": ".getItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".getitem()",
+      "source_file": "server/utils/storage-adapter.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "server_utils_storage_adapter_storageadapter_setitem",
+      "label": ".setItem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".setitem()",
+      "source_file": "server/utils/storage-adapter.ts",
+      "source_location": "L3"
     },
     {
       "id": "server_utils_store_createitem",
@@ -2298,6 +1863,30 @@
       "source_location": "L31"
     },
     {
+      "id": "server_utils_store_normalizeproject",
+      "label": "normalizeProject()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "normalizeproject()",
+      "source_file": "server/utils/store.ts",
+      "source_location": "L74"
+    },
+    {
+      "id": "server_utils_store_normalizetask",
+      "label": "normalizeTask()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "normalizetask()",
+      "source_file": "server/utils/store.ts",
+      "source_location": "L40"
+    },
+    {
       "id": "server_utils_store_removeitem",
       "label": "removeItem()",
       "_callable": true,
@@ -2380,30 +1969,6 @@
       "norm_label": "updateitembyslug()",
       "source_file": "server/utils/store.ts",
       "source_location": "L180"
-    },
-    {
-      "id": "server_utils_storage_adapter_storageadapter_getitem",
-      "label": ".getItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "StorageAdapter",
-      "file_type": "code",
-      "norm_label": ".getitem()",
-      "source_file": "server/utils/storage-adapter.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "server_utils_storage_adapter_storageadapter_setitem",
-      "label": ".setItem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "StorageAdapter",
-      "file_type": "code",
-      "norm_label": ".setitem()",
-      "source_file": "server/utils/storage-adapter.ts",
-      "source_location": "L3"
     },
     {
       "id": "app_pages_tasks_deletetask",
@@ -5646,28 +5211,6 @@
       "source_location": "L11"
     },
     {
-      "id": "server_api_github_global_commits_get",
-      "label": "global-commits.get.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "global-commits.get.ts",
-      "source_file": "server/api/github/global-commits.get.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_github_global_commits_get_fetchcachedglobalcommits",
-      "label": "fetchCachedGlobalCommits",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "fetchcachedglobalcommits",
-      "source_file": "server/api/github/global-commits.get.ts",
-      "source_location": "L6"
-    },
-    {
       "id": "server_api_github_packages_get",
       "label": "packages.get.ts",
       "_origin": "ast",
@@ -5995,7 +5538,7 @@
       "file_type": "code",
       "norm_label": "projectrepository",
       "source_file": "server/repositories/index.ts",
-      "source_location": "L68"
+      "source_location": "L12"
     },
     {
       "id": "server_repositories_index_sprintrepository",
@@ -6006,7 +5549,7 @@
       "file_type": "code",
       "norm_label": "sprintrepository",
       "source_file": "server/repositories/index.ts",
-      "source_location": "L76"
+      "source_location": "L13"
     },
     {
       "id": "server_repositories_index_taskrepository",
@@ -6017,7 +5560,7 @@
       "file_type": "code",
       "norm_label": "taskrepository",
       "source_file": "server/repositories/index.ts",
-      "source_location": "L60"
+      "source_location": "L11"
     },
     {
       "id": "server_schemas_helper",
@@ -6292,7 +5835,7 @@
       "file_type": "concept",
       "norm_label": "zod",
       "source_file": "package.json",
-      "source_location": "L17"
+      "source_location": "L16"
     },
     {
       "id": "components_commitlist",
@@ -6391,7 +5934,7 @@
       "file_type": "code",
       "norm_label": "devdependencies",
       "source_file": "package.json",
-      "source_location": "L19"
+      "source_location": "L18"
     },
     {
       "id": "package_devdependencies_autoprefixer",
@@ -6402,7 +5945,7 @@
       "file_type": "code",
       "norm_label": "autoprefixer",
       "source_file": "package.json",
-      "source_location": "L21"
+      "source_location": "L20"
     },
     {
       "id": "package_devdependencies_nuxtjs_tailwindcss",
@@ -6413,7 +5956,7 @@
       "file_type": "code",
       "norm_label": "@nuxtjs/tailwindcss",
       "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L19"
     },
     {
       "id": "package_devdependencies_postcss",
@@ -6424,7 +5967,7 @@
       "file_type": "code",
       "norm_label": "postcss",
       "source_file": "package.json",
-      "source_location": "L22"
+      "source_location": "L21"
     },
     {
       "id": "package_devdependencies_tailwindcss",
@@ -6435,7 +5978,7 @@
       "file_type": "code",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L23"
+      "source_location": "L22"
     },
     {
       "id": "components_dashboard_upcomingdeadlinescard",
@@ -6911,169 +6454,26 @@
       "source_location": "L1"
     },
     {
-      "id": "server_repositories_contracts_project_repository",
-      "label": "project.repository.ts",
+      "id": "server_api_github_global_commits_get",
+      "label": "global-commits.get.ts",
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
-      "norm_label": "project.repository.ts",
-      "source_file": "server/repositories/contracts/project.repository.ts",
+      "norm_label": "global-commits.get.ts",
+      "source_file": "server/api/github/global-commits.get.ts",
       "source_location": "L1"
     },
     {
-      "id": "server_repositories_supabase_supabase_project_repository",
-      "label": "supabase-project.repository.ts",
+      "id": "server_api_github_global_commits_get_fetchcachedglobalcommits",
+      "label": "fetchCachedGlobalCommits",
       "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
+      "community": 12,
+      "community_name": "store.ts",
       "file_type": "code",
-      "norm_label": "supabase-project.repository.ts",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_contracts_task_repository",
-      "label": "task.repository.ts",
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": "task.repository.ts",
-      "source_file": "server/repositories/contracts/task.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository",
-      "label": "supabase-task.repository.ts",
-      "_origin": "ast",
-      "community": 113,
-      "community_name": "ITaskRepository",
-      "file_type": "code",
-      "norm_label": "supabase-task.repository.ts",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_contracts_index",
-      "label": "contracts/index.ts",
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "contracts/index.ts",
-      "source_file": "server/repositories/contracts/index.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_contracts_sprint_repository",
-      "label": "sprint.repository.ts",
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "sprint.repository.ts",
-      "source_file": "server/repositories/contracts/sprint.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository",
-      "label": "supabase-sprint.repository.ts",
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": "supabase-sprint.repository.ts",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_verify_supabase",
-      "label": "verify-supabase.mjs",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "verify-supabase.mjs",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_verify_supabase_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L16"
-    },
-    {
-      "id": "server_plugins_supabase_sync",
-      "label": "supabase-sync.ts",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "supabase-sync.ts",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_utils_supabase",
-      "label": "supabase.ts",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "supabase.ts",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "ref_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "getSupabaseClient",
-      "file_type": "concept",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline",
-      "label": "RecentActivityTimeline.vue",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "recentactivitytimeline.vue",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_displayitems",
-      "label": "displayItems",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "displayitems",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L70"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L66"
+      "norm_label": "fetchcachedglobalcommits",
+      "source_file": "server/api/github/global-commits.get.ts",
+      "source_location": "L6"
     },
     {
       "id": "server_middleware_visit",
@@ -7095,6 +6495,50 @@
       "file_type": "code",
       "norm_label": "seed.ts",
       "source_file": "server/plugins/seed.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_contracts_index",
+      "label": "contracts/index.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "contracts/index.ts",
+      "source_file": "server/repositories/contracts/index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_contracts_project_repository",
+      "label": "project.repository.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "project.repository.ts",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_contracts_sprint_repository",
+      "label": "sprint.repository.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "sprint.repository.ts",
+      "source_file": "server/repositories/contracts/sprint.repository.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_contracts_task_repository",
+      "label": "task.repository.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "task.repository.ts",
+      "source_file": "server/repositories/contracts/task.repository.ts",
       "source_location": "L1"
     },
     {
@@ -17049,7 +16493,7 @@
       "file_type": "concept",
       "norm_label": "autoprefixer",
       "source_file": "package.json",
-      "source_location": "L21"
+      "source_location": "L20"
     },
     {
       "id": "ref_nuxt",
@@ -17060,7 +16504,7 @@
       "file_type": "concept",
       "norm_label": "nuxt",
       "source_file": "package.json",
-      "source_location": "L14"
+      "source_location": "L13"
     },
     {
       "id": "ref_nuxtjs_tailwindcss",
@@ -17071,7 +16515,7 @@
       "file_type": "concept",
       "norm_label": "@nuxtjs/tailwindcss",
       "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L19"
     },
     {
       "id": "ref_postcss",
@@ -17082,7 +16526,7 @@
       "file_type": "concept",
       "norm_label": "postcss",
       "source_file": "package.json",
-      "source_location": "L22"
+      "source_location": "L21"
     },
     {
       "id": "ref_tailwindcss",
@@ -17093,7 +16537,7 @@
       "file_type": "concept",
       "norm_label": "tailwindcss",
       "source_file": "package.json",
-      "source_location": "L23"
+      "source_location": "L22"
     },
     {
       "id": "components_repoactivitybadge",
@@ -18108,6 +17552,39 @@
       "source_location": "L92"
     },
     {
+      "id": "components_dashboard_recentactivitytimeline",
+      "label": "RecentActivityTimeline.vue",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "recentactivitytimeline.vue",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline_displayitems",
+      "label": "displayItems",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "displayitems",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L70"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L66"
+    },
+    {
       "id": "components_iconarrowupright",
       "label": "IconArrowUpRight.vue",
       "_origin": "ast",
@@ -18149,7 +17626,7 @@
       "file_type": "concept",
       "norm_label": "vue",
       "source_file": "package.json",
-      "source_location": "L15"
+      "source_location": "L14"
     },
     {
       "id": "components_dashboard_crossrepotelemetrywatchdog",
@@ -18765,7 +18242,7 @@
       "file_type": "concept",
       "norm_label": "vue-router",
       "source_file": "package.json",
-      "source_location": "L16"
+      "source_location": "L15"
     },
     {
       "id": "components_project_projectpackagecard",
@@ -19216,17 +18693,6 @@
       "file_type": "code",
       "norm_label": "nuxt",
       "source_file": "package.json",
-      "source_location": "L14"
-    },
-    {
-      "id": "package_dependencies_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
       "source_location": "L13"
     },
     {
@@ -19238,7 +18704,7 @@
       "file_type": "code",
       "norm_label": "vue",
       "source_file": "package.json",
-      "source_location": "L15"
+      "source_location": "L14"
     },
     {
       "id": "package_dependencies_vue_router",
@@ -19249,7 +18715,7 @@
       "file_type": "code",
       "norm_label": "vue-router",
       "source_file": "package.json",
-      "source_location": "L16"
+      "source_location": "L15"
     },
     {
       "id": "package_dependencies_zod",
@@ -19260,7 +18726,7 @@
       "file_type": "code",
       "norm_label": "zod",
       "source_file": "package.json",
-      "source_location": "L17"
+      "source_location": "L16"
     }
   ],
   "links": [
@@ -20525,126 +19991,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_repositories_index_getprojectrepo",
-      "target": "server_repositories_index_hassupabase",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L42",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_getprojectrepo",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L43",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_getprojectrepo",
-      "target": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L46",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_getsprintrepo",
-      "target": "server_repositories_index_hassupabase",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_getsprintrepo",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L52",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_getsprintrepo",
-      "target": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L55",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_gettaskrepo",
-      "target": "server_repositories_index_hassupabase",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L33",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_gettaskrepo",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L34",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_gettaskrepo",
-      "target": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index_hassupabase",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L26",
-      "weight": 1.0
-    },
-    {
       "source": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_create",
       "target": "server_utils_store_normalizeproject",
       "relation": "calls",
@@ -20786,318 +20132,6 @@
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L61",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L40",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L114",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojecttorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L99",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_delete",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_delete",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L137",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyid",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L95",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyslug",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L80",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojecttorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L118",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L121",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L133",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L33",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L68",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L83",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L106",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L64",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L102",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L87",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L90",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L46",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_nexttaskid",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L104",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
-      "target": "server_repositories_supabase_supabase_task_repository_maptasktorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L105",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
-      "target": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L123",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L155",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findbyid",
-      "target": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L100",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "target": "server_repositories_supabase_supabase_task_repository_maptasktorow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L131",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L134",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "target": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -21541,7 +20575,7 @@
       "confidence_score": 1.0,
       "context": "export",
       "source_file": "server/repositories/index.ts",
-      "source_location": "L12",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -22254,7 +21288,7 @@
     },
     {
       "source": "package",
-      "target": "ref_supabase_supabase_js",
+      "target": "ref_nuxt",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -22266,7 +21300,7 @@
     },
     {
       "source": "package",
-      "target": "ref_nuxt",
+      "target": "ref_vue",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -22278,7 +21312,7 @@
     },
     {
       "source": "package",
-      "target": "ref_vue",
+      "target": "ref_vue_router",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -22290,7 +21324,7 @@
     },
     {
       "source": "package",
-      "target": "ref_vue_router",
+      "target": "ref_zod",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -22302,18 +21336,6 @@
     },
     {
       "source": "package",
-      "target": "ref_zod",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "package.json",
-      "source_location": "L17",
-      "weight": 1.0
-    },
-    {
-      "source": "package",
       "target": "ref_nuxtjs_tailwindcss",
       "relation": "imports",
       "_origin": "ast",
@@ -22321,7 +21343,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -22333,7 +21355,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -22345,7 +21367,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -22357,7 +21379,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -23609,30 +22631,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_plugins_supabase_sync",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_plugins_supabase_sync",
-      "target": "server_utils_store_getarray",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
       "source": "server_repositories_index",
       "target": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository",
       "relation": "imports",
@@ -23642,18 +22640,6 @@
       "context": "import",
       "source_file": "server/repositories/index.ts",
       "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -23682,7 +22668,7 @@
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
+      "target": "server_repositories_contracts_task_repository_itaskrepository",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -23694,7 +22680,7 @@
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
+      "target": "server_repositories_contracts_project_repository_iprojectrepository",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -23706,42 +22692,6 @@
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_contracts_task_repository_itaskrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_contracts_project_repository_iprojectrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
       "target": "server_repositories_contracts_sprint_repository_isprintrepository",
       "relation": "imports",
       "_origin": "ast",
@@ -23749,7 +22699,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "server/repositories/index.ts",
-      "source_location": "L9",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -24037,102 +22987,6 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_contracts_project_repository_iprojectrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_contracts_project_repository_projectfilteroptions",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_repositories_contracts_sprint_repository_isprintrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_contracts_task_repository_itaskrepository",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_contracts_task_repository_taskfilteroptions",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
       "source_location": "L3",
       "weight": 1.0
     },
@@ -25627,18 +24481,6 @@
       "weight": 1.0
     },
     {
-      "source": "scripts_verify_supabase",
-      "target": "ref_supabase_supabase_js",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
       "source": "server_api_activities_get",
       "target": "server_repositories_index",
       "relation": "imports_from",
@@ -26695,30 +25537,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_plugins_supabase_sync",
-      "target": "server_utils_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_plugins_supabase_sync",
-      "target": "server_utils_store",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
       "source": "server_repositories_index",
       "target": "server_repositories_nitro_nitro_task_repository",
       "relation": "imports_from",
@@ -26728,18 +25546,6 @@
       "context": "import",
       "source_file": "server/repositories/index.ts",
       "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_utils_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -26768,7 +25574,7 @@
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_task_repository",
+      "target": "server_repositories_contracts_task_repository",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -26776,11 +25582,12 @@
       "context": "import",
       "source_file": "server/repositories/index.ts",
       "source_location": "L4",
+      "type_only": true,
       "weight": 1.0
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_project_repository",
+      "target": "server_repositories_contracts_project_repository",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -26788,11 +25595,12 @@
       "context": "import",
       "source_file": "server/repositories/index.ts",
       "source_location": "L5",
+      "type_only": true,
       "weight": 1.0
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_supabase_supabase_sprint_repository",
+      "target": "server_repositories_contracts_sprint_repository",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -26800,44 +25608,6 @@
       "context": "import",
       "source_file": "server/repositories/index.ts",
       "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_contracts_task_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L7",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_contracts_project_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L8",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_contracts_sprint_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L9",
       "type_only": true,
       "weight": 1.0
     },
@@ -26913,81 +25683,6 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_contracts_project_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L1",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_utils_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_repositories_contracts_sprint_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L1",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_utils_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_contracts_task_repository",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L1",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_utils_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
       "source_location": "L3",
       "weight": 1.0
     },
@@ -27077,18 +25772,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_utils_supabase",
-      "target": "ref_supabase_supabase_js",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
       "source": "server_utils_validation",
       "target": "server_utils_errors",
       "relation": "imports_from",
@@ -27138,30 +25821,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findall",
-      "target": "server_repositories_contracts_project_repository_projectfilteroptions",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findall",
-      "target": "server_repositories_contracts_task_repository_taskfilteroptions",
-      "relation": "references",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "parameter_type",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
       "source": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository",
       "target": "server_repositories_contracts_project_repository_iprojectrepository",
       "relation": "implements",
@@ -27195,42 +25854,6 @@
       "context": "type",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_contracts_project_repository_iprojectrepository",
-      "relation": "implements",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "type",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_contracts_sprint_repository_isprintrepository",
-      "relation": "implements",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "type",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_contracts_task_repository_itaskrepository",
-      "relation": "implements",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "type",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -36140,7 +34763,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L19",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -36189,7 +34812,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_supabase_supabase_js",
+      "target": "package_dependencies_nuxt",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36200,7 +34823,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_nuxt",
+      "target": "package_dependencies_vue",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36211,7 +34834,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_vue",
+      "target": "package_dependencies_vue_router",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -36222,24 +34845,13 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_vue_router",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "package.json",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "package_dependencies",
       "target": "package_dependencies_zod",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -36250,7 +34862,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L20",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -36261,7 +34873,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L21",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -36272,7 +34884,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -36283,7 +34895,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -38300,28 +36912,6 @@
       "weight": 1.0
     },
     {
-      "source": "scripts_verify_supabase",
-      "target": "scripts_verify_supabase_supabase",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_verify_supabase",
-      "target": "scripts_verify_supabase_verify",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L18",
-      "weight": 1.0
-    },
-    {
       "source": "server_api_github_branches_get",
       "target": "server_api_github_branches_get_fetchcachedbranches",
       "relation": "contains",
@@ -38532,57 +37122,13 @@
     },
     {
       "source": "server_repositories_index",
-      "target": "server_repositories_index_hassupabase",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L24",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_index_gettaskrepo",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L32",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_index_getprojectrepo",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
-      "target": "server_repositories_index_getsprintrepo",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L50",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_index",
       "target": "server_repositories_index_taskrepository",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/index.ts",
-      "source_location": "L60",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -38593,7 +37139,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/index.ts",
-      "source_location": "L68",
+      "source_location": "L12",
       "weight": 1.0
     },
     {
@@ -38604,7 +37150,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/index.ts",
-      "source_location": "L76",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -38638,105 +37184,6 @@
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojecttorow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L23",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_supabase_supabase_task_repository_maptasktorow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L26",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository",
-      "target": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -39287,17 +37734,6 @@
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
       "source_location": "L92",
-      "weight": 1.0
-    },
-    {
-      "source": "server_utils_supabase",
-      "target": "server_utils_supabase_getsupabaseclient",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -42920,237 +41356,6 @@
       "weight": 1.0
     },
     {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_update",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L117",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_delete",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L136",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_slugexists",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L150",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L39",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findall",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyslug",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L68",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findbyid",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L83",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
-      "target": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L98",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L105",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L32",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L52",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L67",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "target": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L86",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L103",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L126",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L150",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_nexttaskid",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L171",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findall",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository",
-      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findbyid",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L82",
-      "weight": 1.0
-    },
-    {
       "source": "server_utils_storage_adapter_storageadapter",
       "target": "server_utils_storage_adapter_storageadapter_getitem",
       "relation": "method",
@@ -43253,42 +41458,6 @@
       "context": "argument",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
       "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_findall",
-      "target": "server_repositories_supabase_supabase_project_repository_mapprojectrow",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L65",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
-      "target": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L49",
-      "weight": 1.0
-    },
-    {
-      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findall",
-      "target": "server_repositories_supabase_supabase_task_repository_maptaskrow",
-      "relation": "indirect_call",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "context": "argument",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -43761,5 +41930,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a7ee0d7b313b79c65b8726139e7b87f5a10d404e"
+  "built_at_commit": "943bce03ccada6e764eaa5bffa3af191dfbd1bd5"
 }

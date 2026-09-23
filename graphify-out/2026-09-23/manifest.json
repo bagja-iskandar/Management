@@ -102,9 +102,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790167305.087287,
-    "seen": 1790169726.3439977,
-    "ast_hash": "8c6fb75dfd08ae1683d10a7d3eebff53",
+    "mtime": 1789910813.1635742,
+    "seen": 1789911544.546512,
+    "ast_hash": "050b8fdb7051c18af0bccb2afdf4156e",
     "semantic_hash": ""
   },
   "server/api/activities.get.ts": {
@@ -984,9 +984,9 @@
     "semantic_hash": ""
   },
   "server/repositories/index.ts": {
-    "mtime": 1790168760.7144694,
-    "seen": 1790169726.3522155,
-    "ast_hash": "1e3d9d5044386ed59c560fa079e44a31",
+    "mtime": 1789910916.5270505,
+    "seen": 1789911544.546641,
+    "ast_hash": "c2aa89bc6c76e0d1000c89e2ca9ef621",
     "semantic_hash": ""
   },
   "server/repositories/nitro/nitro-project.repository.ts": {
@@ -1035,42 +1035,6 @@
     "mtime": 1789910886.2147756,
     "seen": 1789911544.5466783,
     "ast_hash": "720a52c7211de22ee261938354f9bd25",
-    "semantic_hash": ""
-  },
-  "scripts/verify-supabase.mjs": {
-    "mtime": 1790169669.8823504,
-    "seen": 1790169726.3440013,
-    "ast_hash": "f1e82e879c3b786c5916ecfd61d220a1",
-    "semantic_hash": ""
-  },
-  "server/plugins/supabase-sync.ts": {
-    "mtime": 1790168774.4082477,
-    "seen": 1790169726.3511915,
-    "ast_hash": "dd6ef84e7581d3d892bfae4651de60bc",
-    "semantic_hash": ""
-  },
-  "server/repositories/supabase/supabase-project.repository.ts": {
-    "mtime": 1790168694.0462594,
-    "seen": 1790169726.353294,
-    "ast_hash": "af78191e23eb2a7898f6d57e150b54c4",
-    "semantic_hash": ""
-  },
-  "server/repositories/supabase/supabase-sprint.repository.ts": {
-    "mtime": 1790168701.4268215,
-    "seen": 1790169726.3532975,
-    "ast_hash": "56cc217b836d5dfeef41c15a339f8aa1",
-    "semantic_hash": ""
-  },
-  "server/repositories/supabase/supabase-task.repository.ts": {
-    "mtime": 1790168738.2161255,
-    "seen": 1790169726.3532991,
-    "ast_hash": "7f77d9373ba91b98bc475ebac8c186ff",
-    "semantic_hash": ""
-  },
-  "server/utils/supabase.ts": {
-    "mtime": 1790168683.4075685,
-    "seen": 1790169726.3557925,
-    "ast_hash": "94856a870a74f18856dc876a5e6d9d32",
     "semantic_hash": ""
   }
 }

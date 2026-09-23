@@ -110,14 +110,5 @@
   "108": "ProjectSecurityFeed.vue",
   "109": "ProjectHeroHeader.vue",
   "110": "SprintHeader.vue",
-  "111": "WeeklyMetricsBento.vue",
-  "112": "IProjectRepository",
-  "113": "ITaskRepository",
-  "114": "ISprintRepository",
-  "115": "getSupabaseClient",
-  "116": "NitroSprintRepository",
-  "117": "NitroProjectRepository",
-  "118": "NitroTaskRepository",
-  "119": "RecentActivityTimeline.vue",
-  "120": "StorageAdapter"
+  "111": "WeeklyMetricsBento.vue"
 }
