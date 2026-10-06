@@ -2,8 +2,7 @@ import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
 import { readJsonBody, requireString, optionalString, validateStringArray } from '../../utils/validation'
-import { getById, updateItem } from '../../utils/store'
-import type { Task } from '~/types'
+import { taskRepository } from '../../repositories'
 
 export default withApiHandler(async (event) => {
   const body = await readJsonBody<{
@@ -52,12 +51,13 @@ export default withApiHandler(async (event) => {
   })
 
   if (taskId) {
-    const task = await getById<Task>('tasks', taskId)
-    if (task) {
-      await updateItem<Task>('tasks', task.id, {
+    try {
+      await taskRepository.update(taskId, {
         githubIssueUrl: createdIssue.html_url,
         githubIssueNumber: createdIssue.number
       })
+    } catch (err) {
+      console.error('[create-issue] Failed to update task with issue info:', err)
     }
   }
 

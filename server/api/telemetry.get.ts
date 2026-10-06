@@ -1,6 +1,7 @@
 import { taskRepository, projectRepository, sprintRepository } from '../repositories'
 import { withApiHandler } from '../utils/handler'
 import { githubFetch } from '../utils/github'
+import { getSupabaseClient } from '../utils/supabase'
 
 export default withApiHandler(async () => {
   const config = useRuntimeConfig()
@@ -40,16 +41,17 @@ export default withApiHandler(async () => {
   }
 
   // 3. Supabase status
-  const supabaseConfigured = Boolean(config.supabaseUrl && config.supabaseKey)
+  const supabaseClient = getSupabaseClient()
+  const supabaseConfigured = Boolean(supabaseClient)
 
   // 4. Vercel status
   const vercelConfigured = Boolean(config.vercelToken)
 
   return {
     storage: {
-      provider: 'Nitro KV (Local)',
+      provider: supabaseConfigured ? 'Supabase PostgreSQL (Cloud)' : 'Nitro KV (Local)',
       connected: true,
-      path: '.data/kv/',
+      path: supabaseConfigured ? 'Remote PostgreSQL' : '.data/kv/',
       counts: {
         tasks: tasks.length,
         projects: projects.length,

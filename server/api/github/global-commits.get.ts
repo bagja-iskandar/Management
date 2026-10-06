@@ -1,6 +1,6 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
-import { getArray, normalizeProject } from '../../utils/store'
+import { projectRepository } from '../../repositories'
 import type { GitHubCommitItem, Project } from '~/types'
 
 const fetchCachedGlobalCommits = defineCachedFunction(
@@ -66,8 +66,7 @@ export default withApiHandler(async (event): Promise<GitHubCommitItem[]> => {
     const fullRepo = repoParam.includes('/') ? repoParam : `${defaultOwner}/${repoParam}`
     repos = [fullRepo]
   } else {
-    const rawProjects = await getArray('projects')
-    const projects = rawProjects.map(normalizeProject)
+    const projects = await projectRepository.findAll()
     const projectRepos = projects
       .map((p: Project) => p.githubRepo?.trim())
       .filter((r): r is string => Boolean(r))

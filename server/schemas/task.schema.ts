@@ -16,22 +16,30 @@ export const taskStatusSchema = z.preprocess((val) => {
 
 export const taskPrioritySchema = z.enum(['low', 'medium', 'high', 'critical'])
 
-export const createTaskSchema = z.object({
+const baseTaskFields = {
   name: z.string().trim().min(1, 'Task name is required'),
   projectSlug: z.string().trim().optional(),
   description: z.string().trim().optional(),
-  status: taskStatusSchema.default('in_queue'),
-  priority: taskPrioritySchema.default('medium'),
-  techTags: z.array(z.string().trim().min(1)).default([]),
+  status: taskStatusSchema,
+  priority: taskPrioritySchema,
+  techTags: z.array(z.string().trim().min(1)),
   dueDate: z.string().trim().optional(),
   sprintId: z.string().trim().optional(),
-  date: z.string().trim().default(() => new Date().toISOString().slice(0, 10)),
+  date: z.string().trim(),
   githubIssueUrl: z.string().trim().optional(),
   githubIssueNumber: z.coerce.number().optional(),
   githubPrUrl: z.string().trim().optional()
+}
+
+export const createTaskSchema = z.object({
+  ...baseTaskFields,
+  status: taskStatusSchema.default('in_queue'),
+  priority: taskPrioritySchema.default('medium'),
+  techTags: z.array(z.string().trim().min(1)).default([]),
+  date: z.string().trim().default(() => new Date().toISOString().slice(0, 10))
 })
 
-export const updateTaskSchema = createTaskSchema.partial()
+export const updateTaskSchema = z.object(baseTaskFields).partial()
 
 export const taskQuerySchema = z.object({
   project: z.string().trim().optional(),

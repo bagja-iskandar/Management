@@ -21,6 +21,14 @@ export function useSprints() {
     return created
   }
 
+  async function getSprint(id: string) {
+    try {
+      return await $fetch<Sprint>(`/api/sprints/${encodeURIComponent(id)}`)
+    } catch {
+      return null
+    }
+  }
+
   async function updateSprint(id: string, patch: Partial<Sprint>) {
     const updated = await $fetch<Sprint>(`/api/sprints/${id}`, { method: 'PUT', body: patch })
     try {
@@ -29,5 +37,13 @@ export function useSprints() {
     return updated
   }
 
-  return { getSprints, createSprint, updateSprint }
+  async function deleteSprint(id: string) {
+    const res = await $fetch(`/api/sprints/${id}`, { method: 'DELETE' })
+    try {
+      refreshNuxtData(['sprints-list', 'tasks-page', 'project-tasks'])
+    } catch {}
+    return res
+  }
+
+  return { getSprints, getSprint, createSprint, updateSprint, deleteSprint }
 }

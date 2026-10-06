@@ -6,8 +6,11 @@ export function useProjects() {
   }
 
   async function getProject(slug: string) {
-    const list = await getProjects()
-    return list.find((p) => p.slug === slug) || null
+    try {
+      return await $fetch<Project>(`/api/projects/${encodeURIComponent(slug)}`)
+    } catch {
+      return null
+    }
   }
 
   async function createProject(payload: Partial<Project> & { slug?: string; title: string }) {
