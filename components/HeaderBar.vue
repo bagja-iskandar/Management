@@ -53,13 +53,13 @@
             <NuxtLink
               v-if="item.to && index < breadcrumbs.length - 1"
               :to="item.to"
-              class="hover:text-[#F5F2EB] hover:underline transition-colors truncate max-w-[110px]"
+              class="hover:text-[#F5F2EB] hover:underline transition-colors truncate max-w-[110px] md:max-w-[160px]"
             >
               {{ item.label }}
             </NuxtLink>
             <span
               v-else
-              class="text-[#F5F2EB] font-bold truncate max-w-[140px]"
+              class="text-[#F5F2EB] font-bold truncate max-w-[140px] md:max-w-[220px] lg:max-w-[320px]"
             >
               {{ item.label }}
             </span>

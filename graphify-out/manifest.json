@@ -408,9 +408,9 @@
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1791295592.51001,
-    "seen": 1791296656.5796647,
-    "ast_hash": "bdce0793f70c2b11bdbd6fdfbb6727d9",
+    "mtime": 1791298053.6512105,
+    "seen": 1791298133.617033,
+    "ast_hash": "5c619e9a65a12b6a0cab1f5576083cf1",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
@@ -840,9 +840,9 @@
     "semantic_hash": ""
   },
   "components/kanban/KanbanToolbar.vue": {
-    "mtime": 1789911072.2628477,
-    "seen": 1789911544.546399,
-    "ast_hash": "e4ce5cbe3ea0f7033d6112c2e264d933",
+    "mtime": 1791297971.7457218,
+    "seen": 1791298133.6264772,
+    "ast_hash": "4527e45afeddb98fa64d5882f360f42c",
     "semantic_hash": ""
   },
   "components/project/ProjectCommitsPreview.vue": {
