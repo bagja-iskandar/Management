@@ -43,8 +43,8 @@ export const updateTaskSchema = z.object(baseTaskFields).partial()
 
 export const taskQuerySchema = z.object({
   project: z.string().trim().optional(),
-  priority: z.string().trim().optional(),
-  status: z.string().trim().optional(),
+  priority: taskPrioritySchema.optional(),
+  status: taskStatusSchema.optional(),
   sprintId: z.string().trim().optional()
 })
 

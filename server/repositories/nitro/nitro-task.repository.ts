@@ -2,6 +2,7 @@ import type { ITaskRepository, TaskFilterOptions } from '../contracts/task.repos
 import type { Task } from '~/types'
 import {
   getArray,
+  setArray,
   getById,
   createItem,
   updateItem,
@@ -62,7 +63,33 @@ export class NitroTaskRepository implements ITaskRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    return await removeItem('tasks', id)
+    const existing = await this.findById(id)
+    if (!existing) return false
+
+    const removed = await removeItem('tasks', id)
+    if (removed) {
+      try {
+        const sprints = await getArray<any>('sprints')
+        let sprintChanged = false
+        const updatedSprints = sprints.map((s) => {
+          if (!Array.isArray(s.taskIds)) return s
+          const filtered = s.taskIds.filter(
+            (tId: string) => tId !== existing.id && tId !== existing.taskId
+          )
+          if (filtered.length !== s.taskIds.length) {
+            sprintChanged = true
+            return { ...s, taskIds: filtered, updatedAt: new Date().toISOString() }
+          }
+          return s
+        })
+        if (sprintChanged) {
+          await setArray('sprints', updatedSprints)
+        }
+      } catch (err) {
+        console.warn('[NitroTaskRepository.delete] Sprint cleanup warning:', err)
+      }
+    }
+    return removed
   }
 
   async nextTaskId(): Promise<string> {

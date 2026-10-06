@@ -30,11 +30,30 @@ export function genId() {
 
 const normalizeId = (value: string | number) => String(value)
 
+let taskIdSeqMutex = Promise.resolve()
+
 export async function getNextTaskId(): Promise<string> {
-  const current = (await getValue<number>('task-seq')) ?? 0
-  const next = current + 1
-  await setValue('task-seq', next)
-  return 'ENG-' + String(next).padStart(3, '0')
+  return new Promise((resolve, reject) => {
+    taskIdSeqMutex = taskIdSeqMutex.then(async () => {
+      try {
+        const tasks = await getArray<Task>('tasks')
+        let maxNum = 0
+        for (const t of tasks) {
+          const match = String(t.taskId || '').match(/(\d+)/)
+          if (match) {
+            const num = parseInt(match[1], 10)
+            if (num > maxNum) maxNum = num
+          }
+        }
+        const currentSeq = (await getValue<number>('task-seq')) ?? 0
+        const next = Math.max(maxNum, currentSeq) + 1
+        await setValue('task-seq', next)
+        resolve('ENG-' + String(next).padStart(3, '0'))
+      } catch (e) {
+        reject(e)
+      }
+    })
+  })
 }
 
 export function normalizeTask(task: any): Task {

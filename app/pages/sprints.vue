@@ -126,19 +126,20 @@ const activeSprint = computed<Sprint | undefined>(() => {
   const mondayIso = toIsoDate(currentMonday.value)
   const sundayIso = toIsoDate(currentSunday.value)
 
+  // Prioritas 1: Cocokkan rentang tanggal minggu yang sedang dilihat
   const dateMatch = list.find((s) => {
     if (!s.startDate || !s.endDate) return false
     return s.startDate <= sundayIso && s.endDate >= mondayIso
   })
   if (dateMatch) return dateMatch
 
+  // Prioritas 2: Cocokkan label Week
   const nameMatch = list.find((s) => s.name?.includes(`Week ${weekNum.value}`))
   if (nameMatch) return nameMatch
 
+  // Prioritas 3: Hanya jika di Current Week, cari yang berstatus active
   if (weekOffset.value === 0) {
-    const active = list.find((s) => s.status === 'active')
-    if (active) return active
-    return list[0]
+    return list.find((s) => s.status === 'active')
   }
 
   return undefined
@@ -146,25 +147,16 @@ const activeSprint = computed<Sprint | undefined>(() => {
 
 const activeWeekTasks = computed<Task[]>(() => {
   const allTasks = tasks.value ?? []
-  if (!allTasks.length) return []
+  if (!allTasks.length || !activeSprint.value) return []
 
-  const mondayIso = toIsoDate(currentMonday.value)
-  const sundayIso = toIsoDate(currentSunday.value)
+  const sId = activeSprint.value.id
+  const taskIds = new Set(activeSprint.value.taskIds || [])
 
-  if (activeSprint.value) {
-    const sId = activeSprint.value.id
-    const taskIds = activeSprint.value.taskIds || []
-    return allTasks.filter((t) => {
-      if (t.sprintId === sId || taskIds.includes(t.id)) return true
-      if (t.dueDate && t.dueDate >= mondayIso && t.dueDate <= sundayIso) return true
-      return false
-    })
-  }
-
-  return allTasks.filter((t) => t.dueDate && t.dueDate >= mondayIso && t.dueDate <= sundayIso)
+  // Strict SSOT: Deliverables harus eksplisit terikat ke sprint ini
+  return allTasks.filter((t) => t.sprintId === sId || taskIds.has(t.id))
 })
 
-async function ensureSprintForCurrentWeek(): Promise<Sprint> {
+async function ensureSprintForCurrentWeek(customObjective?: string): Promise<Sprint> {
   if (activeSprint.value) return activeSprint.value
 
   const mondayIso = toIsoDate(currentMonday.value)
@@ -174,7 +166,7 @@ async function ensureSprintForCurrentWeek(): Promise<Sprint> {
     startDate: mondayIso,
     endDate: sundayIso,
     status: 'active',
-    objective: currentObjective.value
+    objective: customObjective || currentObjective.value
   })
   if (newSprint) {
     if (sprints.value) {
@@ -212,7 +204,7 @@ async function onSaveObjective(text: string) {
     if (activeSprint.value?.id) {
       await sprintsApi.updateSprint(activeSprint.value.id, { objective: finalObj })
     } else {
-      await ensureSprintForCurrentWeek()
+      await ensureSprintForCurrentWeek(finalObj)
     }
     showFeedback('Weekly objective updated')
     await refreshSprints()

@@ -80,7 +80,7 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async findById(id: string): Promise<Task | null> {
-    const clean = id.trim()
+    const clean = id.trim().replace(/[(),]/g, '')
     const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
     const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
 
@@ -101,30 +101,39 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async create(taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt' | 'taskId'> & { taskId?: string }): Promise<Task> {
-    const taskId = taskData.taskId || (await this.nextTaskId())
-    const row = mapTaskToRow({
-      ...taskData,
-      taskId
-    })
-    row.created_at = new Date().toISOString()
-    row.updated_at = new Date().toISOString()
+    const maxRetries = 3
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const taskId = taskData.taskId || (await this.nextTaskId())
+        const row = mapTaskToRow({
+          ...taskData,
+          taskId
+        })
+        row.created_at = new Date().toISOString()
+        row.updated_at = new Date().toISOString()
 
-    const { data, error } = await this.client
-      .from('tasks')
-      .insert(row)
-      .select()
-      .single()
+        const { data, error } = await this.client
+          .from('tasks')
+          .insert(row)
+          .select()
+          .single()
 
-    if (error) {
-      console.error('[SupabaseTaskRepository.create] Error:', error)
-      throw new Error(`Failed to create task in Supabase: ${error.message}`)
+        if (error) throw error
+        return mapTaskRow(data)
+      } catch (err: any) {
+        if (err?.code === '23505' && !taskData.taskId && attempt < maxRetries) {
+          console.warn(`[SupabaseTaskRepository.create] Duplicate taskId collision on attempt ${attempt}, retrying...`)
+          continue
+        }
+        console.error('[SupabaseTaskRepository.create] Error:', err)
+        throw new Error(`Failed to create task in Supabase: ${err.message}`)
+      }
     }
-
-    return mapTaskRow(data)
+    throw new Error('Failed to create task in Supabase after multiple attempts.')
   }
 
   async update(id: string, patch: Partial<Task>): Promise<Task | null> {
-    const clean = id.trim()
+    const clean = id.trim().replace(/[(),]/g, '')
     const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
     const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
 
@@ -148,9 +157,12 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    const clean = id.trim()
+    const clean = id.trim().replace(/[(),]/g, '')
     const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
     const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
+
+    const existing = await this.findById(clean)
+    if (!existing) return false
 
     let query = this.client.from('tasks').delete()
     if (isEng) {
@@ -165,6 +177,31 @@ export class SupabaseTaskRepository implements ITaskRepository {
       return false
     }
 
+    // Cascade cleanup: bersihkan task ID dari array task_ids pada tabel sprints
+    try {
+      const { data: affectedSprints } = await this.client
+        .from('sprints')
+        .select('id, task_ids')
+
+      if (affectedSprints && affectedSprints.length > 0) {
+        for (const sprint of affectedSprints) {
+          if (Array.isArray(sprint.task_ids)) {
+            const updatedTaskIds = sprint.task_ids.filter(
+              (tId: string) => tId !== existing.id && tId !== existing.taskId
+            )
+            if (updatedTaskIds.length !== sprint.task_ids.length) {
+              await this.client
+                .from('sprints')
+                .update({ task_ids: updatedTaskIds, updated_at: new Date().toISOString() })
+                .eq('id', sprint.id)
+            }
+          }
+        }
+      }
+    } catch (cleanupErr) {
+      console.warn('[SupabaseTaskRepository.delete] Sprint cascade cleanup warning:', cleanupErr)
+    }
+
     return true
   }
 
@@ -172,6 +209,8 @@ export class SupabaseTaskRepository implements ITaskRepository {
     const { data, error } = await this.client
       .from('tasks')
       .select('task_id')
+      .order('task_id', { ascending: false })
+      .limit(50)
 
     if (error || !data || data.length === 0) {
       return 'ENG-001'

@@ -1,23 +1,23 @@
-# Graph Report - Management  (2026-09-23)
+# Graph Report - Management  (2026-10-06)
 
 ## Corpus Check
-- 178 files · ~124,663 words
+- 181 files · ~124,974 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: .example 1, (none) 1, .css 1)
 
 ## Summary
-- 1656 nodes · 2160 edges · 121 communities (89 shown, 15 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 48 edges (avg confidence: 0.85)
+- 1664 nodes · 2180 edges · 117 communities (86 shown, 14 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 50 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a7ee0d7b`
+- Built from commit: `f33cefe2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - WorkflowBadge.vue
-- repositories/index.ts
+- task.schema.ts
 - tasks.vue
 - [slug].vue
 - projects/index.vue
@@ -63,7 +63,7 @@
 - AddTargetModal.vue
 - onUpdateTaskStatus
 - types/github.ts
-- isRepoManaged
+- createGitHubClient
 - repos.vue
 - roadmap.vue
 - sprints.vue
@@ -85,7 +85,7 @@
 - ProjectsOverviewTable.vue
 - TodaysFocusCard.vue
 - ProjectNavDock.vue
-- HealthBadge.vue
+- throwApiError
 - ProjectLiveDeploymentCard.vue
 - TaskForm.vue
 - HeaderBar.vue
@@ -98,7 +98,7 @@
 - CompactProjectsHub.vue
 - Task
 - vue-router
-- ProjectPackageCard.vue
+- telemetry.vue
 - ProjectVercelTab.vue
 - ProjectCicdCard.vue
 - ProjectSecurityCard.vue
@@ -107,23 +107,19 @@
 - scripts
 - dependencies
 - devDependencies
-- UpcomingDeadlinesCard.vue
 - SecurityBadge.vue
 - types/index.ts
 - ProjectCommitsPreview.vue
 - IProjectRepository
-- ITaskRepository
+- SupabaseTaskRepository
 - ISprintRepository
-- getSupabaseClient
-- NitroSprintRepository
-- NitroProjectRepository
-- NitroTaskRepository
+- @supabase/supabase-js
+- repositories/index.ts
 - RecentActivityTimeline.vue
-- StorageAdapter
 
 ## God Nodes (most connected - your core abstractions)
 1. `vue` - 58 edges
-2. `withApiHandler()` - 29 edges
+2. `withApiHandler()` - 32 edges
 3. `throwApiError()` - 27 edges
 4. `createGitHubClient()` - 26 edges
 5. `useGitHub()` - 18 edges
@@ -148,15 +144,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (121 total, 15 thin omitted)
+## Communities (117 total, 14 thin omitted)
 
 ### Community 0 - "WorkflowBadge.vue"
 Cohesion: 0.12
 Nodes (15): badgeContainerClasses, badgeText, badgeTooltip, dotClasses, handleRerun(), isFailed, isRerunning, isRunning (+7 more)
 
-### Community 1 - "repositories/index.ts"
-Cohesion: 0.06
-Nodes (59): zod, fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages, fetchCachedPullsAndIssues (+51 more)
+### Community 1 - "task.schema.ts"
+Cohesion: 0.08
+Nodes (27): zod, validateBody(), validateQuery(), baseProjectFields, CreateProjectInput, createProjectSchema, projectPrioritySchema, projectQuerySchema (+19 more)
 
 ### Community 2 - "tasks.vue"
 Cohesion: 0.08
@@ -199,8 +195,8 @@ Cohesion: 0.13
 Nodes (13): close(), emit, errorMessage, isLoading, jobs, loadJobTelemetry(), onKeyDown(), props (+5 more)
 
 ### Community 12 - "store.ts"
-Cohesion: 0.24
-Nodes (17): createStorageAdapter(), createItem(), genId(), getArray(), getById(), getBySlug(), getNextTaskId(), getValue() (+9 more)
+Cohesion: 0.07
+Nodes (24): ITaskRepository, NitroProjectRepository, NitroSprintRepository, NitroTaskRepository, createStorageAdapter(), StorageAdapter, createItem(), genId() (+16 more)
 
 ### Community 13 - "optimizer/SKILL.md"
 Cohesion: 0.05
@@ -310,13 +306,13 @@ Nodes (12): activeTab, dueDate, emit, filteredBacklog, handleSubmit(), name, pri
 Cohesion: 0.12
 Nodes (15): GitHubBranch, GitHubCommitCheck, GitHubCommitFile, GitHubCommitItem, GitHubDeploymentItem, GitHubDeploymentState, GitHubDeploymentSummary, GitHubIssueItem (+7 more)
 
-### Community 52 - "isRepoManaged"
-Cohesion: 0.33
-Nodes (6): filteredRepos, getManagedProject(), isRepoManaged(), managedCount, onConfirmRemoveFromManagement(), unmanagedCount
+### Community 52 - "createGitHubClient"
+Cohesion: 0.14
+Nodes (17): fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages, fetchCachedPullsAndIssues, fetchCachedRepos (+9 more)
 
 ### Community 53 - "repos.vue"
 Cohesion: 0.07
-Nodes (21): branchesData, busyRepoId, commitsData, config, confirmRemoveDialog, { data: projects, refresh: refreshProjects }, detailsLoading, displayRepos (+13 more)
+Nodes (27): branchesData, busyRepoId, commitsData, config, confirmRemoveDialog, { data: projects, refresh: refreshProjects }, detailsLoading, displayRepos (+19 more)
 
 ### Community 54 - "roadmap.vue"
 Cohesion: 0.17
@@ -355,8 +351,8 @@ Cohesion: 0.10
 Nodes (16): ChecklistItem, checklistItems, displayTaskId, effectiveRepo, emit, form, handleCreateIssue(), isCreatingIssue (+8 more)
 
 ### Community 66 - "ProjectCard.vue"
-Cohesion: 0.22
-Nodes (7): blockers, completionRate, deployedCount, props, queueCount, runningCount, totalCount
+Cohesion: 0.12
+Nodes (13): badgeClasses, dotClasses, HealthStatus, label, props, tooltipText, blockers, completionRate (+5 more)
 
 ### Community 67 - "ActivityTable.vue"
 Cohesion: 0.27
@@ -390,9 +386,9 @@ Nodes (3): displayTasks, FocusTaskItem, props
 Cohesion: 0.15
 Nodes (13): currentCommitsCount, currentHasGithub, currentMatrixCount, currentTab, currentTasksCount, emit, nav, onSelect() (+5 more)
 
-### Community 77 - "HealthBadge.vue"
-Cohesion: 0.29
-Nodes (6): badgeClasses, dotClasses, HealthStatus, label, props, tooltipText
+### Community 77 - "throwApiError"
+Cohesion: 0.26
+Nodes (14): throwApiError(), legacyStatusMap, optionalString(), readJsonBody(), requireString(), validateDate(), validatePriority(), validateProjectPriority() (+6 more)
 
 ### Community 78 - "ProjectLiveDeploymentCard.vue"
 Cohesion: 0.12
@@ -411,8 +407,8 @@ Cohesion: 0.16
 Nodes (15): cancelButton, descId, displayBusy, displayCancelText, displayConfirmText, displayMessage, displayTitle, emits (+7 more)
 
 ### Community 83 - "vue"
-Cohesion: 0.17
-Nodes (9): { data: telemetryData, refresh: refreshTelemetry }, ratePercent, resetMinutes, TelemetryResponse, formattedVelocity, props, props, svgClass (+1 more)
+Cohesion: 0.13
+Nodes (11): formattedVelocity, props, DeadlineItem, displayDeadlines, props, props, svgClass, packagesList (+3 more)
 
 ### Community 84 - "CrossRepoTelemetryWatchdog.vue"
 Cohesion: 0.29
@@ -426,10 +422,6 @@ Nodes (9): activeTab, allCount, blockedCount, criticalCount, filteredTasks, high
 Cohesion: 0.18
 Nodes (9): deployedTasksCount, displayedInFlightTasks, inFlightTasksCount, inQueueTasksCount, objectiveText, progressPercentage, props, sprintBadgeLabel (+1 more)
 
-### Community 87 - "useProjects"
-Cohesion: 0.33
-Nodes (3): useProjects(), getProject(), getProjects()
-
 ### Community 89 - "Task"
 Cohesion: 0.40
 Nodes (3): hasAlerts, props, Task
@@ -438,9 +430,9 @@ Nodes (3): hasAlerts, props, Task
 Cohesion: 0.22
 Nodes (6): isProjectPage, route, NavItem, navItems, route, vue-router
 
-### Community 91 - "ProjectPackageCard.vue"
-Cohesion: 0.50
-Nodes (3): packagesList, props, totalPackages
+### Community 91 - "telemetry.vue"
+Cohesion: 0.40
+Nodes (4): { data: telemetryData, refresh: refreshTelemetry }, ratePercent, resetMinutes, TelemetryResponse
 
 ### Community 92 - "ProjectVercelTab.vue"
 Cohesion: 0.15
@@ -470,10 +462,6 @@ Nodes (6): dependencies, nuxt, @supabase/supabase-js, vue, vue-router, zod
 Cohesion: 0.40
 Nodes (5): devDependencies, autoprefixer, @nuxtjs/tailwindcss, postcss, tailwindcss
 
-### Community 101 - "UpcomingDeadlinesCard.vue"
-Cohesion: 0.50
-Nodes (3): DeadlineItem, displayDeadlines, props
-
 ### Community 102 - "SecurityBadge.vue"
 Cohesion: 0.20
 Nodes (9): badgeContainerClasses, badgeIcon, badgeText, badgeTooltip, hasAlerts, isModalOpen, props, repoRef (+1 more)
@@ -483,48 +471,44 @@ Cohesion: 0.11
 Nodes (14): cardType, formattedValue, iconBgClass, isBlocker, isNegative, numericValue, props, subtitleText (+6 more)
 
 ### Community 112 - "IProjectRepository"
-Cohesion: 0.16
-Nodes (5): IProjectRepository, ProjectFilterOptions, mapProjectRow(), mapProjectToRow(), SupabaseProjectRepository
+Cohesion: 0.15
+Nodes (4): IProjectRepository, mapProjectRow(), mapProjectToRow(), SupabaseProjectRepository
 
-### Community 113 - "ITaskRepository"
-Cohesion: 0.18
-Nodes (5): ITaskRepository, TaskFilterOptions, mapTaskRow(), mapTaskToRow(), SupabaseTaskRepository
+### Community 113 - "SupabaseTaskRepository"
+Cohesion: 0.36
+Nodes (3): mapTaskRow(), mapTaskToRow(), SupabaseTaskRepository
 
 ### Community 114 - "ISprintRepository"
-Cohesion: 0.19
-Nodes (4): ISprintRepository, mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository
+Cohesion: 0.13
+Nodes (7): ProjectFilterOptions, ISprintRepository, TaskFilterOptions, mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository, getSupabaseClient()
 
-### Community 115 - "getSupabaseClient"
-Cohesion: 0.22
-Nodes (3): @supabase/supabase-js, supabase, getSupabaseClient()
-
-### Community 116 - "NitroSprintRepository"
-Cohesion: 0.20
-Nodes (5): getProjectRepo(), getSprintRepo(), getTaskRepo(), hasSupabase(), NitroSprintRepository
+### Community 116 - "repositories/index.ts"
+Cohesion: 0.26
+Nodes (8): getProjectRepo(), getSprintRepo(), getTaskRepo(), hasSupabase(), projectRepository, sprintRepository, taskRepository, withApiHandler()
 
 ### Community 119 - "RecentActivityTimeline.vue"
 Cohesion: 0.50
 Nodes (3): ActivityTimelineItem, displayItems, props
 
 ## Knowledge Gaps
-- **917 isolated node(s):** `route`, `isProjectPage`, `route`, `router`, `slug` (+912 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1138 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **919 isolated node(s):** `route`, `isProjectPage`, `route`, `router`, `slug` (+914 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1144 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `TaskQueue.vue`, `AddTaskModal.vue`, `GlobalCommitsTable.vue`, `AddProjectModal.vue`, `CommitList.vue`, `WorkflowLogModal.vue`, `PackageBadge.vue`, `dashboard.vue`, `PackageModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `useSprintCalendar`, `ProjectTaskMatrix.vue`, `TaskDrawer.vue`, `ProjectCard.vue`, `DeploymentBadge.vue`, `SprintObjectiveBanner.vue`, `package.json`, `RepoActivityBadge.vue`, `ProjectsOverviewTable.vue`, `TodaysFocusCard.vue`, `ProjectNavDock.vue`, `HealthBadge.vue`, `ProjectLiveDeploymentCard.vue`, `TaskForm.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `CrossRepoTelemetryWatchdog.vue`, `PriorityTasksRadar.vue`, `WeeklyFocusSnapshot.vue`, `CompactProjectsHub.vue`, `Task`, `vue-router`, `ProjectPackageCard.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectSecurityCard.vue`, `ProjectSupabaseTab.vue`, `UpcomingDeadlinesCard.vue`, `SecurityBadge.vue`, `types/index.ts`, `RecentActivityTimeline.vue`?**
-  _High betweenness centrality (0.337) - this node is a cross-community bridge._
-- **Why does `zod` connect `repositories/index.ts` to `package.json`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
-- **Why does `@supabase/supabase-js` connect `getSupabaseClient` to `package.json`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `TaskQueue.vue`, `AddTaskModal.vue`, `GlobalCommitsTable.vue`, `AddProjectModal.vue`, `CommitList.vue`, `WorkflowLogModal.vue`, `PackageBadge.vue`, `dashboard.vue`, `PackageModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `useSprintCalendar`, `ProjectTaskMatrix.vue`, `TaskDrawer.vue`, `ProjectCard.vue`, `DeploymentBadge.vue`, `SprintObjectiveBanner.vue`, `package.json`, `RepoActivityBadge.vue`, `ProjectsOverviewTable.vue`, `TodaysFocusCard.vue`, `ProjectNavDock.vue`, `ProjectLiveDeploymentCard.vue`, `TaskForm.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `CrossRepoTelemetryWatchdog.vue`, `PriorityTasksRadar.vue`, `WeeklyFocusSnapshot.vue`, `CompactProjectsHub.vue`, `Task`, `vue-router`, `telemetry.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectSecurityCard.vue`, `ProjectSupabaseTab.vue`, `SecurityBadge.vue`, `types/index.ts`, `RecentActivityTimeline.vue`?**
+  _High betweenness centrality (0.343) - this node is a cross-community bridge._
+- **Why does `zod` connect `task.schema.ts` to `repositories/index.ts`, `package.json`?**
+  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+- **Why does `@supabase/supabase-js` connect `@supabase/supabase-js` to `ISprintRepository`, `package.json`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Are the 16 inferred relationships involving `useGitHub()` (e.g. with `createGitHubIssue()` and `fetchDeployments()`) actually correct?**
   _`useGitHub()` has 16 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `route`, `isProjectPage`, `route` to the rest of the system?**
-  _917 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _919 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `WorkflowBadge.vue` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Should `repositories/index.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.05668934240362812 - nodes in this community are weakly interconnected._
+- **Should `task.schema.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.08076923076923077 - nodes in this community are weakly interconnected._
