@@ -17,26 +17,13 @@
       "source_location": "L39"
     },
     {
-      "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository",
-      "label": "NitroTaskRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "NitroTaskRepository",
-      "file_type": "code",
-      "norm_label": "nitrotaskrepository",
-      "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L14"
-    },
-    {
       "id": "types_project_project",
       "label": "Project",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 103,
-      "community_name": "types/index.ts",
+      "community": 100,
+      "community_name": "project.ts",
       "file_type": "code",
       "norm_label": "project",
       "source_file": "types/project.ts",
@@ -48,8 +35,8 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 103,
-      "community_name": "types/index.ts",
+      "community": 100,
+      "community_name": "project.ts",
       "file_type": "code",
       "norm_label": "projectpriority",
       "source_file": "types/project.ts",
@@ -61,12 +48,25 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 103,
-      "community_name": "types/index.ts",
+      "community": 100,
+      "community_name": "project.ts",
       "file_type": "code",
       "norm_label": "projectstatus",
       "source_file": "types/project.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository",
+      "label": "NitroTaskRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "NitroTaskRepository",
+      "file_type": "code",
+      "norm_label": "nitrotaskrepository",
+      "source_file": "server/repositories/nitro/nitro-task.repository.ts",
+      "source_location": "L14"
     },
     {
       "id": "types_sprint_sprint",
@@ -677,7 +677,7 @@
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L340"
+      "source_location": "L342"
     },
     {
       "id": "components_project_projectnavdock_tabconfig",
@@ -690,7 +690,7 @@
       "file_type": "code",
       "norm_label": "tabconfig",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L368"
+      "source_location": "L370"
     },
     {
       "id": "components_sidebar_navitem",
@@ -742,20 +742,20 @@
       "file_type": "code",
       "norm_label": "crumb",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L175"
+      "source_location": "L164"
     },
     {
-      "id": "components_dashboard_upcomingdeadlinescard_deadlineitem",
-      "label": "DeadlineItem",
+      "id": "app_pages_telemetry_telemetryresponse",
+      "label": "TelemetryResponse",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 83,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "deadlineitem",
-      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
-      "source_location": "L75"
+      "norm_label": "telemetryresponse",
+      "source_file": "app/pages/telemetry.vue",
+      "source_location": "L241"
     },
     {
       "id": "types_task_task",
@@ -797,17 +797,17 @@
       "source_location": "L1"
     },
     {
-      "id": "app_pages_telemetry_telemetryresponse",
-      "label": "TelemetryResponse",
+      "id": "components_dashboard_upcomingdeadlinescard_deadlineitem",
+      "label": "DeadlineItem",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 91,
-      "community_name": "telemetry.vue",
+      "community": 99,
+      "community_name": "UpcomingDeadlinesCard.vue",
       "file_type": "code",
-      "norm_label": "telemetryresponse",
-      "source_file": "app/pages/telemetry.vue",
-      "source_location": "L241"
+      "norm_label": "deadlineitem",
+      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
+      "source_location": "L75"
     },
     {
       "id": "components_workflowbadge_handlererun",
@@ -2382,54 +2382,6 @@
       "source_location": "L230"
     },
     {
-      "id": "components_dashboard_onconfirmdelete",
-      "label": "onConfirmDelete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "dashboard.vue",
-      "file_type": "code",
-      "norm_label": "onconfirmdelete()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L236"
-    },
-    {
-      "id": "components_dashboard_onprojectmodalcreated",
-      "label": "onProjectModalCreated()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "dashboard.vue",
-      "file_type": "code",
-      "norm_label": "onprojectmodalcreated()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L289"
-    },
-    {
-      "id": "components_dashboard_onsavedrawertask",
-      "label": "onSaveDrawerTask()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "dashboard.vue",
-      "file_type": "code",
-      "norm_label": "onsavedrawertask()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L209"
-    },
-    {
-      "id": "components_dashboard_ontaskmodalcreated",
-      "label": "onTaskModalCreated()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "dashboard.vue",
-      "file_type": "code",
-      "norm_label": "ontaskmodalcreated()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L258"
-    },
-    {
       "id": "components_dashboard_opentaskmodal",
       "label": "openTaskModal()",
       "_callable": true,
@@ -2440,18 +2392,6 @@
       "norm_label": "opentaskmodal()",
       "source_file": "components/dashboard.vue",
       "source_location": "L196"
-    },
-    {
-      "id": "components_dashboard_refreshdata",
-      "label": "refreshData()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 34,
-      "community_name": "dashboard.vue",
-      "file_type": "code",
-      "norm_label": "refreshdata()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L200"
     },
     {
       "id": "composables_usetasks_usetasks",
@@ -4563,7 +4503,7 @@
       "file_type": "code",
       "norm_label": "onselect()",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L362"
+      "source_location": "L364"
     },
     {
       "id": "components_sidebar_isactive",
@@ -4899,7 +4839,7 @@
       "file_type": "code",
       "norm_label": "handlekeydown()",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L238"
+      "source_location": "L227"
     },
     {
       "id": "composables_usesearch_usesearch",
@@ -4959,7 +4899,7 @@
       "file_type": "code",
       "norm_label": "getfocusableelements()",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L51"
+      "source_location": "L78"
     },
     {
       "id": "components_confirmdialog_handlekeydown",
@@ -4971,7 +4911,7 @@
       "file_type": "code",
       "norm_label": "handlekeydown()",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L57"
+      "source_location": "L84"
     },
     {
       "id": "components_confirmdialog_oncancel",
@@ -4983,7 +4923,7 @@
       "file_type": "code",
       "norm_label": "oncancel()",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L90"
+      "source_location": "L117"
     },
     {
       "id": "components_confirmdialog_onconfirm",
@@ -4995,7 +4935,7 @@
       "file_type": "code",
       "norm_label": "onconfirm()",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L87"
+      "source_location": "L114"
     },
     {
       "id": "components_dashboard_prioritytasksradar_formatprojectlabel",
@@ -5056,18 +4996,6 @@
       "norm_label": "gettitlehoverclass()",
       "source_file": "components/dashboard/PriorityTasksRadar.vue",
       "source_location": "L235"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_cleanprojectname",
-      "label": "cleanProjectName()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "cleanprojectname()",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L184"
     },
     {
       "id": "composables_useprojects_useprojects",
@@ -5250,6 +5178,18 @@
       "source_location": "L257"
     },
     {
+      "id": "components_dashboard_weeklyfocussnapshot_cleanprojectname",
+      "label": "cleanProjectName()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "cleanprojectname()",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L184"
+    },
+    {
       "id": "components_project_projectverceltab_copyurl",
       "label": "copyUrl()",
       "_callable": true,
@@ -5416,6 +5356,66 @@
       "norm_label": "onrerunworkflowbyid()",
       "source_file": "app/pages/projects/[slug].vue",
       "source_location": "L402"
+    },
+    {
+      "id": "components_dashboard_onconfirmdelete",
+      "label": "onConfirmDelete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "refreshData",
+      "file_type": "code",
+      "norm_label": "onconfirmdelete()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L236"
+    },
+    {
+      "id": "components_dashboard_onprojectmodalcreated",
+      "label": "onProjectModalCreated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "refreshData",
+      "file_type": "code",
+      "norm_label": "onprojectmodalcreated()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L289"
+    },
+    {
+      "id": "components_dashboard_onsavedrawertask",
+      "label": "onSaveDrawerTask()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "refreshData",
+      "file_type": "code",
+      "norm_label": "onsavedrawertask()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L209"
+    },
+    {
+      "id": "components_dashboard_ontaskmodalcreated",
+      "label": "onTaskModalCreated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "refreshData",
+      "file_type": "code",
+      "norm_label": "ontaskmodalcreated()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L258"
+    },
+    {
+      "id": "components_dashboard_refreshdata",
+      "label": "refreshData()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 98,
+      "community_name": "refreshData",
+      "file_type": "code",
+      "norm_label": "refreshdata()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L200"
     },
     {
       "id": "components_workflowbadge",
@@ -5804,6 +5804,17 @@
       "source_location": "L178"
     },
     {
+      "id": "types_project",
+      "label": "project.ts",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "project.ts",
+      "file_type": "code",
+      "norm_label": "project.ts",
+      "source_file": "types/project.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "components_securitybadge",
       "label": "SecurityBadge.vue",
       "_origin": "ast",
@@ -6021,17 +6032,6 @@
       "file_type": "code",
       "norm_label": "types/index.ts",
       "source_file": "types/index.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "types_project",
-      "label": "project.ts",
-      "_origin": "ast",
-      "community": 103,
-      "community_name": "types/index.ts",
-      "file_type": "code",
-      "norm_label": "project.ts",
-      "source_file": "types/project.ts",
       "source_location": "L1"
     },
     {
@@ -7650,7 +7650,7 @@
       "file_type": "code",
       "norm_label": "confirmopen",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L319"
+      "source_location": "L317"
     },
     {
       "id": "app_pages_tasks_confirmtarget",
@@ -7661,7 +7661,18 @@
       "file_type": "code",
       "norm_label": "confirmtarget",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L320"
+      "source_location": "L318"
+    },
+    {
+      "id": "app_pages_tasks_data_projects",
+      "label": "{ data: projects }",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "tasks.vue",
+      "file_type": "code",
+      "norm_label": "{ data: projects }",
+      "source_file": "app/pages/tasks.vue",
+      "source_location": "L325"
     },
     {
       "id": "app_pages_tasks_data_tasks_error_taskserror",
@@ -7672,7 +7683,7 @@
       "file_type": "code",
       "norm_label": "{ data: tasks, error: taskserror }",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L325"
+      "source_location": "L324"
     },
     {
       "id": "app_pages_tasks_deployedcount",
@@ -7716,7 +7727,7 @@
       "file_type": "code",
       "norm_label": "isbusy",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L321"
+      "source_location": "L319"
     },
     {
       "id": "app_pages_tasks_priorityfilter",
@@ -7727,7 +7738,7 @@
       "file_type": "code",
       "norm_label": "priorityfilter",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L314"
+      "source_location": "L312"
     },
     {
       "id": "app_pages_tasks_projectfilter",
@@ -7738,7 +7749,18 @@
       "file_type": "code",
       "norm_label": "projectfilter",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L313"
+      "source_location": "L311"
+    },
+    {
+      "id": "app_pages_tasks_projectsapi",
+      "label": "projectsApi",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "tasks.vue",
+      "file_type": "code",
+      "norm_label": "projectsapi",
+      "source_file": "app/pages/tasks.vue",
+      "source_location": "L323"
     },
     {
       "id": "app_pages_tasks_runningsprintcount",
@@ -7760,7 +7782,7 @@
       "file_type": "code",
       "norm_label": "search",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L312"
+      "source_location": "L310"
     },
     {
       "id": "app_pages_tasks_showaddmodal",
@@ -7771,7 +7793,7 @@
       "file_type": "code",
       "norm_label": "showaddmodal",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L318"
+      "source_location": "L316"
     },
     {
       "id": "app_pages_tasks_sortby",
@@ -7782,7 +7804,7 @@
       "file_type": "code",
       "norm_label": "sortby",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L316"
+      "source_location": "L314"
     },
     {
       "id": "app_pages_tasks_statusfilter",
@@ -7793,7 +7815,7 @@
       "file_type": "code",
       "norm_label": "statusfilter",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L315"
+      "source_location": "L313"
     },
     {
       "id": "app_pages_tasks_successfeedback",
@@ -7804,7 +7826,7 @@
       "file_type": "code",
       "norm_label": "successfeedback",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L322"
+      "source_location": "L320"
     },
     {
       "id": "app_pages_tasks_tasksapi",
@@ -7815,7 +7837,7 @@
       "file_type": "code",
       "norm_label": "tasksapi",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L324"
+      "source_location": "L322"
     },
     {
       "id": "skill_code_review_excellence_resources_implementation_playbook",
@@ -14262,94 +14284,6 @@
       "source_location": "L254"
     },
     {
-      "id": "components_kanban_kanbancolumn",
-      "label": "KanbanColumn.vue",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "kanbancolumn.vue",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_badgeclass",
-      "label": "badgeClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "badgeclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L156"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_containerborderclass",
-      "label": "containerBorderClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "containerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L129"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_headerborderclass",
-      "label": "headerBorderClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "headerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L142"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L100"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_quickaddbtnclass",
-      "label": "quickAddBtnClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "quickaddbtnclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L170"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_titleclass",
-      "label": "titleClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "titleclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L149"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_topaddbtnclass",
-      "label": "topAddBtnClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "topaddbtnclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L163"
-    },
-    {
       "id": "components_kanban_kanbandragghost",
       "label": "KanbanDragGhost.vue",
       "_origin": "ast",
@@ -17790,7 +17724,7 @@
       "file_type": "code",
       "norm_label": "currentcommitscount",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L354"
+      "source_location": "L356"
     },
     {
       "id": "components_project_projectnavdock_currenthasgithub",
@@ -17801,7 +17735,7 @@
       "file_type": "code",
       "norm_label": "currenthasgithub",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L355"
+      "source_location": "L357"
     },
     {
       "id": "components_project_projectnavdock_currentmatrixcount",
@@ -17812,7 +17746,7 @@
       "file_type": "code",
       "norm_label": "currentmatrixcount",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L353"
+      "source_location": "L355"
     },
     {
       "id": "components_project_projectnavdock_currenttab",
@@ -17823,7 +17757,7 @@
       "file_type": "code",
       "norm_label": "currenttab",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L351"
+      "source_location": "L353"
     },
     {
       "id": "components_project_projectnavdock_currenttaskscount",
@@ -17834,7 +17768,7 @@
       "file_type": "code",
       "norm_label": "currenttaskscount",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L352"
+      "source_location": "L354"
     },
     {
       "id": "components_project_projectnavdock_emit",
@@ -17845,7 +17779,7 @@
       "file_type": "code",
       "norm_label": "emit",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L357"
+      "source_location": "L359"
     },
     {
       "id": "components_project_projectnavdock_nav",
@@ -17856,7 +17790,7 @@
       "file_type": "code",
       "norm_label": "nav",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L349"
+      "source_location": "L351"
     },
     {
       "id": "components_project_projectnavdock_tabconfigs",
@@ -17867,7 +17801,7 @@
       "file_type": "code",
       "norm_label": "tabconfigs",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L376"
+      "source_location": "L378"
     },
     {
       "id": "components_sidebar",
@@ -18307,7 +18241,7 @@
       "file_type": "code",
       "norm_label": "breadcrumbs",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L180"
+      "source_location": "L169"
     },
     {
       "id": "components_headerbar_data_projects",
@@ -18318,7 +18252,7 @@
       "file_type": "code",
       "norm_label": "{ data: projects }",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L173"
+      "source_location": "L162"
     },
     {
       "id": "components_headerbar_projectsapi",
@@ -18329,7 +18263,7 @@
       "file_type": "code",
       "norm_label": "projectsapi",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L172"
+      "source_location": "L161"
     },
     {
       "id": "components_headerbar_route",
@@ -18340,7 +18274,7 @@
       "file_type": "code",
       "norm_label": "route",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L167"
+      "source_location": "L156"
     },
     {
       "id": "components_headerbar_searchinputref",
@@ -18351,7 +18285,7 @@
       "file_type": "code",
       "norm_label": "searchinputref",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L170"
+      "source_location": "L159"
     },
     {
       "id": "components_headerbar_searchquery",
@@ -18362,7 +18296,7 @@
       "file_type": "code",
       "norm_label": "{ searchquery }",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L169"
+      "source_location": "L158"
     },
     {
       "id": "components_headerbar_toggle",
@@ -18373,7 +18307,7 @@
       "file_type": "code",
       "norm_label": "{ toggle }",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L168"
+      "source_location": "L157"
     },
     {
       "id": "composables_usesearch",
@@ -18417,7 +18351,7 @@
       "file_type": "code",
       "norm_label": "cancelbutton",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L48"
+      "source_location": "L75"
     },
     {
       "id": "components_confirmdialog_descid",
@@ -18428,7 +18362,7 @@
       "file_type": "code",
       "norm_label": "descid",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L45"
+      "source_location": "L72"
     },
     {
       "id": "components_confirmdialog_displaybusy",
@@ -18439,7 +18373,7 @@
       "file_type": "code",
       "norm_label": "displaybusy",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L42"
+      "source_location": "L69"
     },
     {
       "id": "components_confirmdialog_displaycanceltext",
@@ -18450,7 +18384,7 @@
       "file_type": "code",
       "norm_label": "displaycanceltext",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L41"
+      "source_location": "L68"
     },
     {
       "id": "components_confirmdialog_displayconfirmtext",
@@ -18461,7 +18395,7 @@
       "file_type": "code",
       "norm_label": "displayconfirmtext",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L40"
+      "source_location": "L67"
     },
     {
       "id": "components_confirmdialog_displaymessage",
@@ -18472,7 +18406,7 @@
       "file_type": "code",
       "norm_label": "displaymessage",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L39"
+      "source_location": "L66"
     },
     {
       "id": "components_confirmdialog_displaytitle",
@@ -18483,7 +18417,7 @@
       "file_type": "code",
       "norm_label": "displaytitle",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L38"
+      "source_location": "L65"
     },
     {
       "id": "components_confirmdialog_emits",
@@ -18494,7 +18428,7 @@
       "file_type": "code",
       "norm_label": "emits",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L36"
+      "source_location": "L63"
     },
     {
       "id": "components_confirmdialog_panel",
@@ -18505,7 +18439,7 @@
       "file_type": "code",
       "norm_label": "panel",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L47"
+      "source_location": "L74"
     },
     {
       "id": "components_confirmdialog_props",
@@ -18516,7 +18450,7 @@
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L28"
+      "source_location": "L55"
     },
     {
       "id": "components_confirmdialog_titleid",
@@ -18527,7 +18461,51 @@
       "file_type": "code",
       "norm_label": "titleid",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L44"
+      "source_location": "L71"
+    },
+    {
+      "id": "app_pages_telemetry",
+      "label": "telemetry.vue",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "telemetry.vue",
+      "source_file": "app/pages/telemetry.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_pages_telemetry_data_telemetrydata_refresh_refreshtelemetry",
+      "label": "{ data: telemetryData, refresh: refreshTelemetry }",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "{ data: telemetrydata, refresh: refreshtelemetry }",
+      "source_file": "app/pages/telemetry.vue",
+      "source_location": "L274"
+    },
+    {
+      "id": "app_pages_telemetry_ratepercent",
+      "label": "ratePercent",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "ratepercent",
+      "source_file": "app/pages/telemetry.vue",
+      "source_location": "L276"
+    },
+    {
+      "id": "app_pages_telemetry_resetminutes",
+      "label": "resetMinutes",
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "resetminutes",
+      "source_file": "app/pages/telemetry.vue",
+      "source_location": "L282"
     },
     {
       "id": "components_dashboard_cockpittelemetryrow",
@@ -18561,39 +18539,6 @@
       "norm_label": "props",
       "source_file": "components/dashboard/CockpitTelemetryRow.vue",
       "source_location": "L92"
-    },
-    {
-      "id": "components_dashboard_upcomingdeadlinescard",
-      "label": "UpcomingDeadlinesCard.vue",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "upcomingdeadlinescard.vue",
-      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_upcomingdeadlinescard_displaydeadlines",
-      "label": "displayDeadlines",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "displaydeadlines",
-      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
-      "source_location": "L92"
-    },
-    {
-      "id": "components_dashboard_upcomingdeadlinescard_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
-      "source_location": "L84"
     },
     {
       "id": "components_iconarrowupright",
@@ -18825,116 +18770,6 @@
       "norm_label": "sourcetasks",
       "source_file": "components/dashboard/PriorityTasksRadar.vue",
       "source_location": "L182"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot",
-      "label": "WeeklyFocusSnapshot.vue",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "weeklyfocussnapshot.vue",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_deployedtaskscount",
-      "label": "deployedTasksCount",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "deployedtaskscount",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L162"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_displayedinflighttasks",
-      "label": "displayedInFlightTasks",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "displayedinflighttasks",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L180"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_inflighttaskscount",
-      "label": "inFlightTasksCount",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "inflighttaskscount",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L166"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_inqueuetaskscount",
-      "label": "inQueueTasksCount",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "inqueuetaskscount",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L170"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_objectivetext",
-      "label": "objectiveText",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "objectivetext",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L152"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_progresspercentage",
-      "label": "progressPercentage",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "progresspercentage",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L174"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L121"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_sprintbadgelabel",
-      "label": "sprintBadgeLabel",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "sprintbadgelabel",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L139"
-    },
-    {
-      "id": "components_dashboard_weeklyfocussnapshot_totaltasks",
-      "label": "totalTasks",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "PriorityTasksRadar.vue",
-      "file_type": "code",
-      "norm_label": "totaltasks",
-      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
-      "source_location": "L158"
     },
     {
       "id": "components_taskcard",
@@ -19256,48 +19091,202 @@
       "source_location": "L209"
     },
     {
-      "id": "app_pages_telemetry",
-      "label": "telemetry.vue",
+      "id": "components_dashboard_weeklyfocussnapshot",
+      "label": "WeeklyFocusSnapshot.vue",
       "_origin": "ast",
-      "community": 91,
-      "community_name": "telemetry.vue",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
       "file_type": "code",
-      "norm_label": "telemetry.vue",
-      "source_file": "app/pages/telemetry.vue",
+      "norm_label": "weeklyfocussnapshot.vue",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
       "source_location": "L1"
     },
     {
-      "id": "app_pages_telemetry_data_telemetrydata_refresh_refreshtelemetry",
-      "label": "{ data: telemetryData, refresh: refreshTelemetry }",
+      "id": "components_dashboard_weeklyfocussnapshot_deployedtaskscount",
+      "label": "deployedTasksCount",
       "_origin": "ast",
-      "community": 91,
-      "community_name": "telemetry.vue",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
       "file_type": "code",
-      "norm_label": "{ data: telemetrydata, refresh: refreshtelemetry }",
-      "source_file": "app/pages/telemetry.vue",
-      "source_location": "L274"
+      "norm_label": "deployedtaskscount",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L162"
     },
     {
-      "id": "app_pages_telemetry_ratepercent",
-      "label": "ratePercent",
+      "id": "components_dashboard_weeklyfocussnapshot_displayedinflighttasks",
+      "label": "displayedInFlightTasks",
       "_origin": "ast",
-      "community": 91,
-      "community_name": "telemetry.vue",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
       "file_type": "code",
-      "norm_label": "ratepercent",
-      "source_file": "app/pages/telemetry.vue",
-      "source_location": "L276"
+      "norm_label": "displayedinflighttasks",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L180"
     },
     {
-      "id": "app_pages_telemetry_resetminutes",
-      "label": "resetMinutes",
+      "id": "components_dashboard_weeklyfocussnapshot_inflighttaskscount",
+      "label": "inFlightTasksCount",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "inflighttaskscount",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L166"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_inqueuetaskscount",
+      "label": "inQueueTasksCount",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "inqueuetaskscount",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L170"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_objectivetext",
+      "label": "objectiveText",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "objectivetext",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L152"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_progresspercentage",
+      "label": "progressPercentage",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "progresspercentage",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L174"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L121"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_sprintbadgelabel",
+      "label": "sprintBadgeLabel",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "sprintbadgelabel",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L139"
+    },
+    {
+      "id": "components_dashboard_weeklyfocussnapshot_totaltasks",
+      "label": "totalTasks",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "WeeklyFocusSnapshot.vue",
+      "file_type": "code",
+      "norm_label": "totaltasks",
+      "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
+      "source_location": "L158"
+    },
+    {
+      "id": "components_kanban_kanbancolumn",
+      "label": "KanbanColumn.vue",
       "_origin": "ast",
       "community": 91,
-      "community_name": "telemetry.vue",
+      "community_name": "KanbanColumn.vue",
       "file_type": "code",
-      "norm_label": "resetminutes",
-      "source_file": "app/pages/telemetry.vue",
-      "source_location": "L282"
+      "norm_label": "kanbancolumn.vue",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_badgeclass",
+      "label": "badgeClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "badgeclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L156"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_containerborderclass",
+      "label": "containerBorderClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "containerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L129"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_headerborderclass",
+      "label": "headerBorderClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "headerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L142"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L100"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_quickaddbtnclass",
+      "label": "quickAddBtnClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "quickaddbtnclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L170"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_titleclass",
+      "label": "titleClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "titleclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L149"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_topaddbtnclass",
+      "label": "topAddBtnClass",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "KanbanColumn.vue",
+      "file_type": "code",
+      "norm_label": "topaddbtnclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L163"
     },
     {
       "id": "components_project_projectverceltab",
@@ -19617,6 +19606,39 @@
       "norm_label": "projectpackagefeed.vue",
       "source_file": "components/project/github/ProjectPackageFeed.vue",
       "source_location": "L1"
+    },
+    {
+      "id": "components_dashboard_upcomingdeadlinescard",
+      "label": "UpcomingDeadlinesCard.vue",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "UpcomingDeadlinesCard.vue",
+      "file_type": "code",
+      "norm_label": "upcomingdeadlinescard.vue",
+      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_dashboard_upcomingdeadlinescard_displaydeadlines",
+      "label": "displayDeadlines",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "UpcomingDeadlinesCard.vue",
+      "file_type": "code",
+      "norm_label": "displaydeadlines",
+      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
+      "source_location": "L92"
+    },
+    {
+      "id": "components_dashboard_upcomingdeadlinescard_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "UpcomingDeadlinesCard.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
+      "source_location": "L84"
     }
   ],
   "links": [
@@ -20145,7 +20167,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L59",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -20157,7 +20179,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L64",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -20169,7 +20191,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L91",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -20181,7 +20203,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L88",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -20397,7 +20419,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L364",
+      "source_location": "L366",
       "weight": 1.0
     },
     {
@@ -22053,7 +22075,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L341",
+      "source_location": "L343",
       "weight": 1.0
     },
     {
@@ -22065,7 +22087,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L369",
+      "source_location": "L371",
       "weight": 1.0
     },
     {
@@ -22305,7 +22327,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L163",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -22317,7 +22339,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L164",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -22329,7 +22351,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L165",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -22353,7 +22375,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L338",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -22365,7 +22387,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L338",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -24850,7 +24872,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L309",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -24973,7 +24995,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L26",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -25311,7 +25333,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L161",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -25323,7 +25345,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L162",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -25335,7 +25357,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L163",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -25347,7 +25369,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L164",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -25359,7 +25381,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L165",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -25539,7 +25561,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L337",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -25551,7 +25573,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L338",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -29908,7 +29930,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L312",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -29919,7 +29941,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L313",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -29930,7 +29952,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L314",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -29941,7 +29963,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L315",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -29952,7 +29974,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L316",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -29963,7 +29985,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L318",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -29974,7 +29996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L319",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -29985,7 +30007,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L320",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -29996,7 +30018,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L321",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -30007,7 +30029,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L322",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -30018,12 +30040,34 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/tasks.vue",
-      "source_location": "L324",
+      "source_location": "L322",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_tasks",
+      "target": "app_pages_tasks_projectsapi",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/tasks.vue",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
       "source": "app_pages_tasks",
       "target": "app_pages_tasks_data_tasks_error_taskserror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/tasks.vue",
+      "source_location": "L324",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_tasks",
+      "target": "app_pages_tasks_data_projects",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -30892,156 +30936,13 @@
     },
     {
       "source": "components_confirmdialog",
-      "target": "components_confirmdialog_props",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L28",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_emits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L36",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_displaytitle",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L38",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_displaymessage",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L39",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_displayconfirmtext",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L40",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_displaycanceltext",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L41",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_displaybusy",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L42",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_titleid",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L44",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_descid",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_panel",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_cancelbutton",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L48",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_getfocusableelements",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
-      "target": "components_confirmdialog_handlekeydown",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "components_confirmdialog",
       "target": "components_confirmdialog_onconfirm",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L87",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -31052,7 +30953,150 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/ConfirmDialog.vue",
-      "source_location": "L90",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_props",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_emits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_displaytitle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_displaymessage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_displayconfirmtext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_displaycanceltext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_displaybusy",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_titleid",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_descid",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_panel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_cancelbutton",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L75",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_getfocusableelements",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "components_confirmdialog",
+      "target": "components_confirmdialog_handlekeydown",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ConfirmDialog.vue",
+      "source_location": "L84",
       "weight": 1.0
     },
     {
@@ -32471,7 +32515,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L167",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -32482,7 +32526,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L168",
+      "source_location": "L157",
       "weight": 1.0
     },
     {
@@ -32493,7 +32537,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L169",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -32504,7 +32548,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L170",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -32515,7 +32559,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L172",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -32526,7 +32570,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L173",
+      "source_location": "L162",
       "weight": 1.0
     },
     {
@@ -32537,7 +32581,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L175",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -32548,7 +32592,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L180",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -32559,7 +32603,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L238",
+      "source_location": "L227",
       "weight": 1.0
     },
     {
@@ -33725,7 +33769,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L348",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -33736,7 +33780,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L349",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -33747,7 +33791,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L351",
+      "source_location": "L353",
       "weight": 1.0
     },
     {
@@ -33758,7 +33802,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L352",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -33769,7 +33813,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L353",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -33780,7 +33824,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L354",
+      "source_location": "L356",
       "weight": 1.0
     },
     {
@@ -33791,7 +33835,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L355",
+      "source_location": "L357",
       "weight": 1.0
     },
     {
@@ -33802,7 +33846,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L357",
+      "source_location": "L359",
       "weight": 1.0
     },
     {
@@ -33813,7 +33857,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L362",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -33824,7 +33868,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L368",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -33835,7 +33879,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectNavDock.vue",
-      "source_location": "L376",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -44670,5 +44714,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8dfae9854bd021ec956fc2c7da039d98a701be55"
+  "built_at_commit": "14a726e9c6b55988aae82b049ac792dc54f5a110"
 }

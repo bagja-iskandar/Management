@@ -88,8 +88,8 @@
       <h3 class="font-mono text-sm font-semibold text-[#F5F2EB]">No projects in this category</h3>
       <p class="font-sans text-xs text-[#756F68] max-w-sm mx-auto">
         {{ roadmapFilter === 'maintenance'
-          ? 'Belum ada project yang berstatus Maintenance. Anda bisa mengubah status project yang sudah di-deploy menjadi Maintenance.'
-          : 'Semua project Anda saat ini sedang berada dalam mode pemeliharaan (Live).' }}
+          ? 'No projects currently in Maintenance mode. Deployed projects can be transitioned to Maintenance anytime.'
+          : 'All active projects are currently in Live Maintenance mode.' }}
       </p>
     </div>
 

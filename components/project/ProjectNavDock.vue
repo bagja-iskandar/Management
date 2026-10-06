@@ -193,12 +193,13 @@
       </nav>
     </aside>
 
-    <!-- Mobile Bottom Floating Capsule Dock (< md) -->
-    <nav
-      class="md:hidden fixed bottom-20 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-1.5rem)] px-2 sm:px-3 py-1.5 rounded-2xl bg-[#111114]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/50 flex items-center gap-1.5 sm:gap-2 select-none"
-      role="tablist"
-      aria-label="Mobile Project Views Navigation"
-    >
+    <!-- Mobile Top Segmented Capsule Dock (< md, situated below HeaderBar to prevent bottom dock collision) -->
+    <div class="md:hidden fixed top-[3.75rem] inset-x-0 z-30 flex justify-center pointer-events-none px-3">
+      <nav
+        class="pointer-events-auto max-w-[calc(100vw-1.5rem)] px-2 py-1 rounded-2xl bg-[#111114]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/60 flex items-center gap-1 sm:gap-1.5 select-none"
+        role="tablist"
+        aria-label="Mobile Project Views Navigation"
+      >
       <button
         v-for="item in tabConfigs"
         :key="item.id"
@@ -330,6 +331,7 @@
         ></span>
       </button>
     </nav>
+    </div>
   </div>
 </template>
 

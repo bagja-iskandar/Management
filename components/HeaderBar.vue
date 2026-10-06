@@ -2,19 +2,8 @@
   <header
     class="w-full pt-3 px-1 sm:px-2 flex items-center justify-between pointer-events-none select-none"
   >
-    <!-- Left Island: Monogram Brand Squircle (Optionally with mobile hamburger) -->
+    <!-- Left Island: Monogram Brand Squircle -->
     <div class="pointer-events-auto flex items-center gap-2 shrink-0">
-      <!-- Mobile hamburger toggle button (< md) -->
-      <button
-        type="button"
-        class="md:hidden w-9 h-9 flex items-center justify-center text-[#756F68] hover:text-[#F5F2EB] rounded-xl bg-[#111114]/90 backdrop-blur-xl border border-white/[0.08] hover:bg-white/5 transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B] shrink-0 cursor-pointer"
-        aria-label="Toggle navigation menu"
-        @click="toggle"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
 
       <!-- Brand Monogram Squircle -->
       <div

@@ -115,7 +115,7 @@
 
           <!-- Floating HUD Tooltip -->
           <div
-            class="absolute left-full ml-3.5 px-2.5 py-1.5 bg-[#18181C] border border-white/[0.08] text-[#F5F2EB] font-mono text-xs rounded-md shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-150 pointer-events-none z-50 flex flex-col gap-0.5"
+            class="absolute left-full ml-3.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-[#18181C] border border-white/[0.08] text-[#F5F2EB] font-mono text-xs rounded-md shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-150 pointer-events-none z-50 flex flex-col gap-0.5"
           >
             <div class="flex items-center gap-1.5">
               <span class="font-bold" :class="isActive(item.path) ? 'text-[#C98A4B]' : 'text-[#F5F2EB]'">

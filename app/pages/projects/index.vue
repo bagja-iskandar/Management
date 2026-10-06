@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="space-y-6">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
@@ -17,7 +17,7 @@
           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#C98A4B] hover:bg-[#8B6535] text-[#09090B] font-mono text-xs font-semibold transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none shadow-sm shadow-[#C98A4B]/20"
         >
           <span>🐙</span>
-          <span>Tambah dari GitHub Repos</span>
+          <span>Import from GitHub Repos</span>
           <span>→</span>
         </NuxtLink>
         <NuxtLink

@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 pb-20 lg:pb-12 relative">
+  <div class="space-y-6 pb-20 lg:pb-12 pt-10 md:pt-0 relative">
     <!-- Project Hero (Dashboard Tab Only) -->
     <ProjectHeroHeader
       v-if="activeTab === 'dashboard'"

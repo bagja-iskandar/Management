@@ -170,7 +170,7 @@
         :to="`/projects/${project.slug}`"
         class="inline-flex items-center gap-1.5 font-mono text-xs text-[#C98A4B] hover:text-[#F5F2EB] transition-colors group"
       >
-        <span>Buka Project</span>
+        <span>Open Project</span>
         <span class="group-hover:translate-x-1 transition-transform">→</span>
       </NuxtLink>
     </div>

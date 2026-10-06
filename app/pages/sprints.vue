@@ -286,7 +286,7 @@ async function updateTaskStatus(task: Task, newStatus: TaskStatus) {
       in_queue: 'In Queue',
       running_sprint: 'Running',
       deployed: 'Deployed',
-      blocked: 'Error'
+      blocked: 'Blocked'
     }
     showFeedback(`#${task.taskId || 'Task'} marked as ${statusLabels[newStatus]}`)
     await Promise.all([refreshTasks(), refreshSprints()])

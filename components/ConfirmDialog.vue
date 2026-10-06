@@ -1,22 +1,49 @@
 <template>
-  <div class="cd-overlay" role="alertdialog" aria-modal="true" :aria-labelledby="titleId" :aria-describedby="descId">
-    <div class="cd-panel" ref="panel" tabindex="-1" @keydown="handleKeydown">
-      <div class="cd-header-row">
-        <div class="cd-warning-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-            <line x1="12" y1="9" x2="12" y2="13"></line>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
+    role="alertdialog"
+    aria-modal="true"
+    :aria-labelledby="titleId"
+    :aria-describedby="descId"
+    @click.self="onCancel"
+  >
+    <div
+      ref="panel"
+      class="w-full max-w-md p-6 rounded-2xl bg-[#111114] border border-white/[0.08] shadow-2xl shadow-black/80 space-y-4 focus:outline-none"
+      tabindex="-1"
+      @keydown="handleKeydown"
+    >
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(239,68,68,0.2)]" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
         </div>
-        <h3 :id="titleId" class="cd-title">{{ displayTitle }}</h3>
+        <h3 :id="titleId" class="font-mono text-lg font-bold text-[#F5F2EB]">{{ displayTitle }}</h3>
       </div>
 
-      <p :id="descId" class="cd-message">{{ displayMessage }}</p>
+      <p :id="descId" class="text-sm text-[#756F68] leading-relaxed">{{ displayMessage }}</p>
 
-      <div class="cd-actions">
-        <button ref="cancelButton" class="button secondary" @click="onCancel" :disabled="displayBusy">{{ displayCancelText }}</button>
-        <button class="button danger" @click="onConfirm" :disabled="displayBusy">{{ displayConfirmText }}</button>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button
+          ref="cancelButton"
+          type="button"
+          class="px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-[#F5F2EB] font-mono text-xs font-medium border border-white/[0.08] transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
+          :disabled="displayBusy"
+          @click="onCancel"
+        >
+          {{ displayCancelText }}
+        </button>
+        <button
+          type="button"
+          class="px-4 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/25 text-red-400 font-mono text-xs font-semibold border border-red-500/30 transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-red-400"
+          :disabled="displayBusy"
+          @click="onConfirm"
+        >
+          {{ displayConfirmText }}
+        </button>
       </div>
     </div>
   </div>
@@ -116,71 +143,3 @@ onUnmounted(() => {
   }, 0)
 })
 </script>
-
-<style scoped>
-.cd-overlay {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(5, 8, 15, 0.8);
-  backdrop-filter: blur(12px);
-  z-index: 90;
-  padding: 16px;
-}
-
-.cd-panel {
-  background: rgba(15, 19, 29, 0.95);
-  color: var(--text-heading);
-  border: 1px solid var(--glass-border-highlight);
-  border-radius: var(--radius-card);
-  padding: 26px;
-  width: 100%;
-  max-width: 480px;
-  outline: none;
-  box-shadow: var(--shadow-card), 0 0 35px rgba(0, 0, 0, 0.6);
-  backdrop-filter: var(--glass-blur);
-}
-
-.cd-header-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.cd-warning-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: rgba(244, 63, 94, 0.15);
-  border: 1px solid rgba(244, 63, 94, 0.35);
-  color: #fca5a5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 0 12px rgba(244, 63, 94, 0.25);
-}
-
-.cd-title {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.cd-message {
-  margin: 0 0 24px;
-  color: var(--text-body);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.cd-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-}
-</style>

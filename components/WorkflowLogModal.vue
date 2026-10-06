@@ -212,7 +212,7 @@
             class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#F5F2EB] hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
             @click="close"
           >
-            Tutup
+            Close
           </button>
         </div>
       </div>

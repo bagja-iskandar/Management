@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="space-y-6">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
@@ -64,9 +64,7 @@
             aria-label="Filter by Project"
           >
             <option value="all">📁 All Projects</option>
-            <option value="management">management</option>
-            <option value="tf-hitnet-eeg">tf-hitnet-eeg</option>
-            <option value="neural-signal-lab">neural-signal-lab</option>
+            <option v-for="p in projects || []" :key="p.slug" :value="p.slug">{{ p.title || p.slug }}</option>
           </select>
         </div>
 
@@ -322,7 +320,9 @@ const isBusy = ref(false)
 const successFeedback = ref('')
 
 const tasksApi = useTasks()
+const projectsApi = useProjects()
 const { data: tasks, error: tasksError } = useLazyAsyncData<Task[]>('tasks-page', () => tasksApi.getTasks())
+const { data: projects } = useLazyAsyncData('tasks-projects', () => projectsApi.getProjects())
 
 function formatTaskId(t: Task): string {
   if (t.taskId) return t.taskId.replace(/^#/, '')

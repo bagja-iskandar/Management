@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div
     class="bg-[#111114] border rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:border-[#C98A4B] hover:shadow-[0_0_16px_rgba(201,138,75,0.14)] cursor-pointer group relative select-none w-full h-[180px] min-h-[180px] max-h-[180px] box-border"
     :class="[
@@ -31,8 +31,8 @@
           <span v-else class="opacity-80">⚡</span>
         </div>
 
-        <!-- Quick Status Transfer Hover Arrows -->
-        <div class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-0.5 ml-1 shrink-0">
+        <!-- Quick Status Transfer Arrows (visible by default on touch screens, hover on desktop) -->
+        <div class="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-0.5 ml-1 shrink-0">
           <button
             v-if="canMoveLeft"
             type="button"
