@@ -96,15 +96,15 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1789911805.5038617,
-    "seen": 1789911884.6972482,
-    "ast_hash": "5832c2065c0279bda19ff212decd5479",
+    "mtime": 1791284398.3519876,
+    "seen": 1791284512.465454,
+    "ast_hash": "e74ff5b27ba43864066b9804a4fa73f1",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1790167305.087287,
-    "seen": 1790169726.3439977,
-    "ast_hash": "8c6fb75dfd08ae1683d10a7d3eebff53",
+    "mtime": 1791284388.2493951,
+    "seen": 1791284512.4654584,
+    "ast_hash": "df720b4e68f6897ef37cd96ad11f16ce",
     "semantic_hash": ""
   },
   "server/api/activities.get.ts": {
@@ -1038,9 +1038,9 @@
     "semantic_hash": ""
   },
   "scripts/verify-supabase.mjs": {
-    "mtime": 1790169669.8823504,
-    "seen": 1790169726.3440013,
-    "ast_hash": "f1e82e879c3b786c5916ecfd61d220a1",
+    "mtime": 1791284379.1932683,
+    "seen": 1791284512.4654615,
+    "ast_hash": "c20712b77996bd022286bc51d2b0ce1f",
     "semantic_hash": ""
   },
   "server/plugins/supabase-sync.ts": {
@@ -1089,6 +1089,24 @@
     "mtime": 1791269056.963619,
     "seen": 1791269323.212899,
     "ast_hash": "886f3010af072df24610025e1f439a91",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1791284406.4356,
+    "seen": 1791284512.4854515,
+    "ast_hash": "90d841deb5872c9ca92d6808c10b2579",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1791284412.7591627,
+    "seen": 1791284512.4859889,
+    "ast_hash": "378fbf26188f05521c252729abf3aa55",
+    "semantic_hash": ""
+  },
+  "DEPLOYMENT.md": {
+    "mtime": 1791284438.7685697,
+    "seen": 1791284512.4859915,
+    "ast_hash": "40d04cf8273af28aa57446745e675a89",
     "semantic_hash": ""
   }
 }

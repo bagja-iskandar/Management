@@ -10,7 +10,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "createprojectinput",
       "source_file": "server/schemas/project.schema.ts",
@@ -23,7 +23,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "updateprojectinput",
       "source_file": "server/schemas/project.schema.ts",
@@ -36,7 +36,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "createsprintinput",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -49,50 +49,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "updatesprintinput",
       "source_file": "server/schemas/sprint.schema.ts",
       "source_location": "L24"
-    },
-    {
-      "id": "server_schemas_task_schema_createtaskinput",
-      "label": "CreateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L51"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryinput",
-      "label": "TaskQueryInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L53"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskinput",
-      "label": "UpdateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L52"
     },
     {
       "id": "types_github_githubcommitdetail",
@@ -365,7 +326,7 @@
       "file_type": "code",
       "norm_label": "nitrotaskrepository",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L13"
+      "source_location": "L14"
     },
     {
       "id": "server_utils_storage_adapter_storageadapter",
@@ -582,7 +543,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "githubfetchoptions",
       "source_file": "server/utils/github.ts",
@@ -745,6 +706,45 @@
       "source_location": "L1"
     },
     {
+      "id": "server_schemas_task_schema_createtaskinput",
+      "label": "CreateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L51"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryinput",
+      "label": "TaskQueryInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L53"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskinput",
+      "label": "UpdateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L52"
+    },
+    {
       "id": "components_headerbar_crumb",
       "label": "Crumb",
       "_callable": true,
@@ -843,7 +843,7 @@
       "file_type": "code",
       "norm_label": "rerunworkflow()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L85"
+      "source_location": "L109"
     },
     {
       "id": "server_schemas_helper_validatebody",
@@ -851,7 +851,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "validatebody()",
       "source_file": "server/schemas/helper.ts",
@@ -863,7 +863,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "validateparams()",
       "source_file": "server/schemas/helper.ts",
@@ -875,7 +875,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "validatequery()",
       "source_file": "server/schemas/helper.ts",
@@ -940,6 +940,30 @@
       "norm_label": "togglediff()",
       "source_file": "components/CommitList.vue",
       "source_location": "L190"
+    },
+    {
+      "id": "server_api_github_security_get_normalizeseverity",
+      "label": "normalizeSeverity()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "security.get.ts",
+      "file_type": "code",
+      "norm_label": "normalizeseverity()",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "server_api_github_security_get_normalizestate",
+      "label": "normalizeState()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "security.get.ts",
+      "file_type": "code",
+      "norm_label": "normalizestate()",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L14"
     },
     {
       "id": "components_project_projectcommitspreview_formattime",
@@ -1095,7 +1119,7 @@
       "file_type": "code",
       "norm_label": "fetchworkflowjobs()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L92"
+      "source_location": "L119"
     },
     {
       "id": "server_repositories_contracts_project_repository_iprojectrepository_create",
@@ -1359,7 +1383,7 @@
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L150"
+      "source_location": "L159"
     },
     {
       "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findall",
@@ -1395,7 +1419,7 @@
       "file_type": "code",
       "norm_label": ".nexttaskid()",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L171"
+      "source_location": "L208"
     },
     {
       "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
@@ -1407,7 +1431,7 @@
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L126"
+      "source_location": "L135"
     },
     {
       "id": "server_repositories_contracts_sprint_repository_isprintrepository_create",
@@ -1875,7 +1899,7 @@
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L50"
+      "source_location": "L51"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_delete",
@@ -1887,7 +1911,7 @@
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L64"
+      "source_location": "L65"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_findall",
@@ -1899,7 +1923,7 @@
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L14"
+      "source_location": "L15"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_findbyid",
@@ -1911,7 +1935,7 @@
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_nexttaskid",
@@ -1923,7 +1947,7 @@
       "file_type": "code",
       "norm_label": ".nexttaskid()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L68"
+      "source_location": "L95"
     },
     {
       "id": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_update",
@@ -1935,7 +1959,7 @@
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L59"
+      "source_location": "L60"
     },
     {
       "id": "server_utils_storage_adapter_createstorageadapter",
@@ -1983,7 +2007,7 @@
       "file_type": "code",
       "norm_label": "createitem()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L127"
+      "source_location": "L146"
     },
     {
       "id": "server_utils_store_genid",
@@ -2019,7 +2043,7 @@
       "file_type": "code",
       "norm_label": "getbyid()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L116"
+      "source_location": "L135"
     },
     {
       "id": "server_utils_store_getbyslug",
@@ -2031,7 +2055,7 @@
       "file_type": "code",
       "norm_label": "getbyslug()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L175"
+      "source_location": "L194"
     },
     {
       "id": "server_utils_store_getnexttaskid",
@@ -2043,7 +2067,7 @@
       "file_type": "code",
       "norm_label": "getnexttaskid()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L33"
+      "source_location": "L35"
     },
     {
       "id": "server_utils_store_getvalue",
@@ -2067,7 +2091,7 @@
       "file_type": "code",
       "norm_label": "migratenumericids()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L92"
+      "source_location": "L111"
     },
     {
       "id": "server_utils_store_normalizeid",
@@ -2091,7 +2115,7 @@
       "file_type": "code",
       "norm_label": "normalizeproject()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L74"
+      "source_location": "L93"
     },
     {
       "id": "server_utils_store_normalizetask",
@@ -2103,7 +2127,7 @@
       "file_type": "code",
       "norm_label": "normalizetask()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L40"
+      "source_location": "L59"
     },
     {
       "id": "server_utils_store_removeitem",
@@ -2115,7 +2139,7 @@
       "file_type": "code",
       "norm_label": "removeitem()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L161"
+      "source_location": "L180"
     },
     {
       "id": "server_utils_store_removeitembyslug",
@@ -2127,7 +2151,7 @@
       "file_type": "code",
       "norm_label": "removeitembyslug()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L196"
+      "source_location": "L215"
     },
     {
       "id": "server_utils_store_setarray",
@@ -2175,7 +2199,7 @@
       "file_type": "code",
       "norm_label": "updateitem()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L139"
+      "source_location": "L158"
     },
     {
       "id": "server_utils_store_updateitembyslug",
@@ -2187,7 +2211,7 @@
       "file_type": "code",
       "norm_label": "updateitembyslug()",
       "source_file": "server/utils/store.ts",
-      "source_location": "L180"
+      "source_location": "L199"
     },
     {
       "id": "app_pages_tasks_deletetask",
@@ -3066,40 +3090,28 @@
       "source_location": "L733"
     },
     {
-      "id": "server_api_github_security_get_normalizeseverity",
-      "label": "normalizeSeverity()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "createGitHubClient",
-      "file_type": "code",
-      "norm_label": "normalizeseverity()",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "server_api_github_security_get_normalizestate",
-      "label": "normalizeState()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "createGitHubClient",
-      "file_type": "code",
-      "norm_label": "normalizestate()",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L14"
-    },
-    {
       "id": "server_utils_errors_formaterror",
       "label": "formatError()",
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "formaterror()",
       "source_file": "server/utils/errors.ts",
       "source_location": "L6"
+    },
+    {
+      "id": "server_utils_errors_throwapierror",
+      "label": "throwApiError()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "throwapierror()",
+      "source_file": "server/utils/errors.ts",
+      "source_location": "L1"
     },
     {
       "id": "server_utils_github_creategithubclient",
@@ -3107,7 +3119,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "creategithubclient()",
       "source_file": "server/utils/github.ts",
@@ -3119,11 +3131,155 @@
       "_callable": true,
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "githubfetch()",
       "source_file": "server/utils/github.ts",
       "source_location": "L12"
+    },
+    {
+      "id": "server_utils_validation_optionalstring",
+      "label": "optionalString()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "optionalstring()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L33"
+    },
+    {
+      "id": "server_utils_validation_readjsonbody",
+      "label": "readJsonBody()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "readjsonbody()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "server_utils_validation_requirestring",
+      "label": "requireString()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "requirestring()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L26"
+    },
+    {
+      "id": "server_utils_validation_validatedate",
+      "label": "validateDate()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatedate()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L122"
+    },
+    {
+      "id": "server_utils_validation_validatepriority",
+      "label": "validatePriority()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatepriority()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L64"
+    },
+    {
+      "id": "server_utils_validation_validateprojectpriority",
+      "label": "validateProjectPriority()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validateprojectpriority()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L93"
+    },
+    {
+      "id": "server_utils_validation_validateprojectstatus",
+      "label": "validateProjectStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validateprojectstatus()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L84"
+    },
+    {
+      "id": "server_utils_validation_validatesprintstatus",
+      "label": "validateSprintStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatesprintstatus()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L102"
+    },
+    {
+      "id": "server_utils_validation_validatestatus",
+      "label": "validateStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatestatus()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L60"
+    },
+    {
+      "id": "server_utils_validation_validatestringarray",
+      "label": "validateStringArray()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatestringarray()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L111"
+    },
+    {
+      "id": "server_utils_validation_validatetaskstatus",
+      "label": "validateTaskStatus()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatetaskstatus()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "server_utils_validation_validatetechtags",
+      "label": "validateTechTags()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validatetechtags()",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L73"
     },
     {
       "id": "app_pages_repos_formatrelativetime",
@@ -3315,7 +3471,7 @@
       "file_type": "code",
       "norm_label": "addexistingtasktoweek()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L345"
+      "source_location": "L337"
     },
     {
       "id": "app_pages_sprints_ensuresprintforcurrentweek",
@@ -3327,7 +3483,7 @@
       "file_type": "code",
       "norm_label": "ensuresprintforcurrentweek()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L167"
+      "source_location": "L159"
     },
     {
       "id": "app_pages_sprints_oncreatedeliverable",
@@ -3339,7 +3495,7 @@
       "file_type": "code",
       "norm_label": "oncreatedeliverable()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L372"
+      "source_location": "L364"
     },
     {
       "id": "app_pages_sprints_onsaveobjective",
@@ -3351,7 +3507,7 @@
       "file_type": "code",
       "norm_label": "onsaveobjective()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L205"
+      "source_location": "L197"
     },
     {
       "id": "app_pages_sprints_openmodalwithtab",
@@ -3363,7 +3519,7 @@
       "file_type": "code",
       "norm_label": "openmodalwithtab()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L334"
+      "source_location": "L326"
     },
     {
       "id": "app_pages_sprints_removetaskfromweek",
@@ -3375,7 +3531,7 @@
       "file_type": "code",
       "norm_label": "removetaskfromweek()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L308"
+      "source_location": "L300"
     },
     {
       "id": "app_pages_sprints_resetfilters",
@@ -3387,7 +3543,7 @@
       "file_type": "code",
       "norm_label": "resetfilters()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L266"
+      "source_location": "L258"
     },
     {
       "id": "app_pages_sprints_showfeedback",
@@ -3399,7 +3555,7 @@
       "file_type": "code",
       "norm_label": "showfeedback()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L276"
+      "source_location": "L268"
     },
     {
       "id": "app_pages_sprints_updatetaskstatus",
@@ -3411,7 +3567,7 @@
       "file_type": "code",
       "norm_label": "updatetaskstatus()",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L285"
+      "source_location": "L277"
     },
     {
       "id": "components_securityalertmodal_close",
@@ -3759,7 +3915,7 @@
       "file_type": "code",
       "norm_label": "creategithubissue()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L209"
+      "source_location": "L270"
     },
     {
       "id": "composables_usegithub_fetchdeployments",
@@ -3771,7 +3927,7 @@
       "file_type": "code",
       "norm_label": "fetchdeployments()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L168"
+      "source_location": "L212"
     },
     {
       "id": "composables_usegithub_fetchglobalcommits",
@@ -3783,7 +3939,7 @@
       "file_type": "code",
       "norm_label": "fetchglobalcommits()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L267"
+      "source_location": "L339"
     },
     {
       "id": "composables_usegithub_fetchpackages",
@@ -3795,7 +3951,7 @@
       "file_type": "code",
       "norm_label": "fetchpackages()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L251"
+      "source_location": "L317"
     },
     {
       "id": "composables_usegithub_fetchpullsandissues",
@@ -3807,7 +3963,7 @@
       "file_type": "code",
       "norm_label": "fetchpullsandissues()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L203"
+      "source_location": "L264"
     },
     {
       "id": "composables_usegithub_fetchsecurity",
@@ -3819,7 +3975,7 @@
       "file_type": "code",
       "norm_label": "fetchsecurity()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L132"
+      "source_location": "L166"
     },
     {
       "id": "composables_usegithub_usegithub",
@@ -3831,7 +3987,7 @@
       "file_type": "code",
       "norm_label": "usegithub()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L273"
+      "source_location": "L345"
     },
     {
       "id": "composables_usegithub_usegithubbranches",
@@ -3843,7 +3999,7 @@
       "file_type": "code",
       "norm_label": "usegithubbranches()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L45"
+      "source_location": "L55"
     },
     {
       "id": "composables_usegithub_usegithubcommits",
@@ -3855,7 +4011,7 @@
       "file_type": "code",
       "norm_label": "usegithubcommits()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L25"
+      "source_location": "L28"
     },
     {
       "id": "composables_usegithub_usegithubdeployments",
@@ -3867,7 +4023,7 @@
       "file_type": "code",
       "norm_label": "usegithubdeployments()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L138"
+      "source_location": "L172"
     },
     {
       "id": "composables_usegithub_usegithubglobalcommits",
@@ -3879,7 +4035,7 @@
       "file_type": "code",
       "norm_label": "usegithubglobalcommits()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L257"
+      "source_location": "L323"
     },
     {
       "id": "composables_usegithub_usegithubpackages",
@@ -3891,7 +4047,7 @@
       "file_type": "code",
       "norm_label": "usegithubpackages()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L229"
+      "source_location": "L290"
     },
     {
       "id": "composables_usegithub_usegithubpullsandissues",
@@ -3903,7 +4059,7 @@
       "file_type": "code",
       "norm_label": "usegithubpullsandissues()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L174"
+      "source_location": "L218"
     },
     {
       "id": "composables_usegithub_usegithubrepos",
@@ -3915,7 +4071,7 @@
       "file_type": "code",
       "norm_label": "usegithubrepos()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L16"
+      "source_location": "L15"
     },
     {
       "id": "composables_usegithub_usegithubsecurity",
@@ -3927,7 +4083,7 @@
       "file_type": "code",
       "norm_label": "usegithubsecurity()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L98"
+      "source_location": "L125"
     },
     {
       "id": "composables_usegithub_usegithubworkflows",
@@ -3939,7 +4095,7 @@
       "file_type": "code",
       "norm_label": "usegithubworkflows()",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L65"
+      "source_location": "L82"
     },
     {
       "id": "composables_usesprintcalendar_getmonday",
@@ -4552,162 +4708,6 @@
       "norm_label": "getdeploymentdotclass()",
       "source_file": "components/project/github/ProjectDeploymentFeed.vue",
       "source_location": "L196"
-    },
-    {
-      "id": "server_utils_errors_throwapierror",
-      "label": "throwApiError()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "throwapierror()",
-      "source_file": "server/utils/errors.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_utils_validation_optionalstring",
-      "label": "optionalString()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "optionalstring()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L33"
-    },
-    {
-      "id": "server_utils_validation_readjsonbody",
-      "label": "readJsonBody()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "readjsonbody()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_utils_validation_requirestring",
-      "label": "requireString()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "requirestring()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L26"
-    },
-    {
-      "id": "server_utils_validation_validatedate",
-      "label": "validateDate()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatedate()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L122"
-    },
-    {
-      "id": "server_utils_validation_validatepriority",
-      "label": "validatePriority()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatepriority()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L64"
-    },
-    {
-      "id": "server_utils_validation_validateprojectpriority",
-      "label": "validateProjectPriority()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validateprojectpriority()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L93"
-    },
-    {
-      "id": "server_utils_validation_validateprojectstatus",
-      "label": "validateProjectStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validateprojectstatus()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L84"
-    },
-    {
-      "id": "server_utils_validation_validatesprintstatus",
-      "label": "validateSprintStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatesprintstatus()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L102"
-    },
-    {
-      "id": "server_utils_validation_validatestatus",
-      "label": "validateStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatestatus()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L60"
-    },
-    {
-      "id": "server_utils_validation_validatestringarray",
-      "label": "validateStringArray()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatestringarray()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L111"
-    },
-    {
-      "id": "server_utils_validation_validatetaskstatus",
-      "label": "validateTaskStatus()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatetaskstatus()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "server_utils_validation_validatetechtags",
-      "label": "validateTechTags()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "validatetechtags()",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L73"
     },
     {
       "id": "components_project_projectlivedeploymentcard_copyliveurl",
@@ -5564,7 +5564,7 @@
       "label": "projects.get.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "projects.get.ts",
       "source_file": "server/api/projects.get.ts",
@@ -5575,21 +5575,21 @@
       "label": "projects.post.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "projects.post.ts",
       "source_file": "server/api/projects.post.ts",
       "source_location": "L1"
     },
     {
-      "id": "server_api_sprints_id_put",
-      "label": "sprints/[id].put.ts",
+      "id": "server_api_projects_slug_put",
+      "label": "[slug].put.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
-      "norm_label": "sprints/[id].put.ts",
-      "source_file": "server/api/sprints/[id].put.ts",
+      "norm_label": "[slug].put.ts",
+      "source_file": "server/api/projects/[slug].put.ts",
       "source_location": "L1"
     },
     {
@@ -5597,43 +5597,10 @@
       "label": "sprints.post.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "sprints.post.ts",
       "source_file": "server/api/sprints.post.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_tasks_get",
-      "label": "tasks.get.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "tasks.get.ts",
-      "source_file": "server/api/tasks.get.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_tasks_id_put",
-      "label": "tasks/[id].put.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "tasks/[id].put.ts",
-      "source_file": "server/api/tasks/[id].put.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_tasks_post",
-      "label": "tasks.post.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "tasks.post.ts",
-      "source_file": "server/api/tasks.post.ts",
       "source_location": "L1"
     },
     {
@@ -5641,21 +5608,10 @@
       "label": "helper.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "helper.ts",
       "source_file": "server/schemas/helper.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_index",
-      "label": "schemas/index.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "schemas/index.ts",
-      "source_file": "server/schemas/index.ts",
       "source_location": "L1"
     },
     {
@@ -5663,7 +5619,7 @@
       "label": "project.schema.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "project.schema.ts",
       "source_file": "server/schemas/project.schema.ts",
@@ -5674,7 +5630,7 @@
       "label": "baseProjectFields",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "baseprojectfields",
       "source_file": "server/schemas/project.schema.ts",
@@ -5685,7 +5641,7 @@
       "label": "createProjectSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "createprojectschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5696,7 +5652,7 @@
       "label": "projectPrioritySchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "projectpriorityschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5707,7 +5663,7 @@
       "label": "projectQuerySchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "projectqueryschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5718,7 +5674,7 @@
       "label": "projectStatusSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "projectstatusschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5729,7 +5685,7 @@
       "label": "updateProjectSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "updateprojectschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5740,7 +5696,7 @@
       "label": "sprint.schema.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "sprint.schema.ts",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5751,7 +5707,7 @@
       "label": "baseSprintFields",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "basesprintfields",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5762,7 +5718,7 @@
       "label": "createSprintSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "createsprintschema",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5773,7 +5729,7 @@
       "label": "sprintStatusSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "sprintstatusschema",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5784,106 +5740,18 @@
       "label": "updateSprintSchema",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "code",
       "norm_label": "updatesprintschema",
       "source_file": "server/schemas/sprint.schema.ts",
       "source_location": "L21"
     },
     {
-      "id": "server_schemas_task_schema",
-      "label": "task.schema.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "task.schema.ts",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_task_schema_basetaskfields",
-      "label": "baseTaskFields",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "basetaskfields",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "server_schemas_task_schema_createtaskschema",
-      "label": "createTaskSchema",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "server_schemas_task_schema_legacystatusmap",
-      "label": "legacyStatusMap",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "legacystatusmap",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_task_schema_taskpriorityschema",
-      "label": "taskPrioritySchema",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskpriorityschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryschema",
-      "label": "taskQuerySchema",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L44"
-    },
-    {
-      "id": "server_schemas_task_schema_taskstatusschema",
-      "label": "taskStatusSchema",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskstatusschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskschema",
-      "label": "updateTaskSchema",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L42"
-    },
-    {
       "id": "ref_zod",
       "label": "zod",
       "_origin": "ast",
       "community": 1,
-      "community_name": "task.schema.ts",
+      "community_name": "helper.ts",
       "file_type": "concept",
       "norm_label": "zod",
       "source_file": "package.json",
@@ -6031,6 +5899,39 @@
       "norm_label": "tailwindcss",
       "source_file": "package.json",
       "source_location": "L23"
+    },
+    {
+      "id": "server_api_github_security_get",
+      "label": "security.get.ts",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "security.get.ts",
+      "file_type": "code",
+      "norm_label": "security.get.ts",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_github_security_get_fetchcachedsecurity",
+      "label": "fetchCachedSecurity",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "security.get.ts",
+      "file_type": "code",
+      "norm_label": "fetchcachedsecurity",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "server_api_github_security_get_severityorder",
+      "label": "severityOrder",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "security.get.ts",
+      "file_type": "code",
+      "norm_label": "severityorder",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L22"
     },
     {
       "id": "components_securitybadge",
@@ -6638,17 +6539,6 @@
       "source_location": "L1"
     },
     {
-      "id": "server_api_projects_slug_put",
-      "label": "[slug].put.ts",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "[slug].put.ts",
-      "source_file": "server/api/projects/[slug].put.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "server_api_sprints_get",
       "label": "sprints.get.ts",
       "_origin": "ast",
@@ -6682,6 +6572,17 @@
       "source_location": "L1"
     },
     {
+      "id": "server_api_sprints_id_put",
+      "label": "sprints/[id].put.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "sprints/[id].put.ts",
+      "source_file": "server/api/sprints/[id].put.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_api_stats_get",
       "label": "stats.get.ts",
       "_origin": "ast",
@@ -6690,6 +6591,17 @@
       "file_type": "code",
       "norm_label": "stats.get.ts",
       "source_file": "server/api/stats.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_tasks_get",
+      "label": "tasks.get.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "tasks.get.ts",
+      "source_file": "server/api/tasks.get.ts",
       "source_location": "L1"
     },
     {
@@ -6712,6 +6624,28 @@
       "file_type": "code",
       "norm_label": "tasks/[id].get.ts",
       "source_file": "server/api/tasks/[id].get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_tasks_id_put",
+      "label": "tasks/[id].put.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "tasks/[id].put.ts",
+      "source_file": "server/api/tasks/[id].put.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_tasks_post",
+      "label": "tasks.post.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "tasks.post.ts",
+      "source_file": "server/api/tasks.post.ts",
       "source_location": "L1"
     },
     {
@@ -6900,6 +6834,17 @@
       "norm_label": "store.ts",
       "source_file": "server/utils/store.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "server_utils_store_taskidseqmutex",
+      "label": "taskIdSeqMutex",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "taskidseqmutex",
+      "source_file": "server/utils/store.ts",
+      "source_location": "L33"
     },
     {
       "id": "skill_optimizer_skill",
@@ -14913,7 +14858,7 @@
       "label": "branches.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "branches.get.ts",
       "source_file": "server/api/github/branches.get.ts",
@@ -14924,7 +14869,7 @@
       "label": "fetchCachedBranches",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedbranches",
       "source_file": "server/api/github/branches.get.ts",
@@ -14935,7 +14880,7 @@
       "label": "commit-detail.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "commit-detail.get.ts",
       "source_file": "server/api/github/commit-detail.get.ts",
@@ -14946,7 +14891,7 @@
       "label": "fetchCachedCommitDetail",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedcommitdetail",
       "source_file": "server/api/github/commit-detail.get.ts",
@@ -14957,7 +14902,7 @@
       "label": "commits.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "commits.get.ts",
       "source_file": "server/api/github/commits.get.ts",
@@ -14968,18 +14913,29 @@
       "label": "fetchCachedCommits",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedcommits",
       "source_file": "server/api/github/commits.get.ts",
       "source_location": "L6"
     },
     {
+      "id": "server_api_github_create_issue_post",
+      "label": "create-issue.post.ts",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "create-issue.post.ts",
+      "source_file": "server/api/github/create-issue.post.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_api_github_deployments_get",
       "label": "deployments.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "deployments.get.ts",
       "source_file": "server/api/github/deployments.get.ts",
@@ -14990,7 +14946,7 @@
       "label": "fetchCachedDeployments",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcacheddeployments",
       "source_file": "server/api/github/deployments.get.ts",
@@ -15001,7 +14957,7 @@
       "label": "fetchCachedGlobalCommits",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedglobalcommits",
       "source_file": "server/api/github/global-commits.get.ts",
@@ -15012,7 +14968,7 @@
       "label": "packages.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "packages.get.ts",
       "source_file": "server/api/github/packages.get.ts",
@@ -15023,7 +14979,7 @@
       "label": "fetchCachedPackages",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedpackages",
       "source_file": "server/api/github/packages.get.ts",
@@ -15034,7 +14990,7 @@
       "label": "pulls-issues.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "pulls-issues.get.ts",
       "source_file": "server/api/github/pulls-issues.get.ts",
@@ -15045,7 +15001,7 @@
       "label": "fetchCachedPullsAndIssues",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedpullsandissues",
       "source_file": "server/api/github/pulls-issues.get.ts",
@@ -15056,7 +15012,7 @@
       "label": "repos.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "repos.get.ts",
       "source_file": "server/api/github/repos.get.ts",
@@ -15067,51 +15023,18 @@
       "label": "fetchCachedRepos",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedrepos",
       "source_file": "server/api/github/repos.get.ts",
       "source_location": "L5"
     },
     {
-      "id": "server_api_github_security_get",
-      "label": "security.get.ts",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "createGitHubClient",
-      "file_type": "code",
-      "norm_label": "security.get.ts",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_github_security_get_fetchcachedsecurity",
-      "label": "fetchCachedSecurity",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "createGitHubClient",
-      "file_type": "code",
-      "norm_label": "fetchcachedsecurity",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "server_api_github_security_get_severityorder",
-      "label": "severityOrder",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "createGitHubClient",
-      "file_type": "code",
-      "norm_label": "severityorder",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L22"
-    },
-    {
       "id": "server_api_github_workflow_jobs_get",
       "label": "workflow-jobs.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "workflow-jobs.get.ts",
       "source_file": "server/api/github/workflow-jobs.get.ts",
@@ -15122,18 +15045,29 @@
       "label": "fetchCachedWorkflowJobs",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedworkflowjobs",
       "source_file": "server/api/github/workflow-jobs.get.ts",
       "source_location": "L6"
     },
     {
+      "id": "server_api_github_workflow_rerun_post",
+      "label": "workflow-rerun.post.ts",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "workflow-rerun.post.ts",
+      "source_file": "server/api/github/workflow-rerun.post.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_api_github_workflows_get",
       "label": "workflows.get.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "workflows.get.ts",
       "source_file": "server/api/github/workflows.get.ts",
@@ -15144,7 +15078,7 @@
       "label": "fetchCachedWorkflows",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "fetchcachedworkflows",
       "source_file": "server/api/github/workflows.get.ts",
@@ -15155,7 +15089,7 @@
       "label": "errors.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "errors.ts",
       "source_file": "server/utils/errors.ts",
@@ -15166,11 +15100,33 @@
       "label": "utils/github.ts",
       "_origin": "ast",
       "community": 52,
-      "community_name": "createGitHubClient",
+      "community_name": "throwApiError",
       "file_type": "code",
       "norm_label": "utils/github.ts",
       "source_file": "server/utils/github.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "server_utils_validation",
+      "label": "validation.ts",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "validation.ts",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_utils_validation_legacystatusmap",
+      "label": "legacyStatusMap",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "legacystatusmap",
+      "source_file": "server/utils/validation.ts",
+      "source_location": "L41"
     },
     {
       "id": "app_pages_repos",
@@ -15566,7 +15522,7 @@
       "file_type": "code",
       "norm_label": "activemodaltab",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L331"
+      "source_location": "L323"
     },
     {
       "id": "app_pages_sprints_activesprint",
@@ -15588,7 +15544,7 @@
       "file_type": "code",
       "norm_label": "activeweekkey",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L192"
+      "source_location": "L184"
     },
     {
       "id": "app_pages_sprints_activeweektasks",
@@ -15599,7 +15555,7 @@
       "file_type": "code",
       "norm_label": "activeweektasks",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L147"
+      "source_location": "L148"
     },
     {
       "id": "app_pages_sprints_completedcount",
@@ -15610,7 +15566,7 @@
       "file_type": "code",
       "norm_label": "completedcount",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L230"
+      "source_location": "L222"
     },
     {
       "id": "app_pages_sprints_completedtasks",
@@ -15621,7 +15577,7 @@
       "file_type": "code",
       "norm_label": "completedtasks",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L225"
+      "source_location": "L217"
     },
     {
       "id": "app_pages_sprints_completionpercentage",
@@ -15632,7 +15588,7 @@
       "file_type": "code",
       "norm_label": "completionpercentage",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L234"
+      "source_location": "L226"
     },
     {
       "id": "app_pages_sprints_currentobjective",
@@ -15643,7 +15599,7 @@
       "file_type": "code",
       "norm_label": "currentobjective",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L194"
+      "source_location": "L186"
     },
     {
       "id": "app_pages_sprints_data_projects",
@@ -15687,7 +15643,7 @@
       "file_type": "code",
       "norm_label": "deliverablesfilter",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L240"
+      "source_location": "L232"
     },
     {
       "id": "app_pages_sprints_deliverablessearchquery",
@@ -15698,7 +15654,7 @@
       "file_type": "code",
       "norm_label": "deliverablessearchquery",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L241"
+      "source_location": "L233"
     },
     {
       "id": "app_pages_sprints_feedbackmessage",
@@ -15709,7 +15665,7 @@
       "file_type": "code",
       "norm_label": "feedbackmessage",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L272"
+      "source_location": "L264"
     },
     {
       "id": "app_pages_sprints_feedbacktype",
@@ -15720,7 +15676,7 @@
       "file_type": "code",
       "norm_label": "feedbacktype",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L273"
+      "source_location": "L265"
     },
     {
       "id": "app_pages_sprints_filtereddeliverables",
@@ -15731,7 +15687,7 @@
       "file_type": "code",
       "norm_label": "filtereddeliverables",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L243"
+      "source_location": "L235"
     },
     {
       "id": "app_pages_sprints_inflightcount",
@@ -15742,7 +15698,7 @@
       "file_type": "code",
       "norm_label": "inflightcount",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L231"
+      "source_location": "L223"
     },
     {
       "id": "app_pages_sprints_inflighttasks",
@@ -15753,7 +15709,7 @@
       "file_type": "code",
       "norm_label": "inflighttasks",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L226"
+      "source_location": "L218"
     },
     {
       "id": "app_pages_sprints_issubmittingdeliverable",
@@ -15764,7 +15720,7 @@
       "file_type": "code",
       "norm_label": "issubmittingdeliverable",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L332"
+      "source_location": "L324"
     },
     {
       "id": "app_pages_sprints_pendingcount",
@@ -15775,7 +15731,7 @@
       "file_type": "code",
       "norm_label": "pendingcount",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L232"
+      "source_location": "L224"
     },
     {
       "id": "app_pages_sprints_pendingtasks",
@@ -15786,7 +15742,7 @@
       "file_type": "code",
       "norm_label": "pendingtasks",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L227"
+      "source_location": "L219"
     },
     {
       "id": "app_pages_sprints_projectsapi",
@@ -15808,7 +15764,7 @@
       "file_type": "code",
       "norm_label": "showaddtargetmodal",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L330"
+      "source_location": "L322"
     },
     {
       "id": "app_pages_sprints_sprintsapi",
@@ -15841,7 +15797,7 @@
       "file_type": "code",
       "norm_label": "totaldeliverablescount",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L229"
+      "source_location": "L221"
     },
     {
       "id": "app_pages_sprints_unassignedbacklogtasks",
@@ -15852,7 +15808,7 @@
       "file_type": "code",
       "norm_label": "unassignedbacklogtasks",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L339"
+      "source_location": "L331"
     },
     {
       "id": "app_pages_sprints_weekoffset_basedate_currentmonday_currentsunday_weeknum_iscurrentweek_weeklabel_remainingdaystext_gotoprevweek_gotonextweek_gotocurrentweek_toisodate",
@@ -17450,48 +17406,103 @@
       "source_location": "L1"
     },
     {
-      "id": "server_api_github_create_issue_post",
-      "label": "create-issue.post.ts",
+      "id": "server_schemas_index",
+      "label": "schemas/index.ts",
       "_origin": "ast",
       "community": 77,
-      "community_name": "throwApiError",
+      "community_name": "task.schema.ts",
       "file_type": "code",
-      "norm_label": "create-issue.post.ts",
-      "source_file": "server/api/github/create-issue.post.ts",
+      "norm_label": "schemas/index.ts",
+      "source_file": "server/schemas/index.ts",
       "source_location": "L1"
     },
     {
-      "id": "server_api_github_workflow_rerun_post",
-      "label": "workflow-rerun.post.ts",
+      "id": "server_schemas_task_schema",
+      "label": "task.schema.ts",
       "_origin": "ast",
       "community": 77,
-      "community_name": "throwApiError",
+      "community_name": "task.schema.ts",
       "file_type": "code",
-      "norm_label": "workflow-rerun.post.ts",
-      "source_file": "server/api/github/workflow-rerun.post.ts",
+      "norm_label": "task.schema.ts",
+      "source_file": "server/schemas/task.schema.ts",
       "source_location": "L1"
     },
     {
-      "id": "server_utils_validation",
-      "label": "validation.ts",
+      "id": "server_schemas_task_schema_basetaskfields",
+      "label": "baseTaskFields",
       "_origin": "ast",
       "community": 77,
-      "community_name": "throwApiError",
+      "community_name": "task.schema.ts",
       "file_type": "code",
-      "norm_label": "validation.ts",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L1"
+      "norm_label": "basetaskfields",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L19"
     },
     {
-      "id": "server_utils_validation_legacystatusmap",
+      "id": "server_schemas_task_schema_createtaskschema",
+      "label": "createTaskSchema",
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_schemas_task_schema_legacystatusmap",
       "label": "legacyStatusMap",
       "_origin": "ast",
       "community": 77,
-      "community_name": "throwApiError",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "legacystatusmap",
-      "source_file": "server/utils/validation.ts",
-      "source_location": "L41"
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_task_schema_taskpriorityschema",
+      "label": "taskPrioritySchema",
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskpriorityschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryschema",
+      "label": "taskQuerySchema",
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "server_schemas_task_schema_taskstatusschema",
+      "label": "taskStatusSchema",
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskstatusschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskschema",
+      "label": "updateTaskSchema",
+      "_origin": "ast",
+      "community": 77,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L42"
     },
     {
       "id": "components_project_projectlivedeploymentcard",
@@ -19567,7 +19578,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L347",
+      "source_location": "L339",
       "weight": 1.0
     },
     {
@@ -19579,7 +19590,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L365",
+      "source_location": "L357",
       "weight": 1.0
     },
     {
@@ -19591,7 +19602,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L382",
+      "source_location": "L374",
       "weight": 1.0
     },
     {
@@ -19603,7 +19614,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L423",
+      "source_location": "L415",
       "weight": 1.0
     },
     {
@@ -19615,7 +19626,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L215",
+      "source_location": "L207",
       "weight": 1.0
     },
     {
@@ -19627,7 +19638,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L217",
+      "source_location": "L209",
       "weight": 1.0
     },
     {
@@ -19639,7 +19650,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L322",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -19651,7 +19662,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L299",
+      "source_location": "L291",
       "weight": 1.0
     },
     {
@@ -20803,7 +20814,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -20815,7 +20826,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L56",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_delete",
+      "target": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_findbyid",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "server/repositories/nitro/nitro-task.repository.ts",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -20827,7 +20850,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L65",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "server_repositories_nitro_nitro_task_repository_nitrotaskrepository_delete",
+      "target": "server_utils_store_setarray",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "server/repositories/nitro/nitro-task.repository.ts",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -20839,7 +20874,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L47",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -20851,7 +20886,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L69",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -20863,7 +20898,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L61",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
@@ -21091,7 +21126,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L104",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -21103,7 +21138,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L105",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -21115,7 +21150,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L123",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
+      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_findbyid",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -21127,7 +21174,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L155",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_delete",
+      "target": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_update",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -21151,7 +21210,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L131",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -21163,7 +21222,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L134",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -21175,7 +21234,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L147",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -21211,7 +21270,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L133",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -21223,7 +21282,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L135",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -21247,7 +21306,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L118",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -21259,7 +21318,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L36",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -21283,7 +21342,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L108",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -21295,7 +21354,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L112",
+      "source_location": "L131",
       "weight": 1.0
     },
     {
@@ -21307,7 +21366,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L76",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -21319,7 +21378,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L52",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -21331,7 +21390,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L163",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -21343,7 +21402,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L171",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -21355,7 +21414,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L200",
+      "source_location": "L219",
       "weight": 1.0
     },
     {
@@ -21403,7 +21462,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L145",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -21415,7 +21474,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L157",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -21427,7 +21486,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "server/utils/store.ts",
-      "source_location": "L192",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -23364,6 +23423,18 @@
     },
     {
       "source": "server_api_stats_get",
+      "target": "server_repositories_index_sprintrepository",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server/api/stats.get.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "server_api_stats_get",
       "target": "server_repositories_index_taskrepository",
       "relation": "imports",
       "_origin": "ast",
@@ -23480,6 +23551,18 @@
       "context": "import",
       "source_file": "server/api/tasks/[id].get.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "server_api_tasks_id_put",
+      "target": "server_repositories_index_sprintrepository",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server/api/tasks/[id].put.ts",
+      "source_location": "L1",
       "weight": 1.0
     },
     {
@@ -24181,6 +24264,18 @@
     {
       "source": "server_repositories_nitro_nitro_task_repository",
       "target": "server_utils_store_removeitem",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "server/repositories/nitro/nitro-task.repository.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "server_repositories_nitro_nitro_task_repository",
+      "target": "server_utils_store_setarray",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -27404,7 +27499,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -27464,7 +27559,7 @@
       "confidence_score": 1.0,
       "context": "type",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -29183,7 +29278,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -29194,7 +29289,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L167",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -29205,7 +29300,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L192",
+      "source_location": "L184",
       "weight": 1.0
     },
     {
@@ -29216,7 +29311,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L194",
+      "source_location": "L186",
       "weight": 1.0
     },
     {
@@ -29227,7 +29322,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L205",
+      "source_location": "L197",
       "weight": 1.0
     },
     {
@@ -29238,7 +29333,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L225",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -29249,7 +29344,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L226",
+      "source_location": "L218",
       "weight": 1.0
     },
     {
@@ -29260,7 +29355,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L227",
+      "source_location": "L219",
       "weight": 1.0
     },
     {
@@ -29271,7 +29366,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L229",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -29282,7 +29377,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L230",
+      "source_location": "L222",
       "weight": 1.0
     },
     {
@@ -29293,7 +29388,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L231",
+      "source_location": "L223",
       "weight": 1.0
     },
     {
@@ -29304,7 +29399,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L232",
+      "source_location": "L224",
       "weight": 1.0
     },
     {
@@ -29315,7 +29410,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L234",
+      "source_location": "L226",
       "weight": 1.0
     },
     {
@@ -29326,7 +29421,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L240",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -29337,7 +29432,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L241",
+      "source_location": "L233",
       "weight": 1.0
     },
     {
@@ -29348,7 +29443,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L243",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -29359,7 +29454,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L266",
+      "source_location": "L258",
       "weight": 1.0
     },
     {
@@ -29370,7 +29465,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L272",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -29381,7 +29476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L273",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -29392,7 +29487,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L276",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
@@ -29403,7 +29498,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L285",
+      "source_location": "L277",
       "weight": 1.0
     },
     {
@@ -29414,7 +29509,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L308",
+      "source_location": "L300",
       "weight": 1.0
     },
     {
@@ -29425,7 +29520,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L330",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -29436,7 +29531,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L331",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -29447,7 +29542,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L332",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
@@ -29458,7 +29553,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L334",
+      "source_location": "L326",
       "weight": 1.0
     },
     {
@@ -29469,7 +29564,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L339",
+      "source_location": "L331",
       "weight": 1.0
     },
     {
@@ -29480,7 +29575,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L345",
+      "source_location": "L337",
       "weight": 1.0
     },
     {
@@ -29491,7 +29586,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L372",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -35667,178 +35762,13 @@
     },
     {
       "source": "composables_usegithub",
-      "target": "composables_usegithub_fetchsecurity",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L132",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubdeployments",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L138",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubrepos",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L16",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_fetchdeployments",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L168",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubpullsandissues",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L174",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_fetchpullsandissues",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L203",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_creategithubissue",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L209",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubpackages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L229",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubcommits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L25",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_fetchpackages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L251",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubglobalcommits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L257",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_fetchglobalcommits",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L267",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithub",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L273",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubbranches",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L45",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
-      "target": "composables_usegithub_usegithubworkflows",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "composables/useGitHub.ts",
-      "source_location": "L65",
-      "weight": 1.0
-    },
-    {
-      "source": "composables_usegithub",
       "target": "composables_usegithub_rerunworkflow",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L85",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -35849,7 +35779,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L92",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -35860,7 +35790,172 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L98",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubrepos",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_fetchsecurity",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubdeployments",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_fetchdeployments",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubpullsandissues",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L218",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_fetchpullsandissues",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_creategithubissue",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L270",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubcommits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubpackages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L290",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_fetchpackages",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L317",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubglobalcommits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L323",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_fetchglobalcommits",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L339",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithub",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L345",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubbranches",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "composables_usegithub",
+      "target": "composables_usegithub_usegithubworkflows",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "composables/useGitHub.ts",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -38907,7 +39002,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -39407,13 +39502,24 @@
     },
     {
       "source": "server_utils_store",
+      "target": "server_utils_store_migratenumericids",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/utils/store.ts",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "server_utils_store",
       "target": "server_utils_store_getbyid",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
-      "source_location": "L116",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -39424,18 +39530,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
-      "source_location": "L127",
-      "weight": 1.0
-    },
-    {
-      "source": "server_utils_store",
-      "target": "server_utils_store_updateitem",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/utils/store.ts",
-      "source_location": "L139",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -39451,29 +39546,18 @@
     },
     {
       "source": "server_utils_store",
+      "target": "server_utils_store_updateitem",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/utils/store.ts",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "server_utils_store",
       "target": "server_utils_store_removeitem",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/utils/store.ts",
-      "source_location": "L161",
-      "weight": 1.0
-    },
-    {
-      "source": "server_utils_store",
-      "target": "server_utils_store_getbyslug",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/utils/store.ts",
-      "source_location": "L175",
-      "weight": 1.0
-    },
-    {
-      "source": "server_utils_store",
-      "target": "server_utils_store_updateitembyslug",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -39495,13 +39579,35 @@
     },
     {
       "source": "server_utils_store",
+      "target": "server_utils_store_getbyslug",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/utils/store.ts",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "server_utils_store",
+      "target": "server_utils_store_updateitembyslug",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/utils/store.ts",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "server_utils_store",
       "target": "server_utils_store_removeitembyslug",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
-      "source_location": "L196",
+      "source_location": "L215",
       "weight": 1.0
     },
     {
@@ -39539,7 +39645,7 @@
     },
     {
       "source": "server_utils_store",
-      "target": "server_utils_store_getnexttaskid",
+      "target": "server_utils_store_taskidseqmutex",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -39550,13 +39656,24 @@
     },
     {
       "source": "server_utils_store",
+      "target": "server_utils_store_getnexttaskid",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "server/utils/store.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "server_utils_store",
       "target": "server_utils_store_normalizetask",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
-      "source_location": "L40",
+      "source_location": "L59",
       "weight": 1.0
     },
     {
@@ -39578,18 +39695,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/utils/store.ts",
-      "source_location": "L74",
-      "weight": 1.0
-    },
-    {
-      "source": "server_utils_store",
-      "target": "server_utils_store_migratenumericids",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "server/utils/store.ts",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -43164,7 +43270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -43175,7 +43281,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -43186,7 +43292,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L50",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -43197,7 +43303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L59",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -43208,7 +43314,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L64",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -43219,7 +43325,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L68",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -43395,7 +43501,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L126",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -43406,7 +43512,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L150",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -43417,7 +43523,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L171",
+      "source_location": "L208",
       "weight": 1.0
     },
     {
@@ -43555,7 +43661,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "server/repositories/nitro/nitro-task.repository.ts",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -43603,7 +43709,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L275",
+      "source_location": "L347",
       "weight": 1.0
     },
     {
@@ -43615,7 +43721,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L276",
+      "source_location": "L348",
       "weight": 1.0
     },
     {
@@ -43627,7 +43733,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L277",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -43639,7 +43745,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L278",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -43651,7 +43757,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L279",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -43663,7 +43769,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L280",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -43675,7 +43781,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L281",
+      "source_location": "L353",
       "weight": 1.0
     },
     {
@@ -43687,7 +43793,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L282",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -43699,7 +43805,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L283",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -43711,7 +43817,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L297",
+      "source_location": "L375",
       "weight": 1.0
     },
     {
@@ -43723,7 +43829,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L298",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -43735,7 +43841,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L299",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -43747,7 +43853,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L300",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -43759,7 +43865,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L301",
+      "source_location": "L379",
       "weight": 1.0
     },
     {
@@ -43771,7 +43877,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L302",
+      "source_location": "L380",
       "weight": 1.0
     },
     {
@@ -43783,7 +43889,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useGitHub.ts",
-      "source_location": "L303",
+      "source_location": "L381",
       "weight": 1.0
     },
     {
@@ -44088,5 +44194,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f33cefe2193b438246afb734194b0f74377d3438"
+  "built_at_commit": "b206639cf359d22e7f971ca952e747f1e12dd407"
 }

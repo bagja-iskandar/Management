@@ -120,9 +120,9 @@
     "semantic_hash": ""
   },
   "server/api/stats.get.ts": {
-    "mtime": 1789910970.1003275,
-    "seen": 1789911544.5465953,
-    "ast_hash": "9ce270864d00b79409c3f7060e837902",
+    "mtime": 1791278387.7877853,
+    "seen": 1791278571.2699642,
+    "ast_hash": "f058a2e32b080181db0e1ace53fd2940",
     "semantic_hash": ""
   },
   "server/api/tasks.get.ts": {
@@ -168,9 +168,9 @@
     "semantic_hash": "9a4e3d6236d63f7b7444d277311fbcc3"
   },
   "server/utils/store.ts": {
-    "mtime": 1789825220.9932292,
-    "seen": 1789825366.0874949,
-    "ast_hash": "e67c7c452a57c4a2cc4a1e165ac03e83",
+    "mtime": 1791278294.705025,
+    "seen": 1791278571.2785802,
+    "ast_hash": "d0ad97c59e3b9d9eb44ef197e476b868",
     "semantic_hash": ""
   },
   "server/utils/validation.ts": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1789912329.60964,
-    "seen": 1789912457.740213,
-    "ast_hash": "11522b105a202cff8c654087e3908818",
+    "mtime": 1791278438.506968,
+    "seen": 1791278571.2352872,
+    "ast_hash": "f70f94d7dda4d350025a556fb18882a3",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
@@ -510,9 +510,9 @@
     "semantic_hash": ""
   },
   "composables/useGitHub.ts": {
-    "mtime": 1789877694.2625198,
-    "seen": 1789877754.1827118,
-    "ast_hash": "45fec13c26671c5a2c1137be300dd1c0",
+    "mtime": 1791270450.0332503,
+    "seen": 1791278571.2595975,
+    "ast_hash": "2577bc3836027861a58c5e9363c7be54",
     "semantic_hash": ""
   },
   "server/api/github/branches.get.ts": {
@@ -954,9 +954,9 @@
     "semantic_hash": ""
   },
   "server/api/tasks/[id].put.ts": {
-    "mtime": 1789910927.7306814,
-    "seen": 1789911544.546612,
-    "ast_hash": "798ec8db141b236dc7b774071aef1aac",
+    "mtime": 1791278284.7681048,
+    "seen": 1791278571.2713895,
+    "ast_hash": "ec48916127c837f11e4e0c0bf1a3a16a",
     "semantic_hash": ""
   },
   "server/repositories/contracts/index.ts": {
@@ -1002,9 +1002,9 @@
     "semantic_hash": ""
   },
   "server/repositories/nitro/nitro-task.repository.ts": {
-    "mtime": 1789910907.2046316,
-    "seen": 1789911544.5466511,
-    "ast_hash": "0c336d74ddebbb64c2ad2ee83934940f",
+    "mtime": 1791278320.017298,
+    "seen": 1791278571.2760239,
+    "ast_hash": "c7fbfc61908f3bf9ae4b7b78a8697123",
     "semantic_hash": ""
   },
   "server/schemas/helper.ts": {
@@ -1032,9 +1032,9 @@
     "semantic_hash": ""
   },
   "server/schemas/task.schema.ts": {
-    "mtime": 1791268996.1091058,
-    "seen": 1791269323.2217839,
-    "ast_hash": "38f5baf0238eaef3d5bfe0c8a59d328b",
+    "mtime": 1791278261.9662223,
+    "seen": 1791278571.2775726,
+    "ast_hash": "a4df69372807fc7118865503030bcdb1",
     "semantic_hash": ""
   },
   "scripts/verify-supabase.mjs": {
@@ -1062,9 +1062,9 @@
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-task.repository.ts": {
-    "mtime": 1790168738.2161255,
-    "seen": 1790169726.3532991,
-    "ast_hash": "7f77d9373ba91b98bc475ebac8c186ff",
+    "mtime": 1791278351.057042,
+    "seen": 1791278571.2765408,
+    "ast_hash": "8610dc4229d37275684425c7e1556999",
     "semantic_hash": ""
   },
   "server/utils/supabase.ts": {

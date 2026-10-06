@@ -35,11 +35,33 @@ export default defineNuxtConfig({
       githubUsername: process.env.GITHUB_USERNAME || 'bagja-iskandar'
     }
   },
+  nitro: {
+    routeRules: {
+      '/**': {
+        headers: {
+          'X-Content-Type-Options': 'nosniff',
+          'X-Frame-Options': 'SAMEORIGIN',
+          'Referrer-Policy': 'strict-origin-when-cross-origin'
+        }
+      },
+      '/_nuxt/**': {
+        headers: {
+          'Cache-Control': 'public, max-age=31536000, immutable'
+        }
+      }
+    }
+  },
   app: {
     head: {
       title: 'Nexura — Personal Workspace',
-      meta: [{ name: 'description', content: 'Nexura: Modern personal engineering and project management workspace.' }]
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Nexura: Modern personal engineering and project management workspace.' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
     }
   },
-  devtools: { enabled: true }
+  devtools: { enabled: process.env.NODE_ENV !== 'production' }
 })

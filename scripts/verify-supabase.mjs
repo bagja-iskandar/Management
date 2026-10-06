@@ -24,8 +24,9 @@ async function verify() {
     if (pErr.code === 'PGRST205' || pErr.message?.includes('schema cache')) {
       console.log('\n⚠️  Tabel database belum dibuat di Supabase.')
       console.log('👉 Silakan buka SQL Editor Supabase Anda:')
-      console.log(`   https://supabase.com/dashboard/project/${url.replace('https://', '').replace('.supabase.co', '')}/sql/new`)
-      console.log('👉 Paste dan RUN isi file: server/database/migrations/001_create_nexura_tables.sql\n')
+      console.log('👉 Paste dan RUN isi file:')
+      console.log('   1. server/database/migrations/001_create_nexura_tables.sql')
+      console.log('   2. server/database/migrations/002_cascade_cleanup_trigger.sql\n')
       process.exit(0)
     } else {
       console.error('❌ Error query Supabase:', pErr)
