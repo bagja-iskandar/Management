@@ -641,32 +641,6 @@
       "source_location": "L401"
     },
     {
-      "id": "types_task_taskpriority",
-      "label": "TaskPriority",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "TaskDrawer.vue",
-      "file_type": "code",
-      "norm_label": "taskpriority",
-      "source_file": "types/task.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "types_task_taskstatus",
-      "label": "TaskStatus",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "TaskDrawer.vue",
-      "file_type": "code",
-      "norm_label": "taskstatus",
-      "source_file": "types/task.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "components_dashboard_projectsoverviewtable_projectoverviewitem",
       "label": "ProjectOverviewItem",
       "_callable": true,
@@ -717,6 +691,19 @@
       "norm_label": "tabconfig",
       "source_file": "components/project/ProjectNavDock.vue",
       "source_location": "L368"
+    },
+    {
+      "id": "components_sidebar_navitem",
+      "label": "NavItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "navitem",
+      "source_file": "components/Sidebar.vue",
+      "source_location": "L230"
     },
     {
       "id": "composables_useprojectnav_projecttabid",
@@ -784,17 +771,30 @@
       "source_location": "L4"
     },
     {
-      "id": "components_sidebar_navitem",
-      "label": "NavItem",
+      "id": "types_task_taskpriority",
+      "label": "TaskPriority",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
+      "community": 89,
+      "community_name": "Task",
       "file_type": "code",
-      "norm_label": "navitem",
-      "source_file": "components/Sidebar.vue",
-      "source_location": "L230"
+      "norm_label": "taskpriority",
+      "source_file": "types/task.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "types_task_taskstatus",
+      "label": "TaskStatus",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": "taskstatus",
+      "source_file": "types/task.ts",
+      "source_location": "L1"
     },
     {
       "id": "app_pages_telemetry_telemetryresponse",
@@ -1434,6 +1434,18 @@
       "source_location": "L26"
     },
     {
+      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
+      "label": ".client()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 113,
+      "community_name": "ITaskRepository",
+      "file_type": "code",
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
+      "source_location": "L45"
+    },
+    {
       "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_create",
       "label": ".create()",
       "_callable": true,
@@ -1674,18 +1686,6 @@
       "source_location": "L86"
     },
     {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "ISprintRepository",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L45"
-    },
-    {
       "id": "server_utils_supabase_getsupabaseclient",
       "label": "getSupabaseClient()",
       "_callable": true,
@@ -1696,18 +1696,6 @@
       "norm_label": "getsupabaseclient()",
       "source_file": "server/utils/supabase.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "scripts_verify_supabase_verify",
-      "label": "verify()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "@supabase/supabase-js",
-      "file_type": "code",
-      "norm_label": "verify()",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L18"
     },
     {
       "id": "server_repositories_index_getprojectrepo",
@@ -1852,6 +1840,18 @@
       "norm_label": "onconfirmremovefrommanagement()",
       "source_file": "app/pages/repos.vue",
       "source_location": "L560"
+    },
+    {
+      "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_delete",
+      "label": ".delete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/nitro/nitro-project.repository.ts",
+      "source_location": "L51"
     },
     {
       "id": "server_utils_storage_adapter_createstorageadapter",
@@ -4458,6 +4458,30 @@
       "source_location": "L184"
     },
     {
+      "id": "scripts_test_audit_runaudit",
+      "label": "runAudit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "runaudit()",
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L16"
+    },
+    {
+      "id": "scripts_verify_supabase_verify",
+      "label": "verify()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "verify()",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L18"
+    },
+    {
       "id": "components_repoactivitybadge_handleissuecreated",
       "label": "handleIssueCreated()",
       "_callable": true,
@@ -4542,6 +4566,18 @@
       "source_location": "L362"
     },
     {
+      "id": "components_sidebar_isactive",
+      "label": "isActive()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "isactive()",
+      "source_file": "components/Sidebar.vue",
+      "source_location": "L276"
+    },
+    {
       "id": "composables_useprojectnav_useprojectnav",
       "label": "useProjectNav()",
       "_callable": true,
@@ -4624,18 +4660,6 @@
       "norm_label": ".create()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
       "source_location": "L41"
-    },
-    {
-      "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "NitroProjectRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/nitro/nitro-project.repository.ts",
-      "source_location": "L51"
     },
     {
       "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_findall",
@@ -5038,8 +5062,8 @@
       "label": "cleanProjectName()",
       "_callable": true,
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "cleanprojectname()",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -5224,18 +5248,6 @@
       "norm_label": "onsubmit()",
       "source_file": "components/AddProjectModal.vue",
       "source_location": "L257"
-    },
-    {
-      "id": "components_sidebar_isactive",
-      "label": "isActive()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "isactive()",
-      "source_file": "components/Sidebar.vue",
-      "source_location": "L276"
     },
     {
       "id": "components_project_projectverceltab_copyurl",
@@ -5792,61 +5804,6 @@
       "source_location": "L178"
     },
     {
-      "id": "package_devdependencies",
-      "label": "devDependencies",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "devdependencies",
-      "source_file": "package.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "package_devdependencies_autoprefixer",
-      "label": "autoprefixer",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "autoprefixer",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "package_devdependencies_nuxtjs_tailwindcss",
-      "label": "@nuxtjs/tailwindcss",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@nuxtjs/tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L21"
-    },
-    {
-      "id": "package_devdependencies_postcss",
-      "label": "postcss",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "postcss",
-      "source_file": "package.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "package_devdependencies_tailwindcss",
-      "label": "tailwindcss",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "tailwindcss",
-      "source_file": "package.json",
-      "source_location": "L24"
-    },
-    {
       "id": "components_securitybadge",
       "label": "SecurityBadge.vue",
       "_origin": "ast",
@@ -6331,6 +6288,17 @@
       "source_location": "L1"
     },
     {
+      "id": "server_plugins_supabase_sync",
+      "label": "supabase-sync.ts",
+      "_origin": "ast",
+      "community": 114,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "supabase-sync.ts",
+      "source_file": "server/plugins/supabase-sync.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_repositories_contracts_index",
       "label": "contracts/index.ts",
       "_origin": "ast",
@@ -6364,37 +6332,15 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_verify_supabase",
-      "label": "verify-supabase.mjs",
+      "id": "server_utils_supabase",
+      "label": "supabase.ts",
       "_origin": "ast",
-      "community": 115,
-      "community_name": "@supabase/supabase-js",
+      "community": 114,
+      "community_name": "ISprintRepository",
       "file_type": "code",
-      "norm_label": "verify-supabase.mjs",
-      "source_file": "scripts/verify-supabase.mjs",
+      "norm_label": "supabase.ts",
+      "source_file": "server/utils/supabase.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "scripts_verify_supabase_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "@supabase/supabase-js",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L16"
-    },
-    {
-      "id": "ref_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "@supabase/supabase-js",
-      "file_type": "concept",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L14"
     },
     {
       "id": "components_healthbadge",
@@ -6548,17 +6494,6 @@
       "file_type": "code",
       "norm_label": "seed.ts",
       "source_file": "server/plugins/seed.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_plugins_supabase_sync",
-      "label": "supabase-sync.ts",
-      "_origin": "ast",
-      "community": 12,
-      "community_name": "store.ts",
-      "file_type": "code",
-      "norm_label": "supabase-sync.ts",
-      "source_file": "server/plugins/supabase-sync.ts",
       "source_location": "L1"
     },
     {
@@ -14668,72 +14603,6 @@
       "source_location": "L175"
     },
     {
-      "id": "components_taskcard",
-      "label": "TaskCard.vue",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "taskcard.vue",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_taskcard_displaytaskid",
-      "label": "displayTaskId",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "displaytaskid",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L159"
-    },
-    {
-      "id": "components_taskcard_duedatebadgeclass",
-      "label": "dueDateBadgeClass",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "duedatebadgeclass",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L200"
-    },
-    {
-      "id": "components_taskcard_formattedduedate",
-      "label": "formattedDueDate",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "formattedduedate",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L180"
-    },
-    {
-      "id": "components_taskcard_priorityclasses",
-      "label": "priorityClasses",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "priorityclasses",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L166"
-    },
-    {
-      "id": "components_taskcard_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "KanbanBoard.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L136"
-    },
-    {
       "id": "types_github",
       "label": "types/github.ts",
       "_origin": "ast",
@@ -15534,17 +15403,6 @@
       "file_type": "code",
       "norm_label": "handler.ts",
       "source_file": "server/utils/handler.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_utils_supabase",
-      "label": "supabase.ts",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "supabase.ts",
-      "source_file": "server/utils/supabase.ts",
       "source_location": "L1"
     },
     {
@@ -16945,17 +16803,6 @@
       "source_location": "L372"
     },
     {
-      "id": "types_task",
-      "label": "task.ts",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "TaskDrawer.vue",
-      "file_type": "code",
-      "norm_label": "task.ts",
-      "source_file": "types/task.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "components_projectcard",
       "label": "ProjectCard.vue",
       "_origin": "ast",
@@ -17385,6 +17232,127 @@
       "source_location": "L1"
     },
     {
+      "id": "package_dependencies",
+      "label": "dependencies",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "dependencies",
+      "source_file": "package.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "package_dependencies_nuxt",
+      "label": "nuxt",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "nuxt",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "package_dependencies_supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "package_dependencies_vue",
+      "label": "vue",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "vue",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
+      "id": "package_dependencies_vue_router",
+      "label": "vue-router",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "vue-router",
+      "source_file": "package.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "package_dependencies_zod",
+      "label": "zod",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "zod",
+      "source_file": "package.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "package_devdependencies",
+      "label": "devDependencies",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "devdependencies",
+      "source_file": "package.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "package_devdependencies_autoprefixer",
+      "label": "autoprefixer",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "autoprefixer",
+      "source_file": "package.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "package_devdependencies_nuxtjs_tailwindcss",
+      "label": "@nuxtjs/tailwindcss",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "@nuxtjs/tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "package_devdependencies_postcss",
+      "label": "postcss",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "postcss",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "package_devdependencies_tailwindcss",
+      "label": "tailwindcss",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "tailwindcss",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
       "id": "package_name",
       "label": "name",
       "_origin": "ast",
@@ -17407,6 +17375,83 @@
       "source_location": "L4"
     },
     {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_db_verify",
+      "label": "db:verify",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "db:verify",
+      "source_file": "package.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_generate",
+      "label": "generate",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "generate",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_postinstall",
+      "label": "postinstall",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "postinstall",
+      "source_file": "package.json",
+      "source_location": "L10"
+    },
+    {
+      "id": "package_scripts_preview",
+      "label": "preview",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "preview",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
       "id": "package_type",
       "label": "type",
       "_origin": "ast",
@@ -17416,6 +17461,50 @@
       "norm_label": "type",
       "source_file": "package.json",
       "source_location": "L3"
+    },
+    {
+      "id": "scripts_test_audit",
+      "label": "test-audit.mjs",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "test-audit.mjs",
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_test_audit_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L14"
+    },
+    {
+      "id": "scripts_verify_supabase",
+      "label": "verify-supabase.mjs",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "verify-supabase.mjs",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_verify_supabase_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L16"
     },
     {
       "id": "tailwind_config",
@@ -17471,6 +17560,17 @@
       "norm_label": "postcss",
       "source_file": "package.json",
       "source_location": "L23"
+    },
+    {
+      "id": "ref_supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L14"
     },
     {
       "id": "ref_tailwindcss",
@@ -17638,6 +17738,39 @@
       "source_location": "L90"
     },
     {
+      "id": "app_app",
+      "label": "app.vue",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "app.vue",
+      "source_file": "app/app.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_app_isprojectpage",
+      "label": "isProjectPage",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "isprojectpage",
+      "source_file": "app/app.vue",
+      "source_location": "L39"
+    },
+    {
+      "id": "app_app_route",
+      "label": "route",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "route",
+      "source_file": "app/app.vue",
+      "source_location": "L38"
+    },
+    {
       "id": "components_project_projectnavdock",
       "label": "ProjectNavDock.vue",
       "_origin": "ast",
@@ -17737,6 +17870,39 @@
       "source_location": "L376"
     },
     {
+      "id": "components_sidebar",
+      "label": "Sidebar.vue",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "sidebar.vue",
+      "source_file": "components/Sidebar.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_sidebar_navitems",
+      "label": "navItems",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "navitems",
+      "source_file": "components/Sidebar.vue",
+      "source_location": "L238"
+    },
+    {
+      "id": "components_sidebar_route",
+      "label": "route",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "code",
+      "norm_label": "route",
+      "source_file": "components/Sidebar.vue",
+      "source_location": "L228"
+    },
+    {
       "id": "composables_useprojectnav",
       "label": "useProjectNav.ts",
       "_origin": "ast",
@@ -17746,6 +17912,17 @@
       "norm_label": "useprojectnav.ts",
       "source_file": "composables/useProjectNav.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "ref_vue_router",
+      "label": "vue-router",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "ProjectNavDock.vue",
+      "file_type": "concept",
+      "norm_label": "vue-router",
+      "source_file": "package.json",
+      "source_location": "L17"
     },
     {
       "id": "components_project_github_projectdeploymentfeed",
@@ -18653,8 +18830,8 @@
       "id": "components_dashboard_weeklyfocussnapshot",
       "label": "WeeklyFocusSnapshot.vue",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "weeklyfocussnapshot.vue",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18664,8 +18841,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_deployedtaskscount",
       "label": "deployedTasksCount",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "deployedtaskscount",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18675,8 +18852,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_displayedinflighttasks",
       "label": "displayedInFlightTasks",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "displayedinflighttasks",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18686,8 +18863,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_inflighttaskscount",
       "label": "inFlightTasksCount",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "inflighttaskscount",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18697,8 +18874,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_inqueuetaskscount",
       "label": "inQueueTasksCount",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "inqueuetaskscount",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18708,8 +18885,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_objectivetext",
       "label": "objectiveText",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "objectivetext",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18719,8 +18896,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_progresspercentage",
       "label": "progressPercentage",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "progresspercentage",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18730,8 +18907,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_props",
       "label": "props",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18741,8 +18918,8 @@
       "id": "components_dashboard_weeklyfocussnapshot_sprintbadgelabel",
       "label": "sprintBadgeLabel",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "sprintbadgelabel",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
@@ -18752,12 +18929,78 @@
       "id": "components_dashboard_weeklyfocussnapshot_totaltasks",
       "label": "totalTasks",
       "_origin": "ast",
-      "community": 86,
-      "community_name": "WeeklyFocusSnapshot.vue",
+      "community": 85,
+      "community_name": "PriorityTasksRadar.vue",
       "file_type": "code",
       "norm_label": "totaltasks",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
       "source_location": "L158"
+    },
+    {
+      "id": "components_taskcard",
+      "label": "TaskCard.vue",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "taskcard.vue",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_taskcard_displaytaskid",
+      "label": "displayTaskId",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "displaytaskid",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L159"
+    },
+    {
+      "id": "components_taskcard_duedatebadgeclass",
+      "label": "dueDateBadgeClass",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "duedatebadgeclass",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L200"
+    },
+    {
+      "id": "components_taskcard_formattedduedate",
+      "label": "formattedDueDate",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "formattedduedate",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L180"
+    },
+    {
+      "id": "components_taskcard_priorityclasses",
+      "label": "priorityClasses",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "priorityclasses",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L166"
+    },
+    {
+      "id": "components_taskcard_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 86,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L136"
     },
     {
       "id": "composables_useprojects",
@@ -18835,6 +19078,17 @@
       "norm_label": "props",
       "source_file": "components/AlertBar.vue",
       "source_location": "L69"
+    },
+    {
+      "id": "types_task",
+      "label": "task.ts",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "Task",
+      "file_type": "code",
+      "norm_label": "task.ts",
+      "source_file": "types/task.ts",
+      "source_location": "L1"
     },
     {
       "id": "components_addprojectmodal",
@@ -19000,83 +19254,6 @@
       "norm_label": "validationerror",
       "source_file": "components/AddProjectModal.vue",
       "source_location": "L209"
-    },
-    {
-      "id": "app_app",
-      "label": "app.vue",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "app.vue",
-      "source_file": "app/app.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "app_app_isprojectpage",
-      "label": "isProjectPage",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "isprojectpage",
-      "source_file": "app/app.vue",
-      "source_location": "L39"
-    },
-    {
-      "id": "app_app_route",
-      "label": "route",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "route",
-      "source_file": "app/app.vue",
-      "source_location": "L38"
-    },
-    {
-      "id": "components_sidebar",
-      "label": "Sidebar.vue",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "sidebar.vue",
-      "source_file": "components/Sidebar.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_sidebar_navitems",
-      "label": "navItems",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "navitems",
-      "source_file": "components/Sidebar.vue",
-      "source_location": "L238"
-    },
-    {
-      "id": "components_sidebar_route",
-      "label": "route",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "code",
-      "norm_label": "route",
-      "source_file": "components/Sidebar.vue",
-      "source_location": "L228"
-    },
-    {
-      "id": "ref_vue_router",
-      "label": "vue-router",
-      "_origin": "ast",
-      "community": 90,
-      "community_name": "vue-router",
-      "file_type": "concept",
-      "norm_label": "vue-router",
-      "source_file": "package.json",
-      "source_location": "L17"
     },
     {
       "id": "app_pages_telemetry",
@@ -19440,149 +19617,6 @@
       "norm_label": "projectpackagefeed.vue",
       "source_file": "components/project/github/ProjectPackageFeed.vue",
       "source_location": "L1"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_scripts_db_verify",
-      "label": "db:verify",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "db:verify",
-      "source_file": "package.json",
-      "source_location": "L11"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "package_scripts_generate",
-      "label": "generate",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "generate",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_scripts_postinstall",
-      "label": "postinstall",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "postinstall",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "package_scripts_preview",
-      "label": "preview",
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "preview",
-      "source_file": "package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "package_dependencies",
-      "label": "dependencies",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "dependencies",
-      "source_file": "package.json",
-      "source_location": "L13"
-    },
-    {
-      "id": "package_dependencies_nuxt",
-      "label": "nuxt",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "nuxt",
-      "source_file": "package.json",
-      "source_location": "L15"
-    },
-    {
-      "id": "package_dependencies_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L14"
-    },
-    {
-      "id": "package_dependencies_vue",
-      "label": "vue",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "vue",
-      "source_file": "package.json",
-      "source_location": "L16"
-    },
-    {
-      "id": "package_dependencies_vue_router",
-      "label": "vue-router",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "vue-router",
-      "source_file": "package.json",
-      "source_location": "L17"
-    },
-    {
-      "id": "package_dependencies_zod",
-      "label": "zod",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "dependencies",
-      "file_type": "code",
-      "norm_label": "zod",
-      "source_file": "package.json",
-      "source_location": "L18"
     }
   ],
   "links": [
@@ -26102,6 +26136,18 @@
       "context": "import",
       "source_file": "composables/useSprintCalendar.ts",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_test_audit",
+      "target": "ref_supabase_supabase_js",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -39018,6 +39064,28 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_test_audit",
+      "target": "scripts_test_audit_supabase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_test_audit",
+      "target": "scripts_test_audit_runaudit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "scripts/test-audit.mjs",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_verify_supabase",
       "target": "scripts_verify_supabase_supabase",
       "relation": "contains",
@@ -44602,5 +44670,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1d5c7105180e5b5ad0e9af73bddeb0aa98428cc9"
+  "built_at_commit": "8dfae9854bd021ec956fc2c7da039d98a701be55"
 }

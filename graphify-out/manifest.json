@@ -1108,5 +1108,11 @@
     "seen": 1791284512.4859915,
     "ast_hash": "40d04cf8273af28aa57446745e675a89",
     "semantic_hash": ""
+  },
+  "scripts/test-audit.mjs": {
+    "mtime": 1791292777.424167,
+    "seen": 1791292946.2871237,
+    "ast_hash": "7e4a45aa32c2db7287e855af5981f9ea",
+    "semantic_hash": ""
   }
 }
