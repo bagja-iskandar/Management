@@ -1,9 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 import fs from 'node:fs'
 import path from 'node:path'
-import dotenv from 'dotenv'
 
-dotenv.config()
+// Native Node 20+ env loader or graceful dotenv fallback
+if (typeof process.loadEnvFile === 'function' && fs.existsSync('.env')) {
+  try {
+    process.loadEnvFile('.env')
+  } catch {}
+} else {
+  try {
+    const { default: dotenv } = await import('dotenv')
+    dotenv.config()
+  } catch {}
+}
 
 const url = process.env.SUPABASE_URL
 const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY

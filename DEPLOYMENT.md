@@ -60,7 +60,7 @@ npm run db:verify
 ### Langkah 1: Hubungkan Repository ke Vercel
 1. Masuk ke [https://vercel.com](https://vercel.com) dan klik **Add New...** -> **Project**.
 2. Pilih repository GitHub: `bagja-iskandar/Management`.
-3. Vercel akan otomatis mendeteksi framework sebagai **Nuxt.js** (menggunakan file `vercel.json`).
+3. Vercel akan otomatis mendeteksi framework sebagai **Nuxt.js** (Zero-configuration otomatis via Nitro engine).
 
 ### Langkah 2: Konfigurasi Environment Variables di Vercel
 Di bagian **Environment Variables**, tambahkan variabel-variabel berikut:
