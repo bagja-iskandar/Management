@@ -212,11 +212,13 @@ const isRedeploying = ref(false)
 const liveUrl = computed(() => {
   if (props.project.deployUrl) return props.project.deployUrl
   if (props.deployments?.latestDeployment?.environmentUrl) return props.deployments.latestDeployment.environmentUrl
+  const config = useRuntimeConfig()
+  if (config.public?.vercelProductionUrl) return config.public.vercelProductionUrl as string
   if (props.project.githubRepo) {
     const parts = props.project.githubRepo.split('/')
-    return `https://${parts[parts.length - 1].toLowerCase()}.vercel.app`
+    return `https://${parts[parts.length - 1].toLowerCase()}-sona-ta.vercel.app`
   }
-  return 'https://management.vercel.app'
+  return 'https://management-sona-ta.vercel.app'
 })
 
 const liveDomain = computed(() => {

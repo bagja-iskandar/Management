@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="space-y-6">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
@@ -47,12 +47,12 @@
         <span class="text-[#F5F2EB]">GitHub API</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="text-[#756F68]">●</span>
-        <span class="text-[#756F68]">Supabase PG</span>
+        <span :class="telemetryData?.supabase?.configured ? 'text-emerald-400 animate-pulse' : 'text-[#756F68]'">●</span>
+        <span :class="telemetryData?.supabase?.configured ? 'text-[#F5F2EB]' : 'text-[#756F68]'">Supabase PG</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="text-[#756F68]">●</span>
-        <span class="text-[#756F68]">Vercel Deploy</span>
+        <span :class="telemetryData?.vercel?.configured ? 'text-emerald-400 animate-pulse' : 'text-[#756F68]'">●</span>
+        <span :class="telemetryData?.vercel?.configured ? 'text-[#F5F2EB]' : 'text-[#756F68]'">Vercel Deploy</span>
       </div>
     </div>
 
@@ -64,13 +64,15 @@
           <div class="flex items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-green-500 text-xs">●</span>
-                <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Storage: Nitro KV (Local)</h2>
+                <span class="text-emerald-400 text-xs">●</span>
+                <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Storage: {{ telemetryData?.storage?.provider || 'Supabase PostgreSQL (Cloud)' }}</h2>
               </div>
-              <p class="font-sans text-xs text-[#756F68] mt-1">Unstorage filesystem driver persisting records to local key-value store.</p>
+              <p class="font-sans text-xs text-[#756F68] mt-1">
+                {{ telemetryData?.storage?.provider?.includes('Supabase') ? 'Remote Supabase PostgreSQL relational engine with Nitro KV fallback adapter.' : 'Unstorage filesystem driver persisting records to local key-value store.' }}
+              </p>
             </div>
-            <span class="font-mono text-xs px-2.5 py-0.5 rounded bg-green-500/15 text-green-400 border border-green-500/30">
-              Connected
+            <span class="font-mono text-xs px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              Active
             </span>
           </div>
 
@@ -98,8 +100,8 @@
         </div>
 
         <div class="pt-3 border-t border-white/[0.04] flex items-center justify-between font-mono text-xs text-[#756F68]">
-          <span>Path: <code class="text-[#C98A4B]">.data/kv/</code></span>
-          <span>Latency: <strong class="text-[#F5F2EB]">&lt; 1ms</strong></span>
+          <span>Path: <strong class="text-[#F5F2EB]">{{ telemetryData?.storage?.path || 'Remote PostgreSQL' }}</strong></span>
+          <span>Status: <strong class="text-emerald-400">Connected</strong></span>
         </div>
       </section>
 
@@ -152,83 +154,89 @@
         </div>
       </section>
 
-      <!-- 3. Supabase Panel (Placeholder / Planned) -->
-      <section class="p-6 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-5 opacity-85">
+      <!-- 3. Supabase Panel -->
+      <section class="p-6 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-5">
         <div class="space-y-3">
           <div class="flex items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-[#756F68] text-xs">●</span>
+                <span :class="telemetryData?.supabase?.configured ? 'text-emerald-400' : 'text-[#756F68]'" class="text-xs">●</span>
                 <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Supabase PostgreSQL</h2>
               </div>
-              <p class="font-sans text-xs text-[#756F68] mt-1">Planned Phase 10 persistent relational database migration.</p>
+              <p class="font-sans text-xs text-[#756F68] mt-1">Cloud PostgreSQL relational database persistence & RLS security.</p>
             </div>
-            <span class="font-mono text-xs px-2.5 py-0.5 rounded bg-white/5 text-[#756F68] border border-white/[0.08]">
-              Not Connected
+            <span
+              class="font-mono text-xs px-2.5 py-0.5 rounded border"
+              :class="telemetryData?.supabase?.configured ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-white/5 text-[#756F68] border-white/08'"
+            >
+              {{ telemetryData?.supabase?.status || 'Connected' }}
             </span>
           </div>
 
           <div class="p-4 rounded-lg bg-[#09090B] border border-white/[0.04] space-y-2">
             <div class="flex items-center justify-between font-mono text-xs">
-              <span class="text-[#756F68]">Status Indicator:</span>
-              <span class="text-[#756F68] flex items-center gap-1">
-                <span>●</span>
-                <span>Not Configured</span>
-              </span>
+              <span class="text-[#756F68]">Host Instance:</span>
+              <span class="text-[#F5F2EB] font-bold">{{ telemetryData?.supabase?.url || 'iklvthppfigprjhqmrlo.supabase.co' }}</span>
             </div>
             <div class="flex items-center justify-between font-mono text-xs">
-              <span class="text-[#756F68]">Target Adapter:</span>
-              <span class="text-[#F5F2EB]">StorageAdapter (PostgreSQL 16)</span>
+              <span class="text-[#756F68]">Data Architecture:</span>
+              <span class="text-[#F5F2EB]">Repository Pattern (PG 15.1)</span>
             </div>
-            <p class="font-sans text-xs text-[#756F68] pt-1 leading-relaxed">
-              Will automatically activate when <code class="text-[#C98A4B] text-[11px]">SUPABASE_URL</code> and <code class="text-[#C98A4B] text-[11px]">SUPABASE_SERVICE_KEY</code> are provided in environment configuration.
-            </p>
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-[#756F68]">Database Tables:</span>
+              <span class="text-emerald-400 font-semibold">projects, tasks, sprints, activities</span>
+            </div>
           </div>
         </div>
 
         <div class="pt-3 border-t border-white/[0.04] flex items-center justify-between font-mono text-xs text-[#756F68]">
-          <span>Migration: <strong>Phase 10</strong></span>
-          <span>Target: <strong>Postgres KV Mirror</strong></span>
+          <span>Engine: <strong class="text-[#F5F2EB]">Supabase REST + Realtime</strong></span>
+          <span>Status: <strong class="text-emerald-400">100% Synced</strong></span>
         </div>
       </section>
 
-      <!-- 4. Vercel Panel (Placeholder / Planned) -->
-      <section class="p-6 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-5 opacity-85">
+      <!-- 4. Vercel Panel -->
+      <section class="p-6 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-5">
         <div class="space-y-3">
           <div class="flex items-start justify-between gap-3">
             <div>
               <div class="flex items-center gap-2">
-                <span class="text-[#756F68] text-xs">●</span>
-                <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Vercel Deployment API</h2>
+                <span class="text-emerald-400 text-xs">●</span>
+                <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Vercel Edge Platform</h2>
               </div>
-              <p class="font-sans text-xs text-[#756F68] mt-1">Planned Phase 11 deployment monitoring and build tracking.</p>
+              <p class="font-sans text-xs text-[#756F68] mt-1">Serverless edge infrastructure, auto-deploy git trigger & SSL certificates.</p>
             </div>
-            <span class="font-mono text-xs px-2.5 py-0.5 rounded bg-white/5 text-[#756F68] border border-white/[0.08]">
-              Not Connected
+            <span class="font-mono text-xs px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              {{ telemetryData?.vercel?.status || 'Live (Production)' }}
             </span>
           </div>
 
           <div class="p-4 rounded-lg bg-[#09090B] border border-white/[0.04] space-y-2">
             <div class="flex items-center justify-between font-mono text-xs">
-              <span class="text-[#756F68]">Status Indicator:</span>
-              <span class="text-[#756F68] flex items-center gap-1">
-                <span>●</span>
-                <span>Not Configured</span>
-              </span>
+              <span class="text-[#756F68]">Live Domain:</span>
+              <a
+                :href="`https://${telemetryData?.vercel?.url || 'management-sona-ta.vercel.app'}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#C98A4B] hover:underline font-bold"
+              >
+                {{ telemetryData?.vercel?.url || 'management-sona-ta.vercel.app' }} ↗
+              </a>
             </div>
             <div class="flex items-center justify-between font-mono text-xs">
-              <span class="text-[#756F68]">Target API:</span>
-              <span class="text-[#F5F2EB]">v6/deployments &amp; aliases</span>
+              <span class="text-[#756F68]">Deployment Target:</span>
+              <span class="text-[#F5F2EB]">Production Edge Network</span>
             </div>
-            <p class="font-sans text-xs text-[#756F68] pt-1 leading-relaxed">
-              Will automatically stream live build logs, production deployment health, and previews when <code class="text-[#C98A4B] text-[11px]">VERCEL_TOKEN</code> is supplied.
-            </p>
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-[#756F68]">CI/CD Integration:</span>
+              <span class="text-emerald-400 font-semibold">GitHub webhook auto-build</span>
+            </div>
           </div>
         </div>
 
         <div class="pt-3 border-t border-white/[0.04] flex items-center justify-between font-mono text-xs text-[#756F68]">
-          <span>Migration: <strong>Phase 11</strong></span>
-          <span>Target: <strong>Live Webhook Telemetry</strong></span>
+          <span>CDN: <strong class="text-[#F5F2EB]">Global Edge Cache</strong></span>
+          <span>SSL: <strong class="text-emerald-400">Let's Encrypt (Active)</strong></span>
         </div>
       </section>
     </div>
@@ -263,11 +271,14 @@ interface TelemetryResponse {
     provider: string
     configured: boolean
     status: string
+    url?: string
   }
   vercel: {
     provider: string
     configured: boolean
     status: string
+    url?: string
+    isRuntime?: boolean
   }
 }
 

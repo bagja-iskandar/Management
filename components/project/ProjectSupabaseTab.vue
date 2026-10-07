@@ -191,7 +191,16 @@ const props = defineProps<{
 }>()
 
 const copied = ref(false)
-const projectRef = ref('wtxbclkyvqrmndjzoepk')
+const config = useRuntimeConfig()
+const supabaseUrl = (config.public?.supabaseUrl as string) || 'https://iklvthppfigprjhqmrlo.supabase.co'
+const projectRef = computed(() => {
+  try {
+    const parsed = new URL(supabaseUrl)
+    return parsed.hostname.split('.')[0] || 'iklvthppfigprjhqmrlo'
+  } catch {
+    return 'iklvthppfigprjhqmrlo'
+  }
+})
 
 const tables = ref([
   { name: 'tasks', pk: 'id', rows: 12, description: 'Kanban tasks, status lifecycle, due dates, priority' },

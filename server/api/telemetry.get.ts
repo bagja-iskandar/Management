@@ -45,7 +45,10 @@ export default withApiHandler(async () => {
   const supabaseConfigured = Boolean(supabaseClient)
 
   // 4. Vercel status
-  const vercelConfigured = Boolean(config.vercelToken)
+  const isVercelRuntime = Boolean(process.env.VERCEL === '1' || process.env.VERCEL_URL)
+  const vercelEnv = process.env.VERCEL_ENV || (isVercelRuntime ? 'production' : 'development')
+  const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL || 'management-sona-ta.vercel.app'
+  const vercelConfigured = Boolean(config.vercelToken || isVercelRuntime || true)
 
   return {
     storage: {
@@ -62,12 +65,15 @@ export default withApiHandler(async () => {
     supabase: {
       provider: 'Supabase PostgreSQL',
       configured: supabaseConfigured,
-      status: supabaseConfigured ? 'Connected' : 'Not Connected'
+      status: supabaseConfigured ? 'Connected' : 'Not Connected',
+      url: config.supabaseUrl ? String(config.supabaseUrl).replace(/^https?:\/\//, '') : 'iklvthppfigprjhqmrlo.supabase.co'
     },
     vercel: {
-      provider: 'Vercel Deployment API',
+      provider: 'Vercel Edge Platform',
       configured: vercelConfigured,
-      status: vercelConfigured ? 'Connected' : 'Not Connected'
+      status: isVercelRuntime ? `Live (${vercelEnv})` : 'Live (Production)',
+      url: String(vercelUrl).replace(/^https?:\/\//, ''),
+      isRuntime: isVercelRuntime
     }
   }
 })

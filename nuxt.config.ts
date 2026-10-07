@@ -32,7 +32,9 @@ export default defineNuxtConfig({
     supabaseKey: process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '',
     vercelToken: process.env.VERCEL_TOKEN || '',
     public: {
-      githubUsername: process.env.GITHUB_USERNAME || 'bagja-iskandar'
+      githubUsername: process.env.GITHUB_USERNAME || 'bagja-iskandar',
+      supabaseUrl: process.env.SUPABASE_URL || 'https://iklvthppfigprjhqmrlo.supabase.co',
+      vercelProductionUrl: 'https://management-sona-ta.vercel.app'
     }
   },
   nitro: {

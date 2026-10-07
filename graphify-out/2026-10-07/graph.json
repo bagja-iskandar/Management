@@ -17,52 +17,13 @@
       "source_location": "L39"
     },
     {
-      "id": "types_project_project",
-      "label": "Project",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "project.ts",
-      "file_type": "code",
-      "norm_label": "project",
-      "source_file": "types/project.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "types_project_projectpriority",
-      "label": "ProjectPriority",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "project.ts",
-      "file_type": "code",
-      "norm_label": "projectpriority",
-      "source_file": "types/project.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "types_project_projectstatus",
-      "label": "ProjectStatus",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "project.ts",
-      "file_type": "code",
-      "norm_label": "projectstatus",
-      "source_file": "types/project.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "server_schemas_project_schema_createprojectinput",
       "label": "CreateProjectInput",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "createprojectinput",
       "source_file": "server/schemas/project.schema.ts",
@@ -75,7 +36,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "updateprojectinput",
       "source_file": "server/schemas/project.schema.ts",
@@ -88,7 +49,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "createsprintinput",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -101,11 +62,89 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "updatesprintinput",
       "source_file": "server/schemas/sprint.schema.ts",
       "source_location": "L24"
+    },
+    {
+      "id": "server_schemas_task_schema_createtaskinput",
+      "label": "CreateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L51"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryinput",
+      "label": "TaskQueryInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L53"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskinput",
+      "label": "UpdateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L52"
+    },
+    {
+      "id": "types_project_project",
+      "label": "Project",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "types/index.ts",
+      "file_type": "code",
+      "norm_label": "project",
+      "source_file": "types/project.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "types_project_projectpriority",
+      "label": "ProjectPriority",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "types/index.ts",
+      "file_type": "code",
+      "norm_label": "projectpriority",
+      "source_file": "types/project.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "types_project_projectstatus",
+      "label": "ProjectStatus",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "types/index.ts",
+      "file_type": "code",
+      "norm_label": "projectstatus",
+      "source_file": "types/project.ts",
+      "source_location": "L1"
     },
     {
       "id": "types_sprint_sprint",
@@ -186,19 +225,6 @@
       "source_location": "L8"
     },
     {
-      "id": "server_repositories_contracts_project_repository_projectfilteroptions",
-      "label": "ProjectFilterOptions",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "projectfilteroptions",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L3"
-    },
-    {
       "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository",
       "label": "SupabaseProjectRepository",
       "_callable": true,
@@ -225,56 +251,17 @@
       "source_location": "L44"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "label": "SupabaseSprintRepository",
+      "id": "server_repositories_contracts_project_repository_projectfilteroptions",
+      "label": "ProjectFilterOptions",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
+      "community": 116,
+      "community_name": "getSupabaseClient",
       "file_type": "code",
-      "norm_label": "supabasesprintrepository",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L31"
-    },
-    {
-      "id": "server_schemas_task_schema_createtaskinput",
-      "label": "CreateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L51"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryinput",
-      "label": "TaskQueryInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L53"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskinput",
-      "label": "UpdateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L52"
+      "norm_label": "projectfilteroptions",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L3"
     },
     {
       "id": "server_repositories_contracts_task_repository_taskfilteroptions",
@@ -290,6 +277,19 @@
       "source_location": "L3"
     },
     {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
+      "label": "SupabaseSprintRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": "supabasesprintrepository",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L31"
+    },
+    {
       "id": "components_healthbadge_healthstatus",
       "label": "HealthStatus",
       "_callable": true,
@@ -301,19 +301,6 @@
       "norm_label": "healthstatus",
       "source_file": "components/HealthBadge.vue",
       "source_location": "L30"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_activitytimelineitem",
-      "label": "ActivityTimelineItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "activitytimelineitem",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L58"
     },
     {
       "id": "server_repositories_contracts_sprint_repository_isprintrepository",
@@ -407,6 +394,19 @@
       "source_location": "L24"
     },
     {
+      "id": "types_github_githubcommit",
+      "label": "GitHubCommit",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "types/github.ts",
+      "file_type": "code",
+      "norm_label": "githubcommit",
+      "source_file": "types/github.ts",
+      "source_location": "L227"
+    },
+    {
       "id": "types_github_githubcommitcheck",
       "label": "GitHubCommitCheck",
       "_callable": true,
@@ -472,17 +472,17 @@
       "source_location": "L119"
     },
     {
-      "id": "types_github_githubdeploymentsummary",
-      "label": "GitHubDeploymentSummary",
+      "id": "types_github_githubdeploymentstatus",
+      "label": "GitHubDeploymentStatus",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 51,
       "community_name": "types/github.ts",
       "file_type": "code",
-      "norm_label": "githubdeploymentsummary",
+      "norm_label": "githubdeploymentstatus",
       "source_file": "types/github.ts",
-      "source_location": "L151"
+      "source_location": "L228"
     },
     {
       "id": "types_github_githubissueitem",
@@ -509,6 +509,19 @@
       "norm_label": "githubpackageitem",
       "source_file": "types/github.ts",
       "source_location": "L206"
+    },
+    {
+      "id": "types_github_githubpackageoverview",
+      "label": "GitHubPackageOverview",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "types/github.ts",
+      "file_type": "code",
+      "norm_label": "githubpackageoverview",
+      "source_file": "types/github.ts",
+      "source_location": "L230"
     },
     {
       "id": "types_github_githubpackagesummary",
@@ -589,6 +602,19 @@
       "source_location": "L87"
     },
     {
+      "id": "types_github_githubsecurityoverview",
+      "label": "GitHubSecurityOverview",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 51,
+      "community_name": "types/github.ts",
+      "file_type": "code",
+      "norm_label": "githubsecurityoverview",
+      "source_file": "types/github.ts",
+      "source_location": "L229"
+    },
+    {
       "id": "server_utils_github_githubfetchoptions",
       "label": "GitHubFetchOptions",
       "_callable": true,
@@ -641,6 +667,19 @@
       "source_location": "L62"
     },
     {
+      "id": "types_github_githubdeploymentsummary",
+      "label": "GitHubDeploymentSummary",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 60,
+      "community_name": "DeploymentModal.vue",
+      "file_type": "code",
+      "norm_label": "githubdeploymentsummary",
+      "source_file": "types/github.ts",
+      "source_location": "L151"
+    },
+    {
       "id": "components_taskdrawer_checklistitem",
       "label": "ChecklistItem",
       "_callable": true,
@@ -652,6 +691,32 @@
       "norm_label": "checklistitem",
       "source_file": "components/TaskDrawer.vue",
       "source_location": "L401"
+    },
+    {
+      "id": "types_task_taskpriority",
+      "label": "TaskPriority",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "TaskDrawer.vue",
+      "file_type": "code",
+      "norm_label": "taskpriority",
+      "source_file": "types/task.ts",
+      "source_location": "L2"
+    },
+    {
+      "id": "types_task_taskstatus",
+      "label": "TaskStatus",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "TaskDrawer.vue",
+      "file_type": "code",
+      "norm_label": "taskstatus",
+      "source_file": "types/task.ts",
+      "source_location": "L1"
     },
     {
       "id": "components_dashboard_projectsoverviewtable_projectoverviewitem",
@@ -751,7 +816,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 83,
-      "community_name": "vue",
+      "community_name": "telemetry.vue",
       "file_type": "code",
       "norm_label": "telemetryresponse",
       "source_file": "app/pages/telemetry.vue",
@@ -771,30 +836,17 @@
       "source_location": "L4"
     },
     {
-      "id": "types_task_taskpriority",
-      "label": "TaskPriority",
+      "id": "components_dashboard_recentactivitytimeline_activitytimelineitem",
+      "label": "ActivityTimelineItem",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 89,
-      "community_name": "Task",
+      "community": 99,
+      "community_name": "vue",
       "file_type": "code",
-      "norm_label": "taskpriority",
-      "source_file": "types/task.ts",
-      "source_location": "L2"
-    },
-    {
-      "id": "types_task_taskstatus",
-      "label": "TaskStatus",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "taskstatus",
-      "source_file": "types/task.ts",
-      "source_location": "L1"
+      "norm_label": "activitytimelineitem",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L58"
     },
     {
       "id": "components_dashboard_upcomingdeadlinescard_deadlineitem",
@@ -803,7 +855,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 99,
-      "community_name": "UpcomingDeadlinesCard.vue",
+      "community_name": "vue",
       "file_type": "code",
       "norm_label": "deadlineitem",
       "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
@@ -906,6 +958,30 @@
       "source_location": "L190"
     },
     {
+      "id": "server_schemas_helper_validateparams",
+      "label": "validateParams()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "validateparams()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "server_schemas_helper_validatequery",
+      "label": "validateQuery()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "validatequery()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L10"
+    },
+    {
       "id": "components_project_projectcommitspreview_formattime",
       "label": "formatTime()",
       "_callable": true,
@@ -940,18 +1016,6 @@
       "norm_label": "getprioritybadgeclass()",
       "source_file": "components/sprint/DeliverablesMatrix.vue",
       "source_location": "L285"
-    },
-    {
-      "id": "components_project_github_projectgitactivityfeed_formattime",
-      "label": "formatTime()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 106,
-      "community_name": "ProjectGitActivityFeed.vue",
-      "file_type": "code",
-      "norm_label": "formattime()",
-      "source_file": "components/project/github/ProjectGitActivityFeed.vue",
-      "source_location": "L83"
     },
     {
       "id": "components_project_projectprioritydeliverables_getprioritybadgeclass",
@@ -1170,6 +1234,18 @@
       "source_location": "L23"
     },
     {
+      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
+      "label": ".client()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "IProjectRepository",
+      "file_type": "code",
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
+      "source_location": "L39"
+    },
+    {
       "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
       "label": ".create()",
       "_callable": true,
@@ -1362,114 +1438,6 @@
       "source_location": "L135"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
-      "label": "mapSprintRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": "mapsprintrow()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
-      "label": "mapSprintToRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": "mapsprinttorow()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L32"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L67"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L105"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L38"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L52"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 114,
-      "community_name": "SupabaseSprintRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L86"
-    },
-    {
-      "id": "scripts_verify_supabase_verify",
-      "label": "verify()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "verify()",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L27"
-    },
-    {
       "id": "server_repositories_index_getprojectrepo",
       "label": "getProjectRepo()",
       "_callable": true,
@@ -1518,7 +1486,31 @@
       "source_location": "L24"
     },
     {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
+      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprintrow",
+      "label": "mapSprintRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": "mapsprintrow()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_mapsprinttorow",
+      "label": "mapSprintToRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": "mapsprinttorow()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
       "label": ".client()",
       "_callable": true,
       "_origin": "ast",
@@ -1526,8 +1518,68 @@
       "community_name": "getSupabaseClient",
       "file_type": "code",
       "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L39"
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L32"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L67"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
+      "label": ".delete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L105"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
+      "label": ".findAll()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": ".findall()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L38"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
+      "label": ".findById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": ".findbyid()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L52"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
+      "label": ".update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": ".update()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L86"
     },
     {
       "id": "server_utils_supabase_getsupabaseclient",
@@ -2178,30 +2230,6 @@
       "source_location": "L199"
     },
     {
-      "id": "server_api_github_security_get_normalizeseverity",
-      "label": "normalizeSeverity()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "security.get.ts",
-      "file_type": "code",
-      "norm_label": "normalizeseverity()",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "server_api_github_security_get_normalizestate",
-      "label": "normalizeState()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "security.get.ts",
-      "file_type": "code",
-      "norm_label": "normalizestate()",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L14"
-    },
-    {
       "id": "app_pages_tasks_deletetask",
       "label": "deleteTask()",
       "_callable": true,
@@ -2502,6 +2530,54 @@
       "source_location": "L230"
     },
     {
+      "id": "components_dashboard_onconfirmdelete",
+      "label": "onConfirmDelete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "dashboard.vue",
+      "file_type": "code",
+      "norm_label": "onconfirmdelete()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L236"
+    },
+    {
+      "id": "components_dashboard_onprojectmodalcreated",
+      "label": "onProjectModalCreated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "dashboard.vue",
+      "file_type": "code",
+      "norm_label": "onprojectmodalcreated()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L289"
+    },
+    {
+      "id": "components_dashboard_onsavedrawertask",
+      "label": "onSaveDrawerTask()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "dashboard.vue",
+      "file_type": "code",
+      "norm_label": "onsavedrawertask()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L209"
+    },
+    {
+      "id": "components_dashboard_ontaskmodalcreated",
+      "label": "onTaskModalCreated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "dashboard.vue",
+      "file_type": "code",
+      "norm_label": "ontaskmodalcreated()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L258"
+    },
+    {
       "id": "components_dashboard_opentaskmodal",
       "label": "openTaskModal()",
       "_callable": true,
@@ -2512,6 +2588,18 @@
       "norm_label": "opentaskmodal()",
       "source_file": "components/dashboard.vue",
       "source_location": "L196"
+    },
+    {
+      "id": "components_dashboard_refreshdata",
+      "label": "refreshData()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "dashboard.vue",
+      "file_type": "code",
+      "norm_label": "refreshdata()",
+      "source_file": "components/dashboard.vue",
+      "source_location": "L200"
     },
     {
       "id": "composables_usetasks_usetasks",
@@ -3016,6 +3104,30 @@
       "norm_label": "togglematrixtaskstatus()",
       "source_file": "app/pages/projects/[slug].vue",
       "source_location": "L733"
+    },
+    {
+      "id": "server_api_github_security_get_normalizeseverity",
+      "label": "normalizeSeverity()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "normalizeseverity()",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "server_api_github_security_get_normalizestate",
+      "label": "normalizeState()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "normalizestate()",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L14"
     },
     {
       "id": "server_utils_errors_formaterror",
@@ -4398,52 +4510,160 @@
       "source_location": "L239"
     },
     {
-      "id": "components_project_github_projectworkflowrunsfeed_formattime",
+      "id": "components_project_projectdeploymentfeed_formattime",
       "label": "formatTime()",
       "_callable": true,
       "_origin": "ast",
       "community": 70,
-      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "community_name": "IconArrowUpRight.vue",
       "file_type": "code",
       "norm_label": "formattime()",
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L203"
+    },
+    {
+      "id": "components_project_projectdeploymentfeed_getdeploymentbadgeclass",
+      "label": "getDeploymentBadgeClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "getdeploymentbadgeclass()",
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L189"
+    },
+    {
+      "id": "components_project_projectdeploymentfeed_getdeploymentdotclass",
+      "label": "getDeploymentDotClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "getdeploymentdotclass()",
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L196"
+    },
+    {
+      "id": "components_project_projectpackagefeed_formattime",
+      "label": "formatTime()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "formattime()",
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L268"
+    },
+    {
+      "id": "components_project_projectpackagefeed_getpackagetypebadgeclass",
+      "label": "getPackageTypeBadgeClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "getpackagetypebadgeclass()",
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L261"
+    },
+    {
+      "id": "components_project_projectpullsissuesfeed_formatcommittime",
+      "label": "formatCommitTime()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "formatcommittime()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L298"
+    },
+    {
+      "id": "components_project_projectpullsissuesfeed_getprbadgeclass",
+      "label": "getPrBadgeClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "getprbadgeclass()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L286"
+    },
+    {
+      "id": "components_project_projectpullsissuesfeed_getprstatustext",
+      "label": "getPrStatusText()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "getprstatustext()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L292"
+    },
+    {
+      "id": "components_project_projectworkflowrunsfeed_formattime",
+      "label": "formatTime()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "formattime()",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L192"
     },
     {
-      "id": "components_project_github_projectworkflowrunsfeed_getworkflowrunbadgeclass",
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrunbadgeclass",
       "label": "getWorkflowRunBadgeClass()",
       "_callable": true,
       "_origin": "ast",
       "community": 70,
-      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "community_name": "IconArrowUpRight.vue",
       "file_type": "code",
       "norm_label": "getworkflowrunbadgeclass()",
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L164"
     },
     {
-      "id": "components_project_github_projectworkflowrunsfeed_getworkflowrundotclass",
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrundotclass",
       "label": "getWorkflowRunDotClass()",
       "_callable": true,
       "_origin": "ast",
       "community": 70,
-      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "community_name": "IconArrowUpRight.vue",
       "file_type": "code",
       "norm_label": "getworkflowrundotclass()",
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L177"
     },
     {
-      "id": "components_project_github_projectworkflowrunsfeed_getworkflowrunstatustext",
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrunstatustext",
       "label": "getWorkflowRunStatusText()",
       "_callable": true,
       "_origin": "ast",
       "community": 70,
-      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "community_name": "IconArrowUpRight.vue",
       "file_type": "code",
       "norm_label": "getworkflowrunstatustext()",
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L184"
+    },
+    {
+      "id": "scripts_verify_supabase_verify",
+      "label": "verify()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "verify()",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L27"
     },
     {
       "id": "components_repoactivitybadge_handleissuecreated",
@@ -4578,40 +4798,16 @@
       "source_location": "L14"
     },
     {
-      "id": "components_project_github_projectdeploymentfeed_formattime",
+      "id": "components_project_projectgitactivityfeed_formattime",
       "label": "formatTime()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
-      "community_name": "ProjectDeploymentFeed.vue",
+      "community_name": "ProjectGitActivityFeed.vue",
       "file_type": "code",
       "norm_label": "formattime()",
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L203"
-    },
-    {
-      "id": "components_project_github_projectdeploymentfeed_getdeploymentbadgeclass",
-      "label": "getDeploymentBadgeClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "ProjectDeploymentFeed.vue",
-      "file_type": "code",
-      "norm_label": "getdeploymentbadgeclass()",
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L189"
-    },
-    {
-      "id": "components_project_github_projectdeploymentfeed_getdeploymentdotclass",
-      "label": "getDeploymentDotClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "ProjectDeploymentFeed.vue",
-      "file_type": "code",
-      "norm_label": "getdeploymentdotclass()",
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L196"
+      "source_file": "components/project/ProjectGitActivityFeed.vue",
+      "source_location": "L83"
     },
     {
       "id": "server_schemas_helper_validatebody",
@@ -4624,30 +4820,6 @@
       "norm_label": "validatebody()",
       "source_file": "server/schemas/helper.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "server_schemas_helper_validateparams",
-      "label": "validateParams()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "validateparams()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "server_schemas_helper_validatequery",
-      "label": "validateQuery()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "validatequery()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L10"
     },
     {
       "id": "server_utils_handler_withapihandler",
@@ -4780,42 +4952,6 @@
       "norm_label": "togglediff()",
       "source_file": "components/dashboard/GlobalCommitsTable.vue",
       "source_location": "L371"
-    },
-    {
-      "id": "components_project_github_projectpullsissuesfeed_formatcommittime",
-      "label": "formatCommitTime()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "ProjectPullsIssuesFeed.vue",
-      "file_type": "code",
-      "norm_label": "formatcommittime()",
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L298"
-    },
-    {
-      "id": "components_project_github_projectpullsissuesfeed_getprbadgeclass",
-      "label": "getPrBadgeClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "ProjectPullsIssuesFeed.vue",
-      "file_type": "code",
-      "norm_label": "getprbadgeclass()",
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L286"
-    },
-    {
-      "id": "components_project_github_projectpullsissuesfeed_getprstatustext",
-      "label": "getPrStatusText()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "ProjectPullsIssuesFeed.vue",
-      "file_type": "code",
-      "norm_label": "getprstatustext()",
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L292"
     },
     {
       "id": "components_headerbar_handlekeydown",
@@ -5298,30 +5434,6 @@
       "source_location": "L209"
     },
     {
-      "id": "components_project_github_projectpackagefeed_formattime",
-      "label": "formatTime()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 96,
-      "community_name": "ProjectPackageFeed.vue",
-      "file_type": "code",
-      "norm_label": "formattime()",
-      "source_file": "components/project/github/ProjectPackageFeed.vue",
-      "source_location": "L268"
-    },
-    {
-      "id": "components_project_github_projectpackagefeed_getpackagetypebadgeclass",
-      "label": "getPackageTypeBadgeClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 96,
-      "community_name": "ProjectPackageFeed.vue",
-      "file_type": "code",
-      "norm_label": "getpackagetypebadgeclass()",
-      "source_file": "components/project/github/ProjectPackageFeed.vue",
-      "source_location": "L261"
-    },
-    {
       "id": "app_pages_projects_slug_handletabworkflowrerun",
       "label": "handleTabWorkflowRerun()",
       "_callable": true,
@@ -5344,66 +5456,6 @@
       "norm_label": "onrerunworkflowbyid()",
       "source_file": "app/pages/projects/[slug].vue",
       "source_location": "L402"
-    },
-    {
-      "id": "components_dashboard_onconfirmdelete",
-      "label": "onConfirmDelete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "refreshData",
-      "file_type": "code",
-      "norm_label": "onconfirmdelete()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L236"
-    },
-    {
-      "id": "components_dashboard_onprojectmodalcreated",
-      "label": "onProjectModalCreated()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "refreshData",
-      "file_type": "code",
-      "norm_label": "onprojectmodalcreated()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L289"
-    },
-    {
-      "id": "components_dashboard_onsavedrawertask",
-      "label": "onSaveDrawerTask()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "refreshData",
-      "file_type": "code",
-      "norm_label": "onsavedrawertask()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L209"
-    },
-    {
-      "id": "components_dashboard_ontaskmodalcreated",
-      "label": "onTaskModalCreated()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "refreshData",
-      "file_type": "code",
-      "norm_label": "ontaskmodalcreated()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L258"
-    },
-    {
-      "id": "components_dashboard_refreshdata",
-      "label": "refreshData()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 98,
-      "community_name": "refreshData",
-      "file_type": "code",
-      "norm_label": "refreshdata()",
-      "source_file": "components/dashboard.vue",
-      "source_location": "L200"
     },
     {
       "id": "components_workflowbadge",
@@ -5792,14 +5844,36 @@
       "source_location": "L178"
     },
     {
-      "id": "types_project",
-      "label": "project.ts",
+      "id": "server_api_projects_get",
+      "label": "projects.get.ts",
       "_origin": "ast",
-      "community": 100,
-      "community_name": "project.ts",
+      "community": 101,
+      "community_name": "task.schema.ts",
       "file_type": "code",
-      "norm_label": "project.ts",
-      "source_file": "types/project.ts",
+      "norm_label": "projects.get.ts",
+      "source_file": "server/api/projects.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_tasks_get",
+      "label": "tasks.get.ts",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "tasks.get.ts",
+      "source_file": "server/api/tasks.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_helper",
+      "label": "helper.ts",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "helper.ts",
+      "source_file": "server/schemas/helper.ts",
       "source_location": "L1"
     },
     {
@@ -5807,7 +5881,7 @@
       "label": "schemas/index.ts",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "schemas/index.ts",
       "source_file": "server/schemas/index.ts",
@@ -5818,7 +5892,7 @@
       "label": "project.schema.ts",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "project.schema.ts",
       "source_file": "server/schemas/project.schema.ts",
@@ -5829,7 +5903,7 @@
       "label": "baseProjectFields",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "baseprojectfields",
       "source_file": "server/schemas/project.schema.ts",
@@ -5840,7 +5914,7 @@
       "label": "createProjectSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "createprojectschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5851,7 +5925,7 @@
       "label": "projectPrioritySchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "projectpriorityschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5862,7 +5936,7 @@
       "label": "projectQuerySchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "projectqueryschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5873,7 +5947,7 @@
       "label": "projectStatusSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "projectstatusschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5884,7 +5958,7 @@
       "label": "updateProjectSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "updateprojectschema",
       "source_file": "server/schemas/project.schema.ts",
@@ -5895,7 +5969,7 @@
       "label": "sprint.schema.ts",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "sprint.schema.ts",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5906,7 +5980,7 @@
       "label": "baseSprintFields",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "basesprintfields",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5917,7 +5991,7 @@
       "label": "createSprintSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "createsprintschema",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5928,7 +6002,7 @@
       "label": "sprintStatusSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "sprintstatusschema",
       "source_file": "server/schemas/sprint.schema.ts",
@@ -5939,10 +6013,109 @@
       "label": "updateSprintSchema",
       "_origin": "ast",
       "community": 101,
-      "community_name": "project.schema.ts",
+      "community_name": "task.schema.ts",
       "file_type": "code",
       "norm_label": "updatesprintschema",
       "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "server_schemas_task_schema",
+      "label": "task.schema.ts",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "task.schema.ts",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_task_schema_basetaskfields",
+      "label": "baseTaskFields",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "basetaskfields",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "server_schemas_task_schema_createtaskschema",
+      "label": "createTaskSchema",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_schemas_task_schema_legacystatusmap",
+      "label": "legacyStatusMap",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "legacystatusmap",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_task_schema_taskpriorityschema",
+      "label": "taskPrioritySchema",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskpriorityschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryschema",
+      "label": "taskQuerySchema",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "server_schemas_task_schema_taskstatusschema",
+      "label": "taskStatusSchema",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskstatusschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskschema",
+      "label": "updateTaskSchema",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L42"
+    },
+    {
+      "id": "ref_zod",
+      "label": "zod",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "task.schema.ts",
+      "file_type": "concept",
+      "norm_label": "zod",
+      "source_file": "package.json",
       "source_location": "L21"
     },
     {
@@ -6166,6 +6339,17 @@
       "source_location": "L1"
     },
     {
+      "id": "types_project",
+      "label": "project.ts",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "types/index.ts",
+      "file_type": "code",
+      "norm_label": "project.ts",
+      "source_file": "types/project.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "types_sprint",
       "label": "sprint.ts",
       "_origin": "ast",
@@ -6221,17 +6405,6 @@
       "source_location": "L1"
     },
     {
-      "id": "components_project_github_projectgitactivityfeed",
-      "label": "ProjectGitActivityFeed.vue",
-      "_origin": "ast",
-      "community": 106,
-      "community_name": "ProjectGitActivityFeed.vue",
-      "file_type": "code",
-      "norm_label": "projectgitactivityfeed.vue",
-      "source_file": "components/project/github/ProjectGitActivityFeed.vue",
-      "source_location": "L1"
-    },
-    {
       "id": "components_project_projectprioritydeliverables",
       "label": "ProjectPriorityDeliverables.vue",
       "_origin": "ast",
@@ -6240,17 +6413,6 @@
       "file_type": "code",
       "norm_label": "projectprioritydeliverables.vue",
       "source_file": "components/project/ProjectPriorityDeliverables.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_project_github_projectsecurityfeed",
-      "label": "ProjectSecurityFeed.vue",
-      "_origin": "ast",
-      "community": 108,
-      "community_name": "ProjectSecurityFeed.vue",
-      "file_type": "code",
-      "norm_label": "projectsecurityfeed.vue",
-      "source_file": "components/project/github/ProjectSecurityFeed.vue",
       "source_location": "L1"
     },
     {
@@ -6375,160 +6537,6 @@
       "source_location": "L1"
     },
     {
-      "id": "server_repositories_contracts_project_repository",
-      "label": "project.repository.ts",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "project.repository.ts",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository",
-      "label": "supabase-project.repository.ts",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "supabase-project.repository.ts",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_task_schema",
-      "label": "task.schema.ts",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "task.schema.ts",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_task_schema_basetaskfields",
-      "label": "baseTaskFields",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "basetaskfields",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "server_schemas_task_schema_createtaskschema",
-      "label": "createTaskSchema",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "server_schemas_task_schema_legacystatusmap",
-      "label": "legacyStatusMap",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "legacystatusmap",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_task_schema_taskpriorityschema",
-      "label": "taskPrioritySchema",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskpriorityschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryschema",
-      "label": "taskQuerySchema",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L44"
-    },
-    {
-      "id": "server_schemas_task_schema_taskstatusschema",
-      "label": "taskStatusSchema",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskstatusschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskschema",
-      "label": "updateTaskSchema",
-      "_origin": "ast",
-      "community": 115,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L42"
-    },
-    {
-      "id": "dotenv",
-      "label": "dotenv",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "confidence": "EXTRACTED",
-      "file_type": "code",
-      "norm_label": "dotenv",
-      "source_file": "dotenv"
-    },
-    {
-      "id": "scripts_verify_supabase",
-      "label": "verify-supabase.mjs",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "verify-supabase.mjs",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_verify_supabase_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "scripts/verify-supabase.mjs",
-      "source_location": "L25"
-    },
-    {
-      "id": "server_plugins_supabase_sync",
-      "label": "supabase-sync.ts",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "file_type": "code",
-      "norm_label": "supabase-sync.ts",
-      "source_file": "server/plugins/supabase-sync.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "server_repositories_contracts_index",
       "label": "contracts/index.ts",
       "_origin": "ast",
@@ -6537,6 +6545,17 @@
       "file_type": "code",
       "norm_label": "contracts/index.ts",
       "source_file": "server/repositories/contracts/index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_contracts_project_repository",
+      "label": "project.repository.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": "project.repository.ts",
+      "source_file": "server/repositories/contracts/project.repository.ts",
       "source_location": "L1"
     },
     {
@@ -6559,6 +6578,17 @@
       "file_type": "code",
       "norm_label": "task.repository.ts",
       "source_file": "server/repositories/contracts/task.repository.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_project_repository",
+      "label": "supabase-project.repository.ts",
+      "_origin": "ast",
+      "community": 116,
+      "community_name": "getSupabaseClient",
+      "file_type": "code",
+      "norm_label": "supabase-project.repository.ts",
+      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
       "source_location": "L1"
     },
     {
@@ -6593,17 +6623,6 @@
       "norm_label": "supabase.ts",
       "source_file": "server/utils/supabase.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "ref_supabase_supabase_js",
-      "label": "@supabase/supabase-js",
-      "_origin": "ast",
-      "community": 116,
-      "community_name": "getSupabaseClient",
-      "file_type": "concept",
-      "norm_label": "@supabase/supabase-js",
-      "source_file": "package.json",
-      "source_location": "L17"
     },
     {
       "id": "components_healthbadge",
@@ -6705,39 +6724,6 @@
       "source_location": "L483"
     },
     {
-      "id": "components_dashboard_recentactivitytimeline",
-      "label": "RecentActivityTimeline.vue",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "recentactivitytimeline.vue",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_displayitems",
-      "label": "displayItems",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "displayitems",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L70"
-    },
-    {
-      "id": "components_dashboard_recentactivitytimeline_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 119,
-      "community_name": "RecentActivityTimeline.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/dashboard/RecentActivityTimeline.vue",
-      "source_location": "L66"
-    },
-    {
       "id": "server_middleware_visit",
       "label": "visit.ts",
       "_origin": "ast",
@@ -6757,6 +6743,17 @@
       "file_type": "code",
       "norm_label": "seed.ts",
       "source_file": "server/plugins/seed.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_plugins_supabase_sync",
+      "label": "supabase-sync.ts",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "store.ts",
+      "file_type": "code",
+      "norm_label": "supabase-sync.ts",
+      "source_file": "server/plugins/supabase-sync.ts",
       "source_location": "L1"
     },
     {
@@ -6824,39 +6821,6 @@
       "norm_label": "taskidseqmutex",
       "source_file": "server/utils/store.ts",
       "source_location": "L33"
-    },
-    {
-      "id": "server_api_github_security_get",
-      "label": "security.get.ts",
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "security.get.ts",
-      "file_type": "code",
-      "norm_label": "security.get.ts",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_github_security_get_fetchcachedsecurity",
-      "label": "fetchCachedSecurity",
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "security.get.ts",
-      "file_type": "code",
-      "norm_label": "fetchcachedsecurity",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "server_api_github_security_get_severityorder",
-      "label": "severityOrder",
-      "_origin": "ast",
-      "community": 120,
-      "community_name": "security.get.ts",
-      "file_type": "code",
-      "norm_label": "severityorder",
-      "source_file": "server/api/github/security.get.ts",
-      "source_location": "L22"
     },
     {
       "id": "components_project_projectpackagecard",
@@ -14525,6 +14489,94 @@
       "source_location": "L254"
     },
     {
+      "id": "components_kanban_kanbancolumn",
+      "label": "KanbanColumn.vue",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "kanbancolumn.vue",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_badgeclass",
+      "label": "badgeClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "badgeclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L156"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_containerborderclass",
+      "label": "containerBorderClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "containerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L129"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_headerborderclass",
+      "label": "headerBorderClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "headerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L142"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L100"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_quickaddbtnclass",
+      "label": "quickAddBtnClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "quickaddbtnclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L170"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_titleclass",
+      "label": "titleClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "titleclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L149"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_topaddbtnclass",
+      "label": "topAddBtnClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "topaddbtnclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L163"
+    },
+    {
       "id": "components_kanban_kanbandragghost",
       "label": "KanbanDragGhost.vue",
       "_origin": "ast",
@@ -14778,6 +14830,72 @@
       "source_location": "L175"
     },
     {
+      "id": "components_taskcard",
+      "label": "TaskCard.vue",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "taskcard.vue",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_taskcard_displaytaskid",
+      "label": "displayTaskId",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "displaytaskid",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L159"
+    },
+    {
+      "id": "components_taskcard_duedatebadgeclass",
+      "label": "dueDateBadgeClass",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "duedatebadgeclass",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L200"
+    },
+    {
+      "id": "components_taskcard_formattedduedate",
+      "label": "formattedDueDate",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "formattedduedate",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L180"
+    },
+    {
+      "id": "components_taskcard_priorityclasses",
+      "label": "priorityClasses",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "priorityclasses",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L166"
+    },
+    {
+      "id": "components_taskcard_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "KanbanBoard.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/TaskCard.vue",
+      "source_location": "L136"
+    },
+    {
       "id": "types_github",
       "label": "types/github.ts",
       "_origin": "ast",
@@ -14888,17 +15006,6 @@
       "source_location": "L11"
     },
     {
-      "id": "server_api_github_global_commits_get",
-      "label": "global-commits.get.ts",
-      "_origin": "ast",
-      "community": 52,
-      "community_name": "throwApiError",
-      "file_type": "code",
-      "norm_label": "global-commits.get.ts",
-      "source_file": "server/api/github/global-commits.get.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "server_api_github_global_commits_get_fetchcachedglobalcommits",
       "label": "fetchCachedGlobalCommits",
       "_origin": "ast",
@@ -14974,6 +15081,39 @@
       "norm_label": "fetchcachedrepos",
       "source_file": "server/api/github/repos.get.ts",
       "source_location": "L5"
+    },
+    {
+      "id": "server_api_github_security_get",
+      "label": "security.get.ts",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "security.get.ts",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_github_security_get_fetchcachedsecurity",
+      "label": "fetchCachedSecurity",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "fetchcachedsecurity",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "server_api_github_security_get_severityorder",
+      "label": "severityOrder",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "throwApiError",
+      "file_type": "code",
+      "norm_label": "severityorder",
+      "source_file": "server/api/github/security.get.ts",
+      "source_location": "L22"
     },
     {
       "id": "server_api_github_workflow_jobs_get",
@@ -16439,6 +16579,17 @@
       "source_location": "L372"
     },
     {
+      "id": "types_task",
+      "label": "task.ts",
+      "_origin": "ast",
+      "community": 65,
+      "community_name": "TaskDrawer.vue",
+      "file_type": "code",
+      "norm_label": "task.ts",
+      "source_file": "types/task.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "components_projectcard",
       "label": "ProjectCard.vue",
       "_origin": "ast",
@@ -16846,15 +16997,103 @@
       "source_location": "L191"
     },
     {
-      "id": "components_project_github_projectworkflowrunsfeed",
+      "id": "components_iconarrowupright",
+      "label": "IconArrowUpRight.vue",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "iconarrowupright.vue",
+      "source_file": "components/IconArrowUpRight.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_iconarrowupright_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/IconArrowUpRight.vue",
+      "source_location": "L20"
+    },
+    {
+      "id": "components_iconarrowupright_svgclass",
+      "label": "svgClass",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "svgclass",
+      "source_file": "components/IconArrowUpRight.vue",
+      "source_location": "L29"
+    },
+    {
+      "id": "components_project_projectdeploymentfeed",
+      "label": "ProjectDeploymentFeed.vue",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "projectdeploymentfeed.vue",
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_project_projectpackagefeed",
+      "label": "ProjectPackageFeed.vue",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "projectpackagefeed.vue",
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_project_projectpullsissuesfeed",
+      "label": "ProjectPullsIssuesFeed.vue",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "projectpullsissuesfeed.vue",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_project_projectsecurityfeed",
+      "label": "ProjectSecurityFeed.vue",
+      "_origin": "ast",
+      "community": 70,
+      "community_name": "IconArrowUpRight.vue",
+      "file_type": "code",
+      "norm_label": "projectsecurityfeed.vue",
+      "source_file": "components/project/ProjectSecurityFeed.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_project_projectworkflowrunsfeed",
       "label": "ProjectWorkflowRunsFeed.vue",
       "_origin": "ast",
       "community": 70,
-      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "community_name": "IconArrowUpRight.vue",
       "file_type": "code",
       "norm_label": "projectworkflowrunsfeed.vue",
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L1"
+    },
+    {
+      "id": "dotenv",
+      "label": "dotenv",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "confidence": "EXTRACTED",
+      "file_type": "code",
+      "norm_label": "dotenv",
+      "source_file": "dotenv"
     },
     {
       "id": "package",
@@ -17121,6 +17360,28 @@
       "source_location": "L3"
     },
     {
+      "id": "scripts_verify_supabase",
+      "label": "verify-supabase.mjs",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "verify-supabase.mjs",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_verify_supabase_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "scripts/verify-supabase.mjs",
+      "source_location": "L25"
+    },
+    {
       "id": "tailwind_config",
       "label": "tailwind.config.ts",
       "_origin": "ast",
@@ -17176,6 +17437,17 @@
       "source_location": "L26"
     },
     {
+      "id": "ref_supabase_supabase_js",
+      "label": "@supabase/supabase-js",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "@supabase/supabase-js",
+      "source_file": "package.json",
+      "source_location": "L17"
+    },
+    {
       "id": "ref_tailwindcss",
       "label": "tailwindcss",
       "_origin": "ast",
@@ -17185,17 +17457,6 @@
       "norm_label": "tailwindcss",
       "source_file": "package.json",
       "source_location": "L27"
-    },
-    {
-      "id": "ref_zod",
-      "label": "zod",
-      "_origin": "ast",
-      "community": 71,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "zod",
-      "source_file": "package.json",
-      "source_location": "L21"
     },
     {
       "id": "components_repoactivitybadge",
@@ -17539,14 +17800,14 @@
       "source_location": "L20"
     },
     {
-      "id": "components_project_github_projectdeploymentfeed",
-      "label": "ProjectDeploymentFeed.vue",
+      "id": "components_project_projectgitactivityfeed",
+      "label": "ProjectGitActivityFeed.vue",
       "_origin": "ast",
       "community": 76,
-      "community_name": "ProjectDeploymentFeed.vue",
+      "community_name": "ProjectGitActivityFeed.vue",
       "file_type": "code",
-      "norm_label": "projectdeploymentfeed.vue",
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
+      "norm_label": "projectgitactivityfeed.vue",
+      "source_file": "components/project/ProjectGitActivityFeed.vue",
       "source_location": "L1"
     },
     {
@@ -17561,14 +17822,14 @@
       "source_location": "L1"
     },
     {
-      "id": "server_api_projects_get",
-      "label": "projects.get.ts",
+      "id": "server_api_github_global_commits_get",
+      "label": "global-commits.get.ts",
       "_origin": "ast",
       "community": 77,
       "community_name": "repositories/index.ts",
       "file_type": "code",
-      "norm_label": "projects.get.ts",
-      "source_file": "server/api/projects.get.ts",
+      "norm_label": "global-commits.get.ts",
+      "source_file": "server/api/github/global-commits.get.ts",
       "source_location": "L1"
     },
     {
@@ -17682,17 +17943,6 @@
       "source_location": "L1"
     },
     {
-      "id": "server_api_tasks_get",
-      "label": "tasks.get.ts",
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "tasks.get.ts",
-      "source_file": "server/api/tasks.get.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "server_api_tasks_id_delete",
       "label": "tasks/[id].delete.ts",
       "_origin": "ast",
@@ -17790,17 +18040,6 @@
       "norm_label": "taskrepository",
       "source_file": "server/repositories/index.ts",
       "source_location": "L60"
-    },
-    {
-      "id": "server_schemas_helper",
-      "label": "helper.ts",
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "repositories/index.ts",
-      "file_type": "code",
-      "norm_label": "helper.ts",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L1"
     },
     {
       "id": "server_utils_handler",
@@ -18155,17 +18394,6 @@
       "source_location": "L278"
     },
     {
-      "id": "components_project_github_projectpullsissuesfeed",
-      "label": "ProjectPullsIssuesFeed.vue",
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "ProjectPullsIssuesFeed.vue",
-      "file_type": "code",
-      "norm_label": "projectpullsissuesfeed.vue",
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L1"
-    },
-    {
       "id": "components_headerbar",
       "label": "HeaderBar.vue",
       "_origin": "ast",
@@ -18412,7 +18640,7 @@
       "label": "telemetry.vue",
       "_origin": "ast",
       "community": 83,
-      "community_name": "vue",
+      "community_name": "telemetry.vue",
       "file_type": "code",
       "norm_label": "telemetry.vue",
       "source_file": "app/pages/telemetry.vue",
@@ -18423,7 +18651,7 @@
       "label": "{ data: telemetryData, refresh: refreshTelemetry }",
       "_origin": "ast",
       "community": 83,
-      "community_name": "vue",
+      "community_name": "telemetry.vue",
       "file_type": "code",
       "norm_label": "{ data: telemetrydata, refresh: refreshtelemetry }",
       "source_file": "app/pages/telemetry.vue",
@@ -18434,7 +18662,7 @@
       "label": "ratePercent",
       "_origin": "ast",
       "community": 83,
-      "community_name": "vue",
+      "community_name": "telemetry.vue",
       "file_type": "code",
       "norm_label": "ratepercent",
       "source_file": "app/pages/telemetry.vue",
@@ -18445,88 +18673,11 @@
       "label": "resetMinutes",
       "_origin": "ast",
       "community": 83,
-      "community_name": "vue",
+      "community_name": "telemetry.vue",
       "file_type": "code",
       "norm_label": "resetminutes",
       "source_file": "app/pages/telemetry.vue",
       "source_location": "L282"
-    },
-    {
-      "id": "components_dashboard_cockpittelemetryrow",
-      "label": "CockpitTelemetryRow.vue",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "cockpittelemetryrow.vue",
-      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_cockpittelemetryrow_formattedvelocity",
-      "label": "formattedVelocity",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "formattedvelocity",
-      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
-      "source_location": "L119"
-    },
-    {
-      "id": "components_dashboard_cockpittelemetryrow_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
-      "source_location": "L92"
-    },
-    {
-      "id": "components_iconarrowupright",
-      "label": "IconArrowUpRight.vue",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "iconarrowupright.vue",
-      "source_file": "components/IconArrowUpRight.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_iconarrowupright_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/IconArrowUpRight.vue",
-      "source_location": "L20"
-    },
-    {
-      "id": "components_iconarrowupright_svgclass",
-      "label": "svgClass",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "svgclass",
-      "source_file": "components/IconArrowUpRight.vue",
-      "source_location": "L29"
-    },
-    {
-      "id": "ref_vue",
-      "label": "vue",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "vue",
-      "file_type": "concept",
-      "norm_label": "vue",
-      "source_file": "package.json",
-      "source_location": "L19"
     },
     {
       "id": "components_dashboard_crossrepotelemetrywatchdog",
@@ -18716,72 +18867,6 @@
       "source_location": "L182"
     },
     {
-      "id": "components_taskcard",
-      "label": "TaskCard.vue",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "taskcard.vue",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_taskcard_displaytaskid",
-      "label": "displayTaskId",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "displaytaskid",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L159"
-    },
-    {
-      "id": "components_taskcard_duedatebadgeclass",
-      "label": "dueDateBadgeClass",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "duedatebadgeclass",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L200"
-    },
-    {
-      "id": "components_taskcard_formattedduedate",
-      "label": "formattedDueDate",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "formattedduedate",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L180"
-    },
-    {
-      "id": "components_taskcard_priorityclasses",
-      "label": "priorityClasses",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "priorityclasses",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L166"
-    },
-    {
-      "id": "components_taskcard_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 86,
-      "community_name": "TaskCard.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/TaskCard.vue",
-      "source_location": "L136"
-    },
-    {
       "id": "composables_useprojects",
       "label": "useProjects.ts",
       "_origin": "ast",
@@ -18857,17 +18942,6 @@
       "norm_label": "props",
       "source_file": "components/AlertBar.vue",
       "source_location": "L69"
-    },
-    {
-      "id": "types_task",
-      "label": "task.ts",
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "Task",
-      "file_type": "code",
-      "norm_label": "task.ts",
-      "source_file": "types/task.ts",
-      "source_location": "L1"
     },
     {
       "id": "components_addprojectmodal",
@@ -19143,94 +19217,6 @@
       "norm_label": "totaltasks",
       "source_file": "components/dashboard/WeeklyFocusSnapshot.vue",
       "source_location": "L158"
-    },
-    {
-      "id": "components_kanban_kanbancolumn",
-      "label": "KanbanColumn.vue",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "kanbancolumn.vue",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_badgeclass",
-      "label": "badgeClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "badgeclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L156"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_containerborderclass",
-      "label": "containerBorderClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "containerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L129"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_headerborderclass",
-      "label": "headerBorderClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "headerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L142"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L100"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_quickaddbtnclass",
-      "label": "quickAddBtnClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "quickaddbtnclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L170"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_titleclass",
-      "label": "titleClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "titleclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L149"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_topaddbtnclass",
-      "label": "topAddBtnClass",
-      "_origin": "ast",
-      "community": 91,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "topaddbtnclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L163"
     },
     {
       "id": "components_project_projectverceltab",
@@ -19541,22 +19527,77 @@
       "source_location": "L196"
     },
     {
-      "id": "components_project_github_projectpackagefeed",
-      "label": "ProjectPackageFeed.vue",
+      "id": "components_dashboard_cockpittelemetryrow",
+      "label": "CockpitTelemetryRow.vue",
       "_origin": "ast",
-      "community": 96,
-      "community_name": "ProjectPackageFeed.vue",
+      "community": 99,
+      "community_name": "vue",
       "file_type": "code",
-      "norm_label": "projectpackagefeed.vue",
-      "source_file": "components/project/github/ProjectPackageFeed.vue",
+      "norm_label": "cockpittelemetryrow.vue",
+      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
       "source_location": "L1"
+    },
+    {
+      "id": "components_dashboard_cockpittelemetryrow_formattedvelocity",
+      "label": "formattedVelocity",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "formattedvelocity",
+      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
+      "source_location": "L119"
+    },
+    {
+      "id": "components_dashboard_cockpittelemetryrow_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/dashboard/CockpitTelemetryRow.vue",
+      "source_location": "L92"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline",
+      "label": "RecentActivityTimeline.vue",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "recentactivitytimeline.vue",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline_displayitems",
+      "label": "displayItems",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "displayitems",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L70"
+    },
+    {
+      "id": "components_dashboard_recentactivitytimeline_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/dashboard/RecentActivityTimeline.vue",
+      "source_location": "L66"
     },
     {
       "id": "components_dashboard_upcomingdeadlinescard",
       "label": "UpcomingDeadlinesCard.vue",
       "_origin": "ast",
       "community": 99,
-      "community_name": "UpcomingDeadlinesCard.vue",
+      "community_name": "vue",
       "file_type": "code",
       "norm_label": "upcomingdeadlinescard.vue",
       "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
@@ -19567,7 +19608,7 @@
       "label": "displayDeadlines",
       "_origin": "ast",
       "community": 99,
-      "community_name": "UpcomingDeadlinesCard.vue",
+      "community_name": "vue",
       "file_type": "code",
       "norm_label": "displaydeadlines",
       "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
@@ -19578,11 +19619,22 @@
       "label": "props",
       "_origin": "ast",
       "community": 99,
-      "community_name": "UpcomingDeadlinesCard.vue",
+      "community_name": "vue",
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/dashboard/UpcomingDeadlinesCard.vue",
       "source_location": "L84"
+    },
+    {
+      "id": "ref_vue",
+      "label": "vue",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "vue",
+      "file_type": "concept",
+      "norm_label": "vue",
+      "source_file": "package.json",
+      "source_location": "L19"
     }
   ],
   "links": [
@@ -25485,6 +25537,18 @@
       "weight": 1.0
     },
     {
+      "source": "components_project_projectdeploymentfeed",
+      "target": "components_iconarrowupright",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L169",
+      "weight": 1.0
+    },
+    {
       "source": "components_project_projectlivedeploymentcard",
       "target": "ref_vue",
       "relation": "imports_from",
@@ -25533,6 +25597,30 @@
       "weight": 1.0
     },
     {
+      "source": "components_project_projectpackagefeed",
+      "target": "components_iconarrowupright",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L245",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectpullsissuesfeed",
+      "target": "components_iconarrowupright",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L267",
+      "weight": 1.0
+    },
+    {
       "source": "components_project_projectsecuritycard",
       "target": "ref_vue",
       "relation": "imports_from",
@@ -25542,6 +25630,18 @@
       "context": "import",
       "source_file": "components/project/ProjectSecurityCard.vue",
       "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectsecurityfeed",
+      "target": "components_iconarrowupright",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/project/ProjectSecurityFeed.vue",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -25578,6 +25678,18 @@
       "context": "import",
       "source_file": "components/project/ProjectVercelTab.vue",
       "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectworkflowrunsfeed",
+      "target": "components_iconarrowupright",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -33265,149 +33377,6 @@
       "weight": 1.0
     },
     {
-      "source": "components_project_github_projectdeploymentfeed",
-      "target": "components_project_github_projectdeploymentfeed_getdeploymentbadgeclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L189",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectdeploymentfeed",
-      "target": "components_project_github_projectdeploymentfeed_getdeploymentdotclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L196",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectdeploymentfeed",
-      "target": "components_project_github_projectdeploymentfeed_formattime",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectDeploymentFeed.vue",
-      "source_location": "L203",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectgitactivityfeed",
-      "target": "components_project_github_projectgitactivityfeed_formattime",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectGitActivityFeed.vue",
-      "source_location": "L83",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectpackagefeed",
-      "target": "components_project_github_projectpackagefeed_getpackagetypebadgeclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectPackageFeed.vue",
-      "source_location": "L261",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectpackagefeed",
-      "target": "components_project_github_projectpackagefeed_formattime",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectPackageFeed.vue",
-      "source_location": "L268",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectpullsissuesfeed",
-      "target": "components_project_github_projectpullsissuesfeed_getprbadgeclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L286",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectpullsissuesfeed",
-      "target": "components_project_github_projectpullsissuesfeed_getprstatustext",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L292",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectpullsissuesfeed",
-      "target": "components_project_github_projectpullsissuesfeed_formatcommittime",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectPullsIssuesFeed.vue",
-      "source_location": "L298",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectworkflowrunsfeed",
-      "target": "components_project_github_projectworkflowrunsfeed_getworkflowrunbadgeclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L164",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectworkflowrunsfeed",
-      "target": "components_project_github_projectworkflowrunsfeed_getworkflowrundotclass",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L177",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectworkflowrunsfeed",
-      "target": "components_project_github_projectworkflowrunsfeed_getworkflowrunstatustext",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L184",
-      "weight": 1.0
-    },
-    {
-      "source": "components_project_github_projectworkflowrunsfeed",
-      "target": "components_project_github_projectworkflowrunsfeed_formattime",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/project/github/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L192",
-      "weight": 1.0
-    },
-    {
       "source": "components_project_projectcicdcard",
       "target": "components_project_projectcicdcard_props",
       "relation": "contains",
@@ -33515,6 +33484,50 @@
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectCommitsPreview.vue",
       "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectdeploymentfeed",
+      "target": "components_project_projectdeploymentfeed_getdeploymentbadgeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectdeploymentfeed",
+      "target": "components_project_projectdeploymentfeed_getdeploymentdotclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectdeploymentfeed",
+      "target": "components_project_projectdeploymentfeed_formattime",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectDeploymentFeed.vue",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectgitactivityfeed",
+      "target": "components_project_projectgitactivityfeed_formattime",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectGitActivityFeed.vue",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -33848,6 +33861,28 @@
       "weight": 1.0
     },
     {
+      "source": "components_project_projectpackagefeed",
+      "target": "components_project_projectpackagefeed_getpackagetypebadgeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L261",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectpackagefeed",
+      "target": "components_project_projectpackagefeed_formattime",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectPackageFeed.vue",
+      "source_location": "L268",
+      "weight": 1.0
+    },
+    {
       "source": "components_project_projectprioritydeliverables",
       "target": "components_project_projectprioritydeliverables_getprioritybadgeclass",
       "relation": "contains",
@@ -33856,6 +33891,39 @@
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectPriorityDeliverables.vue",
       "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectpullsissuesfeed",
+      "target": "components_project_projectpullsissuesfeed_getprbadgeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L286",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectpullsissuesfeed",
+      "target": "components_project_projectpullsissuesfeed_getprstatustext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L292",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectpullsissuesfeed",
+      "target": "components_project_projectpullsissuesfeed_formatcommittime",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -34219,6 +34287,50 @@
       "confidence_score": 1.0,
       "source_file": "components/project/ProjectVercelTab.vue",
       "source_location": "L307",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectworkflowrunsfeed",
+      "target": "components_project_projectworkflowrunsfeed_getworkflowrunbadgeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectworkflowrunsfeed",
+      "target": "components_project_projectworkflowrunsfeed_getworkflowrundotclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectworkflowrunsfeed",
+      "target": "components_project_projectworkflowrunsfeed_getworkflowrunstatustext",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "components_project_projectworkflowrunsfeed",
+      "target": "components_project_projectworkflowrunsfeed_formattime",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L192",
       "weight": 1.0
     },
     {
@@ -43155,6 +43267,50 @@
     },
     {
       "source": "types_github",
+      "target": "types_github_githubcommit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "types/github.ts",
+      "source_location": "L227",
+      "weight": 1.0
+    },
+    {
+      "source": "types_github",
+      "target": "types_github_githubdeploymentstatus",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "types/github.ts",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "types_github",
+      "target": "types_github_githubsecurityoverview",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "types/github.ts",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "types_github",
+      "target": "types_github_githubpackageoverview",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "types/github.ts",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "types_github",
       "target": "types_github_githubbranch",
       "relation": "contains",
       "_origin": "ast",
@@ -44600,5 +44756,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "eeb5f7856c75fd86b459f0340f5631946dc9e724"
+  "built_at_commit": "769bc35430798a7458c46a1de5ee1d5c1f90999c"
 }
