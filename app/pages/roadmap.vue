@@ -85,11 +85,15 @@
       <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-lg font-mono text-[#756F68]">
         ∅
       </div>
-      <h3 class="font-mono text-sm font-semibold text-[#F5F2EB]">No projects in this category</h3>
+      <h3 class="font-mono text-sm font-semibold text-[#F5F2EB]">
+        {{ (projects || []).length === 0 ? 'No projects registered' : 'No projects in this category' }}
+      </h3>
       <p class="font-sans text-xs text-[#756F68] max-w-sm mx-auto">
-        {{ roadmapFilter === 'maintenance'
-          ? 'No projects currently in Maintenance mode. Deployed projects can be transitioned to Maintenance anytime.'
-          : 'All active projects are currently in Live Maintenance mode.' }}
+        {{ (projects || []).length === 0
+          ? 'No projects found in the workspace. Ensure your database is connected or create a project in Projects Hub to start tracking milestones.'
+          : (roadmapFilter === 'maintenance'
+            ? 'No projects currently in Maintenance mode. Deployed projects can be transitioned to Maintenance anytime.'
+            : 'All active projects are currently in Live Maintenance mode.') }}
       </p>
     </div>
 
