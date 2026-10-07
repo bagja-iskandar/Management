@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Dark Obsidian Squircle Canvas -->
+  <rect width="32" height="32" rx="8" fill="#111114" />
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="#C98A4B" stroke-opacity="0.35" stroke-width="1" />
+  
+  <defs>
+    <linearGradient id="nexura-favicon-gradient" x1="7" y1="7" x2="25" y2="25" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F3C68F" />
+      <stop offset="50%" stop-color="#C98A4B" />
+      <stop offset="100%" stop-color="#8B5A27" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Geometric Monogram 'N' (Nexura) -->
+  <path
+    d="M7 7H11.5L20.5 20.8V7H25V25H20.5L11.5 11.2V25H7V7Z"
+    fill="url(#nexura-favicon-gradient)"
+  />
+</svg>

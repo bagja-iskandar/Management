@@ -120,5 +120,6 @@
   "118": "isRepoManaged",
   "119": "RecentActivityTimeline.vue",
   "120": "security.get.ts",
-  "121": "ProjectPackageCard.vue"
+  "121": "ProjectPackageCard.vue",
+  "122": "NexuraLogo.vue"
 }

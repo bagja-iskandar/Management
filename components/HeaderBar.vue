@@ -16,10 +16,10 @@
         >
           <!-- Monogram Icon -->
           <div
-            class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-[#C98A4B]/15 border border-[#C98A4B]/40 flex items-center justify-center text-[#C98A4B] font-mono text-xs sm:text-sm font-bold transition-all group-hover:scale-110 group-hover:border-[#C98A4B] group-hover:shadow-[0_0_12px_rgba(201,138,75,0.4)]"
+            class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-[#C98A4B]/15 border border-[#C98A4B]/40 p-1 flex items-center justify-center transition-all group-hover:scale-110 group-hover:border-[#C98A4B] group-hover:shadow-[0_0_14px_rgba(201,138,75,0.4)]"
             aria-hidden="true"
           >
-            ◆
+            <NexuraLogo />
           </div>
         </NuxtLink>
 

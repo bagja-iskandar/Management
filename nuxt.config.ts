@@ -59,6 +59,7 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Nexura: Modern personal engineering and project management workspace.' }
       ],
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
