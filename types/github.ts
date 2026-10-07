@@ -222,3 +222,9 @@ export interface GitHubPackageSummary {
   packages: GitHubPackageItem[]
   message?: string
 }
+
+// Backward-compatible type aliases
+export type GitHubCommit = GitHubCommitItem
+export type GitHubDeploymentStatus = GitHubDeploymentSummary
+export type GitHubSecurityOverview = GitHubSecuritySummary
+export type GitHubPackageOverview = GitHubPackageSummary

@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1791284398.3519876,
-    "seen": 1791284512.465454,
-    "ast_hash": "e74ff5b27ba43864066b9804a4fa73f1",
+    "mtime": 1791355648.947764,
+    "seen": 1791355738.8882756,
+    "ast_hash": "fd7f72336e83efe28c2df23620ab622c",
     "semantic_hash": ""
   },
   "package.json": {
@@ -408,9 +408,9 @@
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1791298053.6512105,
-    "seen": 1791298133.617033,
-    "ast_hash": "5c619e9a65a12b6a0cab1f5576083cf1",
+    "mtime": 1791355637.593229,
+    "seen": 1791355738.8667543,
+    "ast_hash": "d88a947759535c8162e8025df134ccea",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
@@ -1101,6 +1101,18 @@
     "mtime": 1791347096.0286162,
     "seen": 1791347167.5399976,
     "ast_hash": "85264bb15d3d9c9b31fe8a2277bc06f2",
+    "semantic_hash": ""
+  },
+  "components/NexuraLogo.vue": {
+    "mtime": 1791355615.009229,
+    "seen": 1791355738.867659,
+    "ast_hash": "7adbe3bdd84d6d495bb8ae6a4f567b8c",
+    "semantic_hash": ""
+  },
+  "public/favicon.svg": {
+    "mtime": 1791355621.5365887,
+    "seen": 1791355738.9228394,
+    "ast_hash": "e7e62b59a0ede9c8a6387bcc1f87fd54",
     "semantic_hash": ""
   }
 }

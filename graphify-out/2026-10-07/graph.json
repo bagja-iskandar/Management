@@ -6903,6 +6903,17 @@
       "source_location": "L127"
     },
     {
+      "id": "components_nexuralogo",
+      "label": "NexuraLogo.vue",
+      "_origin": "ast",
+      "community": 122,
+      "community_name": "NexuraLogo.vue",
+      "file_type": "code",
+      "norm_label": "nexuralogo.vue",
+      "source_file": "components/NexuraLogo.vue",
+      "source_location": "L1"
+    },
+    {
       "id": "skill_optimizer_skill",
       "label": "optimizer/SKILL.md",
       "_origin": "ast",
@@ -44589,5 +44600,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ec0152e2349f5b6fa64be045aedd0252cd1b08a6"
+  "built_at_commit": "eeb5f7856c75fd86b459f0340f5631946dc9e724"
 }

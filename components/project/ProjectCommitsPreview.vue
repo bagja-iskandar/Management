@@ -37,7 +37,7 @@
           </div>
         </div>
         <a
-          :href="commit.url"
+          :href="commit.htmlUrl"
           target="_blank"
           rel="noopener noreferrer"
           class="font-mono text-[10px] text-[#C98A4B] bg-[#C98A4B]/10 px-1.5 py-0.5 rounded border border-[#C98A4B]/20 shrink-0 hover:underline"

@@ -1,17 +1,17 @@
 # Graph Report - Management  (2026-10-07)
 
 ## Corpus Check
-- 184 files · ~126,826 words
+- 185 files · ~126,955 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: .example 1, (none) 1, .css 1)
 
 ## Summary
-- 1683 nodes · 2205 edges · 122 communities (92 shown, 13 thin omitted)
+- 1684 nodes · 2205 edges · 123 communities (92 shown, 13 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 50 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ec0152e2`
+- Built from commit: `eeb5f785`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -149,7 +149,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (122 total, 13 thin omitted)
+## Communities (123 total, 13 thin omitted)
 
 ### Community 0 - "WorkflowBadge.vue"
 Cohesion: 0.12
@@ -521,18 +521,18 @@ Nodes (3): packagesList, props, totalPackages
 
 ## Knowledge Gaps
 - **932 isolated node(s):** `route`, `isProjectPage`, `route`, `router`, `slug` (+927 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1159 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1160 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `TaskQueue.vue`, `AddTaskModal.vue`, `GlobalCommitsTable.vue`, `AddProjectModal.vue`, `CommitList.vue`, `WorkflowLogModal.vue`, `PackageBadge.vue`, `dashboard.vue`, `PackageModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `useSprintCalendar`, `ProjectTaskMatrix.vue`, `TaskDrawer.vue`, `ProjectCard.vue`, `DeploymentBadge.vue`, `SprintObjectiveBanner.vue`, `package.json`, `RepoActivityBadge.vue`, `ProjectsOverviewTable.vue`, `TodaysFocusCard.vue`, `ProjectNavDock.vue`, `ProjectLiveDeploymentCard.vue`, `TaskForm.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `CrossRepoTelemetryWatchdog.vue`, `PriorityTasksRadar.vue`, `TaskCard.vue`, `CompactProjectsHub.vue`, `Task`, `WeeklyFocusSnapshot.vue`, `KanbanColumn.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectSecurityCard.vue`, `ProjectSupabaseTab.vue`, `UpcomingDeadlinesCard.vue`, `SecurityBadge.vue`, `types/index.ts`, `HealthBadge.vue`, `RecentActivityTimeline.vue`, `ProjectPackageCard.vue`?**
-  _High betweenness centrality (0.344) - this node is a cross-community bridge._
+  _High betweenness centrality (0.350) - this node is a cross-community bridge._
 - **Why does `zod` connect `package.json` to `project.schema.ts`, `task.schema.ts`, `repositories/index.ts`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **Why does `@supabase/supabase-js` connect `getSupabaseClient` to `package.json`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **Are the 16 inferred relationships involving `useGitHub()` (e.g. with `createGitHubIssue()` and `fetchDeployments()`) actually correct?**
   _`useGitHub()` has 16 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `route`, `isProjectPage`, `route` to the rest of the system?**
