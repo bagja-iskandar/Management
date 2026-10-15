@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1791355648.947764,
-    "seen": 1791355738.8882756,
-    "ast_hash": "fd7f72336e83efe28c2df23620ab622c",
+    "mtime": 1791362862.340279,
+    "seen": 1791363148.6962154,
+    "ast_hash": "18dc886e275d2f447540ccd89d9be1f3",
     "semantic_hash": ""
   },
   "package.json": {
@@ -402,9 +402,9 @@
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
-    "mtime": 1789820456.8499684,
-    "seen": 1789820533.417741,
-    "ast_hash": "8614708efce2fca3565d9b54fa39d45e",
+    "mtime": 1791363024.1290255,
+    "seen": 1791363148.6711142,
+    "ast_hash": "9978c320fb99244b828d9a341443fbb4",
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
@@ -504,9 +504,9 @@
     "semantic_hash": ""
   },
   "server/api/telemetry.get.ts": {
-    "mtime": 1791269103.1158905,
-    "seen": 1791269323.2154171,
-    "ast_hash": "2d24fcb5ecb5b780ed0da513ef7cb017",
+    "mtime": 1791362870.4499676,
+    "seen": 1791363148.706162,
+    "ast_hash": "c37702fe5c6dd4e52a5ef9e27f9d8282",
     "semantic_hash": ""
   },
   "composables/useGitHub.ts": {
@@ -798,15 +798,15 @@
     "semantic_hash": ""
   },
   "components/project/ProjectSupabaseTab.vue": {
-    "mtime": 1789906444.4786808,
-    "seen": 1789906795.840837,
-    "ast_hash": "250b61de49c6fa6d14a46e6d6cfd710d",
+    "mtime": 1791363038.5704594,
+    "seen": 1791363148.6905735,
+    "ast_hash": "0c2aff6fd12f4ba8a5c2509f2c4088d2",
     "semantic_hash": ""
   },
   "components/project/ProjectVercelTab.vue": {
-    "mtime": 1789906440.565405,
-    "seen": 1789906795.8408394,
-    "ast_hash": "01f0c2687cbaa8ea56182bd7547ef951",
+    "mtime": 1791363054.9928472,
+    "seen": 1791363148.690856,
+    "ast_hash": "9d103a7d7e441235de83679c5435b9f9",
     "semantic_hash": ""
   },
   "components/project/ProjectNavDock.vue": {

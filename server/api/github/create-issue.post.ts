@@ -1,23 +1,16 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
-import { readJsonBody, requireString, optionalString, validateStringArray } from '../../utils/validation'
+import { validateBody, createIssueSchema } from '../../schemas'
 import { taskRepository } from '../../repositories'
 
 export default withApiHandler(async (event) => {
-  const body = await readJsonBody<{
-    repo?: string
-    taskId?: string
-    title?: string
-    body?: string
-    labels?: string[]
-  }>(event)
-
-  const repoParam = requireString(body?.repo, 'repo')
-  const title = requireString(body?.title, 'title')
-  const issueBody = optionalString(body?.body, 'body')
-  const labels = validateStringArray(body?.labels, 'labels')
-  const taskId = optionalString(body?.taskId, 'taskId')
+  const body = await validateBody(event, createIssueSchema)
+  const repoParam = body.repo
+  const title = body.title
+  const issueBody = body.body
+  const labels = body.labels
+  const taskId = body.taskId
 
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()

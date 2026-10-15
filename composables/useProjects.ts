@@ -1,5 +1,16 @@
 import type { Project } from '~/types'
 
+const PROJECT_REFRESH_KEYS = [
+  'projects',
+  'projects-detail',
+  'projects-data',
+  'projects-list',
+  'repos-projects-list',
+  'roadmap-projects',
+  'tasks-projects',
+  'header-projects'
+]
+
 export function useProjects() {
   async function getProjects() {
     return await $fetch<Project[]>('/api/projects')
@@ -16,7 +27,7 @@ export function useProjects() {
   async function createProject(payload: Partial<Project> & { slug?: string; title: string }) {
     const created = await $fetch<Project>('/api/projects', { method: 'POST', body: payload })
     try {
-      refreshNuxtData(['projects', 'projects-detail', 'repos-projects-list', 'roadmap-projects'])
+      refreshNuxtData(PROJECT_REFRESH_KEYS)
     } catch {}
     return created
   }
@@ -24,7 +35,7 @@ export function useProjects() {
   async function updateProject(slug: string, patch: Partial<Project>) {
     const updated = await $fetch<Project>(`/api/projects/${slug}`, { method: 'PUT', body: patch })
     try {
-      refreshNuxtData(['projects', 'projects-detail', 'repos-projects-list', 'roadmap-projects'])
+      refreshNuxtData(PROJECT_REFRESH_KEYS)
     } catch {}
     return updated
   }
@@ -32,7 +43,7 @@ export function useProjects() {
   async function deleteProject(slug: string) {
     const res = await $fetch(`/api/projects/${slug}`, { method: 'DELETE' })
     try {
-      refreshNuxtData(['projects', 'projects-detail', 'repos-projects-list', 'roadmap-projects'])
+      refreshNuxtData(PROJECT_REFRESH_KEYS)
     } catch {}
     return res
   }

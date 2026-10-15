@@ -7,8 +7,8 @@ export interface Task {
   projectSlug?: string
   name: string
   description?: string
-  status: 'in_queue' | 'running_sprint' | 'deployed' | 'blocked'
-  priority: 'low' | 'medium' | 'high' | 'critical'
+  status: TaskStatus
+  priority: TaskPriority
   techTags: string[]
   dueDate?: string
   sprintId?: string

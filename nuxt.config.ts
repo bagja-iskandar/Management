@@ -19,8 +19,6 @@ export default defineNuxtConfig({
   components: ['~~/components'],
   imports: {
     dirs: [
-      '../composables',
-      '../composables/**',
       'composables',
       'composables/**'
     ]

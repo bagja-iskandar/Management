@@ -33,7 +33,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import ProjectNavDock from '../components/project/ProjectNavDock.vue'
 
 const route = useRoute()
 const isProjectPage = computed(() => {

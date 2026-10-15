@@ -1,5 +1,16 @@
 import type { Sprint } from '~/types'
 
+const SPRINT_REFRESH_KEYS = [
+  'sprints',
+  'sprints-data',
+  'sprints-list',
+  'tasks-data',
+  'tasks-all',
+  'tasks-page',
+  'project-tasks',
+  'stats'
+]
+
 export function useSprints() {
   async function getSprints() {
     return await $fetch<Sprint[]>('/api/sprints')
@@ -16,7 +27,7 @@ export function useSprints() {
   }) {
     const created = await $fetch<Sprint>('/api/sprints', { method: 'POST', body: payload })
     try {
-      refreshNuxtData(['sprints-list', 'tasks-page', 'project-tasks'])
+      refreshNuxtData(SPRINT_REFRESH_KEYS)
     } catch {}
     return created
   }
@@ -32,7 +43,7 @@ export function useSprints() {
   async function updateSprint(id: string, patch: Partial<Sprint>) {
     const updated = await $fetch<Sprint>(`/api/sprints/${id}`, { method: 'PUT', body: patch })
     try {
-      refreshNuxtData(['sprints-list', 'tasks-page', 'project-tasks'])
+      refreshNuxtData(SPRINT_REFRESH_KEYS)
     } catch {}
     return updated
   }
@@ -40,7 +51,7 @@ export function useSprints() {
   async function deleteSprint(id: string) {
     const res = await $fetch(`/api/sprints/${id}`, { method: 'DELETE' })
     try {
-      refreshNuxtData(['sprints-list', 'tasks-page', 'project-tasks'])
+      refreshNuxtData(SPRINT_REFRESH_KEYS)
     } catch {}
     return res
   }

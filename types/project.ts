@@ -6,8 +6,8 @@ export interface Project {
   slug: string
   title: string
   description?: string
-  status: 'active' | 'maintenance' | 'planned' | 'on-hold' | 'completed' | 'archived'
-  priority: 'low' | 'medium' | 'high' | 'critical'
+  status: ProjectStatus
+  priority: ProjectPriority
   githubRepo?: string
   deployUrl?: string
   techStack: string[]

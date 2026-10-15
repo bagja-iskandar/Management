@@ -5,8 +5,6 @@ export default {
     './app/**/*.{vue,js,ts,jsx,tsx}',
     './components/**/*.{vue,js,ts,jsx,tsx}',
     './composables/**/*.{vue,js,ts,jsx,tsx}',
-    './pages/**/*.{vue,js,ts,jsx,tsx}',
-    './app.vue',
     './nuxt.config.{js,ts}'
   ],
   theme: {

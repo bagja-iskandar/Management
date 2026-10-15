@@ -1,5 +1,18 @@
 import type { Task } from '~/types'
 
+const TASK_REFRESH_KEYS = [
+  'tasks-data',
+  'tasks-all',
+  'tasks-page',
+  'project-tasks',
+  'roadmap-tasks',
+  'activities',
+  'stats',
+  'sprints-list',
+  'sprints',
+  'sprints-data'
+]
+
 export function useTasks() {
   async function getTasks(params?: Record<string, any>) {
     return await $fetch<Task[]>('/api/tasks', { params })
@@ -16,7 +29,7 @@ export function useTasks() {
   async function createTask(payload: Partial<Task> & { name: string }) {
     const created = await $fetch<Task>('/api/tasks', { method: 'POST', body: payload })
     try {
-      refreshNuxtData(['tasks-page', 'project-tasks', 'roadmap-tasks', 'activities', 'stats', 'sprints-list'])
+      refreshNuxtData(TASK_REFRESH_KEYS)
     } catch {
       // safe fallback in test/isolated env
     }
@@ -26,7 +39,7 @@ export function useTasks() {
   async function updateTask(id: string, patch: Partial<Task>) {
     const updated = await $fetch<Task>(`/api/tasks/${id}`, { method: 'PUT', body: patch })
     try {
-      refreshNuxtData(['tasks-page', 'project-tasks', 'roadmap-tasks', 'activities', 'stats', 'sprints-list'])
+      refreshNuxtData(TASK_REFRESH_KEYS)
     } catch {
       // safe fallback
     }
@@ -36,7 +49,7 @@ export function useTasks() {
   async function deleteTask(id: string) {
     const res = await $fetch(`/api/tasks/${id}`, { method: 'DELETE' })
     try {
-      refreshNuxtData(['tasks-page', 'project-tasks', 'roadmap-tasks', 'activities', 'stats', 'sprints-list'])
+      refreshNuxtData(TASK_REFRESH_KEYS)
     } catch {
       // safe fallback
     }
