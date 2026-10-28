@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubPackageItem, GitHubPackageSummary, GitHubPackageType } from '~/types'
 
 const fetchCachedPackages = defineCachedFunction(
@@ -118,6 +119,11 @@ export default withApiHandler(async (event): Promise<GitHubPackageSummary> => {
   const query = getQuery(event)
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : undefined
 
+  let targetRepo: string | undefined
+  if (repoParam) {
+    targetRepo = await assertGitHubRepoAllowed(repoParam, event)
+  }
+
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
 
@@ -130,5 +136,5 @@ export default withApiHandler(async (event): Promise<GitHubPackageSummary> => {
     }
   }
 
-  return await fetchCachedPackages(token, repoParam)
+  return await fetchCachedPackages(token, targetRepo)
 })

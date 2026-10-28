@@ -8,7 +8,15 @@ export default defineNuxtConfig({
     '~/types': fileURLToPath(new URL('./types', import.meta.url)),
     '@/types': fileURLToPath(new URL('./types', import.meta.url)),
     '~~/types': fileURLToPath(new URL('./types', import.meta.url)),
-    '@@/types': fileURLToPath(new URL('./types', import.meta.url))
+    '@@/types': fileURLToPath(new URL('./types', import.meta.url)),
+    '~/composables': fileURLToPath(new URL('./composables', import.meta.url)),
+    '@/composables': fileURLToPath(new URL('./composables', import.meta.url)),
+    '~~/composables': fileURLToPath(new URL('./composables', import.meta.url)),
+    '@@/composables': fileURLToPath(new URL('./composables', import.meta.url)),
+    '~/components': fileURLToPath(new URL('./components', import.meta.url)),
+    '@/components': fileURLToPath(new URL('./components', import.meta.url)),
+    '~~/components': fileURLToPath(new URL('./components', import.meta.url)),
+    '@@/components': fileURLToPath(new URL('./components', import.meta.url))
   },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~~/assets/css/main.css'],
@@ -18,10 +26,7 @@ export default defineNuxtConfig({
   },
   components: ['~~/components'],
   imports: {
-    dirs: [
-      'composables',
-      'composables/**'
-    ]
+    dirs: ['~~/composables', '~~/composables/**']
   },
   runtimeConfig: {
     githubToken: process.env.GITHUB_TOKEN || '',
@@ -31,7 +36,7 @@ export default defineNuxtConfig({
     vercelToken: process.env.VERCEL_TOKEN || '',
     public: {
       githubUsername: process.env.GITHUB_USERNAME || 'bagja-iskandar',
-      supabaseUrl: process.env.SUPABASE_URL || 'https://iklvthppfigprjhqmrlo.supabase.co',
+      supabaseUrl: process.env.SUPABASE_URL || '',
       vercelProductionUrl: 'https://management-sona-ta.vercel.app'
     }
   },
@@ -62,6 +67,31 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
+    }
+  },
+  hooks: {
+    'imports:dirs'(dirs) {
+      const composablesRoot = fileURLToPath(new URL('./composables', import.meta.url))
+      dirs.push(composablesRoot)
+      for (let i = 0; i < dirs.length; i++) {
+        if (dirs[i].includes('~~')) {
+          dirs[i] = dirs[i].replace(/[\\/]app[\\/]~~/, '')
+        }
+      }
+    },
+    'vite:extendConfig'(config) {
+      if (config.resolve?.alias) {
+        if (Array.isArray(config.resolve.alias)) {
+          config.resolve.alias.sort((a, b) => {
+            const aLen = typeof a.find === 'string' ? a.find.length : 0
+            const bLen = typeof b.find === 'string' ? b.find.length : 0
+            return bLen - aLen
+          })
+        } else if (typeof config.resolve.alias === 'object') {
+          const sortedEntries = Object.entries(config.resolve.alias).sort(([a], [b]) => b.length - a.length)
+          config.resolve.alias = sortedEntries.map(([find, replacement]) => ({ find, replacement }))
+        }
+      }
     }
   },
   devtools: { enabled: process.env.NODE_ENV !== 'production' }

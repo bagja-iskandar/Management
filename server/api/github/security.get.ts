@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubSecurityAlert, GitHubSecuritySeverity, GitHubSecuritySummary } from '~/types'
 
 function normalizeSeverity(severity?: string): GitHubSecuritySeverity {
@@ -180,9 +181,7 @@ export default withApiHandler(async (event): Promise<GitHubSecuritySummary> => {
   const query = getQuery(event)
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
-  if (!repoParam) {
-    throwApiError(400, 'INVALID_REPO', 'Query parameter "repo" is required (format: owner/repo)')
-  }
+  const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
 
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
@@ -201,12 +200,6 @@ export default withApiHandler(async (event): Promise<GitHubSecuritySummary> => {
       lowCount: 0,
       alerts: []
     }
-  }
-
-  let fullRepo = repoParam
-  if (!fullRepo.includes('/')) {
-    const defaultOwner = config.githubUsername || 'bagja-iskandar'
-    fullRepo = `${defaultOwner}/${fullRepo}`
   }
 
   return await fetchCachedSecurity(token, fullRepo)

@@ -3,11 +3,11 @@
     <!-- Header Row -->
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-[#756F68] font-semibold">
+        <h3 class="font-sans text-xs uppercase tracking-wider text-[#8A8F9E] font-semibold">
           READY TO PICK UP
         </h3>
       </div>
-      <span class="font-mono text-xs text-[#C98A4B] bg-[#C98A4B]/10 border border-[#C98A4B]/20 rounded-full px-2 py-0.2">
+      <span class="font-mono text-xs tabular-nums text-indigo-300 bg-indigo-500/10 border border-indigo-500/25 rounded-full px-2 py-0.5">
         {{ queueTasks.length }}
       </span>
     </div>
@@ -26,37 +26,38 @@
       >
         <div class="flex items-center gap-2.5 min-w-0 flex-1">
           <!-- Priority Dot & Label -->
-          <div class="flex items-center gap-1.5 shrink-0 font-mono text-[10px] uppercase font-semibold px-2 py-0.5 rounded border" :class="priorityBadgeClass(task.priority)">
+          <div class="flex items-center gap-1.5 shrink-0 font-mono text-[10px] tabular-nums uppercase font-semibold px-2 py-0.5 rounded border" :class="priorityBadgeClass(task.priority)">
             <span class="w-1.5 h-1.5 rounded-full" :class="priorityDotClass(task.priority)"></span>
             <span>{{ priorityLabel(task.priority) }}</span>
           </div>
 
           <!-- Task ID Monospace -->
-          <span class="font-mono text-xs text-[#C98A4B] font-bold shrink-0">
+          <span class="font-mono text-xs tabular-nums text-indigo-400 font-semibold shrink-0">
             #{{ displayTaskId(task) }}
           </span>
 
           <!-- Task Title -->
-          <span class="text-xs text-[#F5F2EB] font-medium truncate group-hover:text-[#C98A4B] transition-colors">
+          <span class="font-sans text-xs text-[#F3F4F6] font-medium truncate group-hover:text-indigo-300 transition-colors">
             {{ task.name }}
           </span>
         </div>
 
         <!-- Right Side: Tech tags or Due date -->
         <div class="flex items-center gap-2 shrink-0">
-          <span v-if="task.dueDate" class="font-mono text-[10px] text-[#756F68] hidden sm:inline">
-            📅 {{ task.dueDate }}
+          <span v-if="task.dueDate" class="font-mono text-[10px] tabular-nums text-[#8A8F9E] hidden sm:inline-flex items-center gap-1">
+            <NexuraIcon name="Calendar" size="xs" />
+            <span>{{ task.dueDate }}</span>
           </span>
-          <span class="text-[#756F68] text-xs group-hover:translate-x-0.5 transition-transform">
-            →
+          <span class="text-[#8A8F9E] group-hover:text-[#F3F4F6] group-hover:translate-x-0.5 transition-all">
+            <NexuraIcon name="ArrowRight" size="xs" />
           </span>
         </div>
       </div>
     </div>
 
     <!-- Empty State -->
-    <div v-else class="p-3 rounded-lg bg-white/[0.02] border border-white/[0.04] font-mono text-xs text-[#756F68] flex items-center gap-2">
-      <span>✅</span>
+    <div v-else class="p-3 rounded-lg bg-white/[0.02] border border-white/[0.04] font-sans text-xs text-[#8A8F9E] flex items-center gap-2">
+      <NexuraIcon name="CheckCircle2" size="sm" class="text-emerald-400" />
       <span>No tasks in queue</span>
     </div>
   </div>
@@ -65,6 +66,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import NexuraIcon from './ui/NexuraIcon.vue'
 import type { Task, TaskPriority } from '../types'
 
 const props = withDefaults(
@@ -124,28 +126,28 @@ function priorityLabel(priority: TaskPriority) {
 function priorityBadgeClass(priority: TaskPriority) {
   switch (priority) {
     case 'critical':
-      return 'bg-red-500/10 text-red-400 border-red-500/30'
+      return 'bg-rose-500/10 text-rose-400 border-rose-500/30'
     case 'high':
-      return 'bg-orange-500/10 text-orange-400 border-orange-500/30'
+      return 'bg-amber-500/10 text-amber-400 border-amber-500/30'
     case 'low':
-      return 'bg-white/5 text-[#756F68] border-white/[0.08]'
+      return 'bg-white/5 text-[#8A8F9E] border-white/[0.08]'
     case 'medium':
     default:
-      return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30'
+      return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/30'
   }
 }
 
 function priorityDotClass(priority: TaskPriority) {
   switch (priority) {
     case 'critical':
-      return 'bg-red-400 animate-pulse'
+      return 'bg-rose-400 animate-pulse'
     case 'high':
-      return 'bg-orange-400'
+      return 'bg-amber-400'
     case 'low':
-      return 'bg-[#756F68]'
+      return 'bg-[#8A8F9E]'
     case 'medium':
     default:
-      return 'bg-yellow-400'
+      return 'bg-indigo-400'
   }
 }
 

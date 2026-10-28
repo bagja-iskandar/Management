@@ -15,10 +15,10 @@ if (typeof process.loadEnvFile === 'function' && fs.existsSync('.env')) {
 }
 
 const url = process.env.SUPABASE_URL
-const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY
 
 if (!url || !key) {
-  console.error('❌ SUPABASE_URL atau SUPABASE_SERVICE_KEY belum terisi di .env')
+  console.error('❌ SUPABASE_URL atau SUPABASE_SERVICE_ROLE_KEY belum terisi di .env')
   process.exit(1)
 }
 
@@ -33,9 +33,11 @@ async function verify() {
     if (pErr.code === 'PGRST205' || pErr.message?.includes('schema cache')) {
       console.log('\n⚠️  Tabel database belum dibuat di Supabase.')
       console.log('👉 Silakan buka SQL Editor Supabase Anda:')
-      console.log('👉 Paste dan RUN isi file:')
+      console.log('👉 Paste dan RUN file migrasi secara berurutan:')
       console.log('   1. server/database/migrations/001_create_nexura_tables.sql')
-      console.log('   2. server/database/migrations/002_cascade_cleanup_trigger.sql\n')
+      console.log('   2. server/database/migrations/002_cascade_cleanup_trigger.sql')
+      console.log('   3. server/database/migrations/003_system_alignment_and_rls_lockdown.sql')
+      console.log('   (atau server/database/migrations/all_in_one_setup.sql)\n')
       process.exit(0)
     } else {
       console.error('❌ Error query Supabase:', pErr)
@@ -45,18 +47,27 @@ async function verify() {
 
   console.log('✅ Tabel `projects` terdeteksi di Supabase!')
   
-  // 2. Cek tabel sprints & tasks
+  // 2. Cek kolom release_phase pada tabel projects
+  const { error: rpErr } = await supabase.from('projects').select('release_phase').limit(1)
+  if (rpErr) {
+    console.error('⚠️  Kolom `release_phase` belum ada di tabel `projects`. Jalankan migration 003!')
+    process.exit(1)
+  }
+  console.log('✅ Kolom `release_phase` terverifikasi di tabel `projects`!')
+
+  // 3. Cek tabel sprints, tasks, & project_notes
   const { error: sErr } = await supabase.from('sprints').select('id').limit(1)
   const { error: tErr } = await supabase.from('tasks').select('id').limit(1)
+  const { error: nErr } = await supabase.from('project_notes').select('id').limit(1)
 
-  if (sErr || tErr) {
-    console.error('⚠️  Sebagian tabel belum siap:', { sErr, tErr })
+  if (sErr || tErr || nErr) {
+    console.error('⚠️  Sebagian tabel belum siap:', { sErr, tErr, nErr })
     process.exit(1)
   }
 
-  console.log('✅ Tabel `sprints` dan `tasks` terdeteksi di Supabase!')
+  console.log('✅ Tabel `sprints`, `tasks`, dan `project_notes` terdeteksi di Supabase!')
 
-  // 3. Auto-seed dari local data jika masih kosong
+  // 4. Auto-seed dari local data jika masih kosong
   if (projects.length === 0) {
     console.log('📦 Supabase masih kosong. Melakukan migrasi data lokal...')
     const readLocal = (file) => {
@@ -73,6 +84,7 @@ async function verify() {
         description: p.description || '',
         status: p.status || 'active',
         priority: p.priority || 'medium',
+        release_phase: p.releasePhase || p.release_phase || 'v1.0',
         github_repo: p.githubRepo || null,
         deploy_url: p.deployUrl || null,
         tech_stack: p.techStack || [],
@@ -128,6 +140,22 @@ async function verify() {
       const { error } = await supabase.from('tasks').upsert(rows, { onConflict: 'task_id' })
       if (error) console.error('Gagal migrasi tasks:', error.message)
       else console.log(`✨ Berhasil migrasi ${rows.length} tasks ke Supabase!`)
+    }
+
+    const localNotes = readLocal('notes')
+    if (localNotes.length > 0) {
+      const rows = localNotes.map(n => ({
+        id: n.id,
+        project_slug: n.projectSlug || n.project_slug || 'management',
+        category: n.category || 'idea',
+        content: n.content || '',
+        promoted_task_id: n.promotedTaskId || n.promoted_task_id || null,
+        created_at: n.createdAt || new Date().toISOString(),
+        updated_at: n.updatedAt || new Date().toISOString()
+      }))
+      const { error } = await supabase.from('project_notes').upsert(rows, { onConflict: 'id' })
+      if (error) console.error('Gagal migrasi project_notes:', error.message)
+      else console.log(`✨ Berhasil migrasi ${rows.length} project_notes ke Supabase!`)
     }
   } else {
     console.log(`ℹ️  Supabase sudah memiliki data (${projects.length} projects ditemukan).`)

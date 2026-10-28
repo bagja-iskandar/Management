@@ -7,9 +7,9 @@ Dokumentasi lengkap: [DOCUMENTATION.md](./DOCUMENTATION.md)
 ## Tech Stack
 
 - **Nuxt 4** (Vue 3 + TypeScript) — Full-stack framework
-- **Tailwind CSS** — Charcoal-Ochre Console design system
-- **Nitro** — Server API + GitHub API proxy
-- **GitHub REST API** — Repos, commits, branches integration
+- **Tailwind CSS** — Precision Dark Obsidian design system (Linear / Raycast Inset Architecture)
+- **Nitro** — Server API + Dual-Adapter Repository (Supabase PostgreSQL / Nitro KV) + GitHub API proxy
+- **GitHub REST API** — Repos, commits, branches, workflows, PRs/issues, security & packages integration
 
 ## Setup
 
@@ -39,15 +39,17 @@ npm run preview
 - **Tasks Hub** — Multi-dimension task filtering & management
 - **Task Cards** — Monospace `#ENG-xxx` IDs, priority pills, tech stack tags
 
-## Design Tokens
+## Design Tokens (Precision Dark Obsidian)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| Canvas | `#0B0A09` | Page background |
-| Surface | `#141210` | Sidebar, cards |
-| Bone | `#F5F2EB` | Primary text |
-| Muted | `#756F68` | Secondary text |
-| Ochre | `#C98A4B` | Accent, focus |
+| Void | `#07080A` | Outer shell & unified sidebar base |
+| Canvas | `#0B0C10` | Inset workspace background (`.obs-workspace`) |
+| Surface | `#111318` | Specular 1px cards & panels (`.obs-card`) |
+| Elevated | `#171920` | Elevated surfaces, dropdowns, active tabs |
+| Foreground | `#F3F4F6` | Primary text & crisp CTA buttons (Crisp Alabaster) |
+| Muted | `#8A8F9E` | Secondary text & metadata (Cool Slate) |
+| Accent | `#6366F1` / `#818CF8` | Primary Obsidian Indigo accent, focus & active state |
 
 ## Environment Variables
 

@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubWorkflowRun } from '~/types'
 
 const fetchCachedWorkflows = defineCachedFunction(
@@ -49,18 +50,10 @@ export default withApiHandler(async (event): Promise<GitHubWorkflowRun[]> => {
   const query = getQuery(event)
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
-  if (!repoParam) {
-    throwApiError(400, 'INVALID_REPO', 'Query parameter "repo" is required (format: owner/repo)')
-  }
+  const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
 
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
-
-  let fullRepo = repoParam
-  if (!fullRepo.includes('/')) {
-    const defaultOwner = config.githubUsername || 'bagja-iskandar'
-    fullRepo = `${defaultOwner}/${fullRepo}`
-  }
 
   const limitParam = query.limit ? Number(query.limit) : 5
   const limit = Math.max(1, Math.min(100, isNaN(limitParam) ? 5 : limitParam))

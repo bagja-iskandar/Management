@@ -1,17 +1,20 @@
+export * from './useOmniSearch'
+
+/**
+ * Backwards compatibility wrapper for useSearch.
+ * Internally synchronizes with useOmniSearch.
+ */
 export function useSearch() {
-  const searchQuery = useState<string>('nexura:search_query', () => '')
-
-  function setSearch(query: string) {
-    searchQuery.value = query
-  }
-
-  function clearSearch() {
-    searchQuery.value = ''
-  }
+  const omni = useOmniSearch()
 
   return {
-    searchQuery,
-    setSearch,
-    clearSearch
+    ...omni,
+    searchQuery: omni.rawQuery,
+    setSearch: (query: string) => {
+      omni.rawQuery.value = query
+    },
+    clearSearch: () => {
+      omni.rawQuery.value = ''
+    }
   }
 }

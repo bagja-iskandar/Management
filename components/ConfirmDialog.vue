@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
     role="alertdialog"
     aria-modal="true"
     :aria-labelledby="titleId"
@@ -9,28 +9,24 @@
   >
     <div
       ref="panel"
-      class="w-full max-w-md p-6 rounded-2xl bg-[#111114] border border-white/[0.08] shadow-2xl shadow-black/80 space-y-4 focus:outline-none"
+      class="w-full max-w-md p-6 rounded-2xl bg-[#111318] border border-white/[0.1] shadow-2xl text-[#F3F4F6] space-y-4 focus:outline-none"
       tabindex="-1"
       @keydown="handleKeydown"
     >
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(239,68,68,0.2)]" aria-hidden="true">
-          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-            <line x1="12" y1="9" x2="12" y2="13" />
-            <line x1="12" y1="17" x2="12.01" y2="17" />
-          </svg>
+        <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(244,63,94,0.15)]" aria-hidden="true">
+          <NexuraIcon name="AlertTriangle" size="md" class="text-rose-400" />
         </div>
-        <h3 :id="titleId" class="font-mono text-lg font-bold text-[#F5F2EB]">{{ displayTitle }}</h3>
+        <h3 :id="titleId" class="font-sans text-base font-semibold text-[#F3F4F6]">{{ displayTitle }}</h3>
       </div>
 
-      <p :id="descId" class="text-sm text-[#756F68] leading-relaxed">{{ displayMessage }}</p>
+      <p :id="descId" class="font-sans text-sm text-[#8A8F9E] leading-relaxed">{{ displayMessage }}</p>
 
-      <div class="flex items-center justify-end gap-3 pt-2">
+      <div class="flex items-center justify-end gap-3 pt-2 border-t border-white/[0.06]">
         <button
           ref="cancelButton"
           type="button"
-          class="px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-[#F5F2EB] font-mono text-xs font-medium border border-white/[0.08] transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
+          class="px-4 py-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-[#8A8F9E] hover:text-[#F3F4F6] font-sans text-xs font-medium border border-white/[0.08] transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-white/20 cursor-pointer"
           :disabled="displayBusy"
           @click="onCancel"
         >
@@ -38,11 +34,12 @@
         </button>
         <button
           type="button"
-          class="px-4 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/25 text-red-400 font-mono text-xs font-semibold border border-red-500/30 transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-red-400"
+          class="px-4 py-2 rounded-lg bg-rose-500 hover:bg-rose-600 text-white font-sans text-xs font-medium transition-colors disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-rose-500/40 shadow-sm flex items-center gap-1.5 cursor-pointer"
           :disabled="displayBusy"
           @click="onConfirm"
         >
-          {{ displayConfirmText }}
+          <NexuraIcon v-if="displayBusy" name="Loader2" size="xs" class="animate-spin text-white" />
+          <span>{{ displayConfirmText }}</span>
         </button>
       </div>
     </div>
@@ -51,6 +48,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, useId } from 'vue'
+import NexuraIcon from './ui/NexuraIcon.vue'
 
 const props = defineProps({
   title: { type: String, default: 'Confirmation' },

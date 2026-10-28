@@ -1,5 +1,38 @@
-/* ==== assets/css/main.css — Charcoal-Ochre Engineering Console ==== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* ==== assets/css/main.css — Precision Dark Obsidian Design System ==== */
+
+:root {
+  --obs-void: #07080A;
+  --obs-canvas: #0B0C10;
+  --obs-surface: #111318;
+  --obs-elevated: #171920;
+  --obs-hover: #1D2029;
+  --obs-text: #F3F4F6;
+  --obs-muted: #8A8F9E;
+  --obs-dim: #565B68;
+  --obs-accent: #6366F1;
+  --obs-accent-light: #818CF8;
+  --obs-accent-glow: rgba(99, 102, 241, 0.16);
+  --obs-border: rgba(255, 255, 255, 0.07);
+  --obs-border-strong: rgba(255, 255, 255, 0.13);
+}
+
+body[data-preset="amethyst"] {
+  --obs-accent: #8B5CF6;
+  --obs-accent-light: #A78BFA;
+  --obs-accent-glow: rgba(139, 92, 246, 0.18);
+}
+
+body[data-preset="stealth"] {
+  --obs-accent: #E4E4E7;
+  --obs-accent-light: #FAFAFA;
+  --obs-accent-glow: rgba(255, 255, 255, 0.10);
+}
+
+body[data-preset="emerald"] {
+  --obs-accent: #10B981;
+  --obs-accent-light: #34D399;
+  --obs-accent-glow: rgba(16, 185, 129, 0.16);
+}
 
 @tailwind base;
 @tailwind components;
@@ -13,18 +46,39 @@
   }
 
   html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html,
   body,
   #__nuxt {
     min-height: 100%;
-    background-color: #09090B;
-    color: #F5F2EB;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--obs-void);
+    color: var(--obs-text);
+    font-family: 'Geist Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   body {
     margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Monospace Stack */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: 'Geist Mono', 'JetBrains Mono', 'Cascadia Code', monospace;
+  }
+
+  /* Tabular numbers for financial & metric data */
+  .font-mono,
+  .tabular-nums,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum', 'zero';
   }
 
   /* Accessibility focus ring defaults */
@@ -33,18 +87,41 @@
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    outline: 1px solid #C98A4B;
+    outline: 1px solid var(--obs-accent);
     outline-offset: 2px;
   }
 }
 
 @layer components {
-  /* Reusable Console Card */
-  .card,
-  .console-card {
-    background-color: #111114;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+  /* Specular Obsidian Card (.obs-card / .console-card / .card) */
+  .obs-card,
+  .console-card,
+  .card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0) 100%), var(--obs-surface);
+    border: 1px solid var(--obs-border);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+      0 4px 20px -4px rgba(0, 0, 0, 0.5);
     border-radius: 0.75rem;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .obs-card-interactive:hover {
+    border-color: var(--obs-border-strong);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.11),
+      0 8px 28px -6px rgba(0, 0, 0, 0.65);
+  }
+
+  /* Inset Workspace Container (.obs-workspace) */
+  .obs-workspace {
+    background:
+      radial-gradient(900px 280px at 50% -60px, var(--obs-accent-glow), transparent 70%),
+      var(--obs-canvas);
+    border: 1px solid var(--obs-border);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      0 20px 50px rgba(0, 0, 0, 0.7);
   }
 
   /* Reusable Pill / Badge */
@@ -61,50 +138,43 @@
 
   /* Glow Border Pattern */
   .glow-border {
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--obs-border);
     transition: all 0.2s ease;
   }
 
   .glow-border:hover {
-    border-color: #C98A4B;
-    box-shadow: 0 0 12px rgba(201, 138, 75, 0.15);
+    border-color: var(--obs-accent);
+    box-shadow: 0 0 12px var(--obs-accent-glow);
   }
 
-  /* Glow Ochre Utility */
-  .glow-ochre {
-    box-shadow: 0 0 12px rgba(201, 138, 75, 0.15);
+  /* Glow Utilities */
+  .glow-ochre,
+  .glow-accent {
+    box-shadow: 0 0 16px var(--obs-accent-glow);
   }
 
-  /* Static Engineering Telemetry Grid (32px micro-grid, 128px major interval with faint crosshair) */
-  .bg-telemetry-grid {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128' shape-rendering='crispEdges'%3E%3Cpath d='M0 32h128M0 96h128M32 0v128M96 0v128' stroke='rgba(255,255,255,0.015)' stroke-width='1' fill='none'/%3E%3Cpath d='M0 64h128M64 0v128M0 128h128M128 0v128' stroke='rgba(255,255,255,0.03)' stroke-width='1' fill='none'/%3E%3Cpath d='M62 64h5M64 62v5' stroke='%23C98A4B' stroke-opacity='0.12' stroke-width='1' stroke-linecap='square' fill='none'/%3E%3C/svg%3E");
-    background-size: 128px 128px;
-    background-repeat: repeat;
-  }
-
-  /* Compact 24px/96px Variant */
-  .bg-telemetry-grid-24 {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96' shape-rendering='crispEdges'%3E%3Cpath d='M0 24h96M0 72h96M24 0v96M72 0v96' stroke='rgba(255,255,255,0.015)' stroke-width='1' fill='none'/%3E%3Cpath d='M0 48h96M48 0v96M0 96h96M96 0v96' stroke='rgba(255,255,255,0.03)' stroke-width='1' fill='none'/%3E%3Cpath d='M46 48h5M48 46v5' stroke='%23C98A4B' stroke-opacity='0.12' stroke-width='1' stroke-linecap='square' fill='none'/%3E%3C/svg%3E");
-    background-size: 96px 96px;
-    background-repeat: repeat;
-  }
-
-  /* Zero-Overhead Static Radial Vignette Mask */
-  .telemetry-vignette-mask {
-    -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.4) 75%, transparent 100%);
-    mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0.4) 75%, transparent 100%);
-  }
-
-  /* Invisible Smooth Scrollbar (Linear / Raycast / macOS style — Option 1) */
-  * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
+  /* Subtle Modern Scrollbar */
   ::-webkit-scrollbar {
-    display: none;
-    width: 0px;
-    height: 0px;
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -117,6 +187,28 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Custom Obsidian Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  }
 }
-
-

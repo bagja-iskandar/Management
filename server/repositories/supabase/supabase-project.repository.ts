@@ -1,6 +1,8 @@
+import { createError } from 'h3'
 import type { IProjectRepository, ProjectFilterOptions } from '../contracts/project.repository'
 import type { Project } from '~/types'
 import { getSupabaseClient } from '../../utils/supabase'
+import { isNetworkError } from '../index'
 
 function mapProjectRow(row: any): Project {
   return {
@@ -15,6 +17,7 @@ function mapProjectRow(row: any): Project {
     techStack: Array.isArray(row.tech_stack) ? row.tech_stack : [],
     startDate: row.start_date || undefined,
     dueDate: row.due_date || undefined,
+    releasePhase: row.release_phase || undefined,
     createdAt: row.created_at,
     updatedAt: row.updated_at
   }
@@ -32,13 +35,19 @@ function mapProjectToRow(p: Partial<Project>): Record<string, any> {
   if (p.techStack !== undefined) row.tech_stack = p.techStack
   if (p.startDate !== undefined) row.start_date = p.startDate || null
   if (p.dueDate !== undefined) row.due_date = p.dueDate || null
+  if (p.releasePhase !== undefined) row.release_phase = p.releasePhase || null
   return row
 }
 
 export class SupabaseProjectRepository implements IProjectRepository {
   private get client() {
     const c = getSupabaseClient()
-    if (!c) throw new Error('Supabase client is not configured.')
+    if (!c) {
+      throw createError({
+        statusCode: 503,
+        statusMessage: 'Supabase client is not configured or unavailable'
+      })
+    }
     return c
   }
 
@@ -58,8 +67,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
 
     const { data, error } = await query
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.findAll] Error:', error)
-      return []
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return (data || []).map(mapProjectRow)
@@ -73,8 +93,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .maybeSingle()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.findBySlug] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapProjectRow(data) : null
@@ -88,8 +119,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .maybeSingle()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.findById] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapProjectRow(data) : null
@@ -107,8 +149,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .single()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.create] Error:', error)
-      throw new Error(`Failed to create project in Supabase: ${error.message}`)
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Failed to create project in Supabase: ${error.message}`,
+        data: error
+      })
     }
 
     return mapProjectRow(data)
@@ -126,8 +179,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .maybeSingle()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.update] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapProjectRow(data) : null
@@ -140,8 +204,19 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .ilike('slug', slug.trim())
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseProjectRepository.delete] Error:', error)
-      return false
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return true
@@ -154,7 +229,21 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .ilike('slug', slug.trim())
       .maybeSingle()
 
-    if (error) return false
+    if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
+      console.error('[SupabaseProjectRepository.slugExists] Error:', error)
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
+    }
     return Boolean(data)
   }
 }

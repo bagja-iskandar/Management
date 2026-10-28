@@ -1,6 +1,6 @@
 # ROADMAP.md — Nexura Evolution Roadmap
 
-_Last updated: 2026-09-17._
+_Last updated: 2026-10-22._
 
 ---
 
@@ -214,3 +214,49 @@ _Last updated: 2026-09-17._
 - Konfigurasi deploy ke Vercel (frontend).
 - Dockerfile sebagai alternatif (VPS/Docker).
 - CI/CD pipeline via GitHub Actions.
+
+---
+
+## Phase 13 — Precision Dark Obsidian UI/UX Overhaul (Linear / Raycast Inset Architecture)
+**Status**: 📋 Ready for Coding Agent Execution (Spesifikasi & Mockup Selesai)
+**Acuan Utama**: [DESIGN.md](./DESIGN.md) & [mockup-dark-obsidian.html](./mockup-dark-obsidian.html)
+**Tujuan**: Mengganti tema **Charcoal-Ochre** dan layout *floating islands* menjadi **Precision Dark Obsidian** berstandar Linear / Raycast / Cursor yang jernih, dingin, dan ergonomis di mata.
+
+### 13a. 📋 Update Design Tokens & Global CSS (`tailwind.config.ts` & `assets/css/main.css`)
+- Tambahkan token warna baru di `tailwind.config.ts`:
+  - `void: '#07080A'`, `canvas: '#0B0C10'`, `surface: '#111318'`, `surface-elevated: '#171920'`, `surface-hover: '#1D2029'`
+  - `foreground: '#F3F4F6'` (pertahankan alias `bone: '#F3F4F6'`), `muted: '#8A8F9E'`, `dim: '#565B68'`
+  - `accent: '#6366F1'`, `accent-light: '#818CF8'`, `accent-dim: '#4338CA'` (pertahankan alias `ochre: '#6366F1'`, `ochre-dim: '#4338CA'`)
+- Di `assets/css/main.css`:
+  - Definisikan CSS variables `--obs-*` dan preset tema (`data-preset="indigo|amethyst|stealth|emerald"`).
+  - Buat class `.obs-workspace` (inset panel dengan radial top-glow & 1px specular border) dan `.obs-card` / `.console-card` (kartu dengan `inset 0 1px 0 0 rgba(255,255,255,0.07)`).
+  - Hapus atau matikan `.bg-telemetry-grid` dan `<StructureStaticGrid />`.
+  - Ubah default `outline` fokus dari `#C98A4B` ke `#6366F1`.
+
+### 13b. 📋 Refactor App Shell, Sidebar & Header Bar (`app/app.vue`, `Sidebar.vue`, `HeaderBar.vue`)
+- **`app/app.vue`**:
+  - Ubah outer wrapper menjadi `bg-[#07080A] text-[#F3F4F6] flex p-2 sm:p-2.5 gap-2 max-w-[1600px] mx-auto h-screen overflow-hidden`.
+  - Bungkus `<HeaderBar />` dan `<main>` di dalam satu container `.obs-workspace rounded-2xl flex-1 flex flex-col min-w-0 overflow-hidden`.
+- **`components/Sidebar.vue`**:
+  - Ganti *floating icon-only capsule rail* (`w-14 rounded-3xl`) menjadi **Unified Left Sidebar (`w-56`)** dengan:
+    1. Brand Header (`Nexura` + tombol `+` quick deliverable).
+    2. Tombol pencari/command bar `Quick actions... ⌘K`.
+    3. Menu navigasi dengan **ikon + label teks eksplisit + counter badge** (`Command Center`, `My Tasks & Queue`, `Weekly Sprints`, `Roadmap`, `GitHub Repositories`, `System Telemetry`).
+    4. Daftar **Active Projects** (shortcut langsung ke `/projects/[slug]` beserta dot status & persentase progres).
+    5. Footer status telemetri (`Supabase + GitHub` + progress bar kuota API).
+- **`components/HeaderBar.vue`**:
+  - Ganti *floating header islands* menjadi **Unified Top Header Bar** (`h-13 px-5 border-b border-white/[0.06] bg-[#0B0C10]/60 backdrop-blur-md`).
+  - Kiri: Breadcrumb bersih + pill sprint aktif (`Sprint W42 · 4d left`).
+  - Kanan: Pill jam & blocker (`WIB 12:48 | 0 Blockers`) + tombol CTA utama putih alabaster (`bg-[#F3F4F6] hover:bg-white text-[#07080A]`).
+
+### 13c. 📋 Redesign Dashboard Command Center (`components/Dashboard.vue` & Sub-komponen)
+- Susun ulang layout `Dashboard.vue` mengikuti `project_context/mockup-dark-obsidian.html`:
+  - **Baris 1 (4 Specular KPI Cards)**: *In-Flight Tasks*, *Sprint Velocity*, *CI/CD Workflows*, *Open PRs & Issues*.
+  - **Baris 2 (Asymmetric 12-Col Bento Grid)**:
+    - **Kolom Kiri (`xl:col-span-8`)**: `PriorityTasksRadar.vue` (Execution Radar dengan segmented tabs `All Focus | High / Critical | In Flight`) + `GlobalCommitsTable.vue` (Global Commit Stream dengan inline diff preview).
+    - **Kolom Kanan (`xl:col-span-4`)**: Quick Task Inspector Pod + `WeeklyFocusSnapshot.vue` + `CompactProjectsHub.vue`.
+
+### 13d. 📋 Sweep & Standarisasi Seluruh Halaman dan Komponen Lainnya
+- Ganti seluruh hex hardcoded warisan Charcoal-Ochre (`#C98A4B`, `#8B6535`, `#F5F2EB`, `#756F68`, `#141210`, `#111114`, `#18181C`) di seluruh file `.vue` pada `app/pages/` (`tasks.vue`, `sprints.vue`, `roadmap.vue`, `repos.vue`, `telemetry.vue`, `projects/index.vue`, `projects/[slug].vue`) dan `components/` (`KanbanBoard.vue`, `TaskDrawer.vue`, semua `*Modal.vue`, `*Badge.vue`, `ProjectNavDock.vue`) menggunakan tabel migrasi di `DESIGN.md` Bagian 7.
+- Pastikan tidak ada ukuran teks di bawah `12px` (ganti semua `text-[9px]`, `text-[10px]`, `text-[11px]` menjadi `text-xs`).
+- Setelah selesai memodifikasi kode, jalankan `graphify update .` untuk menyinkronkan knowledge graph.

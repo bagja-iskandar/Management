@@ -1,285 +1,722 @@
 <template>
-  <div class="relative z-40">
-    <!-- Desktop Floating Dock (Centered Navigation Rail) -->
-    <aside
-      class="hidden md:flex flex-col justify-center items-center my-3.5 ml-1 sm:ml-2 h-[calc(100vh-1.75rem)] w-14 sm:w-16 shrink-0 relative z-40 select-none"
-      aria-label="Application Sidebar Dock"
-    >
-      <!-- Navigation Capsule Rail (Middle Island) -->
-
-      <!-- POD 2: Middle Island (Navigation Capsule Rail) -->
-      <nav
-        class="w-14 sm:w-16 py-3 px-1.5 rounded-3xl bg-[#111114]/95 backdrop-blur-xl border border-white/[0.08] shadow-2xl shadow-black/50 flex flex-col items-center gap-2.5 relative z-40"
-        aria-label="Main Navigation"
-      >
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.path"
-          :to="item.path"
-          class="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl transition-all relative group hover:z-50 focus:outline-none focus:ring-1 focus:ring-[#C98A4B]"
-          :class="[
-            isActive(item.path)
-              ? 'bg-[#C98A4B]/20 text-[#C98A4B] border border-[#C98A4B]/40 shadow-[0_0_12px_rgba(201,138,75,0.25)] font-bold'
-              : 'border border-transparent text-[#756F68] hover:text-[#F5F2EB] hover:bg-white/5'
-          ]"
-          :aria-current="isActive(item.path) ? 'page' : undefined"
-          :aria-label="item.label"
-        >
-          <!-- Dashboard: grid icon -->
-          <svg
-            v-if="item.icon === 'grid'"
-            class="w-5 h-5 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <rect x="3" y="3" width="7" height="9" rx="1" />
-            <rect x="14" y="3" width="7" height="5" rx="1" />
-            <rect x="14" y="12" width="7" height="9" rx="1" />
-            <rect x="3" y="16" width="7" height="5" rx="1" />
-          </svg>
-
-          <!-- Weekly Focus: target / crosshair icon -->
-          <svg
-            v-else-if="item.icon === 'target'"
-            class="w-5 h-5 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="12" r="3" />
-            <line x1="12" y1="2" x2="12" y2="5" />
-            <line x1="12" y1="19" x2="12" y2="22" />
-            <line x1="2" y1="12" x2="5" y2="12" />
-            <line x1="19" y1="12" x2="22" y2="12" />
-          </svg>
-
-          <!-- Architecture Roadmap: map icon -->
-          <svg
-            v-else-if="item.icon === 'map'"
-            class="w-5 h-5 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-            <line x1="8" y1="2" x2="8" y2="18" />
-            <line x1="16" y1="6" x2="16" y2="22" />
-          </svg>
-
-          <!-- Code Repos: git-branch icon -->
-          <svg
-            v-else-if="item.icon === 'git-branch'"
-            class="w-5 h-5 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <line x1="6" y1="3" x2="6" y2="15" />
-            <circle cx="18" cy="6" r="3" />
-            <circle cx="6" cy="18" r="3" />
-            <path d="M18 9a9 9 0 0 1-9 9" />
-          </svg>
-
-          <!-- System Telemetry: activity icon -->
-          <svg
-            v-else-if="item.icon === 'activity'"
-            class="w-5 h-5 flex-shrink-0"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-
-          <!-- Floating HUD Tooltip -->
-          <div
-            class="absolute left-full ml-3.5 top-1/2 -translate-y-1/2 px-2.5 py-1.5 bg-[#18181C] border border-white/[0.08] text-[#F5F2EB] font-mono text-xs rounded-md shadow-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-150 pointer-events-none z-50 flex flex-col gap-0.5"
-          >
-            <div class="flex items-center gap-1.5">
-              <span class="font-bold" :class="isActive(item.path) ? 'text-[#C98A4B]' : 'text-[#F5F2EB]'">
-                {{ item.tooltipTitle || item.label }}
-              </span>
-              <span v-if="!item.description" class="text-[#756F68] text-[10px]">({{ item.path }})</span>
-            </div>
-            <span v-if="item.description" class="text-[#756F68] text-[10px]">{{ item.description }}</span>
+  <!-- Desktop Unified Left Sidebar (Linear/Raycast style w-56 rail) -->
+  <aside
+    class="w-56 shrink-0 hidden lg:flex flex-col py-2.5 px-2 select-none h-full overflow-hidden"
+    aria-label="Unified Left Sidebar"
+    v-bind="$attrs"
+  >
+    <!-- Zona 1 (Fixed Top): Brand Header -->
+    <div class="shrink-0 pb-2.5">
+      <!-- Workspace Brand Header (Pure Workspace Identity without duplicate + button) -->
+      <div class="flex items-center px-2 py-1">
+        <div class="flex items-center gap-2.5">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center border border-white/15 bg-gradient-to-b from-white/15 to-white/5 shadow-inner">
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
           </div>
+          <div>
+            <div class="text-sm font-bold tracking-tight text-[#F3F4F6] flex items-center gap-1.5 font-sans">
+              Nexura
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zona 2 (Scrollable Body): Workspace Navigation & Active Projects Tree -->
+    <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-4">
+      <!-- Primary Workspace Navigation -->
+      <div class="space-y-0.5">
+        <div class="px-2.5 pb-1 text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+          Workspace
+        </div>
+
+        <!-- 1. Command Center -->
+        <NuxtLink
+          to="/"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="LayoutDashboard"
+              size="md"
+              :class="isRouteActive('/') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            Command Center
+          </span>
+          <span
+            v-if="isRouteActive('/')"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
+            style="background: var(--obs-accent-light)"
+          ></span>
+          <NexuraIcon
+            v-else
+            name="ChevronRight"
+            size="xs"
+            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+          />
         </NuxtLink>
-      </nav>
-    </aside>
 
-    <!-- Mobile Flyout Navigation (Bottom Floating Dock for Smartphone / Tablet) -->
-    <nav
-      class="md:hidden fixed bottom-3 inset-x-3 h-14 bg-[#111114]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl shadow-2xl z-50 flex items-center justify-around px-2"
-      aria-label="Mobile Navigation"
+        <!-- 2. My Tasks & Queue -->
+        <NuxtLink
+          to="/tasks"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/tasks')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="CheckSquare"
+              size="md"
+              :class="isRouteActive('/tasks') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            My Tasks & Queue
+          </span>
+          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-white/[0.05] text-[#8A8F9E] border border-white/[0.06] shrink-0 ml-auto">
+            {{ tasksCount }}
+          </span>
+        </NuxtLink>
+
+        <!-- 3. Weekly Sprints -->
+        <NuxtLink
+          to="/sprints"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/sprints')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="Calendar"
+              size="md"
+              :class="isRouteActive('/sprints') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            Weekly Sprints
+          </span>
+          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0 ml-auto">
+            {{ activeSprintCode }}
+          </span>
+        </NuxtLink>
+
+        <!-- 4. Architecture Roadmap -->
+        <NuxtLink
+          to="/roadmap"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/roadmap')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="Map"
+              size="md"
+              :class="isRouteActive('/roadmap') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            Roadmap
+          </span>
+          <span
+            v-if="isRouteActive('/roadmap')"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
+            style="background: var(--obs-accent-light)"
+          ></span>
+          <NexuraIcon
+            v-else
+            name="ChevronRight"
+            size="xs"
+            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+          />
+        </NuxtLink>
+
+        <!-- 5. GitHub Repositories -->
+        <NuxtLink
+          to="/repos"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/repos')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="GitBranch"
+              size="md"
+              :class="isRouteActive('/repos') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            GitHub Repositories
+          </span>
+          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-white/[0.05] text-[#8A8F9E] border border-white/[0.06] shrink-0 ml-auto">
+            {{ reposCount }}
+          </span>
+        </NuxtLink>
+
+        <!-- 6. System Telemetry -->
+        <NuxtLink
+          to="/telemetry"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/telemetry')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="Activity"
+              size="md"
+              :class="isRouteActive('/telemetry') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            System Telemetry
+          </span>
+          <span
+            v-if="isRouteActive('/telemetry')"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
+            style="background: var(--obs-accent-light)"
+          ></span>
+          <NexuraIcon
+            v-else
+            name="ChevronRight"
+            size="xs"
+            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+          />
+        </NuxtLink>
+      </div>
+
+      <!-- Section: Active Projects -->
+      <div class="space-y-1 pt-1">
+        <div class="px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+          <span>Active Projects</span>
+          <NuxtLink
+            to="/projects"
+            class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
+            title="All Projects"
+          >
+            <NexuraIcon name="ChevronRight" size="xs" />
+          </NuxtLink>
+        </div>
+
+        <!-- Project Tree List -->
+        <div
+          v-for="project in displayedProjects"
+          :key="project.slug"
+          class="space-y-0.5"
+        >
+          <!-- Project Root Interactive Row: Left Chevron + Status Dot + Project Name ... Progress% -->
+          <div
+            class="flex items-center justify-between px-2 py-1.5 rounded-lg text-xs transition group"
+            :class="[
+              isProjectActive(project.slug)
+                ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07]'
+                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+            ]"
+          >
+            <!-- Left Group: Chevron button + Project Link (Status Dot + Name) -->
+            <div class="flex items-center gap-1.5 min-w-0 flex-1">
+              <!-- Chevron expand/collapse on LEFT -->
+              <button
+                type="button"
+                @click.stop="toggleProjectExpand(project.slug, $event)"
+                class="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-transform duration-200 cursor-pointer shrink-0"
+                :class="isExpanded(project.slug) ? 'rotate-90 text-[#F3F4F6]' : 'rotate-0'"
+                aria-label="Toggle Project Navigation"
+              >
+                <NexuraIcon name="ChevronRight" size="xs" />
+              </button>
+
+              <!-- Status dot + Project name link -->
+              <NuxtLink
+                :to="`/projects/${project.slug}`"
+                @click="onProjectClick(project.slug)"
+                class="flex items-center gap-2 truncate flex-1 min-w-0 cursor-pointer"
+              >
+                <span class="w-2 h-2 rounded-full shrink-0" :class="project.dotColor"></span>
+                <span class="truncate font-sans font-medium">{{ project.name }}</span>
+              </NuxtLink>
+            </div>
+
+            <!-- Right: Progress % badge -->
+            <span class="font-mono tabular-nums text-xs text-[#565B68] group-hover:text-[#8A8F9E] shrink-0 ml-1.5">
+              {{ project.progress }}%
+            </span>
+          </div>
+
+          <!-- Contextual Tree Accordion Container -->
+          <div
+            class="grid transition-[grid-template-rows] duration-200 ease-out"
+            :class="isExpanded(project.slug) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0 pointer-events-none'"
+          >
+            <div class="overflow-hidden">
+              <div class="ml-3 pl-3 border-l border-white/[0.08] space-y-0.5 py-1">
+                <!-- 1. Cockpit Overview -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'dashboard')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'dashboard')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="LayoutDashboard"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'dashboard') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">Overview</span>
+                  </span>
+                  <span
+                    v-if="isSubItemActive(project.slug, 'dashboard')"
+                    class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                  ></span>
+                </button>
+
+                <!-- 2. Kanban Board -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'kanban')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'kanban')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="Columns3"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'kanban') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">Kanban Board</span>
+                  </span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span
+                      v-if="isProjectActive(project.slug) && projectNav.tasksCount.value > 0"
+                      class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
+                      :class="isSubItemActive(project.slug, 'kanban') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                    >
+                      {{ projectNav.tasksCount.value }}
+                    </span>
+                    <span
+                      v-if="isSubItemActive(project.slug, 'kanban')"
+                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    ></span>
+                  </div>
+                </button>
+
+                <!-- 3. Deliverables Matrix -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'matrix')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'matrix')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="CheckSquare"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'matrix') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">Deliverables</span>
+                  </span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span
+                      v-if="isProjectActive(project.slug) && projectNav.matrixCount.value > 0"
+                      class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
+                      :class="isSubItemActive(project.slug, 'matrix') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                    >
+                      {{ projectNav.matrixCount.value }}
+                    </span>
+                    <span
+                      v-if="isSubItemActive(project.slug, 'matrix')"
+                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    ></span>
+                  </div>
+                </button>
+
+                <!-- 4. GitHub Stream -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'github')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'github')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="GitBranch"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'github') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">GitHub Stream</span>
+                  </span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span
+                      v-if="isProjectActive(project.slug) && projectNav.commitsCount.value > 0"
+                      class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
+                      :class="isSubItemActive(project.slug, 'github') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                    >
+                      {{ projectNav.commitsCount.value }}
+                    </span>
+                    <span
+                      v-if="isSubItemActive(project.slug, 'github')"
+                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    ></span>
+                  </div>
+                </button>
+
+                <!-- 5. Vercel Deployments -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'vercel')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'vercel')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="Triangle"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'vercel') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">Vercel Edge</span>
+                  </span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Live Deployment"></span>
+                    <span
+                      v-if="isSubItemActive(project.slug, 'vercel')"
+                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    ></span>
+                  </div>
+                </button>
+
+                <!-- 6. Supabase Cloud -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'supabase')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'supabase')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="Zap"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'supabase') ? 'text-indigo-400' : 'text-[#3ECF8E]'"
+                    />
+                    <span class="truncate font-sans">Supabase DB</span>
+                  </span>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#3ECF8E]" title="Connected"></span>
+                    <span
+                      v-if="isSubItemActive(project.slug, 'supabase')"
+                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    ></span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zona 3 (Pinned Bottom Dock): System Telemetry Status Pod -->
+    <div class="shrink-0 pt-3 border-t border-white/[0.06] px-2 space-y-2">
+      <div class="flex items-center justify-between text-xs font-sans">
+        <span class="flex items-center gap-2 text-[#8A8F9E]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Supabase + GitHub
+        </span>
+        <span class="font-mono tabular-nums text-xs text-[#F3F4F6]">4,892/5k</span>
+      </div>
+      <div class="w-full h-1 rounded-full bg-white/[0.06] overflow-hidden" title="API Rate Limit: 94% remaining">
+        <div class="h-full rounded-full bg-emerald-400/80" style="width: 94%"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Navigation (Floating Dock for Smartphone / Tablet) -->
+  <nav
+    class="lg:hidden fixed bottom-2 inset-x-2 h-14 bg-[#111318]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl z-50 flex items-center justify-around px-2 shadow-2xl select-none"
+    aria-label="Mobile Navigation"
+  >
+    <!-- Command Center -->
+    <NuxtLink
+      to="/"
+      class="p-2 rounded-xl transition-all"
+      :class="[isRouteActive('/') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      aria-label="Command Center"
     >
-      <NuxtLink
-        v-for="item in navItems"
-        :key="item.path"
-        :to="item.path"
-        class="p-2 rounded-xl transition-all"
-        :class="[
-          isActive(item.path)
-            ? 'bg-[#C98A4B]/20 text-[#C98A4B] border border-[#C98A4B]/40'
-            : 'text-[#756F68] hover:text-[#F5F2EB]'
-        ]"
-        :aria-label="item.label"
-      >
-        <svg
-          v-if="item.icon === 'grid'"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-        >
-          <rect x="3" y="3" width="7" height="9" rx="1" />
-          <rect x="14" y="3" width="7" height="5" rx="1" />
-          <rect x="14" y="12" width="7" height="9" rx="1" />
-          <rect x="3" y="16" width="7" height="5" rx="1" />
-        </svg>
+      <NexuraIcon name="LayoutDashboard" size="lg" />
+    </NuxtLink>
 
-        <!-- Weekly Focus: target / crosshair icon -->
-        <svg
-          v-else-if="item.icon === 'target'"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <circle cx="12" cy="12" r="9" />
-          <circle cx="12" cy="12" r="3" />
-          <line x1="12" y1="2" x2="12" y2="5" />
-          <line x1="12" y1="19" x2="12" y2="22" />
-          <line x1="2" y1="12" x2="5" y2="12" />
-          <line x1="19" y1="12" x2="22" y2="12" />
-        </svg>
+    <!-- Tasks -->
+    <NuxtLink
+      to="/tasks"
+      class="p-2 rounded-xl transition-all relative"
+      :class="[isRouteActive('/tasks') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      aria-label="Tasks"
+    >
+      <NexuraIcon name="CheckSquare" size="lg" />
+    </NuxtLink>
 
-        <svg
-          v-else-if="item.icon === 'map'"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-        >
-          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-          <line x1="8" y1="2" x2="8" y2="18" />
-          <line x1="16" y1="6" x2="16" y2="22" />
-        </svg>
+    <!-- Quick Add Button (Retained on Mobile) -->
+    <button
+      type="button"
+      @click="openAddTask"
+      class="w-10 h-10 rounded-full bg-[#F3F4F6] hover:bg-white text-[#07080A] flex items-center justify-center font-bold shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer"
+      aria-label="Create Deliverable"
+    >
+      <NexuraIcon name="Plus" size="md" :stroke-width="2.2" />
+    </button>
 
-        <svg
-          v-else-if="item.icon === 'git-branch'"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-        >
-          <line x1="6" y1="3" x2="6" y2="15" />
-          <circle cx="18" cy="6" r="3" />
-          <circle cx="6" cy="18" r="3" />
-          <path d="M18 9a9 9 0 0 1-9 9" />
-        </svg>
+    <!-- Sprints -->
+    <NuxtLink
+      to="/sprints"
+      class="p-2 rounded-xl transition-all"
+      :class="[isRouteActive('/sprints') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      aria-label="Sprints"
+    >
+      <NexuraIcon name="Calendar" size="lg" />
+    </NuxtLink>
 
-        <svg
-          v-else-if="item.icon === 'activity'"
-          class="w-5 h-5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.75"
-        >
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-        </svg>
-      </NuxtLink>
-    </nav>
-  </div>
+    <!-- Repos -->
+    <NuxtLink
+      to="/repos"
+      class="p-2 rounded-xl transition-all"
+      :class="[isRouteActive('/repos') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      aria-label="Repositories"
+    >
+      <NexuraIcon name="GitBranch" size="lg" />
+    </NuxtLink>
+  </nav>
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { ref, computed, watch } from 'vue'
+import NexuraIcon from './ui/NexuraIcon.vue'
+import { useProjectNav, type ProjectTabId } from '~/composables/useProjectNav'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+
+defineOptions({
+  inheritAttrs: false
+})
 
 const route = useRoute()
+const projectNav = useProjectNav()
 
-interface NavItem {
-  label: string
-  tooltipTitle?: string
-  description?: string
-  path: string
-  icon: 'grid' | 'target' | 'map' | 'git-branch' | 'activity'
+const expandedProjects = ref<Set<string>>(new Set())
+
+function isExpanded(slug: string): boolean {
+  return expandedProjects.value.has(slug)
 }
 
-const navItems: NavItem[] = [
-  {
-    label: 'Dashboard',
-    tooltipTitle: 'DASHBOARD',
-    description: 'Command Center & Metrics',
-    path: '/',
-    icon: 'grid'
-  },
-  {
-    label: 'Weekly Focus',
-    tooltipTitle: 'WEEKLY FOCUS',
-    description: 'Solo Execution Target',
-    path: '/sprints',
-    icon: 'target'
-  },
-  {
-    label: 'Architecture Roadmap',
-    tooltipTitle: 'ROADMAP',
-    description: 'Milestones & Epics',
-    path: '/roadmap',
-    icon: 'map'
-  },
-  {
-    label: 'Code Repos',
-    tooltipTitle: 'REPOSITORIES',
-    description: 'Codebases & Sync',
-    path: '/repos',
-    icon: 'git-branch'
-  },
-  {
-    label: 'System Telemetry',
-    tooltipTitle: 'TELEMETRY',
-    description: 'System Status & Logs',
-    path: '/telemetry',
-    icon: 'activity'
+function toggleProjectExpand(slug: string, event?: Event) {
+  if (event) {
+    event.stopPropagation()
   }
-]
+  const next = new Set(expandedProjects.value)
+  if (next.has(slug)) {
+    next.delete(slug)
+  } else {
+    next.add(slug)
+  }
+  expandedProjects.value = next
+}
 
-function isActive(path: string): boolean {
+function ensureProjectExpanded(slug: string) {
+  if (!expandedProjects.value.has(slug)) {
+    const next = new Set(expandedProjects.value)
+    next.add(slug)
+    expandedProjects.value = next
+  }
+}
+
+function onProjectClick(slug: string) {
+  ensureProjectExpanded(slug)
+  if (!isProjectActive(slug)) {
+    projectNav.setActiveTab('dashboard')
+  }
+}
+
+function isRouteActive(path: string): boolean {
+  if (!route?.path) return false
   if (path === '/') {
     return route.path === '/'
   }
-  if (path === '/sprints' || path === '/focus') {
+  if (path === '/sprints') {
     return route.path.startsWith('/sprints') || route.path.startsWith('/focus')
   }
   return route.path.startsWith(path)
 }
+
+function isProjectActive(slug: string): boolean {
+  if (!route?.path) return false
+  return route.path === `/projects/${slug}` || route.path.startsWith(`/projects/${slug}/`)
+}
+
+function isSubItemActive(slug: string, tabId: ProjectTabId): boolean {
+  if (!isProjectActive(slug)) return false
+  return projectNav.activeTab.value === tabId
+}
+
+async function selectProjectTab(slug: string, tabId: ProjectTabId) {
+  projectNav.setActiveTab(tabId)
+  ensureProjectExpanded(slug)
+  await navigateTo({
+    path: `/projects/${slug}`,
+    query: { tab: tabId }
+  })
+}
+
+// Watch route path to automatically expand project accordion when on /projects/:slug
+watch(
+  () => route?.path,
+  (newPath) => {
+    if (!newPath) return
+    const match = newPath.match(/^\/projects\/([^/?#]+)/)
+    if (match && match[1]) {
+      ensureProjectExpanded(match[1])
+    }
+  },
+  { immediate: true }
+)
+
+const currentRouteProjectSlug = computed(() => {
+  if (!route?.path) return null
+  const match = route.path.match(/^\/projects\/([^/?#]+)/)
+  return match ? match[1] : null
+})
+
+const { repos } = useGitHubRepos()
+const { openAddTask } = useQuickTask()
+
+const workspaceStore = useWorkspaceStore()
+const tasks = workspaceStore.tasks
+const projects = workspaceStore.projects
+const sprints = workspaceStore.sprints
+
+const tasksCount = computed(() => tasks.value?.length ?? 14)
+const reposCount = computed(() => repos.value?.length ?? 8)
+
+const activeSprintCode = computed(() => {
+  const active = sprints.value?.find((s) => s.status === 'active')
+  if (active) {
+    const match = active.name.match(/W\d+/i)
+    return match ? match[0].toUpperCase() : 'W42'
+  }
+  return 'W42'
+})
+
+// 4 fallback project slots to prevent Cumulative Layout Shift (CLS)
+const defaultProjects = [
+  { slug: 'nexura-command', name: 'nexura-command', progress: 78, dotColor: 'bg-indigo-400' },
+  { slug: 'supabase-edge-sync', name: 'supabase-edge-sync', progress: 92, dotColor: 'bg-emerald-400' },
+  { slug: 'telemetry-gateway', name: 'telemetry-gateway', progress: 45, dotColor: 'bg-amber-400' },
+  { slug: 'realtime-broker', name: 'realtime-broker', progress: 60, dotColor: 'bg-sky-400' }
+]
+
+interface ProjectStat {
+  total: number
+  deployed: number
+  progress: number
+}
+
+// Single-pass O(N) map counter over tasks.value for high-performance reactive computation
+const projectStatsMap = computed(() => {
+  const map = new Map<string, ProjectStat>()
+  const list = tasks.value || []
+  for (const t of list) {
+    if (!t.projectSlug) continue
+    let curr = map.get(t.projectSlug)
+    if (!curr) {
+      curr = { total: 0, deployed: 0, progress: 0 }
+      map.set(t.projectSlug, curr)
+    }
+    curr.total++
+    if (t.status === 'deployed') {
+      curr.deployed++
+    }
+  }
+  for (const stat of map.values()) {
+    stat.progress = stat.total > 0 ? Math.round((stat.deployed / stat.total) * 100) : 0
+  }
+  return map
+})
+
+// O(N + M) displayed projects with O(1) stats lookup
+const displayedProjects = computed(() => {
+  const colors = ['bg-indigo-400', 'bg-emerald-400', 'bg-amber-400', 'bg-sky-400', 'bg-rose-400', 'bg-violet-400']
+  let list: Array<{ slug: string; name: string; progress: number; dotColor: string }> = []
+  const stats = projectStatsMap.value
+
+  if (!projects.value || projects.value.length === 0) {
+    list = [...defaultProjects]
+  } else {
+    list = projects.value.slice(0, 4).map((p, idx) => {
+      const pStat = stats.get(p.slug)
+      const progress = pStat ? pStat.progress : (idx === 0 ? 78 : idx === 1 ? 92 : idx === 2 ? 45 : 60)
+      return {
+        slug: p.slug,
+        name: p.slug || p.title,
+        progress,
+        dotColor: colors[idx % colors.length]
+      }
+    })
+  }
+
+  // Ensure current active project is injected if not already in the top list
+  const activeSlug = currentRouteProjectSlug.value
+  if (activeSlug && !list.some((p) => p.slug === activeSlug)) {
+    const fullProject = projects.value?.find((p) => p.slug === activeSlug)
+    const pStat = stats.get(activeSlug)
+    if (fullProject) {
+      const progress = pStat ? pStat.progress : 50
+      list.push({
+        slug: fullProject.slug,
+        name: fullProject.slug || fullProject.title,
+        progress,
+        dotColor: colors[list.length % colors.length]
+      })
+    } else {
+      list.push({
+        slug: activeSlug,
+        name: activeSlug,
+        progress: pStat ? pStat.progress : 50,
+        dotColor: 'bg-indigo-400'
+      })
+    }
+  }
+
+  return list
+})
 </script>

@@ -1,5 +1,25 @@
 <template>
-  <div class="space-y-6 pb-20 lg:pb-12 pt-10 md:pt-0 relative">
+  <div class="space-y-6 pb-12 relative">
+    <!-- Mobile / Tablet Tab Strip (< lg only) -->
+    <div class="lg:hidden sticky top-0 z-20 -mx-3 sm:-mx-5 -mt-3 sm:-mt-5 lg:mt-0 px-3 sm:px-5 py-2 bg-[#0B0C10]/95 backdrop-blur-md border-b border-white/[0.06] flex items-center gap-1.5 overflow-x-auto no-scrollbar select-none">
+      <button
+        v-for="tab in projectTabs"
+        :key="tab.id"
+        type="button"
+        @click="onSelectTab(tab.id)"
+        class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border shrink-0 cursor-pointer"
+        :class="activeTab === tab.id
+          ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 shadow-[0_0_8px_rgba(99,102,241,0.2)] font-semibold'
+          : 'bg-white/[0.03] text-[#8A8F9E] hover:text-[#F3F4F6] border-white/[0.06] hover:bg-white/[0.06]'"
+      >
+        <NexuraIcon :name="tab.icon" size="xs" />
+        <span>{{ tab.label }}</span>
+        <span v-if="tab.count !== undefined && tab.count > 0" class="font-mono tabular-nums text-[10px] px-1 rounded bg-white/[0.06]">
+          {{ tab.count }}
+        </span>
+      </button>
+    </div>
+
     <!-- Project Hero (Dashboard Tab Only) -->
     <ProjectHeroHeader
       v-if="activeTab === 'dashboard'"
@@ -61,12 +81,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <ProjectCommitsPreview
           :commits="commits || []"
-          @view-all-commits="activeTab = 'github'"
+          @view-all-commits="onSelectTab('github')"
         />
 
         <ProjectPriorityDeliverables
           :priority-tasks="priorityTasksList"
-          @open-matrix="activeTab = 'matrix'"
+          @open-matrix="onSelectTab('matrix')"
           @task-click="onTaskClick"
         />
       </div>
@@ -98,15 +118,13 @@
     <!-- ================================================================= -->
     <!-- VIEW 4: GITHUB INTEGRATION DEEP COCKPIT                           -->
     <!-- ================================================================= -->
-    <section v-else-if="activeTab === 'github'" aria-label="GitHub Integration" class="p-6 rounded-2xl bg-[#111114] border border-white/[0.06] space-y-4">
+    <section v-else-if="activeTab === 'github'" aria-label="GitHub Integration" class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4 shadow-sm">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
         <div class="flex items-center gap-2.5">
-          <svg class="w-5 h-5 text-[#C98A4B]" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-          </svg>
+          <NexuraIcon name="GitBranch" size="md" class="text-indigo-400" />
           <div>
-            <h2 class="font-mono text-sm font-semibold text-[#F5F2EB]">GitHub Repository Integration</h2>
-            <p class="text-xs text-[#756F68]">
+            <h2 class="font-mono text-sm font-semibold text-[#F3F4F6]">GitHub Repository Integration</h2>
+            <p class="text-xs text-[#8A8F9E]">
               Live branch telemetry and latest commit log from {{ currentProject.githubRepo || 'linked repository' }}.
             </p>
           </div>
@@ -117,10 +135,10 @@
           :href="`https://github.com/${currentProject.githubRepo}`"
           target="_blank"
           rel="noopener noreferrer"
-          class="group font-mono text-xs text-[#C98A4B] hover:underline flex items-center gap-1"
+          class="group font-mono text-xs text-indigo-400 hover:underline flex items-center gap-1.5"
         >
           <span>Open on GitHub</span>
-          <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
       </div>
 
@@ -302,6 +320,7 @@
 <script setup lang="ts">
 import { ref, computed, reactive, onMounted, watch, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import type {
   Project,
   Task,
@@ -310,6 +329,7 @@ import type {
   GitHubWorkflowRun,
   GitHubIssueItem
 } from '~/types'
+import type { ProjectTabId } from '~/composables/useProjectNav'
 
 const route = useRoute()
 const router = useRouter()
@@ -318,26 +338,38 @@ const slug = computed(() => (route.params.slug as string) || 'management')
 const projectNav = useProjectNav()
 const activeTab = projectNav.activeTab
 
+const validTabs: ProjectTabId[] = ['dashboard', 'kanban', 'matrix', 'github', 'vercel', 'supabase']
+
 onMounted(() => {
-  if (route.query.view === 'kanban') {
+  if (route.query.tab && validTabs.includes(route.query.tab as ProjectTabId)) {
+    projectNav.setActiveTab(route.query.tab as ProjectTabId)
+  } else if (route.query.view === 'kanban') {
     projectNav.setActiveTab('kanban')
-  } else if (!route.query.view) {
+  } else if (!route.query.view && !route.query.tab) {
     projectNav.setActiveTab('dashboard')
   }
 })
 
 watch(() => route.params.slug, () => {
-  if (route.query.view === 'kanban') {
+  if (route.query.tab && validTabs.includes(route.query.tab as ProjectTabId)) {
+    projectNav.setActiveTab(route.query.tab as ProjectTabId)
+  } else if (route.query.view === 'kanban') {
     projectNav.setActiveTab('kanban')
   } else {
     projectNav.setActiveTab('dashboard')
   }
 })
 
+watch(() => route.query.tab, (newVal) => {
+  if (newVal && validTabs.includes(newVal as ProjectTabId)) {
+    projectNav.setActiveTab(newVal as ProjectTabId)
+  }
+})
+
 watch(() => route.query.view, (newVal) => {
   if (newVal === 'kanban') {
     projectNav.setActiveTab('kanban')
-  } else if (!newVal && activeTab.value === 'kanban') {
+  } else if (!newVal && !route.query.tab && activeTab.value === 'kanban') {
     projectNav.setActiveTab('dashboard')
   }
 })
@@ -408,10 +440,10 @@ function onRerunWorkflowById(runId: number) {
 
 // Package feed helpers
 const tabPackageStatusDotClass = computed(() => {
-  if (!projectPackages.value) return 'bg-[#756F68]'
-  if (!projectPackages.value.hasScope) return 'bg-[#C98A4B]'
+  if (!projectPackages.value) return 'bg-[#565B68]'
+  if (!projectPackages.value.hasScope) return 'bg-amber-400'
   if ((projectPackages.value.packages || []).length > 0) return 'bg-emerald-400'
-  return 'bg-[#756F68]'
+  return 'bg-[#565B68]'
 })
 
 const tabDockerSnippet = computed(() => {
@@ -504,12 +536,12 @@ const tabDeploymentStatusDotClass = computed(() => {
   if (latest) {
     if (latest.state === 'success') return 'bg-emerald-400'
     if (latest.state === 'in_progress' || latest.state === 'queued' || latest.state === 'pending') {
-      return 'bg-[#C98A4B] animate-pulse'
+      return 'bg-amber-400 animate-pulse'
     }
-    if (latest.state === 'failure' || latest.state === 'error') return 'bg-red-400'
+    if (latest.state === 'failure' || latest.state === 'error') return 'bg-rose-400'
   }
   if (currentProject.value.deployUrl) return 'bg-emerald-400'
-  return 'bg-[#756F68]'
+  return 'bg-[#565B68]'
 })
 
 const tabTotalChecksCount = computed(() => projectDeployments.value?.commitStatus?.totalCount || 0)
@@ -520,9 +552,9 @@ const tabPassedChecksCount = computed(() => {
 const tabCommitCheckBadgeClass = computed(() => {
   const s = projectDeployments.value?.commitStatus?.state
   if (s === 'success') return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-  if (s === 'pending') return 'bg-[#C98A4B]/15 text-[#C98A4B] border-[#C98A4B]/30'
-  if (s === 'failure') return 'bg-red-500/15 text-red-400 border-red-500/30'
-  return 'bg-white/5 text-[#756F68] border-white/10'
+  if (s === 'pending') return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+  if (s === 'failure') return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+  return 'bg-white/5 text-[#8A8F9E] border-white/10'
 })
 
 const tabCommitCheckSummaryText = computed(() => {
@@ -536,20 +568,20 @@ const tabCommitCheckSummaryText = computed(() => {
 
 // Security Computeds
 const tabSecurityStatusDotClass = computed(() => {
-  if (!projectSecurity.value) return 'bg-[#756F68]'
-  if (projectSecurity.value.criticalCount > 0) return 'bg-red-400 animate-pulse'
-  if (projectSecurity.value.highCount > 0) return 'bg-orange-400'
+  if (!projectSecurity.value) return 'bg-[#565B68]'
+  if (projectSecurity.value.criticalCount > 0) return 'bg-rose-400 animate-pulse'
+  if (projectSecurity.value.highCount > 0) return 'bg-amber-400'
   if (projectSecurity.value.totalAlerts > 0) return 'bg-yellow-400'
-  if (!projectSecurity.value.enabled.dependabot) return 'bg-[#C98A4B]'
+  if (!projectSecurity.value.enabled.dependabot) return 'bg-amber-400'
   return 'bg-emerald-400'
 })
 
 const scannerSecretClass = computed(() => {
   if (!projectSecurity.value || !projectSecurity.value.enabled.secretScanning) {
-    return 'border-white/[0.06] bg-white/[0.02] text-[#756F68]'
+    return 'border-white/[0.06] bg-white/[0.02] text-[#8A8F9E]'
   }
   const hasLeaks = projectSecurity.value.alerts.some(a => a.type === 'secret_scanning')
-  return hasLeaks ? 'border-red-500/30 bg-red-500/10 text-red-400' : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
+  return hasLeaks ? 'border-rose-500/30 bg-rose-500/10 text-rose-400' : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
 })
 
 const scannerSecretStatusText = computed(() => {
@@ -602,16 +634,41 @@ const priorityTasksList = computed(() => {
 
 const completedCount = computed(() => projectTasks.value.filter(t => t.status === 'deployed').length)
 const totalTasksCount = computed(() => projectTasks.value.length)
+const commitsCount = computed(() => (commits.value || []).length)
 const derivedPercentage = computed(() => {
   if (!totalTasksCount.value) return 0
   return Math.round((completedCount.value / totalTasksCount.value) * 100)
 })
 
+interface ProjectTabItem {
+  id: ProjectTabId
+  label: string
+  icon: string
+  count?: number
+}
+
+const projectTabs = computed<ProjectTabItem[]>(() => [
+  { id: 'dashboard', label: 'Overview', icon: 'LayoutDashboard' },
+  { id: 'kanban', label: 'Kanban', icon: 'Columns3', count: totalTasksCount.value },
+  { id: 'matrix', label: 'Deliverables', icon: 'CheckSquare', count: totalTasksCount.value },
+  { id: 'github', label: 'GitHub', icon: 'GitBranch', count: commitsCount.value },
+  { id: 'vercel', label: 'Vercel', icon: 'Globe' },
+  { id: 'supabase', label: 'Supabase', icon: 'Database' }
+])
+
+function onSelectTab(tabId: ProjectTabId) {
+  activeTab.value = tabId
+  projectNav.setActiveTab(tabId)
+  const nextQuery = { ...route.query, tab: tabId }
+  if (nextQuery.view) delete nextQuery.view
+  router.replace({ query: nextQuery })
+}
+
 watchEffect(() => {
   projectNav.setCounts({
     tasks: projectTasks.value.length,
     matrix: projectTasks.value.length,
-    commits: (commits.value || []).length,
+    commits: commitsCount.value,
     hasGithub: !!currentProject.value?.githubRepo
   })
 })
@@ -732,6 +789,7 @@ async function onConfirmDeleteTask() {
 
 async function toggleMatrixTaskStatus(task: Task) {
   const next: Record<TaskStatus, TaskStatus> = {
+    idea: 'in_queue',
     in_queue: 'running_sprint',
     running_sprint: 'deployed',
     deployed: 'in_queue',

@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubCommitDetail, GitHubCommitFile } from '~/types'
 
 const fetchCachedCommitDetail = defineCachedFunction(
@@ -56,21 +57,14 @@ export default withApiHandler(async (event): Promise<GitHubCommitDetail | null> 
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
   const shaParam = typeof query.sha === 'string' ? query.sha.trim() : ''
 
-  if (!repoParam) {
-    throwApiError(400, 'INVALID_REPO', 'Query parameter "repo" is required (format: owner/repo)')
-  }
   if (!shaParam) {
     throwApiError(400, 'INVALID_SHA', 'Query parameter "sha" is required')
   }
 
+  const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
+
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
-
-  let fullRepo = repoParam
-  if (!fullRepo.includes('/')) {
-    const defaultOwner = config.githubUsername || 'bagja-iskandar'
-    fullRepo = `${defaultOwner}/${fullRepo}`
-  }
 
   return await fetchCachedCommitDetail(token, fullRepo, shaParam)
 })

@@ -8,11 +8,12 @@ export interface Project {
   description?: string
   status: ProjectStatus
   priority: ProjectPriority
-  githubRepo?: string
-  deployUrl?: string
+  githubRepo?: string | null
+  deployUrl?: string | null
   techStack: string[]
-  startDate?: string
-  dueDate?: string
+  startDate?: string | null
+  dueDate?: string | null
+  releasePhase?: string
   createdAt: string
   updatedAt: string
 }

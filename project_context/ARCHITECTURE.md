@@ -1,6 +1,6 @@
 # ARCHITECTURE.md — Arsitektur Sistem Nexura
 
-_Last updated: 2026-09-17. Arsitektur target: Charcoal-Ochre Command Center dengan GitHub/Supabase/Vercel integration._
+_Last updated: 2026-10-22. Arsitektur target: Precision Dark Obsidian Command Center (Linear / Raycast Inset Architecture) dengan GitHub/Supabase/Vercel integration._
 
 ---
 
@@ -9,20 +9,23 @@ _Last updated: 2026-09-17. Arsitektur target: Charcoal-Ochre Command Center deng
 **Nexura** adalah Personal Engineering Command Center berbasis **Nuxt 4 Full-Stack Monolith** yang dirancang untuk mengelola semua project GitHub, deployments, dan sprint kerja di satu tempat.
 
 ```
-┌────────────────────────────────────────────────────────────────────┐
-│                     Nexura Client (Browser)                        │
-│  ┌──────────┐  ┌────────────────────────────────────────────────┐  │
-│  │ Sidebar   │  │ Header Bar (Clock, Branch, KPI, Search)       │  │
-│  │ (compact) │  ├────────────────────────────────────────────────┤  │
-│  │           │  │                                                │  │
-│  │ Dashboard │  │  Main Workspace                                │  │
-│  │ Sprints   │  │  ┌─────────┬──────────────┬──────────┐        │  │
-│  │ Roadmap   │  │  │IN_QUEUE │RUNNING_SPRINT│ DEPLOYED │ Kanban │  │
-│  │ Repos     │  │  └─────────┴──────────────┴──────────┘        │  │
-│  │ Telemetry │  │                                                │  │
-│  └──────────┘  └────────────────────────────────────────────────┘  │
-│  Tailwind CSS (Charcoal-Ochre tokens) + Vue 3 SPA                  │
-└────────────────────────────┬───────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     Nexura Client (Browser) — Void #07080A              │
+│  ┌──────────────┐  ┌─────────────────────────────────────────────────┐  │
+│  │ Unified Left │  │ Inset Workspace (.obs-workspace #0B0C10)        │  │
+│  │ Sidebar      │  │ ┌─────────────────────────────────────────────┐ │  │
+│  │ (w-56)       │  │ │ Unified HeaderBar (Breadcrumb, Clock, CTA)  │ │  │
+│  │              │  │ ├─────────────────────────────────────────────┤ │  │
+│  │ + Quick ⌘K   │  │ │ [KPI 1]   [KPI 2]   [KPI 3]   [KPI 4]       │ │  │
+│  │ • Cmd Center │  │ │ ┌─────────────────────────┐ ┌─────────────┐ │ │  │
+│  │ • My Tasks   │  │ │ │ Left Execution (8 cols) │ │ Right (4c)  │ │ │  │
+│  │ • Sprints    │  │ │ │ • Execution Radar       │ │ • Inspector │ │ │  │
+│  │ • Roadmap    │  │ │ │ • Global Commit Stream  │ │ • Wk Focus  │ │ │  │
+│  │ • GitHub     │  │ │ └─────────────────────────┘ └─────────────┘ │ │  │
+│  │ • Active Prj │  │ └─────────────────────────────────────────────┘ │  │
+│  └──────────────┘  └─────────────────────────────────────────────────┘  │
+│  Tailwind CSS (Precision Dark Obsidian + Specular 1px) + Vue 3 SPA      │
+└────────────────────────────┬────────────────────────────────────────────┘
                              │ $fetch / useLazyAsyncData
 ┌────────────────────────────▼───────────────────────────────────────┐
 │                     Nitro Server (Backend)                          │
@@ -50,9 +53,9 @@ _Last updated: 2026-09-17. Arsitektur target: Charcoal-Ochre Command Center deng
 ```
 
 **Arsitektur Kunci:**
-- **Client**: Vue 3 SPA dengan Tailwind CSS (Charcoal-Ochre tokens), navigasi 0ms via payload caching
+- **Client**: Vue 3 SPA dengan Tailwind CSS (**Precision Dark Obsidian** tokens + Specular 1px card lighting), navigasi 0ms via payload caching
 - **Server**: Nitro engine — internal CRUD API + external API gateways (GitHub, Vercel)
-- **Storage**: Pluggable adapter pattern — Nitro KV sekarang, Supabase PostgreSQL nanti
+- **Storage**: Pluggable Repository Pattern (`IProjectRepository`, `ITaskRepository`, `ISprintRepository`) — otomatis memilih Supabase PostgreSQL jika tersedia, atau fallback ke Nitro Unstorage KV
 - **Caching**: GitHub/Vercel API responses di-cache dengan TTL 5 menit (rate limit protection)
 
 ---
@@ -147,8 +150,8 @@ Management/
 │       └── main.css              # @tailwind directives + minimal base/components layers
 │                                 # (dashboard.css & navbar.css DIHAPUS)
 │
-├── .env.example                  # Environment variables template (BARU)
-├── tailwind.config.ts            # Tailwind CSS config with Charcoal-Ochre tokens (BARU)
+├── .env.example                  # Environment variables template
+├── tailwind.config.ts            # Tailwind CSS config with Precision Dark Obsidian tokens
 ├── nuxt.config.ts                # Nuxt config + runtimeConfig + Tailwind module
 ├── tsconfig.json
 └── package.json

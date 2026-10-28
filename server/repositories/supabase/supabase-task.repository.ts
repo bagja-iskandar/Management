@@ -1,6 +1,8 @@
+import { createError } from 'h3'
 import type { ITaskRepository, TaskFilterOptions } from '../contracts/task.repository'
 import type { Task } from '~/types'
 import { getSupabaseClient } from '../../utils/supabase'
+import { isNetworkError } from '../index'
 
 function mapTaskRow(row: any): Task {
   return {
@@ -44,7 +46,12 @@ function mapTaskToRow(t: Partial<Task>): Record<string, any> {
 export class SupabaseTaskRepository implements ITaskRepository {
   private get client() {
     const c = getSupabaseClient()
-    if (!c) throw new Error('Supabase client is not configured.')
+    if (!c) {
+      throw createError({
+        statusCode: 503,
+        statusMessage: 'Supabase client is not configured or unavailable'
+      })
+    }
     return c
   }
 
@@ -72,8 +79,19 @@ export class SupabaseTaskRepository implements ITaskRepository {
 
     const { data, error } = await query
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseTaskRepository.findAll] Error:', error)
-      return []
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return (data || []).map(mapTaskRow)
@@ -93,8 +111,19 @@ export class SupabaseTaskRepository implements ITaskRepository {
 
     const { data, error } = await query.maybeSingle()
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseTaskRepository.findById] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapTaskRow(data) : null
@@ -121,15 +150,30 @@ export class SupabaseTaskRepository implements ITaskRepository {
         if (error) throw error
         return mapTaskRow(data)
       } catch (err: any) {
+        if (isNetworkError(err)) {
+          throw createError({
+            statusCode: 503,
+            statusMessage: 'Database connection temporarily unavailable',
+            data: { error: err.message || err }
+          })
+        }
         if (err?.code === '23505' && !taskData.taskId && attempt < maxRetries) {
           console.warn(`[SupabaseTaskRepository.create] Duplicate taskId collision on attempt ${attempt}, retrying...`)
           continue
         }
         console.error('[SupabaseTaskRepository.create] Error:', err)
-        throw new Error(`Failed to create task in Supabase: ${err.message}`)
+        if (err?.statusCode) throw err
+        throw createError({
+          statusCode: 500,
+          statusMessage: `Failed to create task in Supabase: ${err.message}`,
+          data: err
+        })
       }
     }
-    throw new Error('Failed to create task in Supabase after multiple attempts.')
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Failed to create task in Supabase after multiple attempts.'
+    })
   }
 
   async update(id: string, patch: Partial<Task>): Promise<Task | null> {
@@ -149,8 +193,19 @@ export class SupabaseTaskRepository implements ITaskRepository {
 
     const { data, error } = await query.select().maybeSingle()
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseTaskRepository.update] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapTaskRow(data) : null
@@ -173,8 +228,19 @@ export class SupabaseTaskRepository implements ITaskRepository {
 
     const { error } = await query
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseTaskRepository.delete] Error:', error)
-      return false
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     // Cascade cleanup: bersihkan task ID dari array task_ids pada tabel sprints
@@ -209,19 +275,35 @@ export class SupabaseTaskRepository implements ITaskRepository {
     const { data, error } = await this.client
       .from('tasks')
       .select('task_id')
-      .order('task_id', { ascending: false })
-      .limit(50)
 
-    if (error || !data || data.length === 0) {
+    if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
+      console.error('[SupabaseTaskRepository.nextTaskId] Error:', error)
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
+    }
+
+    if (!data || data.length === 0) {
       return 'ENG-001'
     }
 
     let maxNum = 0
     for (const row of data) {
       const match = String(row.task_id || '').match(/(\d+)/)
-      if (match) {
+      if (match && match[1]) {
         const num = parseInt(match[1], 10)
-        if (num > maxNum) maxNum = num
+        if (!isNaN(num) && num > maxNum) {
+          maxNum = num
+        }
       }
     }
 

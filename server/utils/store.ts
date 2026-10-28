@@ -40,7 +40,7 @@ export async function getNextTaskId(): Promise<string> {
         let maxNum = 0
         for (const t of tasks) {
           const match = String(t.taskId || '').match(/(\d+)/)
-          if (match) {
+          if (match && match[1]) {
             const num = parseInt(match[1], 10)
             if (num > maxNum) maxNum = num
           }
@@ -63,7 +63,7 @@ export function normalizeTask(task: any): Task {
     selesai: 'deployed'
   }
   const status: Task['status'] =
-    task.status && ['in_queue', 'running_sprint', 'deployed', 'blocked'].includes(task.status)
+    task.status && ['idea', 'in_queue', 'running_sprint', 'deployed', 'blocked'].includes(task.status)
       ? task.status
       : (legacyStatusMap[task.status] ?? 'in_queue')
 
@@ -103,6 +103,7 @@ export function normalizeProject(proj: any): Project {
     techStack: Array.isArray(proj.techStack) ? proj.techStack : [],
     startDate: proj.startDate,
     dueDate: proj.dueDate,
+    releasePhase: proj.releasePhase || proj.release_phase || undefined,
     createdAt: proj.createdAt || new Date().toISOString(),
     updatedAt: proj.updatedAt || new Date().toISOString()
   }

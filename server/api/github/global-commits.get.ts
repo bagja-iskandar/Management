@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { projectRepository } from '../../repositories'
+import { assertGitHubRepoAllowed, isGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubCommitItem, Project } from '~/types'
 
 const fetchCachedGlobalCommits = defineCachedFunction(
@@ -63,7 +64,7 @@ export default withApiHandler(async (event): Promise<GitHubCommitItem[]> => {
   let repos: string[] = []
 
   if (repoParam) {
-    const fullRepo = repoParam.includes('/') ? repoParam : `${defaultOwner}/${repoParam}`
+    const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
     repos = [fullRepo]
   } else {
     const projects = await projectRepository.findAll()
@@ -72,10 +73,20 @@ export default withApiHandler(async (event): Promise<GitHubCommitItem[]> => {
       .filter((r): r is string => Boolean(r))
 
     const uniqueRepos = Array.from(new Set(projectRepos))
-    repos = uniqueRepos.map((r) => (r.includes('/') ? r : `${defaultOwner}/${r}`))
+    const allowedRepos: string[] = []
+    for (const r of uniqueRepos) {
+      if (await isGitHubRepoAllowed(r, event)) {
+        const fullRepo = r.includes('/') ? r : `${defaultOwner}/${r}`
+        allowedRepos.push(fullRepo)
+      }
+    }
+    repos = allowedRepos
 
     if (repos.length === 0) {
-      repos = [`${config.githubUsername || 'bagja-iskandar'}/Management`]
+      const defaultRepo = `${defaultOwner}/Management`
+      if (await isGitHubRepoAllowed(defaultRepo, event)) {
+        repos = [defaultRepo]
+      }
     }
   }
 

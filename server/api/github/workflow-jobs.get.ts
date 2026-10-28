@@ -1,6 +1,7 @@
 import { withApiHandler } from '../../utils/handler'
 import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubWorkflowJob } from '~/types'
 
 const fetchCachedWorkflowJobs = defineCachedFunction(
@@ -43,21 +44,14 @@ export default withApiHandler(async (event): Promise<GitHubWorkflowJob[]> => {
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
   const runIdParam = query.runId ? Number(query.runId) : NaN
 
-  if (!repoParam) {
-    throwApiError(400, 'INVALID_REPO', 'Query parameter "repo" is required (format: owner/repo)')
-  }
   if (!query.runId || isNaN(runIdParam)) {
     throwApiError(400, 'INVALID_RUN_ID', 'Query parameter "runId" is required and must be a number')
   }
 
+  const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
+
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
-
-  let fullRepo = repoParam
-  if (!fullRepo.includes('/')) {
-    const defaultOwner = config.githubUsername || 'bagja-iskandar'
-    fullRepo = `${defaultOwner}/${fullRepo}`
-  }
 
   return await fetchCachedWorkflowJobs(token, fullRepo, runIdParam)
 })

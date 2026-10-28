@@ -7,12 +7,16 @@ const fetchCachedRepos = defineCachedFunction(
     const client = createGitHubClient(token)
     try {
       const endpoint = token
-        ? '/user/repos?per_page=100&sort=pushed&direction=desc'
+        ? '/user/repos?affiliation=owner&per_page=100&sort=pushed&direction=desc'
         : `/users/${username}/repos?per_page=100&sort=pushed&direction=desc`
 
       const rawRepos = await client.fetch<any[]>(endpoint)
 
       return (rawRepos || [])
+        .filter((r: any) => {
+          const owner = r.owner?.login || (r.full_name ? r.full_name.split('/')[0] : '')
+          return String(owner).toLowerCase() === username.toLowerCase()
+        })
         .map((r: any): GitHubRepoSummary => ({
           id: r.id,
           name: r.name,

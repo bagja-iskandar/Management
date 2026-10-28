@@ -1,37 +1,22 @@
 <template>
   <div class="space-y-4">
-    <!-- KANBAN BOARD COMMAND TOOLBAR -->
-    <KanbanToolbar
-      v-model:search-query="localSearchQuery"
-      v-model:selected-priority="selectedPriority"
-      v-model:selected-tag="selectedTag"
-      v-model:sort-by="sortBy"
-      :priority-options="priorityOptions"
-      :available-tags="availableTags"
-      :total-tasks-count="(tasks || []).length"
-      :filtered-count="processedTasks.length"
-      :has-active-filters="hasActiveFilters"
-      @reset-filters="resetFilters"
-      @add-task="(status) => $emit('add-task', status)"
-    />
-
-    <!-- 4 ENLARGED KANBAN COLUMNS -->
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
-      <!-- COLUMN 1: ERROR -->
+    <!-- 5 ENLARGED KANBAN COLUMNS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto pb-4 snap-x">
+      <!-- COLUMN 1: IDEA -->
       <KanbanColumn
-        status="blocked"
-        title="ERROR"
-        subtitle="Bugs & failing tasks"
-        dot-class="bg-red-400 animate-pulse"
-        :tasks="blockedTasks"
-        :is-drag-over="dragOverColumn === 'blocked'"
+        status="idea"
+        title="IDEA"
+        subtitle="Backlog & raw thoughts"
+        dot-class="bg-amber-400"
+        :tasks="ideaTasks"
+        :is-drag-over="dragOverColumn === 'idea'"
         :dragging-task-id="draggingTaskId"
         :can-move-left="false"
         :can-move-right="true"
         move-right-target="in_queue"
-        empty-title="NO ACTIVE ERRORS"
-        empty-subtitle="All deliverables running smoothly without blockers"
-        quick-add-label="+ Report Error / Bug"
+        empty-title="NO BACKLOG IDEAS"
+        empty-subtitle="Add notes or ideas to spark new work"
+        quick-add-label="+ Quick Add Idea"
         @drag-start="onDragStart"
         @drag-end="onDragEnd"
         @drag-enter="onDragEnter"
@@ -43,18 +28,18 @@
         @add-task="(st) => $emit('add-task', st)"
       />
 
-      <!-- COLUMN 2: IN_QUEUE -->
+      <!-- COLUMN 2: IN QUEUE -->
       <KanbanColumn
         status="in_queue"
-        title="IN_QUEUE"
-        subtitle="Ready to pick up"
+        title="IN QUEUE"
+        subtitle="Ready for execution"
         dot-class="bg-slate-400"
         :tasks="inQueueTasks"
         :is-drag-over="dragOverColumn === 'in_queue'"
         :dragging-task-id="draggingTaskId"
         :can-move-left="true"
         :can-move-right="true"
-        move-left-target="blocked"
+        move-left-target="idea"
         move-right-target="running_sprint"
         empty-title="QUEUE EMPTY"
         empty-subtitle="Drag cards here or create a new task"
@@ -74,8 +59,8 @@
       <KanbanColumn
         status="running_sprint"
         title="RUNNING"
-        subtitle="Currently building"
-        dot-class="bg-[#C98A4B] animate-pulse"
+        subtitle="Active iteration"
+        dot-class="bg-indigo-400"
         :tasks="runningSprintTasks"
         :is-drag-over="dragOverColumn === 'running_sprint'"
         :dragging-task-id="draggingTaskId"
@@ -97,12 +82,39 @@
         @add-task="(st) => $emit('add-task', st)"
       />
 
-      <!-- COLUMN 4: DEPLOYED -->
+      <!-- COLUMN 4: BLOCKED -->
+      <KanbanColumn
+        status="blocked"
+        title="BLOCKED"
+        subtitle="Impediments & errors"
+        dot-class="bg-rose-400"
+        :tasks="blockedTasks"
+        :is-drag-over="dragOverColumn === 'blocked'"
+        :dragging-task-id="draggingTaskId"
+        :can-move-left="true"
+        :can-move-right="true"
+        move-left-target="running_sprint"
+        move-right-target="running_sprint"
+        empty-title="NO BLOCKED TASKS"
+        empty-subtitle="All deliverables running smoothly without blockers"
+        quick-add-label="+ Report Blocker"
+        @drag-start="onDragStart"
+        @drag-end="onDragEnd"
+        @drag-enter="onDragEnter"
+        @drag-over="onDragOver"
+        @drag-leave="onDragLeave"
+        @drop="onDrop"
+        @task-click="(t) => $emit('task-click', t)"
+        @move-status="moveTaskStatus"
+        @add-task="(st) => $emit('add-task', st)"
+      />
+
+      <!-- COLUMN 5: DEPLOYED -->
       <KanbanColumn
         status="deployed"
         title="DEPLOYED"
-        subtitle="Completed & live"
-        dot-class="bg-green-400"
+        subtitle="Live & verified"
+        dot-class="bg-emerald-400"
         :tasks="deployedTasks"
         :is-drag-over="dragOverColumn === 'deployed'"
         :dragging-task-id="draggingTaskId"
@@ -135,7 +147,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from 'vue'
 import type { Task, TaskStatus } from '~/types'
-import KanbanToolbar from './kanban/KanbanToolbar.vue'
 import KanbanColumn from './kanban/KanbanColumn.vue'
 import KanbanDragGhost from './kanban/KanbanDragGhost.vue'
 
@@ -168,53 +179,6 @@ watch(
   { deep: true, immediate: true }
 )
 
-// Filters state
-const localSearchQuery = ref('')
-const selectedPriority = ref<'all' | 'critical' | 'high' | 'medium' | 'low'>('all')
-const selectedTag = ref('all')
-const sortBy = ref<'default' | 'priority' | 'dueDate' | 'title'>('default')
-
-// Unique tech tags
-const availableTags = computed(() => {
-  const set = new Set<string>()
-  for (const t of localTasksList.value) {
-    if (t.techTags && Array.isArray(t.techTags)) {
-      for (const tag of t.techTags) {
-        if (tag) set.add(tag)
-      }
-    }
-  }
-  return Array.from(set).sort()
-})
-
-// Priority options with counts
-const priorityOptions = computed(() => {
-  const allTasks = localTasksList.value
-  return [
-    { value: 'all', label: 'All', count: allTasks.length },
-    { value: 'critical', label: 'Critical', dot: 'bg-red-400 animate-pulse', count: allTasks.filter(t => t.priority === 'critical').length },
-    { value: 'high', label: 'High', dot: 'bg-orange-400', count: allTasks.filter(t => t.priority === 'high').length },
-    { value: 'medium', label: 'Medium', dot: 'bg-yellow-400', count: allTasks.filter(t => t.priority === 'medium').length },
-    { value: 'low', label: 'Low', dot: 'bg-slate-400', count: allTasks.filter(t => t.priority === 'low').length }
-  ]
-})
-
-const hasActiveFilters = computed(() => {
-  return Boolean(
-    localSearchQuery.value.trim() ||
-    selectedPriority.value !== 'all' ||
-    selectedTag.value !== 'all' ||
-    sortBy.value !== 'default'
-  )
-})
-
-function resetFilters() {
-  localSearchQuery.value = ''
-  selectedPriority.value = 'all'
-  selectedTag.value = 'all'
-  sortBy.value = 'default'
-}
-
 const priorityOrder: Record<string, number> = {
   critical: 4,
   high: 3,
@@ -222,49 +186,16 @@ const priorityOrder: Record<string, number> = {
   low: 1
 }
 
-// Filtered and sorted tasks
 const processedTasks = computed(() => {
-  let list = localTasksList.value
-
-  const query = localSearchQuery.value.trim().toLowerCase()
-  if (query) {
-    list = list.filter((t) => {
-      const nameMatch = t.name.toLowerCase().includes(query)
-      const idMatch = (t.taskId || '').toLowerCase().includes(query)
-      const tagMatch = (t.techTags || []).some((tag) => tag.toLowerCase().includes(query))
-      const descMatch = (t.description || '').toLowerCase().includes(query)
-      return nameMatch || idMatch || tagMatch || descMatch
-    })
-  }
-
-  if (selectedPriority.value !== 'all') {
-    list = list.filter((t) => t.priority === selectedPriority.value)
-  }
-
-  if (selectedTag.value !== 'all') {
-    list = list.filter((t) => (t.techTags || []).includes(selectedTag.value))
-  }
-
-  if (sortBy.value === 'dueDate') {
-    list = [...list].sort((a, b) => {
-      if (!a.dueDate) return 1
-      if (!b.dueDate) return -1
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-    })
-  } else if (sortBy.value === 'title') {
-    list = [...list].sort((a, b) => (a.name || '').localeCompare(b.name || ''))
-  } else {
-    list = [...list].sort((a, b) => {
-      const pA = priorityOrder[a.priority] || 0
-      const pB = priorityOrder[b.priority] || 0
-      if (pB !== pA) return pB - pA
-      return (a.taskId || a.id).localeCompare(b.taskId || b.id)
-    })
-  }
-
-  return list
+  return [...localTasksList.value].sort((a, b) => {
+    const pA = priorityOrder[a.priority || 'medium'] || 0
+    const pB = priorityOrder[b.priority || 'medium'] || 0
+    if (pB !== pA) return pB - pA
+    return (a.taskId || a.id).localeCompare(b.taskId || b.id)
+  })
 })
 
+const ideaTasks = computed(() => processedTasks.value.filter((t) => t.status === 'idea'))
 const inQueueTasks = computed(() => processedTasks.value.filter((t) => t.status === 'in_queue'))
 const runningSprintTasks = computed(() => processedTasks.value.filter((t) => t.status === 'running_sprint'))
 const blockedTasks = computed(() => processedTasks.value.filter((t) => t.status === 'blocked'))

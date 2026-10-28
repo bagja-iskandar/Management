@@ -3,6 +3,7 @@ import { createGitHubClient } from '../../utils/github'
 import { throwApiError } from '../../utils/errors'
 import { validateBody, createIssueSchema } from '../../schemas'
 import { taskRepository } from '../../repositories'
+import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 
 export default withApiHandler(async (event) => {
   const body = await validateBody(event, createIssueSchema)
@@ -19,11 +20,7 @@ export default withApiHandler(async (event) => {
     throwApiError(401, 'UNAUTHORIZED', 'GitHub token is required to create an issue')
   }
 
-  let fullRepo = repoParam
-  if (!fullRepo.includes('/')) {
-    const defaultOwner = config.githubUsername || 'bagja-iskandar'
-    fullRepo = `${defaultOwner}/${fullRepo}`
-  }
+  const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
 
   const client = createGitHubClient(token)
   const payload: Record<string, any> = {

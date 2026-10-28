@@ -1,6 +1,6 @@
 # ENGINEERING.md — Standar Engineering & Conventions
 
-_Last updated: 2026-09-17. Updated untuk Charcoal-Ochre Console + Tailwind CSS + GitHub integration._
+_Last updated: 2026-10-22. Updated untuk Precision Dark Obsidian (Linear / Raycast Inset Architecture) + Tailwind CSS + Dual-Adapter Repository._
 
 ---
 
@@ -48,35 +48,37 @@ _Last updated: 2026-09-17. Updated untuk Charcoal-Ochre Console + Tailwind CSS +
 
 ---
 
-## 2. Styling: Tailwind CSS (Phase 6+)
+## 2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+)
 
-### Migrasi dari CSS Custom Properties
-- **Sebelum**: 3 file CSS (~1400 LOC) dengan CSS custom properties + scoped `<style src>`
-- **Sesudah**: Tailwind CSS utility classes langsung di template `.vue` + minimal `main.css` (`@tailwind` directives + `@layer base/components`)
+### Filosofi & Standar Visual
+- **Precision Dark Obsidian**: Seluruh komponen mengikuti standar visual **Linear / Raycast / Cursor** seperti yang didefinisikan secara lengkap di [DESIGN.md](./DESIGN.md) dan direferensikan di [mockup-dark-obsidian.html](./mockup-dark-obsidian.html).
+- **Unified Cool Temperature**: Kanvas luar `void` (`#07080A`), workspace inset `canvas` (`#0B0C10`), kartu `surface` (`#111318`), teks utama `foreground` (`#F3F4F6`), teks sekunder `muted` (`#8A8F9E`), dan aksen utama `accent` (`#6366F1` / `#818CF8`).
 
-### File CSS Dihapus
-- `assets/css/dashboard.css` → styling inline di template
-- `assets/css/navbar.css` → styling inline di template
+### Konvensi Tailwind & CSS Layers
+- Gunakan **semantic tokens** dari `tailwind.config.ts` (`void`, `canvas`, `surface`, `surface-elevated`, `foreground`, `muted`, `dim`, `accent`, `accent-light`).
+- Gunakan class `.obs-workspace` untuk container utama halaman (di `app/app.vue`) dan `.obs-card` (atau `.console-card`) untuk setiap kartu agar mendapatkan **Specular 1px Top-Edge Highlight** (`inset 0 1px 0 0 rgba(255,255,255,0.07)`).
+- **Aturan Tipografi Ergonomis**:
+  - Gunakan `font-sans` (`Inter`) sebagai default untuk **semua elemen UI**: navigasi, judul kartu, nama task, deskripsi, tombol, dan tab.
+  - Gunakan `font-mono` (`JetBrains Mono`) **hanya untuk data & identifier**: Task ID (`NX-142` / `ENG-104`), Commit SHA (`a75e740`), angka metrik/KPI (`78%`, `14`), nama branch/repo, dan jam.
+  - **Batas Minimum Ukuran Font**: `text-xs` (`12px`). Jangan gunakan `text-[9px]`, `text-[10px]`, atau `text-[11px]` karena menurunkan keterbacaan.
+- **Hover & Focus State**:
+  - Card hover: `hover:border-white/[0.13]` atau `hover:border-indigo-500/40`.
+  - Focus ring: `focus-visible:ring-1 focus-visible:ring-[#6366F1] focus-visible:outline-none`.
+  - Primary CTA Button: `bg-[#F3F4F6] hover:bg-white text-[#07080A] font-medium` (Crisp Alabaster).
 
-### Konvensi Tailwind
-- Gunakan **custom tokens** dari `tailwind.config.ts` (canvas, surface, bone, muted, ochre)
-- Gunakan `font-mono` untuk **semua telemetry identifiers**: task IDs, metrics, clocks, branch names, stats, delta tags
-- Gunakan `font-sans` untuk body text, labels, descriptions
-- Border hairline: `border-white/[0.06]` — bukan shadow berat
-- Hover effect: `hover:border-[#C98A4B]` glow — bukan transform/translateY
-- Focus ring: `focus:ring-1 focus:ring-[#C98A4B]` — ochre, bukan indigo
-
-### No Inline Hex — Gunakan Token
+### No Legacy Warm Hex — Gunakan Token Dark Obsidian
 ```html
-<!-- ✅ Benar -->
-<div class="bg-canvas text-bone">
-<span class="text-muted font-mono">
+<!-- ✅ Benar (Precision Dark Obsidian) -->
+<div class="obs-card p-4 text-foreground">
+  <h3 class="font-sans text-sm font-semibold text-foreground">Execution Radar</h3>
+  <span class="font-mono text-xs text-muted">ENG-104</span>
+</div>
 
-<!-- ❌ Hindari (kecuali belum ada token) -->
-<div class="bg-[#0B0A09] text-[#F5F2EB]">
+<!-- ❌ Dilarang (Legacy Charcoal-Ochre hardcoded hex) -->
+<div class="bg-[#141210] text-[#F5F2EB] border-[#C98A4B]">
+  <span class="text-[#756F68] text-[10px]">ENG-104</span>
+</div>
 ```
-
-Exception: hex langsung diperbolehkan untuk one-off values yang tidak ada di token (e.g., specific opacity variants).
 
 ---
 

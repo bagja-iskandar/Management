@@ -1,5 +1,6 @@
 import { getSupabaseClient } from '../utils/supabase'
 import { getArray } from '../utils/store'
+import { markSupabaseOffline, markSupabaseOnline, isNetworkError } from '../repositories'
 import type { Project, Task, Sprint } from '~/types'
 
 export default defineNitroPlugin(async () => {
@@ -17,6 +18,10 @@ export default defineNitroPlugin(async () => {
       .limit(1)
 
     if (error) {
+      if (isNetworkError(error)) {
+        markSupabaseOffline(error.message)
+        return
+      }
       if (error.code === 'PGRST205' || error.message?.includes('schema cache')) {
         console.warn('[Supabase Sync] Notice: Database tables not created yet. Please execute migration SQL in your Supabase SQL Editor.')
       } else {
@@ -24,6 +29,8 @@ export default defineNitroPlugin(async () => {
       }
       return
     }
+
+    markSupabaseOnline()
 
     // 2. If projects table is empty, auto-migrate local data to Supabase
     if (!remoteProjects || remoteProjects.length === 0) {
@@ -65,8 +72,7 @@ export default defineNitroPlugin(async () => {
           task_ids: s.taskIds || [],
           velocity: s.velocity || 0,
           objective: s.objective || null,
-          created_at: s.createdAt || new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          created_at: s.createdAt || new Date().toISOString()
         }))
 
         const { error: sErr } = await client.from('sprints').upsert(rows, { onConflict: 'id' })
@@ -79,12 +85,12 @@ export default defineNitroPlugin(async () => {
       if (localTasks.length > 0) {
         const rows = localTasks.map((t) => ({
           id: t.id,
-          task_id: t.taskId || 'ENG-001',
-          project_slug: t.projectSlug || 'management',
+          task_id: t.taskId,
+          project_slug: t.projectSlug || null,
           name: t.name,
           description: t.description || '',
-          status: t.status || 'in_queue',
-          priority: t.priority || 'medium',
+          status: t.status,
+          priority: t.priority,
           tech_tags: t.techTags || [],
           due_date: t.dueDate || null,
           sprint_id: t.sprintId || null,
@@ -106,6 +112,10 @@ export default defineNitroPlugin(async () => {
       console.log('[Supabase Sync] Supabase database is active and connected.')
     }
   } catch (err: any) {
-    console.error('[Supabase Sync] Unexpected error during sync check:', err.message)
+    if (isNetworkError(err)) {
+      markSupabaseOffline(err.message)
+    } else {
+      console.error('[Supabase Sync] Unexpected error during sync check:', err.message)
+    }
   }
 })

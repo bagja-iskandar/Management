@@ -1,6 +1,6 @@
 # DECISIONS.md — Architectural Decision Records
 
-_Last updated: 2026-09-17._
+_Last updated: 2026-10-22._
 
 > File ini mencatat keputusan arsitektural dan engineering yang sudah disepakati.
 
@@ -51,13 +51,13 @@ _Last updated: 2026-09-17._
 **Diputuskan oleh**: Owner (Bagja Iskandar)
 **Keputusan**: Migrasi total visual layer dari Polymorphism Dark Glass (Indigo `#6366F1`, Glass blur, CSS custom properties) ke **Charcoal-Ochre Engineering Console** (canvas `#0B0A09`, accent `#C98A4B`, Tailwind CSS utility classes).
 **Alasan**: Design sebelumnya terlalu "decorative" (glass blur, neon glow, gradient mesh) untuk sebuah engineering command center. Charcoal-Ochre lebih fokus pada information density, terminal aesthetic, dan readability. Tailwind CSS menggantikan ~1400 LOC CSS custom properties untuk maintainability.
-**Dampak**: Rewrite seluruh styling. Hapus `dashboard.css`, `navbar.css`. Rewrite `main.css`. Tambah `tailwind.config.ts`. Semua `.vue` templates updated.
+**Status**: ⚠️ **Superseded oleh ADR-009 (2026-10-22)** — digantikan oleh **Precision Dark Obsidian** (Linear / Raycast Inset Architecture).
 
 ### [2026-09-17] ADR-002 — Sidebar Redesign: 3 items → 5 items compact
 **Diputuskan oleh**: Owner
 **Keputusan**: Ganti sidebar 3-item (Dashboard, Projects, Tasks) + user profile card dengan sidebar 5-item compact (Dashboard, Active Sprints, Architecture Roadmap, Code Repos, System Telemetry) + system status tile.
 **Alasan**: Nexura bukan lagi "dashboard saja" — melainkan full engineering command center yang perlu navigasi ke sprints, repos, dan system health. User profile card tidak berguna untuk solo developer.
-**Dampak**: Rename `navbar.vue` → `Sidebar.vue`. Hapus profile card. Tambah 4 halaman baru (sprints, roadmap, repos, telemetry).
+**Status**: 🔄 **Diperbarui oleh ADR-009** — dikembalikan menjadi **Unified Left Rail (`w-56`)** dengan label teks eksplisit, tombol `⌘K` Quick Action, dan daftar *Pinned Active Projects* (menggantikan icon-only floating capsule dock).
 
 ### [2026-09-17] ADR-003 — Task Status: Indonesian → English + New Columns
 **Diputuskan oleh**: Owner
@@ -92,8 +92,26 @@ _Last updated: 2026-09-17._
 ### [2026-09-17] ADR-008 — Telemetry Header Bar (New Component)
 **Diputuskan oleh**: Owner
 **Keputusan**: Tambah komponen `HeaderBar.vue` horizontal — menampilkan live clock (UTC/WIB), active branch indicator, sprint velocity KPI, dan search input.
-**Alasan**: Menggantikan "Welcome back, Bagja" banner dengan informasi fungsional. Clock dual timezone relevan untuk developer yang beroperasi lintas timezone. Search dengan ochre focus ring sesuai design tokens.
-**Dampak**: `app.vue` layout berubah: sidebar + header + main. File baru `HeaderBar.vue`.
+**Alasan**: Menggantikan "Welcome back, Bagja" banner dengan informasi fungsional. Clock dual timezone relevan untuk developer yang beroperasi lintas timezone.
+**Status**: 🔄 **Diperbarui oleh ADR-009** — digabungkan menjadi **Unified Top Header Bar** di dalam panel `.obs-workspace` (bukan lagi *floating islands* terpisah).
+
+### [2026-10-22] ADR-009 — UI/UX Overhaul: Charcoal-Ochre → Precision Dark Obsidian (Linear / Raycast Inset Architecture)
+**Diputuskan oleh**: Owner & AI Architect
+**Keputusan**: Mengganti keseluruhan sistem desain dan tata letak dari **Charcoal-Ochre Console** (`#0B0A09` + `#C98A4B` + `#F5F2EB`) menjadi **Precision Dark Obsidian** berstandar Linear / Raycast / Cursor:
+1. **Unifikasi Temperatur Warna Dingin (Cool Achromatic + Obsidian Accent):**
+   - Outer Void `#07080A`, Inset Workspace Canvas `#0B0C10`, Card Surface `#111318`, Elevated `#171920`.
+   - Teks utama `#F3F4F6` (*Crisp Alabaster*), teks sekunder `#8A8F9E` (*Cool Slate*), teks tersier `#565B68`.
+   - Aksen utama **Cool Indigo** (`#6366F1` / `#818CF8`) dengan dukungan preset tema (`indigo`, `amethyst`, `stealth`, `emerald`) dan tombol CTA utama berwarna **Crisp Alabaster** (`bg-[#F3F4F6] text-[#07080A]`).
+2. **Inset Workspace & Specular 1px Lighting:**
+   - Menghapus *floating icon-only capsule dock*, *floating header pills*, dan `<StructureStaticGrid />` (*crosshair grid*).
+   - Mengadopsi **Unified Left Sidebar (`w-56`)** dengan label navigasi jelas + shortcut proyek aktif, berdampingan dengan **Inset Workspace Panel** (`.obs-workspace`, `rounded-2xl`) dan kartu berdimensi **Specular Top-Highlight** (`.obs-card`, `inset 0 1px 0 0 rgba(255,255,255,0.07)`).
+3. **Hierarki Tipografi Ergonomis:**
+   - `font-sans` (`Inter`) menjadi default untuk seluruh elemen UI/navigasi/judul. `font-mono` (`JetBrains Mono`) dibatasi hanya untuk ID task, SHA commit, metrik angka, dan jam. Batas minimum ukuran teks adalah `12px` (`text-xs`).
+4. **Asymmetric Bento Dashboard:**
+   - Baris atas: 4 kartu KPI specular (*In-Flight Tasks, Sprint Velocity, CI/CD Workflows, Open PRs & Issues*).
+   - Area utama 12 kolom: 8 kolom kiri (*Execution Radar* dengan segmented tabs + *Global Commit Stream* dengan inline diff) dan 4 kolom kanan (*Quick Task Inspector*, *Weekly Sprint Focus*, *Managed Projects Hub*).
+**Alasan**: Tema Charcoal-Ochre menimbulkan *thermal clash* (latar hitam dingin vs teks krem/cokelat hangat) yang terasa kusam dan melelahkan mata, serta tata letak *floating islands* memecah fokus visual.
+**Dampak**: Pembaruan `tailwind.config.ts`, `assets/css/main.css`, `app/app.vue`, `Sidebar.vue`, `HeaderBar.vue`, `Dashboard.vue`, dan seluruh komponen `.vue` agar menggunakan token Dark Obsidian. Mockup referensi tersimpan di `project_context/mockup-dark-obsidian.html`.
 
 ---
 

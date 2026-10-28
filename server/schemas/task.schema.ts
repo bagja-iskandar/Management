@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const legacyStatusMap: Record<string, 'in_queue' | 'running_sprint' | 'deployed' | 'blocked'> = {
+const legacyStatusMap: Record<string, 'idea' | 'in_queue' | 'running_sprint' | 'deployed' | 'blocked'> = {
   todo: 'in_queue',
   proses: 'running_sprint',
   selesai: 'deployed'
@@ -12,23 +12,23 @@ export const taskStatusSchema = z.preprocess((val) => {
     return legacyStatusMap[trimmed] ?? trimmed
   }
   return val
-}, z.enum(['in_queue', 'running_sprint', 'deployed', 'blocked']))
+}, z.enum(['idea', 'in_queue', 'running_sprint', 'deployed', 'blocked']))
 
 export const taskPrioritySchema = z.enum(['low', 'medium', 'high', 'critical'])
 
 const baseTaskFields = {
   name: z.string().trim().min(1, 'Task name is required'),
-  projectSlug: z.string().trim().optional(),
+  projectSlug: z.string().trim().nullable().optional(),
   description: z.string().trim().optional(),
   status: taskStatusSchema,
   priority: taskPrioritySchema,
   techTags: z.array(z.string().trim().min(1)),
-  dueDate: z.string().trim().optional(),
-  sprintId: z.string().trim().optional(),
-  date: z.string().trim(),
-  githubIssueUrl: z.string().trim().optional(),
+  dueDate: z.string().trim().nullable().optional(),
+  sprintId: z.string().trim().nullable().optional(),
+  date: z.string().trim().nullable().optional(),
+  githubIssueUrl: z.string().trim().nullable().optional(),
   githubIssueNumber: z.coerce.number().optional(),
-  githubPrUrl: z.string().trim().optional()
+  githubPrUrl: z.string().trim().nullable().optional()
 }
 
 export const createTaskSchema = z.object({
@@ -36,7 +36,12 @@ export const createTaskSchema = z.object({
   status: taskStatusSchema.default('in_queue'),
   priority: taskPrioritySchema.default('medium'),
   techTags: z.array(z.string().trim().min(1)).default([]),
-  date: z.string().trim().default(() => new Date().toISOString().slice(0, 10))
+  date: z
+    .string()
+    .trim()
+    .nullable()
+    .optional()
+    .transform((val) => val || new Date().toISOString().slice(0, 10))
 })
 
 export const updateTaskSchema = z.object(baseTaskFields).partial()

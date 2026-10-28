@@ -3,3 +3,5 @@ export * from './project'
 export * from './sprint'
 export * from './stat'
 export * from './github'
+export * from './note'
+

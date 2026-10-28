@@ -1,6 +1,8 @@
+import { createError } from 'h3'
 import type { ISprintRepository } from '../contracts/sprint.repository'
 import type { Sprint } from '~/types'
 import { getSupabaseClient } from '../../utils/supabase'
+import { isNetworkError } from '../index'
 
 function mapSprintRow(row: any): Sprint {
   return {
@@ -31,7 +33,12 @@ function mapSprintToRow(s: Partial<Sprint>): Record<string, any> {
 export class SupabaseSprintRepository implements ISprintRepository {
   private get client() {
     const c = getSupabaseClient()
-    if (!c) throw new Error('Supabase client is not configured.')
+    if (!c) {
+      throw createError({
+        statusCode: 503,
+        statusMessage: 'Supabase client is not configured or unavailable'
+      })
+    }
     return c
   }
 
@@ -42,8 +49,19 @@ export class SupabaseSprintRepository implements ISprintRepository {
       .order('start_date', { ascending: false })
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseSprintRepository.findAll] Error:', error)
-      return []
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return (data || []).map(mapSprintRow)
@@ -57,8 +75,19 @@ export class SupabaseSprintRepository implements ISprintRepository {
       .maybeSingle()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseSprintRepository.findById] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapSprintRow(data) : null
@@ -67,7 +96,6 @@ export class SupabaseSprintRepository implements ISprintRepository {
   async create(sprintData: Omit<Sprint, 'id' | 'createdAt'>): Promise<Sprint> {
     const row = mapSprintToRow(sprintData)
     row.created_at = new Date().toISOString()
-    row.updated_at = new Date().toISOString()
 
     const { data, error } = await this.client
       .from('sprints')
@@ -76,8 +104,19 @@ export class SupabaseSprintRepository implements ISprintRepository {
       .single()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseSprintRepository.create] Error:', error)
-      throw new Error(`Failed to create sprint in Supabase: ${error.message}`)
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Failed to create sprint in Supabase: ${error.message}`,
+        data: error
+      })
     }
 
     return mapSprintRow(data)
@@ -85,7 +124,6 @@ export class SupabaseSprintRepository implements ISprintRepository {
 
   async update(id: string, patch: Partial<Sprint>): Promise<Sprint | null> {
     const row = mapSprintToRow(patch)
-    row.updated_at = new Date().toISOString()
 
     const { data, error } = await this.client
       .from('sprints')
@@ -95,8 +133,19 @@ export class SupabaseSprintRepository implements ISprintRepository {
       .maybeSingle()
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseSprintRepository.update] Error:', error)
-      return null
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return data ? mapSprintRow(data) : null
@@ -109,8 +158,19 @@ export class SupabaseSprintRepository implements ISprintRepository {
       .eq('id', id.trim())
 
     if (error) {
+      if (isNetworkError(error)) {
+        throw createError({
+          statusCode: 503,
+          statusMessage: 'Database connection temporarily unavailable',
+          data: { error: error.message || error }
+        })
+      }
       console.error('[SupabaseSprintRepository.delete] Error:', error)
-      return false
+      throw createError({
+        statusCode: 500,
+        statusMessage: `Database error: ${error.message}`,
+        data: error
+      })
     }
 
     return true

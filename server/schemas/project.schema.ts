@@ -9,11 +9,12 @@ const baseProjectFields = {
   description: z.string().trim().optional(),
   status: projectStatusSchema,
   priority: projectPrioritySchema,
-  githubRepo: z.string().trim().optional(),
-  deployUrl: z.string().trim().optional(),
+  githubRepo: z.string().trim().nullable().optional(),
+  deployUrl: z.string().trim().nullable().optional(),
   techStack: z.array(z.string().trim().min(1)),
-  startDate: z.string().trim().optional(),
-  dueDate: z.string().trim().optional()
+  startDate: z.string().trim().nullable().optional(),
+  dueDate: z.string().trim().nullable().optional(),
+  releasePhase: z.string().trim().optional()
 }
 
 export const createProjectSchema = z.object({

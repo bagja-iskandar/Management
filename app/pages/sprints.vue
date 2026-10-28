@@ -3,6 +3,7 @@
     <!-- Header & Context -->
     <SprintHeader
       :is-current-week="isCurrentWeek"
+      :week-label="weekLabel"
       @prev-week="goToPrevWeek"
       @current-week="goToCurrentWeek"
       @next-week="goToNextWeek"
@@ -21,14 +22,26 @@
       <div
         v-if="feedbackMessage"
         class="p-3.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-3 shadow-lg"
-        :class="feedbackType === 'error' ? 'bg-red-500/15 border-red-500/30 text-red-400' : 'bg-[#C98A4B]/10 border-[#C98A4B]/30 text-[#C98A4B]'"
+        :class="feedbackType === 'error' ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'"
         role="status"
       >
         <div class="flex items-center gap-2">
-          <span>{{ feedbackType === 'error' ? '⚠️' : '✓' }}</span>
+          <NexuraIcon
+            :name="feedbackType === 'error' ? 'AlertTriangle' : 'CheckCircle2'"
+            size="sm"
+            class="shrink-0"
+            :class="feedbackType === 'error' ? 'text-rose-400' : 'text-emerald-400'"
+          />
           <span>{{ feedbackMessage }}</span>
         </div>
-        <button type="button" class="text-xs hover:underline shrink-0 cursor-pointer" @click="feedbackMessage = ''">✕</button>
+        <button
+          type="button"
+          class="text-xs hover:opacity-80 shrink-0 cursor-pointer p-1 rounded hover:bg-white/[0.04]"
+          aria-label="Dismiss feedback"
+          @click="feedbackMessage = ''"
+        >
+          <NexuraIcon name="X" size="xs" />
+        </button>
       </div>
     </transition>
 
@@ -81,6 +94,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import type { Sprint, Task, TaskStatus, TaskPriority, Project } from '~/types'
 
 // Composables
@@ -283,6 +297,7 @@ async function updateTaskStatus(task: Task, newStatus: TaskStatus) {
   try {
     await tasksApi.updateTask(task.id, { status: newStatus })
     const statusLabels: Record<TaskStatus, string> = {
+      idea: 'Idea',
       in_queue: 'In Queue',
       running_sprint: 'Running',
       deployed: 'Deployed',

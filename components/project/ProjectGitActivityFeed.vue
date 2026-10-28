@@ -3,35 +3,35 @@
     <!-- Commits Stream -->
     <div class="lg:col-span-2 space-y-3">
       <div class="flex items-center justify-between">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-[#756F68]">Commit Log</h3>
-        <span v-if="commitsPending" class="font-mono text-[10px] text-[#C98A4B] animate-pulse">Syncing...</span>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Commit Log</h3>
+        <span v-if="commitsPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Syncing...</span>
       </div>
 
       <div v-if="commits && commits.length" class="space-y-2">
         <div
           v-for="commit in commits"
           :key="commit.sha"
-          class="p-3 rounded-lg bg-[#09090B] border border-white/[0.04] space-y-1"
+          class="p-3 rounded-xl bg-[#07080A]/60 border border-white/[0.05] space-y-1 hover:border-white/[0.12] transition-colors"
         >
           <div class="flex items-baseline justify-between gap-2">
-            <span class="font-mono text-xs text-[#F5F2EB] font-medium truncate">{{ commit.message }}</span>
+            <span class="font-mono text-xs text-[#F3F4F6] font-medium truncate">{{ commit.message }}</span>
             <a
               :href="commit.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-[10px] text-[#C98A4B] hover:underline shrink-0 bg-[#C98A4B]/10 px-1.5 py-0.5 rounded border border-[#C98A4B]/20"
+              class="font-mono text-[10px] tabular-nums text-indigo-400 hover:underline shrink-0 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20"
             >
               {{ commit.sha.slice(0, 7) }}
             </a>
           </div>
-          <div class="flex items-center gap-3 font-mono text-[10px] text-[#756F68]">
+          <div class="flex items-center gap-3 font-mono text-[10px] text-[#8A8F9E]">
             <span>{{ commit.authorName }}</span>
             <span>•</span>
-            <span>{{ formatTime(commit.date) }}</span>
+            <span class="tabular-nums">{{ formatTime(commit.date) }}</span>
           </div>
         </div>
       </div>
-      <div v-else class="py-8 text-center text-xs font-mono text-[#756F68] border border-dashed border-white/[0.06] rounded-xl">
+      <div v-else class="py-8 text-center text-xs font-mono text-[#8A8F9E] border border-dashed border-white/[0.06] rounded-xl">
         No commit data available.
       </div>
     </div>
@@ -39,31 +39,29 @@
     <!-- Branches List -->
     <div class="space-y-3">
       <div class="flex items-center justify-between">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-[#756F68]">Branches</h3>
-        <span v-if="branchesPending" class="font-mono text-[10px] text-[#C98A4B] animate-pulse">Loading...</span>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Branches</h3>
+        <span v-if="branchesPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Loading...</span>
       </div>
 
       <div v-if="branches && branches.length" class="space-y-1.5">
         <div
           v-for="branch in branches"
           :key="branch.name"
-          class="flex items-center justify-between font-mono text-xs py-1.5 px-2.5 rounded bg-white/[0.02] border border-white/[0.03]"
+          class="flex items-center justify-between font-mono text-xs py-2 px-3 rounded-lg bg-[#07080A]/60 border border-white/[0.05] hover:border-white/[0.1] transition-colors"
         >
           <div class="flex items-center gap-2 truncate">
-            <svg class="w-3.5 h-3.5 text-[#C98A4B] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-            </svg>
-            <span class="text-[#F5F2EB] truncate">{{ branch.name }}</span>
-            <span v-if="branch.protected" class="text-[9px] bg-red-950/60 text-red-400 px-1 py-0.5 rounded border border-red-800/40">
+            <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400 shrink-0" />
+            <span class="text-[#F3F4F6] truncate">{{ branch.name }}</span>
+            <span v-if="branch.protected" class="text-[9px] bg-rose-500/10 text-rose-400 px-1.5 py-0.2 rounded border border-rose-500/20 font-semibold uppercase">
               protected
             </span>
           </div>
-          <span class="text-[10px] text-[#756F68] shrink-0 font-mono">
+          <span class="text-[10px] text-[#8A8F9E] shrink-0 font-mono tabular-nums">
             {{ branch.commitSha.slice(0, 7) }}
           </span>
         </div>
       </div>
-      <div v-else class="py-8 text-center text-xs font-mono text-[#756F68] border border-dashed border-white/[0.06] rounded-xl">
+      <div v-else class="py-8 text-center text-xs font-mono text-[#8A8F9E] border border-dashed border-white/[0.06] rounded-xl">
         No branch information.
       </div>
     </div>
@@ -72,6 +70,7 @@
 
 <script setup lang="ts">
 import type { GitHubCommit, GitHubBranch } from '~/types'
+import NexuraIcon from '../ui/NexuraIcon.vue'
 
 defineProps<{
   commits: GitHubCommit[]

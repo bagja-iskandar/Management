@@ -1,6 +1,6 @@
 # PROJECT.md — Identitas, Tujuan, Scope, dan Target Sistem Nexura
 
-_Last updated: 2026-09-17. Refactored into Charcoal-Ochre Engineering Command Center._
+_Last updated: 2026-10-22. Evolved into Precision Dark Obsidian Engineering Command Center (Linear / Raycast Inset Architecture)._
 
 ---
 
@@ -11,8 +11,8 @@ _Last updated: 2026-09-17. Refactored into Charcoal-Ochre Engineering Command Ce
 | **Nama** | Nexura (Personal Engineering Command Center) |
 | **Tipe** | Solo-Developer Project Management & GitHub Integration Hub |
 | **Package name** | `nexura` (dari `package.json`) |
-| **Repo root** | `d:\Project\REWORK\Management` (Git Remote: `bagja-iskandar/Management`) |
-| **Status** | Phase 6–9 Implementation — Design System Overhaul & Feature Build |
+| **Repo root** | `d:\Project_Center\REWORK\Management` (Git Remote: `bagja-iskandar/Management`) |
+| **Status** | Phase 13 — Precision Dark Obsidian UI/UX Overhaul (Linear / Raycast Style) |
 
 ---
 
@@ -34,12 +34,13 @@ _Last updated: 2026-09-17. Refactored into Charcoal-Ochre Engineering Command Ce
 
 ### A. Yang Diubah (Refactored)
 
-| Aspek | Sebelum | Sesudah |
-|-------|---------|---------|
-| Design System | Polymorphism Dark Glass (Indigo `#6366F1`) | Charcoal-Ochre Console (`#0B0A09` + `#C98A4B`) |
-| Styling | CSS Custom Properties (~1400 LOC) | Tailwind CSS utility classes |
-| Navigasi | 3 item sidebar (Dashboard, Projects, Tasks) | 5 item compact sidebar + telemetry header |
-| Dashboard | Welcome banner + mock charts | Command Center + real Kanban board |
+| Aspek | Sebelum (Charcoal-Ochre) | Sesudah (Precision Dark Obsidian) |
+|-------|--------------------------|-----------------------------------|
+| Design System | Charcoal-Ochre Console (`#0B0A09` + `#C98A4B` + `#F5F2EB`) | Precision Dark Obsidian (`#07080A` void, `#0B0C10` canvas, `#111318` specular surface, `#F3F4F6` crisp alabaster, `#6366F1` cool indigo) |
+| App Frame | Floating icon-only capsule dock + floating header pills + crosshair grid | Unified Left Rail (`w-56`) + Inset Obsidian Workspace (`.obs-workspace`, `rounded-2xl`) tanpa grid pengganggu |
+| Styling | Tailwind CSS dengan banyak hardcoded hex (`#C98A4B`, `#F5F2EB`) | Semantic Dark Obsidian tokens + `.obs-card` Specular 1px top-highlight + preset tema (`indigo`, `amethyst`, `stealth`, `emerald`) |
+| Navigasi | Icon-only floating capsule (tanpa label teks) | Unified Sidebar dengan label jelas, tombol `⌘K` Quick Action, counter badge, & *Pinned Active Projects* |
+| Dashboard | 3 blok tumpuk vertikal rata | 4 Specular KPI Cards + Asymmetric Bento Grid (8 cols Execution Radar & Commit Stream + 4 cols Quick Inspector, Sprint Focus & Projects Hub) |
 | Data | Mock stats (`Math.max(...)`) | Real calculations dari actual data |
 | Task Status | `'todo' \| 'proses' \| 'selesai'` (ID) | `'in_queue' \| 'running_sprint' \| 'deployed' \| 'blocked'` (EN) |
 | Task Schema | 6 fields | 12+ fields (taskId, projectSlug, priority, techTags, etc.) |

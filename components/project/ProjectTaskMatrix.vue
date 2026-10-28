@@ -1,9 +1,9 @@
 <template>
-  <section aria-label="Task Matrix" class="p-6 rounded-2xl bg-[#111114] border border-white/[0.06] space-y-4">
+  <section aria-label="Task Matrix" class="obs-card p-4 sm:p-6 rounded-2xl bg-[#111318] border border-white/[0.07] shadow-sm space-y-4">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <h2 class="font-mono text-base font-semibold text-[#F5F2EB]">Associated Tasks Matrix</h2>
-        <span class="font-mono text-xs px-2 py-0.5 rounded-full bg-white/5 text-[#756F68] border border-white/[0.06]">
+        <h2 class="font-mono text-base font-semibold text-[#F3F4F6]">Associated Tasks Matrix</h2>
+        <span class="font-mono text-xs tabular-nums px-2.5 py-0.5 rounded-full bg-white/5 text-[#8A8F9E] border border-white/[0.06]">
           {{ filteredMatrixTasks.length }}
         </span>
       </div>
@@ -13,18 +13,18 @@
           v-model="matrixSearch"
           type="search"
           placeholder="Search tasks..."
-          class="bg-[#09090B] border border-white/[0.08] rounded-lg px-3 py-1.5 text-xs text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none w-44"
+          class="bg-[#07080A] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none w-44 transition-all"
           aria-label="Search project tasks"
         />
 
         <!-- Filter tabs -->
-        <div class="flex items-center gap-1.5" role="tablist">
+        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-[#07080A] border border-white/[0.06]" role="tablist">
           <button
             v-for="filter in matrixFilterOptions"
             :key="filter.value"
             type="button"
-            class="px-2.5 py-1 rounded text-xs font-mono capitalize transition-all border cursor-pointer"
-            :class="matrixFilter === filter.value ? 'bg-[#C98A4B]/15 text-[#C98A4B] border-[#C98A4B]/40' : 'bg-white/5 text-[#756F68] border-transparent hover:text-[#F5F2EB]'"
+            class="px-2.5 py-1 rounded-lg text-xs font-mono capitalize transition-all border cursor-pointer"
+            :class="matrixFilter === filter.value ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold' : 'bg-transparent text-[#8A8F9E] border-transparent hover:text-[#F3F4F6]'"
             @click="matrixFilter = filter.value"
           >
             {{ filter.label }}
@@ -35,7 +35,7 @@
 
     <!-- Task Table -->
     <div class="space-y-2">
-      <div class="hidden md:grid md:grid-cols-12 gap-4 px-4 py-2 font-mono text-xs tracking-wider uppercase text-[#756F68] border-b border-white/[0.06]">
+      <div class="hidden md:grid md:grid-cols-12 gap-4 px-4 py-2 font-mono text-xs tracking-wider uppercase text-[#8A8F9E] border-b border-white/[0.06]">
         <span class="col-span-2">Task ID</span>
         <span class="col-span-4">Task Name & Tech</span>
         <span class="col-span-2">Priority</span>
@@ -44,31 +44,31 @@
         <span class="col-span-1 text-right">Actions</span>
       </div>
 
-      <div v-if="!filteredMatrixTasks.length" class="py-12 text-center text-xs font-mono text-[#756F68]">
+      <div v-if="!filteredMatrixTasks.length" class="py-12 text-center text-xs font-mono text-[#8A8F9E]">
         No tasks match your search or filter criteria.
       </div>
 
       <div
         v-for="(t, idx) in filteredMatrixTasks"
         :key="t.id || idx"
-        class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center p-3.5 rounded-lg bg-[#09090B] border border-white/[0.04] hover:border-white/[0.08] transition-colors cursor-pointer group"
+        class="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-4 items-center p-3.5 rounded-xl bg-[#07080A]/60 border border-white/[0.05] hover:border-white/[0.12] transition-colors cursor-pointer group"
         @click="$emit('task-click', t)"
       >
         <div class="col-span-2 flex items-center gap-2">
-          <span class="font-mono text-xs font-semibold text-[#C98A4B] bg-[#C98A4B]/10 px-2 py-0.5 rounded border border-[#C98A4B]/20">
+          <span class="font-mono text-xs tabular-nums font-semibold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
             #{{ t.taskId || `ENG-${String(idx + 1).padStart(3, '0')}` }}
           </span>
         </div>
 
         <div class="col-span-4 min-w-0">
-          <div class="font-sans text-sm font-medium text-[#F5F2EB] group-hover:text-[#C98A4B] transition-colors truncate" :title="t.name">
+          <div class="font-sans text-sm font-medium text-[#F3F4F6] group-hover:text-indigo-300 transition-colors truncate" :title="t.name">
             {{ t.name }}
           </div>
           <div class="flex items-center gap-1.5 mt-1 flex-wrap">
             <span
               v-for="tag in (t.techTags?.length ? t.techTags : ['core'])"
               :key="tag"
-              class="font-mono text-[10px] bg-[#C98A4B]/10 text-[#C98A4B] rounded px-1.5 py-0.2 border border-[#C98A4B]/20"
+              class="font-mono text-[10px] bg-white/5 text-[#8A8F9E] rounded px-1.5 py-0.5 border border-white/[0.06]"
             >
               {{ tag }}
             </span>
@@ -77,7 +77,7 @@
 
         <div class="col-span-2">
           <span
-            class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full font-mono text-xs uppercase"
+            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-mono text-xs uppercase border"
             :class="getPriorityBadgeClass(t.priority)"
           >
             <span class="w-1.5 h-1.5 rounded-full bg-current" :class="t.priority === 'critical' ? 'animate-pulse' : ''"></span>
@@ -87,39 +87,33 @@
 
         <div class="col-span-2">
           <span
-            class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono capitalize"
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono capitalize border"
             :class="getStatusBadgeClass(t.status)"
           >
             {{ t.status === 'deployed' ? 'Deployed' : t.status === 'running_sprint' ? 'Running' : t.status === 'blocked' ? 'Blocked' : 'In Queue' }}
           </span>
         </div>
 
-        <div class="col-span-1 font-mono text-xs text-[#756F68] whitespace-nowrap">
+        <div class="col-span-1 font-mono text-xs text-[#8A8F9E] tabular-nums whitespace-nowrap">
           {{ t.dueDate || 'Nov 15, 2026' }}
         </div>
 
         <div class="col-span-1 flex items-center justify-end gap-1.5" @click.stop>
           <button
             type="button"
-            class="p-1.5 rounded bg-white/5 hover:bg-[#C98A4B]/15 hover:text-[#C98A4B] text-[#756F68] transition-colors focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer"
+            class="p-1.5 rounded-lg bg-white/5 hover:bg-indigo-500/15 hover:text-indigo-400 text-[#8A8F9E] transition-colors focus:ring-1 focus:ring-indigo-500 focus:outline-none cursor-pointer"
             title="Cycle status"
             @click="$emit('toggle-status', t)"
           >
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="23 4 23 10 17 10" />
-              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-            </svg>
+            <NexuraIcon name="RotateCw" size="xs" />
           </button>
           <button
             type="button"
-            class="p-1.5 rounded bg-white/5 hover:bg-red-500/15 hover:text-red-400 text-[#756F68] transition-colors focus:ring-1 focus:ring-red-500 focus:outline-none cursor-pointer"
+            class="p-1.5 rounded-lg bg-white/5 hover:bg-rose-500/15 hover:text-rose-400 text-[#8A8F9E] transition-colors focus:ring-1 focus:ring-rose-500 focus:outline-none cursor-pointer"
             title="Delete task"
             @click="$emit('delete-task', t)"
           >
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>
+            <NexuraIcon name="Trash2" size="xs" />
           </button>
         </div>
       </div>
@@ -130,6 +124,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { Task, TaskPriority, TaskStatus } from '~/types'
+import NexuraIcon from '../ui/NexuraIcon.vue'
 
 const props = defineProps<{
   tasks: Task[]
@@ -170,16 +165,16 @@ const filteredMatrixTasks = computed(() => {
 })
 
 function getPriorityBadgeClass(priority: TaskPriority | string) {
-  if (priority === 'critical') return 'bg-red-500/10 text-red-400 border-red-500/20'
-  if (priority === 'high') return 'bg-orange-500/10 text-orange-400 border-orange-500/20'
-  if (priority === 'medium') return 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
-  return 'bg-slate-500/10 text-slate-400 border-slate-500/20'
+  if (priority === 'critical') return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+  if (priority === 'high') return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+  if (priority === 'medium') return 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+  return 'bg-white/5 text-[#8A8F9E] border-white/10'
 }
 
 function getStatusBadgeClass(status: TaskStatus | string) {
-  if (status === 'deployed') return 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-  if (status === 'running_sprint') return 'bg-[#C98A4B]/10 text-[#C98A4B] border border-[#C98A4B]/20'
-  if (status === 'blocked') return 'bg-red-500/10 text-red-400 border border-red-500/20'
-  return 'bg-slate-500/10 text-slate-400 border border-slate-500/20'
+  if (status === 'deployed') return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+  if (status === 'running_sprint') return 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30'
+  if (status === 'blocked') return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+  return 'bg-white/5 text-[#8A8F9E] border-white/10'
 }
 </script>

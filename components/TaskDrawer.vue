@@ -1,317 +1,372 @@
 <template>
-  <div
-    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto bg-black/75 backdrop-blur-md transition-all"
-    aria-labelledby="modal-task-title"
-    role="dialog"
-    aria-modal="true"
-    @click.self="$emit('close')"
-  >
-    <!-- Centered Full-Rounded Modal Container -->
+  <Teleport to="body">
     <div
-      class="relative w-full max-w-2xl bg-[#111114] border border-white/[0.1] rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] flex flex-col max-h-[90vh] overflow-hidden text-[#F5F2EB] my-auto outline-none transition-all"
-      @keydown.esc="$emit('close')"
+      v-if="effectiveIsOpen"
+      class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto bg-black/80 backdrop-blur-md transition-all"
+      aria-labelledby="modal-task-title"
+      role="dialog"
+      aria-modal="true"
+      @click.self="handleClose"
     >
-      <!-- Header -->
-      <div class="px-6 py-5 border-b border-white/[0.07] bg-[#171513]/70 flex items-start justify-between gap-4 shrink-0 rounded-t-3xl">
-        <div class="space-y-2 flex-1 min-w-0">
+      <!-- Loading State -->
+      <div
+        v-if="isLoadingTask"
+        class="relative w-full max-w-sm bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl p-8 flex flex-col items-center justify-center gap-3 text-[#F3F4F6] my-auto"
+      >
+        <NexuraIcon name="Loader2" size="lg" class="animate-spin text-indigo-400" />
+        <span class="font-mono text-xs text-[#8A8F9E]">Loading deliverable details...</span>
+      </div>
+
+      <!-- Not Found State -->
+      <div
+        v-else-if="!currentTask"
+        class="relative w-full max-w-sm bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl p-6 flex flex-col items-center justify-center gap-4 text-[#F3F4F6] my-auto"
+      >
+        <div class="text-center space-y-1">
+          <h3 class="font-sans text-sm font-semibold text-[#F3F4F6]">Deliverable Not Found</h3>
+          <p class="font-mono text-xs text-[#8A8F9E]">The requested deliverable could not be loaded.</p>
+        </div>
+        <button
+          type="button"
+          class="px-4 py-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+          @click="handleClose"
+        >
+          Close Drawer
+        </button>
+      </div>
+
+      <!-- Centered Full-Rounded Modal Container -->
+      <div
+        v-else
+        class="relative w-full max-w-2xl bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden text-[#F3F4F6] my-auto outline-none transition-all"
+        @keydown.esc="handleClose"
+      >
+        <!-- Header -->
+        <div class="px-6 py-5 border-b border-white/[0.06] bg-[#0B0C10]/60 flex items-start justify-between gap-4 shrink-0 rounded-t-2xl">
+          <div class="space-y-2 flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-mono text-xs tabular-nums text-[#8A8F9E] bg-white/[0.05] border border-white/[0.08] px-2.5 py-0.5 rounded-full inline-flex items-center">
+                #{{ displayTaskId }}
+              </span>
+              <span
+                class="font-mono text-[10px] uppercase font-semibold px-2.5 py-0.5 rounded-full border tracking-wider tabular-nums"
+                :class="statusBadgeClass"
+              >
+                {{ form.status.replace('_', ' ') }}
+              </span>
+              <span v-if="form.projectSlug" class="font-mono text-[10px] tabular-nums text-[#8A8F9E] bg-white/[0.04] px-2.5 py-0.5 rounded-full border border-white/[0.06] inline-flex items-center gap-1.5">
+                <NexuraIcon name="Folder" size="xs" class="text-[#8A8F9E]" />
+                <span>{{ form.projectSlug }}</span>
+              </span>
+              <!-- Linked GitHub Issue Badge -->
+              <a
+                v-if="form.githubIssueUrl"
+                :href="form.githubIssueUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-[10px] tabular-nums text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20 px-2.5 py-0.5 rounded-full border border-indigo-500/25 inline-flex items-center gap-1.5 transition-colors group cursor-pointer"
+                title="Open linked issue on GitHub"
+              >
+                <span>Linked Issue #{{ form.githubIssueNumber || '' }}</span>
+                <NexuraIcon name="ExternalLink" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <!-- Create GitHub Issue Button -->
+              <button
+                v-else-if="effectiveRepo"
+                type="button"
+                class="font-mono text-[10px] text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/[0.04] hover:bg-white/[0.08] px-2.5 py-0.5 rounded-full border border-white/[0.06] hover:border-white/[0.15] inline-flex items-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer"
+                :disabled="isCreatingIssue || busy || isBusyAction"
+                title="Create linked issue on GitHub"
+                @click="handleCreateIssue"
+              >
+                <NexuraIcon v-if="isCreatingIssue" name="Loader2" size="xs" class="animate-spin text-indigo-400" />
+                <NexuraIcon v-else name="Github" size="xs" />
+                <span>{{ isCreatingIssue ? 'Creating Issue...' : 'Create GitHub Issue' }}</span>
+              </button>
+            </div>
+            <input
+              id="modal-task-title"
+              v-model="form.name"
+              type="text"
+              class="w-full bg-transparent font-sans font-semibold text-lg text-[#F3F4F6] border-b border-transparent hover:border-white/[0.15] focus:border-indigo-500/60 focus:outline-none transition-colors py-0.5 placeholder-[#565B68]"
+              placeholder="Task deliverable title..."
+            />
+          </div>
+
+          <!-- Close Button -->
+          <button
+            type="button"
+            class="w-8 h-8 rounded-lg flex items-center justify-center text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/[0.03] hover:bg-white/[0.08] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 shrink-0 border border-white/[0.08] cursor-pointer"
+            @click="handleClose"
+            aria-label="Close dialog"
+          >
+            <NexuraIcon name="X" size="sm" />
+          </button>
+        </div>
+
+        <!-- Scrollable Form Body -->
+        <div class="p-6 space-y-6 overflow-y-auto flex-1 font-sans text-xs custom-scrollbar">
+          <!-- 1. Status Selector Capsules -->
+          <div class="space-y-2">
+            <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+              Execution Status
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button
+                v-for="s in statusOptions"
+                :key="s.value"
+                type="button"
+                class="py-2 px-3 rounded-lg font-sans text-xs border text-center transition-all flex items-center justify-center gap-2 cursor-pointer"
+                :class="form.status === s.value ? s.activeClass : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:bg-white/[0.04]'"
+                @click="form.status = s.value"
+              >
+                <NexuraIcon :name="s.icon" size="xs" />
+                <span>{{ s.label }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. Priority Selector Capsules -->
+          <div class="space-y-2">
+            <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+              Priority Level
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <button
+                v-for="p in priorityOptions"
+                :key="p.value"
+                type="button"
+                class="py-2 px-3 rounded-lg font-mono text-xs tabular-nums border text-center transition-all flex items-center justify-center gap-2 cursor-pointer"
+                :class="form.priority === p.value ? p.activeClass : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:bg-white/[0.04]'"
+                @click="form.priority = p.value"
+              >
+                <span class="w-1.5 h-1.5 rounded-full" :class="p.dotClass"></span>
+                <span>{{ p.label }}</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Project Slug & Due Date Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="space-y-1.5">
+              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                Linked Project
+              </label>
+              <div class="relative">
+                <select
+                  v-model="form.projectSlug"
+                  class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer appearance-none"
+                >
+                  <option
+                    v-for="p in availableProjects"
+                    :key="p.slug"
+                    :value="p.slug"
+                    class="bg-[#111318] text-[#F3F4F6]"
+                  >
+                    {{ p.slug }} ({{ p.title }})
+                  </option>
+                  <option value="" class="bg-[#111318] text-[#8A8F9E]">(None / General)</option>
+                </select>
+                <NexuraIcon name="ChevronDown" size="xs" class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8A8F9E]" />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                Due Date
+              </label>
+              <input
+                v-model="form.dueDate"
+                type="date"
+                class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none font-mono tabular-nums cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <!-- 4. Tech Tags Editor -->
+          <div class="space-y-1.5">
+            <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+              Tech Tags
+            </label>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span
+                v-for="(tag, idx) in form.techTags"
+                :key="tag"
+                class="inline-flex items-center gap-1.5 font-mono text-xs tabular-nums bg-indigo-500/10 text-indigo-300 border border-indigo-500/25 rounded-md px-2.5 py-1"
+              >
+                <span>{{ tag }}</span>
+                <button
+                  type="button"
+                  class="hover:text-rose-400 text-[#8A8F9E] transition-colors focus:outline-none cursor-pointer flex items-center justify-center"
+                  @click="removeTag(idx)"
+                  title="Remove tag"
+                >
+                  <NexuraIcon name="X" size="xs" />
+                </button>
+              </span>
+
+              <div class="inline-flex items-center gap-1 bg-[#07080A] border border-white/[0.08] rounded-md px-2.5 py-1 focus-within:border-indigo-500/60">
+                <input
+                  v-model="newTagInput"
+                  type="text"
+                  placeholder="+ add tag"
+                  class="bg-transparent text-xs font-mono tabular-nums text-[#F3F4F6] placeholder-[#565B68] focus:outline-none w-20"
+                  @keydown.enter.prevent="addTag"
+                />
+                <button
+                  type="button"
+                  class="w-5 h-5 rounded bg-white/[0.05] hover:bg-indigo-500 hover:text-white text-[#8A8F9E] flex items-center justify-center transition-colors cursor-pointer"
+                  @click="addTag"
+                  title="Add tag"
+                >
+                  <NexuraIcon name="Plus" size="xs" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Task Description & Interactive Checklist -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider">
+                Description & Checklist
+              </label>
+              <button
+                type="button"
+                class="font-mono text-xs text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1 transition-colors cursor-pointer"
+                @click="appendChecklistItem"
+              >
+                <NexuraIcon name="Plus" size="xs" />
+                <span>Add checklist item</span>
+              </button>
+            </div>
+
+            <!-- Description Textarea -->
+            <textarea
+              v-model="form.description"
+              rows="4"
+              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 rounded-lg p-3.5 text-xs font-mono tabular-nums leading-relaxed custom-scrollbar"
+              placeholder="Write Markdown notes or task checklists (- [ ] Item)..."
+            ></textarea>
+
+            <!-- Parsed Interactive Checklist Items (if any) -->
+            <div v-if="checklistItems.length" class="space-y-1.5 pt-3 border-t border-white/[0.06]">
+              <div class="font-mono text-xs text-[#8A8F9E] mb-1">Interactive Checklist:</div>
+              <div
+                v-for="(item, i) in checklistItems"
+                :key="i"
+                class="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#07080A]/60 border border-white/[0.06] cursor-pointer hover:bg-white/[0.03] transition-colors"
+                @click="toggleChecklist(i)"
+              >
+                <input
+                  type="checkbox"
+                  :checked="item.completed"
+                  class="rounded bg-[#07080A] border-white/20 text-indigo-500 focus:ring-indigo-500/40 cursor-pointer"
+                  @click.stop="toggleChecklist(i)"
+                />
+                <span
+                  class="font-mono text-xs tabular-nums"
+                  :class="item.completed ? 'line-through text-[#8A8F9E]' : 'text-[#F3F4F6]'"
+                >
+                  {{ item.text }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="px-6 py-4 border-t border-white/[0.06] bg-[#0B0C10]/60 flex items-center justify-between gap-4 shrink-0 rounded-b-2xl">
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-mono text-xs text-[#C98A4B] font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-[#C98A4B]/10 border border-[#C98A4B]/30">
-              #{{ displayTaskId }}
-            </span>
-            <span
-              class="font-mono text-[10px] uppercase font-semibold px-2.5 py-0.5 rounded-full border tracking-wider"
-              :class="statusBadgeClass"
+            <button
+              type="button"
+              class="font-sans text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-rose-500/20 inline-flex items-center gap-1.5 cursor-pointer"
+              :disabled="busy || isBusyAction"
+              @click="handleDelete"
             >
-              {{ form.status.replace('_', ' ') }}
-            </span>
-            <span v-if="form.projectSlug" class="font-mono text-[10px] text-[#756F68] bg-white/[0.04] px-2.5 py-0.5 rounded-full border border-white/[0.06]">
-              📁 {{ form.projectSlug }}
-            </span>
-            <!-- Linked GitHub Issue Badge -->
+              <NexuraIcon name="Trash2" size="xs" />
+              <span>Delete Task</span>
+            </button>
+
+            <!-- Linked Issue in footer -->
             <a
               v-if="form.githubIssueUrl"
               :href="form.githubIssueUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-[10px] text-[#C98A4B] bg-[#C98A4B]/10 hover:bg-[#C98A4B]/20 px-2.5 py-0.5 rounded-full border border-[#C98A4B]/30 inline-flex items-center gap-1 transition-colors group"
+              class="hidden sm:inline-flex font-mono text-xs tabular-nums text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/25 px-3 py-1.5 rounded-lg items-center gap-1.5 transition-colors group cursor-pointer"
               title="Open linked issue on GitHub"
             >
-              <span>🎯 Linked Issue #{{ form.githubIssueNumber || '' }}</span>
-              <IconArrowUpRight class="w-2.5 h-2.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span>Linked Issue #{{ form.githubIssueNumber || '' }}</span>
+              <NexuraIcon name="ExternalLink" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <!-- Create GitHub Issue Button -->
+
+            <!-- Create Issue button in footer -->
             <button
               v-else-if="effectiveRepo"
               type="button"
-              class="font-mono text-[10px] text-[#756F68] hover:text-[#C98A4B] bg-white/[0.04] hover:bg-white/10 px-2.5 py-0.5 rounded-full border border-white/[0.06] hover:border-[#C98A4B]/30 inline-flex items-center gap-1 transition-colors disabled:opacity-50 cursor-pointer"
-              :disabled="isCreatingIssue || busy"
-              title="Create linked issue on GitHub"
+              class="hidden sm:inline-flex font-sans text-xs text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] px-3 py-1.5 rounded-lg items-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer"
+              :disabled="isCreatingIssue || busy || isBusyAction"
+              title="Create GitHub Issue"
               @click="handleCreateIssue"
             >
-              <span v-if="isCreatingIssue" class="w-2.5 h-2.5 border border-[#C98A4B] border-t-transparent rounded-full animate-spin"></span>
-              <span v-else>🎯</span>
-              <span>{{ isCreatingIssue ? 'Creating Issue...' : 'Create GitHub Issue' }}</span>
+              <NexuraIcon v-if="isCreatingIssue" name="Loader2" size="xs" class="animate-spin text-indigo-400" />
+              <NexuraIcon v-else name="Github" size="xs" />
+              <span>{{ isCreatingIssue ? 'Creating...' : 'Create GitHub Issue' }}</span>
             </button>
           </div>
-          <input
-            id="modal-task-title"
-            v-model="form.name"
-            type="text"
-            class="w-full bg-transparent font-medium text-lg text-[#F5F2EB] border-b border-transparent hover:border-white/[0.15] focus:border-[#C98A4B] focus:outline-none transition-colors py-0.5"
-            placeholder="Task deliverable title..."
-          />
-        </div>
 
-        <!-- Close Button -->
-        <button
-          type="button"
-          class="w-8 h-8 rounded-full flex items-center justify-center text-[#756F68] hover:text-[#F5F2EB] hover:bg-white/10 transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B] shrink-0 border border-white/[0.06]"
-          @click="$emit('close')"
-          aria-label="Close dialog"
-        >
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Scrollable Form Body -->
-      <div class="p-6 space-y-6 overflow-y-auto flex-1 font-sans text-xs">
-        <!-- 1. Status Selector Capsules -->
-        <div class="space-y-2">
-          <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider block">
-            Execution Status
-          </label>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <button
-              v-for="s in statusOptions"
-              :key="s.value"
-              type="button"
-              class="py-2.5 px-3 rounded-2xl font-mono text-xs border text-center transition-all flex items-center justify-center"
-              :class="form.status === s.value ? 'bg-[#C98A4B]/15 text-[#C98A4B] border-[#C98A4B] font-semibold shadow-[0_0_12px_rgba(201,138,75,0.15)]' : 'bg-white/[0.02] text-[#756F68] border-white/[0.06] hover:text-[#F5F2EB] hover:bg-white/5'"
-              @click="form.status = s.value"
-            >
-              {{ s.label }}
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. Priority Selector Capsules -->
-        <div class="space-y-2">
-          <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider block">
-            Priority Level
-          </label>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            <button
-              v-for="p in priorityOptions"
-              :key="p.value"
-              type="button"
-              class="py-2.5 px-3 rounded-2xl font-mono text-xs border text-center transition-all flex items-center justify-center gap-2"
-              :class="form.priority === p.value ? 'bg-[#C98A4B] text-[#09090B] font-bold border-[#C98A4B] shadow-[0_0_12px_rgba(201,138,75,0.25)]' : 'bg-white/[0.02] text-[#756F68] border-white/[0.06] hover:text-[#F5F2EB] hover:bg-white/5'"
-              @click="form.priority = p.value"
-            >
-              <span class="w-1.5 h-1.5 rounded-full" :class="p.dotClass"></span>
-              <span>{{ p.label }}</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. Project Slug & Due Date Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="space-y-2">
-            <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider block">
-              Linked Project
-            </label>
-            <div class="relative">
-              <select
-                v-model="form.projectSlug"
-                class="w-full bg-[#18181C] border border-white/[0.08] rounded-2xl px-3.5 py-2.5 text-xs text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none cursor-pointer appearance-none"
-              >
-                <option value="management">📁 management (Nexura Workspace)</option>
-                <option value="tf-hitnet-eeg">📁 tf-hitnet-eeg</option>
-                <option value="neural-signal-lab">📁 neural-signal-lab</option>
-                <option value="">(None / General)</option>
-              </select>
-              <span class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#756F68] text-xs">▼</span>
-            </div>
-          </div>
-
-          <div class="space-y-2">
-            <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider block">
-              Due Date
-            </label>
-            <input
-              v-model="form.dueDate"
-              type="date"
-              class="w-full bg-[#18181C] border border-white/[0.08] rounded-2xl px-3.5 py-2.5 text-xs text-[#F5F2EB] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none font-mono"
-            />
-          </div>
-        </div>
-
-        <!-- 4. Tech Tags Editor (Full Rounded Pills) -->
-        <div class="space-y-2">
-          <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider block">
-            Tech Tags
-          </label>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span
-              v-for="(tag, idx) in form.techTags"
-              :key="tag"
-              class="inline-flex items-center gap-1.5 font-mono text-xs bg-[#C98A4B]/10 text-[#C98A4B] border border-[#C98A4B]/30 rounded-full px-3 py-1"
-            >
-              <span>{{ tag }}</span>
-              <button
-                type="button"
-                class="hover:text-red-400 font-bold text-xs focus:outline-none ml-0.5"
-                @click="removeTag(idx)"
-                title="Remove tag"
-              >
-                ×
-              </button>
-            </span>
-
-            <div class="inline-flex items-center gap-1 bg-[#18181C] border border-white/[0.08] rounded-full p-1 pl-3">
-              <input
-                v-model="newTagInput"
-                type="text"
-                placeholder="+ add tag"
-                class="bg-transparent text-xs text-[#F5F2EB] placeholder:text-[#756F68] focus:outline-none w-20 font-mono"
-                @keydown.enter.prevent="addTag"
-              />
-              <button
-                type="button"
-                class="w-6 h-6 rounded-full bg-white/5 hover:bg-[#C98A4B] hover:text-[#09090B] text-xs text-[#756F68] flex items-center justify-center transition-colors font-bold"
-                @click="addTag"
-              >
-                +
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Task Description & Interactive Checklist -->
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <label class="font-mono text-xs uppercase text-[#756F68] tracking-wider">
-              Description & Checklist
-            </label>
+          <div class="flex items-center gap-2.5">
             <button
               type="button"
-              class="font-mono text-[11px] text-[#C98A4B] hover:underline"
-              @click="appendChecklistItem"
+              class="px-4 py-2 rounded-lg font-sans text-xs font-medium text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] transition-colors cursor-pointer"
+              :disabled="busy || isBusyAction"
+              @click="handleClose"
             >
-              + Add Checklist item
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="px-5 py-2 rounded-lg font-sans text-xs font-medium bg-[#F3F4F6] hover:bg-white text-[#07080A] shadow-md transition-all flex items-center gap-1.5 disabled:opacity-50 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+              :disabled="busy || isBusyAction"
+              @click="submitSave"
+            >
+              <NexuraIcon v-if="busy || isBusyAction" name="Loader2" size="xs" class="animate-spin text-[#07080A]" />
+              <NexuraIcon v-else name="Check" size="xs" :stroke-width="2.2" />
+              <span>Save Changes</span>
             </button>
           </div>
-
-          <!-- Description Textarea -->
-          <textarea
-            v-model="form.description"
-            rows="4"
-            class="w-full bg-[#18181C] border border-white/[0.08] rounded-2xl p-3.5 text-xs text-[#F5F2EB] placeholder:text-[#756F68] focus:ring-1 focus:ring-[#C98A4B] focus:outline-none font-mono leading-relaxed"
-            placeholder="Write Markdown notes or task checklists (- [ ] Item)..."
-          ></textarea>
-
-          <!-- Parsed Interactive Checklist Items (if any) -->
-          <div v-if="checklistItems.length" class="space-y-1.5 pt-2 border-t border-white/[0.06]">
-            <div class="font-mono text-[11px] text-[#756F68] mb-1">Interactive Checklist:</div>
-            <div
-              v-for="(item, i) in checklistItems"
-              :key="i"
-              class="flex items-center gap-2.5 p-2.5 rounded-2xl bg-white/[0.02] border border-white/[0.04] cursor-pointer hover:bg-white/[0.04] transition-colors"
-              @click="toggleChecklist(i)"
-            >
-              <input
-                type="checkbox"
-                :checked="item.completed"
-                class="rounded bg-[#18181C] border-white/20 text-[#C98A4B] focus:ring-[#C98A4B] cursor-pointer"
-                @click.stop="toggleChecklist(i)"
-              />
-              <span
-                class="font-mono text-xs"
-                :class="item.completed ? 'line-through text-[#756F68]' : 'text-[#F5F2EB]'"
-              >
-                {{ item.text }}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer Actions -->
-      <div class="px-6 py-4 border-t border-white/[0.07] bg-[#171513]/70 flex items-center justify-between gap-4 shrink-0 rounded-b-3xl">
-        <div class="flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            class="font-mono text-xs text-red-400 hover:text-red-300 hover:underline transition-colors px-2 py-1.5 rounded-xl"
-            :disabled="busy"
-            @click="$emit('delete', task)"
-          >
-            Delete Task
-          </button>
-
-          <!-- Linked Issue in footer -->
-          <a
-            v-if="form.githubIssueUrl"
-            :href="form.githubIssueUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hidden sm:inline-flex font-mono text-xs text-[#C98A4B] bg-[#C98A4B]/10 hover:bg-[#C98A4B]/20 border border-[#C98A4B]/30 px-3 py-1.5 rounded-2xl items-center gap-1.5 transition-colors group"
-            title="Open linked issue on GitHub"
-          >
-            <span>🎯 Linked Issue #{{ form.githubIssueNumber || '' }}</span>
-            <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-
-          <!-- Create Issue button in footer -->
-          <button
-            v-else-if="effectiveRepo"
-            type="button"
-            class="hidden sm:inline-flex font-mono text-xs text-[#756F68] hover:text-[#C98A4B] bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] hover:border-[#C98A4B]/30 px-3 py-1.5 rounded-2xl items-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer"
-            :disabled="isCreatingIssue || busy"
-            title="Create GitHub Issue"
-            @click="handleCreateIssue"
-          >
-            <span v-if="isCreatingIssue" class="w-3 h-3 border-2 border-[#C98A4B] border-t-transparent rounded-full animate-spin"></span>
-            <span v-else>🎯</span>
-            <span>{{ isCreatingIssue ? 'Creating...' : 'Create GitHub Issue' }}</span>
-          </button>
-        </div>
-
-        <div class="flex items-center gap-2.5">
-          <button
-            type="button"
-            class="px-4 py-2.5 rounded-2xl font-mono text-xs text-[#756F68] hover:text-[#F5F2EB] hover:bg-white/5 border border-white/[0.08] transition-colors"
-            :disabled="busy"
-            @click="$emit('close')"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            class="px-5 py-2.5 rounded-2xl font-mono text-xs bg-[#C98A4B] hover:bg-[#8B6535] text-[#09090B] font-bold shadow-lg shadow-[#C98A4B]/20 transition-all flex items-center gap-2 disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98]"
-            :disabled="busy"
-            @click="submitSave"
-          >
-            <span v-if="busy" class="w-3.5 h-3.5 border-2 border-[#09090B] border-t-transparent rounded-full animate-spin"></span>
-            <span>Save Changes</span>
-          </button>
         </div>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, reactive, watch } from 'vue'
+import NexuraIcon from './ui/NexuraIcon.vue'
 import { createGitHubIssue } from '../composables/useGitHub'
-import type { Task, TaskStatus, TaskPriority } from '../types'
+import { useTaskDrawer } from '../composables/useTaskDrawer'
+import { useWorkspaceStore } from '../composables/useWorkspaceStore'
+import { useTasks } from '../composables/useTasks'
+import type { Task, TaskStatus, TaskPriority, Project } from '../types'
 
-const props = defineProps<{
-  task: Task
-  busy?: boolean
-  repo?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    isOpen?: boolean
+    taskId?: string | null
+    task?: Task | null
+    busy?: boolean
+    repo?: string
+  }>(),
+  {
+    isOpen: undefined,
+    taskId: undefined,
+    task: undefined,
+    busy: false,
+    repo: undefined
+  }
+)
 
 const emit = defineEmits<{
   (e: 'close'): void
@@ -319,35 +374,126 @@ const emit = defineEmits<{
   (e: 'delete', task: Task): void
 }>()
 
+const { isDrawerOpen, activeTaskId, closeTaskDrawer } = useTaskDrawer()
+const { tasks, projects, updateTaskInStore, removeTaskFromStore } = useWorkspaceStore()
+const tasksApi = useTasks()
+
+const effectiveIsOpen = computed(() => {
+  if (typeof props.isOpen === 'boolean') {
+    return props.isOpen
+  }
+  return isDrawerOpen.value
+})
+
+const effectiveTaskId = computed(() => {
+  return props.taskId !== undefined ? props.taskId : activeTaskId.value
+})
+
+const internalTask = ref<Task | null>(null)
+const isLoadingTask = ref(false)
+const isBusyAction = ref(false)
+
+const currentTask = computed<Task | null>(() => {
+  if (props.task) return props.task
+  if (!effectiveTaskId.value) return null
+  const fromStore = tasks.value.find(
+    (t) => t.id === effectiveTaskId.value || t.taskId === effectiveTaskId.value
+  )
+  if (fromStore) return fromStore
+  return internalTask.value
+})
+
+// Fetch task if not in store
+watch(
+  [effectiveTaskId, effectiveIsOpen],
+  async ([id, open]) => {
+    if (!open || !id) {
+      if (!open) {
+        internalTask.value = null
+      }
+      return
+    }
+    if (props.task) return
+
+    const fromStore = tasks.value.find((t) => t.id === id || t.taskId === id)
+    if (!fromStore) {
+      try {
+        isLoadingTask.value = true
+        const fetched = await tasksApi.getTask(id)
+        internalTask.value = fetched
+      } catch (err) {
+        console.error('[TaskDrawer] Failed to fetch task by id:', id, err)
+        internalTask.value = null
+      } finally {
+        isLoadingTask.value = false
+      }
+    }
+  },
+  { immediate: true }
+)
+
+// Lock background body scroll when open
+watch(
+  effectiveIsOpen,
+  (open) => {
+    if (typeof document !== 'undefined') {
+      if (open) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
+      }
+    }
+  },
+  { immediate: true }
+)
+
 const effectiveRepo = computed(() => {
   if (props.repo) return props.repo
-  if (props.task.projectSlug) {
-    const slug = props.task.projectSlug.toLowerCase()
+  if (currentTask.value?.projectSlug) {
+    const slug = currentTask.value.projectSlug.toLowerCase()
     if (slug === 'management') return 'bagja-iskandar/Management'
-    return `bagja-iskandar/${props.task.projectSlug}`
+    return `bagja-iskandar/${currentTask.value.projectSlug}`
   }
   return 'bagja-iskandar/Management'
+})
+
+const availableProjects = computed<Project[]>(() => {
+  const list = [...projects.value]
+  if (form.projectSlug && !list.some((p) => p.slug === form.projectSlug)) {
+    list.unshift({
+      id: form.projectSlug,
+      slug: form.projectSlug,
+      title: form.projectSlug,
+      status: 'active',
+      priority: 'medium',
+      techStack: [],
+      createdAt: '',
+      updatedAt: ''
+    })
+  }
+  return list
 })
 
 const isCreatingIssue = ref(false)
 const newTagInput = ref('')
 
 const form = reactive({
-  name: props.task.name || '',
-  description: props.task.description || '',
-  status: props.task.status || ('in_queue' as TaskStatus),
-  priority: props.task.priority || ('medium' as TaskPriority),
-  projectSlug: props.task.projectSlug || '',
-  techTags: [...(props.task.techTags || [])],
-  dueDate: props.task.dueDate || '',
-  githubIssueUrl: props.task.githubIssueUrl || '',
-  githubIssueNumber: props.task.githubIssueNumber,
-  githubPrUrl: props.task.githubPrUrl || ''
+  name: '',
+  description: '',
+  status: 'in_queue' as TaskStatus,
+  priority: 'medium' as TaskPriority,
+  projectSlug: '',
+  techTags: [] as string[],
+  dueDate: '',
+  githubIssueUrl: '',
+  githubIssueNumber: undefined as number | undefined,
+  githubPrUrl: ''
 })
 
 watch(
-  () => props.task,
+  currentTask,
   (t) => {
+    if (!t) return
     form.name = t.name || ''
     form.description = t.description || ''
     form.status = t.status || 'in_queue'
@@ -359,41 +505,44 @@ watch(
     form.githubIssueNumber = t.githubIssueNumber
     form.githubPrUrl = t.githubPrUrl || ''
   },
-  { deep: true }
+  { deep: true, immediate: true }
 )
 
 const displayTaskId = computed(() => {
-  if (props.task.taskId) {
-    return props.task.taskId.startsWith('#') ? props.task.taskId.slice(1) : props.task.taskId
+  if (!currentTask.value) return ''
+  if (currentTask.value.taskId) {
+    return currentTask.value.taskId.startsWith('#')
+      ? currentTask.value.taskId.slice(1)
+      : currentTask.value.taskId
   }
-  return props.task.id.slice(0, 7).toUpperCase()
+  return currentTask.value.id.slice(0, 7).toUpperCase()
 })
 
-const statusOptions: { label: string; value: TaskStatus }[] = [
-  { label: 'In Queue', value: 'in_queue' },
-  { label: 'Running', value: 'running_sprint' },
-  { label: 'Deployed', value: 'deployed' },
-  { label: 'Blocked', value: 'blocked' }
+const statusOptions: { label: string; value: TaskStatus; icon: string; activeClass: string }[] = [
+  { label: 'In Queue', value: 'in_queue', icon: 'Clock', activeClass: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/40 font-medium shadow-[0_0_12px_rgba(99,102,241,0.15)]' },
+  { label: 'Running', value: 'running_sprint', icon: 'Zap', activeClass: 'bg-sky-500/15 text-sky-300 border-sky-500/40 font-medium shadow-[0_0_12px_rgba(14,165,233,0.15)]' },
+  { label: 'Deployed', value: 'deployed', icon: 'CheckCircle2', activeClass: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 font-medium shadow-[0_0_12px_rgba(16,185,129,0.15)]' },
+  { label: 'Blocked', value: 'blocked', icon: 'AlertTriangle', activeClass: 'bg-rose-500/15 text-rose-300 border-rose-500/40 font-medium shadow-[0_0_12px_rgba(244,63,94,0.15)]' }
 ]
 
-const priorityOptions: { label: string; value: TaskPriority; dotClass: string }[] = [
-  { label: 'Critical', value: 'critical', dotClass: 'bg-red-400' },
-  { label: 'High', value: 'high', dotClass: 'bg-orange-400' },
-  { label: 'Medium', value: 'medium', dotClass: 'bg-yellow-400' },
-  { label: 'Low', value: 'low', dotClass: 'bg-white/40' }
+const priorityOptions: { label: string; value: TaskPriority; dotClass: string; activeClass: string }[] = [
+  { label: 'Critical', value: 'critical', dotClass: 'bg-rose-400', activeClass: 'bg-rose-500/20 text-rose-300 border-rose-500/40 font-medium shadow-[0_0_12px_rgba(244,63,94,0.15)]' },
+  { label: 'High', value: 'high', dotClass: 'bg-amber-400', activeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-medium shadow-[0_0_12px_rgba(245,158,11,0.15)]' },
+  { label: 'Medium', value: 'medium', dotClass: 'bg-indigo-400', activeClass: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40 font-medium shadow-[0_0_12px_rgba(99,102,241,0.15)]' },
+  { label: 'Low', value: 'low', dotClass: 'bg-slate-400', activeClass: 'bg-slate-500/20 text-slate-300 border-slate-500/40 font-medium shadow-[0_0_12px_rgba(148,163,184,0.15)]' }
 ]
 
 const statusBadgeClass = computed(() => {
   switch (form.status) {
     case 'deployed':
-      return 'bg-green-500/15 text-green-400 border-green-500/30'
+      return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
     case 'running_sprint':
-      return 'bg-blue-500/15 text-blue-400 border-blue-500/30'
+      return 'bg-sky-500/15 text-sky-400 border-sky-500/30'
     case 'blocked':
-      return 'bg-red-500/15 text-red-400 border-red-500/30'
+      return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
     case 'in_queue':
     default:
-      return 'bg-white/5 text-[#756F68] border-white/[0.08]'
+      return 'bg-white/[0.05] text-[#8A8F9E] border-white/[0.08]'
   }
 })
 
@@ -455,9 +604,33 @@ function removeTag(index: number) {
   form.techTags.splice(index, 1)
 }
 
-function submitSave() {
-  emit('save', {
-    name: form.name.trim() || props.task.name,
+function handleClose() {
+  emit('close')
+  closeTaskDrawer()
+}
+
+async function handleDelete() {
+  if (!currentTask.value) return
+  const taskToDelete = currentTask.value
+  emit('delete', taskToDelete)
+
+  try {
+    isBusyAction.value = true
+    await tasksApi.deleteTask(taskToDelete.id)
+    removeTaskFromStore(taskToDelete.id)
+    handleClose()
+  } catch (err) {
+    console.error('[TaskDrawer] Failed to delete task:', err)
+  } finally {
+    isBusyAction.value = false
+  }
+}
+
+async function submitSave() {
+  if (!currentTask.value) return
+  const targetId = currentTask.value.id
+  const payload: Partial<Task> = {
+    name: form.name.trim() || currentTask.value.name,
     description: form.description,
     status: form.status,
     priority: form.priority,
@@ -467,17 +640,33 @@ function submitSave() {
     githubIssueUrl: form.githubIssueUrl || undefined,
     githubIssueNumber: form.githubIssueNumber || undefined,
     githubPrUrl: form.githubPrUrl || undefined
-  })
+  }
+
+  emit('save', payload)
+  updateTaskInStore(targetId, payload)
+
+  try {
+    isBusyAction.value = true
+    const updated = await tasksApi.updateTask(targetId, payload)
+    if (updated) {
+      updateTaskInStore(targetId, updated)
+    }
+    handleClose()
+  } catch (err) {
+    console.error('[TaskDrawer] Failed to update task:', err)
+  } finally {
+    isBusyAction.value = false
+  }
 }
 
 async function handleCreateIssue() {
-  if (!effectiveRepo.value || isCreatingIssue.value) return
+  if (!effectiveRepo.value || isCreatingIssue.value || !currentTask.value) return
   isCreatingIssue.value = true
   try {
     const res = await createGitHubIssue({
       repo: effectiveRepo.value,
-      taskId: props.task.id,
-      title: form.name.trim() || props.task.name,
+      taskId: currentTask.value.id,
+      title: form.name.trim() || currentTask.value.name,
       body: form.description || undefined,
       labels: form.techTags && form.techTags.length ? form.techTags : undefined
     })
@@ -486,8 +675,8 @@ async function handleCreateIssue() {
       form.githubIssueUrl = res.issue.htmlUrl
       form.githubIssueNumber = res.issue.number
 
-      emit('save', {
-        name: form.name.trim() || props.task.name,
+      const patch: Partial<Task> = {
+        name: form.name.trim() || currentTask.value.name,
         description: form.description,
         status: form.status,
         priority: form.priority,
@@ -497,7 +686,11 @@ async function handleCreateIssue() {
         githubIssueUrl: res.issue.htmlUrl,
         githubIssueNumber: res.issue.number,
         githubPrUrl: form.githubPrUrl || undefined
-      })
+      }
+
+      emit('save', patch)
+      updateTaskInStore(currentTask.value.id, patch)
+      await tasksApi.updateTask(currentTask.value.id, patch)
     }
   } catch (err) {
     console.error('Failed to create GitHub issue from task:', err)

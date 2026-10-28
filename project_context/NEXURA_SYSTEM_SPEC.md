@@ -1,6 +1,6 @@
 # NEXURA_SYSTEM_SPEC.md — Spesifikasi Sistem & Blueprint Transformasi
 
-_Last updated: 2026-09-17. Charcoal-Ochre Engineering Command Center + GitHub/Supabase/Vercel integration._
+_Last updated: 2026-10-22. Precision Dark Obsidian Engineering Command Center (Linear / Raycast Inset Architecture) + GitHub/Supabase/Vercel integration._
 
 ---
 
@@ -11,28 +11,22 @@ Nexura dirancang sebagai **personal engineering command center** untuk seorang s
 **Prinsip Desain:**
 1. **Single Pane of Glass** — Semua project, task, repos, commits, dan deployments terlihat di satu tempat tanpa berpindah tab.
 2. **Engineering Telemetry** — Setiap angka di layar adalah data riil, bukan mock. Metrics dihitung dari actual task data dan GitHub activity.
-3. **Kanban-First Workflow** — Alur kerja utama adalah Kanban board 3-kolom (`IN_QUEUE` → `RUNNING_SPRINT` → `DEPLOYED`) untuk flow yang natural.
-4. **Pluggable Services** — GitHub sekarang, Supabase & Vercel nanti. Arsitektur dirancang agar external services bisa di-plug tanpa rewrite.
-5. **Charcoal-Ochre Aesthetic** — Visual language terminal-inspired: dark charcoal surface, ochre accent, monospace telemetry, minimal decoration.
+3. **High-Signal Execution Flow** — Alur kerja menggabungkan **Execution Radar** (daftar fokus bergaya Linear di Dashboard) dan **Kanban Board** 3-kolom (`IN_QUEUE` → `RUNNING_SPRINT` → `DEPLOYED`).
+4. **Pluggable Services** — Dual-Adapter Repository (Supabase PostgreSQL & Nitro KV fallback) + GitHub API Gateway terpusat.
+5. **Precision Dark Obsidian Aesthetic** — Bahasa visual berstandar **Linear / Raycast / Cursor**: suhu warna dingin yang menyatu (`#07080A` void, `#0B0C10` inset workspace, `#111318` specular 1px surface, `#F3F4F6` crisp alabaster text, dan aksen `#6366F1` cool indigo).
 
 ---
 
 ## 2. Matriks Komparasi: Eksisting vs Target
 
-| Aspek | Kondisi Eksisting | Target Nexura |
+| Aspek | Kondisi Lama (Charcoal-Ochre) | Target Baru (Precision Dark Obsidian) |
 |---|---|---|
-| **Design System** | Polymorphism Dark Glass (Indigo/Violet/Cyan, CSS vars) | Charcoal-Ochre Console (Tailwind CSS, `#0B0A09` + `#C98A4B`) |
-| **Header** | Banner teks `"Welcome back, Bagja"` | Telemetry Header: live clock (UTC/WIB), branch pill, sprint KPI, search |
-| **Navigasi** | 3 menu flat + profile card | 5 menu compact sidebar + system status tile |
-| **Dashboard** | Mock SVG curves + mock donut gauge | 3 telemetry stat cards + real Kanban board |
-| **Task Alur Kerja** | Tabel list flat, status cycling | Kanban 3-kolom + tabular matrix hub |
-| **Task Schema** | 6 fields, status Bahasa Indonesia | 12+ fields, monospace `#ENG-xxx` IDs, English status |
-| **Project CRUD** | Read-only (GET saja) | Full CRUD (POST, PUT, DELETE) |
-| **GitHub** | Tidak ada | Real API: repos, commits, branches |
-| **Vercel** | Tidak ada | 🔜 Planned: deployment monitoring |
-| **Supabase** | Tidak ada | 🔜 Planned: PostgreSQL storage |
-| **Data Metrics** | Hardcoded (`Math.max(...)`) | Real calculations dari actual data |
-| **Styling** | ~1400 LOC CSS custom properties | Tailwind CSS utility classes |
+| **Design System** | Charcoal-Ochre (`#0B0A09` + `#C98A4B` + `#F5F2EB`, thermal clash) | Precision Dark Obsidian (`#07080A` void + `#0B0C10` inset canvas + `#111318` specular surface + `#F3F4F6` text + `#6366F1` indigo) |
+| **App Shell** | Floating icon-only capsule dock + floating header islands + crosshair grid | Unified Left Sidebar (`w-56`) + Inset Workspace Panel (`.obs-workspace`, `rounded-2xl`) tanpa crosshair grid |
+| **Header** | 3 pulau kapsul melayang di atas konten | Unified Top Header Bar (`h-13 border-b`) di dalam Inset Workspace: breadcrumb, sprint pill, jam/blockers, dan tombol CTA putih (`#F3F4F6`) |
+| **Navigasi** | Ikon tanpa label teks di dalam kapsul sempit | Navigasi berlabel jelas + `⌘K` Quick Action trigger + counter badge + daftar shortcut *Active Projects* + status bar Supabase/GitHub |
+| **Dashboard** | 3 blok kartu bertumpuk rata | 4 Specular KPI Cards + Asymmetric Bento Grid (8 kolom kiri: *Execution Radar* & *Global Commit Stream*; 4 kolom kanan: *Quick Inspector*, *Weekly Focus*, *Managed Projects*) |
+| **Tipografi** | Overuse `font-mono` dan ukuran mikro `<12px` | `font-sans` (`Inter`) untuk seluruh UI utama, `font-mono` khusus ID/SHA/angka, ukuran minimum `12px` (`text-xs`) |
 
 ---
 
@@ -146,102 +140,89 @@ export interface StickyNote {
 
 ---
 
-## 4. Spesifikasi Halaman & Komponen UI
+## 4. Spesifikasi Halaman & Komponen UI (Precision Dark Obsidian)
 
-### 4.1 Layout Shell (`app/app.vue`)
+> **Acuan Visual Utama**: Lihat [DESIGN.md](./DESIGN.md) dan prototipe interaktif [mockup-dark-obsidian.html](./mockup-dark-obsidian.html).
+
+### 4.1 Layout Shell (`app/app.vue`) — Inset Workspace Architecture
 ```
-┌────┬──────────────────────────────────────────────────┐
-│ N  │  HeaderBar (clock, branch, search)               │
-│    ├──────────────────────────────────────────────────┤
-│ ■  │                                                  │
-│ ⚡ │  <NuxtPage />                                    │
-│ 🗺 │  Main Workspace (bg-[#0B0A09], p-6, scrollable) │
-│ ⑂  │                                                  │
-│ ~  │                                                  │
-│    │                                                  │
-│ ⚙  │                                                  │
-└────┴──────────────────────────────────────────────────┘
- 64px
+┌──────────────────┬──────────────────────────────────────────────────┐
+│ Unified Left     │  Inset Workspace (.obs-workspace #0B0C10)        │
+│ Sidebar (w-56)   │  ┌────────────────────────────────────────────┐  │
+│ bg-[#07080A]     │  │ Unified HeaderBar (h-13, border-b)         │  │
+│                  │  ├────────────────────────────────────────────┤  │
+│ [N] Nexura   [+] │  │                                            │  │
+│ [🔍 Quick... ⌘K] │  │  <NuxtPage />                              │  │
+│                  │  │  Main Workspace (p-5, space-y-5)           │  │
+│ • Command Center │  │                                            │  │
+│ • My Tasks    14 │  │                                            │  │
+│ • Sprints    W42 │  │                                            │  │
+│ • Roadmap        │  │                                            │  │
+│ • GitHub Repos 8 │  │                                            │  │
+│                  │  │                                            │  │
+│ Active Projects  │  │                                            │  │
+│ ● nexura-cmd 78% │  └────────────────────────────────────────────┘  │
+└──────────────────┴──────────────────────────────────────────────────┘
 ```
+- **Outer Shell**: `bg-[#07080A] text-[#F3F4F6] flex p-2 sm:p-2.5 gap-2 max-w-[1600px] mx-auto`.
+- **Hapus `<StructureStaticGrid />`**: Tidak lagi menggunakan crosshair grid cokelat.
 
-### 4.2 Sidebar (`components/Sidebar.vue`) — Icon-Only Rail
-- **Width**: `w-16` (64px), fixed left, full height
-- **Surface**: `bg-[#0B0A09]` — sama dengan canvas, tanpa border kanan
-- **3 Zona Vertikal** (flex col, space-between):
-  - **Atas**: Brand icon "N" — `w-10 h-10 bg-[#C98A4B]/15 rounded-xl text-[#C98A4B] font-mono font-bold`
-  - **Tengah**: Nav group container — `bg-[#141210] rounded-2xl p-2` berisi 5 icon buttons stacked vertikal:
-    1. Dashboard `/` — Grid icon
-    2. Active Sprints `/sprints` — Bolt icon
-    3. Architecture Roadmap `/roadmap` — Map icon
-    4. Code Repos `/repos` — Git-branch icon
-    5. System Telemetry `/telemetry` — Activity icon
-  - **Bawah**: Settings icon — gear
-- **Active Icon**: `bg-[#C98A4B]/15 text-[#C98A4B]`
-- **Inactive Icon**: `text-[#756F68] hover:text-[#F5F2EB] hover:bg-white/5`
-- **Icon Size**: `w-10 h-10 rounded-xl`, SVG `w-5 h-5`
-- **Tooltip**: title attribute per icon (nama halaman)
-- **Mobile**: berubah menjadi bottom bar horizontal
+### 4.2 Unified Left Sidebar (`components/Sidebar.vue`)
+- **Width**: `w-56` (224px) pada desktop (`hidden lg:flex flex-col justify-between py-2.5 px-2`), drawer overlay pada mobile.
+- **Elemen Vertikal**:
+  1. **Brand Header**: Squircle logo + teks `Nexura` (`text-sm font-semibold text-[#F3F4F6]`) + badge versi + tombol `+` quick task.
+  2. **Quick Command Bar Trigger (`⌘K`)**: `bg-[#111318] hover:bg-[#171920] border border-white/[0.07] rounded-lg px-2.5 py-1.5 text-xs text-[#8A8F9E]`.
+  3. **Workspace Navigation (Icon + Label Teks Jelas + Counter Badge)**:
+     - `Command Center` (`/`)
+     - `My Tasks & Queue` (`/tasks`)
+     - `Weekly Sprints` (`/sprints`)
+     - `Roadmap` (`/roadmap`)
+     - `GitHub Repositories` (`/repos`)
+     - `System Telemetry` (`/telemetry`)
+  4. **Active Projects Direct List**: Shortcut langsung ke proyek aktif dengan dot warna status dan persentase progres (`font-mono text-xs`).
+  5. **Bottom Telemetry Pod**: Indikator koneksi `Supabase + GitHub` + kuota API rate limit (`4,892/5k`) + progress bar tipis.
+- **Active Nav Item**: `bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]` dengan ikon berwarna `--obs-accent-light` (`#818CF8`) dan dot indikator di kanan.
+- **Inactive Nav Item**: `text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04]`.
 
-### 4.3 Header Bar (`components/HeaderBar.vue`)
-- **Surface**: `bg-[#141210]/80 backdrop-blur-xl border-b border-white/[0.06] h-14`
-- **Left**: Live clock — `font-mono text-xs text-[#756F68]` — UTC + WIB, update setiap detik
-- **Center**: Active branch pill — `MODALITY://DEV` — `font-mono text-xs bg-[#C98A4B]/15 text-[#C98A4B] rounded-full px-3 py-1`
-- **Right**: Search input — `focus:ring-1 focus:ring-[#C98A4B]`
+### 4.3 Unified Header Bar (`components/HeaderBar.vue`)
+- **Surface**: Berada di bagian atas di dalam `.obs-workspace` (`h-13 px-5 border-b border-white/[0.06] bg-[#0B0C10]/60 backdrop-blur-md flex items-center justify-between`).
+- **Left**: Breadcrumb bersih (`Workspace / Command Center`) + pill sprint aktif (`Sprint W42 · 4d left`).
+- **Right**:
+  - Live clock & blocker status pill (`WIB 12:48 | 0 Blockers` dalam `bg-white/[0.03] border border-white/[0.06] font-mono text-xs`).
+  - **Primary Crisp CTA Button**: `bg-[#F3F4F6] hover:bg-white text-[#07080A] text-xs font-medium px-3 py-1.5 rounded-lg` (`+ New Deliverable`).
 
-### 4.4 Dashboard — Mission Briefing (`/`)
+### 4.4 Dashboard — Asymmetric Bento Command Center (`/`)
 
-Dashboard BUKAN kumpulan widget metrik. Dashboard adalah halaman scrollable berisi project cards besar yang menjawab: **"Apa kondisi semua project saya, dan hari ini mau ngerjakan apa?"**
+Dashboard dirancang menggunakan **Specular 1px Cards (`.obs-card`)** dalam 2 baris utama:
 
-#### 4.4.1 Alert Bar (`components/AlertBar.vue`)
-- Hanya muncul jika ada task BLOCKED atau deadline mendekat/overdue
-- Jika tidak ada alert, bar ini tersembunyi (tidak render)
-- Surface: `bg-red-500/10 border-l-2 border-red-500 rounded-r-lg px-4 py-3`
-- Konten: teks inline — contoh: `⚠ 2 BLOCKED: #ENG-104 Implement OAuth · #ENG-108 Fix CORS | 📅 #ENG-107 due tomorrow`
-- Task ID clickable → navigasi ke project detail
+#### 4.4.1 Baris 1: 4 Specular KPI Cards (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5`)
+1. **In-Flight Tasks**: Angka utama `font-mono text-2xl font-semibold text-[#F3F4F6]` + delta badge emerald + jumlah high priority.
+2. **Sprint Velocity**: Persentase penyelesaian minggu berjalan (`78%`) + rasio deployed (`11 of 14 deployed`).
+3. **CI/CD Workflows**: Persentase kesehatan workflow GitHub Actions + jumlah run.
+4. **Open PRs & Issues**: Jumlah PR/Issue terbuka lintas repositori.
 
-#### 4.4.2 Project Cards (`components/ProjectCard.vue`)
-Satu card besar per project aktif. Card surface: `bg-[#141210] border border-white/[0.06] rounded-xl p-6`.
-
-**Zona Header:**
-- Nama project — `font-mono text-xl font-bold text-[#F5F2EB]`
-- Repo GitHub — `font-mono text-sm text-[#756F68]` clickable
-- Tech tags — `font-mono text-[10px] bg-[#C98A4B]/10 text-[#C98A4B]`
-- Deploy dot + Health badge di kanan atas
-
-**Zona Progress + Blockers:**
-- Progress bar tipis (ochre fill)
-- Breakdown: `font-mono text-xs text-[#756F68]` — "5/12 tasks · 3 queue · 2 running · 5 deployed"
-- Blockers (jika ada): `⛔ #ENG-104 Implement OAuth — waiting for API key` dalam baris merah
-
-**Zona Ready to Pick Up (`components/TaskQueue.vue`):**
-- Task dengan status `in_queue` milik project ini, sorted by priority
-- Setiap baris: priority dot + label + task ID monospace + title
-- Menjawab: "hari ini mau ngerjakan apa dari project ini?"
-- Queue kosong → `✅ No tasks in queue`
-
-**Zona Recent Commits (`components/CommitList.vue`):**
-- 3-5 commit terakhir dari GitHub repo
-- Commit message + SHA pendek + waktu relatif + tombol `▸ Diff`
-- Klik Diff → expand: file changed + patch snippet
-- Jika tidak ada githubRepo → "Link a GitHub repo to see commits"
-
-#### 4.4.3 Health Badge (`components/HealthBadge.vue`)
-Health dihitung otomatis, ambil worst case:
-
-| Sinyal | 🟢 Healthy | 🟡 Needs Attention | 🔴 Critical |
-|--------|-----------|---------------------|-------------|
-| Last commit | < 7 hari | 7-30 hari | > 30 hari |
-| Blockers | 0 | 1-2 | 3+ |
-| Task completion | > 50% | 25-50% | < 25% |
+#### 4.4.2 Baris 2: Asymmetric Bento Grid (`12 Columns`: `8 Left` + `4 Right`)
+- **Kolom Kiri (`xl:col-span-8 space-y-4`):**
+  - **Execution Radar (`PriorityTasksRadar.vue`)**:
+    - Header dengan segmented filter tabs (`All Focus`, `High / Critical`, `In Flight`).
+    - Baris task bersih (`divide-y divide-white/[0.05]`): priority dot (`rose-500` untuk critical, `amber-400` untuk high, `emerald-400` untuk deployed), monospace ID (`NX-142` / `ENG-104`), judul `font-sans text-sm font-medium text-[#F3F4F6]`, badge proyek, pill status, dan tanggal tenggat.
+  - **Global Commit Stream (`GlobalCommitsTable.vue`)**:
+    - Daftar commit terbaru lintas repo dengan SHA pill (`font-mono text-xs bg-white/[0.05] border border-white/[0.07]`), pesan commit, nama repo, dan waktu relatif.
+    - Klik baris untuk membuka **Inline Diff Preview** (`bg-[#07080A] border-t border-white/[0.05] font-mono text-xs`).
+- **Kolom Kanan (`xl:col-span-4 space-y-4`):**
+  - **Quick Task Inspector Pod / Task Drawer**: Menampilkan detail cepat task yang diklik (`border-l-2` dengan warna `--obs-accent`).
+  - **Weekly Sprint Focus (`WeeklyFocusSnapshot.vue`)**: Menampilkan objektif sprint, progress bar `--obs-accent`, dan jumlah task *Completed vs Remaining*.
+  - **Managed Projects Hub (`CompactProjectsHub.vue`)**: Kartu ringkas proyek aktif dengan status deployment dan persentase progres.
 
 ### 4.5 Task Card (`components/TaskCard.vue`)
 ```
 ┌─────────────────────────────────┐
-│  #ENG-104                      │  ← font-mono text-xs text-[#756F68]
-│  Implement OAuth flow          │  ← text-[#F5F2EB] font-medium text-sm
-│  ● HIGH        vue  nuxt      │  ← priority pill + tech tags
+│  #ENG-104                      │  ← font-mono text-xs text-[#8A8F9E]
+│  Implement OAuth flow          │  ← font-sans text-[#F3F4F6] font-medium text-sm
+│  ● HIGH        vue  nuxt      │  ← priority pill + neutral slate tech tags
 └─────────────────────────────────┘
-Hover: border-[#C98A4B] + shadow-[0_0_12px_rgba(201,138,75,0.15)]
+Surface: .obs-card (bg-[#111318] border-white/[0.07] + specular 1px top highlight)
+Hover:   hover:border-indigo-500/40 hover:bg-[#171920]
 ```
 
 ### 4.6 Code Repos (`/repos`)
