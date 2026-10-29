@@ -87,6 +87,11 @@ test('TELE-STATE-02: telemetryState yields READY and isStaleData evaluates accur
   status.value = 'error'
   assert.equal(telemetryState.value, 'READY', 'State must remain READY when cached data exists in memory')
   assert.equal(isStaleData.value, true, 'isStaleData must be true when background refresh fails with cached data')
+
+  // 3. Background re-sync in-flight (status: 'pending') with cached data in memory
+  status.value = 'pending'
+  assert.equal(telemetryState.value, 'READY', 'State must remain READY (no flicker to LOADING) during background refresh')
+  assert.equal(isStaleData.value, false, 'isStaleData is false during pending re-sync')
 })
 
 test('TELE-PING-01: Supabase live probe measures latency in milliseconds and reports Healthy status', async () => {
@@ -110,6 +115,7 @@ test('TELE-PING-01: Supabase live probe measures latency in milliseconds and rep
     }
   }
 
+  // 1. Fast query -> Healthy status
   const mockFastQuery = async (signal) => {
     assert.ok(signal instanceof AbortSignal, 'AbortSignal must be provided')
     return { error: null }
@@ -119,6 +125,16 @@ test('TELE-PING-01: Supabase live probe measures latency in milliseconds and rep
   assert.equal(result.healthy, true, 'Probe must be healthy')
   assert.ok(result.latencyMs >= 0, 'latencyMs must be non-negative')
   assert.equal(result.status, 'Healthy', 'Status must be Healthy for low latency')
+
+  // 2. High latency query -> Degraded status
+  const mockSlowQuery = async (signal) => {
+    assert.ok(signal instanceof AbortSignal, 'AbortSignal must be provided')
+    await new Promise((r) => setTimeout(r, 35))
+    return { error: null }
+  }
+  const slowResult = await simulateProbe(mockSlowQuery, 3000, 20) // threshold = 20ms
+  assert.equal(slowResult.healthy, true, 'Probe must be healthy despite high latency')
+  assert.equal(slowResult.status, 'Degraded', 'Status must be Degraded when latency exceeds threshold')
 })
 
 test('TELE-PING-02: Supabase probe timeout triggers AbortController, cleans timer, and sets Connection Timeout status', async () => {
@@ -154,20 +170,37 @@ test('TELE-PING-02: Supabase probe timeout triggers AbortController, cleans time
   assert.equal(result.timerCleaned, true, 'Timer must be cleaned up')
 })
 
-test('TELE-PING-03: Supabase probe error classification distinguishes Authentication Error from Unreachable', () => {
+test('TELE-PING-03: Supabase probe error classification distinguishes Authentication Error from Unreachable, and masks host credentials', () => {
   function classifySupabaseError(err) {
     if (err?.code === 'PGRST301' || String(err?.message || '').includes('JWT') || err?.status === 401 || err?.status === 403) {
       return 'Authentication Error'
     }
+    if (err?.name === 'AbortError' || String(err?.message || '').toLowerCase().includes('timeout')) {
+      return 'Connection Timeout'
+    }
     return 'Unreachable'
   }
 
-  // 1. Auth error
+  // 1. Auth errors
   assert.equal(classifySupabaseError({ status: 401, message: 'Invalid JWT token' }), 'Authentication Error')
+  assert.equal(classifySupabaseError({ status: 403, message: 'Forbidden: RLS violation' }), 'Authentication Error')
   assert.equal(classifySupabaseError({ code: 'PGRST301', message: 'JWT expired' }), 'Authentication Error')
 
-  // 2. Network error
+  // 2. Timeout errors
+  assert.equal(classifySupabaseError({ name: 'AbortError', message: 'This operation was aborted' }), 'Connection Timeout')
+  assert.equal(classifySupabaseError({ message: 'Probe exceeded 3000ms limit: connection timeout' }), 'Connection Timeout')
+
+  // 3. Network error
   assert.equal(classifySupabaseError(new Error('fetch failed: ECONNREFUSED')), 'Unreachable')
+
+  // 4. Supabase URL host masking (zero credential leakage in telemetry)
+  function maskSupabaseUrl(url) {
+    if (!url) return 'Not Configured'
+    return String(url).replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^[^.]+\./, '***.')
+  }
+  assert.equal(maskSupabaseUrl('https://xyzcompany.supabase.co'), '***.supabase.co')
+  assert.equal(maskSupabaseUrl('https://myproject.supabase.co/rest/v1'), '***.supabase.co')
+  assert.equal(maskSupabaseUrl(null), 'Not Configured')
 })
 
 test('TELE-ENV-01: Runtime environment detection honestly reports development on localhost', () => {
@@ -289,6 +322,14 @@ test('TELE-AUTH-01: Backup export endpoint rejects unauthenticated requests with
 
   // 2. Tampered token
   assert.equal(verifyExportAuth('Bearer invalid_token', null), false, 'Invalid bearer token must be rejected')
+
+  // 3. Malformed session structure
+  assert.equal(verifyExportAuth('Bearer v1.badpayload.badsig', null), false, 'Malformed session token must be rejected')
+
+  // 4. Expired session token
+  const expiredToken = createSessionToken(secretKey, { ttlMs: -1000 })
+  assert.equal(verifyExportAuth(`Bearer ${expiredToken}`, null), false, 'Expired bearer token must be rejected')
+  assert.equal(verifyExportAuth(null, expiredToken), false, 'Expired cookie token must be rejected')
 })
 
 test('TELE-AUTH-02: Backup export endpoint authorizes valid session tokens and raw access keys', () => {
@@ -321,6 +362,9 @@ test('TELE-AUTH-02: Backup export endpoint authorizes valid session tokens and r
   // 2. Valid signed session token in cookie
   const validSession = createSessionToken(secretKey)
   assert.equal(verifyExportAuth(null, validSession), true, 'Valid signed session cookie must be authorized')
+
+  // 3. Valid signed session token in Authorization Bearer header
+  assert.equal(verifyExportAuth(`Bearer ${validSession}`, null), true, 'Valid signed session bearer token must be authorized')
 })
 
 test('TELE-BACKUP-01: Backup export payload adheres to canonical version 1.0 schema with metadata and headers', () => {
@@ -424,4 +468,10 @@ test('TELE-FRONTEND-01: UI export concurrency lock prevents duplicate requests a
   await onExportBackup(failingFetch)
   assert.equal(downloadTriggered, false, 'Download must NOT be triggered on failure')
   assert.equal(isExporting, false, 'isExporting must be reset to false in finally block')
+
+  // 3. Subsequent call after lock release must execute normally
+  const call3 = await onExportBackup(slowSuccessFetch)
+  assert.equal(fetchCallCount, 2, 'Subsequent call after lock release must execute')
+  assert.equal(downloadTriggered, true, 'Download must trigger on unlocked subsequent call')
+  assert.equal(isExporting, false, 'isExporting must remain false')
 })

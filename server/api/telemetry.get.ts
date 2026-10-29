@@ -68,8 +68,6 @@ export default withApiHandler(async () => {
         .select('id', { count: 'exact', head: true })
         .abortSignal(controller.signal)
 
-      clearTimeout(timerId)
-
       if (error) {
         throw error
       }
@@ -78,19 +76,22 @@ export default withApiHandler(async () => {
       supabaseHealthy = true
       supabaseStatus = supabaseLatency < latencyThresholdMs ? 'Healthy' : 'Degraded'
     } catch (err: any) {
-      clearTimeout(timerId)
       supabaseHealthy = false
+
+      const rawMsg = String(err?.message || '').replace(/([a-z0-9_-]+)\.supabase\.co/gi, '***.supabase.co')
 
       if (controller.signal.aborted || err?.name === 'AbortError' || String(err?.message || '').toLowerCase().includes('timeout')) {
         supabaseStatus = 'Connection Timeout'
         supabaseError = `Probe exceeded ${timeoutMs}ms limit`
       } else if (err?.code === 'PGRST301' || String(err?.message || '').includes('JWT') || err?.status === 401 || err?.status === 403) {
         supabaseStatus = 'Authentication Error'
-        supabaseError = err.message || 'Invalid Supabase API key or RLS rejection'
+        supabaseError = rawMsg || 'Invalid Supabase API key or RLS rejection'
       } else {
         supabaseStatus = 'Unreachable'
-        supabaseError = err.message || 'Network connection failed'
+        supabaseError = rawMsg || 'Network connection failed'
       }
+    } finally {
+      clearTimeout(timerId)
     }
   }
 

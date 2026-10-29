@@ -55,6 +55,8 @@ export default withApiHandler(async (event) => {
 
     setHeader(event, 'Content-Disposition', `attachment; filename="${filename}"`)
     setHeader(event, 'Content-Type', 'application/json')
+    setHeader(event, 'Cache-Control', 'no-store, no-cache, must-revalidate, private')
+    setHeader(event, 'Pragma', 'no-cache')
 
     return {
       version: '1.0',

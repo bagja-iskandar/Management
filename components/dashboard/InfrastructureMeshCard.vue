@@ -6,9 +6,17 @@
         <NexuraIcon name="Server" size="sm" class="text-indigo-400 shrink-0" />
         <h2 class="text-sm font-semibold text-[#F3F4F6]">Infrastructure Mesh</h2>
       </div>
-      <span class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        Runtime Topology · 3 Services Configured
+      <span
+        class="font-mono text-xs px-2 py-0.5 rounded border flex items-center gap-1.5"
+        :class="telemetryData?.environment === 'production'
+          ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+          : 'bg-white/[0.04] text-zinc-400 border-white/[0.08]'"
+      >
+        <span
+          class="w-1.5 h-1.5 rounded-full"
+          :class="telemetryData?.environment === 'production' ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'"
+        ></span>
+        {{ telemetryData?.environment === 'production' ? 'Production Topology · 3 Services' : 'Development Topology · Local Runtime' }}
       </span>
     </div>
 
@@ -18,30 +26,45 @@
       <div class="p-2.5 rounded-lg bg-[#0B0C10]/80 border border-white/[0.06] flex items-center justify-between">
         <div class="min-w-0 pr-2">
           <div class="text-xs font-medium text-[#F3F4F6] flex items-center gap-2 truncate">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+            <span
+              class="w-2 h-2 rounded-full shrink-0"
+              :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400 animate-pulse' : (telemetryData?.supabase?.configured ? 'bg-amber-400' : 'bg-[#565B68]')"
+            ></span>
             <span>Supabase PostgreSQL</span>
           </div>
           <div class="text-[11px] text-[#8A8F9E] font-mono mt-0.5 truncate">
-            Supabase Cloud Engine · ap-southeast-1
+            {{ supabaseSubtitle }}
           </div>
         </div>
         <div class="flex items-center gap-1.5 shrink-0">
-          <span class="font-mono text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded">
-            Configured
+          <span
+            class="font-mono text-[11px] px-2 py-0.5 rounded border"
+            :class="telemetryData?.supabase?.healthy
+              ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+              : (telemetryData?.supabase?.configured
+                ? 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+                : 'text-zinc-400 bg-white/[0.04] border-white/[0.08]')"
+          >
+            {{ telemetryData?.supabase?.healthy ? 'Connected' : (telemetryData?.supabase?.configured ? 'Standby' : 'Local Fallback') }}
           </span>
-          <span class="text-[10px] text-zinc-500 font-mono hidden sm:inline">Connected</span>
+          <span v-if="telemetryData?.supabase?.latencyMs != null" class="text-[10px] text-emerald-400/90 font-mono hidden sm:inline tabular-nums">
+            {{ telemetryData.supabase.latencyMs }}ms
+          </span>
         </div>
       </div>
 
-      <!-- 2. Vercel Edge Network -->
+      <!-- 2. Application / Edge Runtime -->
       <div class="p-2.5 rounded-lg bg-[#0B0C10]/80 border border-white/[0.06] flex items-center justify-between">
         <div class="min-w-0 pr-2">
           <div class="text-xs font-medium text-[#F3F4F6] flex items-center gap-2 truncate">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
-            <span>Vercel Edge Network</span>
+            <span
+              class="w-2 h-2 rounded-full shrink-0"
+              :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse' : 'bg-indigo-400'"
+            ></span>
+            <span>{{ telemetryData?.vercel?.isRuntime ? 'Vercel Edge Network' : 'Node.js App Server' }}</span>
           </div>
           <div class="text-[11px] text-[#8A8F9E] font-mono mt-0.5 truncate">
-            200 OK · Liveness Probe
+            {{ telemetryData?.vercel?.isRuntime ? '200 OK · Edge Liveness Probe' : 'Localhost · Liveness Probe' }}
           </div>
         </div>
         <button
@@ -63,11 +86,11 @@
             <span>Storage Persistence</span>
           </div>
           <div class="text-[11px] text-[#8A8F9E] font-mono mt-0.5 truncate">
-            Dual-layer Persistence · Configured
+            {{ telemetryData?.storage?.provider || 'Dual-layer Persistence · Configured' }}
           </div>
         </div>
         <span class="font-mono text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded shrink-0">
-          Active
+          {{ telemetryData?.storage?.routing === 'supabase' ? 'PostgreSQL' : 'Active KV' }}
         </span>
       </div>
     </div>
@@ -75,8 +98,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import NexuraIcon from '../ui/NexuraIcon.vue'
+
+interface TelemetrySummary {
+  environment?: string
+  storage?: {
+    provider?: string
+    routing?: string
+  }
+  supabase?: {
+    configured?: boolean
+    healthy?: boolean
+    latencyMs?: number | null
+  }
+  vercel?: {
+    isRuntime?: boolean
+    status?: string
+  }
+}
+
+const { data: telemetryData } = useLazyAsyncData<TelemetrySummary>(
+  'system-telemetry',
+  () => $fetch('/api/telemetry')
+)
+
+const supabaseSubtitle = computed(() => {
+  if (telemetryData.value?.supabase?.healthy && telemetryData.value.supabase.latencyMs != null) {
+    return `Supabase Cloud Engine · ${telemetryData.value.supabase.latencyMs}ms roundtrip`
+  }
+  if (telemetryData.value?.supabase?.configured) {
+    return 'Supabase Cloud Engine · ap-southeast-1'
+  }
+  return 'Local Nitro Key-Value Fallback'
+})
 
 const isPinging = ref(false)
 const pingResult = ref<string | null>(null)

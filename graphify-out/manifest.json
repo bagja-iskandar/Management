@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
-    "mtime": 1793272429.9201767,
-    "seen": 1793272554.4644852,
-    "ast_hash": "fa8897737dd9c29db2c49cf23b40af63",
+    "mtime": 1793273291.9896467,
+    "seen": 1793273357.4433649,
+    "ast_hash": "ea7756bd9f144f07936279521fb48508",
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "server/api/telemetry.get.ts": {
-    "mtime": 1793272353.961088,
-    "seen": 1793272554.612014,
-    "ast_hash": "ed62d483cb00e894668e1117fdd8ea62",
+    "mtime": 1793273299.0712724,
+    "seen": 1793273357.5528743,
+    "ast_hash": "ab84fd41ad19a19671163f881871ac7b",
     "semantic_hash": ""
   },
   "composables/useGitHub.ts": {
@@ -1038,9 +1038,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/InfrastructureMeshCard.vue": {
-    "mtime": 1793272440.1414685,
-    "seen": 1793272554.501602,
-    "ast_hash": "a7426857c759e890f7bfe164cb939f28",
+    "mtime": 1793273228.4291792,
+    "seen": 1793273357.468339,
+    "ast_hash": "86867669a239dda023a4e23cc9c11b48",
     "semantic_hash": ""
   },
   "components/dashboard/LiveDevOpsStream.vue": {
@@ -1422,15 +1422,15 @@
     "semantic_hash": ""
   },
   "server/api/backup/export.get.ts": {
-    "mtime": 1793272365.7774663,
-    "seen": 1793272554.5759861,
-    "ast_hash": "3a81d9213ea10a161e220f75d83aa212",
+    "mtime": 1793273144.5151217,
+    "seen": 1793273210.5128548,
+    "ast_hash": "e08b98effeff1acdb1c6b5c8377a48ac",
     "semantic_hash": ""
   },
   "tests/unit/telemetry-workspace.spec.mjs": {
-    "mtime": 1793272487.6608999,
-    "seen": 1793272554.6953838,
-    "ast_hash": "971529ebc48d751e111cfca0b3c05826",
+    "mtime": 1793273287.5474403,
+    "seen": 1793273357.5933516,
+    "ast_hash": "7c1e0556c50c8b2cdc66bf9998f43a1f",
     "semantic_hash": ""
   }
 }

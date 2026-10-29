@@ -39,6 +39,41 @@
       </div>
     </div>
 
+    <!-- Feedback Toast -->
+    <transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform -translate-y-2 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform -translate-y-2 opacity-0"
+    >
+      <div
+        v-if="feedbackMessage"
+        class="p-3.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-3 shadow-lg"
+        :class="feedbackType === 'error' ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'"
+        role="status"
+      >
+        <div class="flex items-center gap-2">
+          <NexuraIcon
+            :name="feedbackType === 'error' ? 'AlertTriangle' : 'CheckCircle2'"
+            size="sm"
+            class="shrink-0"
+            :class="feedbackType === 'error' ? 'text-rose-400' : 'text-emerald-400'"
+          />
+          <span>{{ feedbackMessage }}</span>
+        </div>
+        <button
+          type="button"
+          class="text-xs hover:opacity-80 shrink-0 cursor-pointer p-1 rounded hover:bg-white/[0.04]"
+          aria-label="Dismiss feedback"
+          @click="feedbackMessage = ''"
+        >
+          <NexuraIcon name="X" size="xs" />
+        </button>
+      </div>
+    </transition>
+
     <!-- Stale Data Warning Banner -->
     <div
       v-if="isStaleData"
@@ -94,7 +129,7 @@
           :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-[#565B68]'"
         />
         <span :class="telemetryData?.vercel?.isRuntime ? 'text-[#F3F4F6] font-medium' : 'text-[#8A8F9E]'">
-          {{ telemetryData?.vercel?.isRuntime ? 'Vercel Edge (Live)' : 'Vercel (Standby)' }}
+          {{ telemetryData?.vercel?.isRuntime ? 'Vercel Edge (Live)' : 'Node.js (Local)' }}
         </span>
       </div>
     </div>
@@ -153,27 +188,39 @@
 
           <!-- 4-Tile Entity Record Counts Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-            <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between">
-              <span class="text-[10px] text-[#8A8F9E] font-mono uppercase tracking-wider block">Tasks</span>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-1 block">
+            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-[#8A8F9E]">
+                <span class="text-[10px] font-mono uppercase tracking-wider block">Tasks</span>
+                <NexuraIcon name="CheckSquare" size="xs" class="text-indigo-400/80" />
+              </div>
+              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
                 {{ telemetryData?.storage?.counts?.tasks ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between">
-              <span class="text-[10px] text-[#8A8F9E] font-mono uppercase tracking-wider block">Projects</span>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-1 block">
+            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-[#8A8F9E]">
+                <span class="text-[10px] font-mono uppercase tracking-wider block">Projects</span>
+                <NexuraIcon name="Folder" size="xs" class="text-indigo-400/80" />
+              </div>
+              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
                 {{ telemetryData?.storage?.counts?.projects ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between">
-              <span class="text-[10px] text-[#8A8F9E] font-mono uppercase tracking-wider block">Sprints</span>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-1 block">
+            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-[#8A8F9E]">
+                <span class="text-[10px] font-mono uppercase tracking-wider block">Sprints</span>
+                <NexuraIcon name="Target" size="xs" class="text-indigo-400/80" />
+              </div>
+              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
                 {{ telemetryData?.storage?.counts?.sprints ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between">
-              <span class="text-[10px] text-[#8A8F9E] font-mono uppercase tracking-wider block">Notes</span>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-1 block">
+            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-[#8A8F9E]">
+                <span class="text-[10px] font-mono uppercase tracking-wider block">Notes</span>
+                <NexuraIcon name="FileText" size="xs" class="text-indigo-400/80" />
+              </div>
+              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
                 {{ telemetryData?.storage?.counts?.notes ?? 0 }}
               </span>
             </div>
@@ -275,7 +322,7 @@
             </div>
             <div class="flex items-center justify-between">
               <span class="text-[#8A8F9E]">Live Probe Latency:</span>
-              <span class="font-mono font-medium" :class="telemetryData?.supabase?.latencyMs != null ? 'text-emerald-400' : 'text-zinc-500'">
+              <span class="font-mono font-medium tabular-nums" :class="telemetryData?.supabase?.latencyMs != null ? 'text-emerald-400' : 'text-zinc-500'">
                 {{ telemetryData?.supabase?.latencyMs != null ? `${telemetryData.supabase.latencyMs}ms roundtrip` : 'No live probe latency' }}
               </span>
             </div>
@@ -408,6 +455,20 @@ const { data: telemetryData, status, refresh: refreshTelemetry } = useLazyAsyncD
 const isRefreshing = computed(() => status.value === 'pending')
 const isExporting = ref(false)
 
+// Feedback Toast State
+const feedbackMessage = ref('')
+const feedbackType = ref<'success' | 'error'>('success')
+let feedbackTimer: ReturnType<typeof setTimeout> | null = null
+
+function showFeedback(msg: string, type: 'success' | 'error' = 'success') {
+  feedbackMessage.value = msg
+  feedbackType.value = type
+  if (feedbackTimer) clearTimeout(feedbackTimer)
+  feedbackTimer = setTimeout(() => {
+    feedbackMessage.value = ''
+  }, 4000)
+}
+
 const telemetryState = computed<'LOADING' | 'ERROR' | 'READY'>(() => {
   if (status.value === 'pending' && !telemetryData.value) {
     return 'LOADING'
@@ -423,7 +484,12 @@ const isStaleData = computed(() => {
 })
 
 async function onRefresh() {
-  await refreshTelemetry()
+  try {
+    await refreshTelemetry()
+    showFeedback('System telemetry metrics refreshed')
+  } catch (err: any) {
+    showFeedback(`Probe failed: ${err.message || 'Network error'}`, 'error')
+  }
 }
 
 async function onExportBackup() {
@@ -450,8 +516,11 @@ async function onExportBackup() {
     setTimeout(() => {
       URL.revokeObjectURL(downloadUrl)
     }, 1000)
+
+    showFeedback('Database snapshot exported successfully (JSON downloaded)')
   } catch (err: any) {
     console.error('Backup export failed:', err)
+    showFeedback(`Backup export failed: ${err.message || 'Server error'}`, 'error')
   } finally {
     isExporting.value = false
   }
