@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1792746070.356693,
-    "seen": 1792746293.830077,
-    "ast_hash": "a1005f0689e5dd9b7fdd7102272a4b3c",
+    "mtime": 1793282058.8894954,
+    "seen": 1793282093.1697767,
+    "ast_hash": "e1ede1d98c9cc487928e6f1c2f0cd6dc",
     "semantic_hash": ""
   },
   "server/api/activities.get.ts": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1793264823.433428,
-    "seen": 1793264892.6233861,
-    "ast_hash": "9ab4dd805998d79d39bab3344b2055e2",
+    "mtime": 1793274612.817868,
+    "seen": 1793274667.0321977,
+    "ast_hash": "4a2bc893d449ddaf75b5c7698110138f",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
@@ -906,9 +906,9 @@
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-task.repository.ts": {
-    "mtime": 1792927307.5039275,
-    "seen": 1792927382.0959284,
-    "ast_hash": "1c4ebf445c7439c5cca4cc148940c67c",
+    "mtime": 1793282011.762522,
+    "seen": 1793282093.2565749,
+    "ast_hash": "566b1939a26dd33311baa0a4595cab8a",
     "semantic_hash": ""
   },
   "server/utils/supabase.ts": {
@@ -936,9 +936,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1793017582.1830947,
-    "seen": 1793017619.0202415,
-    "ast_hash": "b28f7abb06c0aab34f1bf934d88df8d2",
+    "mtime": 1793282087.4358673,
+    "seen": 1793282093.3244596,
+    "ast_hash": "bbe0a1012c6bdbfab6a324d466674cf3",
     "semantic_hash": ""
   },
   "DEPLOYMENT.md": {
@@ -1308,9 +1308,9 @@
     "semantic_hash": ""
   },
   "tests/unit/security-headers.spec.mjs": {
-    "mtime": 1793017554.4196846,
-    "seen": 1793017619.009789,
-    "ast_hash": "5c771f3a125ffe85eb7671900092213d",
+    "mtime": 1793274594.1203783,
+    "seen": 1793274667.113149,
+    "ast_hash": "c3784f00da46d25dcd7e67943ab5147a",
     "semantic_hash": ""
   },
   "tests/unit/route-security.spec.mjs": {
@@ -1433,12 +1433,6 @@
     "ast_hash": "7c1e0556c50c8b2cdc66bf9998f43a1f",
     "semantic_hash": ""
   },
-  ".phase11-backup/sprints.vue": {
-    "mtime": 1793264823.433428,
-    "seen": 1793274575.1957226,
-    "ast_hash": "9ab4dd805998d79d39bab3344b2055e2",
-    "semantic_hash": ""
-  },
   "components/sprint/SprintRolloverModal.vue": {
     "mtime": 1793274529.6016748,
     "seen": 1793274575.2355275,
@@ -1452,15 +1446,39 @@
     "semantic_hash": ""
   },
   "server/utils/github-sync.ts": {
-    "mtime": 1793274486.8486896,
-    "seen": 1793274575.2765238,
-    "ast_hash": "ee558faf1b384e79f2aa948452996603",
+    "mtime": 1793274614.9830256,
+    "seen": 1793274667.105381,
+    "ast_hash": "9b6be78e26131cd08db960a53f921aa2",
     "semantic_hash": ""
   },
   "tests/unit/github-sync-automation.spec.mjs": {
     "mtime": 1793274528.7806065,
     "seen": 1793274575.2805128,
     "ast_hash": "9b9c34552e5d7600cc2bc544a6d66d2b",
+    "semantic_hash": ""
+  },
+  ".phase12-backup/package.json": {
+    "mtime": 1792746070.356693,
+    "seen": 1793282093.0411036,
+    "ast_hash": "a1005f0689e5dd9b7fdd7102272a4b3c",
+    "semantic_hash": ""
+  },
+  ".phase12-backup/supabase-task.repository.ts": {
+    "mtime": 1792927307.5039275,
+    "seen": 1793282093.0411167,
+    "ast_hash": "1c4ebf445c7439c5cca4cc148940c67c",
+    "semantic_hash": ""
+  },
+  ".phase12-backup/ci.yml": {
+    "mtime": 1793017582.1830947,
+    "seen": 1793282093.3244703,
+    "ast_hash": "b28f7abb06c0aab34f1bf934d88df8d2",
+    "semantic_hash": ""
+  },
+  "tests/unit/supabase-task-injection.spec.mjs": {
+    "mtime": 1793282204.830137,
+    "seen": 1793282298.2334251,
+    "ast_hash": "b5945ca675e2b019f3adeaecdca025a5",
     "semantic_hash": ""
   }
 }

@@ -102,7 +102,7 @@ const currentPageTitle = computed(() => {
   const path = route.path
   if (path === '/') return 'Command Center'
   if (path === '/tasks') return 'My Tasks & Queue'
-  if (path === '/sprints' || path === '/focus') return 'Weekly Sprints'
+  if (path === '/sprints') return 'Weekly Sprints'
   if (path === '/roadmap') return 'Architecture Roadmap'
   if (path === '/repos') return 'GitHub Repositories'
   if (path === '/telemetry') return 'System Telemetry'

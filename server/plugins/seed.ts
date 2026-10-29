@@ -11,16 +11,22 @@ import {
 } from '../utils/store'
 
 export default defineNitroPlugin(async () => {
+  // 0. One-time idempotency guard: prevent clobbering state on subsequent boots
+  const isSeeded = await getValue<boolean>('nitro_seed_v2_completed')
+  if (isSeeded) {
+    return
+  }
+
   await migrateNumericIds<Task>('tasks')
 
   // 1. Projects: Clean mock projects, preserve or create the real active project
-  let projects = await getArray<Project>('projects')
+  const projects = await getArray<Project>('projects')
   // Filter out prototype mock projects
   let cleanProjects = projects
     .filter((p) => !['tf-hitnet-eeg', 'neural-signal-lab'].includes(p.slug))
     .map(normalizeProject)
 
-  if (!cleanProjects.length) {
+  if (cleanProjects.length === 0) {
     cleanProjects = [
       {
         id: genId(),
@@ -41,9 +47,9 @@ export default defineNitroPlugin(async () => {
   }
   await setArray('projects', cleanProjects)
 
-  // 2. Sprints / Weekly Focus: Clean mock tasks references
+  // 2. Sprints / Weekly Focus: Clean mock tasks references without deleting ENG deliverables
   let sprints = await getArray<Sprint>('sprints')
-  if (!sprints.length) {
+  if (sprints.length === 0) {
     const initialSprint: Sprint = {
       id: genId(),
       name: 'Week 38 · 14–20 Sep 2026',
@@ -56,21 +62,18 @@ export default defineNitroPlugin(async () => {
     }
     sprints = [initialSprint]
   } else {
-    // Purge mock task IDs from sprints
+    // Purge only local-* dummy references; PRESERVE ENG deliverables
     sprints = sprints.map((s) => ({
       ...s,
-      taskIds: (s.taskIds || []).filter(
-        (id) => !id.startsWith('eng-') && !id.startsWith('ENG-') && !id.startsWith('local-')
-      )
+      taskIds: (s.taskIds || []).filter((id) => !id.startsWith('local-'))
     }))
   }
   await setArray('sprints', sprints)
 
-  // 3. Tasks: Purge all mock/dummy tasks (eng-101 to eng-118 and local-*)
-  let tasks = await getArray<Task>('tasks')
-  // Keep only user-created tasks, remove all seeded mock tasks
+  // 3. Tasks: Purge legacy prototype mocks while preserving all genuine tasks
+  const tasks = await getArray<Task>('tasks')
   const realTasks = tasks
-    .filter((t) => !t.id.startsWith('eng-') && !t.id.startsWith('local-'))
+    .filter((t) => !t.id.startsWith('local-'))
     .map(normalizeTask)
 
   await setArray('tasks', realTasks)
@@ -80,4 +83,7 @@ export default defineNitroPlugin(async () => {
   if (!currentSeq || (currentSeq > 100 && realTasks.length === 0)) {
     await setValue('task-seq', realTasks.length)
   }
+
+  // 5. Mark seeding as completed
+  await setValue('nitro_seed_v2_completed', true)
 })

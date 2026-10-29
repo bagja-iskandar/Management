@@ -4,6 +4,21 @@ import type { Task } from '~/types'
 import { getSupabaseClient } from '../../utils/supabase'
 import { isNetworkError } from '../index'
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+const ENG_CODE_REGEX = /^#?ENG-\d+$/i
+
+function resolveTaskIdFilter(id: string): { column: 'task_id' | 'id'; value: string } | null {
+  const clean = id.trim()
+  if (!clean) return null
+  if (ENG_CODE_REGEX.test(clean)) {
+    return { column: 'task_id', value: clean.replace(/^#/, '').toUpperCase() }
+  }
+  if (UUID_REGEX.test(clean)) {
+    return { column: 'id', value: clean.toLowerCase() }
+  }
+  return { column: 'id', value: clean }
+}
+
 function mapTaskRow(row: any): Task {
   return {
     id: row.id,
@@ -98,18 +113,19 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async findById(id: string): Promise<Task | null> {
-    const clean = id.trim().replace(/[(),]/g, '')
-    const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
-    const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
-
-    let query = this.client.from('tasks').select('*')
-    if (isEng) {
-      query = query.or(`id.eq.${clean},task_id.eq.${cleanTaskId}`)
-    } else {
-      query = query.eq('id', clean)
+    if (!id || !id.trim()) {
+      return null
     }
 
-    const { data, error } = await query.maybeSingle()
+    const filter = resolveTaskIdFilter(id)
+    if (!filter) return null
+
+    const { data, error } = await this.client
+      .from('tasks')
+      .select('*')
+      .eq(filter.column, filter.value)
+      .maybeSingle()
+
     if (error) {
       if (isNetworkError(error)) {
         throw createError({
@@ -177,21 +193,23 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async update(id: string, patch: Partial<Task>): Promise<Task | null> {
-    const clean = id.trim().replace(/[(),]/g, '')
-    const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
-    const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
+    if (!id || !id.trim()) {
+      return null
+    }
+
+    const filter = resolveTaskIdFilter(id)
+    if (!filter) return null
 
     const row = mapTaskToRow(patch)
     row.updated_at = new Date().toISOString()
 
-    let query = this.client.from('tasks').update(row)
-    if (isEng) {
-      query = query.or(`id.eq.${clean},task_id.eq.${cleanTaskId}`)
-    } else {
-      query = query.eq('id', clean)
-    }
+    const { data, error } = await this.client
+      .from('tasks')
+      .update(row)
+      .eq(filter.column, filter.value)
+      .select()
+      .maybeSingle()
 
-    const { data, error } = await query.select().maybeSingle()
     if (error) {
       if (isNetworkError(error)) {
         throw createError({
@@ -212,21 +230,17 @@ export class SupabaseTaskRepository implements ITaskRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    const clean = id.trim().replace(/[(),]/g, '')
-    const isEng = clean.toUpperCase().startsWith('ENG-') || clean.startsWith('#')
-    const cleanTaskId = clean.replace(/^#/, '').toUpperCase()
-
-    const existing = await this.findById(clean)
-    if (!existing) return false
-
-    let query = this.client.from('tasks').delete()
-    if (isEng) {
-      query = query.or(`id.eq.${clean},task_id.eq.${cleanTaskId}`)
-    } else {
-      query = query.eq('id', clean)
+    if (!id || !id.trim()) {
+      return false
     }
 
-    const { error } = await query
+    const existing = await this.findById(id)
+    if (!existing) return false
+
+    const { error } = await this.client
+      .from('tasks')
+      .delete()
+      .eq('id', existing.id)
     if (error) {
       if (isNetworkError(error)) {
         throw createError({

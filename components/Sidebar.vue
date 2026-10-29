@@ -574,7 +574,7 @@ function isRouteActive(path: string): boolean {
     return route.path === '/'
   }
   if (path === '/sprints') {
-    return route.path.startsWith('/sprints') || route.path.startsWith('/focus')
+    return route.path.startsWith('/sprints')
   }
   return route.path.startsWith(path)
 }
