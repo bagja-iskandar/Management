@@ -41,7 +41,7 @@
             <span>Vercel Edge Network</span>
           </div>
           <div class="text-[11px] text-[#8A8F9E] font-mono mt-0.5 truncate">
-            200 OK · production live
+            200 OK · Liveness Probe
           </div>
         </div>
         <button

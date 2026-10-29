@@ -1408,5 +1408,11 @@
     "seen": 1793267481.693233,
     "ast_hash": "83f1b10ee4bd323e5e548a9a9875ea62",
     "semantic_hash": ""
+  },
+  "tests/unit/roadmap-workspace.spec.mjs": {
+    "mtime": 1793267958.9394088,
+    "seen": 1793268006.352248,
+    "ast_hash": "b55ec947c655c8c59099ace74a65f4be",
+    "semantic_hash": ""
   }
 }
