@@ -60,22 +60,22 @@ export function useSprintCalendar() {
     const endYear = end.getFullYear()
 
     if (startYear !== endYear) {
-      return `Week ${weekNum.value} · ${startDay} ${startMonth} ${startYear} – ${endDay} ${endMonth} ${endYear}`
+      return `Week ${weekNum.value} • ${startDay} ${startMonth} ${startYear} – ${endDay} ${endMonth} ${endYear}`
     }
     if (startMonth !== endMonth) {
-      return `Week ${weekNum.value} · ${startDay} ${startMonth} – ${endDay} ${endMonth} ${startYear}`
+      return `Week ${weekNum.value} • ${startDay} ${startMonth} – ${endDay} ${endMonth} ${startYear}`
     }
-    return `Week ${weekNum.value} · ${startDay}–${endDay} ${startMonth} ${startYear}`
+    return `Week ${weekNum.value} • ${startDay}–${endDay} ${startMonth} ${startYear}`
   })
 
   const remainingDaysText = computed(() => {
     if (!isCurrentWeek.value) {
       if (weekOffset.value < 0) {
         const pastWeeks = Math.abs(weekOffset.value)
-        return pastWeeks === 1 ? 'Past week · Cycle closed' : `${pastWeeks} weeks ago · Closed`
+        return pastWeeks === 1 ? 'Past week • Cycle closed' : `${pastWeeks} weeks ago • Closed`
       } else {
         const futureWeeks = weekOffset.value
-        return futureWeeks === 1 ? 'Next cycle · Starts soon' : `In ${futureWeeks} weeks`
+        return futureWeeks === 1 ? 'Next cycle • Starts soon' : `In ${futureWeeks} weeks`
       }
     }
 

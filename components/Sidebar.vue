@@ -415,29 +415,29 @@
                   </div>
                 </button>
 
-                <!-- 6. Supabase Cloud -->
+                <!-- 6. Project Notes & Ideas -->
                 <button
                   type="button"
-                  @click="selectProjectTab(project.slug, 'supabase')"
+                  @click="selectProjectTab(project.slug, 'notes')"
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
-                    isSubItemActive(project.slug, 'supabase')
+                    isSubItemActive(project.slug, 'notes')
                       ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
                       : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
-                      name="Zap"
+                      name="FileText"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'supabase') ? 'text-indigo-400' : 'text-[#3ECF8E]'"
+                      :class="isSubItemActive(project.slug, 'notes') ? 'text-indigo-400' : 'text-amber-400/80'"
                     />
-                    <span class="truncate font-sans">Supabase DB</span>
+                    <span class="truncate font-sans">Notes &amp; Ideas</span>
                   </span>
                   <div class="flex items-center gap-1.5 shrink-0">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#3ECF8E]" title="Connected"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400/80" title="Notes &amp; Ideas"></span>
                     <span
-                      v-if="isSubItemActive(project.slug, 'supabase')"
+                      v-if="isSubItemActive(project.slug, 'notes')"
                       class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
                     ></span>
                   </div>

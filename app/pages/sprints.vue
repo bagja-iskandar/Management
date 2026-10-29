@@ -1,109 +1,225 @@
 <template>
   <div class="space-y-6">
-    <!-- Header & Context -->
-    <SprintHeader
-      :is-current-week="isCurrentWeek"
-      :week-label="weekLabel"
-      @prev-week="goToPrevWeek"
-      @current-week="goToCurrentWeek"
-      @next-week="goToNextWeek"
-      @open-modal="openModalWithTab"
-    />
-
-    <!-- Feedback Toast -->
-    <transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="transform -translate-y-2 opacity-0"
-      enter-to-class="transform translate-y-0 opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="transform translate-y-0 opacity-100"
-      leave-to-class="transform -translate-y-2 opacity-0"
+    <!-- ================================================================= -->
+    <!-- STATE 1: LOADING SKELETON BENTO LOADER                            -->
+    <!-- ================================================================= -->
+    <div
+      v-if="sprintsDataState === 'LOADING'"
+      class="space-y-6 animate-pulse select-none"
+      role="status"
+      aria-label="Loading sprints workspace"
     >
+      <!-- Skeleton Header -->
+      <div class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4">
+        <div class="h-6 bg-white/[0.08] rounded w-1/4"></div>
+        <div class="h-4 bg-white/[0.04] rounded w-1/2"></div>
+      </div>
+
+      <!-- Skeleton Objective Banner -->
+      <div class="obs-card p-4 rounded-xl bg-[#111318] border border-white/[0.07] space-y-2">
+        <div class="h-4 bg-white/[0.08] rounded w-1/6"></div>
+        <div class="h-4 bg-white/[0.04] rounded w-3/4"></div>
+      </div>
+
+      <!-- Skeleton Metrics Bento -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="h-24 bg-white/[0.03] border border-white/[0.06] rounded-2xl"></div>
+        <div class="h-24 bg-white/[0.03] border border-white/[0.06] rounded-2xl"></div>
+        <div class="h-24 bg-white/[0.03] border border-white/[0.06] rounded-2xl"></div>
+        <div class="h-24 bg-white/[0.03] border border-white/[0.06] rounded-2xl"></div>
+      </div>
+
+      <!-- Skeleton Matrix -->
+      <div class="h-64 bg-white/[0.03] border border-white/[0.06] rounded-2xl"></div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- STATE 2: CONNECTION ERROR CARD                                    -->
+    <!-- ================================================================= -->
+    <div
+      v-else-if="sprintsDataState === 'ERROR'"
+      class="py-16 text-center rounded-2xl bg-[#111318] border border-rose-500/30 p-8 space-y-4 max-w-lg mx-auto my-12"
+      role="alert"
+    >
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400">
+        <NexuraIcon name="AlertTriangle" size="lg" />
+      </div>
+      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">Connection Failed</h2>
+      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+        Failed to synchronize sprint telemetry from the server.
+      </p>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+          @click="workspaceStore.initializeWorkspace(true)"
+        >
+          <NexuraIcon name="RefreshCw" size="xs" />
+          <span>Retry</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- STATE 3: GLOBAL EMPTY STATE CARD                                  -->
+    <!-- ================================================================= -->
+    <div
+      v-else-if="sprintsDataState === 'SUCCESS_EMPTY'"
+      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.08] p-8 space-y-4 max-w-lg mx-auto my-12"
+    >
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+        <NexuraIcon name="Target" size="lg" />
+      </div>
+      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">No Sprint Cycles Found</h2>
+      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+        No active or planned sprint cycles currently exist in this workspace. Initialize your first cycle to track weekly execution.
+      </p>
+      <div class="flex items-center justify-center gap-3 pt-2">
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
+          @click="ensureSprintForCurrentWeek()"
+        >
+          <NexuraIcon name="Zap" size="xs" />
+          <span>Initialize Week {{ weekNum }} Sprint</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- STATE 4: READY STATE (FULL SPRINT WORKSPACE)                      -->
+    <!-- ================================================================= -->
+    <div v-else-if="sprintsDataState === 'READY'" class="space-y-6">
+      <!-- Stale Data Warning Banner -->
       <div
-        v-if="feedbackMessage"
-        class="p-3.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-3 shadow-lg"
-        :class="feedbackType === 'error' ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'"
+        v-if="isStaleDataWarning"
+        class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono flex items-center justify-between"
         role="status"
       >
         <div class="flex items-center gap-2">
-          <NexuraIcon
-            :name="feedbackType === 'error' ? 'AlertTriangle' : 'CheckCircle2'"
-            size="sm"
-            class="shrink-0"
-            :class="feedbackType === 'error' ? 'text-rose-400' : 'text-emerald-400'"
-          />
-          <span>{{ feedbackMessage }}</span>
+          <NexuraIcon name="AlertTriangle" size="xs" class="text-amber-400" />
+          <span>Warning: Displaying cached sprint telemetry. Background synchronization failed.</span>
         </div>
         <button
           type="button"
-          class="text-xs hover:opacity-80 shrink-0 cursor-pointer p-1 rounded hover:bg-white/[0.04]"
-          aria-label="Dismiss feedback"
-          @click="feedbackMessage = ''"
+          class="text-xs underline hover:no-underline font-medium cursor-pointer"
+          @click="workspaceStore.initializeWorkspace(true)"
         >
-          <NexuraIcon name="X" size="xs" />
+          Retry Sync
         </button>
       </div>
-    </transition>
 
-    <!-- Weekly Objective Banner -->
-    <SprintObjectiveBanner
-      :objective="currentObjective"
-      @save="onSaveObjective"
-    />
+      <!-- Header & Context -->
+      <SprintHeader
+        :is-current-week="isCurrentWeek"
+        :week-label="weekLabel"
+        @prev-week="goToPrevWeek"
+        @current-week="goToCurrentWeek"
+        @next-week="goToNextWeek"
+        @open-modal="openModalWithTab"
+      />
 
-    <!-- Solo Telemetry 4-Column Bento Strip -->
-    <WeeklyMetricsBento
-      :week-label="weekLabel"
-      :remaining-days-text="remainingDaysText"
-      :completion-percentage="completionPercentage"
-      :completed-count="completedCount"
-      :total-deliverables-count="totalDeliverablesCount"
-      :in-flight-count="inFlightCount"
-      :pending-count="pendingCount"
-    />
+      <!-- Feedback Toast -->
+      <transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="transform -translate-y-2 opacity-0"
+        enter-to-class="transform translate-y-0 opacity-100"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="transform translate-y-0 opacity-100"
+        leave-to-class="transform -translate-y-2 opacity-0"
+      >
+        <div
+          v-if="feedbackMessage"
+          class="p-3.5 rounded-xl border text-xs font-mono flex items-center justify-between gap-3 shadow-lg"
+          :class="feedbackType === 'error' ? 'bg-rose-500/10 border-rose-500/20 text-rose-400' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'"
+          role="status"
+        >
+          <div class="flex items-center gap-2">
+            <NexuraIcon
+              :name="feedbackType === 'error' ? 'AlertTriangle' : 'CheckCircle2'"
+              size="sm"
+              class="shrink-0"
+              :class="feedbackType === 'error' ? 'text-rose-400' : 'text-emerald-400'"
+            />
+            <span>{{ feedbackMessage }}</span>
+          </div>
+          <button
+            type="button"
+            class="text-xs hover:opacity-80 shrink-0 cursor-pointer p-1 rounded hover:bg-white/[0.04]"
+            aria-label="Dismiss feedback"
+            @click="feedbackMessage = ''"
+          >
+            <NexuraIcon name="X" size="xs" />
+          </button>
+        </div>
+      </transition>
 
-    <!-- Interactive Weekly Deliverables Matrix -->
-    <DeliverablesMatrix
-      v-model:filter="deliverablesFilter"
-      v-model:search-query="deliverablesSearchQuery"
-      :deliverables="filteredDeliverables"
-      :total-targets-count="activeWeekTasks.length"
-      :in-flight-count="inFlightCount"
-      :pending-count="pendingCount"
-      :completed-count="completedCount"
-      @open-modal="openModalWithTab"
-      @reset-filters="resetFilters"
-      @update-status="updateTaskStatus"
-      @remove-task="removeTaskFromWeek"
-    />
+      <!-- Weekly Objective Banner -->
+      <SprintObjectiveBanner
+        :objective="currentObjective"
+        @save="onSaveObjective"
+      />
 
-    <!-- Add Target to This Week Modal -->
-    <AddTargetModal
-      v-if="showAddTargetModal"
-      :initial-tab="activeModalTab"
-      :week-label="weekLabel"
-      :unassigned-tasks="unassignedBacklogTasks"
-      :projects="projects || []"
-      :submitting="isSubmittingDeliverable"
-      @close="showAddTargetModal = false"
-      @add-existing="addExistingTaskToWeek"
-      @create-deliverable="onCreateDeliverable"
-    />
+      <!-- Solo Telemetry 4-Column Bento Strip -->
+      <WeeklyMetricsBento
+        :week-label="weekLabel"
+        :remaining-days-text="remainingDaysText"
+        :completion-percentage="completionPercentage"
+        :completed-count="completedCount"
+        :total-deliverables-count="totalDeliverablesCount"
+        :in-flight-count="inFlightCount"
+        :pending-count="pendingCount"
+      />
+
+      <!-- Interactive Weekly Deliverables Matrix -->
+      <DeliverablesMatrix
+        v-model:filter="deliverablesFilter"
+        v-model:search-query="deliverablesSearchQuery"
+        :deliverables="filteredDeliverables"
+        :total-targets-count="activeWeekTasks.length"
+        :in-flight-count="inFlightCount"
+        :pending-count="pendingCount"
+        :completed-count="completedCount"
+        :week-offset="weekOffset"
+        @return-current-week="goToCurrentWeek"
+        @open-modal="openModalWithTab"
+        @reset-filters="resetFilters"
+        @update-status="updateTaskStatus"
+        @remove-task="removeTaskFromWeek"
+      />
+
+      <!-- Add Target to This Week Modal -->
+      <AddTargetModal
+        v-if="showAddTargetModal"
+        :initial-tab="activeModalTab"
+        :week-label="weekLabel"
+        :unassigned-tasks="unassignedBacklogTasks"
+        :projects="workspaceStore.projects.value || []"
+        :submitting="isSubmittingDeliverable"
+        @close="showAddTargetModal = false"
+        @add-existing="addExistingTaskToWeek"
+        @create-deliverable="onCreateDeliverable"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
-import type { Sprint, Task, TaskStatus, TaskPriority, Project } from '~/types'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useSprints } from '~/composables/useSprints'
+import { useTasks } from '~/composables/useTasks'
+import { useSprintCalendar } from '~/composables/useSprintCalendar'
+import type { Sprint, Task, TaskStatus, TaskPriority } from '~/types'
 
-// Composables
+// Single Source of Truth Workspace Store
+const workspaceStore = useWorkspaceStore()
 const sprintsApi = useSprints()
 const tasksApi = useTasks()
-const projectsApi = useProjects()
+
 const {
   weekOffset,
-  baseDate,
   currentMonday,
   currentSunday,
   weekNum,
@@ -116,58 +232,75 @@ const {
   toIsoDate
 } = useSprintCalendar()
 
-// Server Data Fetching
-const { data: sprints, refresh: refreshSprints } = useLazyAsyncData<Sprint[]>(
-  'sprints',
-  () => sprintsApi.getSprints()
-)
+// Initialize workspace on mount if not yet initialized
+onMounted(async () => {
+  if (!workspaceStore.isInitialized.value) {
+    await workspaceStore.initializeWorkspace()
+  }
+})
 
-const { data: tasks, refresh: refreshTasks } = useLazyAsyncData<Task[]>(
-  'tasks-all',
-  () => tasksApi.getTasks()
-)
+// Deterministic 4-State Machine with Cache Resilience
+const sprintsDataState = computed<'LOADING' | 'ERROR' | 'SUCCESS_EMPTY' | 'READY'>(() => {
+  const sprintsList = workspaceStore.sprints.value || []
+  const hasSprints = sprintsList.length > 0
+  const sprintsHydration = workspaceStore.hydrationStatus.value.sprints
 
-const { data: projects } = useLazyAsyncData<Project[]>(
-  'projects-list',
-  () => projectsApi.getProjects()
-)
+  if (hasSprints) {
+    return 'READY'
+  }
+  if (sprintsHydration === 'error') {
+    return 'ERROR'
+  }
+  if (!workspaceStore.isInitialized.value || sprintsHydration === 'loading') {
+    return 'LOADING'
+  }
+  return 'SUCCESS_EMPTY'
+})
 
-// Active Sprint & Deliverables Linkage
+const isStaleDataWarning = computed(() => {
+  return workspaceStore.hydrationStatus.value.sprints === 'error' && (workspaceStore.sprints.value || []).length > 0
+})
+
+// Deterministic Active Sprint Resolution Hierarchy
 const activeSprint = computed<Sprint | undefined>(() => {
-  const list = sprints.value ?? []
+  const list = workspaceStore.sprints.value ?? []
   if (!list.length) return undefined
 
   const mondayIso = toIsoDate(currentMonday.value)
   const sundayIso = toIsoDate(currentSunday.value)
+  const currentYear = currentMonday.value.getFullYear()
 
-  // Prioritas 1: Cocokkan rentang tanggal minggu yang sedang dilihat
+  // Level 1: ISO date interval intersection
   const dateMatch = list.find((s) => {
     if (!s.startDate || !s.endDate) return false
     return s.startDate <= sundayIso && s.endDate >= mondayIso
   })
   if (dateMatch) return dateMatch
 
-  // Prioritas 2: Cocokkan label Week
-  const nameMatch = list.find((s) => s.name?.includes(`Week ${weekNum.value}`))
+  // Level 2: Year and week-number qualified name match
+  const nameMatch = list.find((s) => {
+    if (!s.name) return false
+    return s.name.includes(`Week ${weekNum.value}`) && s.name.includes(String(currentYear))
+  })
   if (nameMatch) return nameMatch
 
-  // Prioritas 3: Hanya jika di Current Week, cari yang berstatus active
+  // Level 3: Active status fallback ONLY for current week
   if (weekOffset.value === 0) {
-    return list.find((s) => s.status === 'active')
+    const activeMatch = list.find((s) => s.status === 'active')
+    if (activeMatch) return activeMatch
   }
 
+  // Level 4: Fallback undefined (DeliverablesMatrix renders contextual empty state)
   return undefined
 })
 
+// Deliverable Single Source of Truth
 const activeWeekTasks = computed<Task[]>(() => {
-  const allTasks = tasks.value ?? []
-  if (!allTasks.length || !activeSprint.value) return []
-
-  const sId = activeSprint.value.id
-  const taskIds = new Set(activeSprint.value.taskIds || [])
-
-  // Strict SSOT: Deliverables harus eksplisit terikat ke sprint ini
-  return allTasks.filter((t) => t.sprintId === sId || taskIds.has(t.id))
+  const sId = activeSprint.value?.id
+  if (!sId) return []
+  return (workspaceStore.tasks.value || []).filter(
+    (t) => t.sprintId === sId || (activeSprint.value?.taskIds && activeSprint.value.taskIds.includes(t.id))
+  )
 })
 
 async function ensureSprintForCurrentWeek(customObjective?: string): Promise<Sprint> {
@@ -182,37 +315,22 @@ async function ensureSprintForCurrentWeek(customObjective?: string): Promise<Spr
     status: 'active',
     objective: customObjective || currentObjective.value
   })
-  if (newSprint) {
-    if (sprints.value) {
-      sprints.value = [newSprint, ...sprints.value]
-    } else {
-      sprints.value = [newSprint]
-    }
-  }
-  await refreshSprints()
   return newSprint
 }
 
-// Objective
+// Objective Management (Zero localStorage)
 const DEFAULT_OBJECTIVE = 'Finalize core architecture deliverables and stabilize live production pipelines.'
-const activeWeekKey = computed(() => `week_${weekNum.value}_${currentMonday.value.getFullYear()}`)
+const isSavingObjective = ref(false)
 
 const currentObjective = computed<string>(() => {
-  if (activeSprint.value?.objective) {
-    return activeSprint.value.objective
-  }
-  if (import.meta.client) {
-    const saved = localStorage.getItem(`weekly_objective_${activeWeekKey.value}`)
-    if (saved) return saved
-  }
-  return DEFAULT_OBJECTIVE
+  return activeSprint.value?.objective || DEFAULT_OBJECTIVE
 })
 
 async function onSaveObjective(text: string) {
+  if (isSavingObjective.value) return
+  isSavingObjective.value = true
+
   const finalObj = text.trim() || DEFAULT_OBJECTIVE
-  if (import.meta.client) {
-    localStorage.setItem(`weekly_objective_${activeWeekKey.value}`, finalObj)
-  }
 
   try {
     if (activeSprint.value?.id) {
@@ -221,9 +339,10 @@ async function onSaveObjective(text: string) {
       await ensureSprintForCurrentWeek(finalObj)
     }
     showFeedback('Weekly objective updated')
-    await refreshSprints()
   } catch (err: any) {
     showFeedback('Failed to update objective: ' + (err.message || 'Unknown error'), 'error')
+  } finally {
+    isSavingObjective.value = false
   }
 }
 
@@ -248,6 +367,7 @@ const deliverablesSearchQuery = ref('')
 
 const filteredDeliverables = computed(() => {
   let list = activeWeekTasks.value
+
   if (deliverablesFilter.value === 'running') {
     list = list.filter((t) => t.status === 'running_sprint')
   } else if (deliverablesFilter.value === 'queue') {
@@ -288,11 +408,9 @@ function showFeedback(msg: string, type: 'success' | 'error' = 'success') {
   }, 4000)
 }
 
+// Task Status and Lifecycle via Tasks API (SSOT)
 async function updateTaskStatus(task: Task, newStatus: TaskStatus) {
   if (task.status === newStatus) return
-  const oldStatus = task.status
-  task.status = newStatus
-  if (tasks.value) tasks.value = [...tasks.value]
 
   try {
     await tasksApi.updateTask(task.id, { status: newStatus })
@@ -304,30 +422,15 @@ async function updateTaskStatus(task: Task, newStatus: TaskStatus) {
       blocked: 'Blocked'
     }
     showFeedback(`#${task.taskId || 'Task'} marked as ${statusLabels[newStatus]}`)
-    await Promise.all([refreshTasks(), refreshSprints()])
   } catch (err: any) {
-    task.status = oldStatus
-    if (tasks.value) tasks.value = [...tasks.value]
     showFeedback('Failed to update status: ' + (err.message || 'Unknown error'), 'error')
   }
 }
 
 async function removeTaskFromWeek(task: Task) {
   try {
-    task.sprintId = ''
-    if (activeSprint.value && activeSprint.value.taskIds) {
-      activeSprint.value.taskIds = activeSprint.value.taskIds.filter((id) => id !== task.id)
-    }
-    if (tasks.value) tasks.value = [...tasks.value]
-    if (sprints.value) sprints.value = [...sprints.value]
-
     await tasksApi.updateTask(task.id, { sprintId: '' })
-    if (activeSprint.value) {
-      const remainingIds = (activeSprint.value.taskIds || []).filter((id) => id !== task.id)
-      await sprintsApi.updateSprint(activeSprint.value.id, { taskIds: remainingIds })
-    }
     showFeedback(`Returned #${task.taskId || 'Task'} to general backlog`)
-    await Promise.all([refreshTasks(), refreshSprints()])
   } catch (err: any) {
     showFeedback('Failed to remove task: ' + (err.message || 'Unknown error'), 'error')
   }
@@ -344,7 +447,7 @@ function openModalWithTab(tab: 'backlog' | 'create') {
 }
 
 const unassignedBacklogTasks = computed(() => {
-  const all = tasks.value || []
+  const all = workspaceStore.tasks.value || []
   const currentAssignedIds = new Set(activeWeekTasks.value.map((t) => t.id))
   return all.filter((t) => !currentAssignedIds.has(t.id) && t.status !== 'deployed')
 })
@@ -352,25 +455,8 @@ const unassignedBacklogTasks = computed(() => {
 async function addExistingTaskToWeek(bt: Task) {
   try {
     const sprint = await ensureSprintForCurrentWeek()
-    bt.sprintId = sprint.id
-    const currentTaskIds = Array.isArray(sprint.taskIds) ? [...sprint.taskIds] : []
-    if (!currentTaskIds.includes(bt.id)) {
-      currentTaskIds.push(bt.id)
-      sprint.taskIds = currentTaskIds
-    }
-    if (tasks.value) tasks.value = [...tasks.value]
-    if (sprints.value) {
-      const sIdx = sprints.value.findIndex((s) => s.id === sprint.id)
-      if (sIdx !== -1) {
-        sprints.value[sIdx] = { ...sprint, taskIds: currentTaskIds }
-        sprints.value = [...sprints.value]
-      }
-    }
-
     await tasksApi.updateTask(bt.id, { sprintId: sprint.id })
-    await sprintsApi.updateSprint(sprint.id, { taskIds: currentTaskIds })
     showFeedback(`Added #${bt.taskId || 'Task'} to ${weekLabel.value}`)
-    await Promise.all([refreshTasks(), refreshSprints()])
   } catch (err: any) {
     showFeedback('Failed to assign task: ' + (err.message || 'Unknown error'), 'error')
   }
@@ -400,35 +486,8 @@ async function onCreateDeliverable(payload: {
       date: toIsoDate(new Date())
     })
 
-    if (newTask) {
-      const currentList = tasks.value ? [...tasks.value] : []
-      const filtered = currentList.filter((t) => t.id !== newTask.id)
-      tasks.value = [newTask, ...filtered]
-
-      if (sprint) {
-        const currentTaskIds = Array.isArray(sprint.taskIds) ? [...sprint.taskIds] : []
-        if (!currentTaskIds.includes(newTask.id)) {
-          currentTaskIds.push(newTask.id)
-          sprint.taskIds = currentTaskIds
-        }
-
-        if (sprints.value) {
-          const sIdx = sprints.value.findIndex((s) => s.id === sprint.id)
-          if (sIdx !== -1) {
-            sprints.value[sIdx] = { ...sprint, taskIds: currentTaskIds }
-            sprints.value = [...sprints.value]
-          } else {
-            sprints.value = [sprint, ...sprints.value]
-          }
-        }
-
-        await sprintsApi.updateSprint(sprint.id, { taskIds: currentTaskIds })
-      }
-    }
-
     showAddTargetModal.value = false
     showFeedback(`Created #${newTask?.taskId || 'deliverable'} and committed to focus`)
-    await Promise.all([refreshTasks(), refreshSprints()])
   } catch (err: any) {
     showFeedback('Failed to create deliverable: ' + (err.message || 'Unknown error'), 'error')
   } finally {

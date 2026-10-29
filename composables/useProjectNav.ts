@@ -1,4 +1,4 @@
-export type ProjectTabId = 'dashboard' | 'kanban' | 'matrix' | 'github' | 'vercel' | 'supabase'
+export type ProjectTabId = 'dashboard' | 'kanban' | 'matrix' | 'github' | 'vercel' | 'notes'
 
 export function useProjectNav() {
   const activeTab = useState<ProjectTabId>('projectNav_activeTab', () => 'dashboard')

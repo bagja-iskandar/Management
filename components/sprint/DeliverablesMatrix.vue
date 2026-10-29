@@ -72,40 +72,101 @@
       </div>
     </div>
 
-    <!-- Empty State: No deliverables committed to this week -->
+    <!-- Temporal-Aware Empty State: No deliverables committed to this week -->
     <div
       v-if="totalTargetsCount === 0"
       class="py-14 px-6 text-center rounded-xl bg-[#07080A]/60 border border-dashed border-white/[0.08] space-y-4"
     >
-      <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(99,102,241,0.15)]">
-        <NexuraIcon name="Target" size="md" class="text-indigo-400" />
-      </div>
-      <div class="space-y-1">
-        <h3 class="font-sans text-base font-semibold text-[#F3F4F6]">
-          No deliverables committed to this week
-        </h3>
-        <p class="font-sans text-xs text-[#8A8F9E] max-w-md mx-auto">
-          Focus your execution cycle by pulling active tasks from your project backlog or creating a new tactical target.
-        </p>
-      </div>
-      <div class="flex items-center justify-center gap-3 pt-2 flex-wrap">
-        <button
-          type="button"
-          class="px-3.5 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] font-sans text-xs border border-white/[0.08] transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
-          @click="$emit('open-modal', 'backlog')"
-        >
-          <NexuraIcon name="Plus" size="xs" />
-          <span>Add Existing Task from Backlog</span>
-        </button>
-        <button
-          type="button"
-          class="px-3.5 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-medium transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
-          @click="$emit('open-modal', 'create')"
-        >
-          <NexuraIcon name="Zap" size="xs" />
-          <span>Create New Deliverable</span>
-        </button>
-      </div>
+      <!-- Past Week (< 0) -->
+      <template v-if="(weekOffset ?? 0) < 0">
+        <div class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] text-[#8A8F9E] flex items-center justify-center mx-auto">
+          <NexuraIcon name="History" size="md" class="text-[#8A8F9E]" />
+        </div>
+        <div class="space-y-1">
+          <h3 class="font-sans text-base font-semibold text-[#F3F4F6]">
+            Sprint Cycle Concluded
+          </h3>
+          <p class="font-sans text-xs text-[#8A8F9E] max-w-md mx-auto">
+            This historical sprint cycle has concluded with no recorded deliverables committed.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3 pt-2">
+          <button
+            type="button"
+            class="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-sans text-xs font-medium transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer shadow-sm"
+            @click="$emit('return-current-week')"
+          >
+            <NexuraIcon name="ArrowLeft" size="xs" />
+            <span>Return to Current Week</span>
+          </button>
+        </div>
+      </template>
+
+      <!-- Current Week (=== 0) -->
+      <template v-else-if="(weekOffset ?? 0) === 0">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+          <NexuraIcon name="Target" size="md" class="text-indigo-400" />
+        </div>
+        <div class="space-y-1">
+          <h3 class="font-sans text-base font-semibold text-[#F3F4F6]">
+            No deliverables committed to this week
+          </h3>
+          <p class="font-sans text-xs text-[#8A8F9E] max-w-md mx-auto">
+            Focus your execution cycle by pulling active tasks from your project backlog or creating a new tactical target.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3 pt-2 flex-wrap">
+          <button
+            type="button"
+            class="px-3.5 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] font-sans text-xs border border-white/[0.08] transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+            @click="$emit('open-modal', 'backlog')"
+          >
+            <NexuraIcon name="Plus" size="xs" />
+            <span>Add Existing Task from Backlog</span>
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-medium transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+            @click="$emit('open-modal', 'create')"
+          >
+            <NexuraIcon name="Zap" size="xs" />
+            <span>Create Tactical Target</span>
+          </button>
+        </div>
+      </template>
+
+      <!-- Future Week (> 0) -->
+      <template v-else>
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+          <NexuraIcon name="Calendar" size="md" class="text-indigo-400" />
+        </div>
+        <div class="space-y-1">
+          <h3 class="font-sans text-base font-semibold text-[#F3F4F6]">
+            Upcoming Cycle — Open for Planning
+          </h3>
+          <p class="font-sans text-xs text-[#8A8F9E] max-w-md mx-auto">
+            Prepare for this future sprint by reserving backlog items or scoping tactical deliverables in advance.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3 pt-2 flex-wrap">
+          <button
+            type="button"
+            class="px-3.5 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] font-sans text-xs border border-white/[0.08] transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+            @click="$emit('open-modal', 'backlog')"
+          >
+            <NexuraIcon name="Plus" size="xs" />
+            <span>Plan from Backlog</span>
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-medium transition flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-indigo-500 cursor-pointer"
+            @click="$emit('open-modal', 'create')"
+          >
+            <NexuraIcon name="Zap" size="xs" />
+            <span>Create Target</span>
+          </button>
+        </div>
+      </template>
     </div>
 
     <!-- Filtered Empty State -->
@@ -280,15 +341,21 @@
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import type { Task, TaskPriority, TaskStatus } from '~/types'
 
-defineProps<{
-  deliverables: Task[]
-  totalTargetsCount: number
-  inFlightCount: number
-  pendingCount: number
-  completedCount: number
-  filter: string
-  searchQuery: string
-}>()
+withDefaults(
+  defineProps<{
+    deliverables: Task[]
+    totalTargetsCount: number
+    inFlightCount: number
+    pendingCount: number
+    completedCount: number
+    filter: string
+    searchQuery: string
+    weekOffset?: number
+  }>(),
+  {
+    weekOffset: 0
+  }
+)
 
 defineEmits<{
   (e: 'update:filter', val: string): void
@@ -297,6 +364,7 @@ defineEmits<{
   (e: 'reset-filters'): void
   (e: 'update-status', task: Task, status: TaskStatus): void
   (e: 'remove-task', task: Task): void
+  (e: 'return-current-week'): void
 }>()
 
 function getPriorityDotClass(priority?: TaskPriority | string) {
