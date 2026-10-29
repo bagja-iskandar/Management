@@ -99,7 +99,7 @@ test('Test 3: GitHub API route security audit (assertGitHubRepoAllowed enforceme
   assert.ok(fs.existsSync(githubApiDir), 'server/api/github directory must exist')
 
   const files = fs.readdirSync(githubApiDir).filter((f) => f.endsWith('.ts'))
-  assert.equal(files.length, 13, 'There must be exactly 13 .ts route handlers in server/api/github')
+  assert.equal(files.length, 14, 'There must be exactly 14 .ts route handlers in server/api/github')
 
   // repos.get.ts is the global endpoint listing authenticated user's repos and does NOT accept a target repo parameter
   const globalEndpoints = ['repos.get.ts']

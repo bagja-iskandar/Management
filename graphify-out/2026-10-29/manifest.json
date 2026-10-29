@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
-    "mtime": 1793272429.9201767,
-    "seen": 1793272554.4644852,
-    "ast_hash": "fa8897737dd9c29db2c49cf23b40af63",
+    "mtime": 1793273291.9896467,
+    "seen": 1793273357.4433649,
+    "ast_hash": "ea7756bd9f144f07936279521fb48508",
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
@@ -468,9 +468,9 @@
     "semantic_hash": ""
   },
   "server/api/telemetry.get.ts": {
-    "mtime": 1793273158.2183661,
-    "seen": 1793273210.5258176,
-    "ast_hash": "3482242b94999b956299bdc229e5b4ac",
+    "mtime": 1793273299.0712724,
+    "seen": 1793273357.5528743,
+    "ast_hash": "ab84fd41ad19a19671163f881871ac7b",
     "semantic_hash": ""
   },
   "composables/useGitHub.ts": {
@@ -540,9 +540,9 @@
     "semantic_hash": ""
   },
   "server/api/sprints/[id].put.ts": {
-    "mtime": 1789910958.4530234,
-    "seen": 1789911544.5465915,
-    "ast_hash": "b136697a77fe2465a4166cf9f890ab66",
+    "mtime": 1793274437.3847816,
+    "seen": 1793274575.2623875,
+    "ast_hash": "83047c989aaca6ef0970a4596c2cb3da",
     "semantic_hash": ""
   },
   "server/api/github/workflow-jobs.get.ts": {
@@ -1038,9 +1038,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/InfrastructureMeshCard.vue": {
-    "mtime": 1793272440.1414685,
-    "seen": 1793272554.501602,
-    "ast_hash": "a7426857c759e890f7bfe164cb939f28",
+    "mtime": 1793273228.4291792,
+    "seen": 1793273357.468339,
+    "ast_hash": "86867669a239dda023a4e23cc9c11b48",
     "semantic_hash": ""
   },
   "components/dashboard/LiveDevOpsStream.vue": {
@@ -1140,9 +1140,9 @@
     "semantic_hash": ""
   },
   "docs/master-remediation-plan.md": {
-    "mtime": 1793176617.1423523,
-    "seen": 1793180988.6875813,
-    "ast_hash": "6a7fa1f9baf95a7d281c2940875a6927",
+    "mtime": 1793273893.5766766,
+    "seen": 1793274575.296059,
+    "ast_hash": "5f7a554fe5f927021c8183d90bb4b281",
     "semantic_hash": ""
   },
   "docs/nexura-requirements-and-reaudit.md": {
@@ -1428,9 +1428,39 @@
     "semantic_hash": ""
   },
   "tests/unit/telemetry-workspace.spec.mjs": {
-    "mtime": 1793272487.6608999,
-    "seen": 1793272554.6953838,
-    "ast_hash": "971529ebc48d751e111cfca0b3c05826",
+    "mtime": 1793273287.5474403,
+    "seen": 1793273357.5933516,
+    "ast_hash": "7c1e0556c50c8b2cdc66bf9998f43a1f",
+    "semantic_hash": ""
+  },
+  ".phase11-backup/sprints.vue": {
+    "mtime": 1793264823.433428,
+    "seen": 1793274575.1957226,
+    "ast_hash": "9ab4dd805998d79d39bab3344b2055e2",
+    "semantic_hash": ""
+  },
+  "components/sprint/SprintRolloverModal.vue": {
+    "mtime": 1793274529.6016748,
+    "seen": 1793274575.2355275,
+    "ast_hash": "57a1918a9e4eaba1c4cb49535fae828d",
+    "semantic_hash": ""
+  },
+  "server/api/github/sync.post.ts": {
+    "mtime": 1793274529.2520835,
+    "seen": 1793274575.2530684,
+    "ast_hash": "03bd7dbf0c5882561d956f6bc13ec43d",
+    "semantic_hash": ""
+  },
+  "server/utils/github-sync.ts": {
+    "mtime": 1793274486.8486896,
+    "seen": 1793274575.2765238,
+    "ast_hash": "ee558faf1b384e79f2aa948452996603",
+    "semantic_hash": ""
+  },
+  "tests/unit/github-sync-automation.spec.mjs": {
+    "mtime": 1793274528.7806065,
+    "seen": 1793274575.2805128,
+    "ast_hash": "9b9c34552e5d7600cc2bc544a6d66d2b",
     "semantic_hash": ""
   }
 }

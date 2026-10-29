@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1793264823.433428,
-    "seen": 1793264892.6233861,
-    "ast_hash": "9ab4dd805998d79d39bab3344b2055e2",
+    "mtime": 1793274612.817868,
+    "seen": 1793274667.0321977,
+    "ast_hash": "4a2bc893d449ddaf75b5c7698110138f",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
@@ -540,9 +540,9 @@
     "semantic_hash": ""
   },
   "server/api/sprints/[id].put.ts": {
-    "mtime": 1789910958.4530234,
-    "seen": 1789911544.5465915,
-    "ast_hash": "b136697a77fe2465a4166cf9f890ab66",
+    "mtime": 1793274437.3847816,
+    "seen": 1793274575.2623875,
+    "ast_hash": "83047c989aaca6ef0970a4596c2cb3da",
     "semantic_hash": ""
   },
   "server/api/github/workflow-jobs.get.ts": {
@@ -1140,9 +1140,9 @@
     "semantic_hash": ""
   },
   "docs/master-remediation-plan.md": {
-    "mtime": 1793176617.1423523,
-    "seen": 1793180988.6875813,
-    "ast_hash": "6a7fa1f9baf95a7d281c2940875a6927",
+    "mtime": 1793273893.5766766,
+    "seen": 1793274575.296059,
+    "ast_hash": "5f7a554fe5f927021c8183d90bb4b281",
     "semantic_hash": ""
   },
   "docs/nexura-requirements-and-reaudit.md": {
@@ -1308,9 +1308,9 @@
     "semantic_hash": ""
   },
   "tests/unit/security-headers.spec.mjs": {
-    "mtime": 1793017554.4196846,
-    "seen": 1793017619.009789,
-    "ast_hash": "5c771f3a125ffe85eb7671900092213d",
+    "mtime": 1793274594.1203783,
+    "seen": 1793274667.113149,
+    "ast_hash": "c3784f00da46d25dcd7e67943ab5147a",
     "semantic_hash": ""
   },
   "tests/unit/route-security.spec.mjs": {
@@ -1431,6 +1431,36 @@
     "mtime": 1793273287.5474403,
     "seen": 1793273357.5933516,
     "ast_hash": "7c1e0556c50c8b2cdc66bf9998f43a1f",
+    "semantic_hash": ""
+  },
+  ".phase11-backup/sprints.vue": {
+    "mtime": 1793264823.433428,
+    "seen": 1793274575.1957226,
+    "ast_hash": "9ab4dd805998d79d39bab3344b2055e2",
+    "semantic_hash": ""
+  },
+  "components/sprint/SprintRolloverModal.vue": {
+    "mtime": 1793274529.6016748,
+    "seen": 1793274575.2355275,
+    "ast_hash": "57a1918a9e4eaba1c4cb49535fae828d",
+    "semantic_hash": ""
+  },
+  "server/api/github/sync.post.ts": {
+    "mtime": 1793274529.2520835,
+    "seen": 1793274575.2530684,
+    "ast_hash": "03bd7dbf0c5882561d956f6bc13ec43d",
+    "semantic_hash": ""
+  },
+  "server/utils/github-sync.ts": {
+    "mtime": 1793274614.9830256,
+    "seen": 1793274667.105381,
+    "ast_hash": "9b6be78e26131cd08db960a53f921aa2",
+    "semantic_hash": ""
+  },
+  "tests/unit/github-sync-automation.spec.mjs": {
+    "mtime": 1793274528.7806065,
+    "seen": 1793274575.2805128,
+    "ast_hash": "9b9c34552e5d7600cc2bc544a6d66d2b",
     "semantic_hash": ""
   }
 }

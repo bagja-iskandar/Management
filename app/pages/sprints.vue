@@ -119,6 +119,56 @@
         @open-modal="openModalWithTab"
       />
 
+      <!-- Sprint Action Sub-bar: GitHub Sync & Sprint Rollover -->
+      <div class="flex items-center justify-between gap-3 flex-wrap pb-1">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-xs text-[#8A8F9E]">
+            Cycle Execution:
+          </span>
+          <span
+            class="font-mono text-xs px-2.5 py-0.5 rounded-full border"
+            :class="incompleteDeliverables.length > 0 ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'"
+          >
+            {{ incompleteDeliverables.length > 0 ? `${incompleteDeliverables.length} Incomplete Deliverables` : 'All Deliverables Deployed' }}
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Sync GitHub Button -->
+          <button
+            type="button"
+            :disabled="isSyncingGitHub"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111318] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.08] hover:border-white/[0.16] text-xs font-mono transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+            title="Synchronize PRs, branches, and commit status from GitHub"
+            @click="onSyncGitHub"
+          >
+            <NexuraIcon
+              name="GitPullRequest"
+              size="xs"
+              class="text-indigo-400"
+              :class="{ 'animate-spin': isSyncingGitHub }"
+            />
+            <span>{{ isSyncingGitHub ? 'Syncing...' : 'Sync GitHub' }}</span>
+          </button>
+
+          <!-- Rollover Sprint Button -->
+          <button
+            type="button"
+            :disabled="incompleteDeliverables.length === 0 || isRollingOver"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:bg-white/[0.04] disabled:text-[#565B68] disabled:border-white/[0.06] text-white border border-indigo-500/30 text-xs font-mono font-medium transition active:scale-95 disabled:cursor-not-allowed cursor-pointer shadow-sm"
+            :title="incompleteDeliverables.length === 0 ? 'No incomplete deliverables to rollover' : 'Rollover incomplete deliverables to next sprint cycle'"
+            @click="isRolloverModalOpen = true"
+          >
+            <NexuraIcon
+              name="FastForward"
+              size="xs"
+              :class="{ 'animate-pulse': incompleteDeliverables.length > 0 && !isRollingOver }"
+            />
+            <span>Rollover Sprint ({{ incompleteDeliverables.length }})</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Feedback Toast -->
       <transition
         enter-active-class="transition duration-200 ease-out"
@@ -200,6 +250,17 @@
         @add-existing="addExistingTaskToWeek"
         @create-deliverable="onCreateDeliverable"
       />
+
+      <!-- Sprint Rollover Modal -->
+      <SprintRolloverModal
+        :show="isRolloverModalOpen"
+        :current-week-label="weekLabel"
+        :next-week-label="nextWeekLabel"
+        :incomplete-deliverables="incompleteDeliverables"
+        :is-rolling-over="isRollingOver"
+        @close="isRolloverModalOpen = false"
+        @confirm="onConfirmRollover"
+      />
     </div>
   </div>
 </template>
@@ -207,10 +268,16 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import SprintRolloverModal from '~~/components/sprint/SprintRolloverModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useSprints } from '~/composables/useSprints'
 import { useTasks } from '~/composables/useTasks'
-import { useSprintCalendar } from '~/composables/useSprintCalendar'
+import {
+  useSprintCalendar,
+  getSunday,
+  getWeekNumber,
+  toIsoDate
+} from '~/composables/useSprintCalendar'
 import type { Sprint, Task, TaskStatus, TaskPriority } from '~/types'
 
 // Single Source of Truth Workspace Store
@@ -228,9 +295,13 @@ const {
   remainingDaysText,
   goToPrevWeek,
   goToNextWeek,
-  goToCurrentWeek,
-  toIsoDate
+  goToCurrentWeek
 } = useSprintCalendar()
+
+// GitHub Sync and Rollover States
+const isSyncingGitHub = ref(false)
+const isRolloverModalOpen = ref(false)
+const isRollingOver = ref(false)
 
 // Initialize workspace on mount if not yet initialized
 onMounted(async () => {
@@ -302,6 +373,70 @@ const activeWeekTasks = computed<Task[]>(() => {
     (t) => t.sprintId === sId || (activeSprint.value?.taskIds && activeSprint.value.taskIds.includes(t.id))
   )
 })
+
+// Incomplete deliverables in active week
+const incompleteDeliverables = computed<Task[]>(() => {
+  return activeWeekTasks.value.filter((t) => t.status !== 'deployed')
+})
+
+// Next Week Calendar Geometry
+const nextWeekMonday = computed(() => {
+  const d = new Date(currentMonday.value)
+  d.setDate(d.getDate() + 7)
+  return d
+})
+const nextWeekSunday = computed(() => getSunday(nextWeekMonday.value))
+const nextWeekNum = computed(() => getWeekNumber(nextWeekMonday.value))
+
+const nextWeekLabel = computed(() => {
+  const start = nextWeekMonday.value
+  const end = nextWeekSunday.value
+  const startDay = start.getDate()
+  const endDay = end.getDate()
+  const startMonth = start.toLocaleDateString('en-US', { month: 'short' })
+  const endMonth = end.toLocaleDateString('en-US', { month: 'short' })
+  const startYear = start.getFullYear()
+  const endYear = end.getFullYear()
+
+  if (startYear !== endYear) {
+    return `Week ${nextWeekNum.value} • ${startDay} ${startMonth} ${startYear} – ${endDay} ${endMonth} ${endYear}`
+  }
+  if (startMonth !== endMonth) {
+    return `Week ${nextWeekNum.value} • ${startDay} ${startMonth} – ${endDay} ${endMonth} ${startYear}`
+  }
+  return `Week ${nextWeekNum.value} • ${startDay}–${endDay} ${startMonth} ${startYear}`
+})
+
+async function ensureSprintForWeek(monday: Date, sunday: Date, label: string): Promise<Sprint> {
+  const mondayIso = toIsoDate(monday)
+  const sundayIso = toIsoDate(sunday)
+  const weekNumber = getWeekNumber(monday)
+  const year = monday.getFullYear()
+
+  const list = workspaceStore.sprints.value || []
+  const existing = list.find((s) => {
+    if (s.startDate && s.endDate && s.startDate <= sundayIso && s.endDate >= mondayIso) {
+      return true
+    }
+    if (s.name && s.name.includes(`Week ${weekNumber}`) && s.name.includes(String(year))) {
+      return true
+    }
+    return false
+  })
+
+  if (existing) {
+    return existing
+  }
+
+  const newSprint = await sprintsApi.createSprint({
+    name: label,
+    startDate: mondayIso,
+    endDate: sundayIso,
+    status: 'active',
+    objective: DEFAULT_OBJECTIVE
+  })
+  return newSprint
+}
 
 async function ensureSprintForCurrentWeek(customObjective?: string): Promise<Sprint> {
   if (activeSprint.value) return activeSprint.value
@@ -492,6 +627,63 @@ async function onCreateDeliverable(payload: {
     showFeedback('Failed to create deliverable: ' + (err.message || 'Unknown error'), 'error')
   } finally {
     isSubmittingDeliverable.value = false
+  }
+}
+
+// GitHub Sync Action
+async function onSyncGitHub() {
+  if (isSyncingGitHub.value) return
+  isSyncingGitHub.value = true
+
+  try {
+    const res = await $fetch<{
+      success?: boolean
+      syncedCount?: number
+      deployedCount?: number
+      message?: string
+    }>('/api/github/sync', { method: 'POST' })
+
+    const synced = res?.syncedCount ?? 0
+    const deployed = res?.deployedCount ?? 0
+    showFeedback(res?.message || `GitHub Sync: ${synced} deliverables updated, ${deployed} deployed`)
+    await workspaceStore.initializeWorkspace(true)
+  } catch (err: any) {
+    showFeedback(`GitHub sync failed: ${err.message || 'Network error'}`, 'error')
+  } finally {
+    isSyncingGitHub.value = false
+  }
+}
+
+// Sprint Rollover Action
+async function onConfirmRollover(markCurrentCompleted: boolean) {
+  if (isRollingOver.value || incompleteDeliverables.value.length === 0) return
+  isRollingOver.value = true
+
+  try {
+    // 1. Ensure target next week's sprint exists
+    const targetSprint = await ensureSprintForWeek(
+      nextWeekMonday.value,
+      nextWeekSunday.value,
+      nextWeekLabel.value
+    )
+
+    // 2. Mutate incomplete deliverables to target sprint
+    const tasksToMove = [...incompleteDeliverables.value]
+    for (const task of tasksToMove) {
+      await tasksApi.updateTask(task.id, { sprintId: targetSprint.id })
+    }
+
+    // 3. Mark current sprint as completed if checkbox was enabled
+    if (markCurrentCompleted && activeSprint.value?.id) {
+      await sprintsApi.updateSprint(activeSprint.value.id, { status: 'completed' })
+    }
+
+    showFeedback(`Successfully rolled over ${tasksToMove.length} deliverable${tasksToMove.length > 1 ? 's' : ''} to next sprint`)
+    isRolloverModalOpen.value = false
+  } catch (err: any) {
+    showFeedback(`Rollover failed: ${err.message || 'Unknown error'}`, 'error')
+  } finally {
+    isRollingOver.value = false
   }
 }
 </script>
