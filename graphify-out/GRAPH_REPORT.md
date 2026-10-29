@@ -1,17 +1,17 @@
-# Graph Report - Management  (2026-10-28)
+# Graph Report - Management  (2026-10-29)
 
 ## Corpus Check
-- 227 files · ~202,500 words
+- 229 files · ~207,033 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: .example 1, (none) 1, .css 1)
 
 ## Summary
-- 2507 nodes · 3337 edges · 184 communities (152 shown, 14 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 96 edges (avg confidence: 0.85)
+- 2555 nodes · 3386 edges · 176 communities (145 shown, 13 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 99 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a75e7407`
+- Built from commit: `1d2a5a08`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -59,12 +59,12 @@
 - priorityTasksList
 - NEXURA_SYSTEM_SPEC.md — Spesifikasi Sistem & Blueprint Transformasi
 - ROADMAP.md — Nexura Evolution Roadmap
-- handler.ts
-- ISprintRepository
+- isNetworkError
+- EditProjectModal.vue
 - AddTargetModal.vue
 - onUpdateTaskStatus
 - types/github.ts
-- createGitHubClient
+- repositories/index.ts
 - repos.vue
 - roadmap.vue
 - sprints.vue
@@ -74,7 +74,7 @@
 - DeploymentModal.vue
 - useGitHub.ts
 - OmniSearchInput.vue
-- ProjectSupabaseTab.vue
+- ENGINEERING.md — Standar Engineering & Conventions
 - useStats
 - TaskDrawer.vue
 - HeaderSearch.vue
@@ -88,10 +88,10 @@
 - OmniSearchPreviewPane.vue
 - useProjectNav
 - TaskQueue.vue
-- helper.ts
+- projects-workspace.spec.mjs
 - ProjectLiveDeploymentCard.vue
 - 3. Spesifikasi Skema Data
-- isNetworkError
+- ITaskRepository
 - HeaderBar.vue
 - ConfirmDialog.vue
 - app.vue
@@ -99,7 +99,7 @@
 - notes/IdeaScratchpadPanel.vue
 - SecurityBadge.vue
 - 1. Kondisi Engineering
-- KanbanColumn.vue
+- note.schema.ts
 - useTasks
 - ProjectSecurityCard.vue
 - PackageModal.vue
@@ -115,7 +115,7 @@
 - workspace-store.spec.mjs
 - normalizeStatus
 - WorkspacePulse.vue
-- telemetry.vue
+- useSprintCalendar
 - FASE 0: Security Lockdown, Database Alignment & Core Safety
 - omni-search.spec.mjs
 - FASE 11: Otomasi Lanjutan & GitHub Sync
@@ -138,53 +138,45 @@
 - PackageBadge.vue
 - 20.3. Rekomendasi Sistem Global Baru Selain Search (`RECOMMENDATION`)
 - 7. System-Wide Engineering Audit
-- session.post.ts
+- github-allowlist.spec.mjs
 - BLOK 2: REMEDIASI 1 HALAMAN PER FASE
 - 16. Implementation Roadmap
 - 20.2. Rekomendasi Memaksimalkan Fitur `OmniSearch` (`RECOMMENDATION`)
 - SessionAuthModal.vue
 - closeSearch
 - FASE 2: Global OmniSearch & Command Engine (`⌘K` / `Ctrl+K`)
-- useSprintCalendar
+- emit
 - 6. Cross-Page Workflow Analysis
 - SprintObjectiveBanner.vue
-- repositories/index.ts
+- useWorkspaceStore.ts
 - 10. Testing and Quality Assurance Assessment
 - 13. Recommended Features
 - 14. Features to Simplify, Remove, or Defer
 - 2. Audit Scope and Methodology
 - 11. GitHub and Development Workflow Recommendations
 - 8. Data Model and Business Rule Analysis
+- NitroProjectRepository
 - RecentShipmentsCard.vue
 - FASE 13: Dead Code Pruning & Final Audit Sign-Off
-- IProjectRepository
-- types/index.ts
-- FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)
-- FASE 4: Halaman Dashboard Command Center (`/`)
-- task.schema.ts
-- FASE 5: Halaman Projects Hub (`/projects`)
-- ENGINEERING.md — Standar Engineering & Conventions
-- note.schema.ts
-- ProjectTaskMatrix.vue
-- ITaskRepository
-- NitroSprintRepository
-- session-auth.spec.mjs
-- FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)
-- FASE 8: Halaman Release Phase Roadmap (`/roadmap`)
-- FASE 9: Halaman Repositories Catalog (`/repos`)
-- FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)
+- ProjectSupabaseTab.vue
 - 2. Color Tokens (`tailwind.config.ts` & CSS Variables)
-- security.get.ts
+- 1. Executive Summary & Latar Belakang Arsitektur
+- 4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)
+- FASE 1: Global Workspace Store & Shell Infrastructure
+- FASE 12: CI/CD Quality Gate & Automated Tests
+- StorageAdapter
 - 5. Component Design Specifications
+- ProjectTaskMatrix.vue
 - 2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+)
-- deleteTask
+- ISprintRepository
+- session-auth.spec.mjs
 - 3. Naming Conventions
 - 4. API Convention
 - 5. Data Flow Patterns
-- StorageAdapter
+- deleteTask
 
 ## God Nodes (most connected - your core abstractions)
-1. `vue` - 67 edges
+1. `vue` - 69 edges
 2. `withApiHandler()` - 37 edges
 3. `useWorkspaceStore()` - 32 edges
 4. `isNetworkError()` - 29 edges
@@ -210,7 +202,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (184 total, 14 thin omitted)
+## Communities (176 total, 13 thin omitted)
 
 ### Community 0 - "WorkflowBadge.vue"
 Cohesion: 0.12
@@ -229,12 +221,12 @@ Cohesion: 0.03
 Nodes (59): activeDrawerTask, activeTabLiveUrl, { activity: projectPullsIssues, pending: pullsIssuesPending, refresh: refreshPullsIssues }, { branches, pending: branchesPending }, { commits, pending: commitsPending }, commitsCount, completedCount, confirmDeleteProject (+51 more)
 
 ### Community 4 - "projects/index.vue"
-Cohesion: 0.10
-Nodes (18): activeCount, activeStatus, allCount, completedCount, { data: serverProjects, error: projectsError, refresh: refreshProjects }, displayProjects, filteredProjects, getDerivedStatus() (+10 more)
+Cohesion: 0.07
+Nodes (21): activeCount, activeStatus, ActiveStatusFilter, allCount, archivedCount, completedCount, editingProject, filteredProjects (+13 more)
 
 ### Community 5 - "KanbanBoard.vue"
-Cohesion: 0.10
-Nodes (21): activeDragTask, blockedTasks, deployedTasks, draggingTaskId, dragOverColumn, dragPosition, emit, ideaTasks (+13 more)
+Cohesion: 0.07
+Nodes (28): badgeClass, containerBorderClass, headerBorderClass, props, quickAddBtnClass, titleClass, topAddBtnClass, activeDragTask (+20 more)
 
 ### Community 6 - "dashboard-command-center.spec.mjs"
 Cohesion: 0.08
@@ -337,8 +329,8 @@ Cohesion: 0.20
 Nodes (9): Context, Do not use this skill when, Instructions, Output Format, Refactor and Clean Code, Requirements, Resources, Safety (+1 more)
 
 ### Community 34 - "Dashboard.vue"
-Cohesion: 0.09
-Nodes (17): hasAlerts, props, activeProjects, activeSprint, blockedTasks, completionRate, deployedTasksCount, highPriorityCount (+9 more)
+Cohesion: 0.05
+Nodes (33): hasAlerts, props, activeProjects, activeSprint, blockedTasks, completionRate, deployedTasksCount, highPriorityCount (+25 more)
 
 ### Community 35 - "PROJECT.md — Identitas, Tujuan, Scope, dan Target Sistem Nexura"
 Cohesion: 0.15
@@ -368,13 +360,13 @@ Nodes (8): 1. Filosofi & Visi Sistem, 2. Matriks Komparasi: Eksisting vs Target,
 Cohesion: 0.05
 Nodes (39): 10a. ⏳ Supabase Client & Storage Adapter, 10b. ⏳ SQL Migration, 10c. ⏳ Data Migration Script, 11a. ⏳ Vercel API Endpoints, 11b. ⏳ New Pages & Integration Points, 12a. ⏳ Lightweight Auth, 12b. ⏳ Data Backup & Export/Import, 12c. ⏳ Production Build & Deploy (+31 more)
 
-### Community 47 - "handler.ts"
-Cohesion: 0.22
-Nodes (5): fetchCachedRepos, noteRepository, sprintRepository, taskRepository, withApiHandler()
+### Community 47 - "isNetworkError"
+Cohesion: 0.18
+Nodes (6): IProjectRepository, ProjectFilterOptions, isNetworkError(), mapProjectRow(), mapProjectToRow(), SupabaseProjectRepository
 
-### Community 48 - "ISprintRepository"
-Cohesion: 0.20
-Nodes (4): ISprintRepository, mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository
+### Community 48 - "EditProjectModal.vue"
+Cohesion: 0.11
+Nodes (19): deployUrl, description, dialogRef, dueDate, emit, githubRepo, isSubmitting, onCancel() (+11 more)
 
 ### Community 49 - "AddTargetModal.vue"
 Cohesion: 0.15
@@ -384,13 +376,13 @@ Nodes (12): activeTab, dueDate, emit, filteredBacklog, handleSubmit(), name, pri
 Cohesion: 0.11
 Nodes (17): GitHubBranch, GitHubCommit, GitHubCommitCheck, GitHubCommitFile, GitHubCommitItem, GitHubDeploymentItem, GitHubDeploymentStatus, GitHubIssueItem (+9 more)
 
-### Community 52 - "createGitHubClient"
-Cohesion: 0.22
-Nodes (16): fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages, fetchCachedPullsAndIssues, fetchCachedWorkflowJobs (+8 more)
+### Community 52 - "repositories/index.ts"
+Cohesion: 0.05
+Nodes (68): zod, sessionSchema, fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages (+60 more)
 
 ### Community 53 - "repos.vue"
 Cohesion: 0.06
-Nodes (30): branchesData, commitsData, config, confirmRemoveDialog, connectForm, { data: projects, refresh: refreshProjects }, detailsLoading, displayRepos (+22 more)
+Nodes (33): refreshProjects(), branchesData, commitsData, config, confirmRemoveDialog, connectForm, { data: projects, refresh: refreshProjects }, detailsLoading (+25 more)
 
 ### Community 54 - "roadmap.vue"
 Cohesion: 0.17
@@ -436,13 +428,13 @@ Nodes (10): inputPlaceholder, inputRef, leadingIcon, leadingIconColor, onTabPres
   closeSearch
 } (+2 more)
 
-### Community 63 - "ProjectSupabaseTab.vue"
-Cohesion: 0.25
-Nodes (6): config, copied, migrations, projectRef, props, tables
+### Community 63 - "ENGINEERING.md — Standar Engineering & Conventions"
+Cohesion: 0.22
+Nodes (5): 6. Testing (Target), 7. Environment Variables, ENGINEERING.md — Standar Engineering & Conventions, Minimum Target, Tooling (ketika diimplementasikan)
 
 ### Community 65 - "TaskDrawer.vue"
-Cohesion: 0.07
-Nodes (28): availableProjects, ChecklistItem, checklistItems, currentTask, displayTaskId, effectiveIsOpen, effectiveRepo, effectiveTaskId (+20 more)
+Cohesion: 0.08
+Nodes (21): availableProjects, ChecklistItem, checklistItems, currentTask, displayTaskId, effectiveIsOpen, effectiveRepo, effectiveTaskId (+13 more)
 
 ### Community 66 - "HeaderSearch.vue"
 Cohesion: 0.07
@@ -481,12 +473,12 @@ Cohesion: 0.29
 Nodes (4): openRepo(), primaryActionLabel, { selectedItem, executeCurrent, executeSecondary }, safeOpenExternal()
 
 ### Community 76 - "TaskQueue.vue"
-Cohesion: 0.15
-Nodes (9): emit, onTaskClick(), priorityOrder, props, queueTasks, router, Task, TaskPriority (+1 more)
+Cohesion: 0.20
+Nodes (6): emit, onTaskClick(), priorityOrder, props, queueTasks, router
 
-### Community 77 - "helper.ts"
-Cohesion: 0.10
-Nodes (22): zod, projectRepository, CreateIssueInput, createIssueSchema, WorkflowRerunInput, workflowRerunSchema, validateBody(), validateQuery() (+14 more)
+### Community 77 - "projects-workspace.spec.mjs"
+Cohesion: 0.11
+Nodes (9): __dirname, __filename, filterAndSort(), getProgress(), jiti, nuxtState, projectRoot, { useProjects } (+1 more)
 
 ### Community 78 - "ProjectLiveDeploymentCard.vue"
 Cohesion: 0.15
@@ -496,9 +488,9 @@ Nodes (10): activeLiveUrl, copySuccess, deployedShortSha, deployedTimeAgo, envir
 Cohesion: 0.33
 Nodes (6): 3.1 `types/task.ts`, 3.2 `types/project.ts`, 3.3 `types/sprint.ts` (Baru), 3.4 `types/github.ts` (Baru), 3.5 `types/note.ts` (Baru), 3. Spesifikasi Skema Data
 
-### Community 80 - "isNetworkError"
-Cohesion: 0.20
-Nodes (8): TaskFilterOptions, isNetworkError(), mapProjectRow(), mapProjectToRow(), SupabaseProjectRepository, mapTaskRow(), mapTaskToRow(), SupabaseTaskRepository
+### Community 80 - "ITaskRepository"
+Cohesion: 0.15
+Nodes (5): ITaskRepository, TaskFilterOptions, mapTaskRow(), mapTaskToRow(), SupabaseTaskRepository
 
 ### Community 81 - "HeaderBar.vue"
 Cohesion: 0.14
@@ -509,8 +501,8 @@ Cohesion: 0.16
 Nodes (15): cancelButton, descId, displayBusy, displayCancelText, displayConfirmText, displayMessage, displayTitle, emits (+7 more)
 
 ### Community 83 - "app.vue"
-Cohesion: 0.11
-Nodes (16): handleGlobalKeydown(), { isAddTaskOpen, openAddTask, closeAddTask }, { isDrawerOpen, activeTaskId, closeTaskDrawer }, { isOpen: isOmniSearchOpen, toggleSearch, openSearch }, projectOptions, session, tasksApi, workspaceStore (+8 more)
+Cohesion: 0.16
+Nodes (10): handleGlobalKeydown(), { isAddTaskOpen, openAddTask, closeAddTask }, { isDrawerOpen, activeTaskId, closeTaskDrawer }, { isOpen: isOmniSearchOpen, toggleSearch, openSearch }, projectOptions, session, tasksApi, workspaceStore (+2 more)
 
 ### Community 84 - "useOmniSearch.ts"
 Cohesion: 0.13
@@ -534,9 +526,9 @@ Nodes (9): badgeContainerClasses, badgeIcon, badgeText, badgeTooltip, hasAlerts,
 Cohesion: 0.33
 Nodes (6): 1. Kondisi Engineering, Client / Frontend Layer, Composables, Semua Masalah Historis — Resolved, Server / API Layer, TypeScript
 
-### Community 88 - "KanbanColumn.vue"
-Cohesion: 0.14
-Nodes (12): badgeClass, containerBorderClass, headerBorderClass, props, quickAddBtnClass, titleClass, topAddBtnClass, displayTaskId (+4 more)
+### Community 88 - "note.schema.ts"
+Cohesion: 0.13
+Nodes (10): markSupabaseOffline(), markSupabaseOnline(), createNoteSchema, noteCategorySchema, NoteQueryInput, noteQuerySchema, PromoteNoteInput, promoteNoteSchema (+2 more)
 
 ### Community 90 - "ProjectSecurityCard.vue"
 Cohesion: 0.25
@@ -555,8 +547,8 @@ Cohesion: 0.22
 Nodes (3): latestRun, props, recentRuns
 
 ### Community 94 - "vue"
-Cohesion: 0.17
-Nodes (8): isPinging, pingResult, props, svgClass, packagesList, props, totalPackages, vue
+Cohesion: 0.11
+Nodes (13): { data: telemetryData, status, refresh: refreshTelemetry }, isRefreshing, ratePercent, resetMinutes, TelemetryResponse, isPinging, pingResult, props (+5 more)
 
 ### Community 95 - "ProjectExecutionOverview.vue"
 Cohesion: 0.15
@@ -586,21 +578,21 @@ Nodes (10): blockedCount, deployedCount, filteredTasks, getProjectName(), getSta
 Cohesion: 0.33
 Nodes (6): blockedCount, getLocalDateString(), overdueCount, props, pulseState, PulseStateType
 
-### Community 106 - "telemetry.vue"
-Cohesion: 0.29
-Nodes (5): { data: telemetryData, status, refresh: refreshTelemetry }, isRefreshing, ratePercent, resetMinutes, TelemetryResponse
+### Community 106 - "useSprintCalendar"
+Cohesion: 0.33
+Nodes (5): getMonday(), getSunday(), getWeekNumber(), toIsoDate(), useSprintCalendar()
 
 ### Community 107 - "FASE 0: Security Lockdown, Database Alignment & Core Safety"
-Cohesion: 0.18
-Nodes (11): 1. File yang Disentuh:, 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, 4. Gate Pengujian & Rollback Plan: (+3 more)
+Cohesion: 0.40
+Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 0: Security Lockdown, Database Alignment & Core Safety
 
 ### Community 108 - "omni-search.spec.mjs"
 Cohesion: 0.13
 Nodes (15): closeSearch(), __dirname, __filename, handleEscAction(), handleInputKeydown(), handleKeydown(), jiti, nuxtState (+7 more)
 
 ### Community 112 - "FASE 11: Otomasi Lanjutan & GitHub Sync"
-Cohesion: 0.18
-Nodes (11): 1. File yang Disentuh:, 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, 4. Gate Pengujian & Rollback Plan: (+3 more)
+Cohesion: 0.25
+Nodes (8): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, 5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok, BLOK 1: FONDASI ARSITEKTUR & FITUR GLOBAL, BLOK 3: OTOMASI SISTEM, PENGUJIAN & SIGN-OFF, FASE 11: Otomasi Lanjutan & GitHub Sync
 
 ### Community 113 - "useWorkspaceStore"
 Cohesion: 0.15
@@ -619,7 +611,7 @@ Cohesion: 0.50
 Nodes (3): __dirname, __filename, projectRoot
 
 ### Community 117 - "NexuraIcon.vue"
-Cohesion: 0.07
+Cohesion: 0.06
 Nodes (9): getIconRegistry(), IconSize, IconSizePreset, NexuraIconProps, numericStrokeWidth, props, resolvedIcon, resolvedSize (+1 more)
 
 ### Community 118 - "5.9. System Telemetry (`/telemetry`)"
@@ -663,8 +655,8 @@ Cohesion: 0.18
 Nodes (11): 5.8. GitHub Repositories (`/repos`), A. Page Identity, B. Current State, C. What Is Already Good?, D. Problems and Critical Findings, E. UX and Workflow Evaluation, F. Feature Recommendations, G. Features to Remove, Simplify, or Defer (+3 more)
 
 ### Community 129 - "Master Remediation & Architectural Alignment Plan: Nexura Management"
-Cohesion: 0.08
-Nodes (24): 1.1. Hakikat dan Karakteristik Nexura Management, 1.2. Koreksi Arsitektural Pemilik Proyek: Dari 4 Fase Menjadi 13 Fase Terpadu (3 Blok), 1.3. Status UI/UX "Dark Obsidian Bento" yang Aktif & Wajib Dilindungi (Styling Freeze Rule), 1.4. Diagram Arsitektur: Saat Ini (Flawed/Fragmented) vs Target (Hardened/Unified), 1. Executive Summary & Latar Belakang Arsitektur, 2.1. Temuan Baru (Discovered in Current Codebase Inspection), 2. Matriks Revalidasi Audit & Temuan Real Codebase, 3.1. Kandidat Pemangkasan Kode Mati (Dead Code Pruning Candidates) (+16 more)
+Cohesion: 0.17
+Nodes (11): 2.1. Temuan Baru (Discovered in Current Codebase Inspection), 2. Matriks Revalidasi Audit & Temuan Real Codebase, 3.1. Kandidat Pemangkasan Kode Mati (Dead Code Pruning Candidates), 3. Matriks Alignment Requirement (25 Keputusan Hasil Discovery Sesi 1–8), 6. Matriks Kepemilikan File & Distribusi Subagent (Anti-Tabrakan), 7.1. Spesifikasi 6 Test Suites Vitest, 7.2. Konfigurasi Pipeline `.github/workflows/ci.yml`, 7. Strategi Testing & CI Quality Gate (+3 more)
 
 ### Community 130 - "PackageBadge.vue"
 Cohesion: 0.20
@@ -678,13 +670,17 @@ Nodes (10): 20.1. Audit Kondisi `OmniSearch` Saat Ini (`VERIFIED`), 20.3. Rekome
 Cohesion: 0.22
 Nodes (9): 7. System-Wide Engineering Audit, A. Architecture, B. Data Model and Consistency, C. State Management and Data Fetching, D. API and Backend Quality, E. Security and Authorization, F. Testing and Quality Assurance, G. Performance and Scalability (+1 more)
 
-### Community 133 - "session.post.ts"
-Cohesion: 0.19
-Nodes (10): sessionSchema, createSessionToken(), CreateSessionTokenOptions, resolveSecurityKeys(), SessionTokenValidationResult, verifyAccessKey(), verifySessionToken(), jiti (+2 more)
+### Community 133 - "github-allowlist.spec.mjs"
+Cohesion: 0.40
+Nodes (3): jiti, {
+  normalizeGitHubRepo,
+  isGitHubRepoAllowed,
+  assertGitHubRepoAllowed
+}, repos
 
 ### Community 134 - "BLOK 2: REMEDIASI 1 HALAMAN PER FASE"
-Cohesion: 0.29
-Nodes (7): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, 5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok, BLOK 2: REMEDIASI 1 HALAMAN PER FASE, FASE 7: Halaman Sprints & Iterations (`/sprints`)
+Cohesion: 0.05
+Nodes (41): 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh:, 1. File yang Disentuh: (+33 more)
 
 ### Community 135 - "16. Implementation Roadmap"
 Cohesion: 0.29
@@ -706,9 +702,9 @@ Nodes (8): handleEscAction(), onBackdropClick(), onInputContainerClick(), onInpu
 Cohesion: 0.40
 Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 2: Global OmniSearch & Command Engine (`⌘K` / `Ctrl+K`)
 
-### Community 140 - "useSprintCalendar"
-Cohesion: 0.33
-Nodes (5): getMonday(), getSunday(), getWeekNumber(), toIsoDate(), useSprintCalendar()
+### Community 140 - "emit"
+Cohesion: 0.43
+Nodes (7): emit, handleClose(), handleCreateIssue(), handleDelete(), submitSave(), removeTaskFromStore(), updateTaskInStore()
 
 ### Community 141 - "6. Cross-Page Workflow Analysis"
 Cohesion: 0.40
@@ -718,9 +714,9 @@ Nodes (5): 6.1. Alur Pembuatan & Penyuntingan Tugas (*Task Creation & Editing*),
 Cohesion: 0.29
 Nodes (5): draft, emit, isEditing, onSave(), props
 
-### Community 143 - "repositories/index.ts"
-Cohesion: 0.19
-Nodes (9): ProjectFilterOptions, getNoteRepo(), getProjectRepo(), getSprintRepo(), getTaskRepo(), isSupabaseActive(), markSupabaseOffline(), markSupabaseOnline() (+1 more)
+### Community 143 - "useWorkspaceStore.ts"
+Cohesion: 0.29
+Nodes (6): EntityContext, entityContexts, EntityHydrationStatus, entityQueues, EntityType, HydrationStatus
 
 ### Community 144 - "10. Testing and Quality Assurance Assessment"
 Cohesion: 0.50
@@ -754,108 +750,80 @@ Nodes (4): allTasks, deployedTasks, displayShipments, props
 Cohesion: 0.40
 Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 13: Dead Code Pruning & Final Audit Sign-Off
 
-### Community 156 - "IProjectRepository"
-Cohesion: 0.15
-Nodes (3): IProjectRepository, NitroProjectRepository, normalizeProject()
-
-### Community 157 - "types/index.ts"
-Cohesion: 0.15
-Nodes (8): NoteCategory, ProjectNote, Project, ProjectPriority, ProjectStatus, Sprint, SprintStatus, Stat
-
-### Community 158 - "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)
-
-### Community 159 - "FASE 4: Halaman Dashboard Command Center (`/`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 4: Halaman Dashboard Command Center (`/`)
-
-### Community 160 - "task.schema.ts"
-Cohesion: 0.18
-Nodes (10): baseTaskFields, CreateTaskInput, createTaskSchema, legacyStatusMap, taskPrioritySchema, TaskQueryInput, taskQuerySchema, taskStatusSchema (+2 more)
-
-### Community 161 - "FASE 5: Halaman Projects Hub (`/projects`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 5: Halaman Projects Hub (`/projects`)
-
-### Community 162 - "ENGINEERING.md — Standar Engineering & Conventions"
-Cohesion: 0.22
-Nodes (5): 6. Testing (Target), 7. Environment Variables, ENGINEERING.md — Standar Engineering & Conventions, Minimum Target, Tooling (ketika diimplementasikan)
-
-### Community 164 - "note.schema.ts"
+### Community 156 - "ProjectSupabaseTab.vue"
 Cohesion: 0.25
-Nodes (7): createNoteSchema, noteCategorySchema, NoteQueryInput, noteQuerySchema, PromoteNoteInput, promoteNoteSchema, updateNoteSchema
+Nodes (6): config, copied, migrations, projectRef, props, tables
+
+### Community 157 - "2. Color Tokens (`tailwind.config.ts` & CSS Variables)"
+Cohesion: 0.40
+Nodes (5): 2. Color Tokens (`tailwind.config.ts` & CSS Variables), Border & Surface Recipes (`assets/css/main.css`), Optional Theme Presets (CSS Custom Properties), Primary Obsidian Palette, Semantic Status Colors
+
+### Community 158 - "1. Executive Summary & Latar Belakang Arsitektur"
+Cohesion: 0.29
+Nodes (7): 1.1. Hakikat dan Karakteristik Nexura Management, 1.2. Koreksi Arsitektural Pemilik Proyek: Dari 4 Fase Menjadi 13 Fase Terpadu (3 Blok), 1.3. Status UI/UX "Dark Obsidian Bento" yang Aktif & Wajib Dilindungi (Styling Freeze Rule), 1.4. Diagram Arsitektur: Saat Ini (Flawed/Fragmented) vs Target (Hardened/Unified), 1. Executive Summary & Latar Belakang Arsitektur, A. Arsitektur Sebelum Remediasi (Kondisi Rentan & Terfragmentasi), B. Arsitektur Target (Kondisi Kokoh, Terpadu & Jujur)
+
+### Community 159 - "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)"
+Cohesion: 0.33
+Nodes (6): 4.1. Single Source of Truth (SSOT) Relasi Task–Sprint, 4.2. Unified Reactive Workspace Store (`useWorkspaceStore.ts`), 4.3. Global Modal Shell Mounting di `app/app.vue`, 4.4. Static Repository Selection at Boot (Zero Silent Failover), 4.5. Server-Side Auth Gate & GitHub Allowlist, 4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)
+
+### Community 160 - "FASE 1: Global Workspace Store & Shell Infrastructure"
+Cohesion: 0.40
+Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 1: Global Workspace Store & Shell Infrastructure
+
+### Community 161 - "FASE 12: CI/CD Quality Gate & Automated Tests"
+Cohesion: 0.40
+Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 12: CI/CD Quality Gate & Automated Tests
+
+### Community 164 - "5. Component Design Specifications"
+Cohesion: 0.50
+Nodes (4): 5.1 Specular KPI Row (4 Micro-Cards di Atas Dashboard), 5.2 Asymmetric Bento Workspace (`12 Columns`: `8 Left` + `4 Right`), 5.3 Kanban Board & Task Cards (`KanbanBoard.vue` & `TaskCard.vue`), 5. Component Design Specifications
 
 ### Community 165 - "ProjectTaskMatrix.vue"
 Cohesion: 0.25
 Nodes (5): filteredMatrixTasks, matrixFilter, matrixFilterOptions, matrixSearch, props
 
+### Community 166 - "2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+)"
+Cohesion: 0.50
+Nodes (4): 2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+), Filosofi & Standar Visual, Konvensi Tailwind & CSS Layers, No Legacy Warm Hex — Gunakan Token Dark Obsidian
+
+### Community 167 - "ISprintRepository"
+Cohesion: 0.13
+Nodes (6): ISprintRepository, getSprintRepo(), NitroSprintRepository, mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository
+
 ### Community 169 - "session-auth.spec.mjs"
 Cohesion: 0.22
 Nodes (5): { createSessionToken }, jiti, nuxtState, { useSession }, { useWorkspaceStore }
 
-### Community 171 - "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)
-
-### Community 172 - "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 8: Halaman Release Phase Roadmap (`/roadmap`)
-
-### Community 173 - "FASE 9: Halaman Repositories Catalog (`/repos`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 9: Halaman Repositories Catalog (`/repos`)
-
-### Community 174 - "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)"
-Cohesion: 0.40
-Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Criteria / Definition of Done (DoD):, 4. Gate Pengujian & Rollback Plan:, FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)
-
-### Community 175 - "2. Color Tokens (`tailwind.config.ts` & CSS Variables)"
-Cohesion: 0.40
-Nodes (5): 2. Color Tokens (`tailwind.config.ts` & CSS Variables), Border & Surface Recipes (`assets/css/main.css`), Optional Theme Presets (CSS Custom Properties), Primary Obsidian Palette, Semantic Status Colors
-
-### Community 176 - "security.get.ts"
-Cohesion: 0.60
-Nodes (4): fetchCachedSecurity, normalizeSeverity(), normalizeState(), severityOrder
-
-### Community 177 - "5. Component Design Specifications"
-Cohesion: 0.50
-Nodes (4): 5.1 Specular KPI Row (4 Micro-Cards di Atas Dashboard), 5.2 Asymmetric Bento Workspace (`12 Columns`: `8 Left` + `4 Right`), 5.3 Kanban Board & Task Cards (`KanbanBoard.vue` & `TaskCard.vue`), 5. Component Design Specifications
-
-### Community 178 - "2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+)"
-Cohesion: 0.50
-Nodes (4): 2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+), Filosofi & Standar Visual, Konvensi Tailwind & CSS Layers, No Legacy Warm Hex — Gunakan Token Dark Obsidian
-
-### Community 180 - "3. Naming Conventions"
+### Community 175 - "3. Naming Conventions"
 Cohesion: 0.50
 Nodes (4): 3. Naming Conventions, Components, Files, Task ID Format
 
-### Community 181 - "4. API Convention"
+### Community 176 - "4. API Convention"
 Cohesion: 0.50
 Nodes (4): 4. API Convention, External API (GitHub), Rate Limiting Strategy, Request/Response
 
-### Community 182 - "5. Data Flow Patterns"
+### Community 177 - "5. Data Flow Patterns"
 Cohesion: 0.50
 Nodes (4): 5. Data Flow Patterns, CRUD Pattern, Error Pattern, External API Pattern
 
 ## Knowledge Gaps
-- **1436 isolated node(s):** `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }`, `tasksApi`, `{ isAddTaskOpen, openAddTask, closeAddTask }` (+1431 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1767 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **14 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **1466 isolated node(s):** `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }`, `tasksApi`, `{ isAddTaskOpen, openAddTask, closeAddTask }` (+1461 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1809 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `PackageBadge.vue`, `AddTaskModal.vue`, `LiveDevOpsStream.vue`, `AddProjectModal.vue`, `CommitList.vue`, `SessionAuthModal.vue`, `WorkflowLogModal.vue`, `useSprintCalendar`, `SprintObjectiveBanner.vue`, `UnifiedHeroBanner.vue`, `ActiveExecutionQueue.vue`, `RecentShipmentsCard.vue`, `tasks-workspace.spec.mjs`, `dashboard-command-center.spec.mjs`, `Dashboard.vue`, `ProjectTaskMatrix.vue`, `session-auth.spec.mjs`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `tasks/ActiveFocusPanel.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `OmniSearchInput.vue`, `ProjectSupabaseTab.vue`, `TaskDrawer.vue`, `HeaderSearch.vue`, `Sidebar.vue`, `DeploymentBadge.vue`, `package.json`, `RepoActivityBadge.vue`, `OmniSearchPreviewPane.vue`, `TaskQueue.vue`, `ProjectLiveDeploymentCard.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `app.vue`, `useOmniSearch.ts`, `notes/IdeaScratchpadPanel.vue`, `SecurityBadge.vue`, `KanbanColumn.vue`, `ProjectSecurityCard.vue`, `PackageModal.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectExecutionOverview.vue`, `workspace-store.spec.mjs`, `WorkspacePulse.vue`, `telemetry.vue`, `omni-search.spec.mjs`, `useSession`, `NexuraIcon.vue`?**
-  _High betweenness centrality (0.305) - this node is a cross-community bridge._
-- **Why does `zod` connect `helper.ts` to `task.schema.ts`, `note.schema.ts`, `session.post.ts`, `package.json`, `handler.ts`?**
-  _High betweenness centrality (0.072) - this node is a cross-community bridge._
-- **Why does `@supabase/supabase-js` connect `package.json` to `repositories/index.ts`?**
-  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Why does `vue` connect `vue` to `WorkflowBadge.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `PackageBadge.vue`, `AddTaskModal.vue`, `LiveDevOpsStream.vue`, `AddProjectModal.vue`, `CommitList.vue`, `SessionAuthModal.vue`, `WorkflowLogModal.vue`, `dashboard-command-center.spec.mjs`, `SprintObjectiveBanner.vue`, `UnifiedHeroBanner.vue`, `ActiveExecutionQueue.vue`, `RecentShipmentsCard.vue`, `ProjectSupabaseTab.vue`, `tasks-workspace.spec.mjs`, `Dashboard.vue`, `ProjectTaskMatrix.vue`, `session-auth.spec.mjs`, `EditProjectModal.vue`, `AddTargetModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `SecurityAlertModal.vue`, `PullRequestsIssuesModal.vue`, `tasks/ActiveFocusPanel.vue`, `DeploymentModal.vue`, `useGitHub.ts`, `OmniSearchInput.vue`, `TaskDrawer.vue`, `HeaderSearch.vue`, `Sidebar.vue`, `DeploymentBadge.vue`, `package.json`, `RepoActivityBadge.vue`, `OmniSearchPreviewPane.vue`, `TaskQueue.vue`, `projects-workspace.spec.mjs`, `ProjectLiveDeploymentCard.vue`, `HeaderBar.vue`, `ConfirmDialog.vue`, `app.vue`, `useOmniSearch.ts`, `notes/IdeaScratchpadPanel.vue`, `SecurityBadge.vue`, `ProjectSecurityCard.vue`, `PackageModal.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `ProjectExecutionOverview.vue`, `workspace-store.spec.mjs`, `WorkspacePulse.vue`, `useSprintCalendar`, `omni-search.spec.mjs`, `useSession`, `NexuraIcon.vue`?**
+  _High betweenness centrality (0.340) - this node is a cross-community bridge._
+- **Why does `zod` connect `repositories/index.ts` to `note.schema.ts`, `package.json`?**
+  _High betweenness centrality (0.066) - this node is a cross-community bridge._
+- **Why does `@supabase/supabase-js` connect `package.json` to `note.schema.ts`?**
+  _High betweenness centrality (0.050) - this node is a cross-community bridge._
 - **Are the 21 inferred relationships involving `useWorkspaceStore()` (e.g. with `addNoteToStore()` and `addProjectToStore()`) actually correct?**
   _`useWorkspaceStore()` has 21 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }` to the rest of the system?**
-  _1436 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1466 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `WorkflowBadge.vue` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `tasks.vue` be split into smaller, more focused modules?**

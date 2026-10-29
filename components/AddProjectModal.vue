@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto" @click.self="onCancel" role="presentation">
     <div
       ref="dialogRef"
@@ -204,8 +204,8 @@ const priority = ref<'low' | 'medium' | 'high' | 'critical'>('high')
 const githubRepo = ref('')
 const deployUrl = ref('')
 const techStackInput = ref('')
-const startDate = ref('2026-09-01')
-const dueDate = ref('2026-12-31')
+const startDate = ref('')
+const dueDate = ref('')
 const validationError = ref('')
 const isSubmitting = ref(false)
 

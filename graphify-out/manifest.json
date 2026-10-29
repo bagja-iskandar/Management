@@ -30,9 +30,9 @@
     "semantic_hash": ""
   },
   "components/AddProjectModal.vue": {
-    "mtime": 1789820456.886027,
-    "seen": 1789820533.4177442,
-    "ast_hash": "f25f041fd7aaa6eaa0286018509444fc",
+    "mtime": 1793242997.202197,
+    "seen": 1793243110.905403,
+    "ast_hash": "3605ea88a8ed351b733a21ba73a51834",
     "semantic_hash": ""
   },
   "components/AddTaskModal.vue": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "app/pages/projects/index.vue": {
-    "mtime": 1792928877.032064,
-    "seen": 1792929073.6065507,
-    "ast_hash": "2078dcfef7e4467038375002bb608dd1",
+    "mtime": 1793251658.0907874,
+    "seen": 1793251712.0486348,
+    "ast_hash": "24bb1a7c32fb6a4530b41441ad142448",
     "semantic_hash": ""
   },
   "components/StructureStaticGrid.vue": {
@@ -1371,6 +1371,18 @@
     "mtime": 1793195070.9312365,
     "seen": 1793195202.661814,
     "ast_hash": "3ec5da2b597513525f6cf3f6aabb175f",
+    "semantic_hash": ""
+  },
+  "components/EditProjectModal.vue": {
+    "mtime": 1793243056.7683365,
+    "seen": 1793243110.9084296,
+    "ast_hash": "90ec254a2084d5650c442e2b3cc8ea5c",
+    "semantic_hash": ""
+  },
+  "tests/unit/projects-workspace.spec.mjs": {
+    "mtime": 1793243544.6854153,
+    "seen": 1793243577.9092627,
+    "ast_hash": "6089bbf4ee36ba6c0ce8fe3db5fca1aa",
     "semantic_hash": ""
   }
 }

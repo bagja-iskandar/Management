@@ -1,5 +1,6 @@
 <template>
-  <div class="space-y-6 pb-12">
+  <div class="flex flex-col min-h-full">
+    <div class="space-y-6 flex-1 pb-6">
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
       <div>
@@ -12,6 +13,17 @@
       </div>
 
       <div class="flex items-center gap-2.5 flex-wrap">
+        <!-- PROJ-002: New Project Button -->
+        <button
+          type="button"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
+          title="Create New Project"
+          @click="showAddModal = true"
+        >
+          <NexuraIcon name="Plus" size="xs" :stroke-width="2.5" />
+          <span>New Project</span>
+        </button>
+
         <NuxtLink
           to="/repos"
           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition-all focus:ring-1 focus:ring-indigo-500/50 focus:outline-none shadow-[0_0_16px_rgba(99,102,241,0.25)] active:scale-95"
@@ -40,7 +52,45 @@
         <NexuraIcon name="CheckCircle2" size="xs" class="text-emerald-400" />
         <span>{{ successFeedback }}</span>
       </div>
-      <button type="button" class="text-xs text-emerald-400 hover:underline" @click="successFeedback = ''">Dismiss</button>
+      <button type="button" class="text-xs text-emerald-400 hover:underline cursor-pointer" @click="successFeedback = ''">Dismiss</button>
+    </div>
+
+    <!-- Non-blocking Stale Error Warning -->
+    <div
+      v-if="isProjectsStaleError"
+      class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono flex items-center justify-between"
+      role="status"
+    >
+      <div class="flex items-center gap-2">
+        <NexuraIcon name="AlertTriangle" size="xs" class="text-amber-400" />
+        <span>Warning: Displaying cached projects. Background synchronization failed.</span>
+      </div>
+      <button
+        type="button"
+        class="text-xs underline hover:no-underline font-medium cursor-pointer"
+        @click="refreshProjects"
+      >
+        Retry Sync
+      </button>
+    </div>
+
+    <!-- Blocking Error State -->
+    <div
+      v-if="projectsDataState === 'ERROR'"
+      class="p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono flex items-center justify-between"
+      role="alert"
+    >
+      <div class="flex items-center gap-2">
+        <NexuraIcon name="AlertCircle" size="sm" class="text-rose-400" />
+        <span>Failed to load projects from server.</span>
+      </div>
+      <button
+        type="button"
+        class="underline hover:no-underline font-medium cursor-pointer"
+        @click="refreshProjects"
+      >
+        Retry
+      </button>
     </div>
 
     <!-- Toolbar: Search, Sort & Status Tabs -->
@@ -70,7 +120,7 @@
         </select>
       </div>
 
-      <!-- Status Filter Tabs -->
+      <!-- 7-Status Filter Tabs -->
       <div class="flex items-center gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Project Status Filter">
         <button
           type="button"
@@ -89,6 +139,15 @@
         >
           <span>Active</span>
           <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ activeCount }}</span>
+        </button>
+        <button
+          type="button"
+          class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
+          :class="activeStatus === 'maintenance' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          @click="activeStatus = 'maintenance'"
+        >
+          <span>Maintenance</span>
+          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ maintenanceCount }}</span>
         </button>
         <button
           type="button"
@@ -117,16 +176,45 @@
           <span>Completed</span>
           <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ completedCount }}</span>
         </button>
+        <button
+          type="button"
+          class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
+          :class="activeStatus === 'archived' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          @click="activeStatus = 'archived'"
+        >
+          <span>Archived</span>
+          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ archivedCount }}</span>
+        </button>
       </div>
     </div>
 
-    <!-- Error state -->
-    <div v-if="projectsError" class="p-4 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 text-xs font-mono" role="alert">
-      Failed to load projects from server. Please refresh the page.
+    <!-- Empty Workspace State (SUCCESS_EMPTY) -->
+    <div
+      v-if="projectsDataState === 'SUCCESS_EMPTY'"
+      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.06] space-y-3"
+    >
+      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#8A8F9E]">
+        <NexuraIcon name="Folder" size="lg" />
+      </div>
+      <h3 class="font-mono text-sm font-semibold text-[#F3F4F6]">No projects in workspace</h3>
+      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+        Get started by creating your first managed project or repository.
+      </p>
+      <button
+        type="button"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
+        @click="showAddModal = true"
+      >
+        <NexuraIcon name="Plus" size="xs" />
+        <span>Create Project</span>
+      </button>
     </div>
 
-    <!-- Empty State -->
-    <div v-if="!filteredProjects.length && !projectsError" class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.06] space-y-3">
+    <!-- Filter Yields Zero Results -->
+    <div
+      v-else-if="filteredProjects.length === 0 && projectsDataState !== 'ERROR'"
+      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.06] space-y-3"
+    >
       <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#8A8F9E]">
         <NexuraIcon name="Folder" size="lg" />
       </div>
@@ -150,7 +238,7 @@
       >
         <!-- Top Section -->
         <div class="space-y-3">
-          <!-- Card Header: Title & Status -->
+          <!-- Card Header: Title, Status Badge & Edit Trigger (PROJ-004) -->
           <div class="flex items-start justify-between gap-3">
             <div class="min-w-0">
               <NuxtLink :to="`/projects/${project.slug}`" class="block">
@@ -160,12 +248,25 @@
               </NuxtLink>
               <span class="font-mono text-[11px] text-[#8A8F9E]">/{{ project.slug }}</span>
             </div>
-            <span
-              class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-mono capitalize whitespace-nowrap border"
-              :class="getStatusBadgeClass(project.status || getDerivedStatus(project.slug))"
-            >
-              {{ project.status || getDerivedStatus(project.slug) }}
-            </span>
+
+            <!-- Status Badge + Edit Button -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-mono capitalize whitespace-nowrap border"
+                :class="getStatusBadgeClass(project.status)"
+              >
+                {{ project.status || 'active' }}
+              </span>
+              <button
+                type="button"
+                class="p-1 rounded-lg text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.08] transition-colors focus:outline-none cursor-pointer"
+                title="Edit Project Metadata"
+                aria-label="Edit project"
+                @click.stop="openEditModal(project)"
+              >
+                <NexuraIcon name="Pencil" size="xs" />
+              </button>
+            </div>
           </div>
 
           <!-- Description -->
@@ -203,7 +304,7 @@
               </a>
             </div>
 
-            <!-- Tech stack tags -->
+            <!-- Tech stack tags (Honest rendering: only genuine array elements) -->
             <div v-if="getTechStack(project).length" class="flex items-center gap-1.5 flex-wrap pt-1">
               <span
                 v-for="tech in getTechStack(project)"
@@ -226,7 +327,7 @@
             </span>
             <span class="inline-flex items-center gap-1">
               <NexuraIcon name="Calendar" size="xs" class="text-[#8A8F9E]" />
-              <span>{{ project.dueDate ? formatDate(project.dueDate) : getDueDate(project.slug) }}</span>
+              <span>{{ formatDate(project.dueDate) }}</span>
             </span>
           </div>
 
@@ -261,113 +362,172 @@
         </div>
       </article>
     </div>
+    </div>
 
-    <!-- Summary Panel -->
-    <section class="obs-card p-5 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-3 shadow-sm">
-      <h2 class="font-mono text-sm font-semibold text-[#F3F4F6] uppercase tracking-wider">Projects Overview Summary</h2>
-      <div class="flex items-center gap-3 flex-wrap font-mono text-xs tabular-nums">
+    <!-- Sticky Bottom Summary Panel -->
+    <section class="sticky bottom-0 z-20 mt-auto obs-card p-4 sm:p-5 rounded-2xl bg-[#111318]/95 backdrop-blur-md border border-white/[0.1] space-y-2 shadow-[0_-8px_24px_rgba(0,0,0,0.6)]">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <h2 class="font-mono text-xs sm:text-sm font-semibold text-[#F3F4F6] uppercase tracking-wider">Projects Overview Summary</h2>
+        <p class="font-sans text-[11px] text-[#8A8F9E] hidden md:block">
+          Derived task completion rates &amp; milestone velocity.
+        </p>
+      </div>
+      <div class="flex items-center gap-2.5 flex-wrap font-mono text-xs tabular-nums">
         <span class="px-2.5 py-1 rounded-lg bg-white/5 text-[#F3F4F6] border border-white/[0.08]">
-          Total Managed: {{ displayProjects.length }}
+          Total: {{ storeProjects.length }}
         </span>
         <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
           Active: {{ activeCount }}
         </span>
+        <span class="px-2.5 py-1 rounded-lg bg-purple-500/15 text-purple-400 border border-purple-500/30">
+          Maintenance: {{ maintenanceCount }}
+        </span>
         <span class="px-2.5 py-1 rounded-lg bg-sky-500/15 text-sky-400 border border-sky-500/30">
           Completed: {{ completedCount }}
         </span>
-        <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-400 border border-amber-500/30">
+        <span class="px-2.5 py-1 rounded-lg bg-yellow-500/15 text-yellow-400 border border-yellow-500/30">
           Planned: {{ plannedCount }}
         </span>
+        <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-400 border border-amber-500/30">
+          On Hold: {{ onHoldCount }}
+        </span>
+        <span class="px-2.5 py-1 rounded-lg bg-zinc-500/15 text-zinc-400 border border-zinc-500/30">
+          Archived: {{ archivedCount }}
+        </span>
       </div>
-      <p class="font-sans text-xs text-[#8A8F9E] leading-relaxed">
-        This scalable hub visualizes all personal repositories and projects. Progress bars represent derived task completion rates and milestone velocity.
-      </p>
     </section>
 
-    <!-- Add Project Modal Dialog -->
+    <!-- PROJ-002: Add Project Modal Dialog -->
     <AddProjectModal
       v-if="showAddModal"
       @close="showAddModal = false"
       @create="onProjectCreated"
     />
+
+    <!-- PROJ-004: Edit Project Modal Dialog -->
+    <EditProjectModal
+      :is-open="isEditModalOpen"
+      :project="editingProject"
+      @close="closeEditModal"
+      @saved="onProjectUpdated"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import type { Project } from '~/types'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import EditProjectModal from '~~/components/EditProjectModal.vue'
+import AddProjectModal from '~~/components/AddProjectModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useProjects } from '~/composables/useProjects'
 
-const { tasks } = useWorkspaceStore()
+type ProjectsDataState = 'NOT_LOADED' | 'LOADING' | 'SUCCESS_WITH_DATA' | 'SUCCESS_EMPTY' | 'ERROR'
+type ActiveStatusFilter = 'all' | 'active' | 'maintenance' | 'planned' | 'on-hold' | 'completed' | 'archived'
 
+// SSOT Workspace Store
+const workspaceStore = useWorkspaceStore()
+const { projects: storeProjects, tasks: storeTasks, hydrationStatus } = workspaceStore
+const projectsApi = useProjects()
+
+// Local UI Filter & Modal State
 const search = ref('')
-const activeStatus = ref<'all' | 'active' | 'planned' | 'on-hold' | 'completed'>('all')
+const activeStatus = ref<ActiveStatusFilter>('all')
 const sortBy = ref<'progress-desc' | 'progress-asc' | 'name-asc' | 'name-desc'>('progress-desc')
 const showAddModal = ref(false)
 const successFeedback = ref('')
-const localNewProjects = ref<Project[]>([])
 
-const projectsApi = useProjects()
-const { data: serverProjects, error: projectsError, refresh: refreshProjects } = useLazyAsyncData<Project[]>('projects', () => projectsApi.getProjects())
+// PROJ-004: Edit Modal State
+const isEditModalOpen = ref(false)
+const editingProject = ref<Project | null>(null)
 
-const displayProjects = computed(() => {
-  const merged = [...localNewProjects.value]
-  const server = serverProjects.value ?? []
-  for (const s of server) {
-    if (!merged.some(m => m.slug === s.slug)) {
-      merged.push(s)
-    }
-  }
-  return merged
-})
-
-function getTechStack(project: Project): string[] {
-  if (project.techStack?.length) return project.techStack
-  const s = project.slug.toLowerCase()
-  if (s.includes('hitnet') || s.includes('tf')) return ['PyTorch', 'Python', 'EEG']
-  if (s.includes('management')) return ['Nuxt 4', 'Tailwind', 'TypeScript']
-  if (s.includes('neural')) return ['Python', 'SciPy', 'BCI']
-  return ['TypeScript', 'Vue 3']
+function openEditModal(project: Project) {
+  editingProject.value = project
+  isEditModalOpen.value = true
 }
 
+function closeEditModal() {
+  isEditModalOpen.value = false
+  editingProject.value = null
+}
+
+// Auto-hydrate workspace if not initialized
+onMounted(async () => {
+  if (!workspaceStore.isInitialized.value) {
+    await workspaceStore.initializeWorkspace()
+  }
+})
+
+// Deterministic Projects Data State
+const projectsDataState = computed<ProjectsDataState>(() => {
+  if (
+    hydrationStatus.value.projects === 'loading' ||
+    (!workspaceStore.isInitialized.value && workspaceStore.isLoading.value)
+  ) {
+    return 'LOADING'
+  }
+  if (
+    hydrationStatus.value.projects === 'error' &&
+    storeProjects.value.length === 0
+  ) {
+    return 'ERROR'
+  }
+  if (!workspaceStore.isInitialized.value && hydrationStatus.value.projects === 'idle') {
+    return 'NOT_LOADED'
+  }
+  return storeProjects.value.length === 0 ? 'SUCCESS_EMPTY' : 'SUCCESS_WITH_DATA'
+})
+
+// Stale state warning: store has cached data but background fetch failed
+const isProjectsStaleError = computed(() => {
+  return hydrationStatus.value.projects === 'error' && storeProjects.value.length > 0
+})
+
+async function refreshProjects() {
+  try {
+    await workspaceStore.fetchWorkspaceProjects()
+  } catch (err: any) {
+    console.error('[projects] Failed to refresh projects:', err)
+  }
+}
+
+// Data Honesty: Tech Stack (No fake fallbacks)
+function getTechStack(project: Project): string[] {
+  return Array.isArray(project.techStack) ? project.techStack : []
+}
+
+// Progress calculation from SSOT storeTasks
 function getProgress(slug: string): number {
-  const projectTasks = (tasks.value || []).filter(t => t.projectSlug === slug)
+  const projectTasks = (storeTasks.value || []).filter(t => t.projectSlug === slug)
   if (projectTasks.length === 0) return 0
   const deployed = projectTasks.filter(t => t.status === 'deployed').length
   return Math.round((deployed / projectTasks.length) * 100)
 }
 
-function getDerivedStatus(slug: string): string {
-  if (slug.includes('portfolio')) return 'completed'
-  if (slug.includes('signal') || slug.includes('gamma')) return 'planned'
-  return 'active'
-}
-
+// 6 Official Project Statuses styling
 function getStatusBadgeClass(status?: string): string {
-  const s = (status || '').toLowerCase()
+  const s = (status || 'active').toLowerCase()
   if (s === 'completed') return 'bg-sky-500/15 text-sky-400 border-sky-500/30'
-  if (s === 'on-hold' || s === 'on hold') return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+  if (s === 'active') return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
   if (s === 'planned') return 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+  if (s === 'on-hold' || s === 'on hold') return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+  if (s === 'maintenance') return 'bg-purple-500/15 text-purple-400 border-purple-500/30'
+  if (s === 'archived') return 'bg-zinc-500/15 text-zinc-400 border-zinc-500/30'
   return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
 }
 
+// Task count from SSOT storeTasks
 function getTaskCountLabel(slug: string): string {
-  const projectTasks = (tasks.value || []).filter(t => t.projectSlug === slug)
+  const projectTasks = (storeTasks.value || []).filter(t => t.projectSlug === slug)
   if (projectTasks.length === 0) return '0/0 tasks'
   const deployed = projectTasks.filter(t => t.status === 'deployed').length
   return `${deployed}/${projectTasks.length} tasks`
 }
 
-function getDueDate(slug: string): string {
-  if (slug.includes('hitnet') || slug.includes('tf')) return 'Oct 2026'
-  if (slug.includes('portfolio')) return 'Completed'
-  if (slug.includes('signal') || slug.includes('gamma')) return 'Mar 2027'
-  return 'Dec 2026'
-}
-
-function formatDate(d?: string): string {
-  if (!d) return 'Dec 2026'
+// Honest date formatting (Zero fake 'Dec 2026' fallback)
+function formatDate(d?: string | null): string {
+  if (!d) return 'No Due Date'
   try {
     const date = new Date(d)
     if (isNaN(date.getTime())) return d
@@ -377,20 +537,22 @@ function formatDate(d?: string): string {
   }
 }
 
-// Counts
-const allCount = computed(() => displayProjects.value.length)
-const activeCount = computed(() => displayProjects.value.filter(p => (p.status || getDerivedStatus(p.slug)).toLowerCase() === 'active').length)
-const plannedCount = computed(() => displayProjects.value.filter(p => (p.status || getDerivedStatus(p.slug)).toLowerCase() === 'planned').length)
-const onHoldCount = computed(() => displayProjects.value.filter(p => (p.status || getDerivedStatus(p.slug)).toLowerCase().includes('hold')).length)
-const completedCount = computed(() => displayProjects.value.filter(p => (p.status || getDerivedStatus(p.slug)).toLowerCase() === 'completed').length)
+// Reactive Status Counters based on storeProjects
+const allCount = computed(() => storeProjects.value.length)
+const activeCount = computed(() => storeProjects.value.filter(p => (p.status || 'active').toLowerCase() === 'active').length)
+const maintenanceCount = computed(() => storeProjects.value.filter(p => (p.status || '').toLowerCase() === 'maintenance').length)
+const plannedCount = computed(() => storeProjects.value.filter(p => (p.status || '').toLowerCase() === 'planned').length)
+const onHoldCount = computed(() => storeProjects.value.filter(p => (p.status || '').toLowerCase().replace(/\s+/g, '-') === 'on-hold').length)
+const completedCount = computed(() => storeProjects.value.filter(p => (p.status || '').toLowerCase() === 'completed').length)
+const archivedCount = computed(() => storeProjects.value.filter(p => (p.status || '').toLowerCase() === 'archived').length)
 
-// Filter & Sort
+// Filter & Sort Pipeline
 const filteredProjects = computed(() => {
-  let list = [...displayProjects.value]
+  let list = [...storeProjects.value]
 
   if (activeStatus.value !== 'all') {
     list = list.filter(p => {
-      const st = (p.status || getDerivedStatus(p.slug)).toLowerCase().replace(/\s+/g, '-')
+      const st = (p.status || 'active').toLowerCase().replace(/\s+/g, '-')
       return st === activeStatus.value
     })
   }
@@ -422,65 +584,61 @@ function resetFilters() {
   sortBy.value = 'progress-desc'
 }
 
+// PROJ-002: Create Project Handler
 async function onProjectCreated(payload: {
-  title: string
-  description: string
-  status: 'active' | 'planned' | 'on-hold' | 'completed' | 'archived'
-  priority: 'low' | 'medium' | 'high' | 'critical'
-  startDate: string
-  dueDate: string
+  name?: string
+  title?: string
+  description?: string
+  status?: 'active' | 'planned' | 'on-hold' | 'completed' | 'archived'
+  priority?: 'low' | 'medium' | 'high' | 'critical'
+  startDate?: string
+  dueDate?: string
   githubRepo?: string
   deployUrl?: string
   techStack?: string[]
 }) {
-  const newSlug = payload.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `proj-${Date.now()}`
-  const newProj: Project = {
-    id: String(Date.now()),
-    slug: newSlug,
-    title: payload.title,
-    description: payload.description,
-    status: payload.status,
-    priority: payload.priority,
-    startDate: payload.startDate,
-    dueDate: payload.dueDate,
-    githubRepo: payload.githubRepo,
-    deployUrl: payload.deployUrl,
-    techStack: payload.techStack || [],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  }
+  const title = payload.title || payload.name || 'Untitled Project'
+  const newSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '') || `proj-${Date.now()}`
 
   try {
-    const created = await projectsApi.createProject({
+    await projectsApi.createProject({
       slug: newSlug,
-      title: payload.title,
+      title,
       description: payload.description,
-      status: payload.status,
-      priority: payload.priority,
-      startDate: payload.startDate,
-      dueDate: payload.dueDate,
-      githubRepo: payload.githubRepo,
-      deployUrl: payload.deployUrl,
-      techStack: payload.techStack
+      status: payload.status || 'active',
+      priority: payload.priority || 'medium',
+      startDate: payload.startDate || null,
+      dueDate: payload.dueDate || null,
+      githubRepo: payload.githubRepo || null,
+      deployUrl: payload.deployUrl || null,
+      techStack: payload.techStack || []
     })
 
-    const projToDisplay = created || newProj
-    if (serverProjects.value) {
-      serverProjects.value = [projToDisplay, ...serverProjects.value.filter(p => p.slug !== projToDisplay.slug)]
-    } else {
-      localNewProjects.value.unshift(projToDisplay)
-    }
-
-    await refreshProjects()
-  } catch {
-    // Fallback locally
-    localNewProjects.value.unshift(newProj)
+    showAddModal.value = false
+    successFeedback.value = `Project '${title}' created successfully.`
+    setTimeout(() => {
+      successFeedback.value = ''
+    }, 5000)
+  } catch (err: any) {
+    console.error('[projects] Failed to create project:', err)
   }
+}
 
-  showAddModal.value = false
-  successFeedback.value = `Project '${payload.title}' created successfully.`
-  setTimeout(() => {
-    successFeedback.value = ''
-  }, 5000)
+// PROJ-004: Update Project Metadata Handler
+async function onProjectUpdated(payload: { slug: string; patch: any }) {
+  try {
+    await projectsApi.updateProject(payload.slug, payload.patch)
+    isEditModalOpen.value = false
+    editingProject.value = null
+    successFeedback.value = `Project '${payload.patch.title || payload.slug}' updated successfully.`
+    setTimeout(() => {
+      successFeedback.value = ''
+    }, 4000)
+  } catch (err: any) {
+    console.error('[projects] Failed to update project:', err)
+  }
 }
 </script>
