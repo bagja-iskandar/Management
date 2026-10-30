@@ -266,12 +266,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import SprintRolloverModal from '~~/components/sprint/SprintRolloverModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useSprints } from '~/composables/useSprints'
 import { useTasks } from '~/composables/useTasks'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 import {
   useSprintCalendar,
   getSunday,
@@ -303,11 +304,35 @@ const isSyncingGitHub = ref(false)
 const isRolloverModalOpen = ref(false)
 const isRollingOver = ref(false)
 
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
 // Initialize workspace on mount if not yet initialized
 onMounted(async () => {
+  setActions([
+    {
+      id: 'new-sprint',
+      label: 'New Sprint',
+      icon: 'Calendar',
+      variant: 'secondary',
+      handler: () => openModalWithTab('create')
+    },
+    {
+      id: 'add-target',
+      label: 'Add Target',
+      icon: 'Plus',
+      variant: 'primary',
+      handler: () => openModalWithTab('backlog')
+    }
+  ])
+
   if (!workspaceStore.isInitialized.value) {
     await workspaceStore.initializeWorkspace()
   }
+})
+
+onBeforeUnmount(() => {
+  clearActions()
 })
 
 // Deterministic 4-State Machine with Cache Resilience

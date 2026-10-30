@@ -5,26 +5,6 @@
       <h1 class="font-sans text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight">
         GitHub Repository Hub
       </h1>
-
-      <div class="flex items-center gap-2 flex-wrap">
-        <NuxtLink
-          to="/projects"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.08] transition"
-        >
-          <NexuraIcon name="Folder" size="xs" />
-          <span>Projects Hub</span>
-        </NuxtLink>
-
-        <button
-          type="button"
-          :disabled="pending"
-          class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] text-xs font-medium shadow-sm transition active:scale-95 disabled:opacity-50 cursor-pointer"
-          @click="onSyncRepos"
-        >
-          <NexuraIcon name="RotateCw" size="xs" :class="{ 'animate-spin': pending }" />
-          <span>Sync GitHub Repos</span>
-        </button>
-      </div>
     </div>
 
     <!-- Operation Feedback Banner -->
@@ -551,13 +531,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import ConfirmDialog from '../../components/ConfirmDialog.vue'
 import RepoActivityBadge from '../../components/RepoActivityBadge.vue'
 import NexuraIcon from '../../components/ui/NexuraIcon.vue'
 import { useGitHubRepos } from '../../composables/useGitHub'
 import { useProjects } from '../../composables/useProjects'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 import type { GitHubRepoSummary, GitHubCommitItem, GitHubBranch, Project } from '../../types'
 
 const route = useRoute()
@@ -752,6 +733,29 @@ async function onSyncRepos() {
   await refresh()
   await refreshProjects()
 }
+
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
+onMounted(() => {
+  watchEffect(() => {
+    setActions([
+      {
+        id: 'sync-repos',
+        label: 'Sync GitHub Repos',
+        icon: 'RotateCw',
+        variant: 'primary',
+        loading: pending.value,
+        disabled: pending.value,
+        handler: onSyncRepos
+      }
+    ])
+  })
+})
+
+onBeforeUnmount(() => {
+  clearActions()
+})
 
 // Expanded details management
 const expandedRepo = ref<string | null>(null)

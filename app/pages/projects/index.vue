@@ -11,35 +11,6 @@
         <h1 class="font-mono text-2xl font-bold text-[#F3F4F6]">Projects</h1>
         <p class="font-sans text-xs text-[#8A8F9E] mt-1">Managed personal repositories, status tracking, and derived task milestones.</p>
       </div>
-
-      <div class="flex items-center gap-2.5 flex-wrap">
-        <!-- PROJ-002: New Project Button -->
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
-          title="Create New Project"
-          @click="showAddModal = true"
-        >
-          <NexuraIcon name="Plus" size="xs" :stroke-width="2.5" />
-          <span>New Project</span>
-        </button>
-
-        <NuxtLink
-          to="/repos"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition-all focus:ring-1 focus:ring-indigo-500/50 focus:outline-none shadow-[0_0_16px_rgba(99,102,241,0.25)] active:scale-95"
-        >
-          <NexuraIcon name="GitBranch" size="xs" />
-          <span>Import from GitHub Repos</span>
-          <NexuraIcon name="ArrowRight" size="xs" />
-        </NuxtLink>
-        <NuxtLink
-          to="/"
-          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-[#F3F4F6] font-mono text-xs font-medium border border-white/[0.08] transition-colors focus:ring-1 focus:ring-indigo-500/50 focus:outline-none"
-        >
-          <NexuraIcon name="ArrowLeft" size="xs" class="text-[#8A8F9E]" />
-          <span>Dashboard</span>
-        </NuxtLink>
-      </div>
     </div>
 
     <!-- Success Feedback Alert -->
@@ -415,13 +386,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import type { Project } from '~/types'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import EditProjectModal from '~~/components/EditProjectModal.vue'
 import AddProjectModal from '~~/components/AddProjectModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 
 type ProjectsDataState = 'NOT_LOADED' | 'LOADING' | 'SUCCESS_WITH_DATA' | 'SUCCESS_EMPTY' | 'ERROR'
 type ActiveStatusFilter = 'all' | 'active' | 'maintenance' | 'planned' | 'on-hold' | 'completed' | 'archived'
@@ -452,11 +424,37 @@ function closeEditModal() {
   editingProject.value = null
 }
 
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
 // Auto-hydrate workspace if not initialized
 onMounted(async () => {
+  setActions([
+    {
+      id: 'import-repos',
+      label: 'Import Repos',
+      icon: 'GitBranch',
+      variant: 'secondary',
+      handler: () => navigateTo('/repos')
+    },
+    {
+      id: 'new-project',
+      label: 'New Project',
+      icon: 'Plus',
+      variant: 'primary',
+      handler: () => {
+        showAddModal.value = true
+      }
+    }
+  ])
+
   if (!workspaceStore.isInitialized.value) {
     await workspaceStore.initializeWorkspace()
   }
+})
+
+onBeforeUnmount(() => {
+  clearActions()
 })
 
 // Deterministic Projects Data State

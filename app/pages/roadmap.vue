@@ -129,33 +129,6 @@
             </button>
           </div>
 
-          <!-- View Mode Switcher -->
-          <div class="p-1 rounded-lg bg-[#07080A] border border-white/[0.06] inline-flex items-center gap-1" role="tablist" aria-label="Roadmap View Mode">
-            <button
-              type="button"
-              class="px-3 py-1.5 rounded-md text-xs font-mono transition-all border flex items-center gap-1.5 focus:outline-none shrink-0 cursor-pointer"
-              :class="activeViewMode === 'board'
-                ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
-              @click="activeViewMode = 'board'"
-            >
-              <NexuraIcon name="LayoutGrid" size="xs" />
-              <span>Board View</span>
-            </button>
-
-            <button
-              type="button"
-              class="px-3 py-1.5 rounded-md text-xs font-mono transition-all border flex items-center gap-1.5 focus:outline-none shrink-0 cursor-pointer"
-              :class="activeViewMode === 'timeline'
-                ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
-              @click="activeViewMode = 'timeline'"
-            >
-              <NexuraIcon name="GitCommit" size="xs" />
-              <span>Timeline View</span>
-            </button>
-          </div>
-
           <!-- Hub Link -->
           <NuxtLink
             to="/projects"
@@ -603,10 +576,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 import { CANONICAL_RELEASE_PHASES, type ReleasePhase, type Project, type Task } from '~/types'
 
 // Single Source of Truth Workspace Store
@@ -617,11 +591,57 @@ const projectsApi = useProjects()
 const activeViewMode = ref<'board' | 'timeline'>('board')
 const searchQuery = ref('')
 
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
+async function refreshRoadmap() {
+  try {
+    await workspaceStore.refreshWorkspace()
+    showFeedback('Roadmap refreshed')
+  } catch (err: any) {
+    showFeedback('Failed to refresh: ' + (err.message || 'Unknown error'), 'error')
+  }
+}
+
 // Initialize workspace store if not yet hydrated
 onMounted(async () => {
+  watchEffect(() => {
+    setActions([
+      {
+        id: 'view-board',
+        label: 'Board View',
+        icon: 'LayoutGrid',
+        variant: activeViewMode.value === 'board' ? 'primary' : 'secondary',
+        handler: () => {
+          activeViewMode.value = 'board'
+        }
+      },
+      {
+        id: 'view-timeline',
+        label: 'Timeline View',
+        icon: 'GitCommit',
+        variant: activeViewMode.value === 'timeline' ? 'primary' : 'secondary',
+        handler: () => {
+          activeViewMode.value = 'timeline'
+        }
+      },
+      {
+        id: 'refresh-roadmap',
+        label: 'Refresh',
+        icon: 'RotateCw',
+        variant: 'secondary',
+        handler: () => refreshRoadmap()
+      }
+    ])
+  })
+
   if (!workspaceStore.isInitialized.value) {
     await workspaceStore.initializeWorkspace()
   }
+})
+
+onBeforeUnmount(() => {
+  clearActions()
 })
 
 // Deterministic 4-State Machine & Cache Resilience

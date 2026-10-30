@@ -1,297 +1,255 @@
-# ARCHITECTURE.md — Arsitektur Sistem Nexura
+# ARCHITECTURE.md — Arsitektur Sistem Nexura Management
 
-_Last updated: 2026-10-22. Arsitektur target: Precision Dark Obsidian Command Center (Linear / Raycast Inset Architecture) dengan GitHub/Supabase/Vercel integration._
+> **Status:** RATIFIED & HARDENED (Production-Ready)  
+> **Last Updated:** 29 Oktober 2026  
+> **Lead Architect & Orchestrator:** Bagja Iskandar & Antigravity Head Agent  
+> **Design Pattern:** Precision Dark Obsidian Bento Architecture (Linear / Raycast Inset Shell)  
+> **Master Reference:** [`DOCUMENTATION.md`](../DOCUMENTATION.md) | [`docs/master-remediation-plan.md`](../docs/master-remediation-plan.md)
 
 ---
 
 ## 1. Gambaran Arsitektur Sistem
 
-**Nexura** adalah Personal Engineering Command Center berbasis **Nuxt 4 Full-Stack Monolith** yang dirancang untuk mengelola semua project GitHub, deployments, dan sprint kerja di satu tempat.
+**Nexura Management** adalah *Personal Engineering Command Center* mutakhir berbasis **Nuxt 4 Full-Stack Monolith** yang dirancang secara khusus untuk solo software engineer. Sistem menyatukan manajemen proyek, antrean deliverable teknis dengan Kanban 5-lajur, siklus sprint mingguan, roadmap rilis, katalog repositori GitHub, telemetri kesehatan devops, dan pencadangan data ke dalam satu panel kerja terpadu.
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                     Nexura Client (Browser) — Void #07080A              │
-│  ┌──────────────┐  ┌─────────────────────────────────────────────────┐  │
-│  │ Unified Left │  │ Inset Workspace (.obs-workspace #0B0C10)        │  │
-│  │ Sidebar      │  │ ┌─────────────────────────────────────────────┐ │  │
-│  │ (w-56)       │  │ │ Unified HeaderBar (Breadcrumb, Clock, CTA)  │ │  │
-│  │              │  │ ├─────────────────────────────────────────────┤ │  │
-│  │ + Quick ⌘K   │  │ │ [KPI 1]   [KPI 2]   [KPI 3]   [KPI 4]       │ │  │
-│  │ • Cmd Center │  │ │ ┌─────────────────────────┐ ┌─────────────┐ │ │  │
-│  │ • My Tasks   │  │ │ │ Left Execution (8 cols) │ │ Right (4c)  │ │ │  │
-│  │ • Sprints    │  │ │ │ • Execution Radar       │ │ • Inspector │ │ │  │
-│  │ • Roadmap    │  │ │ │ • Global Commit Stream  │ │ • Wk Focus  │ │ │  │
-│  │ • GitHub     │  │ │ └─────────────────────────┘ └─────────────┘ │ │  │
-│  │ • Active Prj │  │ └─────────────────────────────────────────────┘ │  │
-│  └──────────────┘  └─────────────────────────────────────────────────┘  │
-│  Tailwind CSS (Precision Dark Obsidian + Specular 1px) + Vue 3 SPA      │
-└────────────────────────────┬────────────────────────────────────────────┘
-                             │ $fetch / useLazyAsyncData
-┌────────────────────────────▼───────────────────────────────────────┐
-│                     Nitro Server (Backend)                          │
-│  ┌──────────────────────┐  ┌─────────────────────────────────────┐ │
-│  │ Internal API         │  │ External API Gateways               │ │
-│  │ /api/tasks     CRUD  │  │ /api/github/repos    → GitHub API   │ │
-│  │ /api/projects  CRUD  │  │ /api/github/commits  → GitHub API   │ │
-│  │ /api/sprints   CRUD  │  │ /api/github/branches → GitHub API   │ │
-│  │ /api/stats     Calc  │  │ /api/vercel/*        → Vercel API   │ │
-│  └──────────┬───────────┘  └────────────┬────────────────────────┘ │
-│             │ StorageAdapter            │ cachedFunction (TTL 5m)   │
-└─────────────┼───────────────────────────┼─────────────────────────┘
-              │                           │
-     ┌────────▼─────────┐       ┌────────▼──────────┐
-     │ Storage Layer     │       │ External Services  │
-     │ ┌───────────────┐ │       │ ┌───────────────┐  │
-     │ │ Nitro KV      │ │       │ │ GitHub API v3 │  │
-     │ │ .data/kv/     │ │       │ └───────────────┘  │
-     │ │ (current)     │ │       │ ┌───────────────┐  │
-     │ ├───────────────┤ │       │ │ Vercel API    │  │
-     │ │ Supabase PG   │ │       │ │ (🔜 planned)  │  │
-     │ │ (🔜 planned)  │ │       │ └───────────────┘  │
-     │ └───────────────┘ │       └────────────────────┘
-     └───────────────────┘
-```
+```mermaid
+flowchart TD
+    subgraph ClientLayer["Client Layer (Nuxt 4 / Vue 3.5 SPA) — Void #07080A"]
+        AppShell["app/app.vue (Root Layout & Inset Workspace Shell .obs-workspace)"]
+        Sidebar["Sidebar.vue (Unified Left Rail w-56)"]
+        HeaderBar["HeaderBar.vue (Unified Header & Telemetry Breadcrumbs)"]
+        Store["useWorkspaceStore.ts (Canonical Singleton Reactivity via useState)\n- tasks, projects, sprints, notes\n- Single Coordinated Hydration saat boot\n- Optimistic UI Mutator 0ms"]
+        Omni["OmniSearchModal.vue (⌘K Command Engine)"]
+        GlobalDrawer["TaskDrawer.vue (Global Deliverable Inspector)"]
+        
+        AppShell --> Sidebar
+        AppShell --> HeaderBar
+        AppShell --> Store
+        AppShell --> Omni
+        AppShell --> GlobalDrawer
+    end
 
-**Arsitektur Kunci:**
-- **Client**: Vue 3 SPA dengan Tailwind CSS (**Precision Dark Obsidian** tokens + Specular 1px card lighting), navigasi 0ms via payload caching
-- **Server**: Nitro engine — internal CRUD API + external API gateways (GitHub, Vercel)
-- **Storage**: Pluggable Repository Pattern (`IProjectRepository`, `ITaskRepository`, `ISprintRepository`) — otomatis memilih Supabase PostgreSQL jika tersedia, atau fallback ke Nitro Unstorage KV
-- **Caching**: GitHub/Vercel API responses di-cache dengan TTL 5 menit (rate limit protection)
+    subgraph NitroLayer["Nitro Serverless Engine (server/)"]
+        AuthMiddleware["server/middleware/auth.ts\n- Enforce Bearer Token / nexura_session cookie\n- Kunci dicocokkan ke NEXURA_ACCESS_KEY / SERVICE_ROLE_KEY\n- Toleran dengan warning pada local dev"]
+        AllowlistHelper["server/utils/github-allowlist.ts\n- Validasi parameter repo hanya untuk owner bagja-iskandar & repo terdaftar"]
+        ApiHandler["server/utils/handler.ts (withApiHandler)\n- Standardized JSON Envelope & HTTP Status Code Mapping"]
+        SyncEngine["server/utils/github-sync.ts\n- Regex parser #ENG-xxx pada commits/PRs & auto-deploy"]
+        Repositories["server/repositories/ (Repository Pattern)\n- SupabaseTaskRepository (PostgREST parameterized .eq)\n- SupabaseProjectRepository\n- SupabaseSprintRepository\n- SupabaseNoteRepository\n- NitroKV*Repository (Strictly Offline Dev Fallback)"]
+    end
+
+    subgraph StorageLayer["Data & Cloud Services"]
+        SupabaseDB[("Supabase PostgreSQL\n- RLS anon dicabut total (REVOKE ALL)\n- Eksklusif service_role via Server\n- SSOT: tasks.sprint_id\n- Skema: projects, tasks, sprints, project_notes")]
+        GitHubAPI["GitHub REST API v3 (Octokit Proxy)\n- Cached via defineCachedFunction (TTL 5 min)\n- Rate limit aware & token safety"]
+    end
+
+    subgraph QualityGate["CI/CD Quality Gate (.github/workflows/ci.yml)"]
+        QG1["Static Typecheck: vue-tsc --noEmit (0 errors)"]
+        QG2["Master Test Suite: node --test (244/244 passing, 2.69s)"]
+        QG3["Coverage Audit: test:coverage (83.05% lines)"]
+        QG4["Production Packaging: npm run build (.output/ ready)"]
+    end
+
+    Store -->|Parallel Boot Fetch| AuthMiddleware
+    AuthMiddleware --> AllowlistHelper
+    AuthMiddleware --> ApiHandler
+    ApiHandler --> Repositories
+    Repositories -->|PostgREST service_role| SupabaseDB
+    ApiHandler -->|Octokit Proxy| GitHubAPI
+    SyncEngine -.-> Repositories
+```
 
 ---
 
-## 2. Struktur Direktori (Target)
+## 2. Struktur Direktori Sistem (Terkini)
 
 ```
 Management/
-├── app/                          # Nuxt 4 app directory
-│   ├── app.vue                   # Root shell: <Sidebar> + <HeaderBar> + <NuxtPage>
-│   └── pages/
-│       ├── index.vue             # Route / → Dashboard Command Center
-│       ├── sprints.vue           # Route /sprints → Active Sprints (BARU)
-│       ├── roadmap.vue           # Route /roadmap → Architecture Roadmap (BARU)
-│       ├── repos.vue             # Route /repos → GitHub Repos Browser (BARU)
-│       ├── telemetry.vue         # Route /telemetry → System Telemetry (BARU)
-│       ├── projects.vue          # Route /projects → Projects Hub (redesigned)
+├── .github/
+│   └── workflows/ci.yml             # Pipeline GitHub Actions (typecheck, test, build)
+├── app/
+│   ├── app.vue                      # Root Layout, Workspace Shell & Global Modals
+│   └── pages/                       # 8 Rute Kanonikal Sistem
+│       ├── index.vue                # / (Dashboard Command Center)
+│       ├── tasks.vue                # /tasks (5-Column Kanban Board & Queue Workspace)
 │       ├── projects/
-│       │   └── [slug].vue        # Route /projects/:slug → Project Detail (redesigned)
-│       └── tasks.vue             # Route /tasks → Tasks Hub (redesigned)
-│
-├── components/
-│   ├── Sidebar.vue               # Compact left sidebar (5 nav items) — replaces navbar.vue
-│   ├── HeaderBar.vue             # Telemetry header (clock, branch, KPI, search) (BARU)
-│   ├── KanbanBoard.vue           # 3-column Kanban (IN_QUEUE, RUNNING, DEPLOYED) (BARU)
-│   ├── TaskCard.vue              # Task card for Kanban (BARU)
-│   ├── StickyNote.vue            # Draggable sticky note card (BARU)
-│   ├── GlobalNotes.vue           # Global notes overlay — rendered in app.vue (BARU)
-│   ├── dashboard.vue             # Dashboard Command Center (rewritten)
-│   ├── StatCard.vue              # Telemetry stat card (redesigned)
-│   ├── ActivityTable.vue         # Activity data table (redesigned)
-│   ├── QuickPanel.vue            # Quick actions panel
-│   ├── ConfirmDialog.vue         # Delete confirmation dialog (preserved)
-│   ├── AddProjectModal.vue       # Create project modal (extended)
-│   └── AddTaskModal.vue          # Create task modal (extended)
-│
-├── composables/
-│   ├── useTasks.ts               # Tasks CRUD client
-│   ├── useStats.ts               # Stats fetcher
-│   ├── useProjects.ts            # Projects CRUD client
-│   ├── useGitHub.ts              # GitHub repos/commits/branches client (BARU)
-│   └── useNotes.ts               # Sticky notes CRUD + drag state (BARU)
-│
-├── types/
-│   ├── index.ts                  # Barrel exports
-│   ├── task.ts                   # Task interface (extended)
-│   ├── project.ts                # Project interface (extended)
-│   ├── sprint.ts                 # Sprint interface (BARU)
-│   ├── note.ts                   # StickyNote interface (BARU)
-│   ├── stat.ts                   # Stat interface
-│   └── github.ts                 # GitHub types (BARU)
-│
-├── server/
-│   ├── api/
-│   │   ├── activities.get.ts     # GET /api/activities
-│   │   ├── tasks.get.ts          # GET /api/tasks
-│   │   ├── tasks.post.ts         # POST /api/tasks (extended)
-│   │   ├── stats.get.ts          # GET /api/stats (real calculations)
-│   │   ├── projects.get.ts       # GET /api/projects
-│   │   ├── projects.post.ts      # POST /api/projects (BARU)
-│   │   ├── sprints.get.ts        # GET /api/sprints (BARU)
-│   │   ├── sprints.post.ts       # POST /api/sprints (BARU)
-│   │   ├── task/
-│   │   │   ├── [id].put.ts       # PUT /api/task/:id (extended)
-│   │   │   └── [id].delete.ts    # DELETE /api/task/:id
-│   │   ├── projects/
-│   │   │   ├── [slug].put.ts     # PUT /api/projects/:slug (BARU)
-│   │   │   └── [slug].delete.ts  # DELETE /api/projects/:slug (BARU)
-│   │   ├── github/
-│   │       ├── repos.get.ts      # GET /api/github/repos (BARU)
-│   │       ├── commits.get.ts    # GET /api/github/commits (BARU)
-│   │       └── branches.get.ts   # GET /api/github/branches (BARU)
-│   │   └── notes/
-│   │       ├── index.get.ts      # GET /api/notes (BARU)
-│   │       ├── index.post.ts     # POST /api/notes (BARU)
-│   │       ├── [id].put.ts       # PUT /api/notes/:id (BARU)
-│   │       └── [id].delete.ts    # DELETE /api/notes/:id (BARU)
-│   ├── plugins/
-│   │   └── seed.ts               # Seed data (updated schema)
-│   ├── middleware/
-│   │   └── visit.ts              # Page visit counter
-│   └── utils/
-│       ├── store.ts              # CRUD helpers
-│       ├── storage-adapter.ts    # StorageAdapter interface (KV implementation)
-│       ├── github.ts             # GitHub API client factory + cache (BARU)
-│       ├── handler.ts            # withApiHandler wrapper
-│       ├── validation.ts         # Input validators (extended)
-│       └── errors.ts             # Error helpers
-│
+│       │   ├── index.vue            # /projects (Projects Hub)
+│       │   └── [slug].vue           # /projects/:slug (Project Detail Cockpit)
+│       ├── sprints.vue              # /sprints (Weekly Iterations & Calendar)
+│       ├── roadmap.vue              # /roadmap (Release Phase Roadmap)
+│       ├── repos.vue                # /repos (Repositories Catalog & 1-Click Importer)
+│       └── telemetry.vue            # /telemetry (DevOps Observability & JSON Backup)
 ├── assets/
 │   └── css/
-│       └── main.css              # @tailwind directives + minimal base/components layers
-│                                 # (dashboard.css & navbar.css DIHAPUS)
-│
-├── .env.example                  # Environment variables template
-├── tailwind.config.ts            # Tailwind CSS config with Precision Dark Obsidian tokens
-├── nuxt.config.ts                # Nuxt config + runtimeConfig + Tailwind module
-├── tsconfig.json
-└── package.json
+│       └── main.css                 # Tailwind directives, Dark Obsidian variables & Specular borders
+├── components/                      # Komponen Vue 3.5 Dark Obsidian Bento
+│   ├── Dashboard.vue                # Bento Cockpit Dashboard View
+│   ├── KanbanBoard.vue              # Papan Kanban 5-Kolom (idea -> deployed)
+│   ├── TaskDrawer.vue               # Global Deliverable Inspector Slide-Over
+│   ├── AddTaskModal.vue             # Modal Global Pembuatan Tugas
+│   ├── AddProjectModal.vue          # Modal Global Pembuatan Proyek Baru
+│   ├── EditProjectModal.vue         # Modal Global Penyuntingan Metadata Proyek
+│   ├── OmniSearchModal.vue          # Modal Global ⌘K OmniSearch & Command Engine
+│   ├── ConfirmDialog.vue            # Dialog Konfirmasi Hapus Ganda
+│   ├── HeaderBar.vue                # Unified Header Bar & Telemetry Breadcrumbs
+│   ├── Sidebar.vue                  # Unified Left Rail (w-56)
+│   ├── dashboard/                   # Subkomponen Asymmetric Bento 8:4
+│   ├── kanban/                      # Subkomponen Kanban Board & Drag-Drop Cards
+│   ├── tasks/                       # Active Focus Panel & Idea Scratchpad
+│   ├── project/                     # Subkomponen Project Cockpit & DevOps Tabs
+│   ├── sprint/                      # Subkomponen Weekly Sprint Calendar
+│   └── search/                      # Subkomponen OmniSearch Preview & Results
+├── composables/                     # Reactive Vue Composables (Nuxt Auto-Imported)
+│   ├── useWorkspaceStore.ts         # Singleton Workspace Store (SSOT)
+│   ├── useTaskDrawer.ts             # Pengendali State TaskDrawer
+│   ├── useQuickTask.ts              # Pengendali AddTaskModal
+│   ├── useProjectModal.ts           # Pengendali Modal Proyek
+│   ├── useOmniSearch.ts             # Pengendali State & Algoritma Pencarian ⌘K
+│   ├── useTasks.ts                  # Tasks REST API Client
+│   ├── useProjects.ts               # Projects REST API Client
+│   ├── useSprints.ts                # Sprints REST API Client
+│   ├── useNotes.ts                  # Notes/Scratchpad REST API Client
+│   ├── useGitHub.ts                 # GitHub Gateway Proxy Client
+│   └── useStats.ts                  # Dynamic Telemetry Stats Fetcher
+├── server/                          # Nitro Backend Serverless Engine
+│   ├── api/                         # REST API Endpoints Terpusat
+│   │   ├── tasks/                   # CRUD /api/tasks & /api/tasks/:id
+│   │   ├── projects/                # CRUD /api/projects & /api/projects/:slug
+│   │   ├── sprints/                 # CRUD /api/sprints & /api/sprints/:id
+│   │   ├── notes/                   # CRUD /api/notes & /api/notes/:id
+│   │   ├── github/                  # Proxy /api/github/repos, commits, branches, issues
+│   │   ├── telemetry.get.ts         # Live ping Supabase & GitHub rate limits
+│   │   └── backup/                  # /api/backup/export (1-klik dump JSON)
+│   ├── database/migrations/         # Migrasi SQL PostgreSQL Supabase
+│   │   ├── 001_initial.sql          # Inisialisasi tabel dasar
+│   │   ├── 002_add_github_repo.sql  # Penambahan kolom repo GitHub
+│   │   └── 003_system_alignment... # RLS lockdown & enum alignment
+│   ├── middleware/                  # Server Middleware
+│   │   └── auth.ts                  # Unified Auth Gate (Bearer Token & Session Cookie)
+│   ├── plugins/                     # Server Nitro Plugins
+│   │   └── seed.ts                  # Hardened Seed Plugin (nitro_seed_v2_completed guard)
+│   ├── repositories/                # Dual-Adapter Repository Layer
+│   │   ├── task.repository.ts       # Interface ITaskRepository
+│   │   ├── project.repository.ts    # Interface IProjectRepository
+│   │   ├── sprint.repository.ts     # Interface ISprintRepository
+│   │   ├── note.repository.ts       # Interface INoteRepository
+│   │   ├── supabase/                # PostgreSQL PostgREST Implementations
+│   │   └── nitro/                   # In-Memory Unstorage KV Implementations
+│   ├── schemas/                     # Zod Validation Schemas
+│   └── utils/                       # Server Utilities (handler, allowlist, github-sync, errors)
+├── tests/                           # Master Automated Test Suite
+│   └── unit/                        # 18 Test Suites (244 Tests Passing via node:test)
+├── types/                           # Definisi TypeScript Interfaces & Enums
+├── nuxt.config.ts                   # Konfigurasi Nuxt 4 & RuntimeConfig Security
+├── tailwind.config.ts               # Precision Dark Obsidian Design Tokens
+└── package.json                     # NPM Manifest & Quality Gate Scripts
 ```
 
 ---
 
-## 3. Konvensi Nuxt 4
+## 3. Komponen Arsitektur Kunci
 
-| Direktori | Lokasi | Status |
-|---|---|---|
-| `pages/` | `app/pages/` | ✅ Sesuai |
-| `app.vue` | `app/app.vue` | ✅ Sesuai |
-| `components/` | Root (`components/`) | ⚠️ Functional (auto-import configured) |
-| `composables/` | Root (`composables/`) | ⚠️ Functional (auto-import configured) |
-| `types/` | Root (`types/`) | ⚠️ Non-auto-imported, manual import |
+### 3.1. Unified State Management (`useWorkspaceStore.ts`)
+- **Single Source of Truth:** Menggunakan `useState` Nuxt untuk mengelola state global: `tasks`, `projects`, `sprints`, dan `notes`.
+- **Single Coordinated Hydration:** Saat inisialisasi boot di `app/app.vue`, fungsi `initializeWorkspace()` mengeksekusi paralel fetch tunggal (`Promise.all`) untuk mengisi store. Ini menggantikan multiplikasi 25 kunci cache Nuxt terfragmentasi sebelumnya.
+- **Optimistic UI (0ms Interactivity):** Setiap mutasi (tambah tugas, update kolom Kanban, toggle checklist, hapus deliverable) langsung memodifikasi state memori lokal secara instan (0ms) sambil mengirim request sinkronisasi ke server di latar belakang.
 
-> **Keputusan**: Lokasi `components/` dan `composables/` di root dipertahankan (DECISIONS.md PENDING-03). Nuxt auto-import dikonfigurasi melalui `nuxt.config.ts`.
+### 3.2. Serverless Security & Gateway Layer
+- **Unified Auth Gate ([`server/middleware/auth.ts`](../server/middleware/auth.ts)):**
+  - Mengamankan seluruh rute mutasi (`POST`, `PUT`, `PATCH`, `DELETE`) di bawah `/api/**`.
+  - Memverifikasi header `Authorization: Bearer <key>` atau cookie `nexura_session`.
+  - Di lingkungan cloud produksi, mutasi tanpa kredensial valid ditolak dengan HTTP 401 Unauthorized.
+- **Supabase RLS Lockdown (Migration 003):**
+  - Hak akses peran publik `anon` dicabut secara total dari seluruh tabel database.
+  - Akses database diisolasi eksklusif untuk peran `service_role` melalui Nitro backend repository. Klien browser tidak pernah mengekspos koneksi langsung ke PostgREST.
+- **GitHub Parameter Allowlist ([`server/utils/github-allowlist.ts`](../server/utils/github-allowlist.ts)):**
+  - Membatasi eksekusi issue GitHub dan workflow rerun hanya pada repositori milik akun pemilik (`bagja-iskandar`) atau yang terdaftar di kolom `projects.github_repo`.
 
----
+### 3.3. Repository Pattern & PostgREST DSL Parameterization
+- Akses data dibungkus oleh abstraksi repository interface (`ITaskRepository`, `IProjectRepository`, dll.).
+- **Hardening Injeksi PostgREST (`SEC-004`):**
+  - Meniadakan interpolasi string mentah pada pemanggilan `.or(...)`.
+  - Pemilahan query dibangun secara deterministik: jika format ID adalah `ENG-xxx`, query diarahkan ke `.eq('task_id', val)`; jika format ID adalah UUID, query diarahkan ke `.eq('id', val)`.
+  - Nilai selalu diproteksi sebagai parameter literal yang aman dari manipulasi query grammar.
+- **Zero Silent Data Loss Policy:**
+  - Repositori Supabase tidak lagi melakukan failover mutasi diam-diam ke penyimpanan ephemeral lokal Nitro KV. Jika Supabase mengalami gangguan jaringan di lingkungan produksi, sistem merespons secara transparan dengan HTTP 503 Service Unavailable.
 
-## 4. Alur Data
+### 3.4. Alur 5 Kolom Kanban Pipeline & Markdown Checklist
+- Kolom kanonikal: `idea` (Amber) → `in_queue` (Slate) → `running_sprint` (Indigo) → `blocked` (Rose) → `deployed` (Emerald).
+- Deliverable yang berada pada `running_sprint` terhubung langsung dengan panel **Active Focus**.
+- Parser checklist mengevaluasi sintaks Markdown `- [ ]` dan `- [x]`. Mengklik checkbox langsung memodifikasi string deskripsi tugas dan menyimpannya secara otomatis ke database.
 
-### Dashboard Load
-```
-browser → GET /
-  → app/pages/index.vue → <Dashboard>
-  → useLazyAsyncData('stats') → $fetch('/api/stats')
-      → stats.get.ts → getArray('tasks') + getArray('projects')
-      → Real calculations: Active Tasks count, Blockers count, Velocity
-  → useLazyAsyncData('activities') → $fetch('/api/activities')
-      → activities.get.ts → getArray('tasks') → sort by date
-  → <KanbanBoard> renders tasks by status column
-```
-
-### Create Task
-```
-user input → <AddTaskModal> emits 'create'
-  → useTasks.createTask({ name, projectSlug, priority, techTags, dueDate })
-  → $fetch POST /api/tasks
-  → tasks.post.ts → validate → auto-generate taskId ('ENG-xxx') → createItem()
-  → return Task
-  → refreshNuxtData() → KanbanBoard re-renders
-```
-
-### GitHub Repos Fetch
-```
-browser → /repos
-  → useLazyAsyncData('github-repos') → $fetch('/api/github/repos')
-  → github/repos.get.ts → cachedFunction(async () => {
-      fetch('https://api.github.com/user/repos', { headers: { Authorization: 'Bearer ${token}' } })
-    }, { maxAge: 300 })  // 5 min TTL
-  → Return cached or fresh repo list
-```
-
-### Status Transfer (Kanban Drag)
-```
-user drag card → KanbanBoard.onDrop(taskId, newStatus)
-  → useTasks.updateTask(id, { status: newStatus })
-  → $fetch PUT /api/task/:id
-  → [id].put.ts → updateItem('tasks', id, { status })
-  → refreshNuxtData() → columns re-render
-```
+### 3.5. Otomasi GitHub Sync & Sprint Rollover
+- **Automated Deploy Detection ([`server/utils/github-sync.ts`](../server/utils/github-sync.ts)):**
+  - Memindai commit messages dan pull request titles pada repositori tertaut.
+  - Menemukan pola `#ENG-xxx` dan secara otomatis memindahkan status deliverable terkait ke kolom `deployed`.
+- **Confirmed Sprint Rollover (`AUTO-002`):**
+  - Menyediakan modal konfirmasi 1-klik untuk merollover deliverable yang belum selesai dari sprint sebelumnya ke sprint minggu berjalan secara aman.
 
 ---
 
-## 5. Storage Layer
+## 4. Testing & CI/CD Pipeline
 
-### Current: Nitro Unstorage KV
-```
-useStorage('data:')
-  key: 'tasks'    → .data/kv/tasks    (JSON Task[])
-  key: 'projects' → .data/kv/projects (JSON Project[])
-  key: 'sprints'  → .data/kv/sprints  (JSON Sprint[])
-  key: 'notes'    → .data/kv/notes    (JSON StickyNote[])
-  key: 'visits'   → .data/kv/visits   (JSON number)
-  key: 'task-seq' → .data/kv/task-seq (JSON number — next ENG-xxx sequence)
-```
+Kualitas sistem dijaga oleh pipeline otomatis pada `.github/workflows/ci.yml`:
 
-### Future: Supabase PostgreSQL (pluggable)
-```
-StorageAdapter interface tetap sama.
-Swap implementasi dari KV → Supabase client queries.
-Toggle via config atau env var.
+```yaml
+name: CI Quality Gate
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+jobs:
+  validate:
+    name: Typecheck, Test & Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: Static Typecheck
+        run: npm run typecheck
+      - name: Master Automated Test Suite
+        run: npm test
+      - name: Code Coverage Audit
+        run: npm run test:coverage
+      - name: Production Packaging
+        run: npm run build
 ```
 
 ---
 
-## 6. API Contract
+## 5. Ringkasan API Kontrak REST
 
-### Internal CRUD
+Semua endpoint dibungkus dengan utilitas terpusat [`withApiHandler`](../server/utils/handler.ts) dan mematuhi format envelope JSON standar:
 
-| Method | Path | Request Body | Response |
-|---|---|---|---|
-| GET | `/api/activities` | — | `Task[]` (sorted by date desc) |
-| GET | `/api/tasks` | `?project=slug&priority=high` | `Task[]` (filtered, sorted) |
-| POST | `/api/tasks` | `{ name, projectSlug?, priority?, techTags?, dueDate? }` | `Task` (with auto-generated `taskId`) |
-| PUT | `/api/task/:id` | `Partial<Task>` | `Task` |
-| DELETE | `/api/task/:id` | — | `{ ok: true }` |
-| GET | `/api/projects` | — | `Project[]` |
-| POST | `/api/projects` | `{ slug, title, description?, githubRepo?, techStack? }` | `Project` |
-| PUT | `/api/projects/:slug` | `Partial<Project>` | `Project` |
-| DELETE | `/api/projects/:slug` | — | `{ ok: true }` |
-| GET | `/api/stats` | — | `Stat[]` (real calculations) |
-| GET | `/api/sprints` | — | `Sprint[]` |
-| POST | `/api/sprints` | `{ name, startDate, endDate }` | `Sprint` |
-| GET | `/api/notes` | `?scope=global` or `?scope=slug` | `StickyNote[]` |
-| POST | `/api/notes` | `{ content, scope, color?, position? }` | `StickyNote` |
-| PUT | `/api/notes/:id` | `Partial<StickyNote>` | `StickyNote` |
-| DELETE | `/api/notes/:id` | — | `{ ok: true }` |
-
-### External API Gateways
-
-| Method | Path | Upstream | Response |
-|---|---|---|---|
-| GET | `/api/github/repos` | `api.github.com/user/repos` | `GitHubRepoSummary[]` |
-| GET | `/api/github/commits?repo=X` | `api.github.com/repos/{owner}/{repo}/commits` | `GitHubCommitItem[]` |
-| GET | `/api/github/branches?repo=X` | `api.github.com/repos/{owner}/{repo}/branches` | `GitHubBranch[]` |
-| GET | `/api/github/commit-detail?repo=X&sha=Y` | `api.github.com/repos/{owner}/{repo}/commits/{sha}` | `{ files, stats, patch }` |
-| GET | `/api/vercel/deployments` | `api.vercel.com/v6/deployments` | `Deployment[]` (🔜) |
-
-Error responses: H3 `createError` format — `{ statusCode, statusMessage, data: { code, details? } }`
-
----
-
-## 7. External Service Integration
-
-### GitHub (Phase 9 — Ready)
-- **Auth**: Personal Access Token (PAT) via `.env` → `runtimeConfig.githubToken` (server-only)
-- **Username**: `bagja-iskandar`
-- **Endpoints**: Repos, commits, branches per repo
-- **Caching**: Nitro `cachedFunction` with TTL 5 menit (proteksi rate limit 5,000 req/jam)
-- **Error handling**: 401 (bad token), 403 (rate limited), graceful fallback
-
-### Supabase (Phase 10 — Planned)
-- **Purpose**: PostgreSQL database menggantikan Nitro KV untuk persistent storage
-- **Auth**: Service role key via `.env` → `runtimeConfig.supabaseKey` (server-only)
-- **Swap**: Implement `StorageAdapter` interface backed by Supabase queries
-
-### Vercel (Phase 11 — Planned)
-- **Purpose**: Deployment monitoring — status, build logs, project health
-- **Auth**: Access Token via `.env` → `runtimeConfig.vercelToken` (server-only)
-- **Endpoints**: Deployments list, project list
+| Resource | Method | Path | Auth Gate | Deskripsi |
+|---|---|---|---|---|
+| **Tasks** | `GET` | `/api/tasks` | Terbuka | Mengambil daftar tugas (filter: `projectSlug`, `status`, `priority`) |
+| | `POST` | `/api/tasks` | **Protected** | Membuat tugas baru (auto-generates format `#ENG-xxx`) |
+| | `GET` | `/api/tasks/:id` | Terbuka | Mengambil detail tugas berdasarkan UUID atau `task_id` |
+| | `PUT` | `/api/tasks/:id` | **Protected** | Memperbarui status, checklist deskripsi, atau sprint deliverable |
+| | `DELETE` | `/api/tasks/:id` | **Protected** | Menghapus tugas dari database |
+| **Projects** | `GET` | `/api/projects` | Terbuka | Mengambil seluruh katalog proyek terdaftar |
+| | `POST` | `/api/projects` | **Protected** | Mendaftarkan proyek baru |
+| | `GET` | `/api/projects/:slug` | Terbuka | Mengambil detail proyek berdasarkan slug |
+| | `PUT` | `/api/projects/:slug` | **Protected** | Memperbarui metadata proyek (title, repo, releasePhase, techStack) |
+| | `DELETE` | `/api/projects/:slug` | **Protected** | Menghapus proyek dari sistem |
+| **Sprints** | `GET` | `/api/sprints` | Terbuka | Mengambil seluruh riwayat sprint |
+| | `POST` | `/api/sprints` | **Protected** | Membuat siklus sprint baru |
+| | `PUT` | `/api/sprints/:id` | **Protected** | Memperbarui status atau rentang sprint |
+| **Notes** | `GET` | `/api/notes` | Terbuka | Mengambil catatan ide/bug (filter via `projectSlug`) |
+| | `POST` | `/api/notes` | **Protected** | Menambahkan catatan ide baru ke scratchpad |
+| | `PUT` | `/api/notes/:id` | **Protected** | Mengupdate catatan atau menandai `promoted_task_id` |
+| | `DELETE` | `/api/notes/:id` | **Protected** | Menghapus catatan ide |
+| **GitHub** | `GET` | `/api/github/repos` | Terbuka | Mengambil katalog repositori akun (cached 5 min) |
+| | `GET` | `/api/github/commits` | Terbuka | Mengambil daftar commit terbaru (`?repo=owner/repo`) |
+| | `GET` | `/api/github/branches` | Terbuka | Mengambil daftar branch repositori |
+| | `POST` | `/api/github/create-issue` | **Protected** | Membuat issue GitHub (allowlist verified) |
+| | `POST` | `/api/github/workflow-rerun` | **Protected** | Memicu rerun GitHub Action (allowlist verified) |
+| **Telemetry** | `GET` | `/api/telemetry` | Terbuka | Live ping Supabase, kuota rate-limit GitHub & runtime detection |
+| | `GET` | `/api/backup/export` | **Protected** | Mengunduh dump JSON seluruh data workspace |

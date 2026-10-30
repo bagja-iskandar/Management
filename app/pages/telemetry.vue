@@ -13,30 +13,6 @@
           {{ telemetryData?.environment || 'Development' }}
         </span>
       </div>
-
-      <div class="flex items-center gap-2 flex-wrap">
-        <!-- Export Backup Button -->
-        <button
-          type="button"
-          :disabled="isExporting"
-          class="inline-flex items-center gap-1.5 bg-[#111318] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.12] text-xs font-medium px-3.5 py-1.5 rounded-lg shadow-sm transition active:scale-95 disabled:opacity-50 cursor-pointer"
-          @click="onExportBackup"
-        >
-          <NexuraIcon name="Download" size="xs" :class="{ 'animate-bounce': isExporting }" />
-          <span>{{ isExporting ? 'Exporting...' : 'Export Backup (JSON)' }}</span>
-        </button>
-
-        <!-- Refresh Telemetry Button -->
-        <button
-          type="button"
-          :disabled="isRefreshing"
-          class="inline-flex items-center gap-1.5 bg-[#F3F4F6] hover:bg-white text-[#07080A] text-xs font-medium px-3.5 py-1.5 rounded-lg shadow-sm transition active:scale-95 disabled:opacity-50 cursor-pointer"
-          @click="onRefresh"
-        >
-          <NexuraIcon name="RotateCw" size="xs" :class="{ 'animate-spin': isRefreshing }" />
-          <span>Refresh Telemetry</span>
-        </button>
-      </div>
     </div>
 
     <!-- Feedback Toast -->
@@ -402,8 +378,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 
 interface TelemetryResponse {
   environment?: string
@@ -525,6 +502,38 @@ async function onExportBackup() {
     isExporting.value = false
   }
 }
+
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
+onMounted(() => {
+  watchEffect(() => {
+    setActions([
+      {
+        id: 'refresh-telemetry',
+        label: 'Refresh',
+        icon: 'RotateCw',
+        variant: 'secondary',
+        disabled: isRefreshing.value,
+        loading: isRefreshing.value,
+        handler: onRefresh
+      },
+      {
+        id: 'export-backup',
+        label: 'Export Backup',
+        icon: 'Download',
+        variant: 'primary',
+        disabled: isExporting.value,
+        loading: isExporting.value,
+        handler: onExportBackup
+      }
+    ])
+  })
+})
+
+onBeforeUnmount(() => {
+  clearActions()
+})
 
 const ratePercent = computed(() => {
   const rl = telemetryData.value?.github?.rateLimit

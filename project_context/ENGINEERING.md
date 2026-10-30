@@ -1,186 +1,151 @@
-# ENGINEERING.md — Standar Engineering & Conventions
+# ENGINEERING.md — Standar Engineering & Konvensi Teknis Nexura
 
-_Last updated: 2026-10-22. Updated untuk Precision Dark Obsidian (Linear / Raycast Inset Architecture) + Tailwind CSS + Dual-Adapter Repository._
+> **Status:** RATIFIED & HARDENED (Production-Ready)  
+> **Last Updated:** 29 Oktober 2026  
+> **Lead Architect & Orchestrator:** Bagja Iskandar & Antigravity Head Agent  
+> **Design Pattern:** Precision Dark Obsidian Bento UI (Linear / Raycast Inset Shell)  
+> **Master Reference:** [`DOCUMENTATION.md`](../DOCUMENTATION.md) | [`docs/master-remediation-plan.md`](../docs/master-remediation-plan.md)
 
 ---
 
-## 1. Kondisi Engineering
+## 1. Standar Rekayasa & Arsitektur Kode
 
-### TypeScript
-- Project menggunakan TypeScript via Nuxt — semua file `.ts` dan `.vue` (dengan `<script setup lang="ts">`)
-- `tsconfig.json` mendelegasikan sepenuhnya ke `.nuxt/tsconfig.*.json`
-- Semua masalah TypeScript dari Phase 1–2 telah **resolved**
+### 1.1. TypeScript Strictness
+- Proyek berjalan di atas TypeScript Strict Mode via konfigurasi Nuxt 4 (`.nuxt/tsconfig.json`).
+- Seluruh komponen Vue wajib menggunakan sintaks Composition API `<script setup lang="ts">`.
+- Props didefinisikan menggunakan generic syntax: `defineProps<Props>()`.
+- Emits didefinisikan menggunakan generic syntax: `defineEmits<{ (e: 'event', payload: T): void }>()`.
+- Dilarang keras menggunakan `any` tanpa alasan teknis yang terdokumentasi; gunakan Zod schemas untuk memvalidasi tipe runtime yang tidak pasti.
 
-### Composables
-- Pattern: plain function returns object dengan async methods
-- Caching: `useLazyAsyncData` + `getCachedData` payload caching di consumer (bukan di composable)
-- Invalidasi: `refreshNuxtData(key)` setelah mutasi
-- Existing: `useTasks.ts`, `useStats.ts`, `useProjects.ts`
-- Target baru: `useGitHub.ts` (Phase 9)
+### 1.2. Unified State Management (`useWorkspaceStore.ts`)
+- **Canonical Singleton:** State global aplikasi dipusatkan pada [`composables/useWorkspaceStore.ts`](../composables/useWorkspaceStore.ts) menggunakan `useState` bawaan Nuxt.
+- **Single Coordinated Hydration:** Inisialisasi awal saat boot di `app/app.vue` mengeksekusi paralel `initializeWorkspace()`, meniadakan 25 kunci cache terfragmentasi sebelumnya.
+- **Optimistic UI:** Mutasi data (pemindahan kolom Kanban, checklist Markdown, pembuatan proyek) langsung memutasi state memori lokal (0ms) sambil menyinkronkan data ke API di latar belakang. Jika sinkronisasi gagal, state di-rollback secara otomatis.
 
-### Server / API Layer
-- **Wrapper**: `withApiHandler` untuk semua endpoint — centralized error catching
-- **Validation**: `readJsonBody`, `requireString`, `validateStatus`, `validateDate`
-- **Storage**: `StorageAdapter` interface — pluggable (KV sekarang, Supabase nanti)
-- **Error format**: `throwApiError` → H3 `createError` → `{ statusCode, code, details }`
+### 1.3. Server Layer & Dual-Adapter Repository
+- **Centralized Handler (`withApiHandler`):** Seluruh REST endpoint di bawah `/api/**` dibungkus dengan [`server/utils/handler.ts`](../server/utils/handler.ts).
+- **Unified Security Gate:** Seluruh operasi mutasi (`POST`, `PUT`, `PATCH`, `DELETE`) dilindungi oleh [`server/middleware/auth.ts`](../server/middleware/auth.ts) yang memvalidasi Bearer token atau session cookie.
+- **Repository Pattern:** Seluruh akses data menggunakan abstraksi repository (`server/repositories/`).
+- **PostgREST Query Hardening (`SEC-004`):**
+  - Meniadakan interpolasi string mentah pada pemanggilan `.or(...)`.
+  - Menggunakan pencarian deterministik: `ENG-xxx` diarahkan ke `.eq('task_id', val)`, UUID diarahkan ke `.eq('id', val)`.
+- **Zero Silent Data Loss Policy:**
+  - Repositori Supabase tidak lagi melakukan failover mutasi diam-diam ke Nitro KV. Kegagalan database di cloud produksi menghasilkan error HTTP 503 secara jujur (*fail-fast*).
 
-### Client / Frontend Layer
-- `useLazyAsyncData` dengan `getCachedData` untuk navigasi 0ms
-- `refreshNuxtData()` untuk invalidasi setelah mutasi
-- `isBusy` ref sebagai loading state dengan `finally` block
-- Error feedback alert banner di semua halaman
+---
 
-### Semua Masalah Historis — Resolved
+## 2. Standar Desain Visual: Precision Dark Obsidian Bento UI
 
-| ID | Masalah | Status |
+### 2.1. Filosofi Desain
+Mengadopsi standar visual modern ala **Linear / Raycast / Cursor**:
+- Kanvas dingin: Outer Void `#07080A`, Inset Workspace Canvas `#0B0C10`, Specular Surface `#111318`.
+- Teks berkontras tinggi: Teks utama Crisp Alabaster `#F3F4F6`, teks sekunder Cool Slate `#8A8F9E`.
+- Aksen utama: Obsidian Cool Indigo (`#6366F1` / `#818CF8`) dan tombol aksi utama putih Crisp Alabaster (`bg-[#F3F4F6] text-[#07080A]`).
+
+### 2.2. Aturan Tipografi & Ergonomi Layar
+1. **Font UI Default:** Gunakan `font-sans` (`Inter`) untuk semua elemen navigasi, judul kartu, nama tugas, deskripsi, dan tombol.
+2. **Font Data & Metrik:** Gunakan `font-mono` (`JetBrains Mono`) **hanya** untuk identifier: Task ID (`#ENG-104`), commit SHA (`a75e740`), angka metrik/KPI (`78%`), nama branch/repo, dan jam.
+3. **Batas Ukuran Minimum:** Batas minimum font yang diizinkan adalah `text-xs` (`12px`). Dilarang menggunakan ukuran mikro `text-[9px]`, `text-[10px]`, atau `text-[11px]` demi menjaga keterbacaan.
+
+### 2.3. Specular Lighting & Bento Grid
+- Gunakan class `.obs-workspace` untuk membungkus workspace inset pada `app/app.vue`.
+- Gunakan class `.obs-card` (atau `.console-card`) untuk kartu specular dengan top-highlight 1px (`inset 0 1px 0 0 rgba(255,255,255,0.07)`).
+
+---
+
+## 3. Konvensi Penamaan (Naming Conventions)
+
+| Tipe Entitas | Konvensi | Contoh |
 |---|---|---|
-| TS-01 | Tipe lokal duplikat di dashboard.vue | ✅ Phase 1c |
-| TS-02 | `$fetch` tanpa generic type (useStats) | ✅ Phase 2b |
-| TS-03 | `$fetch` tanpa generic type (useProjects) | ✅ Phase 2b |
-| TS-04 | Props non-reaktif di ConfirmDialog | ✅ Phase 1b |
-| TS-05 | Dead code `statusClass()` | ✅ Phase 2d |
-| SVR-01 | Double query di `[id].put.ts` | ✅ Phase 2e |
-| CLT-01 | Manual import Dashboard | ✅ Phase 2c |
-| CLT-02 | Manual import Navbar | ✅ Phase 2c |
-| CLT-03 | Missing error handling (dashboard) | ✅ Phase 1d |
-| CLT-04 | Missing error handling (projects) | ✅ Phase 1d |
-| CSS-01–05 | Fragile selectors, orphans, duplications | ✅ Phase 1e/1f/2f |
+| **Components** | PascalCase | `Sidebar.vue`, `KanbanBoard.vue`, `TaskDrawer.vue` |
+| **Pages** | kebab-case / lowercase | `index.vue`, `tasks.vue`, `projects/index.vue`, `[slug].vue` |
+| **Composables** | camelCase (`useNoun`) | `useWorkspaceStore.ts`, `useOmniSearch.ts`, `useTasks.ts` |
+| **API Endpoints** | `noun.method.ts` / `[param].method.ts` | `tasks.get.ts`, `[id].put.ts`, `repos.get.ts` |
+| **Repositories** | PascalCase + suffix | `SupabaseTaskRepository`, `NitroTaskRepository` |
+| **Zod Schemas** | camelCase + `Schema` | `createTaskSchema`, `updateProjectSchema` |
+| **Test Suites** | `*.spec.mjs` / `*.spec.ts` | `supabase-task-injection.spec.mjs`, `metrics.spec.mjs` |
 
 ---
 
-## 2. Styling: Tailwind CSS — Precision Dark Obsidian (Phase 13+)
+## 4. Alur Data & Mutasi (Data Flow Architecture)
 
-### Filosofi & Standar Visual
-- **Precision Dark Obsidian**: Seluruh komponen mengikuti standar visual **Linear / Raycast / Cursor** seperti yang didefinisikan secara lengkap di [DESIGN.md](./DESIGN.md) dan direferensikan di [mockup-dark-obsidian.html](./mockup-dark-obsidian.html).
-- **Unified Cool Temperature**: Kanvas luar `void` (`#07080A`), workspace inset `canvas` (`#0B0C10`), kartu `surface` (`#111318`), teks utama `foreground` (`#F3F4F6`), teks sekunder `muted` (`#8A8F9E`), dan aksen utama `accent` (`#6366F1` / `#818CF8`).
+### 4.1. Alur Optimistic UI (Tasks & Kanban)
+```
+User Drag / Action
+    ↓
+Emit event ke handler komponen
+    ↓
+Composable call (useWorkspaceStore.updateTask(id, payload))
+    ↓
+1. Mutasi Optimistik Lokal (0ms) -> UI Kanban langsung re-render seketika
+2. Server Sync via $fetch('/api/tasks/:id', { method: 'PUT', body: payload })
+    ↓
+withApiHandler -> Auth Gate Middleware -> SupabaseTaskRepository.update()
+    ↓
+Response OK -> sync silent selesai
+Response Error -> Rollback state lokal & tampilkan toast notifikasi
+```
 
-### Konvensi Tailwind & CSS Layers
-- Gunakan **semantic tokens** dari `tailwind.config.ts` (`void`, `canvas`, `surface`, `surface-elevated`, `foreground`, `muted`, `dim`, `accent`, `accent-light`).
-- Gunakan class `.obs-workspace` untuk container utama halaman (di `app/app.vue`) dan `.obs-card` (atau `.console-card`) untuk setiap kartu agar mendapatkan **Specular 1px Top-Edge Highlight** (`inset 0 1px 0 0 rgba(255,255,255,0.07)`).
-- **Aturan Tipografi Ergonomis**:
-  - Gunakan `font-sans` (`Inter`) sebagai default untuk **semua elemen UI**: navigasi, judul kartu, nama task, deskripsi, tombol, dan tab.
-  - Gunakan `font-mono` (`JetBrains Mono`) **hanya untuk data & identifier**: Task ID (`NX-142` / `ENG-104`), Commit SHA (`a75e740`), angka metrik/KPI (`78%`, `14`), nama branch/repo, dan jam.
-  - **Batas Minimum Ukuran Font**: `text-xs` (`12px`). Jangan gunakan `text-[9px]`, `text-[10px]`, atau `text-[11px]` karena menurunkan keterbacaan.
-- **Hover & Focus State**:
-  - Card hover: `hover:border-white/[0.13]` atau `hover:border-indigo-500/40`.
-  - Focus ring: `focus-visible:ring-1 focus-visible:ring-[#6366F1] focus-visible:outline-none`.
-  - Primary CTA Button: `bg-[#F3F4F6] hover:bg-white text-[#07080A] font-medium` (Crisp Alabaster).
-
-### No Legacy Warm Hex — Gunakan Token Dark Obsidian
-```html
-<!-- ✅ Benar (Precision Dark Obsidian) -->
-<div class="obs-card p-4 text-foreground">
-  <h3 class="font-sans text-sm font-semibold text-foreground">Execution Radar</h3>
-  <span class="font-mono text-xs text-muted">ENG-104</span>
-</div>
-
-<!-- ❌ Dilarang (Legacy Charcoal-Ochre hardcoded hex) -->
-<div class="bg-[#141210] text-[#F5F2EB] border-[#C98A4B]">
-  <span class="text-[#756F68] text-[10px]">ENG-104</span>
-</div>
+### 4.2. Alur Active Focus & Markdown Checklist
+```
+User mengklik checkbox Markdown (- [ ] -> - [x])
+    ↓
+ActiveFocusPanel.toggleChecklist(task, itemIndex)
+    ↓
+Modifikasi string deskripsi lokal via regex replacing (- [ ] -> - [x])
+    ↓
+Simpan deskripsi baru via workspaceStore.updateTask(task.id, { description })
+    ↓
+Deskripsi tersimpan permanen di Supabase PostgreSQL
 ```
 
 ---
 
-## 3. Naming Conventions
+## 5. Standar Testing & Automated Quality Gate
 
-### Files
-| Tipe | Convention | Contoh |
-|------|-----------|--------|
-| Components | PascalCase | `Sidebar.vue`, `KanbanBoard.vue`, `TaskCard.vue` |
-| Components (layout) | lowercase | `dashboard.vue` (historical, accepted) |
-| Composables | `useNoun` camelCase | `useTasks.ts`, `useGitHub.ts` |
-| API routes | `noun.method.ts` | `tasks.get.ts`, `projects.post.ts` |
-| API dynamic routes | `[param].method.ts` | `[id].put.ts`, `[slug].delete.ts` |
-| Server utils | lowercase camelCase | `github.ts`, `store.ts` |
-| Types | PascalCase interface | `Task`, `Project`, `Sprint`, `GitHubRepoSummary` |
+Sistem menerapkan **Zero-Dependency Native Node.js Test Runner (`node:test`)** yang berkecepatan tinggi (< 3 detik) tanpa overhead framework eksternal:
 
-### Components
-- Semua menggunakan `<script setup lang="ts">`
-- Props: `defineProps<Type>()` generic syntax
-- Emits: `defineEmits<{ event: [payload] }>()` generic syntax
-- Tidak ada Options API, tidak ada class components
+### 5.1. Rangkaian Pengujian Master (18 Test Suites / 244 Tests)
+1. `tests/unit/id-generator.spec.mjs` — Validasi generator ID `ENG-xxx` sekuensial dan pengurutan nomor.
+2. `tests/unit/metrics.spec.mjs` — Verifikasi prinsip Zero Fake Metrics (kalkulasi progres 0/0 tasks = 0%).
+3. `tests/unit/github-allowlist.spec.mjs` — Pengujian proteksi penolakan HTTP 403 untuk repositori di luar izin.
+4. `tests/unit/markdown-checklist.spec.mjs` — Parser checklist `- [ ]` / `- [x]` dan kalkulasi rasio selesai.
+5. `tests/unit/task-sprint-ssot.spec.mjs` — Integritas relasi sprint SSOT `tasks.sprint_id`.
+6. `tests/unit/supabase-task-injection.spec.mjs` — Imunitas query PostgREST DSL terhadap query grammar injection.
+7. *12 Test Suites lainnya* mencakup validasi skema Zod, auth middleware, store reactivity, dan telemetry ping.
 
-### Task ID Format
-- Sequential monospace: `ENG-001`, `ENG-002`, `ENG-003`, ...
-- Stored di `task-seq` KV key sebagai counter
-- Auto-generated di `tasks.post.ts`
+### 5.2. Skrip Pengujian Otomatis
+```bash
+# 1. Menjalankan seluruh 244 tes unit
+npm test
 
----
+# 2. Menjalankan tes dengan audit Code Coverage
+npm run test:coverage
 
-## 4. API Convention
+# 3. Static TypeScript typecheck
+npm run typecheck
 
-### Request/Response
-- Request body: JSON — validated via `readJsonBody` + `requireString`
-- Response: JSON — wrapped by `withApiHandler`
-- Error: H3 `createError` → `{ statusCode, statusMessage, data: { code, details? } }`
-
-### External API (GitHub)
-- Auth: `Authorization: Bearer ${runtimeConfig.githubToken}`
-- Caching: Nitro `cachedFunction` with `maxAge: 300` (5 menit)
-- Error handling: 401 → "Invalid GitHub token", 403 → "Rate limited", graceful fallback
-
-### Rate Limiting Strategy
-- GitHub: 5,000 req/jam (authenticated)
-- Cache semua GET responses selama 5 menit
-- Dashboard polling: client-side refresh on demand (bukan auto-poll)
-
----
-
-## 5. Data Flow Patterns
-
-### CRUD Pattern
-```
-User Action → Component Event → Composable Method → $fetch to Nitro API
-  → withApiHandler → validate → StorageAdapter → KV / Supabase
-  → Return response → refreshNuxtData() → UI re-renders
-```
-
-### External API Pattern
-```
-Component → useLazyAsyncData → $fetch('/api/github/repos')
-  → Nitro handler → cachedFunction(fetchFromGitHub, { maxAge: 300 })
-  → Return cached or fresh data → Component renders
-```
-
-### Error Pattern
-```
-API failure → H3 createError → withApiHandler catches → returns error response
-  → Client useLazyAsyncData.error → error banner rendered → retry button
+# 4. Packaging rilis produksi
+npm run build
 ```
 
 ---
 
-## 6. Testing (Target)
-
-**Status saat ini**: Tidak ada testing.
-
-### Minimum Target
-- [ ] Unit test `server/utils/store.ts` (CRUD helpers)
-- [ ] Unit test `server/utils/validation.ts` (input validators)
-- [ ] API integration test untuk endpoints utama
-- [ ] E2E smoke test: create task, move via Kanban, verify
-
-### Tooling (ketika diimplementasikan)
-- `vitest` untuk unit & integration tests
-- `@nuxt/test-utils` untuk Nuxt-specific testing
-
----
-
-## 7. Environment Variables
+## 6. Konfigurasi Lingkungan (`.env`)
 
 ```env
-# GitHub (Required for Phase 9)
-GITHUB_TOKEN=ghp_xxxxxxxxxxxx          # PAT with repo + read:user scope
-GITHUB_USERNAME=bagja-iskandar         # Default, also in runtimeConfig
+# GitHub Integration
+GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GITHUB_USERNAME=bagja-iskandar
 
-# Supabase (Phase 10 — fill when ready)
-SUPABASE_URL=https://xxx.supabase.co
-SUPABASE_SERVICE_KEY=eyJhbGci...
+# Supabase PostgreSQL (Production Storage)
+SUPABASE_URL=https://xxxxxxxxxxxxxxxx.supabase.co
+SUPABASE_KEY=eyJhbGciOi...              # Anon / Publishable Key
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi... # Wajib untuk mutasi server backend
 
-# Vercel (Phase 11 — fill when ready)
-VERCEL_TOKEN=xxxxxxxxxxxx
-VERCEL_TEAM_ID=                        # Optional, for team projects
+# Nexura Server Security Gate
+NEXURA_ACCESS_KEY=your_secure_random_hex_key_here
+
+# Runtime Environment
+NODE_ENV=development
 ```
-
-Semua env vars diakses via `runtimeConfig` (server-only, tidak terekspos ke client) kecuali `public.githubUsername`.

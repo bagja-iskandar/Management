@@ -4,7 +4,7 @@
 **Versi Sistem:** Nuxt 4.1.2 Full-Stack Engineering Platform  
 **Status Arsitektur:** Hardened Single-Owner Command Center  
 **Desain & UI/UX:** Precision Dark Obsidian Bento UI (Void `#07080A`, Canvas `#0B0C10`, Specular Surface `#111318`)  
-**Terakhir Diperbarui:** 29 Oktober 2026  
+**Terakhir Diperbarui:** 30 Oktober 2026 (Fase 1 UX Redesign: Contextual Action Bar Validated)  
 
 ---
 
@@ -260,8 +260,7 @@ Management/
 │       ├── sprints.vue              # /sprints (Weekly Iterations & Calendar)
 │       ├── roadmap.vue              # /roadmap (Release Phase Roadmap)
 │       ├── repos.vue                # /repos (Repositories Catalog & Importer)
-│       ├── telemetry.vue            # /telemetry (DevOps Health & Backup)
-│       └── focus.vue                # (Kandidat Pruning Fase 13)
+│       └── telemetry.vue            # /telemetry (DevOps Health & Backup)
 ├── assets/css/
 │   └── main.css                     # Tailwind directives & Dark Obsidian styles
 ├── components/                      # Komponen Vue 3.5 Dark Obsidian Bento
@@ -293,10 +292,13 @@ Management/
 ├── server/                          # Nitro Backend Serverless Engine
 │   ├── api/                         # REST API Endpoints
 │   ├── database/migrations/         # Skrip SQL Migration Supabase
-│   ├── middleware/                  # Server Middleware (auth.ts)
-│   ├── repositories/                # Storage Provider (Supabase & Nitro KV)
+│   ├── middleware/                  # Server Middleware (auth.ts - auth gate mutasi)
+│   ├── plugins/                     # Server Plugins (seed.ts - idempotent initialization)
+│   ├── repositories/                # Storage Repositories (Supabase PostgREST & Nitro KV)
 │   ├── schemas/                     # Zod Validation Schemas
-│   └── utils/                       # Server Utilities (handler, allowlist, errors)
+│   └── utils/                       # Server Utilities (handler, allowlist, note, errors)
+├── tests/                           # Master Automated Test Suite
+│   └── unit/                        # 19 Test Suites (259 Tests Passing, Node Test Runner)
 ├── types/                           # Definisi Tipe TypeScript
 ├── DOCUMENTATION.md                 # Dokumentasi Lengkap Sistem
 ├── nuxt.config.ts                   # Konfigurasi Nuxt 4
@@ -343,12 +345,15 @@ npm run dev
 # Akses melalui peramban di http://localhost:3000
 
 # 3. Pemeriksaan tipe TypeScript (Static Typecheck)
-npx vue-tsc --noEmit
+npm run typecheck
 
-# 4. Menjalankan pengujian otomatis (Vitest Suite)
-npm run test
+# 4. Menjalankan pengujian otomatis (Master Test Suite: 259 tests)
+npm test
 
-# 5. Membangun bundle produksi
+# 5. Menjalankan pengujian dengan audit Code Coverage (Target >= 80%)
+npm run test:coverage
+
+# 6. Membangun bundle produksi (Nitro / Vercel Preset)
 npm run build
 ```
 

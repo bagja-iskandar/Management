@@ -36,57 +36,66 @@
       <HeaderSearch />
     </div>
 
-    <!-- Right: Live Telemetry Clock & Blocker Status + Session Auth -->
-    <div class="flex items-center gap-2.5 shrink-0">
-      <!-- Monospace Telemetry Pod: WIB Clock | Blockers -->
-      <div class="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] font-mono tabular-nums text-xs text-[#8A8F9E]">
-        <span class="font-mono tabular-nums">WIB {{ currentTimeStr }}</span>
-        <span class="text-white/15 select-none">|</span>
-        <span :class="blockersCount > 0 ? 'text-rose-400 font-semibold' : 'text-emerald-400'">
-          {{ blockersCount }} {{ blockersCount === 1 ? 'Blocker' : 'Blockers' }}
-        </span>
-      </div>
-
-      <!-- Discrete Session Auth Trigger Button -->
-      <button
-        type="button"
-        @click="handleOpenAuthModal"
-        class="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer flex items-center justify-center"
-        :title="session.isAuthenticated.value ? 'Session Active (Verified)' : 'Authenticate Session (Access Key)'"
-        :aria-label="session.isAuthenticated.value ? 'Session Active' : 'Authenticate Session'"
-      >
-        <NexuraIcon
-          name="KeyRound"
-          size="sm"
-          :stroke-width="2"
-          :class="session.isAuthenticated.value ? 'text-emerald-400' : 'text-[#8A8F9E]'"
-        />
-      </button>
+    <!-- Right: Contextual Action Bar -->
+    <div class="flex items-center gap-2 shrink-0" aria-label="Contextual Action Bar">
+      <template v-for="action in headerActions" :key="action.id">
+        <button
+          type="button"
+          @click="handleActionClick(action)"
+          :disabled="action.disabled || action.loading"
+          :class="getActionClass(action.variant)"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all select-none cursor-pointer focus:outline-none active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+          :title="action.shortcut ? `${action.label} (${action.shortcut})` : action.label"
+        >
+          <NexuraIcon v-if="action.icon" :name="action.icon" size="xs" class="shrink-0" />
+          <span>{{ action.label }}</span>
+          <kbd
+            v-if="action.shortcut"
+            class="hidden sm:inline-block ml-1 px-1 py-0.5 rounded text-[10px] font-mono bg-black/30 text-white/50 border border-white/10"
+          >
+            {{ action.shortcut }}
+          </kbd>
+        </button>
+      </template>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import NexuraIcon from './ui/NexuraIcon.vue'
+import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import HeaderSearch from './search/HeaderSearch.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
-import { useSession } from '~/composables/useSession'
 import { useOmniSearch } from '~/composables/useOmniSearch'
+import { useHeaderActions, type HeaderAction, type HeaderActionVariant } from '~/composables/useHeaderActions'
 
 const route = useRoute()
 const workspaceStore = useWorkspaceStore()
-const session = useSession()
 const { closeSearch } = useOmniSearch()
+const { actions: headerActions } = useHeaderActions()
 
-function handleOpenAuthModal() {
+function handleActionClick(action: HeaderAction) {
   closeSearch()
-  session.openAuthModal()
+  action.handler()
+}
+
+function getActionClass(variant?: HeaderActionVariant) {
+  switch (variant) {
+    case 'primary':
+      return 'bg-[#F3F4F6] hover:bg-white text-[#07080A] shadow-sm font-semibold'
+    case 'secondary':
+      return 'bg-white/[0.04] hover:bg-white/[0.08] text-[#D1D5DB] hover:text-[#F3F4F6] border border-white/[0.08]'
+    case 'ghost':
+      return 'hover:bg-white/[0.05] text-[#8A8F9E] hover:text-[#F3F4F6]'
+    case 'danger':
+      return 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30'
+    default:
+      return 'bg-white/[0.04] hover:bg-white/[0.08] text-[#D1D5DB] hover:text-[#F3F4F6] border border-white/[0.08]'
+  }
 }
 
 // Canonical reactive references from workspace store (zero duplicate network calls)
-const tasks = workspaceStore.tasks
 const projects = workspaceStore.projects
 const sprints = workspaceStore.sprints
 
@@ -141,41 +150,5 @@ const daysLeft = computed(() => {
   const now = Date.now()
   const diffDays = Math.ceil((end - now) / (1000 * 60 * 60 * 24))
   return diffDays > 0 ? diffDays : 0
-})
-
-// Blocker count
-const blockersCount = computed(() => {
-  if (!tasks.value) return 0
-  return tasks.value.filter((t) => t.status === 'blocked').length
-})
-
-// WIB Live Clock (UTC+7)
-const currentTimeStr = ref('12:48')
-let timer: ReturnType<typeof setInterval> | null = null
-
-function updateClock() {
-  try {
-    const now = new Date()
-    currentTimeStr.value = now.toLocaleTimeString('id-ID', {
-      timeZone: 'Asia/Jakarta',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    }).replace('.', ':')
-  } catch {
-    const d = new Date()
-    const hh = String((d.getUTCHours() + 7) % 24).padStart(2, '0')
-    const mm = String(d.getUTCMinutes()).padStart(2, '0')
-    currentTimeStr.value = `${hh}:${mm}`
-  }
-}
-
-onMounted(() => {
-  updateClock()
-  timer = setInterval(updateClock, 10000)
-})
-
-onUnmounted(() => {
-  if (timer) clearInterval(timer)
 })
 </script>

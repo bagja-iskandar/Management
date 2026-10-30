@@ -1,14 +1,12 @@
 # DECISIONS.md — Architectural Decision Records
 
-_Last updated: 2026-10-22._
-
-> File ini mencatat keputusan arsitektural dan engineering yang sudah disepakati.
+> **Status:** RATIFIED & ACTIVE  
+> **Last Updated:** 29 Oktober 2026  
+> **Lead Architect & Orchestrator:** Bagja Iskandar & Antigravity Head Agent  
 
 ---
 
 ## Historical Decisions (Phase 0–5)
-
-> Keputusan Phase 0–5 telah dieksekusi dan diverifikasi. Ringkasan di bawah ini, detail lengkap di Git history.
 
 ### [2026-08-14] PENDING-01 — Bahasa UI → English
 **Keputusan**: Standardisasi UI ke Bahasa Inggris. Status backend values tetap English (`in_queue`, `running_sprint`, `deployed`, `blocked`).
@@ -20,7 +18,7 @@ _Last updated: 2026-10-22._
 **Keputusan**: Tetap di root (bukan `app/`). Nuxt auto-import dikonfigurasi via `nuxt.config.ts`.
 
 ### [2026-08-14] PENDING-04 — Pinia
-**Keputusan**: Biarkan terdaftar di dependencies, belum diimplementasikan. Evaluasi setelah Phase 8.
+**Keputusan**: Biarkan terdaftar di dependencies, digantikan oleh Nuxt `useState` di `useWorkspaceStore.ts`.
 
 ### [2026-08-14] Phase 1a–1f — Critical Fixes
 **Keputusan**: Hapus ghost files, fix reaktivitas props, konsolidasi types, tambah error handling, bersihkan fragile CSS selectors, hapus file orphan.
@@ -32,95 +30,88 @@ _Last updated: 2026-10-22._
 **Keputusan**: Focus trap, ARIA improvements, sr-only text, perbaiki navigasi projects, standardisasi bahasa English.
 
 ### [2026-08-15] Phase 4 — Polymorphism Design System (Stitch)
-**Keputusan**: Tetapkan estetika Polymorphism Dark Glass. Canvas `#0B0F19`, glass surfaces, Indigo/Cyan/Violet accents.
-**Status**: ⚠️ **Superseded oleh Phase 6** — digantikan Charcoal-Ochre Console.
+**Status**: ⚠️ **Superseded oleh Phase 6 & ADR-009** — digantikan Precision Dark Obsidian.
 
 ### [2026-08-15] Phase 5 — UI Implementation
-**Keputusan**: Implementasi design Stitch 1-to-1. Left Sidebar 230px, 4 KPI cards, SVG curves, donut gauge, projects hub, tasks hub.
-**Status**: ⚠️ **Akan di-rewrite Phase 6–8** — design system dan layout berubah total.
-
-### [2026-08-15] Navigation Performance — useLazyAsyncData
-**Keputusan**: Ganti `await useAsyncData` → `useLazyAsyncData` + `getCachedData` payload caching. Navigasi 0ms.
-**Status**: ✅ **Tetap dipertahankan** — pattern ini berlanjut ke design baru.
+**Status**: ⚠️ **Superseded oleh ADR-009** — layout dan design system dirombak ke Precision Dark Obsidian Bento.
 
 ---
 
-## New Decisions (Phase 6+)
+## Architectural Decision Records (ADRs)
 
 ### [2026-09-17] ADR-001 — Design System Migration: Polymorphism → Charcoal-Ochre
-**Diputuskan oleh**: Owner (Bagja Iskandar)
-**Keputusan**: Migrasi total visual layer dari Polymorphism Dark Glass (Indigo `#6366F1`, Glass blur, CSS custom properties) ke **Charcoal-Ochre Engineering Console** (canvas `#0B0A09`, accent `#C98A4B`, Tailwind CSS utility classes).
-**Alasan**: Design sebelumnya terlalu "decorative" (glass blur, neon glow, gradient mesh) untuk sebuah engineering command center. Charcoal-Ochre lebih fokus pada information density, terminal aesthetic, dan readability. Tailwind CSS menggantikan ~1400 LOC CSS custom properties untuk maintainability.
-**Status**: ⚠️ **Superseded oleh ADR-009 (2026-10-22)** — digantikan oleh **Precision Dark Obsidian** (Linear / Raycast Inset Architecture).
+**Status**: ⚠️ **Superseded oleh ADR-009** — digantikan Precision Dark Obsidian.
 
 ### [2026-09-17] ADR-002 — Sidebar Redesign: 3 items → 5 items compact
-**Diputuskan oleh**: Owner
-**Keputusan**: Ganti sidebar 3-item (Dashboard, Projects, Tasks) + user profile card dengan sidebar 5-item compact (Dashboard, Active Sprints, Architecture Roadmap, Code Repos, System Telemetry) + system status tile.
-**Alasan**: Nexura bukan lagi "dashboard saja" — melainkan full engineering command center yang perlu navigasi ke sprints, repos, dan system health. User profile card tidak berguna untuk solo developer.
-**Status**: 🔄 **Diperbarui oleh ADR-009** — dikembalikan menjadi **Unified Left Rail (`w-56`)** dengan label teks eksplisit, tombol `⌘K` Quick Action, dan daftar *Pinned Active Projects* (menggantikan icon-only floating capsule dock).
+**Status**: 🔄 **Diperbarui oleh ADR-009** — digantikan Unified Left Rail (`w-56`) dengan label teks eksplisit.
 
 ### [2026-09-17] ADR-003 — Task Status: Indonesian → English + New Columns
-**Diputuskan oleh**: Owner
-**Keputusan**: Ubah status task dari `'todo' | 'proses' | 'selesai'` menjadi `'in_queue' | 'running_sprint' | 'deployed' | 'blocked'`. Tambah kolom Kanban 3-lajur.
-**Alasan**: Status baru mencerminkan engineering workflow nyata (queue → sprint execution → deployed). Status `'blocked'` ditambah untuk tracking blockers. Bahasa Inggris konsisten dengan seluruh codebase.
-**Dampak**: Schema `Task` diubah. Seed data diubah. Kanban board 3 kolom. API validation diubah.
+**Diputuskan oleh**: Owner (Bagja Iskandar)
+**Keputusan**: Ubah status task dari `'todo' | 'proses' | 'selesai'` menjadi `'in_queue' | 'running_sprint' | 'deployed' | 'blocked'`.
+**Dampak**: Schema Zod, migration Supabase, dan Kanban pipeline diselaraskan.
 
 ### [2026-09-17] ADR-004 — Sequential Task IDs (ENG-xxx)
 **Diputuskan oleh**: Owner
-**Keputusan**: Setiap task mendapat sequential monospace ID (`ENG-001`, `ENG-002`, ...) selain UUID. ID ini ditampilkan di UI sebagai `#ENG-104`.
-**Alasan**: UUID tidak human-readable. Sequential ID memungkinkan referensi cepat dalam percakapan dan commit messages.
-**Dampak**: Tambah field `taskId` di schema. Tambah KV key `task-seq` sebagai counter. Auto-generate di `tasks.post.ts`.
+**Keputusan**: Setiap deliverable mendapat sequential monospace ID (`#ENG-001`, `#ENG-002`, ...). Auto-generated pada `tasks.post.ts`.
+**Alasan**: Memudahkan referensi cepat dalam commit messages, PRs, dan percakapan.
 
 ### [2026-09-17] ADR-005 — GitHub Integration via Server-Side Proxy
 **Diputuskan oleh**: Owner
 **Keputusan**: Integrasi GitHub melalui server-side Nitro API proxy (`/api/github/*`), bukan client-side direct call.
-**Alasan**: (1) GitHub PAT tidak boleh terekspos ke browser. (2) Server-side caching via Nitro `cachedFunction` melindungi dari rate limit. (3) Konsisten dengan arsitektur existing.
-**Dampak**: 3 API endpoints baru. `server/utils/github.ts` helper. Token di `runtimeConfig` (server-only).
+**Alasan**: Melindungi PAT GitHub agar tidak bocor ke browser, serta menerapkan caching TTL 5 menit untuk menjaga kuota rate limit.
 
 ### [2026-09-17] ADR-006 — Pluggable Storage: KV Now, Supabase Later
-**Diputuskan oleh**: Owner
-**Keputusan**: Pertahankan Nitro Unstorage KV sebagai storage saat ini. Arsitektur `StorageAdapter` interface tetap dipertahankan agar bisa di-swap ke Supabase PostgreSQL tanpa mengubah API handlers.
-**Alasan**: Supabase belum di-setup. KV berfungsi baik untuk development lokal. Swap ke Supabase hanya perlu (1) isi `.env`, (2) implement `StorageAdapter` baru, (3) toggle config.
-**Dampak**: Tidak ada perubahan storage saat ini. Future-proof architecture.
+**Status**: 🔄 **Disempurnakan oleh ADR-012** — Supabase PostgreSQL menjadi persistensi utama produksi; Nitro KV dipertahankan strictly untuk offline development lokal.
 
 ### [2026-09-17] ADR-007 — Vercel as Deploy Target
 **Diputuskan oleh**: Owner
-**Keputusan**: Frontend Nexura di-deploy ke Vercel. Vercel API integration untuk deployment monitoring direncanakan di Phase 11 setelah token tersedia.
-**Alasan**: Vercel adalah platform deployment utama untuk project-project GitHub owner.
-**Dampak**: Nuxt build output harus kompatibel dengan Vercel deployment preset.
+**Keputusan**: Build output Nuxt 4 dikonfigurasi untuk kompatibilitas penuh dengan preset serverless Vercel (`.output/`).
 
-### [2026-09-17] ADR-008 — Telemetry Header Bar (New Component)
-**Diputuskan oleh**: Owner
-**Keputusan**: Tambah komponen `HeaderBar.vue` horizontal — menampilkan live clock (UTC/WIB), active branch indicator, sprint velocity KPI, dan search input.
-**Alasan**: Menggantikan "Welcome back, Bagja" banner dengan informasi fungsional. Clock dual timezone relevan untuk developer yang beroperasi lintas timezone.
-**Status**: 🔄 **Diperbarui oleh ADR-009** — digabungkan menjadi **Unified Top Header Bar** di dalam panel `.obs-workspace` (bukan lagi *floating islands* terpisah).
+### [2026-09-17] ADR-008 — Telemetry Header Bar
+**Status**: 🔄 **Diperbarui oleh ADR-009** — digabungkan menjadi Unified Top Header Bar di dalam `.obs-workspace`.
 
-### [2026-10-22] ADR-009 — UI/UX Overhaul: Charcoal-Ochre → Precision Dark Obsidian (Linear / Raycast Inset Architecture)
+### [2026-10-22] ADR-009 — UI/UX Overhaul: Precision Dark Obsidian (Linear / Raycast Inset Architecture)
 **Diputuskan oleh**: Owner & AI Architect
-**Keputusan**: Mengganti keseluruhan sistem desain dan tata letak dari **Charcoal-Ochre Console** (`#0B0A09` + `#C98A4B` + `#F5F2EB`) menjadi **Precision Dark Obsidian** berstandar Linear / Raycast / Cursor:
-1. **Unifikasi Temperatur Warna Dingin (Cool Achromatic + Obsidian Accent):**
-   - Outer Void `#07080A`, Inset Workspace Canvas `#0B0C10`, Card Surface `#111318`, Elevated `#171920`.
-   - Teks utama `#F3F4F6` (*Crisp Alabaster*), teks sekunder `#8A8F9E` (*Cool Slate*), teks tersier `#565B68`.
-   - Aksen utama **Cool Indigo** (`#6366F1` / `#818CF8`) dengan dukungan preset tema (`indigo`, `amethyst`, `stealth`, `emerald`) dan tombol CTA utama berwarna **Crisp Alabaster** (`bg-[#F3F4F6] text-[#07080A]`).
-2. **Inset Workspace & Specular 1px Lighting:**
-   - Menghapus *floating icon-only capsule dock*, *floating header pills*, dan `<StructureStaticGrid />` (*crosshair grid*).
-   - Mengadopsi **Unified Left Sidebar (`w-56`)** dengan label navigasi jelas + shortcut proyek aktif, berdampingan dengan **Inset Workspace Panel** (`.obs-workspace`, `rounded-2xl`) dan kartu berdimensi **Specular Top-Highlight** (`.obs-card`, `inset 0 1px 0 0 rgba(255,255,255,0.07)`).
-3. **Hierarki Tipografi Ergonomis:**
-   - `font-sans` (`Inter`) menjadi default untuk seluruh elemen UI/navigasi/judul. `font-mono` (`JetBrains Mono`) dibatasi hanya untuk ID task, SHA commit, metrik angka, dan jam. Batas minimum ukuran teks adalah `12px` (`text-xs`).
-4. **Asymmetric Bento Dashboard:**
-   - Baris atas: 4 kartu KPI specular (*In-Flight Tasks, Sprint Velocity, CI/CD Workflows, Open PRs & Issues*).
-   - Area utama 12 kolom: 8 kolom kiri (*Execution Radar* dengan segmented tabs + *Global Commit Stream* dengan inline diff) dan 4 kolom kanan (*Quick Task Inspector*, *Weekly Sprint Focus*, *Managed Projects Hub*).
-**Alasan**: Tema Charcoal-Ochre menimbulkan *thermal clash* (latar hitam dingin vs teks krem/cokelat hangat) yang terasa kusam dan melelahkan mata, serta tata letak *floating islands* memecah fokus visual.
-**Dampak**: Pembaruan `tailwind.config.ts`, `assets/css/main.css`, `app/app.vue`, `Sidebar.vue`, `HeaderBar.vue`, `Dashboard.vue`, dan seluruh komponen `.vue` agar menggunakan token Dark Obsidian. Mockup referensi tersimpan di `project_context/mockup-dark-obsidian.html`.
+**Keputusan**: Menetapkan palet Void `#07080A`, Canvas `#0B0C10`, Specular Surface `#111318`, Crisp Alabaster `#F3F4F6`, Cool Indigo `#6366F1`, dan Inset Workspace (`.obs-workspace`) dengan Specular 1px card lighting (`.obs-card`).
 
----
+### [2026-10-27] ADR-010 — Mandatory Multi-Agent Governance & Single Execution Owner
+**Diputuskan oleh**: Owner & Head Agent
+**Keputusan**: Memberlakukan tata kelola mutlak multi-agent:
+1. Head Agent bertindak sebagai Technical Architect, Lead Orchestrator, dan Penjaga Kualitas — **dilarang menulis kode implementasi secara langsung**.
+2. Penerapan prinsip *Single Execution Owner*: setiap file hanya boleh dimodifikasi oleh satu eksekutor spesialis yang berwenang pada satu waktu.
+3. Seluruh pekerjaan wajib melewati Siklus 5 Tahap Gate (Investigasi → Diskusi Tim → Rencana Implementasi → Review Silang → Persetujuan Eksplisit Project Owner).
+**Dampak**: Menghilangkan konflik merge (*code clobbering*) dan menjamin integritas rekayasa sistem.
 
-## Log Format
+### [2026-10-27] ADR-011 — Unified Singleton Workspace Store & Single Coordinated Hydration
+**Diputuskan oleh**: Owner & Head Agent
+**Keputusan**: Mengganti 25 kunci cache Nuxt `useLazyAsyncData` yang terfragmentasi dengan Singleton Store [`composables/useWorkspaceStore.ts`](../composables/useWorkspaceStore.ts) berbasis Nuxt `useState`.
+**Alasan**: Booting aplikasi sebelumnya memicu 11 request HTTP bersamaan yang sering mengalami desinkronisasi. Store terpadu mengeksekusi paralel boot fetch tunggal dan menyediakan mutasi *Optimistic UI* 0ms dengan auto-rollback.
 
-```
-### [YYYY-MM-DD] ADR-xxx — Judul Keputusan
-**Diputuskan oleh**: [owner / engineer / bersama]
-**Keputusan**: [deskripsi]
-**Alasan**: [alasan]
-**Dampak**: [file/area yang terpengaruh]
-```
+### [2026-10-27] ADR-012 — Supabase PostgreSQL RLS Lockdown & Dedicated service_role Access
+**Diputuskan oleh**: Owner & Security Specialist
+**Keputusan**: 
+1. Mencabut hak peran `anon` dari seluruh tabel database Supabase (`REVOKE ALL FROM anon`).
+2. Mengunci akses PostgREST eksklusif untuk peran `service_role` melalui backend Nitro.
+3. Meniadakan failover mutasi diam-diam ke Nitro KV (*Zero Silent Data Loss Policy*).
+**Alasan**: Mencegah kebocoran data di PostgREST publik dan split-brain state di lingkungan serverless Vercel.
+
+### [2026-10-28] ADR-013 — 5-Column Engineering Kanban Pipeline & Markdown Checklist Sync
+**Diputuskan oleh**: Owner & Workspaces Specialist
+**Keputusan**: Memperluas pipeline Kanban dari 3 kolom menjadi 5 kolom kanonikal: `idea` → `in_queue` → `running_sprint` → `blocked` → `deployed`. Dilengkapi panel Active Focus yang mem-parse checklist Markdown `- [ ]` / `- [x]` dan menyinkronkan statusnya secara reaktif ke database.
+
+### [2026-10-28] ADR-014 — Sprint Relationship SSOT via `tasks.sprint_id`
+**Diputuskan oleh**: Owner & Backend Specialist
+**Keputusan**: Menjadikan kolom `tasks.sprint_id` sebagai satu-satunya *Single Source of Truth* untuk relasi deliverable ke siklus sprint. Menghapus penulisan paralel ganda ke array `sprints.task_ids[]`.
+**Alasan**: Mencegah fragmentasi relasi relasional dan memastikan referensi sprint selalu deterministik.
+
+### [2026-10-29] ADR-015 — Zero-Dependency Native Node.js Test Runner & PostgREST DSL Parameterization
+**Diputuskan oleh**: Owner, QA Specialist & Security Specialist
+**Keputusan**:
+1. Menyelenggarakan pengujian master menggunakan Node.js Native Test Runner (`node:test`) tanpa dependensi framework runtime berat.
+2. Memparameterisasi query PostgREST DSL di `SupabaseTaskRepository`: memisahkan pencarian `ENG-xxx` via `.eq('task_id', val)` dan UUID via `.eq('id', val)`, menutup celah manipulasi query grammar.
+**Hasil**: 244 test lolos 100% dalam 2.69s dengan coverage 83.05%.
+
+### [2026-10-29] ADR-016 — Pruning of Redundant `focus.vue` & Orphan Telemetry `visit.ts`
+**Diputuskan oleh**: Owner & QA Specialist
+**Keputusan**: Menghapus permanen [`app/pages/focus.vue`](../app/pages/focus.vue) (fungsinya diserap penuh oleh Active Focus di `/tasks`) dan middleware [`server/middleware/visit.ts`](../server/middleware/visit.ts) (I/O orphan tanpa konsumen), serta membersihkan sisa referensi navigasi di `Sidebar.vue` dan `HeaderBar.vue`.
+**Alasan**: Mengurangi bundle overhead, menghemat I/O serverless, dan mengunci sistem pada 8 rute kanonikal bersih.

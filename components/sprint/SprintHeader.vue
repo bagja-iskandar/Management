@@ -58,15 +58,6 @@
         <NexuraIcon name="Plus" size="xs" :stroke-width="2.2" />
         <span>Add Target to Sprint</span>
       </button>
-
-      <!-- Dashboard Shortcut Link -->
-      <NuxtLink
-        to="/"
-        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] font-sans text-xs font-medium border border-white/[0.08] transition focus:outline-none focus:ring-1 focus:ring-indigo-500"
-      >
-        <NexuraIcon name="LayoutDashboard" size="xs" />
-        <span class="hidden sm:inline">Dashboard</span>
-      </NuxtLink>
     </div>
   </div>
 </template>

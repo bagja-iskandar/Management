@@ -461,6 +461,32 @@
       <div class="w-full h-1 rounded-full bg-white/[0.06] overflow-hidden" title="API Rate Limit: 94% remaining">
         <div class="h-full rounded-full bg-emerald-400/80" style="width: 94%"></div>
       </div>
+
+      <!-- Session Auth Status Button -->
+      <button
+        type="button"
+        @click="session.openAuthModal"
+        class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.04] text-xs transition cursor-pointer group"
+        :title="session.isAuthenticated.value ? 'Session Active (Verified)' : 'Click to Authenticate Session'"
+        aria-label="Session Authentication Status"
+      >
+        <span class="flex items-center gap-1.5 text-[#8A8F9E] group-hover:text-[#F3F4F6]">
+          <NexuraIcon
+            name="KeyRound"
+            size="xs"
+            :class="session.isAuthenticated.value ? 'text-emerald-400' : 'text-amber-400'"
+          />
+          <span class="text-[11px] font-sans font-medium">Session</span>
+        </span>
+        <span
+          class="text-[10px] font-mono px-1.5 py-0.5 rounded border"
+          :class="session.isAuthenticated.value
+            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+            : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
+        >
+          {{ session.isAuthenticated.value ? 'Active' : 'Unverified' }}
+        </span>
+      </button>
     </div>
   </aside>
 
@@ -526,6 +552,7 @@ import { ref, computed, watch } from 'vue'
 import NexuraIcon from './ui/NexuraIcon.vue'
 import { useProjectNav, type ProjectTabId } from '~/composables/useProjectNav'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useSession } from '~/composables/useSession'
 
 defineOptions({
   inheritAttrs: false
@@ -617,6 +644,7 @@ const currentRouteProjectSlug = computed(() => {
   return match ? match[1] : null
 })
 
+const session = useSession()
 const { repos } = useGitHubRepos()
 const { openAddTask } = useQuickTask()
 

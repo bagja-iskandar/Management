@@ -12,21 +12,21 @@
     "semantic_hash": ""
   },
   "app/pages/index.vue": {
-    "mtime": 1786709056.3076906,
-    "seen": 1789396011.1384983,
-    "ast_hash": "f349ce94795ae82a35c4ca1695bfcda3",
-    "semantic_hash": "f349ce94795ae82a35c4ca1695bfcda3"
+    "mtime": 1793323062.9433608,
+    "seen": 1793323333.9825718,
+    "ast_hash": "b02e7fc8a245e15391440f125d8f5ca0",
+    "semantic_hash": ""
   },
   "app/pages/projects/[slug].vue": {
-    "mtime": 1793262862.423728,
-    "seen": 1793262922.3098466,
-    "ast_hash": "d6f75824b6e1b39c7225309161078fbe",
+    "mtime": 1793329949.5813138,
+    "seen": 1793330024.0191844,
+    "ast_hash": "d63e370d0f7655330c9d9937f8887da2",
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {
-    "mtime": 1793174188.4421391,
-    "seen": 1793174253.6153016,
-    "ast_hash": "6ac5641912871224adb41bf04f913bbc",
+    "mtime": 1793329918.512951,
+    "seen": 1793330024.020295,
+    "ast_hash": "5c1b25e4ad9dca6d217156b3db90a8a3",
     "semantic_hash": ""
   },
   "components/AddProjectModal.vue": {
@@ -186,15 +186,15 @@
     "semantic_hash": ""
   },
   "DOCUMENTATION.md": {
-    "mtime": 1792937103.747449,
-    "seen": 1792937136.5244718,
-    "ast_hash": "ccbfd7e86639db410523bd34be03a2de",
+    "mtime": 1793320207.7349548,
+    "seen": 1793322739.0996225,
+    "ast_hash": "44ded02168feb82af7f7da83bea9907f",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1792728175.2905014,
-    "seen": 1792729295.259749,
-    "ast_hash": "78e26b30d5c513328a329f840b309e06",
+    "mtime": 1793285593.5062761,
+    "seen": 1793285933.8614545,
+    "ast_hash": "6b999738d63961d99e078ddfe0efe82a",
     "semantic_hash": ""
   },
   "graphify-out/converted/Prompt _03be839a.md": {
@@ -210,15 +210,15 @@
     "semantic_hash": ""
   },
   "project_context/ARCHITECTURE.md": {
-    "mtime": 1792728175.443106,
-    "seen": 1792729295.2609506,
-    "ast_hash": "ae84ed818b22ba8c693d6e87232d5980",
+    "mtime": 1793285830.580946,
+    "seen": 1793285933.864833,
+    "ast_hash": "9b1c6de06de72e257c6f188d457cbee5",
     "semantic_hash": ""
   },
   "project_context/DECISIONS.md": {
-    "mtime": 1792728175.4492738,
-    "seen": 1792729295.2609549,
-    "ast_hash": "f153ed704a0694e97f13d13ae811d46b",
+    "mtime": 1793285887.3426232,
+    "seen": 1793285933.864838,
+    "ast_hash": "a36097e4d55abc9d691425b09547bf7e",
     "semantic_hash": ""
   },
   "project_context/DESIGN.md": {
@@ -228,21 +228,21 @@
     "semantic_hash": ""
   },
   "project_context/ENGINEERING.md": {
-    "mtime": 1792728175.4600937,
-    "seen": 1792729295.2609603,
-    "ast_hash": "5113be6f26e3f8e516c94f14c09c09b7",
+    "mtime": 1793285859.2479048,
+    "seen": 1793285933.865443,
+    "ast_hash": "9306c50af3dbe29150dc19b6593f4bb5",
     "semantic_hash": ""
   },
   "project_context/PROJECT.md": {
-    "mtime": 1792728175.4784472,
-    "seen": 1792729295.2609675,
-    "ast_hash": "c7e28534c4b935cd1aaf0413e7d1096a",
+    "mtime": 1793285776.360312,
+    "seen": 1793285933.8660264,
+    "ast_hash": "f8dc1beb45677f96bda0cf8aefec35c1",
     "semantic_hash": ""
   },
   "project_context/ROADMAP.md": {
-    "mtime": 1792728175.4882421,
-    "seen": 1792729295.2609708,
-    "ast_hash": "9a204626822f9a932b2e5548b501fa9a",
+    "mtime": 1793285753.967896,
+    "seen": 1793285933.8660316,
+    "ast_hash": "be6fca3c7544cfcc9c6f6aaa93363731",
     "semantic_hash": ""
   },
   "public/robots.txt": {
@@ -342,39 +342,39 @@
     "semantic_hash": ""
   },
   "app/pages/repos.vue": {
-    "mtime": 1793160419.454816,
-    "seen": 1793160968.3892028,
-    "ast_hash": "03fe08a3a7a9b3bbd8373bbe430ea06d",
+    "mtime": 1793329971.7451582,
+    "seen": 1793330024.0195735,
+    "ast_hash": "325f1e88a9377c6d833a5c8596aaeeba",
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
-    "mtime": 1793267725.5269597,
-    "seen": 1793267779.997636,
-    "ast_hash": "36a7acf9fd7193fbd4f7f3b868f66729",
+    "mtime": 1793331875.1859145,
+    "seen": 1793331940.9669232,
+    "ast_hash": "867f3016e70cc8af9ec24b9530ae7dc1",
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1793274612.817868,
-    "seen": 1793274667.0321977,
-    "ast_hash": "4a2bc893d449ddaf75b5c7698110138f",
+    "mtime": 1793323194.9700038,
+    "seen": 1793323333.9825954,
+    "ast_hash": "4a520fc6177f41f8534ae62116e56952",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
-    "mtime": 1793273291.9896467,
-    "seen": 1793273357.4433649,
-    "ast_hash": "ea7756bd9f144f07936279521fb48508",
+    "mtime": 1793329990.8206851,
+    "seen": 1793330024.0202987,
+    "ast_hash": "0566bf5bf0a0f6303d542f09352085ca",
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1793282993.5178523,
-    "seen": 1793283098.305709,
-    "ast_hash": "deda2f75822e0329fe905fec19674b82",
+    "mtime": 1793322689.5855398,
+    "seen": 1793322738.9351246,
+    "ast_hash": "743e4d71b3971d75baba605945833867",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
-    "mtime": 1793282999.3707795,
-    "seen": 1793283098.3201764,
-    "ast_hash": "1293f1e6217389502678cbb809019165",
+    "mtime": 1793319607.867029,
+    "seen": 1793319694.2514107,
+    "ast_hash": "deda5fb298319e410e8c2dd036a438de",
     "semantic_hash": ""
   },
   "composables/useSidebar.ts": {
@@ -492,9 +492,9 @@
     "semantic_hash": ""
   },
   "app/pages/projects/index.vue": {
-    "mtime": 1793251658.0907874,
-    "seen": 1793251712.0486348,
-    "ast_hash": "24bb1a7c32fb6a4530b41441ad142448",
+    "mtime": 1793323150.509366,
+    "seen": 1793323333.982584,
+    "ast_hash": "90315175f3803c49eff65268a725bcb1",
     "semantic_hash": ""
   },
   "components/StructureStaticGrid.vue": {
@@ -750,9 +750,9 @@
     "semantic_hash": ""
   },
   "components/sprint/SprintHeader.vue": {
-    "mtime": 1792914917.456378,
-    "seen": 1792915159.423015,
-    "ast_hash": "af9378bf7e157b60ff22a7da83bfb6ad",
+    "mtime": 1793319628.3167086,
+    "seen": 1793319694.2697148,
+    "ast_hash": "2e64f52a2d77c369ae2c5db4ee98cb02",
     "semantic_hash": ""
   },
   "components/sprint/SprintObjectiveBanner.vue": {
@@ -930,9 +930,9 @@
     "semantic_hash": ""
   },
   "DEPLOYMENT.md": {
-    "mtime": 1791347096.0286162,
-    "seen": 1791347167.5399976,
-    "ast_hash": "85264bb15d3d9c9b31fe8a2277bc06f2",
+    "mtime": 1793285912.0505404,
+    "seen": 1793285933.8614464,
+    "ast_hash": "a7018758cf77468bff13867b7becdb62",
     "semantic_hash": ""
   },
   "components/NexuraLogo.vue": {
@@ -1128,9 +1128,9 @@
     "semantic_hash": ""
   },
   "docs/master-remediation-plan.md": {
-    "mtime": 1793273893.5766766,
-    "seen": 1793274575.296059,
-    "ast_hash": "5f7a554fe5f927021c8183d90bb4b281",
+    "mtime": 1793285720.1591673,
+    "seen": 1793285933.861848,
+    "ast_hash": "4e4e118858e455157055ac6b626d3f17",
     "semantic_hash": ""
   },
   "docs/nexura-requirements-and-reaudit.md": {
@@ -1497,6 +1497,24 @@
     "mtime": 1789910963.1917005,
     "seen": 1793283098.2833934,
     "ast_hash": "f141ae6edd994413be42b93ebba26ded",
+    "semantic_hash": ""
+  },
+  "composables/useHeaderActions.ts": {
+    "mtime": 1793329781.9534564,
+    "seen": 1793329863.189752,
+    "ast_hash": "9f34b39a195eed2f86dbc4614f1b076e",
+    "semantic_hash": ""
+  },
+  "docs/master-ux-redesign-architecture-plan.md": {
+    "mtime": 1793320179.0421555,
+    "seen": 1793322739.1038644,
+    "ast_hash": "4adbf3c7b2fdcffa26a861f0811625cc",
+    "semantic_hash": ""
+  },
+  "tests/unit/header-actions-lifecycle.spec.mjs": {
+    "mtime": 1793320003.176599,
+    "seen": 1793320125.7191598,
+    "ast_hash": "ab7180ca376850c86644b40f6a39c1f1",
     "semantic_hash": ""
   }
 }

@@ -113,14 +113,7 @@
       </div>
 
       <!-- Top Action Bar -->
-      <div class="flex items-center justify-between pb-1 border-b border-white/[0.06] shrink-0">
-        <NuxtLink
-          to="/projects"
-          class="inline-flex items-center gap-1.5 text-xs text-[#8A8F9E] hover:text-[#F3F4F6] font-mono transition-colors"
-        >
-          <NexuraIcon name="ArrowLeft" size="xs" />
-          <span>Back to Projects Hub</span>
-        </NuxtLink>
+      <div class="flex items-center justify-end pb-1 border-b border-white/[0.06] shrink-0">
         <button
           type="button"
           class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 border border-rose-500/20 font-mono text-xs transition cursor-pointer"
@@ -508,7 +501,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, onMounted, watch, watchEffect } from 'vue'
+import { ref, computed, reactive, onMounted, onBeforeUnmount, watch, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
 import IdeaScratchpadPanel from '~~/components/notes/IdeaScratchpadPanel.vue'
@@ -524,6 +517,8 @@ import type { ProjectTabId } from '~/composables/useProjectNav'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import { useTasks } from '~/composables/useTasks'
+import { useQuickTask } from '~/composables/useQuickTask'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 import {
   useGitHubCommits,
   useGitHubBranches,
@@ -608,6 +603,41 @@ const currentProject = computed<Project | null>(() => {
   const list = storeProjects.value || []
   const currentSlug = slug.value.toLowerCase()
   return list.find(p => p.slug.toLowerCase() === currentSlug) || null
+})
+
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+const { openAddTask } = useQuickTask()
+
+onMounted(() => {
+  watchEffect(() => {
+    const repo = currentProject.value?.githubRepo
+    setActions([
+      {
+        id: 'repo-link',
+        label: 'GitHub Repo',
+        icon: 'ExternalLink',
+        variant: 'secondary',
+        disabled: !repo,
+        handler: () => {
+          if (repo) {
+            window.open(`https://github.com/${repo}`, '_blank')
+          }
+        }
+      },
+      {
+        id: 'add-deliverable',
+        label: 'Add Deliverable',
+        icon: 'Plus',
+        variant: 'primary',
+        handler: () => openAddTask()
+      }
+    ])
+  })
+})
+
+onBeforeUnmount(() => {
+  clearActions()
 })
 
 // 4-State Machine for Deterministic Lifecycle

@@ -37,56 +37,6 @@
             <span>Table</span>
           </button>
         </div>
-
-        <!-- Active Focus Toggle Button -->
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition border cursor-pointer"
-          :class="showActiveFocus
-            ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/35 shadow-[0_0_12px_rgba(99,102,241,0.2)]'
-            : 'bg-[#07080A] hover:bg-white/[0.04] text-[#8A8F9E] hover:text-[#F3F4F6] border-white/[0.08]'"
-          title="Toggle Active Focus checklist panel"
-          @click="showActiveFocus = !showActiveFocus"
-        >
-          <NexuraIcon name="Zap" size="xs" :class="showActiveFocus ? 'text-indigo-400' : 'text-[#8A8F9E]'" />
-          <span>Active Focus</span>
-          <span
-            v-if="runningSprintCount > 0"
-            class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-500/30 text-indigo-200 font-bold"
-          >
-            {{ runningSprintCount }}
-          </span>
-        </button>
-
-        <!-- Scratchpad Slide-Over Toggle Button -->
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition border cursor-pointer"
-          :class="showScratchpad
-            ? 'bg-amber-500/20 text-amber-300 border-amber-500/35 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-            : 'bg-[#07080A] hover:bg-white/[0.04] text-[#8A8F9E] hover:text-[#F3F4F6] border-white/[0.08]'"
-          title="Open Idea Scratchpad slide-over"
-          @click="showScratchpad = !showScratchpad"
-        >
-          <NexuraIcon name="Sparkles" size="xs" :class="showScratchpad ? 'text-amber-400' : 'text-[#8A8F9E]'" />
-          <span>Scratchpad</span>
-          <span
-            v-if="notesCount > 0"
-            class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-500/30 text-amber-200 font-bold"
-          >
-            {{ notesCount }}
-          </span>
-        </button>
-
-        <!-- New Deliverable Action Button -->
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-semibold text-[#07080A] transition cursor-pointer active:scale-95 shadow-sm"
-          @click="openAddTask"
-        >
-          <NexuraIcon name="Plus" size="xs" :stroke-width="2.4" />
-          <span>New Deliverable</span>
-        </button>
       </div>
     </div>
 
@@ -499,7 +449,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { Task, TaskPriority, TaskStatus } from '~/types'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
@@ -513,6 +463,7 @@ import { useQuickTask } from '~/composables/useQuickTask'
 import { useOmniSearch } from '~/composables/useOmniSearch'
 import { useTasks } from '~/composables/useTasks'
 import { useProjects } from '~/composables/useProjects'
+import { useHeaderActions } from '~/composables/useHeaderActions'
 
 // Workspace singletons
 const route = useRoute()
@@ -721,6 +672,46 @@ const inQueueCount = computed(() => tasksList.value.filter(t => normalizeStatus(
 const runningSprintCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'running_sprint').length)
 const deployedCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'deployed').length)
 const blockedCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'blocked').length)
+
+// Contextual Action Bar integration
+const { setActions, clearActions } = useHeaderActions()
+
+onMounted(() => {
+  watchEffect(() => {
+    setActions([
+      {
+        id: 'focus-toggle',
+        label: runningSprintCount.value > 0 ? `Focus (${runningSprintCount.value})` : 'Focus',
+        icon: 'Zap',
+        variant: showActiveFocus.value ? 'primary' : 'secondary',
+        handler: () => {
+          showActiveFocus.value = !showActiveFocus.value
+        }
+      },
+      {
+        id: 'scratchpad-toggle',
+        label: notesCount.value > 0 ? `Scratchpad (${notesCount.value})` : 'Scratchpad',
+        icon: 'Sparkles',
+        variant: showScratchpad.value ? 'primary' : 'secondary',
+        handler: () => {
+          showScratchpad.value = !showScratchpad.value
+        }
+      },
+      {
+        id: 'new-task',
+        label: 'New Deliverable',
+        icon: 'Plus',
+        variant: 'primary',
+        shortcut: 'Ctrl+N',
+        handler: () => openAddTask()
+      }
+    ])
+  })
+})
+
+onBeforeUnmount(() => {
+  clearActions()
+})
 
 // Filter & Sort deliverables
 const filteredTasks = computed(() => {

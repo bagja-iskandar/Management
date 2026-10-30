@@ -1,6 +1,8 @@
 # PROJECT.md — Identitas, Tujuan, Scope, dan Target Sistem Nexura
 
-_Last updated: 2026-10-22. Evolved into Precision Dark Obsidian Engineering Command Center (Linear / Raycast Inset Architecture)._
+> **Status:** Production-Ready (Phase 0–13 Remediasi 100% Selesai & Divalidasi)  
+> **Last Updated:** 29 Oktober 2026  
+> **Lead Architect & Orchestrator:** Bagja Iskandar & Antigravity Head Agent  
 
 ---
 
@@ -9,100 +11,92 @@ _Last updated: 2026-10-22. Evolved into Precision Dark Obsidian Engineering Comm
 | Field | Value |
 |---|---|
 | **Nama** | Nexura (Personal Engineering Command Center) |
-| **Tipe** | Solo-Developer Project Management & GitHub Integration Hub |
+| **Tipe** | Solo-Developer Engineering Management & GitHub Integration Platform |
 | **Package name** | `nexura` (dari `package.json`) |
 | **Repo root** | `d:\Project_Center\REWORK\Management` (Git Remote: `bagja-iskandar/Management`) |
-| **Status** | Phase 13 — Precision Dark Obsidian UI/UX Overhaul (Linear / Raycast Style) |
+| **Status Arsitektur** | Hardened Nuxt 4 Monolith (Single-Owner Command Center) |
+| **Desain UI/UX** | Precision Dark Obsidian Bento UI (Linear / Raycast Inset Architecture) |
+| **Kesiapan Rilis** | Siap Rilis Produksi (244/244 tests passing, Coverage 83.05%, 0 diagnostic errors) |
 
 ---
 
 ## 2. Visi & Tujuan Sistem
 
-**Nexura** adalah personal engineering command center yang dirancang untuk mengelola **semua project GitHub, deployment, dan sprint kerja** di satu tempat — menggantikan workflow manual berpindah antar GitHub, Vercel dashboard, dan spreadsheet.
+**Nexura** adalah *Personal Engineering Command Center* yang dirancang khusus untuk mengelola **seluruh repositori GitHub, proyek piranti lunak, siklus sprint, deliverable teknis, dan telemetri sistem** dalam satu layar terpadu tanpa friksi:
 
-**Tujuan Inti:**
-1. **Single Pane of Glass** — Satu dashboard untuk melihat status semua project, task, repos, dan deployments tanpa berpindah tab.
-2. **Real GitHub Integration** — Terhubung langsung dengan akun GitHub `bagja-iskandar` untuk monitoring repos, commits, branches secara real-time.
-3. **Zero-Ceremony Task Management** — Kanban board 3-kolom (`IN_QUEUE` → `RUNNING_SPRINT` → `DEPLOYED`) untuk mengelola task tanpa birokrasi Jira.
-4. **Engineering Telemetry** — Real-time metrics: active tasks, blockers, sprint velocity — bukan angka mock/dummy.
-5. **Pluggable Backend** — Storage layer yang bisa di-swap dari local KV ke Supabase PostgreSQL tanpa mengubah API contract.
-6. **Deploy-Ready** — Target deploy ke Vercel untuk frontend, dengan optional VPS/Docker.
-
----
-
-## 3. Scope Matriks
-
-### A. Yang Diubah (Refactored)
-
-| Aspek | Sebelum (Charcoal-Ochre) | Sesudah (Precision Dark Obsidian) |
-|-------|--------------------------|-----------------------------------|
-| Design System | Charcoal-Ochre Console (`#0B0A09` + `#C98A4B` + `#F5F2EB`) | Precision Dark Obsidian (`#07080A` void, `#0B0C10` canvas, `#111318` specular surface, `#F3F4F6` crisp alabaster, `#6366F1` cool indigo) |
-| App Frame | Floating icon-only capsule dock + floating header pills + crosshair grid | Unified Left Rail (`w-56`) + Inset Obsidian Workspace (`.obs-workspace`, `rounded-2xl`) tanpa grid pengganggu |
-| Styling | Tailwind CSS dengan banyak hardcoded hex (`#C98A4B`, `#F5F2EB`) | Semantic Dark Obsidian tokens + `.obs-card` Specular 1px top-highlight + preset tema (`indigo`, `amethyst`, `stealth`, `emerald`) |
-| Navigasi | Icon-only floating capsule (tanpa label teks) | Unified Sidebar dengan label jelas, tombol `⌘K` Quick Action, counter badge, & *Pinned Active Projects* |
-| Dashboard | 3 blok tumpuk vertikal rata | 4 Specular KPI Cards + Asymmetric Bento Grid (8 cols Execution Radar & Commit Stream + 4 cols Quick Inspector, Sprint Focus & Projects Hub) |
-| Data | Mock stats (`Math.max(...)`) | Real calculations dari actual data |
-| Task Status | `'todo' \| 'proses' \| 'selesai'` (ID) | `'in_queue' \| 'running_sprint' \| 'deployed' \| 'blocked'` (EN) |
-| Task Schema | 6 fields | 12+ fields (taskId, projectSlug, priority, techTags, etc.) |
-| Project Schema | 5 fields | 12+ fields (githubRepo, deployUrl, techStack, etc.) |
-| Project CRUD | Read-only (GET) | Full CRUD (GET, POST, PUT, DELETE) |
-
-### B. Yang Ditambahkan (New)
-
-- **Sidebar.vue** — Compact 5-item navigation (replaces navbar.vue)
-- **HeaderBar.vue** — Live clock (UTC/WIB), branch indicator, sprint KPI, search
-- **KanbanBoard.vue** — 3-column task board with drag-and-drop
-- **TaskCard.vue** — Rich task card with monospace ID, priority pill, tech tags
-- **GitHub API Gateway** — `/api/github/repos`, `/commits`, `/branches`
-- **Pages**: `/sprints`, `/roadmap`, `/repos`, `/telemetry`
-- **Sprint model** — Sprint management (create, assign tasks, track velocity)
-- **`.env.example`** — Environment variables template
-- **`tailwind.config.ts`** — Tailwind configuration with custom tokens
-
-### C. Yang Dikecualikan (Anti-Bloat)
-
-- Tidak ada multi-user, team invitations, atau RBAC
-- Tidak ada time-tracking atau billing
-- Tidak ada form kaku atau mandatory fields
-- Tidak ada CI/CD pipeline execution (hanya monitoring status)
-- Tidak ada code editor / terminal in-browser
+1. **Single Pane of Glass:** Satu dashboard terpadu untuk melihat status semua proyek, deliverable, commit git, dan metrik kesehatan sistem tanpa berpindah-pindah tab browser.
+2. **Real GitHub DevOps Integration:** Terhubung langsung dengan akun GitHub `bagja-iskandar` untuk monitoring repositori, commit stream, issue creation, dan alur workflow actions secara real-time via Nitro server-side proxy yang aman.
+3. **Engineering-Centric Kanban Pipeline:** Pipeline 5-kolom (`idea` → `in_queue` → `running_sprint` → `blocked` → `deployed`) dengan drag-and-drop HTML5, companion panel Active Focus dengan checklist Markdown reaktif (`- [ ]` / `- [x]`), serta slide-over Idea Scratchpad.
+4. **Zero-Tolerance Data Honesty (`UX-002`):** Seluruh metrik dihitung secara matematis murni dari data riil. Meniadakan angka fabrikasi sintetis (14, 3, 78%) dan fallback fiktif.
+5. **Hardened Dual-Storage Layer:** Persistensi PostgreSQL via Supabase dengan Row Level Security (RLS) terkunci penuh ke peran `service_role` pada mode cloud produksi, dengan graceful Nitro KV fallback strictly untuk offline development lokal.
+6. **Deploy-Ready & CI-Protected:** Terintegrasi penuh dengan GitHub Actions CI pipeline (`vue-tsc --noEmit`, `node:test`, `npm run build`) untuk deployment mulus ke Vercel platform.
 
 ---
 
-## 4. Tech Stack
+## 3. Matriks Scope Sistem
 
-| Layer | Teknologi | Versi | Status |
+### A. Rute Kanonikal Sistem (8 Rute Aktif)
+
+| Rute | Komponen Utama | Deskripsi Fungsional |
+|---|---|---|
+| `/` | [`app/pages/index.vue`](../app/pages/index.vue) | Bento Executive Dashboard (Asymmetric 8:4 Grid, Hero Banner, Execution Queue, Live DevOps Stream, Infrastructure Mesh). |
+| `/tasks` | [`app/pages/tasks.vue`](../app/pages/tasks.vue) | 5-Column Kanban Board & High-Density Table View, Active Focus Panel, Idea Scratchpad, Multi-Dimension Filtering. |
+| `/projects` | [`app/pages/projects/index.vue`](../app/pages/projects/index.vue) | Projects Hub, Progress Telemetry dinamis, modal pembuat proyek baru, dan modal penyunting metadata proyek. |
+| `/projects/:slug` | [`app/pages/projects/[slug].vue`](../app/pages/projects/[slug].vue) | Deep Project Cockpit, GitHub commits/PRs/workflows tab, isolated project notes, honest 404 page, safe delete confirmation. |
+| `/sprints` | [`app/pages/sprints.vue`](../app/pages/sprints.vue) | Weekly Sprint Management (Senin–Minggu), SSOT `tasks.sprint_id`, click-to-drawer inspection. |
+| `/roadmap` | [`app/pages/roadmap.vue`](../app/pages/roadmap.vue) | Strategic Release Phase Roadmap (`Backlog` → `MVP` → `v1.1` → `v2.0` → `Released`), project-level mapping. |
+| `/repos` | [`app/pages/repos.vue`](../app/pages/repos.vue) | GitHub Repositories Catalog, strict repo matching, 1-klik Import as Managed Project, non-destructive detach. |
+| `/telemetry` | [`app/pages/telemetry.vue`](../app/pages/telemetry.vue) | DevOps Health & Observability, live Supabase ping, GitHub rate limits, runtime detection, 1-klik Export Backup JSON. |
+
+### B. Fitur & Infrastruktur Global
+
+- **Singleton Workspace Store ([`composables/useWorkspaceStore.ts`](../composables/useWorkspaceStore.ts)):** Single source of truth berbasis Nuxt `useState` dengan single coordinated hydration saat boot dan mutasi optimistik 0ms.
+- **Global OmniSearch Engine ([`components/OmniSearchModal.vue`](../components/OmniSearchModal.vue)):** Shortcut keyboard `⌘K` / `Ctrl+K`, pencarian fuzzy seketika melintasi seluruh entitas, deep-linking langsung ke `<TaskDrawer />`, serta sanitasi tautan eksternal `noopener,noreferrer`.
+- **Global Task Inspector ([`components/TaskDrawer.vue`](../components/TaskDrawer.vue)):** Inspector detail deliverable yang dapat diakses secara konsisten dari seluruh halaman dan modal pencarian.
+- **Server Security Gate ([`server/middleware/auth.ts`](../server/middleware/auth.ts)):** Proteksi seluruh mutasi REST API via Bearer token / `nexura_session` cookie berbasis `NEXURA_ACCESS_KEY` / `SUPABASE_SERVICE_ROLE_KEY`.
+- **GitHub Parameter Allowlist ([`server/utils/github-allowlist.ts`](../server/utils/github-allowlist.ts)):** Mencegah eksploitasi proxy GitHub untuk repositori di luar milik akun terdaftar.
+- **Automated GitHub Sync ([`server/utils/github-sync.ts`](../server/utils/github-sync.ts)):** Deteksi commit `#ENG-xxx` dan auto-move status ke `deployed`.
+
+### C. Yang Dikecualikan Secara Sadar (Anti-Bloat Directive)
+
+- Tidak ada sistem multi-user, team invitations, atau RBAC korporat (fokus murni pada efisiensi solo developer).
+- Tidak ada time-tracking kaku atau modul billing.
+- Tidak ada form birokratis dengan puluhan isian wajib yang menghambat kecepatan kerja.
+- Tidak ada background process tak berizin yang melakukan tindakan destruktif terhadap repositori git atau database.
+
+---
+
+## 4. Tech Stack & Dependensi Inti
+
+| Layer | Teknologi | Versi | Status Operasional |
 |---|---|---|---|
-| **Framework** | Nuxt | ^4.0.3 | ✅ Active |
-| **UI Runtime** | Vue | ^3.5.18 | ✅ Active |
-| **Routing** | Vue Router (Nuxt Pages) | ^4.5.1 | ✅ Active |
-| **Server/API** | Nitro (bundled with Nuxt) | — | ✅ Active |
-| **Styling** | Tailwind CSS + @nuxtjs/tailwindcss | — | 📋 Phase 6 |
-| **Font** | Inter (sans) + JetBrains Mono (mono) | — | 📋 Phase 6 |
-| **Storage (current)** | Nitro Unstorage KV (`.data/kv/`) | — | ✅ Active |
-| **Storage (planned)** | Supabase PostgreSQL | — | ⏳ Phase 10 |
-| **External: GitHub** | GitHub REST API v3 | — | 📋 Phase 9 |
-| **External: Vercel** | Vercel API | — | ⏳ Phase 11 |
-| **State Management** | Pinia (registered, unused) | ^3.0.3 | ⏳ Evaluate |
-| **Language** | TypeScript (via Nuxt) | — | ✅ Active |
-| **Deploy Target** | Vercel (frontend) | — | ⏳ Phase 12 |
+| **Framework** | Nuxt | `^4.1.2` | ✅ Active (Full-Stack Monolith) |
+| **UI Runtime** | Vue | `^3.5.18` | ✅ Active (Composition API `<script setup lang="ts">`) |
+| **Styling & Tokens** | Tailwind CSS | `^3.4.0` | ✅ Active (Precision Dark Obsidian Bento Architecture) |
+| **Serverless Engine** | Nitro | Bundled Nuxt 4 | ✅ Active (Standardized `withApiHandler`) |
+| **Primary Database** | Supabase PostgreSQL | `@supabase/supabase-js` `^2.49.0` | ✅ Active (RLS Locked to `service_role`) |
+| **Secondary Storage** | Nitro KV (Unstorage) | Bundled Nitro | ✅ Active (Strictly Local Offline Development) |
+| **DevOps Gateway** | GitHub REST API v3 | Octokit REST API | ✅ Active (Server proxy + Allowlist + TTL Cache) |
+| **State Management** | Nuxt useState Singleton | Built-in Nuxt 4 | ✅ Active (`useWorkspaceStore.ts`) |
+| **Test Runner** | Node.js Test Runner | `node:test` (Node 20+) | ✅ Active (244 tests passing in 2.69s) |
+| **Type Checker** | vue-tsc | `^2.2.0` | ✅ Active (0 diagnostic errors) |
+| **CI/CD** | GitHub Actions | Ubuntu Latest | ✅ Active (`.github/workflows/ci.yml`) |
 
 ---
 
-## 5. Integrasi External Services
+## 5. Matriks Hasil Pengujian & Kualitas (Quality Baseline)
 
-### GitHub (Ready — Phase 9)
-- **Username**: `bagja-iskandar`
-- **Auth**: Personal Access Token via `.env`
-- **Scope**: `repo`, `read:user`
-- **Features**: List repos, fetch commits, fetch branches, link projects to repos
-- **Caching**: In-memory TTL 5 menit (rate limit protection)
-
-### Supabase (Planned — Phase 10)
-- **Purpose**: PostgreSQL menggantikan local KV storage
-- **Why**: Persistent data yang bisa diakses dari mana saja, termasuk setelah deploy
-- **Migration**: Drop-in swap via `StorageAdapter` interface
-
-### Vercel (Planned — Phase 11)
-- **Purpose**: Deployment monitoring — status, build logs
-- **Features**: List deployments, project health, build status per project
+```
+================================================================================
+NEXURA COMMAND CENTER — PRODUCTION QUALITY GATE
+================================================================================
+Test Runner:           Node.js Native Test Runner (node:test)
+Master Test Suites:    18 Suites (tests/unit/*.spec.mjs)
+Total Test Cases:      244 Passed / 244 Total (100% Green, 0 Failures)
+Execution Duration:    2.69s
+Code Coverage:         Lines 83.05% | Branches 79.30% | Functions 81.58%
+TypeScript Typecheck:  Exit Code 0 (0 Diagnostic Errors)
+Production Packaging:  .output/ Ready (Client: 2003 mods, Server: 211 mods)
+Dangling References:   0 Broken Routes, 0 Broken Imports
+================================================================================
+```
