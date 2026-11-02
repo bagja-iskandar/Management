@@ -3,7 +3,31 @@
     <!-- Commits Stream -->
     <div class="lg:col-span-2 space-y-3">
       <div class="flex items-center justify-between">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Commit Log</h3>
+        <div class="flex items-center gap-3">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Commit Log</h3>
+          <div class="flex items-center gap-2">
+            <label for="branch-selector" class="sr-only">Select Branch</label>
+            <div class="relative">
+              <select
+                id="branch-selector"
+                :value="selectedBranch || (branches?.[0]?.name || '')"
+                class="bg-[#07080A] border border-white/[0.08] rounded-lg pl-7 pr-8 py-1 text-xs font-mono text-[#F3F4F6] outline-none transition focus:border-indigo-500/50 cursor-pointer appearance-none"
+                :disabled="branchesPending"
+                @change="(e: Event) => $emit('select-branch', (e.target as HTMLSelectElement).value)"
+              >
+                <option v-for="b in branches" :key="b.name" :value="b.name">
+                  {{ b.name }} {{ b.protected ? '(protected)' : '' }}
+                </option>
+              </select>
+              <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-indigo-400">
+                <NexuraIcon name="GitBranch" size="xs" />
+              </div>
+              <div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[#8A8F9E]">
+                <NexuraIcon name="ChevronDown" size="xs" />
+              </div>
+            </div>
+          </div>
+        </div>
         <span v-if="commitsPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Syncing...</span>
       </div>
 
@@ -47,11 +71,17 @@
         <div
           v-for="branch in branches"
           :key="branch.name"
-          class="flex items-center justify-between font-mono text-xs py-2 px-3 rounded-lg bg-[#07080A]/60 border border-white/[0.05] hover:border-white/[0.1] transition-colors"
+          class="flex items-center justify-between font-mono text-xs py-2 px-3 rounded-lg border transition-colors cursor-pointer"
+          :class="[
+            selectedBranch === branch.name
+              ? 'border-indigo-500/40 bg-indigo-500/10'
+              : 'bg-[#07080A]/60 border-white/[0.05] hover:border-white/[0.1]'
+          ]"
+          @click="$emit('select-branch', branch.name)"
         >
           <div class="flex items-center gap-2 truncate">
-            <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400 shrink-0" />
-            <span class="text-[#F3F4F6] truncate">{{ branch.name }}</span>
+            <NexuraIcon name="GitBranch" size="xs" :class="selectedBranch === branch.name ? 'text-indigo-300' : 'text-indigo-400'" class="shrink-0" />
+            <span :class="selectedBranch === branch.name ? 'text-indigo-200 font-medium' : 'text-[#F3F4F6]'" class="truncate">{{ branch.name }}</span>
             <span v-if="branch.protected" class="text-[9px] bg-rose-500/10 text-rose-400 px-1.5 py-0.2 rounded border border-rose-500/20 font-semibold uppercase">
               protected
             </span>
@@ -77,6 +107,11 @@ defineProps<{
   commitsPending: boolean
   branches: GitHubBranch[]
   branchesPending: boolean
+  selectedBranch?: string
+}>()
+
+defineEmits<{
+  (e: 'select-branch', branchName: string): void
 }>()
 
 function formatTime(dateStr: string): string {

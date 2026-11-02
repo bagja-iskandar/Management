@@ -285,13 +285,13 @@
                   ></span>
                 </button>
 
-                <!-- 2. Kanban Board -->
+                <!-- 2. Project Deliverables (Unified) -->
                 <button
                   type="button"
-                  @click="selectProjectTab(project.slug, 'kanban')"
+                  @click="selectProjectTab(project.slug, 'deliverables')"
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
-                    isSubItemActive(project.slug, 'kanban')
+                    (isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix'))
                       ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
                       : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
                   ]"
@@ -300,60 +300,26 @@
                     <NexuraIcon
                       name="Columns3"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'kanban') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
-                    />
-                    <span class="truncate font-sans">Kanban Board</span>
-                  </span>
-                  <div class="flex items-center gap-1.5 shrink-0">
-                    <span
-                      v-if="isProjectActive(project.slug) && projectNav.tasksCount.value > 0"
-                      class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
-                      :class="isSubItemActive(project.slug, 'kanban') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
-                    >
-                      {{ projectNav.tasksCount.value }}
-                    </span>
-                    <span
-                      v-if="isSubItemActive(project.slug, 'kanban')"
-                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
-                    ></span>
-                  </div>
-                </button>
-
-                <!-- 3. Deliverables Matrix -->
-                <button
-                  type="button"
-                  @click="selectProjectTab(project.slug, 'matrix')"
-                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
-                  :class="[
-                    isSubItemActive(project.slug, 'matrix')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
-                  ]"
-                >
-                  <span class="flex items-center gap-2 truncate">
-                    <NexuraIcon
-                      name="CheckSquare"
-                      size="xs"
-                      :class="isSubItemActive(project.slug, 'matrix') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
                     />
                     <span class="truncate font-sans">Deliverables</span>
                   </span>
                   <div class="flex items-center gap-1.5 shrink-0">
                     <span
-                      v-if="isProjectActive(project.slug) && projectNav.matrixCount.value > 0"
+                      v-if="isProjectActive(project.slug) && (projectNav.tasksCount.value > 0 || projectNav.matrixCount.value > 0)"
                       class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
-                      :class="isSubItemActive(project.slug, 'matrix') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
                     >
-                      {{ projectNav.matrixCount.value }}
+                      {{ projectNav.tasksCount.value || projectNav.matrixCount.value }}
                     </span>
                     <span
-                      v-if="isSubItemActive(project.slug, 'matrix')"
+                      v-if="isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')"
                       class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
                     ></span>
                   </div>
                 </button>
 
-                <!-- 4. GitHub Stream -->
+                <!-- 3. GitHub Stream -->
                 <button
                   type="button"
                   @click="selectProjectTab(project.slug, 'github')"

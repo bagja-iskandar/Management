@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col bg-[#111318]/70 rounded-2xl p-3.5 transition-all duration-150 h-[calc(100vh-240px)] min-h-[620px] shadow-sm backdrop-blur-sm"
+    class="flex flex-col bg-[#111318]/70 rounded-2xl p-3.5 transition-all duration-150 h-full min-h-[calc(100vh-175px)] shadow-sm backdrop-blur-sm"
     :class="containerBorderClass"
     @dragover.prevent="$emit('drag-over', status, $event)"
     @dragenter.prevent="$emit('drag-enter', status)"
@@ -80,17 +80,6 @@
           <span class="text-[10px] text-[#565B68]">{{ emptySubtitle }}</span>
         </div>
       </div>
-
-      <!-- Bottom Quick Add Button -->
-      <button
-        type="button"
-        class="mt-3 w-full py-2.5 px-3 rounded-xl transition-all text-xs font-mono flex items-center justify-center gap-1.5 focus:outline-none focus:ring-1 h-10 shrink-0 cursor-pointer active:scale-[0.99]"
-        :class="quickAddBtnClass"
-        @click="$emit('add-task', status)"
-      >
-        <NexuraIcon name="Plus" size="xs" />
-        <span>{{ quickAddLabel }}</span>
-      </button>
     </div>
   </div>
 </template>
@@ -115,7 +104,7 @@ const props = defineProps<{
   moveRightTarget?: TaskStatus
   emptyTitle: string
   emptySubtitle: string
-  quickAddLabel: string
+  quickAddLabel?: string
 }>()
 
 defineEmits<{
@@ -175,21 +164,5 @@ const topAddBtnClass = computed(() => {
   if (props.status === 'running_sprint') return 'bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400'
   if (props.status === 'deployed') return 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400'
   return 'bg-white/5 hover:bg-indigo-500/20 text-[#8A8F9E] hover:text-indigo-300'
-})
-
-const quickAddBtnClass = computed(() => {
-  if (props.status === 'idea') {
-    return 'border border-amber-500/30 text-amber-400/80 hover:text-amber-300 hover:border-amber-400 hover:bg-amber-950/20 focus:ring-amber-400'
-  }
-  if (props.status === 'blocked') {
-    return 'border border-rose-500/30 text-rose-400/80 hover:text-rose-300 hover:border-rose-400 hover:bg-rose-950/20 focus:ring-rose-400'
-  }
-  if (props.status === 'running_sprint') {
-    return 'border border-indigo-500/30 text-indigo-400 hover:text-white hover:border-indigo-400 hover:bg-indigo-600/20 focus:ring-indigo-500'
-  }
-  if (props.status === 'deployed') {
-    return 'border border-emerald-500/30 text-emerald-400/80 hover:text-emerald-300 hover:border-emerald-400 hover:bg-emerald-950/20 focus:ring-emerald-400'
-  }
-  return 'border border-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] hover:border-indigo-500/40 hover:bg-white/[0.02] focus:ring-indigo-500'
 })
 </script>

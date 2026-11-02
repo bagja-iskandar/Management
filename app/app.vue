@@ -21,7 +21,18 @@
     <AddTaskModal
       v-if="isAddTaskOpen"
       :projects="projectOptions"
+      :project-slug="taskContext.projectSlug || undefined"
+      :status="taskContext.status || 'in_queue'"
       @close="closeAddTask"
+      @create="onTaskCreated"
+    />
+
+    <!-- Global Dedicated Idea Capture Modal (Single Source of Truth) -->
+    <AddIdeaModal
+      v-if="isAddIdeaOpen"
+      :projects="projectOptions"
+      :project-slug="taskContext.projectSlug || undefined"
+      @close="closeAddIdea"
       @create="onTaskCreated"
     />
 
@@ -40,6 +51,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted } from 'vue'
 import TaskDrawer from '../components/TaskDrawer.vue'
+import AddTaskModal from '../components/AddTaskModal.vue'
+import AddIdeaModal from '../components/AddIdeaModal.vue'
 import SessionAuthModal from '../components/SessionAuthModal.vue'
 import { useWorkspaceStore } from '../composables/useWorkspaceStore'
 import { useTaskDrawer } from '../composables/useTaskDrawer'
@@ -47,13 +60,21 @@ import { useTasks } from '~/composables/useTasks'
 import { useQuickTask } from '~/composables/useQuickTask'
 import { useSession } from '~/composables/useSession'
 import { useOmniSearch } from '~/composables/useOmniSearch'
-import type { TaskPriority } from '~/types'
+import type { TaskPriority, TaskStatus } from '~/types'
 
 const workspaceStore = useWorkspaceStore()
 const session = useSession()
 const { isDrawerOpen, activeTaskId, closeTaskDrawer } = useTaskDrawer()
 const tasksApi = useTasks()
-const { isAddTaskOpen, openAddTask, closeAddTask } = useQuickTask()
+const {
+  isAddTaskOpen,
+  isAddIdeaOpen,
+  taskContext,
+  openAddTask,
+  closeAddTask,
+  openAddIdea,
+  closeAddIdea
+} = useQuickTask()
 const { isOpen: isOmniSearchOpen, toggleSearch, openSearch } = useOmniSearch()
 
 // Centralized keyboard shortcuts listener
@@ -66,9 +87,10 @@ function handleGlobalKeydown(e: KeyboardEvent) {
   // Ctrl+K / Cmd+K: Toggle OmniSearch (close any open z-50 drawer/modal first)
   if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K' || e.code === 'KeyK')) {
     e.preventDefault()
-    if (isDrawerOpen.value || isAddTaskOpen.value) {
+    if (isDrawerOpen.value || isAddTaskOpen.value || isAddIdeaOpen.value) {
       closeTaskDrawer()
       closeAddTask()
+      closeAddIdea()
       openSearch()
     } else {
       toggleSearch()
@@ -90,7 +112,7 @@ function handleGlobalKeydown(e: KeyboardEvent) {
   if (isInput) return
 
   // Do not trigger single-key shortcuts if any modal/drawer is open
-  if (isDrawerOpen.value || isAddTaskOpen.value || isOmniSearchOpen.value) {
+  if (isDrawerOpen.value || isAddTaskOpen.value || isAddIdeaOpen.value || isOmniSearchOpen.value) {
     return
   }
 
@@ -106,6 +128,16 @@ function handleGlobalKeydown(e: KeyboardEvent) {
     if (!e.metaKey && !e.ctrlKey && !e.altKey) {
       e.preventDefault()
       openAddTask()
+      return
+    }
+  }
+
+  // 'I' or 'i': Open AddIdeaModal
+  if (e.key === 'i' || e.key === 'I') {
+    if (!e.metaKey && !e.ctrlKey && !e.altKey) {
+      e.preventDefault()
+      openAddIdea()
+      return
     }
   }
 }
@@ -139,6 +171,7 @@ const projectOptions = computed(() => {
 async function onTaskCreated(payload: {
   name: string
   description?: string
+  status?: TaskStatus
   priority?: TaskPriority
   projectSlug?: string
   techTags?: string[]
@@ -148,14 +181,16 @@ async function onTaskCreated(payload: {
     await tasksApi.createTask({
       name: payload.name,
       description: payload.description,
+      status: payload.status || 'in_queue',
       priority: payload.priority || 'medium',
       projectSlug: payload.projectSlug || 'management',
       techTags: payload.techTags || [],
       dueDate: payload.dueDate
     })
     closeAddTask()
+    closeAddIdea()
   } catch (err) {
-    console.error('Failed to create deliverable:', err)
+    console.error('Failed to create deliverable/idea:', err)
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['relative', activeTab === 'dashboard' ? 'space-y-3 sm:space-y-3.5 xl:h-full xl:flex xl:flex-col xl:min-h-0 xl:pb-0' : 'space-y-6 pb-12']">
+  <div :class="['relative', (activeTab === 'dashboard' || activeTab === 'deliverables' || activeTab === 'kanban' || activeTab === 'matrix') ? 'space-y-3 sm:space-y-3.5 xl:h-full xl:flex xl:flex-col xl:min-h-0 xl:pb-0' : 'space-y-6 pb-12']">
     <!-- ================================================================= -->
     <!-- STATE 1: LOADING SKELETON BENTO LOADER                            -->
     <!-- ================================================================= -->
@@ -92,7 +92,7 @@
     <!-- ================================================================= -->
     <!-- STATE 4: READY STATE (FULL COCKPIT)                               -->
     <!-- ================================================================= -->
-    <div v-else-if="detailState === 'READY' && currentProject" :class="[activeTab === 'dashboard' ? 'space-y-3 sm:space-y-3.5 xl:h-full xl:flex xl:flex-col xl:min-h-0' : 'space-y-6']">
+    <div v-else-if="detailState === 'READY' && currentProject" :class="[(activeTab === 'dashboard' || activeTab === 'deliverables' || activeTab === 'kanban' || activeTab === 'matrix') ? 'space-y-3 sm:space-y-3.5 xl:h-full xl:flex xl:flex-col xl:min-h-0' : 'space-y-6']">
       <!-- Stale Error Warning Banner -->
       <div
         v-if="isStaleProjectsError"
@@ -113,7 +113,10 @@
       </div>
 
       <!-- Top Action Bar -->
-      <div class="flex items-center justify-end pb-1 border-b border-white/[0.06] shrink-0">
+      <div
+        v-if="activeTab !== 'deliverables' && activeTab !== 'kanban' && activeTab !== 'matrix'"
+        class="flex items-center justify-end pb-1 border-b border-white/[0.06] shrink-0"
+      >
         <button
           type="button"
           class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 border border-rose-500/20 font-mono text-xs transition cursor-pointer"
@@ -212,34 +215,39 @@
           <ProjectPriorityDeliverables
             :priority-tasks="priorityTasksList"
             class="h-full"
-            @open-matrix="onSelectTab('matrix')"
+            @open-matrix="onSetDeliverableViewMode('table')"
             @task-click="onTaskClick"
           />
         </div>
       </div>
 
       <!-- ================================================================= -->
-      <!-- VIEW 2: DEDICATED FULL KANBAN BOARD                               -->
+      <!-- VIEW 2: PROJECT DELIVERABLES WORKSPACE (UNIFIED KANBAN & TABLE)   -->
       <!-- ================================================================= -->
-      <section v-else-if="activeTab === 'kanban'" aria-label="Dedicated Kanban Board" class="space-y-4">
+      <section
+        v-else-if="activeTab === 'deliverables' || activeTab === 'kanban' || activeTab === 'matrix'"
+        aria-label="Project Deliverables Workspace"
+        class="space-y-4 xl:flex-1 xl:flex xl:flex-col xl:min-h-0"
+      >
+        <!-- Render Kanban Board -->
         <KanbanBoard
+          v-if="deliverableViewMode === 'kanban'"
           :tasks="projectTasks"
+          class="xl:flex-1 xl:flex xl:flex-col xl:min-h-0"
           @update-status="onUpdateTaskStatus"
           @add-task="onAddTaskToColumn"
           @task-click="onTaskClick"
         />
-      </section>
 
-      <!-- ================================================================= -->
-      <!-- VIEW 3: ASSOCIATED TASK MATRIX                                    -->
-      <!-- ================================================================= -->
-      <ProjectTaskMatrix
-        v-else-if="activeTab === 'matrix'"
-        :tasks="projectTasks"
-        @task-click="onTaskClick"
-        @toggle-status="toggleMatrixTaskStatus"
-        @delete-task="deleteTaskFromDrawer"
-      />
+        <!-- Render Deliverables Table / Matrix -->
+        <ProjectTaskMatrix
+          v-else
+          :tasks="projectTasks"
+          @task-click="onTaskClick"
+          @toggle-status="toggleMatrixTaskStatus"
+          @delete-task="deleteTaskFromDrawer"
+        />
+      </section>
 
       <!-- ================================================================= -->
       <!-- VIEW 4: GITHUB INTEGRATION DEEP COCKPIT                           -->
@@ -339,6 +347,8 @@
           :commits-pending="commitsPending"
           :branches="branches || []"
           :branches-pending="branchesPending"
+          :selected-branch="selectedBranch"
+          @select-branch="(b: string) => selectedBranch = b"
         />
       </section>
 
@@ -374,13 +384,6 @@
         @delete="deleteTaskFromDrawer"
       />
 
-      <AddTaskModal
-        v-if="showAddTaskModal"
-        :project-slug="currentProject.slug"
-        :disabled="isBusy"
-        @close="showAddTaskModal = false"
-        @create="onTaskModalCreated"
-      />
 
       <ConfirmDialog
         v-if="confirmDeleteTask"
@@ -518,7 +521,7 @@ import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import { useTasks } from '~/composables/useTasks'
 import { useQuickTask } from '~/composables/useQuickTask'
-import { useHeaderActions } from '~/composables/useHeaderActions'
+import { useHeaderActions, type HeaderAction } from '~/composables/useHeaderActions'
 import {
   useGitHubCommits,
   useGitHubBranches,
@@ -537,16 +540,23 @@ const router = useRouter()
 const slug = computed(() => (route.params.slug as string) || 'management')
 
 const projectNav = useProjectNav()
-const activeTab = projectNav.activeTab
+const { activeTab, deliverableViewMode } = projectNav
 
-const validTabs: ProjectTabId[] = ['dashboard', 'kanban', 'matrix', 'github', 'vercel', 'notes']
+const validTabs: ProjectTabId[] = ['dashboard', 'deliverables', 'kanban', 'matrix', 'github', 'vercel', 'notes']
 
 function resolveTab(tabQuery: unknown): ProjectTabId {
   if (typeof tabQuery !== 'string') return 'dashboard'
   const t = tabQuery.toLowerCase()
   if (t === 'supabase' || t === 'notes') return 'notes'
-  if (t === 'kanban') return 'kanban'
-  if (t === 'matrix') return 'matrix'
+  if (t === 'deliverables') return 'deliverables'
+  if (t === 'kanban') {
+    projectNav.setViewMode('kanban')
+    return 'deliverables'
+  }
+  if (t === 'matrix') {
+    projectNav.setViewMode('table')
+    return 'deliverables'
+  }
   if (t === 'github') return 'github'
   if (t === 'vercel') return 'vercel'
   return 'dashboard'
@@ -555,8 +565,12 @@ function resolveTab(tabQuery: unknown): ProjectTabId {
 onMounted(() => {
   if (route.query.tab) {
     projectNav.setActiveTab(resolveTab(route.query.tab))
-  } else if (route.query.view === 'kanban') {
-    projectNav.setActiveTab('kanban')
+    if (route.query.view === 'table' || route.query.view === 'kanban') {
+      projectNav.setViewMode(route.query.view as 'kanban' | 'table')
+    }
+  } else if (route.query.view === 'kanban' || route.query.view === 'table') {
+    projectNav.setActiveTab('deliverables')
+    projectNav.setViewMode(route.query.view as 'kanban' | 'table')
   } else {
     projectNav.setActiveTab('dashboard')
   }
@@ -565,8 +579,12 @@ onMounted(() => {
 watch(() => route.params.slug, () => {
   if (route.query.tab) {
     projectNav.setActiveTab(resolveTab(route.query.tab))
-  } else if (route.query.view === 'kanban') {
-    projectNav.setActiveTab('kanban')
+    if (route.query.view === 'table' || route.query.view === 'kanban') {
+      projectNav.setViewMode(route.query.view as 'kanban' | 'table')
+    }
+  } else if (route.query.view === 'kanban' || route.query.view === 'table') {
+    projectNav.setActiveTab('deliverables')
+    projectNav.setViewMode(route.query.view as 'kanban' | 'table')
   } else {
     projectNav.setActiveTab('dashboard')
   }
@@ -579,10 +597,8 @@ watch(() => route.query.tab, (newVal) => {
 })
 
 watch(() => route.query.view, (newVal) => {
-  if (newVal === 'kanban') {
-    projectNav.setActiveTab('kanban')
-  } else if (!newVal && !route.query.tab && activeTab.value === 'kanban') {
-    projectNav.setActiveTab('dashboard')
+  if (newVal === 'kanban' || newVal === 'table') {
+    projectNav.setViewMode(newVal as 'kanban' | 'table')
   }
 })
 
@@ -607,32 +623,52 @@ const currentProject = computed<Project | null>(() => {
 
 // Contextual Action Bar integration
 const { setActions, clearActions } = useHeaderActions()
-const { openAddTask } = useQuickTask()
+const { openAddTask, openAddIdea } = useQuickTask()
 
 onMounted(() => {
   watchEffect(() => {
     const repo = currentProject.value?.githubRepo
-    setActions([
-      {
-        id: 'repo-link',
-        label: 'GitHub Repo',
-        icon: 'ExternalLink',
-        variant: 'secondary',
-        disabled: !repo,
-        handler: () => {
-          if (repo) {
-            window.open(`https://github.com/${repo}`, '_blank')
-          }
+    const actions: HeaderAction[] = []
+
+    if (activeTab.value === 'deliverables' || activeTab.value === 'kanban' || activeTab.value === 'matrix') {
+      actions.push({
+        id: 'deliverables-board-view',
+        label: 'Board View',
+        icon: 'Columns3',
+        variant: deliverableViewMode.value === 'kanban' ? 'primary' : 'secondary',
+        handler: () => onSetDeliverableViewMode('kanban')
+      })
+      actions.push({
+        id: 'deliverables-table-view',
+        label: 'Table View',
+        icon: 'Table',
+        variant: deliverableViewMode.value === 'table' ? 'primary' : 'secondary',
+        handler: () => onSetDeliverableViewMode('table')
+      })
+    }
+
+    actions.push({
+      id: 'repo-link',
+      label: 'GitHub Repo',
+      icon: 'ExternalLink',
+      variant: 'secondary',
+      disabled: !repo,
+      handler: () => {
+        if (repo) {
+          window.open(`https://github.com/${repo}`, '_blank')
         }
-      },
-      {
-        id: 'add-deliverable',
-        label: 'Add Deliverable',
-        icon: 'Plus',
-        variant: 'primary',
-        handler: () => openAddTask()
       }
-    ])
+    })
+
+    actions.push({
+      id: 'add-deliverable',
+      label: 'Add Deliverable',
+      icon: 'Plus',
+      variant: 'primary',
+      handler: () => openAddTask()
+    })
+
+    setActions(actions)
   })
 })
 
@@ -675,8 +711,6 @@ async function retryFetchProjects() {
 
 const isBusy = ref(false)
 const isDrawerBusy = ref(false)
-const showAddTaskModal = ref(false)
-const defaultColumnStatus = ref<TaskStatus>('in_queue')
 const activeDrawerTask = ref<Task | null>(null)
 const confirmDeleteTask = ref(false)
 const taskToDelete = ref<Task | null>(null)
@@ -722,8 +756,13 @@ async function onProjectDeleted() {
 
 // GitHub integration (Safely computed from targetRepo)
 const targetRepo = computed(() => currentProject.value?.githubRepo || '')
-const { commits, pending: commitsPending } = useGitHubCommits(targetRepo, 5)
+const selectedBranch = ref<string | undefined>(undefined)
+const { commits, pending: commitsPending } = useGitHubCommits(targetRepo, 5, selectedBranch)
 const { branches, pending: branchesPending } = useGitHubBranches(targetRepo)
+
+watch(targetRepo, () => {
+  selectedBranch.value = undefined
+})
 const { workflows: projectWorkflows, pending: workflowsPending, refresh: refreshWorkflows } = useGitHubWorkflows(targetRepo, 5)
 const { data: projectSecurity, pending: securityPending, refresh: refreshSecurity } = useGitHubSecurity(targetRepo)
 const { deployments: projectDeployments, pending: deploymentsPending, refresh: refreshDeployments } = useGitHubDeployments(targetRepo, 5)
@@ -947,19 +986,27 @@ interface ProjectTabItem {
 
 const projectTabs = computed<ProjectTabItem[]>(() => [
   { id: 'dashboard', label: 'Overview', icon: 'LayoutDashboard' },
-  { id: 'kanban', label: 'Kanban', icon: 'Columns3', count: totalTasksCount.value },
-  { id: 'matrix', label: 'Deliverables', icon: 'CheckSquare', count: totalTasksCount.value },
+  { id: 'deliverables', label: 'Deliverables', icon: 'CheckSquare', count: totalTasksCount.value },
   { id: 'github', label: 'GitHub', icon: 'GitBranch', count: commitsCount.value },
   { id: 'vercel', label: 'Vercel', icon: 'Globe' },
   { id: 'notes', label: 'Notes', icon: 'FileText' }
 ])
 
 function onSelectTab(tabId: ProjectTabId) {
-  activeTab.value = tabId
   projectNav.setActiveTab(tabId)
-  const nextQuery = { ...route.query, tab: tabId }
-  if (nextQuery.view) delete nextQuery.view
+  const nextQuery: Record<string, any> = { ...route.query, tab: tabId }
+  if (tabId === 'deliverables') {
+    nextQuery.view = deliverableViewMode.value
+  } else if (nextQuery.view) {
+    delete nextQuery.view
+  }
   router.replace({ query: nextQuery })
+}
+
+function onSetDeliverableViewMode(mode: 'kanban' | 'table') {
+  projectNav.setActiveTab('deliverables')
+  projectNav.setViewMode(mode)
+  router.replace({ query: { ...route.query, tab: 'deliverables', view: mode } })
 }
 
 watchEffect(() => {
@@ -984,36 +1031,11 @@ function onTaskClick(task: Task) {
 }
 
 function onAddTaskToColumn(status: TaskStatus = 'in_queue') {
-  defaultColumnStatus.value = status
-  showAddTaskModal.value = true
-}
-
-async function onTaskModalCreated(payload: {
-  name: string
-  description?: string
-  status?: TaskStatus
-  priority: TaskPriority
-  techTags: string[]
-  dueDate?: string
-  projectSlug?: string
-}) {
-  if (!currentProject.value) return
-  isBusy.value = true
-  try {
-    await tasksApi.createTask({
-      name: payload.name,
-      description: payload.description,
-      projectSlug: currentProject.value.slug,
-      status: defaultColumnStatus.value || 'in_queue',
-      priority: payload.priority || 'medium',
-      techTags: payload.techTags || [],
-      dueDate: payload.dueDate
-    })
-    showAddTaskModal.value = false
-  } catch (err) {
-    console.error('Failed to create task:', err)
-  } finally {
-    isBusy.value = false
+  const slug = currentProject.value?.slug || null
+  if (status === 'idea') {
+    openAddIdea(slug)
+  } else {
+    openAddTask(slug, status)
   }
 }
 

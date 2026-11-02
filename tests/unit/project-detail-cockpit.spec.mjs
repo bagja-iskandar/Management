@@ -262,25 +262,34 @@ test('NAV-01: useProjectNav accepts "notes" as a valid tab and rejects legacy ta
   resetWorkspaceStore()
   const nav = useProjectNav()
 
-  // 1. Initial tab defaults to 'dashboard'
+  // 1. Initial tab defaults to 'dashboard' and deliverableViewMode to 'kanban'
   assert.equal(nav.activeTab.value, 'dashboard')
+  assert.equal(nav.deliverableViewMode.value, 'kanban')
 
   // 2. Setting 'notes' is accepted and reflected
   nav.setActiveTab('notes')
   assert.equal(nav.activeTab.value, 'notes')
 
-  // 3. Setting 'kanban', 'matrix', 'github', 'vercel'
+  // 3. Setting 'deliverables', 'kanban', 'matrix', 'github', 'vercel'
+  nav.setActiveTab('deliverables')
+  assert.equal(nav.activeTab.value, 'deliverables')
+
   nav.setActiveTab('kanban')
-  assert.equal(nav.activeTab.value, 'kanban')
+  assert.equal(nav.activeTab.value, 'deliverables')
+  assert.equal(nav.deliverableViewMode.value, 'kanban')
+
   nav.setActiveTab('matrix')
-  assert.equal(nav.activeTab.value, 'matrix')
+  assert.equal(nav.activeTab.value, 'deliverables')
+  assert.equal(nav.deliverableViewMode.value, 'table')
+
   nav.setActiveTab('github')
   assert.equal(nav.activeTab.value, 'github')
   nav.setActiveTab('vercel')
   assert.equal(nav.activeTab.value, 'vercel')
 
   // 4. Valid tabs list contract
-  const validTabs = ['dashboard', 'kanban', 'matrix', 'github', 'vercel', 'notes']
+  const validTabs = ['dashboard', 'deliverables', 'kanban', 'matrix', 'github', 'vercel', 'notes']
+  assert.ok(validTabs.includes('deliverables'), 'deliverables must be in valid tabs')
   assert.ok(validTabs.includes('notes'), 'notes must be in valid tabs')
   assert.ok(!validTabs.includes('supabase'), 'supabase must NOT be in valid tabs')
 })
@@ -576,10 +585,16 @@ test("LAYOUT-VIEWPORT-01: Single Viewport desktop flexbox classes are conditiona
 
   // 1. Verify conditional scoping on root container
   assert.ok(
-    pageContent.includes(
-      "activeTab === 'dashboard' ? 'space-y-3 sm:space-y-3.5 xl:h-full xl:flex xl:flex-col xl:min-h-0 xl:pb-0' : 'space-y-6 pb-12'"
-    ),
-    'Root container must conditionally apply single-viewport desktop flexbox classes for dashboard tab only'
+    pageContent.includes('xl:h-full xl:flex xl:flex-col xl:min-h-0 xl:pb-0'),
+    'Root container must apply single-viewport desktop flexbox classes'
+  )
+  assert.ok(
+    pageContent.includes("activeTab === 'dashboard'"),
+    'Root container must scope single-viewport desktop classes to dashboard tab'
+  )
+  assert.ok(
+    pageContent.includes("'space-y-6 pb-12'"),
+    'Root container must maintain fallback spacing for relaxed scrollable tabs'
   )
 
   // 2. Verify 4-pillar bento grid applies desktop 4 columns

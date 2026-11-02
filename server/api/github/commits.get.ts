@@ -5,10 +5,11 @@ import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubCommitItem } from '~/types'
 
 const fetchCachedCommits = defineCachedFunction(
-  async (token: string, repo: string, limit: number): Promise<GitHubCommitItem[]> => {
+  async (token: string, repo: string, limit: number, branch?: string): Promise<GitHubCommitItem[]> => {
     const client = createGitHubClient(token)
     try {
-      const rawCommits = await client.fetch<any[]>(`/repos/${repo}/commits?per_page=${limit}`)
+      const branchQuery = branch ? `&sha=${encodeURIComponent(branch)}` : ''
+      const rawCommits = await client.fetch<any[]>(`/repos/${repo}/commits?per_page=${limit}${branchQuery}`)
 
       return (rawCommits || []).map((c: any): GitHubCommitItem => {
         const message = (c.commit?.message || '').split('\n')[0]
@@ -32,13 +33,15 @@ const fetchCachedCommits = defineCachedFunction(
   {
     maxAge: 300,
     name: 'github-commits',
-    getKey: (token: string, repo: string, limit: number) => `${token ? 'auth' : 'anon'}:${repo}:${limit}`
+    getKey: (token: string, repo: string, limit: number, branch?: string) =>
+      `${token ? 'auth' : 'anon'}:${repo}:${limit}:${branch || 'default'}`
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubCommitItem[]> => {
   const query = getQuery(event)
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
+  const branchParam = typeof query.branch === 'string' && query.branch.trim() !== '' ? query.branch.trim() : undefined
 
   const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
 
@@ -48,5 +51,5 @@ export default withApiHandler(async (event): Promise<GitHubCommitItem[]> => {
   const limitParam = query.limit ? Number(query.limit) : 20
   const limit = Math.max(1, Math.min(100, isNaN(limitParam) ? 20 : limitParam))
 
-  return await fetchCachedCommits(token, fullRepo, limit)
+  return await fetchCachedCommits(token, fullRepo, limit, branchParam)
 })

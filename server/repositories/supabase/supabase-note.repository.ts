@@ -205,12 +205,28 @@ export class SupabaseNoteRepository implements INoteRepository {
     }
 
     const cleanTitle = extractNoteTitle(note.content)
-    const priority = (overrides?.priority as any) || 'medium'
+
+    // Smart Category Mapping
+    let targetStatus: 'idea' | 'in_queue' = 'idea'
+    let defaultPriority: 'low' | 'medium' | 'high' = 'medium'
+
+    if (note.category === 'bug') {
+      targetStatus = 'in_queue'
+      defaultPriority = 'high'
+    } else if (note.category === 'maintenance') {
+      targetStatus = 'in_queue'
+      defaultPriority = 'medium'
+    } else {
+      targetStatus = 'idea'
+      defaultPriority = 'medium'
+    }
+
+    const priority = (overrides?.priority as any) || defaultPriority
 
     const task = await taskRepository.create({
       name: cleanTitle,
       description: note.content,
-      status: 'idea',
+      status: targetStatus,
       priority,
       dueDate: overrides?.dueDate,
       projectSlug: note.projectSlug,

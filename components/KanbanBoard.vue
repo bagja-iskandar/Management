@@ -1,7 +1,7 @@
 <template>
-  <div class="space-y-4">
+  <div class="space-y-4 xl:flex-1 xl:flex xl:flex-col xl:min-h-0">
     <!-- 5 ENLARGED KANBAN COLUMNS -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto pb-4 snap-x">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto pb-4 xl:pb-0 snap-x xl:flex-1 xl:min-h-0">
       <!-- COLUMN 1: IDEA -->
       <KanbanColumn
         status="idea"
@@ -109,11 +109,11 @@
         @add-task="(st) => $emit('add-task', st)"
       />
 
-      <!-- COLUMN 5: DEPLOYED -->
+      <!-- COLUMN 5: DONE (DEPLOYED) -->
       <KanbanColumn
         status="deployed"
-        title="DEPLOYED"
-        subtitle="Live & verified"
+        title="DONE"
+        subtitle="Completed & deployed"
         dot-class="bg-emerald-400"
         :tasks="deployedTasks"
         :is-drag-over="dragOverColumn === 'deployed'"
@@ -121,7 +121,7 @@
         :can-move-left="true"
         :can-move-right="false"
         move-left-target="running_sprint"
-        empty-title="NO DEPLOYED DELIVERABLES"
+        empty-title="NO COMPLETED DELIVERABLES"
         empty-subtitle="Completed work and released tasks appear here"
         quick-add-label="+ Quick Add Task"
         @drag-start="onDragStart"

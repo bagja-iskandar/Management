@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#111318] border rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:border-indigo-500/50 hover:shadow-[0_0_16px_rgba(99,102,241,0.14)] cursor-pointer group relative select-none w-full h-[180px] min-h-[180px] max-h-[180px] box-border"
+    class="bg-[#111318] border rounded-xl p-3.5 flex flex-col justify-between transition-all duration-200 hover:border-indigo-500/50 hover:shadow-[0_0_16px_rgba(99,102,241,0.14)] cursor-pointer group relative select-none w-full min-h-[105px] h-auto box-border"
     :class="[
       task.status === 'blocked'
         ? 'border-rose-500/50 hover:border-rose-500 bg-rose-950/10'

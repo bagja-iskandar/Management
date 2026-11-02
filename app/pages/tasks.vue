@@ -243,7 +243,7 @@
         :tasks="filteredTasks"
         @update-status="handleUpdateStatus"
         @task-click="handleTaskClick"
-        @add-task="openAddTask"
+        @add-task="onKanbanAddTask"
       />
     </div>
 
@@ -470,7 +470,7 @@ const route = useRoute()
 const router = useRouter()
 const workspaceStore = useWorkspaceStore()
 const { openTaskDrawer } = useTaskDrawer()
-const { openAddTask } = useQuickTask()
+const { openAddTask, openAddIdea } = useQuickTask()
 const { isOpen: isOmniSearchOpen } = useOmniSearch()
 const tasksApi = useTasks()
 const projectsApi = useProjects()
@@ -794,6 +794,15 @@ async function handleUpdateStatus(taskId: string, newStatus: TaskStatus) {
     await tasksApi.updateTask(taskId, { status: newStatus })
   } catch (err) {
     console.error('[tasks] Failed to persist task status update:', err)
+  }
+}
+
+function onKanbanAddTask(status: TaskStatus) {
+  const targetProject = projectFilter.value !== 'all' ? projectFilter.value : null
+  if (status === 'idea') {
+    openAddIdea(targetProject)
+  } else {
+    openAddTask(targetProject, status)
   }
 }
 

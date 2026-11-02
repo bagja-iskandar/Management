@@ -299,6 +299,8 @@ flowchart TD
 ---
 
 ### FASE 2: KANBAN REDESIGN, SCRATCHPAD BUG FIX & PRESENTATION MAPPING
+> **STATUS:** `COMPLETED & VALIDATED (100% PRODUCTION CERTIFIED)`  
+> **REALISASI:** Smart category mapping aktif di Supabase & Nitro repositories + fallback Scratchpad panel, 5 tombol Quick Add duplikat dihapus dari `KanbanColumn.vue`, kolom ke-5 Kanban dilabeli `DONE` via presentation mapping, card task difluidkan (`min-h-[105px]`), dan 11 unit test baru (`scratchpad-smart-promotion.spec.mjs`) lulus (270/270 tests passed).
 - **Tujuan:** Memperbaiki bug promosi Scratchpad, mengeliminasi duplikasi tombol Add, menerapkan label `DONE` pada Kanban, dan merampingkan kartu tugas.
 - **Masalah yang Diselesaikan:** Catatan bug/maintenance salah masuk ke kolom idea; ada 11 tombol add redundan; istilah 'Deployed' tidak universal; kartu tugas memboroskan ruang.
 - **Requirement IDs:** `REQ-KAN-01`, `REQ-KAN-02`, `REQ-KAN-03`, `REQ-KAN-04`, `REQ-SCR-01`.
@@ -330,6 +332,8 @@ flowchart TD
 ---
 
 ### FASE 3: PROJECT WORKSPACE CONSOLIDATION & REMOTE BRANCH SELECTION
+> **STATUS:** `COMPLETED & VALIDATED (100% PRODUCTION CERTIFIED)`  
+> **REALISASI:** Penyatuan tab kanonikal `deliverables` dengan segmented switcher dual-mode `[Kanban | Table Matrix]`, sinkronisasi URL query backward-compatible (`?tab=kanban` & `?tab=matrix`), remote branch dropdown selector pada `ProjectGitActivityFeed.vue`, backend commit branch query (`&sha=...`) dan Nitro cache key branch isolation, penyelarasan subitem Sidebar proyek, serta 14 unit test baru (`github-branch-commits.spec.mjs`) lulus 100% (284/284 tests passed across 21 suites).
 - **Tujuan:** Menyatukan Kanban dan Deliverables Matrix di detail proyek, serta mengaktifkan pemilihan branch remote via GitHub API.
 - **Masalah yang Diselesaikan:** Fragmentasi navigasi proyek (Kanban dan Matrix terpisah); daftar branch git bersifat statis dan tidak dapat diperiksa commit-nya.
 - **Requirement IDs:** `REQ-REPO-01`, `REQ-REPO-02`, `REQ-REPO-03`, `REQ-WORK-01`, `REQ-WORK-02`.

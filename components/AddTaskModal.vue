@@ -127,9 +127,41 @@
           </div>
         </div>
 
-        <!-- Due Date -->
+        <!-- Due Date with Quick Presets -->
         <div class="flex flex-col gap-1.5">
-          <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F3F4F6]">Due Date</label>
+          <div class="flex items-center justify-between">
+            <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F3F4F6]">Due Date</label>
+            <div class="flex items-center gap-1 font-mono text-[10px]">
+              <button
+                type="button"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                @click="setDuePreset(3)"
+              >
+                +3d
+              </button>
+              <button
+                type="button"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                @click="setDuePreset(7)"
+              >
+                +1w
+              </button>
+              <button
+                type="button"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                @click="setDuePreset(14)"
+              >
+                +2w
+              </button>
+              <button
+                type="button"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-rose-500/10 text-[#8A8F9E] hover:text-rose-400 border border-white/[0.06] transition cursor-pointer"
+                @click="dueDate = ''"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
           <input
             id="task-due-date"
             v-model="dueDate"
@@ -139,28 +171,31 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
-          <button
-            type="button"
-            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
-            @click="onCancel"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            class="px-4 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-sans font-medium text-[#07080A] shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-indigo-500/40 focus:outline-none"
-            :disabled="isSubmitting || disabled"
-          >
-            <span v-if="isSubmitting" class="flex items-center gap-1.5">
-              <NexuraIcon name="Loader2" size="sm" class="animate-spin" />
-              <span>Creating...</span>
-            </span>
-            <span v-else class="flex items-center gap-1.5">
-              <NexuraIcon name="Plus" size="sm" :stroke-width="2.2" />
-              <span>Create Deliverable</span>
-            </span>
-          </button>
+        <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/[0.06]">
+          <span class="text-[11px] font-mono text-[#565B68]">⌘ + Enter to create</span>
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
+              @click="onCancel"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-sans font-medium text-[#07080A] shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-indigo-500/40 focus:outline-none"
+              :disabled="isSubmitting || disabled"
+            >
+              <span v-if="isSubmitting" class="flex items-center gap-1.5">
+                <NexuraIcon name="Loader2" size="sm" class="animate-spin" />
+                <span>Creating...</span>
+              </span>
+              <span v-else class="flex items-center gap-1.5">
+                <NexuraIcon name="Plus" size="sm" :stroke-width="2.2" />
+                <span>Create Deliverable</span>
+              </span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -170,7 +205,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import NexuraIcon from './ui/NexuraIcon.vue'
-import type { TaskPriority } from '~/types'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useProjects } from '~/composables/useProjects'
+import type { TaskPriority, TaskStatus } from '~/types'
 
 export interface ProjectItemOption {
   label: string
@@ -181,11 +218,13 @@ const props = withDefaults(
   defineProps<{
     disabled?: boolean
     projectSlug?: string
+    status?: TaskStatus
     projects?: ProjectItemOption[]
   }>(),
   {
     disabled: false,
     projectSlug: '',
+    status: 'in_queue',
     projects: () => []
   }
 )
@@ -197,19 +236,26 @@ const emit = defineEmits<{
     description: string
     project?: string
     projectSlug: string
-    status: 'in_queue'
+    status: TaskStatus
     priority: TaskPriority
-    dueDate: string
+    dueDate?: string
     techTags: string[]
   }): void
 }>()
 
+const workspaceStore = useWorkspaceStore()
 const projectsApi = useProjects()
 const { data: fetchedProjects } = useLazyAsyncData('add-task-modal-projects', () => projectsApi.getProjects())
 
 const resolvedProjectOptions = computed(() => {
   if (props.projects && props.projects.length > 0) {
     return props.projects
+  }
+  if (workspaceStore.projects.value && workspaceStore.projects.value.length > 0) {
+    return workspaceStore.projects.value.map((p) => ({
+      label: p.title || p.slug,
+      value: p.slug
+    }))
   }
   if (fetchedProjects.value && fetchedProjects.value.length > 0) {
     return fetchedProjects.value.map((p) => ({
@@ -218,9 +264,7 @@ const resolvedProjectOptions = computed(() => {
     }))
   }
   return [
-    { label: 'Nexura Management Workspace', value: 'management' },
-    { label: 'TF-HiTNet EEG Emotion', value: 'tf-hitnet-eeg' },
-    { label: 'Neural Signal Lab', value: 'neural-signal-lab' }
+    { label: 'Nexura Management Workspace', value: 'management' }
   ]
 })
 
@@ -242,6 +286,12 @@ function getDefaultDueDate(): string {
   const d = new Date()
   d.setDate(d.getDate() + 7)
   return d.toISOString().split('T')[0]
+}
+
+function setDuePreset(days: number) {
+  const d = new Date()
+  d.setDate(d.getDate() + days)
+  dueDate.value = d.toISOString().split('T')[0]
 }
 
 const name = ref('')
@@ -279,6 +329,12 @@ onUnmounted(() => {
 function onKeyDown(e: KeyboardEvent) {
   if (e.key === 'Escape') {
     onCancel()
+    return
+  }
+
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    e.preventDefault()
+    onSubmit()
     return
   }
 
@@ -324,9 +380,9 @@ function onSubmit() {
     description: description.value.trim(),
     project: targetSlug,
     projectSlug: targetSlug,
-    status: 'in_queue',
+    status: props.status || 'in_queue',
     priority: priority.value,
-    dueDate: dueDate.value,
+    dueDate: dueDate.value || undefined,
     techTags
   })
 }

@@ -268,7 +268,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import type { ProjectNote, NoteCategory, Task } from '~/types'
+import type { ProjectNote, NoteCategory, Task, TaskStatus, TaskPriority } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import NexuraIcon from '../ui/NexuraIcon.vue'
 
@@ -508,14 +508,28 @@ async function promoteNoteToKanban(note: ProjectNote) {
     const firstLine = note.content.split('\n')[0].replace(/^[-*#\s]+/, '').trim()
     const taskTitle = firstLine.length > 80 ? firstLine.slice(0, 80) + '...' : firstLine || 'Promoted Idea'
 
+    let fallbackStatus: TaskStatus = 'idea'
+    let fallbackPriority: TaskPriority = 'medium'
+
+    if (note.category === 'bug') {
+      fallbackStatus = 'in_queue'
+      fallbackPriority = 'high'
+    } else if (note.category === 'maintenance') {
+      fallbackStatus = 'in_queue'
+      fallbackPriority = 'medium'
+    } else {
+      fallbackStatus = 'idea'
+      fallbackPriority = 'medium'
+    }
+
     const localNewTask: Task = {
       id: 'task-' + Date.now(),
       taskId: 'ENG-' + Math.floor(100 + Math.random() * 900),
       projectSlug: note.projectSlug || null,
       name: taskTitle,
       description: note.content,
-      status: 'idea',
-      priority: note.category === 'bug' ? 'high' : 'medium',
+      status: fallbackStatus,
+      priority: fallbackPriority,
       techTags: [note.category],
       date: new Date().toISOString().slice(0, 10),
       createdAt: new Date().toISOString(),

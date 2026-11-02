@@ -25,9 +25,16 @@ export function useGitHubRepos() {
   return { repos, error, pending, refresh };
 }
 
-export function useGitHubCommits(repo: string | Ref<string>, limit?: number) {
+export function useGitHubCommits(
+  repo: string | Ref<string>,
+  limit?: number,
+  branch?: string | Ref<string | undefined>,
+) {
   const repoValue = computed(() =>
     typeof repo === "string" ? repo : toValue(repo),
+  );
+  const branchValue = computed(() =>
+    branch === undefined ? undefined : typeof branch === "string" ? branch : toValue(branch),
   );
 
   const {
@@ -36,16 +43,20 @@ export function useGitHubCommits(repo: string | Ref<string>, limit?: number) {
     pending,
     refresh,
   } = useLazyAsyncData<GitHubCommitItem[]>(
-    () => `github-commits-${repoValue.value}`,
+    () => `github-commits-${repoValue.value}-${branchValue.value || "default"}`,
     () => {
       const r = repoValue.value;
       if (!r) return Promise.resolve([]);
+      const params: Record<string, any> = { repo: r, limit };
+      if (branchValue.value) {
+        params.branch = branchValue.value;
+      }
       return $fetch<GitHubCommitItem[]>("/api/github/commits", {
-        params: { repo: r, limit },
+        params,
       });
     },
     {
-      watch: [repoValue],
+      watch: [repoValue, branchValue],
     },
   );
 
@@ -354,9 +365,9 @@ export function useGitHub() {
     useGitHubPackages,
     useGitHubGlobalCommits,
     fetchRepos: () => $fetch<GitHubRepoSummary[]>("/api/github/repos"),
-    fetchCommits: (repo: string, limit?: number) =>
+    fetchCommits: (repo: string, limit?: number, branch?: string) =>
       $fetch<GitHubCommitItem[]>("/api/github/commits", {
-        params: { repo, limit },
+        params: { repo, limit, ...(branch ? { branch } : {}) },
       }),
     fetchGlobalCommits: (limit?: number, repo?: string) =>
       $fetch<GitHubCommitItem[]>("/api/github/global-commits", {
