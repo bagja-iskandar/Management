@@ -114,7 +114,7 @@
 
       <!-- Top Action Bar -->
       <div
-        v-if="activeTab !== 'deliverables' && activeTab !== 'kanban' && activeTab !== 'matrix'"
+        v-if="activeTab !== 'deliverables' && activeTab !== 'kanban' && activeTab !== 'matrix' && activeTab !== 'settings'"
         class="flex items-center justify-end pb-1 border-b border-white/[0.06] shrink-0"
       >
         <button
@@ -208,7 +208,12 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-3.5 xl:flex-1 xl:min-h-0">
           <ProjectCommitsPreview
             :commits="commits || []"
+            :commits-pending="commitsPending"
+            :branches="branches || []"
+            :branches-pending="branchesPending"
+            :selected-branch="selectedBranch"
             class="h-full"
+            @select-branch="(b: string) => selectedBranch = b"
             @view-all-commits="onSelectTab('github')"
           />
 
@@ -371,6 +376,124 @@
           :project-slug="currentProject.slug"
           :is-drawer="false"
         />
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 7: PROJECT SETTINGS & DANGER ZONE                            -->
+      <!-- ================================================================= -->
+      <section v-else-if="activeTab === 'settings'" aria-label="Project Settings" class="space-y-6">
+        <!-- Card 1: Project Metadata & Configuration -->
+        <div class="obs-card rounded-2xl p-6 bg-[#111318] border border-white/[0.07] space-y-5">
+          <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+                <NexuraIcon name="Settings" size="sm" />
+              </div>
+              <div>
+                <h2 class="font-mono text-sm font-semibold text-[#F3F4F6]">Project Configuration</h2>
+                <p class="text-xs text-[#8A8F9E]">Update repository bindings, project title, and deployment URLs</p>
+              </div>
+            </div>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/[0.05] border border-white/[0.08] text-[#8A8F9E]">
+              SLUG: {{ currentProject.slug }}
+            </span>
+          </div>
+
+          <!-- Metadata Form Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+            <div class="space-y-1.5">
+              <label class="text-[#8A8F9E]">Project Title</label>
+              <input
+                v-model="editProjectForm.title"
+                type="text"
+                placeholder="Project title..."
+                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+              />
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[#8A8F9E]">GitHub Repository (owner/repo)</label>
+              <input
+                v-model="editProjectForm.githubRepo"
+                type="text"
+                placeholder="e.g. bagja-iskandar/Management"
+                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+              />
+            </div>
+
+            <div class="space-y-1.5 md:col-span-2">
+              <label class="text-[#8A8F9E]">Project Description</label>
+              <textarea
+                v-model="editProjectForm.description"
+                rows="3"
+                placeholder="Short description of this project..."
+                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl p-3 text-xs text-[#F3F4F6] outline-none transition resize-none"
+              ></textarea>
+            </div>
+
+            <div class="space-y-1.5 md:col-span-2">
+              <label class="text-[#8A8F9E]">Live Production URL</label>
+              <input
+                v-model="editProjectForm.deployUrl"
+                type="url"
+                placeholder="https://..."
+                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+              />
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2">
+            <span v-if="projectSaveFeedback" class="font-mono text-xs text-emerald-400 flex items-center gap-1.5">
+              <NexuraIcon name="CheckCircle2" size="xs" />
+              <span>{{ projectSaveFeedback }}</span>
+            </span>
+            <span v-else></span>
+
+            <button
+              type="button"
+              :disabled="isSavingProject"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-xs font-mono font-semibold text-white transition cursor-pointer shadow-sm"
+              @click="onSaveProjectSettings"
+            >
+              <NexuraIcon v-if="!isSavingProject" name="Save" size="xs" />
+              <NexuraIcon v-else name="Loader2" size="xs" class="animate-spin" />
+              <span>{{ isSavingProject ? 'Saving...' : 'Save Changes' }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2: Danger Zone -->
+        <div class="obs-card rounded-2xl p-6 bg-[#111318] border border-rose-500/30 space-y-4 shadow-sm">
+          <div class="flex items-center justify-between border-b border-rose-500/20 pb-3">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400">
+                <NexuraIcon name="AlertTriangle" size="sm" />
+              </div>
+              <div>
+                <h2 class="font-mono text-sm font-semibold text-rose-400">Danger Zone</h2>
+                <p class="text-xs text-[#8A8F9E]">Irreversible project deletion and telemetry purge</p>
+              </div>
+            </div>
+            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400">
+              DESTRUCTIVE
+            </span>
+          </div>
+
+          <p class="text-xs text-[#8A8F9E] leading-relaxed">
+            Deleting this project will permanently decouple all associated deliverables, purge cached GitHub & deployment activity, and erase project workspace metadata. This action requires typing the exact project slug to confirm.
+          </p>
+
+          <div class="pt-2 flex justify-end">
+            <button
+              type="button"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 border border-rose-500/30 text-xs font-mono font-semibold transition cursor-pointer"
+              @click="openDeleteProjectModal"
+            >
+              <NexuraIcon name="Trash2" size="xs" />
+              <span>Delete This Project</span>
+            </button>
+          </div>
+        </div>
       </section>
 
       <!-- Modals & Drawers -->
@@ -542,7 +665,7 @@ const slug = computed(() => (route.params.slug as string) || 'management')
 const projectNav = useProjectNav()
 const { activeTab, deliverableViewMode } = projectNav
 
-const validTabs: ProjectTabId[] = ['dashboard', 'deliverables', 'kanban', 'matrix', 'github', 'vercel', 'notes']
+const validTabs: ProjectTabId[] = ['dashboard', 'deliverables', 'kanban', 'matrix', 'github', 'vercel', 'notes', 'settings']
 
 function resolveTab(tabQuery: unknown): ProjectTabId {
   if (typeof tabQuery !== 'string') return 'dashboard'
@@ -559,6 +682,7 @@ function resolveTab(tabQuery: unknown): ProjectTabId {
   }
   if (t === 'github') return 'github'
   if (t === 'vercel') return 'vercel'
+  if (t === 'settings') return 'settings'
   return 'dashboard'
 }
 
@@ -757,7 +881,7 @@ async function onProjectDeleted() {
 // GitHub integration (Safely computed from targetRepo)
 const targetRepo = computed(() => currentProject.value?.githubRepo || '')
 const selectedBranch = ref<string | undefined>(undefined)
-const { commits, pending: commitsPending } = useGitHubCommits(targetRepo, 5, selectedBranch)
+const { commits, pending: commitsPending } = useGitHubCommits(targetRepo, 50, selectedBranch)
 const { branches, pending: branchesPending } = useGitHubBranches(targetRepo)
 
 watch(targetRepo, () => {
@@ -989,8 +1113,55 @@ const projectTabs = computed<ProjectTabItem[]>(() => [
   { id: 'deliverables', label: 'Deliverables', icon: 'CheckSquare', count: totalTasksCount.value },
   { id: 'github', label: 'GitHub', icon: 'GitBranch', count: commitsCount.value },
   { id: 'vercel', label: 'Vercel', icon: 'Globe' },
-  { id: 'notes', label: 'Notes', icon: 'FileText' }
+  { id: 'notes', label: 'Notes', icon: 'FileText' },
+  { id: 'settings', label: 'Settings', icon: 'Settings' }
 ])
+
+// Project Settings State & Form
+const editProjectForm = reactive({
+  title: '',
+  description: '',
+  githubRepo: '',
+  deployUrl: ''
+})
+const isSavingProject = ref(false)
+const projectSaveFeedback = ref('')
+
+watch(
+  currentProject,
+  (proj) => {
+    if (proj) {
+      editProjectForm.title = proj.title || ''
+      editProjectForm.description = proj.description || ''
+      editProjectForm.githubRepo = proj.githubRepo || ''
+      editProjectForm.deployUrl = proj.deployUrl || ''
+    }
+  },
+  { immediate: true }
+)
+
+async function onSaveProjectSettings() {
+  if (!currentProject.value || isSavingProject.value) return
+  isSavingProject.value = true
+  projectSaveFeedback.value = ''
+  try {
+    await projectsApi.updateProject(currentProject.value.slug, {
+      title: editProjectForm.title,
+      description: editProjectForm.description,
+      githubRepo: editProjectForm.githubRepo,
+      deployUrl: editProjectForm.deployUrl
+    })
+    projectSaveFeedback.value = 'Project configuration saved successfully!'
+    setTimeout(() => {
+      projectSaveFeedback.value = ''
+    }, 4000)
+  } catch (err: any) {
+    console.error('Failed to update project settings:', err)
+    projectSaveFeedback.value = `Failed: ${err?.message || 'Error saving settings'}`
+  } finally {
+    isSavingProject.value = false
+  }
+}
 
 function onSelectTab(tabId: ProjectTabId) {
   projectNav.setActiveTab(tabId)

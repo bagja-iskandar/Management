@@ -193,6 +193,37 @@
             class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
+
+        <!-- 7. Global Settings -->
+        <NuxtLink
+          to="/settings"
+          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          :class="[
+            isRouteActive('/settings')
+              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+          ]"
+        >
+          <span class="flex items-center gap-2.5 font-sans">
+            <NexuraIcon
+              name="Settings"
+              size="md"
+              :class="isRouteActive('/settings') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+            />
+            Settings
+          </span>
+          <span
+            v-if="isRouteActive('/settings')"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
+            style="background: var(--obs-accent-light)"
+          ></span>
+          <NexuraIcon
+            v-else
+            name="ChevronRight"
+            size="xs"
+            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+          />
+        </NuxtLink>
       </div>
 
       <!-- Section: Active Projects -->
@@ -407,6 +438,31 @@
                       class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
                     ></span>
                   </div>
+                </button>
+
+                <!-- 7. Project Settings -->
+                <button
+                  type="button"
+                  @click="selectProjectTab(project.slug, 'settings')"
+                  class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
+                  :class="[
+                    isSubItemActive(project.slug, 'settings')
+                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                  ]"
+                >
+                  <span class="flex items-center gap-2 truncate">
+                    <NexuraIcon
+                      name="Settings"
+                      size="xs"
+                      :class="isSubItemActive(project.slug, 'settings') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                    />
+                    <span class="truncate font-sans">Settings</span>
+                  </span>
+                  <span
+                    v-if="isSubItemActive(project.slug, 'settings')"
+                    class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                  ></span>
                 </button>
               </div>
             </div>

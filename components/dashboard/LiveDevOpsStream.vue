@@ -72,7 +72,7 @@
     <!-- Activity Stream List -->
     <div
       v-if="displayItems.length > 0"
-      class="flex-1 min-h-[160px] max-h-[350px] overflow-y-auto custom-scrollbar divide-y divide-white/[0.05]"
+      class="flex-1 min-h-0 overflow-hidden divide-y divide-white/[0.05]"
       tabindex="0"
       role="region"
       aria-label="DevOps activity feed"
@@ -111,27 +111,30 @@
 
           <!-- Right: Repo pill + Relative time + Diff toggle indicator if commit -->
           <div class="flex items-center gap-2.5 shrink-0 font-mono text-xs text-[#8A8F9E]">
+            <span v-if="item.authorName" class="text-[#8A8F9E] text-[11px] truncate max-w-[120px] hidden sm:inline">
+              {{ item.authorName }}
+            </span>
             <span v-if="item.repoName" class="hidden md:inline text-indigo-300">
               {{ cleanRepoName(item.repoName) }}
             </span>
             <span>{{ formatRelativeTime(item.date) }}</span>
+            <a
+              v-if="item.htmlUrl"
+              :href="item.htmlUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[#8A8F9E] hover:text-[#F3F4F6] transition inline-flex items-center"
+              title="Open on GitHub"
+              @click.stop
+            >
+              <NexuraIcon name="ExternalLink" size="xs" />
+            </a>
             <span
               v-if="item.type === 'commit'"
               class="text-xs text-[#8A8F9E] w-3 text-center transition-transform"
             >
               {{ expandedShas.has(item.id) ? '▾' : '▸' }}
             </span>
-            <a
-              v-else-if="item.htmlUrl"
-              :href="item.htmlUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="opacity-0 group-hover:opacity-100 text-[#8A8F9E] hover:text-white transition"
-              title="Open on GitHub"
-              @click.stop
-            >
-              <NexuraIcon name="ExternalLink" size="xs" />
-            </a>
           </div>
         </div>
 
@@ -266,6 +269,7 @@ export interface DevOpsStreamItem {
   badge: string
   badgeClass: string
   repoName?: string
+  authorName?: string
   date: string
   htmlUrl?: string
   commitRaw?: GitHubCommitItem
@@ -281,6 +285,7 @@ const commitItems = computed<DevOpsStreamItem[]>(() => {
     badge: c.shortSha || c.sha.slice(0, 7),
     badgeClass: 'bg-white/[0.05] border-white/[0.07] text-[#F3F4F6]',
     repoName: c.repoName,
+    authorName: c.authorName || (c as any).commitRaw?.authorName,
     date: c.date,
     htmlUrl: c.htmlUrl,
     commitRaw: c
@@ -370,7 +375,7 @@ const allStreamItems = computed<DevOpsStreamItem[]>(() => {
   })
 })
 
-// Filtered stream display capped at 8 items
+// Filtered stream display capped at 11 items
 const displayItems = computed(() => {
   let list = allStreamItems.value
   if (activeTab.value === 'commits') {
@@ -380,7 +385,7 @@ const displayItems = computed(() => {
   } else if (activeTab.value === 'deployments') {
     list = deploymentItems.value
   }
-  return list.slice(0, 8)
+  return list.slice(0, 11)
 })
 
 function getStatusDotClass(status: DevOpsStreamItem['status'], type: DevOpsStreamItem['type']): string {

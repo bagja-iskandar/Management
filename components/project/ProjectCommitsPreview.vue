@@ -7,19 +7,40 @@
           Recent Repository Commits
         </h3>
       </div>
-      <button
-        type="button"
-        class="font-mono text-[11px] text-[#8A8F9E] hover:text-indigo-400 transition-colors cursor-pointer inline-flex items-center gap-1"
-        @click="$emit('view-all-commits')"
-      >
-        <span>View all commits</span>
-        <NexuraIcon name="ArrowRight" size="xs" />
-      </button>
+      <div class="flex items-center gap-2.5">
+        <div v-if="branches && branches.length" class="relative">
+          <select
+            id="overview-branch-selector"
+            :value="selectedBranch || (branches?.[0]?.name || '')"
+            class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] rounded-lg pl-6 pr-6 py-0.5 text-[11px] font-mono text-[#F3F4F6] outline-none transition focus:border-indigo-500/50 cursor-pointer appearance-none"
+            :disabled="branchesPending"
+            @change="(e: Event) => $emit('select-branch', (e.target as HTMLSelectElement).value)"
+          >
+            <option v-for="b in branches" :key="b.name" :value="b.name">
+              {{ b.name }}
+            </option>
+          </select>
+          <div class="absolute inset-y-0 left-0 pl-1.5 flex items-center pointer-events-none text-indigo-400">
+            <NexuraIcon name="GitBranch" size="xs" />
+          </div>
+          <div class="absolute inset-y-0 right-0 pr-1.5 flex items-center pointer-events-none text-[#8A8F9E]">
+            <NexuraIcon name="ChevronDown" size="xs" />
+          </div>
+        </div>
+        <button
+          type="button"
+          class="font-mono text-[11px] text-[#8A8F9E] hover:text-indigo-400 transition-colors cursor-pointer inline-flex items-center gap-1"
+          @click="$emit('view-all-commits')"
+        >
+          <span>View all commits</span>
+          <NexuraIcon name="ArrowRight" size="xs" />
+        </button>
+      </div>
     </div>
 
     <div v-if="commits && commits.length" class="space-y-2 flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1">
       <div
-        v-for="commit in commits.slice(0, 8)"
+        v-for="commit in commits"
         :key="commit.sha"
         class="flex items-start justify-between gap-3 p-2.5 rounded-xl bg-[#07080A]/60 border border-white/[0.05] hover:border-white/[0.12] transition-colors"
       >
@@ -50,15 +71,20 @@
 </template>
 
 <script setup lang="ts">
-import type { GitHubCommit } from '~/types'
+import type { GitHubCommit, GitHubBranch } from '~/types'
 import NexuraIcon from '../ui/NexuraIcon.vue'
 
 defineProps<{
   commits: GitHubCommit[]
+  commitsPending?: boolean
+  branches?: GitHubBranch[]
+  branchesPending?: boolean
+  selectedBranch?: string
 }>()
 
 defineEmits<{
   (e: 'view-all-commits'): void
+  (e: 'select-branch', branchName: string): void
 }>()
 
 function formatTime(dateStr: string): string {

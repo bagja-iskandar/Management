@@ -31,7 +31,10 @@
         <span v-if="commitsPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Syncing...</span>
       </div>
 
-      <div v-if="commits && commits.length" class="space-y-2">
+      <div
+        v-if="commits && commits.length"
+        class="space-y-2 max-h-[480px] sm:max-h-[520px] overflow-y-auto custom-scrollbar pr-1.5"
+      >
         <div
           v-for="commit in commits"
           :key="commit.sha"
@@ -67,7 +70,10 @@
         <span v-if="branchesPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Loading...</span>
       </div>
 
-      <div v-if="branches && branches.length" class="space-y-1.5">
+      <div
+        v-if="branches && branches.length"
+        class="space-y-1.5 max-h-[480px] sm:max-h-[520px] overflow-y-auto custom-scrollbar pr-1"
+      >
         <div
           v-for="branch in branches"
           :key="branch.name"

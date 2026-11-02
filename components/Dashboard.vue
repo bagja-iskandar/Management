@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 pb-6 select-none xl:h-full xl:flex xl:flex-col xl:min-h-0">
+  <div class="space-y-4 select-none xl:h-full xl:flex xl:flex-col xl:min-h-0">
     <!-- Header -->
     <div class="flex items-center justify-between pb-0.5 shrink-0">
       <h1 class="text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight font-sans">

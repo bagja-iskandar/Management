@@ -4,10 +4,10 @@
     <div class="flex items-center justify-between border-b border-white/[0.06] pb-2">
       <div class="flex items-center gap-2">
         <NexuraIcon name="CheckCircle2" size="sm" class="text-emerald-400 shrink-0" />
-        <h2 class="text-sm font-semibold text-[#F3F4F6]">Recent Shipments</h2>
+        <h2 class="text-sm font-semibold text-[#F3F4F6]">Shipped Deliverables</h2>
       </div>
       <span class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-        {{ deployedTasks.length }} Deployed Wins
+        {{ deployedTasks.length }} Shipped Wins
       </span>
     </div>
 
@@ -64,8 +64,8 @@
       v-else
       class="p-4 bg-[#0B0C10]/60 border border-white/[0.06] rounded-lg text-center font-mono space-y-1 flex-1 flex flex-col justify-center"
     >
-      <div class="text-xs text-[#8A8F9E]">No recent deployments recorded.</div>
-      <p class="text-[10px] text-zinc-500">Deploy completed tasks in Kanban to showcase wins here.</p>
+      <div class="text-xs text-[#8A8F9E]">No deliverables marked as deployed yet.</div>
+      <p class="text-[10px] text-zinc-500">Move tasks to DONE in Kanban to showcase wins here.</p>
     </div>
   </section>
 </template>

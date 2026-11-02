@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
+import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { ref, computed } from 'vue'
 import { createJiti } from 'jiti'
@@ -364,3 +365,48 @@ test('DELIV-SSOT-02: Instant reactivity synchronizes mutations instantaneously a
   assert.equal(matrixTable.value[0].status, 'deployed', 'Matrix table status must immediately update')
   assert.equal(matrixTable.value[0].priority, 'high', 'Matrix table priority must immediately update')
 })
+
+// =============================================================================
+// 6. GITHUB OVERVIEW BRANCH SELECTOR & REACTIVITY CONTRACTS
+// =============================================================================
+
+test('BRANCH-UI-03: ProjectCommitsPreview template contains compact branch selector dropdown and emits select-branch', () => {
+  const componentPath = path.resolve(projectRoot, 'components/project/ProjectCommitsPreview.vue')
+  const content = fs.readFileSync(componentPath, 'utf8')
+
+  assert.ok(content.includes('id="overview-branch-selector"'), 'Must contain overview branch selector element')
+  assert.ok(content.includes("select-branch"), 'Must emit select-branch event')
+  assert.ok(!content.includes('.slice(0, 8)'), 'Must not truncate commits with slice(0, 8)')
+  assert.ok(content.includes('v-for="commit in commits"'), 'Must iterate through all commits directly')
+})
+
+test('BRANCH-UI-04: Project detail page configures useGitHubCommits limit to 50 and wires two-way branch reactivity to ProjectCommitsPreview', () => {
+  const pagePath = path.resolve(projectRoot, 'app/pages/projects/[slug].vue')
+  const content = fs.readFileSync(pagePath, 'utf8')
+
+  assert.ok(content.includes('useGitHubCommits(targetRepo, 50, selectedBranch)'), 'Must call useGitHubCommits with limit 50 and selectedBranch')
+  assert.ok(content.includes(':branches='), 'Must bind branches to ProjectCommitsPreview')
+  assert.ok(content.includes(':selected-branch="selectedBranch"'), 'Must bind selected-branch to ProjectCommitsPreview')
+  assert.ok(content.includes('@select-branch='), 'Must listen to select-branch event on ProjectCommitsPreview')
+  assert.ok(content.includes('selectedBranch ='), 'Must mutate selectedBranch upon select-branch event')
+})
+
+test('BRANCH-UI-05: ProjectGitActivityFeed template confines commits and branches to scrollable containers with custom scrollbar', () => {
+  const componentPath = path.resolve(projectRoot, 'components/project/ProjectGitActivityFeed.vue')
+  const content = fs.readFileSync(componentPath, 'utf8')
+
+  assert.ok(
+    content.includes('max-h-[480px]') && content.includes('overflow-y-auto') && content.includes('custom-scrollbar'),
+    'ProjectGitActivityFeed must confine items with max-height and custom scrollbar'
+  )
+  assert.ok(
+    content.includes('space-y-2 max-h-[480px] sm:max-h-[520px] overflow-y-auto custom-scrollbar'),
+    'ProjectGitActivityFeed must confine commits stream within max-height and custom scrollbar'
+  )
+  assert.ok(
+    content.includes('space-y-1.5 max-h-[480px] sm:max-h-[520px] overflow-y-auto custom-scrollbar'),
+    'ProjectGitActivityFeed must confine branches list within max-height and custom scrollbar'
+  )
+})
+
+
