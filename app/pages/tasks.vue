@@ -13,30 +13,15 @@
 
       <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap">
         <!-- View Mode Switcher (Kanban vs Table) -->
-        <div class="p-1 rounded-lg bg-[#07080A] border border-white/[0.08] inline-flex items-center gap-1 shadow-inner" role="group" aria-label="View Mode">
-          <button
-            type="button"
-            class="px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-1.5 transition cursor-pointer"
-            :class="viewMode === 'kanban'
-              ? 'bg-white/[0.1] text-white font-semibold shadow-sm border border-white/[0.1]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'"
-            @click="setViewMode('kanban')"
-          >
-            <NexuraIcon name="LayoutGrid" size="xs" />
-            <span>Kanban</span>
-          </button>
-          <button
-            type="button"
-            class="px-3 py-1.5 rounded-md text-xs font-mono flex items-center gap-1.5 transition cursor-pointer"
-            :class="viewMode === 'table'
-              ? 'bg-white/[0.1] text-white font-semibold shadow-sm border border-white/[0.1]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'"
-            @click="setViewMode('table')"
-          >
-            <NexuraIcon name="List" size="xs" />
-            <span>Table</span>
-          </button>
-        </div>
+        <BaseSegmentedControl
+          v-model="viewMode"
+          :options="[
+            { value: 'kanban', label: 'Kanban', icon: 'LayoutGrid' },
+            { value: 'table', label: 'Table', icon: 'List' }
+          ]"
+          size="sm"
+          @change="(val) => setViewMode(val)"
+        />
       </div>
     </div>
 

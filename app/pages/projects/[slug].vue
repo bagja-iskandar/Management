@@ -756,19 +756,15 @@ onMounted(() => {
 
     if (activeTab.value === 'deliverables' || activeTab.value === 'kanban' || activeTab.value === 'matrix') {
       actions.push({
-        id: 'deliverables-board-view',
-        label: 'Board View',
-        icon: 'Columns3',
-        variant: deliverableViewMode.value === 'kanban' ? 'primary' : 'secondary',
-        handler: () => onSetDeliverableViewMode('kanban')
-      })
-      actions.push({
-        id: 'deliverables-table-view',
-        label: 'Table View',
-        icon: 'Table',
-        variant: deliverableViewMode.value === 'table' ? 'primary' : 'secondary',
-        handler: () => onSetDeliverableViewMode('table')
-      })
+        type: 'segmented',
+        id: 'deliverables-view',
+        modelValue: deliverableViewMode.value,
+        options: [
+          { value: 'kanban', label: 'Board View', icon: 'Columns3' },
+          { value: 'table', label: 'Table View', icon: 'Table' }
+        ],
+        onChange: (val: any) => onSetDeliverableViewMode(val)
+      } as any)
     }
 
     actions.push({

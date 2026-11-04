@@ -39,7 +39,18 @@
     <!-- Right: Contextual Action Bar -->
     <div class="flex items-center gap-2 shrink-0" aria-label="Contextual Action Bar">
       <template v-for="action in headerActions" :key="action.id">
+        <!-- Segmented Control Action -->
+        <BaseSegmentedControl
+          v-if="action.type === 'segmented'"
+          :model-value="action.modelValue"
+          :options="action.options"
+          size="xs"
+          @update:model-value="(val) => { closeSearch(); action.onChange(val) }"
+        />
+
+        <!-- Standard Button Action -->
         <button
+          v-else
           type="button"
           @click="handleActionClick(action)"
           :disabled="action.disabled || action.loading"
@@ -65,6 +76,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import BaseSegmentedControl from '~~/components/ui/BaseSegmentedControl.vue'
 import HeaderSearch from './search/HeaderSearch.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useOmniSearch } from '~/composables/useOmniSearch'
@@ -77,7 +89,9 @@ const { actions: headerActions } = useHeaderActions()
 
 function handleActionClick(action: HeaderAction) {
   closeSearch()
-  action.handler()
+  if ('handler' in action && typeof action.handler === 'function') {
+    action.handler()
+  }
 }
 
 function getActionClass(variant?: HeaderActionVariant) {

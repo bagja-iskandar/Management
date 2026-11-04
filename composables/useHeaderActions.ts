@@ -2,7 +2,8 @@ import { ref, computed } from 'vue'
 
 export type HeaderActionVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
 
-export interface HeaderAction {
+export interface HeaderButtonAction {
+  type?: 'button'
   id: string
   label: string
   icon?: any
@@ -12,6 +13,22 @@ export interface HeaderAction {
   loading?: boolean
   handler: () => void | Promise<void>
 }
+
+export interface HeaderSegmentedAction {
+  type: 'segmented'
+  id: string
+  modelValue: string | number
+  options: Array<{
+    value: string | number
+    label: string
+    icon?: any
+    count?: number
+    disabled?: boolean
+  }>
+  onChange: (val: any) => void
+}
+
+export type HeaderAction = HeaderButtonAction | HeaderSegmentedAction
 
 // Module-level reactive singleton state (avoids SSR devalue serialization error for functions)
 const actionsState = ref<HeaderAction[]>([])

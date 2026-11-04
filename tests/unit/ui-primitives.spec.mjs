@@ -238,13 +238,23 @@ test('UI-SEGMENTED-01: BaseSegmentedControl renders tablist with active pill sta
   assert.ok(content.includes('role="tab"'), 'Pill buttons must declare role="tab"')
   assert.ok(content.includes(':aria-selected="modelValue === opt.value ? \'true\' : \'false\'"'), 'Must set aria-selected accurately')
 
-  // Active vs Inactive visual styling
+  // True Switch Bento Container Styling
   assert.ok(
-    content.includes("bg-white/[0.08] text-[#F3F4F6] font-medium shadow-sm border border-white/[0.08]"),
-    'Active pill must apply elevated glass styling'
+    content.includes('bg-[#07080A]') && content.includes('border-white/[0.08]'),
+    'Container must apply dark void #07080A with inset shadow styling'
+  )
+
+  // Active vs Inactive visual styling (Default Bento #171920 & Glass fallback)
+  assert.ok(
+    content.includes('bg-[#171920]') && content.includes('text-[#F3F4F6]'),
+    'Default active pill must apply elevated #171920 obsidian styling'
   )
   assert.ok(
-    content.includes("text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border border-transparent"),
+    content.includes('bg-white/[0.08]'),
+    'Glass variant must support bg-white/[0.08]'
+  )
+  assert.ok(
+    content.includes("text-[#8A8F9E] hover:text-[#F3F4F6]"),
     'Inactive pill must apply muted text and transparent border'
   )
 
@@ -276,3 +286,47 @@ test('UI-EMPTY-01: BaseEmptyState supports empty, error, and skeleton variants w
   assert.ok(content.includes('<slot />'), 'Must support custom content slot')
   assert.ok(content.includes('<slot name="actions" />'), 'Must support actions slot for recovery buttons')
 })
+
+// =============================================================================
+// 10. BASE SWITCH (components/ui/BaseSwitch.vue)
+// =============================================================================
+
+test('UI-SWITCH-01: BaseSwitch supports accessible switch role, track styling, and sliding thumb transition', () => {
+  const content = loadComponentSource('components/ui/BaseSwitch.vue')
+
+  // Accessibility & Role
+  assert.ok(content.includes('role="switch"'), 'Button must declare role="switch"')
+  assert.ok(
+    content.includes(":aria-checked=\"modelValue ? 'true' : 'false'\""),
+    'Must accurately bind :aria-checked state'
+  )
+  assert.ok(
+    content.includes('@keydown.prevent.space="toggle"') && content.includes('@keydown.prevent.enter="toggle"'),
+    'Must support keyboard navigation via Space and Enter keys'
+  )
+
+  // Track styling
+  assert.ok(
+    content.includes('bg-indigo-600') && content.includes('border-indigo-400/30'),
+    'Active switch track must use vibrant indigo glow styling'
+  )
+  assert.ok(
+    content.includes('bg-white/[0.1]'),
+    'Inactive switch track must use muted border/surface'
+  )
+
+  // Sliding Thumb & Transitions
+  assert.ok(
+    content.includes('translate-x-4.5') && content.includes('translate-x-3.5'),
+    'Thumb transform must support translate-x-4.5 and translate-x-3.5 responsive offsets'
+  )
+  assert.ok(
+    content.includes('transform transition-transform pointer-events-none inline-block'),
+    'Thumb must apply smooth hardware-accelerated transform transition'
+  )
+
+  // Emits
+  assert.ok(content.includes("emit('update:modelValue', nextValue)"), 'Must emit update:modelValue on toggle')
+  assert.ok(content.includes("emit('change', nextValue)"), 'Must emit change event on toggle')
+})
+

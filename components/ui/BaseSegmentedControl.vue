@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-[#0B0C10] border border-white/[0.06] p-0.5 rounded-lg inline-flex items-center gap-0.5 select-none"
+    class="bg-[#07080A] border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 rounded-lg inline-flex items-center gap-0.5 select-none"
+    :class="[fullWidth ? 'w-full flex' : '', props.class]"
     role="tablist"
-    :class="props.class"
   >
     <button
       v-for="opt in options"
@@ -10,13 +10,18 @@
       type="button"
       role="tab"
       :aria-selected="modelValue === opt.value ? 'true' : 'false'"
-      :disabled="opt.disabled"
-      class="inline-flex items-center gap-1.5 rounded-md text-xs font-sans transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/50 disabled:opacity-40 disabled:cursor-not-allowed"
+      :disabled="disabled || opt.disabled"
+      class="inline-flex items-center justify-center font-sans transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/50 disabled:opacity-40 disabled:cursor-not-allowed"
       :class="[
         sizeClasses,
+        fullWidth ? 'flex-1' : '',
         modelValue === opt.value
-          ? 'bg-white/[0.08] text-[#F3F4F6] font-medium shadow-sm border border-white/[0.08]'
-          : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border border-transparent'
+          ? (variant === 'glass'
+              ? 'bg-white/[0.08] text-[#F3F4F6] font-medium shadow-sm border border-white/[0.08]'
+              : 'bg-[#171920] text-[#F3F4F6] font-medium border border-white/[0.14] shadow-[0_2px_4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]')
+          : (variant === 'glass'
+              ? 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border border-transparent'
+              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent')
       ]"
       @click="onSelect(opt.value)"
     >
@@ -24,14 +29,15 @@
         v-if="opt.icon"
         :name="opt.icon"
         size="xs"
+        class="shrink-0"
         :class="modelValue === opt.value ? 'text-indigo-400' : 'text-[#8A8F9E]'"
       />
 
-      <span>{{ opt.label }}</span>
+      <span class="truncate">{{ opt.label }}</span>
 
       <span
         v-if="typeof opt.count === 'number'"
-        class="font-mono text-[10px] px-1.5 py-0.2 rounded-full"
+        class="font-mono text-[10px] px-1.5 py-0.2 rounded-full shrink-0"
         :class="
           modelValue === opt.value
             ? 'bg-white/10 text-[#F3F4F6]'
@@ -48,7 +54,8 @@
 import { computed, type Component } from 'vue'
 import NexuraIcon from './NexuraIcon.vue'
 
-export type SegmentedControlSize = 'sm' | 'md'
+export type SegmentedControlSize = 'xs' | 'sm' | 'md'
+export type SegmentedControlVariant = 'default' | 'glass'
 
 export interface SegmentedControlOption {
   value: string | number
@@ -62,6 +69,9 @@ export interface BaseSegmentedControlProps {
   modelValue?: string | number
   options?: SegmentedControlOption[]
   size?: SegmentedControlSize
+  variant?: SegmentedControlVariant
+  fullWidth?: boolean
+  disabled?: boolean
   class?: string
 }
 
@@ -69,6 +79,9 @@ const props = withDefaults(defineProps<BaseSegmentedControlProps>(), {
   modelValue: '',
   options: () => [],
   size: 'sm',
+  variant: 'default',
+  fullWidth: false,
+  disabled: false,
   class: ''
 })
 
@@ -78,14 +91,20 @@ const emit = defineEmits<{
 }>()
 
 function onSelect(val: string | number) {
+  if (props.disabled) return
   emit('update:modelValue', val)
   emit('change', val)
 }
 
 const sizeClasses = computed(() => {
-  if (props.size === 'md') {
-    return 'px-3 py-1.5'
+  switch (props.size) {
+    case 'xs':
+      return 'px-2 py-0.5 text-[11px] rounded-md gap-1'
+    case 'md':
+      return 'px-3.5 py-1.5 text-xs rounded-lg gap-2'
+    case 'sm':
+    default:
+      return 'px-2.5 py-1 text-xs rounded-md gap-1.5'
   }
-  return 'px-2.5 py-1'
 })
 </script>

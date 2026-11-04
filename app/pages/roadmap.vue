@@ -108,6 +108,16 @@
         </div>
 
         <div class="flex items-center gap-3 flex-wrap">
+          <!-- View Switcher -->
+          <BaseSegmentedControl
+            v-model="activeViewMode"
+            :options="[
+              { value: 'board', label: 'Board View', icon: 'LayoutGrid' },
+              { value: 'timeline', label: 'Timeline View', icon: 'GitCommit' }
+            ]"
+            size="sm"
+          />
+
           <!-- Deliverables Search Input -->
           <div class="relative w-44 sm:w-56">
             <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
@@ -607,24 +617,6 @@ async function refreshRoadmap() {
 onMounted(async () => {
   watchEffect(() => {
     setActions([
-      {
-        id: 'view-board',
-        label: 'Board View',
-        icon: 'LayoutGrid',
-        variant: activeViewMode.value === 'board' ? 'primary' : 'secondary',
-        handler: () => {
-          activeViewMode.value = 'board'
-        }
-      },
-      {
-        id: 'view-timeline',
-        label: 'Timeline View',
-        icon: 'GitCommit',
-        variant: activeViewMode.value === 'timeline' ? 'primary' : 'secondary',
-        handler: () => {
-          activeViewMode.value = 'timeline'
-        }
-      },
       {
         id: 'refresh-roadmap',
         label: 'Refresh',

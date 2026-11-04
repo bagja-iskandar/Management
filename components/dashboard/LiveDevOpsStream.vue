@@ -17,40 +17,16 @@
 
       <div class="flex items-center gap-2">
         <!-- Segmented Filter Tabs -->
-        <div class="flex items-center gap-1 p-0.5 rounded-lg bg-[#0B0C10] border border-white/[0.06] text-xs">
-          <button
-            type="button"
-            class="px-2.5 py-1 rounded-md transition font-medium cursor-pointer"
-            :class="activeTab === 'all' ? 'bg-white/[0.09] text-[#F3F4F6]' : 'text-[#8A8F9E] hover:text-white'"
-            @click="activeTab = 'all'"
-          >
-            All Stream ({{ allStreamItems.length }})
-          </button>
-          <button
-            type="button"
-            class="px-2.5 py-1 rounded-md transition font-medium cursor-pointer"
-            :class="activeTab === 'commits' ? 'bg-white/[0.09] text-[#F3F4F6]' : 'text-[#8A8F9E] hover:text-white'"
-            @click="activeTab = 'commits'"
-          >
-            Commits ({{ commitItems.length }})
-          </button>
-          <button
-            type="button"
-            class="px-2.5 py-1 rounded-md transition font-medium cursor-pointer"
-            :class="activeTab === 'ci' ? 'bg-white/[0.09] text-[#F3F4F6]' : 'text-[#8A8F9E] hover:text-white'"
-            @click="activeTab = 'ci'"
-          >
-            CI/CD ({{ workflowItems.length }})
-          </button>
-          <button
-            type="button"
-            class="px-2.5 py-1 rounded-md transition font-medium cursor-pointer"
-            :class="activeTab === 'deployments' ? 'bg-white/[0.09] text-[#F3F4F6]' : 'text-[#8A8F9E] hover:text-white'"
-            @click="activeTab = 'deployments'"
-          >
-            Deployments ({{ deploymentItems.length }})
-          </button>
-        </div>
+        <BaseSegmentedControl
+          v-model="activeTab"
+          :options="[
+            { value: 'all', label: 'All Stream', count: allStreamItems.length },
+            { value: 'commits', label: 'Commits', count: commitItems.length },
+            { value: 'ci', label: 'CI/CD', count: workflowItems.length },
+            { value: 'deployments', label: 'Deployments', count: deploymentItems.length }
+          ]"
+          size="xs"
+        />
 
         <!-- Refresh Button -->
         <button
