@@ -38,8 +38,8 @@
       <!-- Centered Full-Rounded Modal Container -->
       <div
         v-else
+        ref="panelRef"
         class="relative w-full max-w-2xl bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden text-[#F3F4F6] my-auto outline-none transition-all"
-        @keydown.esc="handleClose"
       >
         <!-- Header -->
         <div class="px-6 py-5 border-b border-white/[0.06] bg-[#0B0C10]/60 flex items-start justify-between gap-4 shrink-0 rounded-t-2xl">
@@ -343,13 +343,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watch } from 'vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
-import { createGitHubIssue } from '../composables/useGitHub'
-import { useTaskDrawer } from '../composables/useTaskDrawer'
-import { useWorkspaceStore } from '../composables/useWorkspaceStore'
-import { useTasks } from '../composables/useTasks'
-import type { Task, TaskStatus, TaskPriority, Project } from '../types'
+import { ref, computed, reactive, watch, toRef } from 'vue'
+import NexuraIcon from '~/components/ui/NexuraIcon.vue'
+import { createGitHubIssue } from '~/composables/useGitHub'
+import { useTaskDrawer } from '~/composables/useTaskDrawer'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useTasks } from '~/composables/useTasks'
+import { useModalLifecycle } from '~/composables/useModalLifecycle'
+import { useMarkdownChecklist } from '~/composables/useMarkdownChecklist'
+import type { Task, TaskStatus, TaskPriority, Project } from '~/types'
 
 const props = withDefaults(
   defineProps<{
@@ -389,6 +391,18 @@ const effectiveTaskId = computed(() => {
   return props.taskId !== undefined ? props.taskId : activeTaskId.value
 })
 
+const panelRef = ref<HTMLElement | null>(null)
+
+// Upgraded lifecycle management: body lock, esc handling, focus trap
+useModalLifecycle({
+  isOpen: effectiveIsOpen,
+  panelRef,
+  onClose: handleClose,
+  preventScroll: true,
+  trapFocus: true,
+  restoreFocus: true
+})
+
 const internalTask = ref<Task | null>(null)
 const isLoadingTask = ref(false)
 const isBusyAction = ref(false)
@@ -426,21 +440,6 @@ watch(
         internalTask.value = null
       } finally {
         isLoadingTask.value = false
-      }
-    }
-  },
-  { immediate: true }
-)
-
-// Lock background body scroll when open
-watch(
-  effectiveIsOpen,
-  (open) => {
-    if (typeof document !== 'undefined') {
-      if (open) {
-        document.body.style.overflow = 'hidden'
-      } else {
-        document.body.style.overflow = ''
       }
     }
   },
@@ -546,50 +545,20 @@ const statusBadgeClass = computed(() => {
   }
 })
 
-// Checklist parser
-interface ChecklistItem {
-  completed: boolean
-  text: string
-  rawLine: string
-}
-
-const checklistItems = computed<ChecklistItem[]>(() => {
-  if (!form.description) return []
-  const lines = form.description.split('\n')
-  const items: ChecklistItem[] = []
-
-  for (const line of lines) {
-    const trimmed = line.trim()
-    if (trimmed.startsWith('- [ ] ') || trimmed.startsWith('* [ ] ')) {
-      items.push({ completed: false, text: trimmed.slice(6), rawLine: line })
-    } else if (trimmed.startsWith('- [x] ') || trimmed.startsWith('- [X] ') || trimmed.startsWith('* [x] ')) {
-      items.push({ completed: true, text: trimmed.slice(6), rawLine: line })
-    }
-  }
-
-  return items
-})
+// Upgraded checklist management via useMarkdownChecklist
+const descRef = toRef(form, 'description')
+const {
+  checklistItems,
+  toggle: toggleChecklistStep,
+  add: addChecklistStep
+} = useMarkdownChecklist(descRef)
 
 function toggleChecklist(index: number) {
-  const item = checklistItems.value[index]
-  if (!item) return
-  const lines = form.description.split('\n')
-  const updatedLines = lines.map((line) => {
-    if (line === item.rawLine) {
-      if (item.completed) {
-        return line.replace(/(\*|\-)\s*\[(x|X)\]/, '$1 [ ]')
-      } else {
-        return line.replace(/(\*|\-)\s*\[ \]/, '$1 [x]')
-      }
-    }
-    return line
-  })
-  form.description = updatedLines.join('\n')
+  toggleChecklistStep(index)
 }
 
 function appendChecklistItem() {
-  const newline = form.description && !form.description.endsWith('\n') ? '\n' : ''
-  form.description += `${newline}- [ ] New deliverable item`
+  addChecklistStep('New deliverable item')
 }
 
 function addTag() {

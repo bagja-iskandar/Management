@@ -118,7 +118,7 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
+import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import { useSession } from '~/composables/useSession'
 
 const session = useSession()

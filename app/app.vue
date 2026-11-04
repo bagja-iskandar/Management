@@ -50,10 +50,6 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted } from 'vue'
-import TaskDrawer from '../components/TaskDrawer.vue'
-import AddTaskModal from '../components/AddTaskModal.vue'
-import AddIdeaModal from '../components/AddIdeaModal.vue'
-import SessionAuthModal from '../components/SessionAuthModal.vue'
 import { useWorkspaceStore } from '../composables/useWorkspaceStore'
 import { useTaskDrawer } from '../composables/useTaskDrawer'
 import { useTasks } from '~/composables/useTasks'

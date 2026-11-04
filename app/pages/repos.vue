@@ -412,132 +412,24 @@
     />
 
     <!-- Modal: Connect Repo to Project Management -->
-    <Teleport to="body">
-      <div
-        v-if="repoToConnect"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-        role="dialog"
-        aria-modal="true"
-        @click.self="repoToConnect = null"
-      >
-        <div
-          class="w-full max-w-lg bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl p-6 text-[#F3F4F6] space-y-5"
-          @click.stop
-        >
-          <div class="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-            <div class="flex items-center gap-2.5">
-              <div class="w-9 h-9 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-                <NexuraIcon name="FolderPlus" size="sm" />
-              </div>
-              <div>
-                <h3 class="font-sans text-base font-semibold text-[#F3F4F6]">Connect to Project</h3>
-                <p class="font-mono text-xs text-[#8A8F9E]">Map GitHub repository to Nexura Management</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors cursor-pointer"
-              @click="repoToConnect = null"
-            >
-              <NexuraIcon name="X" size="sm" />
-            </button>
-          </div>
-
-          <form class="space-y-4" @submit.prevent="onConfirmConnectProject">
-            <div class="space-y-1.5">
-              <label class="text-[#8A8F9E] font-mono text-[11px] uppercase tracking-wider block">
-                Project Title
-              </label>
-              <input
-                v-model="connectForm.title"
-                type="text"
-                required
-                class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
-              />
-            </div>
-
-            <div class="space-y-1.5">
-              <label class="text-[#8A8F9E] font-mono text-[11px] uppercase tracking-wider block">
-                Project Slug
-              </label>
-              <input
-                v-model="connectForm.slug"
-                type="text"
-                required
-                class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
-              />
-            </div>
-
-            <div class="space-y-1.5">
-              <label class="text-[#8A8F9E] font-mono text-[11px] uppercase tracking-wider block">
-                Description
-              </label>
-              <textarea
-                v-model="connectForm.description"
-                rows="3"
-                class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg p-3 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none resize-none"
-              ></textarea>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3">
-              <div class="space-y-1.5">
-                <label class="text-[#8A8F9E] font-mono text-[11px] uppercase tracking-wider block">
-                  Primary Stack
-                </label>
-                <input
-                  v-model="connectForm.primaryTech"
-                  type="text"
-                  class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
-                />
-              </div>
-
-              <div class="space-y-1.5">
-                <label class="text-[#8A8F9E] font-mono text-[11px] uppercase tracking-wider block">
-                  Priority
-                </label>
-                <select
-                  v-model="connectForm.priority"
-                  class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
-                >
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
-              <button
-                type="button"
-                class="px-4 py-2 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] font-sans text-xs font-medium border border-white/[0.08] transition-colors cursor-pointer"
-                @click="repoToConnect = null"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                class="px-4 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-semibold shadow-sm transition active:scale-95 flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
-                :disabled="isConnectingProject"
-              >
-                <NexuraIcon v-if="isConnectingProject" name="RotateCw" size="xs" class="animate-spin text-[#07080A]" />
-                <span>{{ isConnectingProject ? 'Connecting...' : 'Connect Project' }}</span>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </Teleport>
+    <ConnectRepoModal
+      :is-open="Boolean(repoToConnect)"
+      :repo="repoToConnect"
+      :is-connecting="isConnectingProject"
+      @close="repoToConnect = null"
+      @confirm="onConfirmConnectProject"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, watch, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
-import ConfirmDialog from '../../components/ConfirmDialog.vue'
 import RepoActivityBadge from '../../components/RepoActivityBadge.vue'
 import NexuraIcon from '../../components/ui/NexuraIcon.vue'
 import { useGitHubRepos } from '../../composables/useGitHub'
 import { useProjects } from '../../composables/useProjects'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useHeaderActions } from '~/composables/useHeaderActions'
 import type { GitHubRepoSummary, GitHubCommitItem, GitHubBranch, Project } from '../../types'
 
@@ -547,6 +439,7 @@ const username = computed(() => config.public.githubUsername || 'bagja-iskandar'
 
 const { repos, pending, refresh } = useGitHubRepos()
 const projectsApi = useProjects()
+const workspaceStore = useWorkspaceStore()
 
 const { data: projects, refresh: refreshProjects } = useLazyAsyncData('repos-projects-list', () => projectsApi.getProjects())
 
@@ -664,32 +557,37 @@ function openConnectModal(repo: GitHubRepoSummary) {
 }
 
 // Confirm Connect Project
-async function onConfirmConnectProject() {
+async function onConfirmConnectProject(payload?: { title: string; slug: string; description: string; primaryTech: string; priority: any }) {
   if (!repoToConnect.value) return
   isConnectingProject.value = true
 
   try {
-    const techStack = connectForm.primaryTech
-      ? [connectForm.primaryTech.trim()]
+    const form = payload || connectForm
+    const techStack = form.primaryTech
+      ? [form.primaryTech.trim()]
       : (repoToConnect.value.language ? [repoToConnect.value.language.toLowerCase()] : ['typescript'])
 
     await projectsApi.createProject({
-      title: connectForm.title.trim(),
-      slug: connectForm.slug.trim(),
-      description: connectForm.description.trim(),
+      title: form.title.trim(),
+      slug: form.slug.trim(),
+      description: (form.description || '').trim(),
       status: 'active',
-      priority: connectForm.priority,
+      priority: form.priority,
       githubRepo: repoToConnect.value.fullName,
       techStack: techStack,
       startDate: new Date().toISOString().slice(0, 10),
       dueDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
     })
 
-    await refreshProjects()
-    feedbackType.value = 'success'
-    feedbackMessage.value = `Repository '${repoToConnect.value.name}' successfully connected to Project Management!`
+    const repoName = repoToConnect.value.name
     repoToConnect.value = null
+    await refreshProjects()
+    await workspaceStore.refreshWorkspace()
+
+    feedbackType.value = 'success'
+    feedbackMessage.value = `Repository '${repoName}' successfully connected to Project Management!`
   } catch (err: any) {
+    console.error('Failed to connect project:', err)
     feedbackType.value = 'error'
     feedbackMessage.value = `Failed to connect project: ${err.message || 'Unknown error'}`
   } finally {

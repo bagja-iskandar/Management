@@ -6,9 +6,9 @@
     "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
   },
   "app/app.vue": {
-    "mtime": 1793609910.271484,
-    "seen": 1793609969.3374007,
-    "ast_hash": "84a130da33b78c211c04112b9aa52dbe",
+    "mtime": 1793772151.7698357,
+    "seen": 1793772392.964211,
+    "ast_hash": "fbf2b46d73c1291a283694dcb0e60884",
     "semantic_hash": ""
   },
   "app/pages/index.vue": {
@@ -30,21 +30,15 @@
     "semantic_hash": ""
   },
   "components/AddProjectModal.vue": {
-    "mtime": 1793242997.202197,
-    "seen": 1793243110.905403,
-    "ast_hash": "3605ea88a8ed351b733a21ba73a51834",
-    "semantic_hash": ""
-  },
-  "components/AddTaskModal.vue": {
-    "mtime": 1793609869.004587,
-    "seen": 1793609969.344897,
-    "ast_hash": "3142fb305d6eec98beaeef1f8e2f6dba",
+    "mtime": 1793772293.556991,
+    "seen": 1793772392.978067,
+    "ast_hash": "f953cbd789a4618f7ddcdbda6c028f7d",
     "semantic_hash": ""
   },
   "components/ConfirmDialog.vue": {
-    "mtime": 1792747972.995115,
-    "seen": 1792748191.7842395,
-    "ast_hash": "e8324744cc6b7d1ac51db1c414c87b68",
+    "mtime": 1793772284.9729197,
+    "seen": 1793772392.9793446,
+    "ast_hash": "f8a3fc440f63de9431d8315614780221",
     "semantic_hash": ""
   },
   "components/dashboard.vue": {
@@ -336,9 +330,9 @@
     "semantic_hash": ""
   },
   "app/pages/repos.vue": {
-    "mtime": 1793329971.7451582,
-    "seen": 1793330024.0195735,
-    "ast_hash": "325f1e88a9377c6d833a5c8596aaeeba",
+    "mtime": 1793772625.088119,
+    "seen": 1793772690.9511626,
+    "ast_hash": "8559d44b1a0d3964b6889f82722e9917",
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
@@ -348,9 +342,9 @@
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1793323194.9700038,
-    "seen": 1793323333.9825954,
-    "ast_hash": "4a520fc6177f41f8534ae62116e56952",
+    "mtime": 1793772635.1060443,
+    "seen": 1793772690.953973,
+    "ast_hash": "9e0585ca1d7d772281bcde65b6b3cbb5",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
@@ -467,12 +461,6 @@
     "ast_hash": "3b798be67c9afd0e056cb2bf77c61f30",
     "semantic_hash": ""
   },
-  "components/TaskDrawer.vue": {
-    "mtime": 1792927150.501984,
-    "seen": 1792927277.2987254,
-    "ast_hash": "81c8ca18a09f60dbadd404f92f449e2a",
-    "semantic_hash": ""
-  },
   "app/pages/projects/index.vue": {
     "mtime": 1793323150.509366,
     "seen": 1793323333.982584,
@@ -515,34 +503,16 @@
     "ast_hash": "6c6d89135db2abe699f6dc48bc1d1511",
     "semantic_hash": ""
   },
-  "components/WorkflowLogModal.vue": {
-    "mtime": 1791295656.3187437,
-    "seen": 1791296656.5833058,
-    "ast_hash": "1a07e064768acdf33a37737c709d9518",
-    "semantic_hash": ""
-  },
   "server/api/github/security.get.ts": {
     "mtime": 1793016828.3878758,
     "seen": 1793017005.6493402,
     "ast_hash": "85d8f1a5a701f3266c684a074c6f2d0c",
     "semantic_hash": ""
   },
-  "components/SecurityAlertModal.vue": {
-    "mtime": 1791295645.8050406,
-    "seen": 1791296656.5814717,
-    "ast_hash": "2ee4e22d53eb2f87d1be0238c4a6d1c8",
-    "semantic_hash": ""
-  },
   "server/api/github/deployments.get.ts": {
     "mtime": 1793016763.492215,
     "seen": 1793017005.6493251,
     "ast_hash": "559ecc0aa1e95167e5f9b3b270e3fa3e",
-    "semantic_hash": ""
-  },
-  "components/DeploymentModal.vue": {
-    "mtime": 1789906473.3823965,
-    "seen": 1789906795.840741,
-    "ast_hash": "b389c155d01d4c78267f0fbfb4123bee",
     "semantic_hash": ""
   },
   "server/api/github/create-issue.post.ts": {
@@ -558,9 +528,9 @@
     "semantic_hash": ""
   },
   "components/PullRequestsIssuesModal.vue": {
-    "mtime": 1792830627.8426223,
-    "seen": 1792830890.489299,
-    "ast_hash": "6878948278e0adcee9b80b1773c77791",
+    "mtime": 1793772312.3972273,
+    "seen": 1793772392.9836938,
+    "ast_hash": "d30fd24ba2f0425bcee5077655158c8d",
     "semantic_hash": ""
   },
   "components/RepoActivityBadge.vue": {
@@ -573,12 +543,6 @@
     "mtime": 1793016791.4265356,
     "seen": 1793017005.6493316,
     "ast_hash": "dad3e07336a4e1c463217a2006b43bfc",
-    "semantic_hash": ""
-  },
-  "components/PackageModal.vue": {
-    "mtime": 1789906494.5818722,
-    "seen": 1789906795.840757,
-    "ast_hash": "086e85655c4d9593d9bb6ba15686734b",
     "semantic_hash": ""
   },
   "server/api/github/global-commits.get.ts": {
@@ -657,12 +621,6 @@
     "mtime": 1792832347.035257,
     "seen": 1792832438.9967935,
     "ast_hash": "d5561d483c168b01b74baab2b5925ba8",
-    "semantic_hash": ""
-  },
-  "components/sprint/AddTargetModal.vue": {
-    "mtime": 1792828890.0109735,
-    "seen": 1792828976.3053365,
-    "ast_hash": "ab7d925afcde3654243a5a435f46aad8",
     "semantic_hash": ""
   },
   "components/sprint/DeliverablesMatrix.vue": {
@@ -1175,12 +1133,6 @@
     "ast_hash": "9f311dc75cbc572098f280bc7318c5d1",
     "semantic_hash": ""
   },
-  "components/SessionAuthModal.vue": {
-    "mtime": 1793025789.186515,
-    "seen": 1793025851.9538286,
-    "ast_hash": "9a6aafc3ff53aa6e697e28b8f1e18232",
-    "semantic_hash": ""
-  },
   "composables/useSession.ts": {
     "mtime": 1793023015.569379,
     "seen": 1793023137.13548,
@@ -1224,9 +1176,9 @@
     "semantic_hash": ""
   },
   "components/EditProjectModal.vue": {
-    "mtime": 1793243056.7683365,
-    "seen": 1793243110.9084296,
-    "ast_hash": "90ec254a2084d5650c442e2b3cc8ea5c",
+    "mtime": 1793772300.8301723,
+    "seen": 1793772392.9811153,
+    "ast_hash": "3e3b01574fc9b71c447ab3ca99b70c18",
     "semantic_hash": ""
   },
   "tests/unit/projects-workspace.spec.mjs": {
@@ -1266,9 +1218,9 @@
     "semantic_hash": ""
   },
   "components/sprint/SprintRolloverModal.vue": {
-    "mtime": 1793274529.6016748,
-    "seen": 1793274575.2355275,
-    "ast_hash": "57a1918a9e4eaba1c4cb49535fae828d",
+    "mtime": 1793772316.6205702,
+    "seen": 1793772393.0310977,
+    "ast_hash": "58020305e417dcd7e5e740887ad1f8aa",
     "semantic_hash": ""
   },
   "server/api/github/sync.post.ts": {
@@ -1308,9 +1260,9 @@
     "semantic_hash": ""
   },
   "tests/unit/header-actions-lifecycle.spec.mjs": {
-    "mtime": 1793320003.176599,
-    "seen": 1793320125.7191598,
-    "ast_hash": "ab7180ca376850c86644b40f6a39c1f1",
+    "mtime": 1793767127.5343695,
+    "seen": 1793767188.6292818,
+    "ast_hash": "4f2d2dee899c35b753e62b44a8ac5923",
     "semantic_hash": ""
   },
   "tests/unit/scratchpad-smart-promotion.spec.mjs": {
@@ -1323,12 +1275,6 @@
     "mtime": 1793625936.0361047,
     "seen": 1793625979.612427,
     "ast_hash": "6a4aea8eb703c7d6acb3c84fbfe14c98",
-    "semantic_hash": ""
-  },
-  "components/AddIdeaModal.vue": {
-    "mtime": 1793609893.7904959,
-    "seen": 1793609969.343485,
-    "ast_hash": "b2f4a2aad117c72066e82647738f5996",
     "semantic_hash": ""
   },
   "tests/unit/deliverable-and-idea-modals.spec.mjs": {
@@ -1485,6 +1431,96 @@
     "mtime": 1793765139.565164,
     "seen": 1793765270.6612713,
     "ast_hash": "616c58b64fd12dc9bb4b14b868041548",
+    "semantic_hash": ""
+  },
+  "components/modals/ConfirmDialog.vue": {
+    "mtime": 1793771731.1620007,
+    "seen": 1793772393.0022073,
+    "ast_hash": "e28deb1e1cdcfe21ea967afb5caba156",
+    "semantic_hash": ""
+  },
+  "components/modals/SessionAuthModal.vue": {
+    "mtime": 1793771744.512447,
+    "seen": 1793772393.0022175,
+    "ast_hash": "78fa9b62c4d32a302def493f7da56b8d",
+    "semantic_hash": ""
+  },
+  "components/modals/devops/DeploymentModal.vue": {
+    "mtime": 1793771995.938178,
+    "seen": 1793772393.0022252,
+    "ast_hash": "a206dcec30c8a8c3e18e4c72a7e5f655",
+    "semantic_hash": ""
+  },
+  "components/modals/devops/PackageModal.vue": {
+    "mtime": 1793772027.6464958,
+    "seen": 1793772393.0022316,
+    "ast_hash": "20c71b90751c95c2c0f052c84f2ddabb",
+    "semantic_hash": ""
+  },
+  "components/modals/devops/PullRequestsIssuesModal.vue": {
+    "mtime": 1793772080.5198004,
+    "seen": 1793772393.0022388,
+    "ast_hash": "f86bbc4ed21553480c6853319d6b401d",
+    "semantic_hash": ""
+  },
+  "components/modals/devops/SecurityAlertModal.vue": {
+    "mtime": 1793772111.8162732,
+    "seen": 1793772393.0022454,
+    "ast_hash": "f9ad9e714e742afcee9c5a484f8e8ab4",
+    "semantic_hash": ""
+  },
+  "components/modals/devops/WorkflowLogModal.vue": {
+    "mtime": 1793772136.9698324,
+    "seen": 1793772393.0022511,
+    "ast_hash": "0e89caf6d64aab45443284ad94879330",
+    "semantic_hash": ""
+  },
+  "components/modals/project/AddProjectModal.vue": {
+    "mtime": 1793771871.6956944,
+    "seen": 1793772393.0022566,
+    "ast_hash": "32ce6af06e1b817b1adf37416b770490",
+    "semantic_hash": ""
+  },
+  "components/modals/project/ConnectRepoModal.vue": {
+    "mtime": 1793771580.1616569,
+    "seen": 1793772393.0022628,
+    "ast_hash": "73ba26277778c2eb97f9839384fd542b",
+    "semantic_hash": ""
+  },
+  "components/modals/project/EditProjectModal.vue": {
+    "mtime": 1793771899.35113,
+    "seen": 1793772393.0022693,
+    "ast_hash": "0eb50b99ddaeb521a22f9a8661800321",
+    "semantic_hash": ""
+  },
+  "components/modals/sprint/AddTargetModal.vue": {
+    "mtime": 1793771923.9369004,
+    "seen": 1793772393.0022755,
+    "ast_hash": "413968c004e6eb51e34461193de2d250",
+    "semantic_hash": ""
+  },
+  "components/modals/sprint/SprintRolloverModal.vue": {
+    "mtime": 1793771940.4691186,
+    "seen": 1793772393.0022812,
+    "ast_hash": "757e2f7f5a7c1101d29cafd6ebc4dc2c",
+    "semantic_hash": ""
+  },
+  "components/modals/task/AddIdeaModal.vue": {
+    "mtime": 1793771845.0953383,
+    "seen": 1793772393.0022864,
+    "ast_hash": "97fd6aa38ea624b493edd17b8bf495a1",
+    "semantic_hash": ""
+  },
+  "components/modals/task/AddTaskModal.vue": {
+    "mtime": 1793771776.7918081,
+    "seen": 1793772393.0022922,
+    "ast_hash": "064f899915721e02254b88a7374af3f5",
+    "semantic_hash": ""
+  },
+  "components/modals/task/TaskDrawer.vue": {
+    "mtime": 1793771825.0106623,
+    "seen": 1793772393.0022986,
+    "ast_hash": "d5a38246ff75601f7b8b176eb307503d",
     "semantic_hash": ""
   }
 }

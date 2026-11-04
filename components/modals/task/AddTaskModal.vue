@@ -204,7 +204,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
+import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import type { TaskPriority, TaskStatus } from '~/types'

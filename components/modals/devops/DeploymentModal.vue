@@ -10,13 +10,14 @@
       @click.self="close"
     >
       <div
-        class="w-full max-w-2xl bg-[#09090B] border border-white/[0.08] rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col overflow-hidden my-8 max-h-[88vh]"
+        ref="panelRef"
+        class="w-full max-w-2xl bg-[#07080A] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-8 max-h-[88vh] text-[#F3F4F6] outline-none"
         @click.stop
       >
         <!-- ======================================================== -->
         <!-- TERMINAL WINDOW HEADER                                   -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3.5 bg-[#111114] border-b border-white/[0.06] flex items-center justify-between gap-4">
+        <div class="px-5 py-3.5 bg-[#111318] border-b border-white/[0.06] flex items-center justify-between gap-4">
           <!-- Left: Title & Repo Subtitle -->
           <div class="flex items-center gap-2.5 min-w-0">
             <span
@@ -25,10 +26,10 @@
               aria-hidden="true"
             ></span>
             <div class="min-w-0">
-              <div class="font-mono text-xs font-bold text-[#F5F2EB] truncate">
-                Deployment & Environments Telemetry
+              <div class="font-sans text-xs font-bold text-[#F3F4F6] truncate">
+                Deployment &amp; Environments Telemetry
               </div>
-              <div class="font-mono text-[10px] text-[#756F68] truncate">
+              <div class="font-mono text-[10px] text-[#8A8F9E] truncate">
                 telemetry://environments/{{ repo || 'local-deployment' }}
               </div>
             </div>
@@ -41,23 +42,20 @@
               :href="activeLiveUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs text-[#C98A4B] hover:text-[#F5F2EB] transition-colors inline-flex items-center gap-1 group"
+              class="font-mono text-xs text-indigo-400 hover:text-[#F3F4F6] transition-colors inline-flex items-center gap-1 group"
               title="Open Live Site"
             >
               <span>Live Site</span>
-              <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
             <button
               type="button"
-              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#756F68] hover:text-[#F5F2EB] transition-colors focus:outline-none focus:ring-1 focus:ring-[#C98A4B] cursor-pointer"
+              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
               aria-label="Close modal"
               @click="close"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <NexuraIcon name="X" size="sm" />
             </button>
           </div>
         </div>
@@ -65,38 +63,38 @@
         <!-- ======================================================== -->
         <!-- 3 BENTO TELEMETRY TILES                                  -->
         <!-- ======================================================== -->
-        <div class="p-5 pb-0 bg-[#09090B]">
+        <div class="p-5 pb-0 bg-[#07080A]">
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             <!-- Bento 1: Environment -->
-            <div class="p-3 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#756F68]">Environment</span>
+            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Environment</span>
               <div class="flex items-baseline gap-2">
-                <span class="font-mono text-base sm:text-lg font-bold text-[#F5F2EB] truncate">
+                <span class="font-mono text-base sm:text-lg font-bold text-[#F3F4F6] truncate">
                   {{ environmentName }}
                 </span>
               </div>
-              <div class="font-mono text-[10px] text-[#756F68] truncate">
+              <div class="font-mono text-[10px] text-[#8A8F9E] truncate">
                 {{ environmentSubtitle }}
               </div>
             </div>
 
             <!-- Bento 2: State Status -->
-            <div class="p-3 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#756F68]">State Status</span>
+            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">State Status</span>
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full shrink-0" :class="stateDotClass"></span>
                 <span class="font-mono text-base sm:text-lg font-bold" :class="stateTextClass">
                   {{ stateLabel }}
                 </span>
               </div>
-              <div class="font-mono text-[10px] text-[#756F68] truncate">
+              <div class="font-mono text-[10px] text-[#8A8F9E] truncate">
                 {{ stateSubtitle }}
               </div>
             </div>
 
             <!-- Bento 3: Commit Checks -->
-            <div class="p-3 rounded-xl bg-[#111114] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#756F68]">Commit Checks</span>
+            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Commit Checks</span>
               <div class="flex items-baseline gap-1.5">
                 <span
                   class="font-mono text-base sm:text-lg font-bold"
@@ -105,7 +103,7 @@
                   {{ commitChecksLabel }}
                 </span>
               </div>
-              <div class="font-mono text-[10px] text-[#756F68] truncate">
+              <div class="font-mono text-[10px] text-[#8A8F9E] truncate">
                 {{ commitChecksSubtitle }}
               </div>
             </div>
@@ -115,13 +113,13 @@
         <!-- ======================================================== -->
         <!-- MODAL BODY (SCROLLABLE CONTENT)                          -->
         <!-- ======================================================== -->
-        <div class="p-5 space-y-5 overflow-y-auto max-h-[calc(88vh-190px)]">
+        <div class="p-5 space-y-5 overflow-y-auto max-h-[calc(88vh-190px)] custom-scrollbar">
           <!-- SECTION 1: DEPLOYMENT LIST (If deployments exist) -->
           <div v-if="summary?.deployments && summary.deployments.length > 0" class="space-y-3">
             <div class="flex items-center justify-between">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[#756F68] flex items-center gap-2">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E] flex items-center gap-2">
                 <span>Deployments Recorded</span>
-                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/5 border border-white/[0.06] text-[#756F68]">
+                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/5 border border-white/[0.06] text-[#8A8F9E]">
                   {{ summary.deployments.length }}
                 </span>
               </h3>
@@ -131,7 +129,7 @@
               <div
                 v-for="deployment in summary.deployments"
                 :key="deployment.id"
-                class="p-4 rounded-xl bg-[#111114] border border-white/[0.06] hover:border-white/[0.12] transition-colors space-y-3"
+                class="p-4 rounded-xl bg-[#111318] border border-white/[0.06] hover:border-white/[0.12] transition-colors space-y-3"
               >
                 <!-- Row 1: Environment, State Badge, Branch & Sha, Time -->
                 <div class="flex flex-wrap items-center justify-between gap-2">
@@ -140,7 +138,7 @@
                       class="w-2 h-2 rounded-full shrink-0"
                       :class="getDeploymentDotClass(deployment.state)"
                     ></span>
-                    <span class="font-mono text-sm font-bold text-[#F5F2EB]">
+                    <span class="font-mono text-sm font-bold text-[#F3F4F6]">
                       {{ deployment.environment || 'Production' }}
                     </span>
                     <span
@@ -151,20 +149,15 @@
                     </span>
                   </div>
 
-                  <span class="font-mono text-[11px] text-[#756F68]">
+                  <span class="font-mono text-[11px] text-[#8A8F9E]">
                     {{ formatRelativeTime(deployment.updatedAt || deployment.createdAt) }}
                   </span>
                 </div>
 
                 <!-- Row 2: Commit Sha & Ref details -->
-                <div class="flex items-center gap-3 font-mono text-xs text-[#756F68] flex-wrap">
-                  <span v-if="deployment.ref" class="inline-flex items-center gap-1">
-                    <svg class="w-3.5 h-3.5 text-[#C98A4B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="6" y1="3" x2="6" y2="15"></line>
-                      <circle cx="18" cy="6" r="3"></circle>
-                      <circle cx="6" cy="18" r="3"></circle>
-                      <path d="M18 9a9 9 0 0 1-9 9"></path>
-                    </svg>
+                <div class="flex items-center gap-3 font-mono text-xs text-[#8A8F9E] flex-wrap">
+                  <span v-if="deployment.ref" class="inline-flex items-center gap-1 text-indigo-400">
+                    <NexuraIcon name="GitBranch" size="xs" />
                     <span>{{ deployment.ref }}</span>
                   </span>
 
@@ -175,17 +168,17 @@
                       :href="`https://github.com/${repo}/commit/${deployment.commitSha}`"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-[#C98A4B] hover:underline bg-[#C98A4B]/10 px-1.5 py-0.5 rounded border border-[#C98A4B]/20 text-[11px]"
+                      class="text-indigo-400 hover:underline bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20 text-[11px]"
                       :title="`View commit ${deployment.shortSha}`"
                     >
                       {{ deployment.shortSha }}
                     </a>
-                    <span v-else class="text-[#C98A4B] bg-[#C98A4B]/10 px-1.5 py-0.5 rounded border border-[#C98A4B]/20 text-[11px]">
+                    <span v-else class="text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded border border-indigo-500/20 text-[11px]">
                       {{ deployment.shortSha }}
                     </span>
                   </span>
 
-                  <span v-if="deployment.description" class="text-[#756F68] text-[11px] truncate max-w-sm">
+                  <span v-if="deployment.description" class="text-[#8A8F9E] text-[11px] truncate max-w-sm">
                     — {{ deployment.description }}
                   </span>
                 </div>
@@ -200,7 +193,7 @@
                     class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-mono text-[11px] font-semibold border border-emerald-500/30 transition-colors group"
                   >
                     <span>Open Live Site</span>
-                    <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
 
                   <a
@@ -208,10 +201,10 @@
                     :href="deployment.logUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#756F68] hover:text-[#F5F2EB] font-mono text-[11px] border border-white/[0.06] transition-colors group"
+                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] font-mono text-[11px] border border-white/[0.06] transition-colors group"
                   >
                     <span>View Log</span>
-                    <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
@@ -223,12 +216,12 @@
             <!-- Connected Live Environment Card if deployUrl exists -->
             <div
               v-if="deployUrl"
-              class="p-4 rounded-xl bg-[#111114] border border-emerald-500/20 space-y-3"
+              class="p-4 rounded-xl bg-[#111318] border border-emerald-500/20 space-y-3"
             >
               <div class="flex items-center justify-between gap-2 flex-wrap">
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span class="font-mono text-sm font-bold text-[#F5F2EB]">
+                  <span class="font-mono text-sm font-bold text-[#F3F4F6]">
                     Connected Live Environment: Production
                   </span>
                 </div>
@@ -240,24 +233,20 @@
                   class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-mono text-xs font-semibold border border-emerald-500/30 transition-colors group"
                 >
                   <span>Open Live Site</span>
-                  <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               </div>
 
-              <div class="font-mono text-xs text-[#756F68] bg-[#09090B] px-3 py-2 rounded-lg border border-white/[0.04] truncate">
+              <div class="font-mono text-xs text-[#8A8F9E] bg-[#07080A] px-3 py-2 rounded-lg border border-white/[0.04] truncate">
                 {{ deployUrl }}
               </div>
             </div>
 
             <!-- Helpful Callout -->
-            <div class="p-4 rounded-xl bg-[#111114] border border-white/[0.06] flex items-start gap-3 text-xs text-[#756F68]">
-              <svg class="w-5 h-5 text-[#C98A4B] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
+            <div class="p-4 rounded-xl bg-[#111318] border border-white/[0.06] flex items-start gap-3 text-xs text-[#8A8F9E]">
+              <NexuraIcon name="Info" size="sm" class="text-indigo-400 shrink-0 mt-0.5" />
               <div class="space-y-1">
-                <div class="font-mono text-[#F5F2EB] font-medium">Deployment Telemetry Ready</div>
+                <div class="font-mono text-[#F3F4F6] font-medium">Deployment Telemetry Ready</div>
                 <div>GitHub Deployments are automatically recorded when Vercel, Cloudflare, or GitHub Actions deploy this repository.</div>
               </div>
             </div>
@@ -269,13 +258,13 @@
             class="space-y-2.5 pt-2 border-t border-white/[0.06]"
           >
             <div class="flex items-center justify-between">
-              <h3 class="font-mono text-xs uppercase tracking-wider text-[#756F68] flex items-center gap-2">
+              <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E] flex items-center gap-2">
                 <span>Commit Status Checks</span>
-                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/5 border border-white/[0.06] text-[#756F68]">
+                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/5 border border-white/[0.06] text-[#8A8F9E]">
                   {{ summary.commitStatus.checks.length }}
                 </span>
               </h3>
-              <span class="font-mono text-[10px] text-[#756F68]">
+              <span class="font-mono text-[10px] text-[#8A8F9E]">
                 State: {{ summary.commitStatus.state }}
               </span>
             </div>
@@ -284,7 +273,7 @@
               <div
                 v-for="check in summary.commitStatus.checks"
                 :key="check.id"
-                class="p-3 rounded-lg bg-[#111114] border border-white/[0.04] flex items-center justify-between gap-3"
+                class="p-3 rounded-lg bg-[#111318] border border-white/[0.04] flex items-center justify-between gap-3"
               >
                 <div class="flex items-center gap-2.5 min-w-0">
                   <span
@@ -292,10 +281,10 @@
                     :class="getCheckDotClass(check.state)"
                   ></span>
                   <div class="min-w-0">
-                    <div class="font-mono text-xs text-[#F5F2EB] font-medium truncate">
+                    <div class="font-mono text-xs text-[#F3F4F6] font-medium truncate">
                       {{ check.context }}
                     </div>
-                    <div v-if="check.description" class="text-[11px] text-[#756F68] truncate font-sans">
+                    <div v-if="check.description" class="text-[11px] text-[#8A8F9E] truncate font-sans">
                       {{ check.description }}
                     </div>
                   </div>
@@ -314,10 +303,10 @@
                     :href="check.targetUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center text-[#C98A4B] hover:text-[#F5F2EB] px-1 py-0.5 group"
+                    class="inline-flex items-center text-indigo-400 hover:text-[#F3F4F6] px-1 py-0.5 group"
                     title="Inspect check target"
                   >
-                    <IconArrowUpRight class="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
@@ -328,7 +317,7 @@
         <!-- ======================================================== -->
         <!-- WINDOW FOOTER / STATUS BAR                               -->
         <!-- ======================================================== -->
-        <div class="px-5 py-2.5 bg-[#111114] border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#756F68]">
+        <div class="px-5 py-2.5 bg-[#111318] border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#8A8F9E]">
           <span>telemetry: active</span>
           <span class="hidden sm:inline">Press ESC to close</span>
         </div>
@@ -338,8 +327,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
-import type { GitHubDeploymentSummary, GitHubDeploymentState } from '../types'
+import { ref, computed, toRef } from 'vue'
+import NexuraIcon from '~/components/ui/NexuraIcon.vue'
+import { useModalLifecycle } from '~/composables/useModalLifecycle'
+import type { GitHubDeploymentSummary, GitHubDeploymentState } from '~/types'
 
 const props = withDefaults(
   defineProps<{
@@ -358,27 +349,20 @@ const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
+const panelRef = ref<HTMLElement | null>(null)
+
+useModalLifecycle({
+  isOpen: toRef(props, 'isOpen'),
+  panelRef,
+  onClose: close,
+  preventScroll: true,
+  trapFocus: true,
+  restoreFocus: true
+})
+
 function close() {
   emit('close')
 }
-
-function onKeyDown(e: KeyboardEvent) {
-  if (e.key === 'Escape' && props.isOpen) {
-    close()
-  }
-}
-
-onMounted(() => {
-  if (typeof window !== 'undefined') {
-    window.addEventListener('keydown', onKeyDown)
-  }
-})
-
-onUnmounted(() => {
-  if (typeof window !== 'undefined') {
-    window.removeEventListener('keydown', onKeyDown)
-  }
-})
 
 // Active Live URL (from latest deployment environmentUrl, or props.deployUrl)
 const activeLiveUrl = computed(() => {
@@ -391,12 +375,12 @@ const statusDotClass = computed(() => {
   if (latest) {
     if (latest.state === 'success') return 'bg-emerald-400'
     if (latest.state === 'in_progress' || latest.state === 'queued' || latest.state === 'pending') {
-      return 'bg-[#C98A4B] animate-pulse'
+      return 'bg-amber-400 animate-pulse'
     }
-    if (latest.state === 'failure' || latest.state === 'error') return 'bg-red-400'
+    if (latest.state === 'failure' || latest.state === 'error') return 'bg-rose-400'
   }
   if (props.deployUrl) return 'bg-emerald-400 animate-pulse'
-  return 'bg-[#756F68]'
+  return 'bg-[#8A8F9E]'
 })
 
 // Bento 1: Environment
@@ -435,12 +419,12 @@ const stateDotClass = computed(() => {
   if (latest) {
     if (latest.state === 'success') return 'bg-emerald-400'
     if (latest.state === 'in_progress' || latest.state === 'queued' || latest.state === 'pending') {
-      return 'bg-[#C98A4B] animate-pulse'
+      return 'bg-amber-400 animate-pulse'
     }
-    if (latest.state === 'failure' || latest.state === 'error') return 'bg-red-400'
+    if (latest.state === 'failure' || latest.state === 'error') return 'bg-rose-400'
   }
   if (props.deployUrl) return 'bg-emerald-400'
-  return 'bg-[#756F68]'
+  return 'bg-[#8A8F9E]'
 })
 
 const stateTextClass = computed(() => {
@@ -448,12 +432,12 @@ const stateTextClass = computed(() => {
   if (latest) {
     if (latest.state === 'success') return 'text-emerald-400'
     if (latest.state === 'in_progress' || latest.state === 'queued' || latest.state === 'pending') {
-      return 'text-[#C98A4B]'
+      return 'text-amber-400'
     }
-    if (latest.state === 'failure' || latest.state === 'error') return 'text-red-400'
+    if (latest.state === 'failure' || latest.state === 'error') return 'text-rose-400'
   }
   if (props.deployUrl) return 'text-emerald-400'
-  return 'text-[#756F68]'
+  return 'text-[#8A8F9E]'
 })
 
 const stateSubtitle = computed(() => {
@@ -476,9 +460,9 @@ const commitChecksLabel = computed(() => {
 const commitStatusTextClass = computed(() => {
   const state = props.summary?.commitStatus?.state
   if (state === 'success') return 'text-emerald-400'
-  if (state === 'pending') return 'text-[#C98A4B]'
-  if (state === 'failure') return 'text-red-400'
-  return 'text-[#756F68]'
+  if (state === 'pending') return 'text-amber-400'
+  if (state === 'failure') return 'text-rose-400'
+  return 'text-[#8A8F9E]'
 })
 
 const commitChecksSubtitle = computed(() => {
@@ -498,13 +482,13 @@ function getDeploymentDotClass(state: GitHubDeploymentState) {
     case 'in_progress':
     case 'queued':
     case 'pending':
-      return 'bg-[#C98A4B] animate-pulse'
+      return 'bg-amber-400 animate-pulse'
     case 'failure':
     case 'error':
-      return 'bg-red-400'
+      return 'bg-rose-400'
     case 'inactive':
     default:
-      return 'bg-[#756F68]'
+      return 'bg-[#8A8F9E]'
   }
 }
 
@@ -515,13 +499,13 @@ function getDeploymentBadgeClass(state: GitHubDeploymentState) {
     case 'in_progress':
     case 'queued':
     case 'pending':
-      return 'border-[#C98A4B]/30 bg-[#C98A4B]/10 text-[#C98A4B]'
+      return 'border-amber-500/30 bg-amber-500/10 text-amber-400'
     case 'failure':
     case 'error':
-      return 'border-red-500/30 bg-red-500/10 text-red-400'
+      return 'border-rose-500/30 bg-rose-500/10 text-rose-400'
     case 'inactive':
     default:
-      return 'border-white/[0.08] bg-white/5 text-[#756F68]'
+      return 'border-white/[0.08] bg-white/5 text-[#8A8F9E]'
   }
 }
 
@@ -531,12 +515,12 @@ function getCheckDotClass(state: string) {
     case 'success':
       return 'bg-emerald-400'
     case 'pending':
-      return 'bg-[#C98A4B] animate-pulse'
+      return 'bg-amber-400 animate-pulse'
     case 'failure':
     case 'error':
-      return 'bg-red-400'
+      return 'bg-rose-400'
     default:
-      return 'bg-[#756F68]'
+      return 'bg-[#8A8F9E]'
   }
 }
 
@@ -545,12 +529,12 @@ function getCheckBadgeClass(state: string) {
     case 'success':
       return 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
     case 'pending':
-      return 'border-[#C98A4B]/30 bg-[#C98A4B]/10 text-[#C98A4B]'
+      return 'border-amber-500/30 bg-amber-500/10 text-amber-400'
     case 'failure':
     case 'error':
-      return 'border-red-500/30 bg-red-500/10 text-red-400'
+      return 'border-rose-500/30 bg-rose-500/10 text-rose-400'
     default:
-      return 'border-white/[0.08] bg-white/5 text-[#756F68]'
+      return 'border-white/[0.08] bg-white/5 text-[#8A8F9E]'
   }
 }
 

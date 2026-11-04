@@ -5,10 +5,12 @@
     @click.self="$emit('close')"
   >
     <div
-      class="w-full max-w-2xl bg-[#111318] border border-white/[0.1] rounded-2xl p-6 shadow-2xl space-y-5 outline-none"
+      ref="panelRef"
+      class="w-full max-w-2xl bg-[#111318] border border-white/[0.1] rounded-2xl p-6 shadow-2xl space-y-5 outline-none custom-scrollbar"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-target-title"
+      tabindex="-1"
     >
       <!-- Modal Header -->
       <div class="flex items-start justify-between pb-3 border-b border-white/[0.06]">
@@ -227,8 +229,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import type { Task, Project, TaskPriority, TaskStatus } from '~/types'
 
 const props = defineProps<{
@@ -254,6 +256,7 @@ const emit = defineEmits<{
 
 const activeTab = ref<'backlog' | 'create'>(props.initialTab || 'backlog')
 const searchQuery = ref('')
+const panelRef = ref<HTMLElement | null>(null)
 
 const name = ref('')
 const projectSlug = ref(props.projects?.[0]?.slug || 'management')
@@ -298,4 +301,22 @@ function handleSubmit() {
     techTags
   })
 }
+
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape') {
+    emit('close')
+  }
+}
+
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('keydown', handleKeydown)
+  }
+})
+
+onUnmounted(() => {
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('keydown', handleKeydown)
+  }
+})
 </script>

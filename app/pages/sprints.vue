@@ -268,7 +268,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
-import SprintRolloverModal from '~~/components/sprint/SprintRolloverModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useSprints } from '~/composables/useSprints'
 import { useTasks } from '~/composables/useTasks'
