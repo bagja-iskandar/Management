@@ -302,12 +302,19 @@ test('SCRATCHPAD-PANEL-FALLBACK: IdeaScratchpadPanel fallback mirrors smart cate
   )
 })
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 // =============================================================================
 // 4. KANBAN DONE PRESENTATION MAPPING CONTRACT (KanbanBoard.vue)
 // =============================================================================
 
 test('KANBAN-DONE-CONTRACT: Column 5 presents title="DONE", subtitle="Completed & deployed", status="deployed"', () => {
-  const boardFilePath = path.resolve(projectRoot, 'components/KanbanBoard.vue')
+  const boardFilePath = resolveComponent('components/kanban/KanbanBoard.vue', 'components/KanbanBoard.vue')
   const content = fs.readFileSync(boardFilePath, 'utf-8')
 
   // Verify column 5 presentation attributes
@@ -348,7 +355,7 @@ test('KANBAN-QUICK-ADD-ELIMINATION: Duplicate bottom Quick Add button is removed
 })
 
 test('TASKCARD-FLUID-HEIGHT: TaskCard.vue replaces rigid 180px fixed height with fluid min-h-[105px] h-auto', () => {
-  const cardFilePath = path.resolve(projectRoot, 'components/TaskCard.vue')
+  const cardFilePath = resolveComponent('components/kanban/TaskCard.vue', 'components/TaskCard.vue')
   const content = fs.readFileSync(cardFilePath, 'utf-8')
 
   // Verify rigid fixed height is removed

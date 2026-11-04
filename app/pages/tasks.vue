@@ -438,7 +438,6 @@ import { ref, computed, onMounted, onBeforeUnmount, watch, watchEffect } from 'v
 import { useRoute, useRouter } from 'vue-router'
 import type { Task, TaskPriority, TaskStatus } from '~/types'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
-import KanbanBoard from '~~/components/KanbanBoard.vue'
 import ActiveFocusPanel from '~~/components/tasks/ActiveFocusPanel.vue'
 import IdeaScratchpadPanel from '~~/components/notes/IdeaScratchpadPanel.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'

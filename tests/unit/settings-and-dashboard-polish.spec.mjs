@@ -12,12 +12,19 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '../..')
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 // =============================================================================
 // 1. DASHBOARD LAYOUT & VIEWPORT POLISH
 // =============================================================================
 
 test('DASH-LAYOUT-01: components/Dashboard.vue root container is free of pb-6 to eliminate double padding clashes', () => {
-  const filePath = path.resolve(projectRoot, 'components/Dashboard.vue')
+  const filePath = resolveComponent('components/dashboard/Dashboard.vue', 'components/Dashboard.vue')
   const content = fs.readFileSync(filePath, 'utf8')
 
   // Extract root container template tag
@@ -228,7 +235,7 @@ test('SETTINGS-DANGER-01: app/pages/projects/[slug].vue renders Danger Zone card
 // =============================================================================
 
 test('SIDEBAR-SETTINGS-01: components/Sidebar.vue Navigation Rail registers /settings route with Settings icon', () => {
-  const filePath = path.resolve(projectRoot, 'components/Sidebar.vue')
+  const filePath = resolveComponent('components/layout/Sidebar.vue', 'components/Sidebar.vue')
   const content = fs.readFileSync(filePath, 'utf8')
 
   assert.ok(
@@ -242,7 +249,7 @@ test('SIDEBAR-SETTINGS-01: components/Sidebar.vue Navigation Rail registers /set
 })
 
 test('SIDEBAR-SETTINGS-02: components/Sidebar.vue Project Tree Accordion registers Settings sub-item invoking selectProjectTab(project.slug, "settings")', () => {
-  const filePath = path.resolve(projectRoot, 'components/Sidebar.vue')
+  const filePath = resolveComponent('components/layout/Sidebar.vue', 'components/Sidebar.vue')
   const content = fs.readFileSync(filePath, 'utf8')
 
   assert.ok(

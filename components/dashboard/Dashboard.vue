@@ -75,15 +75,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import type { Task } from '../types'
-import AlertBar from './AlertBar.vue'
-import LiveDevOpsStream from './dashboard/LiveDevOpsStream.vue'
-import InfrastructureMeshCard from './dashboard/InfrastructureMeshCard.vue'
-import RecentShipmentsCard from './dashboard/RecentShipmentsCard.vue'
-import UnifiedHeroBanner from './dashboard/UnifiedHeroBanner.vue'
-import ProjectExecutionOverview from './dashboard/ProjectExecutionOverview.vue'
-import WorkspacePulse from './dashboard/WorkspacePulse.vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
+import type { Task } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useTaskDrawer } from '~/composables/useTaskDrawer'
 

@@ -14,6 +14,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '../..')
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 // Prevent unhandled promise rejections on secondary .finally() branches in Node test runner
 const origFinally = Promise.prototype.finally
 Promise.prototype.finally = function (callback) {
@@ -471,7 +478,7 @@ test('CAB-UI-03: HeaderBar getButtonSizeClass maps size options to unified heigh
 })
 
 test('CAB-UI-04: HeaderBar button action height h-[38px] harmonizes perfectly with BaseSegmentedControl sm container', () => {
-  const headerBarSource = fs.readFileSync(path.resolve(projectRoot, 'components/HeaderBar.vue'), 'utf8')
+  const headerBarSource = fs.readFileSync(resolveComponent('components/layout/HeaderBar.vue', 'components/HeaderBar.vue'), 'utf8')
   const segmentedSource = fs.readFileSync(path.resolve(projectRoot, 'components/ui/BaseSegmentedControl.vue'), 'utf8')
 
   // Verify HeaderBar applies getButtonSizeClass to action buttons

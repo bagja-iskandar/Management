@@ -992,11 +992,18 @@ test("CHART-ZERO-01: Projects with zero deliverables render neutral ghost bar '0
   assert.equal(activeProject.renderedSegments.length, 1)
 })
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 // -----------------------------------------------------------------------------
 // 29. CLEANUP-MATRIX-01: Eliminasi Badge Matrix
 // -----------------------------------------------------------------------------
 test("CLEANUP-MATRIX-01: Source code audit confirms complete elimination of 'Command Center Matrix' from components/Dashboard.vue", () => {
-  const dashboardSource = fs.readFileSync(path.resolve(projectRoot, 'components/Dashboard.vue'), 'utf-8')
+  const dashboardSource = fs.readFileSync(resolveComponent('components/dashboard/Dashboard.vue', 'components/Dashboard.vue'), 'utf-8')
   assert.equal(
     dashboardSource.includes('Command Center Matrix'),
     false,
@@ -1008,7 +1015,7 @@ test("CLEANUP-MATRIX-01: Source code audit confirms complete elimination of 'Com
 // 30. CLEANUP-BARLET-01: Eliminasi Quick Actions Barlet
 // -----------------------------------------------------------------------------
 test('CLEANUP-BARLET-01: Source code audit confirms complete elimination of Quick Actions Barlet (Task (C), CI Run, Prod) from components/Dashboard.vue', () => {
-  const dashboardSource = fs.readFileSync(path.resolve(projectRoot, 'components/Dashboard.vue'), 'utf-8')
+  const dashboardSource = fs.readFileSync(resolveComponent('components/dashboard/Dashboard.vue', 'components/Dashboard.vue'), 'utf-8')
   assert.equal(dashboardSource.includes('Task (C)'), false, "Must not contain 'Task (C)' quick action button")
   assert.equal(dashboardSource.includes('CI Run'), false, "Must not contain 'CI Run' quick action button")
   assert.equal(dashboardSource.includes('Open Live Production on Vercel'), false, "Must not contain Prod link button")
@@ -1018,7 +1025,7 @@ test('CLEANUP-BARLET-01: Source code audit confirms complete elimination of Quic
 // 31. VIEWPORT-FLEX-01: Dynamic Flex Contraction saat AlertBar Aktif
 // -----------------------------------------------------------------------------
 test('VIEWPORT-FLEX-01: Lower Bento Grid absorbs AlertBar height dynamically (flex-1 min-h-0) maintaining constant single viewport budget', () => {
-  const dashboardSource = fs.readFileSync(path.resolve(projectRoot, 'components/Dashboard.vue'), 'utf-8')
+  const dashboardSource = fs.readFileSync(resolveComponent('components/dashboard/Dashboard.vue', 'components/Dashboard.vue'), 'utf-8')
 
   // 1. Verify layout container has flex column viewport constraints
   assert.ok(

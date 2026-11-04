@@ -571,7 +571,6 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
 import { useProjectNav, type ProjectTabId } from '~/composables/useProjectNav'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useSession } from '~/composables/useSession'

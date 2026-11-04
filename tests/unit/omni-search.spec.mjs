@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
+import fs from 'node:fs'
 import Module from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { ref, computed } from 'vue'
@@ -689,10 +690,16 @@ test('TEST-OMNI-BENTO-TWO-LINE-01: Verifikasi Integritas Data Two-Line Bento Row
   assert.match(blockedTask.badgeColor, /rose/i, 'Blocked/critical task badge must have rose highlight styling')
 })
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 test('TEST-OMNI-SINGLE-INPUT-AND-ZERO-BLUR: Architectural guard for Single Input, Flush Width, and Zero Blur', async () => {
-  const fs = await import('node:fs')
   const headerSearchPath = path.resolve(projectRoot, 'components/search/HeaderSearch.vue')
-  const headerBarPath = path.resolve(projectRoot, 'components/HeaderBar.vue')
+  const headerBarPath = resolveComponent('components/layout/HeaderBar.vue', 'components/HeaderBar.vue')
 
   const headerSearchContent = fs.readFileSync(headerSearchPath, 'utf-8')
   const headerBarContent = fs.readFileSync(headerBarPath, 'utf-8')
@@ -728,8 +735,7 @@ test('TEST-OMNI-SINGLE-INPUT-AND-ZERO-BLUR: Architectural guard for Single Input
 })
 
 test('TEST-OMNI-PHASE-A-HEADERBAR-CLEAN: HeaderBar zero backdrop-blur, closeSearch before modals, and no duplicate handleKeydown', async () => {
-  const fs = await import('node:fs')
-  const headerBarPath = path.resolve(projectRoot, 'components/HeaderBar.vue')
+  const headerBarPath = resolveComponent('components/layout/HeaderBar.vue', 'components/HeaderBar.vue')
   const appVuePath = path.resolve(projectRoot, 'app/app.vue')
 
   const headerBarContent = fs.readFileSync(headerBarPath, 'utf-8')

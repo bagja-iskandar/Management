@@ -119,13 +119,13 @@
         <!-- Status Badge if Idea or Blocked -->
         <span
           v-if="task.status === 'idea'"
-          class="ml-auto font-mono text-[9px] bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded px-1.5 py-0.5 uppercase tracking-wider font-bold shrink-0"
+          class="ml-auto font-mono text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded px-2 py-0.5 uppercase tracking-wider font-bold shrink-0"
         >
           IDEA
         </span>
         <span
           v-else-if="task.status === 'blocked'"
-          class="ml-auto font-mono text-[9px] bg-rose-500/20 text-rose-400 border border-rose-500/40 rounded px-1.5 py-0.5 uppercase tracking-wider font-bold animate-pulse shrink-0"
+          class="ml-auto font-mono text-xs bg-rose-500/20 text-rose-400 border border-rose-500/40 rounded px-2 py-0.5 uppercase tracking-wider font-bold animate-pulse shrink-0"
         >
           BLOCKED
         </span>
@@ -136,8 +136,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import NexuraIcon from './ui/NexuraIcon.vue'
-import type { Task } from '../types'
+import type { Task } from '~/types'
 
 const props = withDefaults(
   defineProps<{

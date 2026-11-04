@@ -87,7 +87,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Task, TaskStatus } from '~/types'
-import TaskCard from '../TaskCard.vue'
 import NexuraIcon from '../ui/NexuraIcon.vue'
 
 const props = defineProps<{

@@ -425,7 +425,6 @@
 <script setup lang="ts">
 import { ref, reactive, computed, watch, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
-import RepoActivityBadge from '../../components/RepoActivityBadge.vue'
 import NexuraIcon from '../../components/ui/NexuraIcon.vue'
 import { useGitHubRepos } from '../../composables/useGitHub'
 import { useProjects } from '../../composables/useProjects'

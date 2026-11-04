@@ -58,8 +58,7 @@
 
 <script setup lang="ts">
 import { ref, computed, toRef } from 'vue'
-import { useGitHubPullsAndIssues } from '../composables/useGitHub'
-import NexuraIcon from './ui/NexuraIcon.vue'
+import { useGitHubPullsAndIssues } from '~/composables/useGitHub'
 
 const props = withDefaults(
   defineProps<{

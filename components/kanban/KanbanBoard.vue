@@ -147,8 +147,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onUnmounted } from 'vue'
 import type { Task, TaskStatus } from '~/types'
-import KanbanColumn from './kanban/KanbanColumn.vue'
-import KanbanDragGhost from './kanban/KanbanDragGhost.vue'
 
 const props = defineProps<{
   tasks: Task[]

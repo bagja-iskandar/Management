@@ -536,6 +536,13 @@ import {
   type OmniSearchItem,
   type OmniSearchScope
 } from '../../composables/useOmniSearch'
+import {
+  scopeTriggerPills,
+  categoryDisplayNames,
+  categoryOrder,
+  resolveLeadingIcon,
+  resolveLeadingIconColor
+} from '../../composables/search/useHeaderSearchView'
 
 const route = useRoute()
 
@@ -566,15 +573,6 @@ const itemElements = new Map<number, HTMLElement>()
 const expandedCategories = ref<Record<string, boolean>>({})
 const MAX_ITEMS_PER_GROUP = 5
 
-const scopeTriggerPills: { label: string; scope: OmniSearchScope }[] = [
-  { label: 'Tasks', scope: 'task' },
-  { label: 'Projects', scope: 'project' },
-  { label: 'Sprints', scope: 'sprint' },
-  { label: 'Repos', scope: 'repo' },
-  { label: 'Notes', scope: 'note' },
-  { label: 'Actions', scope: 'action' }
-]
-
 const isIdleState = computed(() => {
   return rawQuery.value.trim() === '' && activeScope.value === 'all'
 })
@@ -588,31 +586,8 @@ function setItemRef(el: any, visualIndex: number) {
 }
 
 // Leading Icon based on active prefix mode or scope
-const leadingIcon = computed(() => {
-  if (parsedQuery.value.prefixMode === 'action') return 'Terminal'
-  if (parsedQuery.value.prefixMode === 'tag') return 'Hash'
-  if (parsedQuery.value.prefixMode === 'project') return 'Folder'
-  if (parsedQuery.value.prefixMode === 'blocker') return 'AlertTriangle'
-  if (activeScope.value === 'action') return 'Terminal'
-  if (activeScope.value === 'task') return 'CheckSquare'
-  if (activeScope.value === 'project') return 'Folder'
-  if (activeScope.value === 'sprint') return 'Calendar'
-  if (activeScope.value === 'repo') return 'GitBranch'
-  if (activeScope.value === 'note') return 'Sparkles'
-  return 'Search'
-})
-
-const leadingIconColor = computed(() => {
-  if (parsedQuery.value.prefixMode === 'action' || activeScope.value === 'action') return 'text-emerald-400'
-  if (parsedQuery.value.prefixMode === 'tag') return 'text-indigo-400'
-  if (parsedQuery.value.prefixMode === 'project' || activeScope.value === 'project') return 'text-blue-400'
-  if (parsedQuery.value.prefixMode === 'blocker') return 'text-rose-400'
-  if (activeScope.value === 'task') return 'text-indigo-400'
-  if (activeScope.value === 'sprint') return 'text-purple-400'
-  if (activeScope.value === 'repo') return 'text-emerald-400'
-  if (activeScope.value === 'note') return 'text-yellow-400'
-  return 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'
-})
+const leadingIcon = computed(() => resolveLeadingIcon(parsedQuery.value.prefixMode, activeScope.value))
+const leadingIconColor = computed(() => resolveLeadingIconColor(parsedQuery.value.prefixMode, activeScope.value))
 
 // Inline Dynamic Prefix Chip Badge
 const prefixChip = computed<{ label: string; class: string } | null>(() => {
@@ -663,26 +638,6 @@ interface ItemGroup {
   hiddenCount: number
   maxScore: number
 }
-
-const categoryDisplayNames: Record<string, string> = {
-  'Actions': 'ACTIONS & COMMANDS',
-  'Tasks & Deliverables': 'DELIVERABLES & TASKS',
-  'Projects': 'PROJECTS',
-  'Weekly Sprints': 'WEEKLY SPRINTS',
-  'Repositories': 'REPOSITORIES',
-  'Project Notes': 'PROJECT NOTES',
-  'Quick Navigation': 'QUICK NAVIGATION'
-}
-
-const categoryOrder = [
-  'Actions',
-  'Tasks & Deliverables',
-  'Projects',
-  'Weekly Sprints',
-  'Repositories',
-  'Project Notes',
-  'Quick Navigation'
-]
 
 // Top 4 Quick Actions for the 3-Zone Compact Idle View
 const idleQuickActions = computed<IndexedOmniItem[]>(() => {

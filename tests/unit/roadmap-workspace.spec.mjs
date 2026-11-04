@@ -14,6 +14,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const projectRoot = path.resolve(__dirname, '../..')
 
+// Helper for self-healing dual-path component resolution
+function resolveComponent(canonicalRelPath, legacyRelPath) {
+  const canonicalPath = path.resolve(projectRoot, canonicalRelPath)
+  if (fs.existsSync(canonicalPath)) return canonicalPath
+  return path.resolve(projectRoot, legacyRelPath)
+}
+
 // Prevent unhandled promise rejections on secondary .finally() branches in Node test runner
 const origFinally = Promise.prototype.finally
 Promise.prototype.finally = function (callback) {
@@ -743,7 +750,7 @@ test('ROADMAP-NAV-01: app/pages/roadmap.vue registers segmented switcher via use
 // 16. ROADMAP-NAV-02: HeaderBar.vue Segmented Action Wireup
 // -----------------------------------------------------------------------------
 test('ROADMAP-NAV-02: components/HeaderBar.vue renders BaseSegmentedControl for segmented actions', () => {
-  const headerPath = path.resolve(projectRoot, 'components/HeaderBar.vue')
+  const headerPath = resolveComponent('components/layout/HeaderBar.vue', 'components/HeaderBar.vue')
   const content = fs.readFileSync(headerPath, 'utf8')
 
   assert.ok(content.includes("v-if=\"action.type === 'segmented'\""), 'HeaderBar must conditionally render segmented actions')
