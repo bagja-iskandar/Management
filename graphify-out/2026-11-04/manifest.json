@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1793016250.2774937,
-    "seen": 1793016398.617678,
-    "ast_hash": "4c1deae1cbb35c32cf9b8b1dad96378f",
+    "mtime": 1793762941.4279308,
+    "seen": 1793763019.6239388,
+    "ast_hash": "79cbe306352ac8dfe7d4410798b8779b",
     "semantic_hash": ""
   },
   "package.json": {
@@ -372,9 +372,9 @@
     "semantic_hash": ""
   },
   "server/api/projects.post.ts": {
-    "mtime": 1789910947.425701,
-    "seen": 1789911544.5465739,
-    "ast_hash": "871d206330000dec6526cc09e404c6e4",
+    "mtime": 1793762153.0674372,
+    "seen": 1793762203.7809243,
+    "ast_hash": "cb1f0c0f378ed32baea4d0ec0b33f3fa",
     "semantic_hash": ""
   },
   "server/api/projects/[slug].delete.ts": {
@@ -623,12 +623,6 @@
     "ast_hash": "9d2bd5438971f35423aafd4a06fa1594",
     "semantic_hash": ""
   },
-  "components/IconArrowUpRight.vue": {
-    "mtime": 1789906403.8786254,
-    "seen": 1789906795.8407488,
-    "ast_hash": "4b599dfc2cfe117613e68ac9886c60ba",
-    "semantic_hash": ""
-  },
   "components/kanban/KanbanColumn.vue": {
     "mtime": 1793611931.2478583,
     "seen": 1793612067.942297,
@@ -714,9 +708,9 @@
     "semantic_hash": ""
   },
   "server/api/tasks/[id].put.ts": {
-    "mtime": 1791278284.7681048,
-    "seen": 1791278571.2713895,
-    "ast_hash": "ec48916127c837f11e4e0c0bf1a3a16a",
+    "mtime": 1793762147.0068796,
+    "seen": 1793762203.7859254,
+    "ast_hash": "caec0f12cdaac21d68e83b03b0d89c6d",
     "semantic_hash": ""
   },
   "server/repositories/contracts/index.ts": {
@@ -744,9 +738,9 @@
     "semantic_hash": ""
   },
   "server/repositories/index.ts": {
-    "mtime": 1793762017.26326,
-    "seen": 1793762020.5944996,
-    "ast_hash": "b89517ab104e56de234199c1de1c1bb6",
+    "mtime": 1793762024.1028721,
+    "seen": 1793762203.789109,
+    "ast_hash": "16e88aa69f418601301dcdfa91caaebc",
     "semantic_hash": ""
   },
   "server/repositories/nitro/nitro-project.repository.ts": {
@@ -768,9 +762,9 @@
     "semantic_hash": ""
   },
   "server/schemas/helper.ts": {
-    "mtime": 1789910883.5523493,
-    "seen": 1789911544.5466547,
-    "ast_hash": "08efb1e6a1c6f243d95e5d136c6b4468",
+    "mtime": 1793762112.7689893,
+    "seen": 1793762203.7912803,
+    "ast_hash": "e8647d811e32e38b07506460c0e4a1a8",
     "semantic_hash": ""
   },
   "server/schemas/index.ts": {
@@ -804,27 +798,27 @@
     "semantic_hash": ""
   },
   "server/plugins/supabase-sync.ts": {
-    "mtime": 1792743386.4350028,
-    "seen": 1792743613.4058037,
-    "ast_hash": "02ba10d19a43e12e3b74dcfbedf7c698",
+    "mtime": 1793762157.3310676,
+    "seen": 1793762203.7870655,
+    "ast_hash": "48a2c221b5c52a429d6e12c27c8cfe23",
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-project.repository.ts": {
-    "mtime": 1792927121.1075468,
-    "seen": 1792927277.3968523,
-    "ast_hash": "e7005be423eea3cb82bfd5162fb5d13c",
+    "mtime": 1793762097.524813,
+    "seen": 1793762203.790684,
+    "ast_hash": "bd7c5e133fc7a5b08c5714014b3e482e",
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-sprint.repository.ts": {
-    "mtime": 1792927141.5723102,
-    "seen": 1792927277.3968575,
-    "ast_hash": "443acb7bafec06a639c1855b0734dd13",
+    "mtime": 1793762105.7739995,
+    "seen": 1793762203.7906895,
+    "ast_hash": "b8aaf047c90796f25c06349fe306a694",
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-task.repository.ts": {
-    "mtime": 1793282011.762522,
-    "seen": 1793282093.2565749,
-    "ast_hash": "566b1939a26dd33311baa0a4595cab8a",
+    "mtime": 1793762090.2789118,
+    "seen": 1793762203.7906945,
+    "ast_hash": "85c88944c0d0e8463767dba4db0090d3",
     "semantic_hash": ""
   },
   "server/utils/supabase.ts": {
@@ -1038,33 +1032,33 @@
     "semantic_hash": ""
   },
   "server/api/notes/[id].delete.ts": {
-    "mtime": 1792928858.2138429,
-    "seen": 1792929073.6973102,
-    "ast_hash": "52b1d3c9ee2e2014f68d87de1cb41342",
+    "mtime": 1793762124.303332,
+    "seen": 1793762203.7796404,
+    "ast_hash": "ee99bb70d5e3bb446a5c69957290ff94",
     "semantic_hash": ""
   },
   "server/api/notes/[id].put.ts": {
-    "mtime": 1792928754.895172,
-    "seen": 1792928808.5566268,
-    "ast_hash": "e1bfbd90e4947a5982299fba4fae514b",
+    "mtime": 1793762129.2956867,
+    "seen": 1793762203.7796454,
+    "ast_hash": "fa0dd644ae641026975e29ca5c0c70bb",
     "semantic_hash": ""
   },
   "server/api/notes/[id]/promote.post.ts": {
-    "mtime": 1793174431.7436366,
-    "seen": 1793174473.5019832,
-    "ast_hash": "1514f6773d26300c4de2872a5b8cb41f",
+    "mtime": 1793762137.312723,
+    "seen": 1793762203.779649,
+    "ast_hash": "5b2dc1374784aa033f683b268df03d3e",
     "semantic_hash": ""
   },
   "server/api/notes/index.get.ts": {
-    "mtime": 1792928847.2017465,
-    "seen": 1792929073.698406,
-    "ast_hash": "1c71d8578c6917426845238ed8b90aa0",
+    "mtime": 1793762116.743145,
+    "seen": 1793762203.7796526,
+    "ast_hash": "dedf85bf595bf1465ba3dfb60044b406",
     "semantic_hash": ""
   },
   "server/api/notes/index.post.ts": {
-    "mtime": 1792928853.0589533,
-    "seen": 1792929073.698412,
-    "ast_hash": "3e5070b2d7446be5379275a0cd144fb7",
+    "mtime": 1793762120.271645,
+    "seen": 1793762203.7796557,
+    "ast_hash": "a07b037151d559d1038b4f9c23ef254a",
     "semantic_hash": ""
   },
   "server/repositories/contracts/note.repository.ts": {
@@ -1074,21 +1068,21 @@
     "semantic_hash": ""
   },
   "server/repositories/nitro/nitro-note.repository.ts": {
-    "mtime": 1793432203.4055867,
-    "seen": 1793432250.0365884,
-    "ast_hash": "2ae084de0520e9c1653cb9def420140a",
+    "mtime": 1793762063.7652683,
+    "seen": 1793762203.789113,
+    "ast_hash": "97caa894ab71786c3ef2bb2f22a5c759",
     "semantic_hash": ""
   },
   "server/repositories/supabase/supabase-note.repository.ts": {
-    "mtime": 1793432193.5367234,
-    "seen": 1793432250.0379827,
-    "ast_hash": "560410b186f818c9cb9f9e78f848a65d",
+    "mtime": 1793762072.2404666,
+    "seen": 1793762203.7906792,
+    "ast_hash": "ae548cfd9e9e02cce5fb6e8b456889f4",
     "semantic_hash": ""
   },
   "server/utils/note.ts": {
-    "mtime": 1792928662.6528583,
-    "seen": 1792928808.6126568,
-    "ast_hash": "f3d2c62041176c65a24c5c1af688e8cd",
+    "mtime": 1793762055.0464385,
+    "seen": 1793762203.7967885,
+    "ast_hash": "0994ea808b4495afc45085284d0ef97e",
     "semantic_hash": ""
   },
   "components/notes/IdeaScratchpadPanel.vue": {
@@ -1407,6 +1401,78 @@
     "mtime": 1793761943.45383,
     "seen": 1793762020.6110709,
     "ast_hash": "77eb286c8f063d7df1c12719a7322261",
+    "semantic_hash": ""
+  },
+  "server/repositories/supabase/mappers.ts": {
+    "mtime": 1793762047.5609078,
+    "seen": 1793762203.790671,
+    "ast_hash": "b45dcc7846b075c840a0b10299fd8dab",
+    "semantic_hash": ""
+  },
+  "tests/unit/shared-utils.spec.mjs": {
+    "mtime": 1793762139.9782455,
+    "seen": 1793762203.8067589,
+    "ast_hash": "bc5d95b112f621af0efcc76edb12a4e5",
+    "semantic_hash": ""
+  },
+  "components/ui/IconArrowUpRight.vue": {
+    "mtime": 1789906403.8786254,
+    "seen": 1793763019.6155324,
+    "ast_hash": "4b599dfc2cfe117613e68ac9886c60ba",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseBadge.vue": {
+    "mtime": 1793763139.1297238,
+    "seen": 1793763223.5080168,
+    "ast_hash": "bf7c75809f1b4f5c50d5880683b19c36",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseButton.vue": {
+    "mtime": 1793763019.5689323,
+    "seen": 1793763223.5080225,
+    "ast_hash": "724d6b2f027465c49b2ceb664e24e78b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseCard.vue": {
+    "mtime": 1793763036.8738713,
+    "seen": 1793763223.5080256,
+    "ast_hash": "c137a7a982edc42dd4ffe47dc1502a62",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseDrawer.vue": {
+    "mtime": 1793763090.9594984,
+    "seen": 1793763223.5080278,
+    "ast_hash": "860a8630bbbef32b13052375373174fc",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseEmptyState.vue": {
+    "mtime": 1793763170.5591123,
+    "seen": 1793763223.508031,
+    "ast_hash": "8a1db64050d56823555a7942ae2a5c92",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseInput.vue": {
+    "mtime": 1793763107.5481026,
+    "seen": 1793763223.5080333,
+    "ast_hash": "ae3617b38f0fa7b802654bcbdb6a1766",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseModal.vue": {
+    "mtime": 1793763071.3796196,
+    "seen": 1793763223.5080357,
+    "ast_hash": "c8dc5fa4d682a2177c90c0df7684212b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseSegmentedControl.vue": {
+    "mtime": 1793763149.4987614,
+    "seen": 1793763223.508038,
+    "ast_hash": "f2ad9b847f0e64715c76b9a7373f021b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseSelect.vue": {
+    "mtime": 1793763128.7357366,
+    "seen": 1793763223.508041,
+    "ast_hash": "cc97f7ab43cb906726ed87d16b798c83",
     "semantic_hash": ""
   }
 }

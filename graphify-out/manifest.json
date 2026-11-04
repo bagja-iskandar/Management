@@ -66,9 +66,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1793016250.2774937,
-    "seen": 1793016398.617678,
-    "ast_hash": "4c1deae1cbb35c32cf9b8b1dad96378f",
+    "mtime": 1793762941.4279308,
+    "seen": 1793763019.6239388,
+    "ast_hash": "79cbe306352ac8dfe7d4410798b8779b",
     "semantic_hash": ""
   },
   "package.json": {
@@ -621,12 +621,6 @@
     "mtime": 1793433608.5795412,
     "seen": 1793433657.1262045,
     "ast_hash": "9d2bd5438971f35423aafd4a06fa1594",
-    "semantic_hash": ""
-  },
-  "components/IconArrowUpRight.vue": {
-    "mtime": 1789906403.8786254,
-    "seen": 1789906795.8407488,
-    "ast_hash": "4b599dfc2cfe117613e68ac9886c60ba",
     "semantic_hash": ""
   },
   "components/kanban/KanbanColumn.vue": {
@@ -1419,6 +1413,72 @@
     "mtime": 1793762139.9782455,
     "seen": 1793762203.8067589,
     "ast_hash": "bc5d95b112f621af0efcc76edb12a4e5",
+    "semantic_hash": ""
+  },
+  "components/ui/IconArrowUpRight.vue": {
+    "mtime": 1789906403.8786254,
+    "seen": 1793763019.6155324,
+    "ast_hash": "4b599dfc2cfe117613e68ac9886c60ba",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseBadge.vue": {
+    "mtime": 1793763139.1297238,
+    "seen": 1793763223.5080168,
+    "ast_hash": "bf7c75809f1b4f5c50d5880683b19c36",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseButton.vue": {
+    "mtime": 1793763019.5689323,
+    "seen": 1793763223.5080225,
+    "ast_hash": "724d6b2f027465c49b2ceb664e24e78b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseCard.vue": {
+    "mtime": 1793763036.8738713,
+    "seen": 1793763223.5080256,
+    "ast_hash": "c137a7a982edc42dd4ffe47dc1502a62",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseDrawer.vue": {
+    "mtime": 1793763090.9594984,
+    "seen": 1793763223.5080278,
+    "ast_hash": "860a8630bbbef32b13052375373174fc",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseEmptyState.vue": {
+    "mtime": 1793763170.5591123,
+    "seen": 1793763223.508031,
+    "ast_hash": "8a1db64050d56823555a7942ae2a5c92",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseInput.vue": {
+    "mtime": 1793763107.5481026,
+    "seen": 1793763223.5080333,
+    "ast_hash": "ae3617b38f0fa7b802654bcbdb6a1766",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseModal.vue": {
+    "mtime": 1793763071.3796196,
+    "seen": 1793763223.5080357,
+    "ast_hash": "c8dc5fa4d682a2177c90c0df7684212b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseSegmentedControl.vue": {
+    "mtime": 1793763149.4987614,
+    "seen": 1793763223.508038,
+    "ast_hash": "f2ad9b847f0e64715c76b9a7373f021b",
+    "semantic_hash": ""
+  },
+  "components/ui/BaseSelect.vue": {
+    "mtime": 1793763128.7357366,
+    "seen": 1793763223.508041,
+    "ast_hash": "cc97f7ab43cb906726ed87d16b798c83",
+    "semantic_hash": ""
+  },
+  "tests/unit/ui-primitives.spec.mjs": {
+    "mtime": 1793763378.7748709,
+    "seen": 1793763418.5466163,
+    "ast_hash": "ab670a62674153146dee5ad742851bec",
     "semantic_hash": ""
   }
 }
