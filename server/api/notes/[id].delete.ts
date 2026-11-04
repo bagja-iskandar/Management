@@ -1,25 +1,9 @@
-import { defineEventHandler, getRouterParam, createError } from 'h3'
-import { removeItem } from '../../utils/store'
-import { getSupabaseClient } from '../../utils/supabase'
+import { withApiHandler } from '../../utils/handler'
+import { requireRouterParam } from '../../schemas/helper'
+import { noteRepository } from '../../repositories'
 
-export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) {
-    throw createError({ statusCode: 400, statusMessage: 'Note ID is required' })
-  }
-
-  const supabase = getSupabaseClient()
-  if (supabase) {
-    const { error } = await supabase
-      .from('project_notes')
-      .delete()
-      .eq('id', id)
-
-    if (!error) {
-      return { success: true, id }
-    }
-  }
-
-  const success = await removeItem('project_notes', id)
+export default withApiHandler(async (event) => {
+  const id = requireRouterParam(event, 'id', 'Note ID')
+  const success = await noteRepository.delete(id)
   return { success, id }
 })

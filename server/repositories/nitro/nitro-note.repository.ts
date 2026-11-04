@@ -1,4 +1,3 @@
-import { createError } from 'h3'
 import type { INoteRepository, PromoteNoteOverrides, PromoteNoteResult } from '../contracts/note.repository'
 import type { ProjectNote, NoteCategory } from '~/types'
 import type { CreateNoteInput, UpdateNoteInput } from '../../schemas/note.schema'
@@ -10,8 +9,10 @@ import {
   removeItem,
   genId
 } from '../../utils/store'
-import { taskRepository } from '../index'
-import { extractNoteTitle } from '../../utils/note'
+import { promoteNoteToTask } from '../../utils/note'
+
+const CANONICAL_KEY = 'project_notes'
+const LEGACY_KEY = 'notes'
 
 export function normalizeNote(note: any): ProjectNote {
   return {
@@ -25,9 +26,17 @@ export function normalizeNote(note: any): ProjectNote {
   }
 }
 
+async function getStoredNotes(): Promise<ProjectNote[]> {
+  const canonical = await getArray<ProjectNote>(CANONICAL_KEY)
+  if (canonical.length > 0) {
+    return canonical
+  }
+  return await getArray<ProjectNote>(LEGACY_KEY)
+}
+
 export class NitroNoteRepository implements INoteRepository {
   async findAll(projectSlug?: string, category?: NoteCategory): Promise<ProjectNote[]> {
-    const raw = await getArray<ProjectNote>('notes')
+    const raw = await getStoredNotes()
     let notes = raw.map(normalizeNote)
 
     if (projectSlug) {
@@ -48,12 +57,12 @@ export class NitroNoteRepository implements INoteRepository {
   }
 
   async findById(id: string): Promise<ProjectNote | null> {
-    const item = await getById<ProjectNote>('notes', id)
+    const item = (await getById<ProjectNote>(CANONICAL_KEY, id)) || (await getById<ProjectNote>(LEGACY_KEY, id))
     return item ? normalizeNote(item) : null
   }
 
   async create(noteData: CreateNoteInput): Promise<ProjectNote> {
-    const item = await createItem<ProjectNote>('notes', {
+    const item = await createItem<ProjectNote>(CANONICAL_KEY, {
       projectSlug: noteData.projectSlug,
       category: noteData.category,
       content: noteData.content,
@@ -63,67 +72,20 @@ export class NitroNoteRepository implements INoteRepository {
   }
 
   async update(id: string, patch: UpdateNoteInput): Promise<ProjectNote | null> {
-    const updated = await updateItem<ProjectNote>('notes', id, patch as any)
+    let updated = await updateItem<ProjectNote>(CANONICAL_KEY, id, patch as any)
+    if (!updated) {
+      updated = await updateItem<ProjectNote>(LEGACY_KEY, id, patch as any)
+    }
     return updated ? normalizeNote(updated) : null
   }
 
   async delete(id: string): Promise<boolean> {
-    return await removeItem('notes', id)
+    const deletedCanonical = await removeItem(CANONICAL_KEY, id)
+    const deletedLegacy = await removeItem(LEGACY_KEY, id)
+    return deletedCanonical || deletedLegacy
   }
 
   async promoteToTask(id: string, overrides?: PromoteNoteOverrides): Promise<PromoteNoteResult> {
-    const note = await this.findById(id)
-    if (!note) {
-      throw createError({ statusCode: 404, statusMessage: 'Note not found' })
-    }
-
-    if (note.promotedTaskId) {
-      throw createError({ statusCode: 409, statusMessage: 'Note has already been promoted to a task' })
-    }
-
-    const cleanTitle = extractNoteTitle(note.content)
-
-    // Smart Category Mapping
-    let targetStatus: 'idea' | 'in_queue' = 'idea'
-    let defaultPriority: 'low' | 'medium' | 'high' = 'medium'
-
-    if (note.category === 'bug') {
-      targetStatus = 'in_queue'
-      defaultPriority = 'high'
-    } else if (note.category === 'maintenance') {
-      targetStatus = 'in_queue'
-      defaultPriority = 'medium'
-    } else {
-      targetStatus = 'idea'
-      defaultPriority = 'medium'
-    }
-
-    const priority = (overrides?.priority as any) || defaultPriority
-
-    const task = await taskRepository.create({
-      name: cleanTitle,
-      description: note.content,
-      status: targetStatus,
-      priority,
-      dueDate: overrides?.dueDate,
-      projectSlug: note.projectSlug,
-      techTags: ['scratchpad', note.category]
-    })
-
-    const updatedNote = await this.update(id, {
-      promotedTaskId: task.id
-    })
-
-    if (!updatedNote) {
-      throw createError({
-        statusCode: 500,
-        statusMessage: 'Failed to update note with promoted task ID'
-      })
-    }
-
-    return {
-      note: updatedNote,
-      task
-    }
+    return promoteNoteToTask(this, id, overrides)
   }
 }

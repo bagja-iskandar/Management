@@ -51,6 +51,7 @@ export default defineNitroPlugin(async () => {
           tech_stack: p.techStack || [],
           start_date: p.startDate || null,
           due_date: p.dueDate || null,
+          release_phase: p.releasePhase || 'mvp',
           created_at: p.createdAt || new Date().toISOString(),
           updated_at: p.updatedAt || new Date().toISOString()
         }))

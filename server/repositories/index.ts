@@ -10,9 +10,10 @@ import type { ITaskRepository } from './contracts/task.repository'
 import type { IProjectRepository } from './contracts/project.repository'
 import type { ISprintRepository } from './contracts/sprint.repository'
 import type { INoteRepository } from './contracts/note.repository'
-import { getSupabaseClient } from '../utils/supabase'
+import { getSupabaseClient, isNetworkError } from '../utils/supabase'
 
 export * from './contracts'
+export { isNetworkError } from '../utils/supabase'
 
 // Lazy instances
 let _nitroTask: NitroTaskRepository | null = null
@@ -29,19 +30,6 @@ let _supabaseNote: SupabaseNoteRepository | null = null
 
 let _isSupabaseReachable: boolean | null = null
 let _lastSupabaseCheck = 0
-
-export function isNetworkError(err: any): boolean {
-  if (!err) return false
-  const msg = (typeof err === 'string' ? err : err.message || err.details || JSON.stringify(err)).toLowerCase()
-  return (
-    msg.includes('fetch failed') ||
-    msg.includes('enotfound') ||
-    msg.includes('econnrefused') ||
-    msg.includes('etimedout') ||
-    msg.includes('network') ||
-    msg.includes('connection')
-  )
-}
 
 export function markSupabaseOffline(reason?: string) {
   if (_isSupabaseReachable !== false) {

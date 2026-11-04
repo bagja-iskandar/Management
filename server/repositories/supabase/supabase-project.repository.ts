@@ -1,54 +1,11 @@
-import { createError } from 'h3'
 import type { IProjectRepository, ProjectFilterOptions } from '../contracts/project.repository'
 import type { Project } from '~/types'
-import { getSupabaseClient } from '../../utils/supabase'
-import { isNetworkError } from '../index'
-
-function mapProjectRow(row: any): Project {
-  return {
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    description: row.description || '',
-    status: row.status,
-    priority: row.priority,
-    githubRepo: row.github_repo || undefined,
-    deployUrl: row.deploy_url || undefined,
-    techStack: Array.isArray(row.tech_stack) ? row.tech_stack : [],
-    startDate: row.start_date || undefined,
-    dueDate: row.due_date || undefined,
-    releasePhase: row.release_phase || undefined,
-    createdAt: row.created_at,
-    updatedAt: row.updated_at
-  }
-}
-
-function mapProjectToRow(p: Partial<Project>): Record<string, any> {
-  const row: Record<string, any> = {}
-  if (p.slug !== undefined) row.slug = p.slug
-  if (p.title !== undefined) row.title = p.title
-  if (p.description !== undefined) row.description = p.description
-  if (p.status !== undefined) row.status = p.status
-  if (p.priority !== undefined) row.priority = p.priority
-  if (p.githubRepo !== undefined) row.github_repo = p.githubRepo
-  if (p.deployUrl !== undefined) row.deploy_url = p.deployUrl
-  if (p.techStack !== undefined) row.tech_stack = p.techStack
-  if (p.startDate !== undefined) row.start_date = p.startDate || null
-  if (p.dueDate !== undefined) row.due_date = p.dueDate || null
-  if (p.releasePhase !== undefined) row.release_phase = p.releasePhase || null
-  return row
-}
+import { requireSupabaseClient, throwIfSupabaseError } from '../../utils/supabase'
+import { mapProjectRow, mapProjectToRow } from './mappers'
 
 export class SupabaseProjectRepository implements IProjectRepository {
-  private get client() {
-    const c = getSupabaseClient()
-    if (!c) {
-      throw createError({
-        statusCode: 503,
-        statusMessage: 'Supabase client is not configured or unavailable'
-      })
-    }
-    return c
+  protected get client() {
+    return requireSupabaseClient()
   }
 
   async findAll(filters?: ProjectFilterOptions): Promise<Project[]> {
@@ -66,21 +23,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
     }
 
     const { data, error } = await query
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.findAll] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.findAll')
 
     return (data || []).map(mapProjectRow)
   }
@@ -92,21 +35,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .ilike('slug', slug.trim())
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.findBySlug] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.findBySlug')
 
     return data ? mapProjectRow(data) : null
   }
@@ -118,21 +47,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .eq('id', id.trim())
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.findById] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.findById')
 
     return data ? mapProjectRow(data) : null
   }
@@ -148,21 +63,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .select()
       .single()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.create] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Failed to create project in Supabase: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.create')
 
     return mapProjectRow(data)
   }
@@ -178,21 +79,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .select()
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.update] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.update')
 
     return data ? mapProjectRow(data) : null
   }
@@ -203,21 +90,7 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .delete()
       .ilike('slug', slug.trim())
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.delete] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.delete')
 
     return true
   }
@@ -229,21 +102,8 @@ export class SupabaseProjectRepository implements IProjectRepository {
       .ilike('slug', slug.trim())
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseProjectRepository.slugExists] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseProjectRepository.slugExists')
+
     return Boolean(data)
   }
 }

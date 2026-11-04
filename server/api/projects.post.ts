@@ -27,7 +27,8 @@ export default withApiHandler(async (event) => {
     deployUrl: body.deployUrl,
     techStack: body.techStack,
     startDate: body.startDate,
-    dueDate: body.dueDate
+    dueDate: body.dueDate,
+    releasePhase: body.releasePhase
   })
 
   setResponseStatus(event, 201)

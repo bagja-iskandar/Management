@@ -1,12 +1,10 @@
-import { getRouterParam, createError } from 'h3'
+import { createError } from 'h3'
 import { withApiHandler } from '../../../utils/handler'
+import { requireRouterParam } from '../../../schemas/helper'
 import { noteRepository } from '../../../repositories'
 
 export default withApiHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) {
-    throw createError({ statusCode: 400, statusMessage: 'Note ID is required' })
-  }
+  const id = requireRouterParam(event, 'id', 'Note ID')
 
   const note = await noteRepository.findById(id)
   if (!note) {

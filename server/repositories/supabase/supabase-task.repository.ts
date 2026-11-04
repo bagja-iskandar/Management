@@ -1,8 +1,8 @@
 import { createError } from 'h3'
 import type { ITaskRepository, TaskFilterOptions } from '../contracts/task.repository'
 import type { Task } from '~/types'
-import { getSupabaseClient } from '../../utils/supabase'
-import { isNetworkError } from '../index'
+import { requireSupabaseClient, throwIfSupabaseError } from '../../utils/supabase'
+import { mapTaskRow, mapTaskToRow } from './mappers'
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const ENG_CODE_REGEX = /^#?ENG-\d+$/i
@@ -19,55 +19,9 @@ function resolveTaskIdFilter(id: string): { column: 'task_id' | 'id'; value: str
   return { column: 'id', value: clean }
 }
 
-function mapTaskRow(row: any): Task {
-  return {
-    id: row.id,
-    taskId: row.task_id,
-    projectSlug: row.project_slug || undefined,
-    name: row.name,
-    description: row.description || '',
-    status: row.status,
-    priority: row.priority,
-    techTags: Array.isArray(row.tech_tags) ? row.tech_tags : [],
-    dueDate: row.due_date || undefined,
-    sprintId: row.sprint_id || undefined,
-    date: row.date || (row.created_at ? row.created_at.slice(0, 10) : new Date().toISOString().slice(0, 10)),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at,
-    githubIssueUrl: row.github_issue_url || undefined,
-    githubIssueNumber: row.github_issue_number || undefined,
-    githubPrUrl: row.github_pr_url || undefined
-  }
-}
-
-function mapTaskToRow(t: Partial<Task>): Record<string, any> {
-  const row: Record<string, any> = {}
-  if (t.taskId !== undefined) row.task_id = t.taskId
-  if (t.projectSlug !== undefined) row.project_slug = t.projectSlug || null
-  if (t.name !== undefined) row.name = t.name
-  if (t.description !== undefined) row.description = t.description
-  if (t.status !== undefined) row.status = t.status
-  if (t.priority !== undefined) row.priority = t.priority
-  if (t.techTags !== undefined) row.tech_tags = t.techTags
-  if (t.dueDate !== undefined) row.due_date = t.dueDate || null
-  if (t.sprintId !== undefined) row.sprint_id = t.sprintId || null
-  if (t.date !== undefined) row.date = t.date
-  if (t.githubIssueUrl !== undefined) row.github_issue_url = t.githubIssueUrl || null
-  if (t.githubIssueNumber !== undefined) row.github_issue_number = t.githubIssueNumber || null
-  if (t.githubPrUrl !== undefined) row.github_pr_url = t.githubPrUrl || null
-  return row
-}
-
 export class SupabaseTaskRepository implements ITaskRepository {
-  private get client() {
-    const c = getSupabaseClient()
-    if (!c) {
-      throw createError({
-        statusCode: 503,
-        statusMessage: 'Supabase client is not configured or unavailable'
-      })
-    }
-    return c
+  protected get client() {
+    return requireSupabaseClient()
   }
 
   async findAll(filters?: TaskFilterOptions): Promise<Task[]> {
@@ -93,21 +47,7 @@ export class SupabaseTaskRepository implements ITaskRepository {
     }
 
     const { data, error } = await query
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseTaskRepository.findAll] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseTaskRepository.findAll')
 
     return (data || []).map(mapTaskRow)
   }
@@ -126,21 +66,7 @@ export class SupabaseTaskRepository implements ITaskRepository {
       .eq(filter.column, filter.value)
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseTaskRepository.findById] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseTaskRepository.findById')
 
     return data ? mapTaskRow(data) : null
   }
@@ -166,24 +92,11 @@ export class SupabaseTaskRepository implements ITaskRepository {
         if (error) throw error
         return mapTaskRow(data)
       } catch (err: any) {
-        if (isNetworkError(err)) {
-          throw createError({
-            statusCode: 503,
-            statusMessage: 'Database connection temporarily unavailable',
-            data: { error: err.message || err }
-          })
-        }
         if (err?.code === '23505' && !taskData.taskId && attempt < maxRetries) {
           console.warn(`[SupabaseTaskRepository.create] Duplicate taskId collision on attempt ${attempt}, retrying...`)
           continue
         }
-        console.error('[SupabaseTaskRepository.create] Error:', err)
-        if (err?.statusCode) throw err
-        throw createError({
-          statusCode: 500,
-          statusMessage: `Failed to create task in Supabase: ${err.message}`,
-          data: err
-        })
+        throwIfSupabaseError(err, 'SupabaseTaskRepository.create')
       }
     }
     throw createError({
@@ -210,21 +123,7 @@ export class SupabaseTaskRepository implements ITaskRepository {
       .select()
       .maybeSingle()
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseTaskRepository.update] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseTaskRepository.update')
 
     return data ? mapTaskRow(data) : null
   }
@@ -241,21 +140,8 @@ export class SupabaseTaskRepository implements ITaskRepository {
       .from('tasks')
       .delete()
       .eq('id', existing.id)
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseTaskRepository.delete] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+
+    throwIfSupabaseError(error, 'SupabaseTaskRepository.delete')
 
     // Cascade cleanup: bersihkan task ID dari array task_ids pada tabel sprints
     try {
@@ -290,21 +176,7 @@ export class SupabaseTaskRepository implements ITaskRepository {
       .from('tasks')
       .select('task_id')
 
-    if (error) {
-      if (isNetworkError(error)) {
-        throw createError({
-          statusCode: 503,
-          statusMessage: 'Database connection temporarily unavailable',
-          data: { error: error.message || error }
-        })
-      }
-      console.error('[SupabaseTaskRepository.nextTaskId] Error:', error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: `Database error: ${error.message}`,
-        data: error
-      })
-    }
+    throwIfSupabaseError(error, 'SupabaseTaskRepository.nextTaskId')
 
     if (!data || data.length === 0) {
       return 'ENG-001'

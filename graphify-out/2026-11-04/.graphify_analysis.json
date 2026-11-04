@@ -1,0 +1,426 @@
+{
+  "communities": {
+    "0": [
+      "components_dashboard",
+      "components_dashboard_chartperiod",
+      "components_dashboard_completedarc",
+      "components_dashboard_completedcount",
+      "components_dashboard_confirmopen",
+      "components_dashboard_confirmtarget",
+      "components_dashboard_data_activities_error_activitieserror",
+      "components_dashboard_data_stats_error_statserror",
+      "components_dashboard_deletetask",
+      "components_dashboard_filtered",
+      "components_dashboard_inprogressarc",
+      "components_dashboard_inprogresscount",
+      "components_dashboard_isbusy",
+      "components_dashboard_onconfirmdelete",
+      "components_dashboard_ontaskmodalcreated",
+      "components_dashboard_q",
+      "components_dashboard_refreshdata",
+      "components_dashboard_showaddtaskmodal",
+      "components_dashboard_statsapi",
+      "components_dashboard_tasksapi",
+      "components_dashboard_todoarc",
+      "components_dashboard_todocount",
+      "components_dashboard_togglestatus",
+      "components_dashboard_totaltaskscount",
+      "composables_usestats",
+      "composables_usestats_usestats",
+      "composables_usestats_usestats_getstats",
+      "composables_usetasks",
+      "composables_usetasks_usetasks",
+      "composables_usetasks_usetasks_createtask",
+      "composables_usetasks_usetasks_deletetask",
+      "composables_usetasks_usetasks_getactivities",
+      "composables_usetasks_usetasks_gettasks",
+      "composables_usetasks_usetasks_updatetask"
+    ],
+    "1": [
+      "server_api_activities_get",
+      "server_api_projects_get",
+      "server_api_stats_get",
+      "server_api_task_id_delete",
+      "server_api_task_id_put",
+      "server_api_tasks_get",
+      "server_api_tasks_post",
+      "server_middleware_visit",
+      "server_plugins_seed",
+      "server_utils_errors",
+      "server_utils_errors_formaterror",
+      "server_utils_errors_throwapierror",
+      "server_utils_handler",
+      "server_utils_handler_withapihandler",
+      "server_utils_storage_adapter",
+      "server_utils_storage_adapter_createstorageadapter",
+      "server_utils_store",
+      "server_utils_store_createitem",
+      "server_utils_store_genid",
+      "server_utils_store_getarray",
+      "server_utils_store_getbyid",
+      "server_utils_store_getvalue",
+      "server_utils_store_migratenumericids",
+      "server_utils_store_normalizeid",
+      "server_utils_store_removeitem",
+      "server_utils_store_setarray",
+      "server_utils_store_setvalue",
+      "server_utils_store_storage",
+      "server_utils_store_updateitem",
+      "server_utils_validation",
+      "server_utils_validation_readjsonbody",
+      "server_utils_validation_requirestring",
+      "server_utils_validation_validatedate",
+      "server_utils_validation_validatestatus"
+    ],
+    "2": [
+      "app_pages_tasks",
+      "app_pages_tasks_allcount",
+      "app_pages_tasks_completedcount",
+      "app_pages_tasks_confirmopen",
+      "app_pages_tasks_confirmtarget",
+      "app_pages_tasks_data_tasks_error_taskserror",
+      "app_pages_tasks_deletetask",
+      "app_pages_tasks_filteredtasks",
+      "app_pages_tasks_formatdate",
+      "app_pages_tasks_getpriority",
+      "app_pages_tasks_getprojectname",
+      "app_pages_tasks_gettaskdescription",
+      "app_pages_tasks_inprogresscount",
+      "app_pages_tasks_isbusy",
+      "app_pages_tasks_onconfirmdelete",
+      "app_pages_tasks_ontaskcreated",
+      "app_pages_tasks_priorityfilter",
+      "app_pages_tasks_projectfilter",
+      "app_pages_tasks_resetfilters",
+      "app_pages_tasks_search",
+      "app_pages_tasks_showaddmodal",
+      "app_pages_tasks_sortby",
+      "app_pages_tasks_statusfilter",
+      "app_pages_tasks_successfeedback",
+      "app_pages_tasks_tasksapi",
+      "app_pages_tasks_todocount",
+      "app_pages_tasks_togglestatus"
+    ],
+    "3": [
+      "app_pages_projects_slug",
+      "app_pages_projects_slug_addtasklocally",
+      "app_pages_projects_slug_completedcount",
+      "app_pages_projects_slug_confirmdeleteproject",
+      "app_pages_projects_slug_currentproject",
+      "app_pages_projects_slug_data_projects",
+      "app_pages_projects_slug_derivedpercentage",
+      "app_pages_projects_slug_filteredtasks",
+      "app_pages_projects_slug_inprogresscount",
+      "app_pages_projects_slug_localtask",
+      "app_pages_projects_slug_localtasks",
+      "app_pages_projects_slug_newtaskname",
+      "app_pages_projects_slug_onprojectdeleted",
+      "app_pages_projects_slug_priorityclass",
+      "app_pages_projects_slug_projectsapi",
+      "app_pages_projects_slug_removetask",
+      "app_pages_projects_slug_route",
+      "app_pages_projects_slug_router",
+      "app_pages_projects_slug_showtaskdrawer",
+      "app_pages_projects_slug_slug",
+      "app_pages_projects_slug_statusclass",
+      "app_pages_projects_slug_taskfilter",
+      "app_pages_projects_slug_tasksearch",
+      "app_pages_projects_slug_todocount",
+      "app_pages_projects_slug_toggletaskstatus"
+    ],
+    "4": [
+      "app_pages_projects",
+      "app_pages_projects_activecount",
+      "app_pages_projects_activestatus",
+      "app_pages_projects_allcount",
+      "app_pages_projects_completedcount",
+      "app_pages_projects_data_serverprojects_error_projectserror",
+      "app_pages_projects_displayprojects",
+      "app_pages_projects_filteredprojects",
+      "app_pages_projects_getduedate",
+      "app_pages_projects_getprogress",
+      "app_pages_projects_getstatusclass",
+      "app_pages_projects_getstatuslabel",
+      "app_pages_projects_gettaskcountlabel",
+      "app_pages_projects_localnewprojects",
+      "app_pages_projects_onholdcount",
+      "app_pages_projects_onprojectcreated",
+      "app_pages_projects_plannedcount",
+      "app_pages_projects_projectsapi",
+      "app_pages_projects_resetfilters",
+      "app_pages_projects_search",
+      "app_pages_projects_showaddmodal",
+      "app_pages_projects_sortby",
+      "app_pages_projects_successfeedback"
+    ],
+    "5": [
+      "components_activitytable",
+      "components_activitytable_formatdate",
+      "components_activitytable_getprojectlabel",
+      "components_activitytable_props",
+      "components_activitytable_statusclass",
+      "components_activitytable_statuslabel",
+      "components_statcard",
+      "components_statcard_formattedvalue",
+      "components_statcard_iconvariant",
+      "components_statcard_props",
+      "components_statcard_trendtext",
+      "ref_vue",
+      "types_index",
+      "types_project",
+      "types_project_project",
+      "types_stat",
+      "types_stat_stat",
+      "types_task",
+      "types_task_task"
+    ],
+    "6": [
+      "package",
+      "package_dependencies",
+      "package_dependencies_nuxt",
+      "package_dependencies_pinia",
+      "package_dependencies_vue",
+      "package_dependencies_vue_router",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_generate",
+      "package_scripts_postinstall",
+      "package_scripts_preview",
+      "package_type",
+      "ref_nuxt",
+      "ref_pinia",
+      "ref_vue_router"
+    ],
+    "7": [
+      "components_addtaskmodal",
+      "components_addtaskmodal_description",
+      "components_addtaskmodal_dialogref",
+      "components_addtaskmodal_duedate",
+      "components_addtaskmodal_emit",
+      "components_addtaskmodal_issubmitting",
+      "components_addtaskmodal_name",
+      "components_addtaskmodal_nameinputref",
+      "components_addtaskmodal_oncancel",
+      "components_addtaskmodal_onkeydown",
+      "components_addtaskmodal_onsubmit",
+      "components_addtaskmodal_priority",
+      "components_addtaskmodal_props",
+      "components_addtaskmodal_selectedproject",
+      "components_addtaskmodal_status",
+      "components_addtaskmodal_validationerror"
+    ],
+    "8": [
+      "components_confirmdialog",
+      "components_confirmdialog_cancelbutton",
+      "components_confirmdialog_descid",
+      "components_confirmdialog_displaybusy",
+      "components_confirmdialog_displaycanceltext",
+      "components_confirmdialog_displayconfirmtext",
+      "components_confirmdialog_displaymessage",
+      "components_confirmdialog_displaytitle",
+      "components_confirmdialog_emits",
+      "components_confirmdialog_getfocusableelements",
+      "components_confirmdialog_handlekeydown",
+      "components_confirmdialog_oncancel",
+      "components_confirmdialog_onconfirm",
+      "components_confirmdialog_panel",
+      "components_confirmdialog_props",
+      "components_confirmdialog_titleid"
+    ],
+    "9": [
+      "components_addprojectmodal",
+      "components_addprojectmodal_description",
+      "components_addprojectmodal_dialogref",
+      "components_addprojectmodal_duedate",
+      "components_addprojectmodal_emit",
+      "components_addprojectmodal_issubmitting",
+      "components_addprojectmodal_name",
+      "components_addprojectmodal_nameinputref",
+      "components_addprojectmodal_oncancel",
+      "components_addprojectmodal_onkeydown",
+      "components_addprojectmodal_onsubmit",
+      "components_addprojectmodal_priority",
+      "components_addprojectmodal_startdate",
+      "components_addprojectmodal_status",
+      "components_addprojectmodal_validationerror"
+    ],
+    "10": [
+      "components_taskform",
+      "components_taskform_emits",
+      "components_taskform_oninput",
+      "components_taskform_onsubmit",
+      "components_taskform_props",
+      "components_taskform_value"
+    ],
+    "11": [
+      "components_navbar",
+      "components_navbar_open",
+      "components_navbar_route"
+    ],
+    "12": [
+      "composables_useprojects",
+      "composables_useprojects_useprojects",
+      "composables_useprojects_useprojects_getprojects"
+    ],
+    "13": [
+      "server_utils_storage_adapter_storageadapter",
+      "server_utils_storage_adapter_storageadapter_getitem",
+      "server_utils_storage_adapter_storageadapter_setitem"
+    ],
+    "14": [
+      "tsconfig",
+      "tsconfig_files",
+      "tsconfig_references"
+    ],
+    "15": [
+      "components_quickpanel",
+      "components_quickpanel_props"
+    ],
+    "16": [
+      "app_app"
+    ],
+    "17": [
+      "app_pages_index"
+    ],
+    "18": [
+      "nuxt_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06951871657754011,
+    "1": 0.1622103386809269,
+    "2": 0.08262108262108261,
+    "3": 0.08,
+    "4": 0.11462450592885376,
+    "5": 0.11695906432748537,
+    "6": 0.1111111111111111,
+    "7": 0.15,
+    "8": 0.15833333333333333,
+    "9": 0.1619047619047619,
+    "10": 0.4666666666666667,
+    "11": 0.6666666666666666,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0
+  },
+  "gods": [
+    {
+      "id": "ref_vue",
+      "label": "vue",
+      "degree": 10
+    },
+    {
+      "id": "server_utils_handler_withapihandler",
+      "label": "withApiHandler()",
+      "degree": 8
+    },
+    {
+      "id": "app_pages_projects_getstatuslabel",
+      "label": "getStatusLabel()",
+      "degree": 7
+    },
+    {
+      "id": "composables_usetasks_usetasks",
+      "label": "useTasks()",
+      "degree": 7
+    },
+    {
+      "id": "server_utils_store_getarray",
+      "label": "getArray()",
+      "degree": 7
+    },
+    {
+      "id": "server_utils_store_setarray",
+      "label": "setArray()",
+      "degree": 7
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 6
+    },
+    {
+      "id": "server_utils_errors_throwapierror",
+      "label": "throwApiError()",
+      "degree": 6
+    },
+    {
+      "id": "server_utils_store_storage",
+      "label": "storage()",
+      "degree": 6
+    },
+    {
+      "id": "server_utils_store_getvalue",
+      "label": "getValue()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "readJsonBody()",
+      "target": "throwApiError()",
+      "source_files": [
+        "server/utils/validation.ts",
+        "server/utils/errors.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "requireString()",
+      "target": "throwApiError()",
+      "source_files": [
+        "server/utils/validation.ts",
+        "server/utils/errors.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "validateDate()",
+      "target": "throwApiError()",
+      "source_files": [
+        "server/utils/validation.ts",
+        "server/utils/errors.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "validateStatus()",
+      "target": "throwApiError()",
+      "source_files": [
+        "server/utils/validation.ts",
+        "server/utils/errors.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    },
+    {
+      "source": "storage()",
+      "target": "createStorageAdapter()",
+      "source_files": [
+        "server/utils/store.ts",
+        "server/utils/storage-adapter.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "cross-file semantic connection"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

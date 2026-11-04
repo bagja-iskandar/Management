@@ -1,13 +1,11 @@
+import { createError } from 'h3'
 import { taskRepository, sprintRepository } from '../../repositories'
 import { withApiHandler } from '../../utils/handler'
-import { validateBody } from '../../schemas/helper'
+import { validateBody, requireRouterParam } from '../../schemas/helper'
 import { updateTaskSchema } from '../../schemas/task.schema'
 
 export default withApiHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  if (!id) {
-    throw createError({ statusCode: 400, statusMessage: 'Task ID is required' })
-  }
+  const id = requireRouterParam(event, 'id', 'Task ID')
 
   const patch = await validateBody(event, updateTaskSchema)
   const existing = await taskRepository.findById(id)
@@ -31,13 +29,6 @@ export default withApiHandler(async (event) => {
 
     if (activeSprint) {
       patch.sprintId = activeSprint.id
-
-      // Sinkronkan juga sprint.taskIds jika ada
-      const currentTaskIds = Array.isArray(activeSprint.taskIds) ? [...activeSprint.taskIds] : []
-      if (!currentTaskIds.includes(existing.id)) {
-        currentTaskIds.push(existing.id)
-        await sprintRepository.update(activeSprint.id, { taskIds: currentTaskIds })
-      }
     }
   }
 
