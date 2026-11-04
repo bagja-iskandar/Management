@@ -25,6 +25,7 @@ export interface HeaderSegmentedAction {
     count?: number
     disabled?: boolean
   }>
+  size?: 'xs' | 'sm' | 'md'
   onChange: (val: any) => void
 }
 

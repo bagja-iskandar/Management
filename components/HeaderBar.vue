@@ -44,7 +44,7 @@
           v-if="action.type === 'segmented'"
           :model-value="action.modelValue"
           :options="action.options"
-          size="xs"
+          :size="action.size || 'sm'"
           @update:model-value="(val) => { closeSearch(); action.onChange(val) }"
         />
 

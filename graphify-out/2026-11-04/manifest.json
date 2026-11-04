@@ -18,15 +18,15 @@
     "semantic_hash": ""
   },
   "app/pages/projects/[slug].vue": {
-    "mtime": 1793626770.7842798,
-    "seen": 1793626995.3745735,
-    "ast_hash": "a53df6a8d7dfb81988ad8abe33e3d5c6",
+    "mtime": 1793765287.797562,
+    "seen": 1793765342.992943,
+    "ast_hash": "5b17590533015301b984615d144ec8e9",
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {
-    "mtime": 1793610185.3574395,
-    "seen": 1793610328.5972538,
-    "ast_hash": "49764862ff2469671bd6e45357620bbc",
+    "mtime": 1793765276.5512764,
+    "seen": 1793765342.9970095,
+    "ast_hash": "dff565a4fe2e41b4539ffd84b886d297",
     "semantic_hash": ""
   },
   "components/AddProjectModal.vue": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1793765172.0872903,
-    "seen": 1793765270.6291995,
-    "ast_hash": "90a9e01b71bf10ea80de39c3e03785be",
+    "mtime": 1793766004.8541062,
+    "seen": 1793766065.2396495,
+    "ast_hash": "647e945c0b03d8d808e7d4b18de299cc",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
@@ -942,9 +942,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/LiveDevOpsStream.vue": {
-    "mtime": 1793627798.3968942,
-    "seen": 1793627825.9527767,
-    "ast_hash": "dde5e60833575dd445c619028e3c2eff",
+    "mtime": 1793765307.16351,
+    "seen": 1793765343.008615,
+    "ast_hash": "8ecf5da22050ce206dbefef291160a9e",
     "semantic_hash": ""
   },
   "components/dashboard/RecentShipmentsCard.vue": {
@@ -1296,9 +1296,9 @@
     "semantic_hash": ""
   },
   "composables/useHeaderActions.ts": {
-    "mtime": 1793765147.577497,
-    "seen": 1793765270.663333,
-    "ast_hash": "8fb736af31d3ea74b776450014ccf879",
+    "mtime": 1793765989.1023555,
+    "seen": 1793766065.2872171,
+    "ast_hash": "fed823aff4afbb379783cf391aabb921",
     "semantic_hash": ""
   },
   "docs/master-ux-redesign-architecture-plan.md": {
@@ -1464,9 +1464,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseSegmentedControl.vue": {
-    "mtime": 1793765224.0208256,
-    "seen": 1793765270.6601987,
-    "ast_hash": "1242e550f9bd5318d2f0ea2b65a62c04",
+    "mtime": 1793765961.7459786,
+    "seen": 1793766065.2828205,
+    "ast_hash": "f6e3dff953d4233b4093491418b3e92c",
     "semantic_hash": ""
   },
   "components/ui/BaseSelect.vue": {
@@ -1476,9 +1476,9 @@
     "semantic_hash": ""
   },
   "tests/unit/ui-primitives.spec.mjs": {
-    "mtime": 1793763378.7748709,
-    "seen": 1793763418.5466163,
-    "ast_hash": "ab670a62674153146dee5ad742851bec",
+    "mtime": 1793765426.6567318,
+    "seen": 1793765456.1392825,
+    "ast_hash": "ec02a3852f6672dc44876468eaacebae",
     "semantic_hash": ""
   },
   "components/ui/BaseSwitch.vue": {

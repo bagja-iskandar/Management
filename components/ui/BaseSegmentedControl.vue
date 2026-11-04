@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#07080A] border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 rounded-lg inline-flex items-center gap-0.5 select-none"
+    class="bg-[#07080A] border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 sm:p-1 rounded-lg sm:rounded-xl gap-1 inline-flex items-center select-none"
     :class="[fullWidth ? 'w-full flex' : '', props.class]"
     role="tablist"
   >
@@ -99,12 +99,12 @@ function onSelect(val: string | number) {
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'xs':
-      return 'px-2 py-0.5 text-[11px] rounded-md gap-1'
+      return 'px-2.5 py-1 text-xs rounded-md gap-1.5'
     case 'md':
-      return 'px-3.5 py-1.5 text-xs rounded-lg gap-2'
+      return 'px-4 py-2 text-xs sm:text-sm rounded-lg gap-2.5 font-medium'
     case 'sm':
     default:
-      return 'px-2.5 py-1 text-xs rounded-md gap-1.5'
+      return 'px-3.5 py-1.5 text-xs rounded-lg gap-2 font-medium'
   }
 })
 </script>

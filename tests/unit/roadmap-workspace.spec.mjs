@@ -716,3 +716,38 @@ test('ROADMAP-EDGE-02: Independence between project.status and project.releasePh
     assert.ok(cls.length > 0, `Status ${s} must have a non-empty badge class`)
   }
 })
+
+// -----------------------------------------------------------------------------
+// 15. ROADMAP-NAV-01: HeaderBar Contextual Segmented Switcher Relocation
+// -----------------------------------------------------------------------------
+test('ROADMAP-NAV-01: app/pages/roadmap.vue registers segmented switcher via useHeaderActions and eliminates local duplicate', () => {
+  const roadmapPath = path.resolve(projectRoot, 'app/pages/roadmap.vue')
+  const content = fs.readFileSync(roadmapPath, 'utf8')
+
+  // Verified registration in Contextual Action Bar
+  assert.ok(content.includes("type: 'segmented'"), 'Must register segmented type action')
+  assert.ok(content.includes("id: 'roadmap-view'"), 'Must use id roadmap-view')
+  assert.ok(content.includes("size: 'sm'"), 'Must specify size sm')
+  assert.ok(content.includes("label: 'Board View'"), 'Must include Board View option')
+  assert.ok(content.includes("label: 'Timeline View'"), 'Must include Timeline View option')
+  assert.ok(content.includes('activeViewMode.value = val'), 'Must mutate activeViewMode on selection')
+
+  // Verification that template no longer contains duplicate local toolbar switcher
+  assert.ok(
+    !content.includes('<BaseSegmentedControl') && !content.includes('<SegmentedControl'),
+    'Template must not render duplicate local segmented control'
+  )
+})
+
+// -----------------------------------------------------------------------------
+// 16. ROADMAP-NAV-02: HeaderBar.vue Segmented Action Wireup
+// -----------------------------------------------------------------------------
+test('ROADMAP-NAV-02: components/HeaderBar.vue renders BaseSegmentedControl for segmented actions', () => {
+  const headerPath = path.resolve(projectRoot, 'components/HeaderBar.vue')
+  const content = fs.readFileSync(headerPath, 'utf8')
+
+  assert.ok(content.includes("v-if=\"action.type === 'segmented'\""), 'HeaderBar must conditionally render segmented actions')
+  assert.ok(content.includes('<BaseSegmentedControl'), 'HeaderBar must render BaseSegmentedControl component')
+  assert.ok(content.includes(':size="action.size || \'sm\'"'), 'HeaderBar must pass size property defaulting to sm')
+})
+

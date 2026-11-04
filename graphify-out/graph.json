@@ -716,7 +716,7 @@
       "file_type": "code",
       "norm_label": "headeraction",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L31"
+      "source_location": "L32"
     },
     {
       "id": "composables_useheaderactions_headeractionvariant",
@@ -1184,7 +1184,7 @@
       "file_type": "code",
       "norm_label": "phaseclassification",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L666"
+      "source_location": "L669"
     },
     {
       "id": "types_github_githubsecurityseverity",
@@ -5401,7 +5401,7 @@
       "file_type": "code",
       "norm_label": "useheaderactions()",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L36"
+      "source_location": "L37"
     },
     {
       "id": "composables_useheaderactions_useheaderactions_clearactions",
@@ -5413,7 +5413,7 @@
       "file_type": "code",
       "norm_label": "clearactions()",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "composables_useheaderactions_useheaderactions_setactions",
@@ -5425,7 +5425,7 @@
       "file_type": "code",
       "norm_label": "setactions()",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L37"
+      "source_location": "L38"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_promise_finally",
@@ -6625,7 +6625,7 @@
       "file_type": "code",
       "norm_label": "classifyreleasephase()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L672"
+      "source_location": "L675"
     },
     {
       "id": "app_pages_roadmap_formatdate",
@@ -6637,7 +6637,7 @@
       "file_type": "code",
       "norm_label": "formatdate()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L753"
+      "source_location": "L756"
     },
     {
       "id": "app_pages_roadmap_getphasebadgeclass",
@@ -6649,7 +6649,7 @@
       "file_type": "code",
       "norm_label": "getphasebadgeclass()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L724"
+      "source_location": "L727"
     },
     {
       "id": "app_pages_roadmap_getphaselabel",
@@ -6661,7 +6661,7 @@
       "file_type": "code",
       "norm_label": "getphaselabel()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L729"
+      "source_location": "L732"
     },
     {
       "id": "app_pages_roadmap_getprioritybadgeclass",
@@ -6673,7 +6673,7 @@
       "file_type": "code",
       "norm_label": "getprioritybadgeclass()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L774"
+      "source_location": "L777"
     },
     {
       "id": "app_pages_roadmap_getprojectprogress",
@@ -6685,7 +6685,7 @@
       "file_type": "code",
       "norm_label": "getprojectprogress()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L741"
+      "source_location": "L744"
     },
     {
       "id": "app_pages_roadmap_getprojectsbyphase",
@@ -6697,7 +6697,7 @@
       "file_type": "code",
       "norm_label": "getprojectsbyphase()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L720"
+      "source_location": "L723"
     },
     {
       "id": "app_pages_roadmap_getprojecttasks",
@@ -6709,7 +6709,7 @@
       "file_type": "code",
       "norm_label": "getprojecttasks()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L735"
+      "source_location": "L738"
     },
     {
       "id": "app_pages_roadmap_getstatusbadgeclass",
@@ -6721,7 +6721,7 @@
       "file_type": "code",
       "norm_label": "getstatusbadgeclass()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L764"
+      "source_location": "L767"
     },
     {
       "id": "app_pages_roadmap_onupdatereleasephase",
@@ -6733,7 +6733,7 @@
       "file_type": "code",
       "norm_label": "onupdatereleasephase()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L785"
+      "source_location": "L788"
     },
     {
       "id": "app_pages_roadmap_refreshroadmap",
@@ -6745,7 +6745,7 @@
       "file_type": "code",
       "norm_label": "refreshroadmap()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L607"
+      "source_location": "L597"
     },
     {
       "id": "app_pages_roadmap_showfeedback",
@@ -6757,7 +6757,7 @@
       "file_type": "code",
       "norm_label": "showfeedback()",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L803"
+      "source_location": "L806"
     },
     {
       "id": "app_pages_sprints_addexistingtasktoweek",
@@ -19590,7 +19590,7 @@
       "file_type": "code",
       "norm_label": "actionsstate",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L34"
+      "source_location": "L35"
     },
     {
       "id": "docs_master_remediation_plan_4_1_single_source_of_truth_ssot_relasi_task_sprint",
@@ -27297,7 +27297,7 @@
       "file_type": "code",
       "norm_label": "activeviewmode",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L601"
+      "source_location": "L591"
     },
     {
       "id": "app_pages_roadmap_feedbackmessage",
@@ -27308,7 +27308,7 @@
       "file_type": "code",
       "norm_label": "feedbackmessage",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L799"
+      "source_location": "L802"
     },
     {
       "id": "app_pages_roadmap_feedbacktype",
@@ -27319,7 +27319,7 @@
       "file_type": "code",
       "norm_label": "feedbacktype",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L800"
+      "source_location": "L803"
     },
     {
       "id": "app_pages_roadmap_filteredprojects",
@@ -27330,7 +27330,7 @@
       "file_type": "code",
       "norm_label": "filteredprojects",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L694"
+      "source_location": "L697"
     },
     {
       "id": "app_pages_roadmap_isstaledatawarning",
@@ -27341,7 +27341,7 @@
       "file_type": "code",
       "norm_label": "isstaledatawarning",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L657"
+      "source_location": "L660"
     },
     {
       "id": "app_pages_roadmap_istaskmetricsavailable",
@@ -27352,7 +27352,7 @@
       "file_type": "code",
       "norm_label": "istaskmetricsavailable",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L661"
+      "source_location": "L664"
     },
     {
       "id": "app_pages_roadmap_isupdatingphase",
@@ -27363,7 +27363,7 @@
       "file_type": "code",
       "norm_label": "isupdatingphase",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L783"
+      "source_location": "L786"
     },
     {
       "id": "app_pages_roadmap_projectsapi",
@@ -27374,7 +27374,7 @@
       "file_type": "code",
       "norm_label": "projectsapi",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L598"
+      "source_location": "L588"
     },
     {
       "id": "app_pages_roadmap_roadmapdatastate",
@@ -27385,7 +27385,7 @@
       "file_type": "code",
       "norm_label": "roadmapdatastate",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L640"
+      "source_location": "L643"
     },
     {
       "id": "app_pages_roadmap_searchquery",
@@ -27396,7 +27396,7 @@
       "file_type": "code",
       "norm_label": "searchquery",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L602"
+      "source_location": "L592"
     },
     {
       "id": "app_pages_roadmap_setactions_clearactions",
@@ -27407,7 +27407,7 @@
       "file_type": "code",
       "norm_label": "{ setactions, clearactions }",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L605"
+      "source_location": "L595"
     },
     {
       "id": "app_pages_roadmap_timelineprojects",
@@ -27418,7 +27418,7 @@
       "file_type": "code",
       "norm_label": "timelineprojects",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L709"
+      "source_location": "L712"
     },
     {
       "id": "app_pages_roadmap_workspacestore",
@@ -27429,7 +27429,7 @@
       "file_type": "code",
       "norm_label": "workspacestore",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L597"
+      "source_location": "L587"
     },
     {
       "id": "app_pages_sprints",
@@ -33738,7 +33738,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L745",
+      "source_location": "L748",
       "weight": 1.0
     },
     {
@@ -33750,7 +33750,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L721",
+      "source_location": "L724",
       "weight": 1.0
     },
     {
@@ -33762,7 +33762,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L786",
+      "source_location": "L789",
       "weight": 1.0
     },
     {
@@ -33774,7 +33774,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L790",
+      "source_location": "L793",
       "weight": 1.0
     },
     {
@@ -33786,7 +33786,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L610",
+      "source_location": "L600",
       "weight": 1.0
     },
     {
@@ -42187,7 +42187,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L589",
+      "source_location": "L579",
       "weight": 1.0
     },
     {
@@ -49412,7 +49412,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L597",
+      "source_location": "L587",
       "weight": 1.0
     },
     {
@@ -49423,7 +49423,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L598",
+      "source_location": "L588",
       "weight": 1.0
     },
     {
@@ -49434,7 +49434,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L601",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -49445,7 +49445,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L602",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -49456,7 +49456,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L605",
+      "source_location": "L595",
       "weight": 1.0
     },
     {
@@ -49467,7 +49467,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L607",
+      "source_location": "L597",
       "weight": 1.0
     },
     {
@@ -49478,7 +49478,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L640",
+      "source_location": "L643",
       "weight": 1.0
     },
     {
@@ -49489,7 +49489,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L657",
+      "source_location": "L660",
       "weight": 1.0
     },
     {
@@ -49500,7 +49500,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L661",
+      "source_location": "L664",
       "weight": 1.0
     },
     {
@@ -49511,7 +49511,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L666",
+      "source_location": "L669",
       "weight": 1.0
     },
     {
@@ -49522,7 +49522,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L672",
+      "source_location": "L675",
       "weight": 1.0
     },
     {
@@ -49533,7 +49533,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L694",
+      "source_location": "L697",
       "weight": 1.0
     },
     {
@@ -49544,7 +49544,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L709",
+      "source_location": "L712",
       "weight": 1.0
     },
     {
@@ -49555,7 +49555,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L720",
+      "source_location": "L723",
       "weight": 1.0
     },
     {
@@ -49566,7 +49566,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L724",
+      "source_location": "L727",
       "weight": 1.0
     },
     {
@@ -49577,7 +49577,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L729",
+      "source_location": "L732",
       "weight": 1.0
     },
     {
@@ -49588,7 +49588,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L735",
+      "source_location": "L738",
       "weight": 1.0
     },
     {
@@ -49599,7 +49599,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L741",
+      "source_location": "L744",
       "weight": 1.0
     },
     {
@@ -49610,7 +49610,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L753",
+      "source_location": "L756",
       "weight": 1.0
     },
     {
@@ -49621,7 +49621,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L764",
+      "source_location": "L767",
       "weight": 1.0
     },
     {
@@ -49632,7 +49632,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L774",
+      "source_location": "L777",
       "weight": 1.0
     },
     {
@@ -49643,7 +49643,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L783",
+      "source_location": "L786",
       "weight": 1.0
     },
     {
@@ -49654,7 +49654,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L785",
+      "source_location": "L788",
       "weight": 1.0
     },
     {
@@ -49665,7 +49665,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L799",
+      "source_location": "L802",
       "weight": 1.0
     },
     {
@@ -49676,7 +49676,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L800",
+      "source_location": "L803",
       "weight": 1.0
     },
     {
@@ -49687,7 +49687,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/roadmap.vue",
-      "source_location": "L803",
+      "source_location": "L806",
       "weight": 1.0
     },
     {
@@ -58465,7 +58465,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L31",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -58476,7 +58476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -58487,7 +58487,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L36",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -75160,7 +75160,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L51",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -75172,7 +75172,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -76149,5 +76149,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "48615cb0fceba52c09577023ebf9482905e947d1"
+  "built_at_commit": "6e39fa3585f52975a6db45ab1af44c361cf7a282"
 }
