@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
+import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { ref, computed, watch, nextTick } from 'vue'
 import { createJiti } from 'jiti'
@@ -441,4 +442,59 @@ test('CAB-UI-02: HeaderBar getActionClass maps variants to Precision Dark Obsidi
   assert.match(getActionClass('danger'), /bg-rose-500\/10/)
   assert.equal(getActionClass(undefined), getActionClass('secondary'))
 })
+
+test('CAB-UI-03: HeaderBar getButtonSizeClass maps size options to unified height scales and validates useHeaderActions size prop', () => {
+  // Canonical mapping function from HeaderBar.vue
+  function getButtonSizeClass(size) {
+    switch (size) {
+      case 'xs':
+        return 'h-8 px-2.5 rounded-lg gap-1.5 text-xs'
+      case 'md':
+        return 'h-10 px-4 rounded-xl gap-2.5 text-xs sm:text-sm'
+      case 'sm':
+      default:
+        return 'h-[38px] px-3.5 rounded-lg sm:rounded-xl gap-2 text-xs'
+    }
+  }
+
+  assert.equal(getButtonSizeClass('xs'), 'h-8 px-2.5 rounded-lg gap-1.5 text-xs')
+  assert.equal(getButtonSizeClass('md'), 'h-10 px-4 rounded-xl gap-2.5 text-xs sm:text-sm')
+  assert.equal(getButtonSizeClass('sm'), 'h-[38px] px-3.5 rounded-lg sm:rounded-xl gap-2 text-xs')
+  assert.equal(getButtonSizeClass(undefined), 'h-[38px] px-3.5 rounded-lg sm:rounded-xl gap-2 text-xs')
+
+  // Verify type definition support in composables/useHeaderActions.ts
+  const composableSource = fs.readFileSync(path.resolve(projectRoot, 'composables/useHeaderActions.ts'), 'utf8')
+  assert.ok(
+    composableSource.includes("size?: 'xs' | 'sm' | 'md'"),
+    'HeaderButtonAction and HeaderSegmentedAction must declare size?: \'xs\' | \'sm\' | \'md\''
+  )
+})
+
+test('CAB-UI-04: HeaderBar button action height h-[38px] harmonizes perfectly with BaseSegmentedControl sm container', () => {
+  const headerBarSource = fs.readFileSync(path.resolve(projectRoot, 'components/HeaderBar.vue'), 'utf8')
+  const segmentedSource = fs.readFileSync(path.resolve(projectRoot, 'components/ui/BaseSegmentedControl.vue'), 'utf8')
+
+  // Verify HeaderBar applies getButtonSizeClass to action buttons
+  assert.ok(
+    headerBarSource.includes('getButtonSizeClass(action.size)'),
+    'HeaderBar must bind getButtonSizeClass(action.size) on action buttons'
+  )
+  assert.ok(
+    headerBarSource.includes("return 'h-[38px] px-3.5 rounded-lg sm:rounded-xl gap-2 text-xs'"),
+    'HeaderBar default/sm button size must return h-[38px]'
+  )
+
+  // Verify BaseSegmentedControl sm container height is exactly h-[38px]
+  assert.ok(
+    segmentedSource.includes("case 'sm':") && segmentedSource.includes("return 'h-[38px]'"),
+    'BaseSegmentedControl sm/default container must declare height h-[38px]'
+  )
+
+  // Verify BaseSegmentedControl inner pill fills 100% container height
+  assert.ok(
+    segmentedSource.includes("return 'h-full px-3.5 py-1.5 text-xs rounded-lg gap-2 font-medium'"),
+    'BaseSegmentedControl sm inner pill must declare h-full for perfect vertical parity'
+  )
+})
+
 

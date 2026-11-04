@@ -54,8 +54,8 @@
           type="button"
           @click="handleActionClick(action)"
           :disabled="action.disabled || action.loading"
-          :class="getActionClass(action.variant)"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all select-none cursor-pointer focus:outline-none active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+          :class="[getActionClass(action.variant), getButtonSizeClass(action.size)]"
+          class="inline-flex items-center font-medium transition-all select-none cursor-pointer focus:outline-none active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
           :title="action.shortcut ? `${action.label} (${action.shortcut})` : action.label"
         >
           <NexuraIcon v-if="action.icon" :name="action.icon" size="xs" class="shrink-0" />
@@ -106,6 +106,18 @@ function getActionClass(variant?: HeaderActionVariant) {
       return 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30'
     default:
       return 'bg-white/[0.04] hover:bg-white/[0.08] text-[#D1D5DB] hover:text-[#F3F4F6] border border-white/[0.08]'
+  }
+}
+
+function getButtonSizeClass(size?: 'xs' | 'sm' | 'md') {
+  switch (size) {
+    case 'xs':
+      return 'h-8 px-2.5 rounded-lg gap-1.5 text-xs'
+    case 'md':
+      return 'h-10 px-4 rounded-xl gap-2.5 text-xs sm:text-sm'
+    case 'sm':
+    default:
+      return 'h-[38px] px-3.5 rounded-lg sm:rounded-xl gap-2 text-xs'
   }
 }
 

@@ -4,19 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "id": "components_addideamodal_projectitemoption",
-      "label": "ProjectItemOption",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "projectitemoption",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L156"
-    },
-    {
       "id": "components_ui_basecard_basecardprops",
       "label": "BaseCardProps",
       "_callable": true,
@@ -249,58 +236,6 @@
       "norm_label": "themepreset",
       "source_file": "app/pages/settings.vue",
       "source_location": "L308"
-    },
-    {
-      "id": "server_schemas_github_schema_createissueinput",
-      "label": "CreateIssueInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "createissueinput",
-      "source_file": "server/schemas/github.schema.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "server_schemas_github_schema_workflowreruninput",
-      "label": "WorkflowRerunInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "workflowreruninput",
-      "source_file": "server/schemas/github.schema.ts",
-      "source_location": "L18"
-    },
-    {
-      "id": "server_schemas_sprint_schema_createsprintinput",
-      "label": "CreateSprintInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "createsprintinput",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "server_schemas_sprint_schema_updatesprintinput",
-      "label": "UpdateSprintInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "updatesprintinput",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L24"
     },
     {
       "id": "components_ui_basebadge_badgevariant",
@@ -576,97 +511,6 @@
       "source_location": "L1"
     },
     {
-      "id": "server_utils_auth_createsessiontokenoptions",
-      "label": "CreateSessionTokenOptions",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "createsessiontokenoptions",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "server_utils_auth_sessiontokenvalidationresult",
-      "label": "SessionTokenValidationResult",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "sessiontokenvalidationresult",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_task_schema_createtaskinput",
-      "label": "CreateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L56"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryinput",
-      "label": "TaskQueryInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L58"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskinput",
-      "label": "UpdateTaskInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskinput",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L57"
-    },
-    {
-      "id": "server_schemas_project_schema_createprojectinput",
-      "label": "CreateProjectInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "createprojectinput",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "server_schemas_project_schema_updateprojectinput",
-      "label": "UpdateProjectInput",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "updateprojectinput",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L35"
-    },
-    {
       "id": "components_ui_baseswitch_baseswitchprops",
       "label": "BaseSwitchProps",
       "_callable": true,
@@ -706,56 +550,56 @@
       "source_location": "L10"
     },
     {
-      "id": "composables_useheaderactions_headeraction",
-      "label": "HeaderAction",
+      "id": "server_schemas_github_schema_createissueinput",
+      "label": "CreateIssueInput",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 211,
+      "community_name": "helper.ts",
       "file_type": "code",
-      "norm_label": "headeraction",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L32"
+      "norm_label": "createissueinput",
+      "source_file": "server/schemas/github.schema.ts",
+      "source_location": "L11"
     },
     {
-      "id": "composables_useheaderactions_headeractionvariant",
-      "label": "HeaderActionVariant",
+      "id": "server_schemas_github_schema_workflowreruninput",
+      "label": "WorkflowRerunInput",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 211,
+      "community_name": "helper.ts",
       "file_type": "code",
-      "norm_label": "headeractionvariant",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L3"
+      "norm_label": "workflowreruninput",
+      "source_file": "server/schemas/github.schema.ts",
+      "source_location": "L18"
     },
     {
-      "id": "composables_useheaderactions_headerbuttonaction",
-      "label": "HeaderButtonAction",
+      "id": "server_schemas_sprint_schema_createsprintinput",
+      "label": "CreateSprintInput",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 211,
+      "community_name": "helper.ts",
       "file_type": "code",
-      "norm_label": "headerbuttonaction",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L5"
+      "norm_label": "createsprintinput",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L23"
     },
     {
-      "id": "composables_useheaderactions_headersegmentedaction",
-      "label": "HeaderSegmentedAction",
+      "id": "server_schemas_sprint_schema_updatesprintinput",
+      "label": "UpdateSprintInput",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 211,
+      "community_name": "helper.ts",
       "file_type": "code",
-      "norm_label": "headersegmentedaction",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L17"
+      "norm_label": "updatesprintinput",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L24"
     },
     {
       "id": "components_ui_baseemptystate_baseemptystateprops",
@@ -782,6 +626,162 @@
       "norm_label": "emptystatevariant",
       "source_file": "components/ui/BaseEmptyState.vue",
       "source_location": "L92"
+    },
+    {
+      "id": "components_addideamodal_projectitemoption",
+      "label": "ProjectItemOption",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "projectitemoption",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L156"
+    },
+    {
+      "id": "server_utils_auth_createsessiontokenoptions",
+      "label": "CreateSessionTokenOptions",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "createsessiontokenoptions",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "server_utils_auth_sessiontokenvalidationresult",
+      "label": "SessionTokenValidationResult",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "sessiontokenvalidationresult",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_task_schema_createtaskinput",
+      "label": "CreateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L56"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryinput",
+      "label": "TaskQueryInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L58"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskinput",
+      "label": "UpdateTaskInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskinput",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L57"
+    },
+    {
+      "id": "server_schemas_project_schema_createprojectinput",
+      "label": "CreateProjectInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "createprojectinput",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_schemas_project_schema_updateprojectinput",
+      "label": "UpdateProjectInput",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "updateprojectinput",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L35"
+    },
+    {
+      "id": "composables_useheaderactions_headeraction",
+      "label": "HeaderAction",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "headeraction",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L33"
+    },
+    {
+      "id": "composables_useheaderactions_headeractionvariant",
+      "label": "HeaderActionVariant",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "headeractionvariant",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "composables_useheaderactions_headerbuttonaction",
+      "label": "HeaderButtonAction",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "headerbuttonaction",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "composables_useheaderactions_headersegmentedaction",
+      "label": "HeaderSegmentedAction",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "headersegmentedaction",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L18"
     },
     {
       "id": "app_pages_projects_slug_detailstate",
@@ -1876,54 +1876,6 @@
       "source_location": "L30"
     },
     {
-      "id": "components_addideamodal_oncancel",
-      "label": "onCancel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "oncancel()",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L288"
-    },
-    {
-      "id": "components_addideamodal_onkeydown",
-      "label": "onKeyDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "onkeydown()",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L258"
-    },
-    {
-      "id": "components_addideamodal_onsubmit",
-      "label": "onSubmit()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "onsubmit()",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L292"
-    },
-    {
-      "id": "components_addideamodal_toggletag",
-      "label": "toggleTag()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "toggletag()",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L233"
-    },
-    {
       "id": "tests_unit_project_detail_cockpit_spec_checkslugmatch",
       "label": "checkSlugMatch()",
       "_callable": true,
@@ -3016,42 +2968,6 @@
       "source_location": "L64"
     },
     {
-      "id": "components_project_projectpullsissuesfeed_formatcommittime",
-      "label": "formatCommitTime()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "formatcommittime()",
-      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
-      "source_location": "L295"
-    },
-    {
-      "id": "components_project_projectpullsissuesfeed_getprbadgeclass",
-      "label": "getPrBadgeClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "getprbadgeclass()",
-      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
-      "source_location": "L283"
-    },
-    {
-      "id": "components_project_projectpullsissuesfeed_getprstatustext",
-      "label": "getPrStatusText()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "getprstatustext()",
-      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
-      "source_location": "L289"
-    },
-    {
       "id": "components_ui_nexuraicon_geticonregistry",
       "label": "getIconRegistry()",
       "_callable": true,
@@ -3890,42 +3806,6 @@
       "norm_label": "resolveactiveweektasks()",
       "source_file": "tests/unit/sprints-workspace.spec.mjs",
       "source_location": "L134"
-    },
-    {
-      "id": "server_schemas_helper_requirerouterparam",
-      "label": "requireRouterParam()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "requirerouterparam()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L20"
-    },
-    {
-      "id": "server_schemas_helper_validatebody",
-      "label": "validateBody()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "validatebody()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_schemas_helper_validateparams",
-      "label": "validateParams()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "validateparams()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L15"
     },
     {
       "id": "components_sprint_sprintobjectivebanner_oncancel",
@@ -5017,7 +4897,7 @@
       "file_type": "code",
       "norm_label": "dispatchheaderbarclick()",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L399"
+      "source_location": "L400"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_getactionclass",
@@ -5029,7 +4909,19 @@
       "file_type": "code",
       "norm_label": "getactionclass()",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L423"
+      "source_location": "L424"
+    },
+    {
+      "id": "tests_unit_header_actions_lifecycle_spec_getbuttonsizeclass",
+      "label": "getButtonSizeClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 182,
+      "community_name": "header-actions-lifecycle.spec.mjs",
+      "file_type": "code",
+      "norm_label": "getbuttonsizeclass()",
+      "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
+      "source_location": "L448"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_mockusestate",
@@ -5041,7 +4933,7 @@
       "file_type": "code",
       "norm_label": "mockusestate()",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L26"
+      "source_location": "L27"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_resetheaderstate",
@@ -5053,7 +4945,7 @@
       "file_type": "code",
       "norm_label": "resetheaderstate()",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L45"
+      "source_location": "L46"
     },
     {
       "id": "components_search_headersearch_oninputcontainerclick",
@@ -5188,90 +5080,6 @@
       "source_location": "L19"
     },
     {
-      "id": "server_middleware_auth_iscsrfsafe",
-      "label": "isCsrfSafe()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "iscsrfsafe()",
-      "source_file": "server/middleware/auth.ts",
-      "source_location": "L24"
-    },
-    {
-      "id": "server_utils_auth_createsessiontoken",
-      "label": "createSessionToken()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "createsessiontoken()",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L37"
-    },
-    {
-      "id": "server_utils_auth_resolvesecuritykeys",
-      "label": "resolveSecurityKeys()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "resolvesecuritykeys()",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L20"
-    },
-    {
-      "id": "server_utils_auth_verifyaccesskey",
-      "label": "verifyAccessKey()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "verifyaccesskey()",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L143"
-    },
-    {
-      "id": "server_utils_auth_verifysessiontoken",
-      "label": "verifySessionToken()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "verifysessiontoken()",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L62"
-    },
-    {
-      "id": "tests_unit_auth_middleware_spec_evaluatedevauthbypass",
-      "label": "evaluateDevAuthBypass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "evaluatedevauthbypass()",
-      "source_file": "tests/unit/auth-middleware.spec.mjs",
-      "source_location": "L163"
-    },
-    {
-      "id": "server_schemas_helper_validatequery",
-      "label": "validateQuery()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "validatequery()",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L10"
-    },
-    {
       "id": "tests_unit_github_sync_automation_spec_promise_finally",
       "label": ".finally()",
       "_callable": true,
@@ -5392,40 +5200,40 @@
       "source_location": "L31"
     },
     {
-      "id": "composables_useheaderactions_useheaderactions",
-      "label": "useHeaderActions()",
+      "id": "components_project_projectpullsissuesfeed_formatcommittime",
+      "label": "formatCommitTime()",
       "_callable": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 197,
+      "community_name": "ProjectPullsIssuesFeed.vue",
       "file_type": "code",
-      "norm_label": "useheaderactions()",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L37"
+      "norm_label": "formatcommittime()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L295"
     },
     {
-      "id": "composables_useheaderactions_useheaderactions_clearactions",
-      "label": "clearActions()",
+      "id": "components_project_projectpullsissuesfeed_getprbadgeclass",
+      "label": "getPrBadgeClass()",
       "_callable": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 197,
+      "community_name": "ProjectPullsIssuesFeed.vue",
       "file_type": "code",
-      "norm_label": "clearactions()",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L46"
+      "norm_label": "getprbadgeclass()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L283"
     },
     {
-      "id": "composables_useheaderactions_useheaderactions_setactions",
-      "label": "setActions()",
+      "id": "components_project_projectpullsissuesfeed_getprstatustext",
+      "label": "getPrStatusText()",
       "_callable": true,
       "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
+      "community": 197,
+      "community_name": "ProjectPullsIssuesFeed.vue",
       "file_type": "code",
-      "norm_label": "setactions()",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L38"
+      "norm_label": "getprstatustext()",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L289"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_promise_finally",
@@ -5437,7 +5245,7 @@
       "file_type": "code",
       "norm_label": ".finally()",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L18"
+      "source_location": "L19"
     },
     {
       "id": "tests_unit_supabase_task_injection_spec_createmocksupabaseclient",
@@ -5680,6 +5488,174 @@
       "source_location": "L192"
     },
     {
+      "id": "server_schemas_helper_requirerouterparam",
+      "label": "requireRouterParam()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "requirerouterparam()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "server_schemas_helper_validatebody",
+      "label": "validateBody()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "validatebody()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "server_schemas_helper_validateparams",
+      "label": "validateParams()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "validateparams()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "components_addideamodal_oncancel",
+      "label": "onCancel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "oncancel()",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L288"
+    },
+    {
+      "id": "components_addideamodal_onkeydown",
+      "label": "onKeyDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "onkeydown()",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L258"
+    },
+    {
+      "id": "components_addideamodal_onsubmit",
+      "label": "onSubmit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "onsubmit()",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L292"
+    },
+    {
+      "id": "components_addideamodal_toggletag",
+      "label": "toggleTag()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "toggletag()",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L233"
+    },
+    {
+      "id": "server_middleware_auth_iscsrfsafe",
+      "label": "isCsrfSafe()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "iscsrfsafe()",
+      "source_file": "server/middleware/auth.ts",
+      "source_location": "L24"
+    },
+    {
+      "id": "server_utils_auth_createsessiontoken",
+      "label": "createSessionToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "createsessiontoken()",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L37"
+    },
+    {
+      "id": "server_utils_auth_resolvesecuritykeys",
+      "label": "resolveSecurityKeys()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "resolvesecuritykeys()",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "server_utils_auth_verifyaccesskey",
+      "label": "verifyAccessKey()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "verifyaccesskey()",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L143"
+    },
+    {
+      "id": "server_utils_auth_verifysessiontoken",
+      "label": "verifySessionToken()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "verifysessiontoken()",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L62"
+    },
+    {
+      "id": "tests_unit_auth_middleware_spec_evaluatedevauthbypass",
+      "label": "evaluateDevAuthBypass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "evaluatedevauthbypass()",
+      "source_file": "tests/unit/auth-middleware.spec.mjs",
+      "source_location": "L163"
+    },
+    {
+      "id": "server_schemas_helper_validatequery",
+      "label": "validateQuery()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "validatequery()",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L10"
+    },
+    {
       "id": "tests_unit_scratchpad_smart_promotion_spec_promise_finally",
       "label": ".finally()",
       "_callable": true,
@@ -5690,6 +5666,42 @@
       "norm_label": ".finally()",
       "source_file": "tests/unit/scratchpad-smart-promotion.spec.mjs",
       "source_location": "L18"
+    },
+    {
+      "id": "composables_useheaderactions_useheaderactions",
+      "label": "useHeaderActions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "useheaderactions()",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L38"
+    },
+    {
+      "id": "composables_useheaderactions_useheaderactions_clearactions",
+      "label": "clearActions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "clearactions()",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "composables_useheaderactions_useheaderactions_setactions",
+      "label": "setActions()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "setactions()",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L39"
     },
     {
       "id": "tests_unit_tasks_workspace_spec_addstep",
@@ -9148,6 +9160,18 @@
       "source_location": "L97"
     },
     {
+      "id": "components_headerbar_getbuttonsizeclass",
+      "label": "getButtonSizeClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 81,
+      "community_name": "HeaderBar.vue",
+      "file_type": "code",
+      "norm_label": "getbuttonsizeclass()",
+      "source_file": "components/HeaderBar.vue",
+      "source_location": "L112"
+    },
+    {
       "id": "components_headerbar_handleactionclick",
       "label": "handleActionClick()",
       "_callable": true,
@@ -10504,180 +10528,64 @@
       "source_location": "L38"
     },
     {
-      "id": "components_addideamodal",
-      "label": "AddIdeaModal.vue",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_409",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "addideamodal.vue",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L1"
+      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L409"
     },
     {
-      "id": "components_addideamodal_available_tags",
-      "label": "AVAILABLE_TAGS",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_419",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "available_tags",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L161"
+      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L419"
     },
     {
-      "id": "components_addideamodal_data_fetchedprojects",
-      "label": "{ data: fetchedProjects }",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_426",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "{ data: fetchedprojects }",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L190"
+      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L426"
     },
     {
-      "id": "components_addideamodal_description",
-      "label": "description",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_433",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "description",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L228"
+      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L433"
     },
     {
-      "id": "components_addideamodal_dialogref",
-      "label": "dialogRef",
+      "id": "docs_master_remediation_plan_fase_3_halaman_tasks_queue_workspace_tasks",
+      "label": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
       "_origin": "ast",
       "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "dialogref",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L241"
-    },
-    {
-      "id": "components_addideamodal_emit",
-      "label": "emit",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "emit",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L176"
-    },
-    {
-      "id": "components_addideamodal_issubmitting",
-      "label": "isSubmitting",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "issubmitting",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L231"
-    },
-    {
-      "id": "components_addideamodal_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L227"
-    },
-    {
-      "id": "components_addideamodal_nameinputref",
-      "label": "nameInputRef",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "nameinputref",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L242"
-    },
-    {
-      "id": "components_addideamodal_projectsapi",
-      "label": "projectsApi",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "projectsapi",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L189"
-    },
-    {
-      "id": "components_addideamodal_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L163"
-    },
-    {
-      "id": "components_addideamodal_resolvedprojectoptions",
-      "label": "resolvedProjectOptions",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "resolvedprojectoptions",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L192"
-    },
-    {
-      "id": "components_addideamodal_selectedproject",
-      "label": "selectedProject",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "selectedproject",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L213"
-    },
-    {
-      "id": "components_addideamodal_selectedtags",
-      "label": "selectedTags",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "selectedtags",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L229"
-    },
-    {
-      "id": "components_addideamodal_validationerror",
-      "label": "validationError",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "validationerror",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L230"
-    },
-    {
-      "id": "components_addideamodal_workspacestore",
-      "label": "workspaceStore",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "AddIdeaModal.vue",
-      "file_type": "code",
-      "norm_label": "workspacestore",
-      "source_file": "components/AddIdeaModal.vue",
-      "source_location": "L188"
+      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 3: halaman tasks & queue workspace (`/tasks`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L404"
     },
     {
       "id": "deployment",
@@ -11672,6 +11580,18 @@
       "source_location": "L291"
     },
     {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_330",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 107,
+      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L330"
+    },
+    {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
@@ -11682,6 +11602,18 @@
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L304"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_340",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 107,
+      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L340"
     },
     {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod",
@@ -11696,6 +11628,18 @@
       "source_location": "L312"
     },
     {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_345",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 107,
+      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L345"
+    },
+    {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
@@ -11708,16 +11652,16 @@
       "source_location": "L319"
     },
     {
-      "id": "docs_master_remediation_plan_5_rencana_remediasi_terperinci_13_fase_mandiri_dalam_3_blok",
-      "label": "5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_351",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 107,
       "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "5. rencana remediasi terperinci: 13 fase mandiri dalam 3 blok",
+      "norm_label": "4. gate pengujian & rollback plan:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L272"
+      "source_location": "L351"
     },
     {
       "id": "docs_master_remediation_plan_blok_1_fondasi_arsitektur_fitur_global",
@@ -11732,18 +11676,6 @@
       "source_location": "L276"
     },
     {
-      "id": "docs_master_remediation_plan_blok_3_otomasi_sistem_pengujian_sign_off",
-      "label": "BLOK 3: OTOMASI SISTEM, PENGUJIAN & SIGN-OFF",
-      "_origin": "ast",
-      "community": 107,
-      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "blok 3: otomasi sistem, pengujian & sign-off",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L654"
-    },
-    {
       "id": "docs_master_remediation_plan_fase_0_security_lockdown_database_alignment_core_safety",
       "label": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
       "_origin": "ast",
@@ -11754,6 +11686,18 @@
       "norm_label": "fase 0: security lockdown, database alignment & core safety",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L286"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_1_global_workspace_store_shell_infrastructure",
+      "label": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "_origin": "ast",
+      "community": 107,
+      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 1: global workspace store & shell infrastructure",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L325"
     },
     {
       "id": "node_fs",
@@ -12021,6 +11965,18 @@
       "source_location": "L669"
     },
     {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_695",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L695"
+    },
+    {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_675",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
@@ -12031,6 +11987,18 @@
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L675"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_706",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L706"
     },
     {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_679",
@@ -12045,6 +12013,18 @@
       "source_location": "L679"
     },
     {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_716",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L716"
+    },
+    {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_684",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
@@ -12057,6 +12037,30 @@
       "source_location": "L684"
     },
     {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_721",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L721"
+    },
+    {
+      "id": "docs_master_remediation_plan_blok_3_otomasi_sistem_pengujian_sign_off",
+      "label": "BLOK 3: OTOMASI SISTEM, PENGUJIAN & SIGN-OFF",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "blok 3: otomasi sistem, pengujian & sign-off",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L654"
+    },
+    {
       "id": "docs_master_remediation_plan_fase_11_otomasi_lanjutan_github_sync",
       "label": "FASE 11: Otomasi Lanjutan & GitHub Sync",
       "_origin": "ast",
@@ -12067,6 +12071,18 @@
       "norm_label": "fase 11: otomasi lanjutan & github sync",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L664"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_12_ci_cd_quality_gate_automated_tests",
+      "label": "FASE 12: CI/CD Quality Gate & Automated Tests",
+      "_origin": "ast",
+      "community": 112,
+      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 12: ci/cd quality gate & automated tests",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L690"
     },
     {
       "id": "composables_useprojects",
@@ -12496,17 +12512,6 @@
       "file_type": "code",
       "norm_label": "projectprioritydeliverables.vue",
       "source_file": "components/project/ProjectPriorityDeliverables.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_project_projectpullsissuesfeed",
-      "label": "ProjectPullsIssuesFeed.vue",
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "projectpullsissuesfeed.vue",
-      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
       "source_location": "L1"
     },
     {
@@ -14182,6 +14187,78 @@
       "source_location": "L197"
     },
     {
+      "id": "docs_master_remediation_plan_4_1_single_source_of_truth_ssot_relasi_task_sprint",
+      "label": "4.1. Single Source of Truth (SSOT) Relasi Task\u2013Sprint",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.1. single source of truth (ssot) relasi task\u2013sprint",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L239"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_2_unified_reactive_workspace_store_useworkspacestore_ts",
+      "label": "4.2. Unified Reactive Workspace Store (`useWorkspaceStore.ts`)",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.2. unified reactive workspace store (`useworkspacestore.ts`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L250"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_3_global_modal_shell_mounting_di_app_app_vue",
+      "label": "4.3. Global Modal Shell Mounting di `app/app.vue`",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.3. global modal shell mounting di `app/app.vue`",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L255"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_4_static_repository_selection_at_boot_zero_silent_failover",
+      "label": "4.4. Static Repository Selection at Boot (Zero Silent Failover)",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.4. static repository selection at boot (zero silent failover)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L262"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_5_server_side_auth_gate_github_allowlist",
+      "label": "4.5. Server-Side Auth Gate & GitHub Allowlist",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.5. server-side auth gate & github allowlist",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L266"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_cetak_biru_arsitektur_target_target_architectural_blueprint",
+      "label": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "_origin": "ast",
+      "community": 129,
+      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. cetak biru arsitektur target (target architectural blueprint)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L237"
+    },
+    {
       "id": "docs_master_remediation_plan_6_matriks_kepemilikan_file_distribusi_subagent_anti_tabrakan",
       "label": "6. Matriks Kepemilikan File & Distribusi Subagent (Anti-Tabrakan)",
       "_origin": "ast",
@@ -15030,19 +15107,18 @@
       "file_type": "code",
       "norm_label": "sizeclasses",
       "source_file": "components/ui/BaseSegmentedControl.vue",
-      "source_location": "L99"
+      "source_location": "L111"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_409",
-      "label": "1. File yang Disentuh:",
+      "id": "components_ui_basesegmentedcontrol_trackheightclasses",
+      "label": "trackHeightClasses",
       "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L409"
+      "community": 133,
+      "community_name": "BaseSegmentedControl.vue",
+      "file_type": "code",
+      "norm_label": "trackheightclasses",
+      "source_file": "components/ui/BaseSegmentedControl.vue",
+      "source_location": "L99"
     },
     {
       "id": "docs_master_remediation_plan_1_file_yang_disentuh_444",
@@ -15057,90 +15133,6 @@
       "source_location": "L444"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_473",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L473"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_509",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L509"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_538",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L538"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_567",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L567"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_598",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L598"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_632",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L632"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_419",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L419"
-    },
-    {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_451",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
@@ -15151,90 +15143,6 @@
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L451"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_479",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L479"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_515",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L515"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_545",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L545"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_572",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L572"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_602",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L602"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_638",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L638"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_426",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L426"
     },
     {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_456",
@@ -15249,90 +15157,6 @@
       "source_location": "L456"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_492",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L492"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_521",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L521"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_550",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L550"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_582",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L582"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_615",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L615"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_643",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L643"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_433",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L433"
-    },
-    {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_462",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
@@ -15345,76 +15169,16 @@
       "source_location": "L462"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_498",
-      "label": "4. Gate Pengujian & Rollback Plan:",
+      "id": "docs_master_remediation_plan_5_rencana_remediasi_terperinci_13_fase_mandiri_dalam_3_blok",
+      "label": "5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok",
       "_origin": "ast",
       "community": 134,
       "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
+      "norm_label": "5. rencana remediasi terperinci: 13 fase mandiri dalam 3 blok",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L498"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_527",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L527"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_556",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L556"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_587",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L587"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_621",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L621"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_648",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L648"
+      "source_location": "L272"
     },
     {
       "id": "docs_master_remediation_plan_blok_2_remediasi_1_halaman_per_fase",
@@ -15429,30 +15193,6 @@
       "source_location": "L389"
     },
     {
-      "id": "docs_master_remediation_plan_fase_10_halaman_telemetry_devops_health_telemetry",
-      "label": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 10: halaman telemetry & devops health (`/telemetry`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L627"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_3_halaman_tasks_queue_workspace_tasks",
-      "label": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 3: halaman tasks & queue workspace (`/tasks`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L404"
-    },
-    {
       "id": "docs_master_remediation_plan_fase_4_halaman_dashboard_command_center",
       "label": "FASE 4: Halaman Dashboard Command Center (`/`)",
       "_origin": "ast",
@@ -15463,66 +15203,6 @@
       "norm_label": "fase 4: halaman dashboard command center (`/`)",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L439"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_5_halaman_projects_hub_projects",
-      "label": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 5: halaman projects hub (`/projects`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L468"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_6_halaman_project_detail_cockpit_projects_slug",
-      "label": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 6: halaman project detail cockpit (`/projects/[slug]`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L504"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_7_halaman_sprints_iterations_sprints",
-      "label": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 7: halaman sprints & iterations (`/sprints`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L533"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_8_halaman_release_phase_roadmap_roadmap",
-      "label": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 8: halaman release phase roadmap (`/roadmap`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L562"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_9_halaman_repositories_catalog_repos",
-      "label": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "_origin": "ast",
-      "community": 134,
-      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 9: halaman repositories catalog (`/repos`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L593"
     },
     {
       "id": "docs_management_system_audit_16_implementation_roadmap",
@@ -16456,202 +16136,64 @@
       "source_location": "L45"
     },
     {
-      "id": "server_api_notes_id_delete",
-      "label": "notes/[id].delete.ts",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_473",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "notes/[id].delete.ts",
-      "source_file": "server/api/notes/[id].delete.ts",
-      "source_location": "L1"
+      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L473"
     },
     {
-      "id": "server_api_notes_id_promote_post",
-      "label": "promote.post.ts",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_479",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "promote.post.ts",
-      "source_file": "server/api/notes/[id]/promote.post.ts",
-      "source_location": "L1"
+      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L479"
     },
     {
-      "id": "server_api_notes_id_put",
-      "label": "notes/[id].put.ts",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_492",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "notes/[id].put.ts",
-      "source_file": "server/api/notes/[id].put.ts",
-      "source_location": "L1"
+      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L492"
     },
     {
-      "id": "server_api_notes_index_post",
-      "label": "index.post.ts",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_498",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "index.post.ts",
-      "source_file": "server/api/notes/index.post.ts",
-      "source_location": "L1"
+      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L498"
     },
     {
-      "id": "server_api_sprints_id_put",
-      "label": "sprints/[id].put.ts",
+      "id": "docs_master_remediation_plan_fase_5_halaman_projects_hub_projects",
+      "label": "FASE 5: Halaman Projects Hub (`/projects`)",
       "_origin": "ast",
       "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "sprints/[id].put.ts",
-      "source_file": "server/api/sprints/[id].put.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_sprints_post",
-      "label": "sprints.post.ts",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "sprints.post.ts",
-      "source_file": "server/api/sprints.post.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_index_noterepository",
-      "label": "noteRepository",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "noterepository",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L122"
-    },
-    {
-      "id": "server_schemas_github_schema",
-      "label": "github.schema.ts",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "github.schema.ts",
-      "source_file": "server/schemas/github.schema.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_github_schema_createissueschema",
-      "label": "createIssueSchema",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "createissueschema",
-      "source_file": "server/schemas/github.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_github_schema_workflowrerunschema",
-      "label": "workflowRerunSchema",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "workflowrerunschema",
-      "source_file": "server/schemas/github.schema.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "server_schemas_helper",
-      "label": "helper.ts",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "helper.ts",
-      "source_file": "server/schemas/helper.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_index",
-      "label": "schemas/index.ts",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "schemas/index.ts",
-      "source_file": "server/schemas/index.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_sprint_schema",
-      "label": "sprint.schema.ts",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "sprint.schema.ts",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_sprint_schema_basesprintfields",
-      "label": "baseSprintFields",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "basesprintfields",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "server_schemas_sprint_schema_createsprintschema",
-      "label": "createSprintSchema",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "createsprintschema",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "server_schemas_sprint_schema_sprintstatusschema",
-      "label": "sprintStatusSchema",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "sprintstatusschema",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_sprint_schema_updatesprintschema",
-      "label": "updateSprintSchema",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "code",
-      "norm_label": "updatesprintschema",
-      "source_file": "server/schemas/sprint.schema.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "ref_zod",
-      "label": "zod",
-      "_origin": "ast",
-      "community": 148,
-      "community_name": "helper.ts",
-      "file_type": "concept",
-      "norm_label": "zod",
-      "source_file": "package.json",
-      "source_location": "L25"
+      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 5: halaman projects hub (`/projects`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L468"
     },
     {
       "id": "docs_management_system_audit_11_1_evaluasi_pipeline_ci_cd_saat_ini_verified",
@@ -18626,7 +18168,7 @@
       "file_type": "code",
       "norm_label": "__dirname",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L13"
+      "source_location": "L14"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_filename",
@@ -18637,7 +18179,7 @@
       "file_type": "code",
       "norm_label": "__filename",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L12"
+      "source_location": "L13"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_jiti",
@@ -18648,7 +18190,7 @@
       "file_type": "code",
       "norm_label": "jiti",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L35"
+      "source_location": "L36"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_nuxtstate",
@@ -18659,7 +18201,7 @@
       "file_type": "code",
       "norm_label": "nuxtstate",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L25"
+      "source_location": "L26"
     },
     {
       "id": "tests_unit_header_actions_lifecycle_spec_projectroot",
@@ -18670,315 +18212,187 @@
       "file_type": "code",
       "norm_label": "projectroot",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L14"
+      "source_location": "L15"
     },
     {
-      "id": "server_api_auth_session_get",
-      "label": "session.get.ts",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_509",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "session.get.ts",
-      "source_file": "server/api/auth/session.get.ts",
-      "source_location": "L1"
+      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L509"
     },
     {
-      "id": "server_api_auth_session_post",
-      "label": "session.post.ts",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_515",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "session.post.ts",
-      "source_file": "server/api/auth/session.post.ts",
-      "source_location": "L1"
+      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L515"
     },
     {
-      "id": "server_api_auth_session_post_sessionschema",
-      "label": "sessionSchema",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_521",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "sessionschema",
-      "source_file": "server/api/auth/session.post.ts",
-      "source_location": "L8"
+      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L521"
     },
     {
-      "id": "server_api_backup_export_get",
-      "label": "export.get.ts",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_527",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "export.get.ts",
-      "source_file": "server/api/backup/export.get.ts",
-      "source_location": "L1"
+      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L527"
     },
     {
-      "id": "server_middleware_auth",
-      "label": "middleware/auth.ts",
+      "id": "docs_master_remediation_plan_fase_6_halaman_project_detail_cockpit_projects_slug",
+      "label": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
       "_origin": "ast",
       "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "middleware/auth.ts",
-      "source_file": "server/middleware/auth.ts",
-      "source_location": "L1"
+      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 6: halaman project detail cockpit (`/projects/[slug]`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L504"
     },
     {
-      "id": "server_utils_auth",
-      "label": "utils/auth.ts",
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "utils/auth.ts",
-      "source_file": "server/utils/auth.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_unit_auth_middleware_spec",
-      "label": "auth-middleware.spec.mjs",
-      "_origin": "ast",
-      "community": 187,
-      "community_name": "export.get.ts",
-      "file_type": "code",
-      "norm_label": "auth-middleware.spec.mjs",
-      "source_file": "tests/unit/auth-middleware.spec.mjs",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_api_tasks_get",
-      "label": "tasks.get.ts",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_538",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "tasks.get.ts",
-      "source_file": "server/api/tasks.get.ts",
-      "source_location": "L1"
+      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L538"
     },
     {
-      "id": "server_api_tasks_post",
-      "label": "tasks.post.ts",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_545",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "tasks.post.ts",
-      "source_file": "server/api/tasks.post.ts",
-      "source_location": "L1"
+      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L545"
     },
     {
-      "id": "server_schemas_task_schema",
-      "label": "task.schema.ts",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_550",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "task.schema.ts",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L1"
+      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L550"
     },
     {
-      "id": "server_schemas_task_schema_basetaskfields",
-      "label": "baseTaskFields",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_556",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "basetaskfields",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L19"
+      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L556"
     },
     {
-      "id": "server_schemas_task_schema_createtaskschema",
-      "label": "createTaskSchema",
+      "id": "docs_master_remediation_plan_fase_7_halaman_sprints_iterations_sprints",
+      "label": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
       "_origin": "ast",
       "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "createtaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L34"
+      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 7: halaman sprints & iterations (`/sprints`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L533"
     },
     {
-      "id": "server_schemas_task_schema_legacystatusmap",
-      "label": "legacyStatusMap",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "legacystatusmap",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_task_schema_taskpriorityschema",
-      "label": "taskPrioritySchema",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskpriorityschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L17"
-    },
-    {
-      "id": "server_schemas_task_schema_taskqueryschema",
-      "label": "taskQuerySchema",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskqueryschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L49"
-    },
-    {
-      "id": "server_schemas_task_schema_taskstatusschema",
-      "label": "taskStatusSchema",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "taskstatusschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "server_schemas_task_schema_updatetaskschema",
-      "label": "updateTaskSchema",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "task.schema.ts",
-      "file_type": "code",
-      "norm_label": "updatetaskschema",
-      "source_file": "server/schemas/task.schema.ts",
-      "source_location": "L47"
-    },
-    {
-      "id": "server_api_projects_get",
-      "label": "projects.get.ts",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_567",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projects.get.ts",
-      "source_file": "server/api/projects.get.ts",
-      "source_location": "L1"
+      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L567"
     },
     {
-      "id": "server_api_projects_post",
-      "label": "projects.post.ts",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_572",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projects.post.ts",
-      "source_file": "server/api/projects.post.ts",
-      "source_location": "L1"
+      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L572"
     },
     {
-      "id": "server_api_projects_slug_put",
-      "label": "[slug].put.ts",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_582",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "[slug].put.ts",
-      "source_file": "server/api/projects/[slug].put.ts",
-      "source_location": "L1"
+      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L582"
     },
     {
-      "id": "server_repositories_index_projectrepository",
-      "label": "projectRepository",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_587",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projectrepository",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L106"
+      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L587"
     },
     {
-      "id": "server_schemas_project_schema",
-      "label": "project.schema.ts",
+      "id": "docs_master_remediation_plan_fase_8_halaman_release_phase_roadmap_roadmap",
+      "label": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
       "_origin": "ast",
       "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "project.schema.ts",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_schemas_project_schema_baseprojectfields",
-      "label": "baseProjectFields",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "baseprojectfields",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "server_schemas_project_schema_createprojectschema",
-      "label": "createProjectSchema",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "createprojectschema",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L20"
-    },
-    {
-      "id": "server_schemas_project_schema_projectpriorityschema",
-      "label": "projectPrioritySchema",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projectpriorityschema",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "server_schemas_project_schema_projectqueryschema",
-      "label": "projectQuerySchema",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projectqueryschema",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L29"
-    },
-    {
-      "id": "server_schemas_project_schema_projectstatusschema",
-      "label": "projectStatusSchema",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "projectstatusschema",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "server_schemas_project_schema_updateprojectschema",
-      "label": "updateProjectSchema",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "project.schema.ts",
-      "file_type": "code",
-      "norm_label": "updateprojectschema",
-      "source_file": "server/schemas/project.schema.ts",
-      "source_location": "L27"
+      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 8: halaman release phase roadmap (`/roadmap`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L562"
     },
     {
       "id": "project_context_decisions",
@@ -19571,158 +18985,135 @@
       "source_location": "L23"
     },
     {
-      "id": "composables_useheaderactions",
-      "label": "useHeaderActions.ts",
-      "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
-      "file_type": "code",
-      "norm_label": "useheaderactions.ts",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "composables_useheaderactions_actionsstate",
-      "label": "actionsState",
-      "_origin": "ast",
-      "community": 195,
-      "community_name": "useHeaderActions.ts",
-      "file_type": "code",
-      "norm_label": "actionsstate",
-      "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L35"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_1_single_source_of_truth_ssot_relasi_task_sprint",
-      "label": "4.1. Single Source of Truth (SSOT) Relasi Task\u2013Sprint",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.1. single source of truth (ssot) relasi task\u2013sprint",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L239"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_2_unified_reactive_workspace_store_useworkspacestore_ts",
-      "label": "4.2. Unified Reactive Workspace Store (`useWorkspaceStore.ts`)",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.2. unified reactive workspace store (`useworkspacestore.ts`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L250"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_3_global_modal_shell_mounting_di_app_app_vue",
-      "label": "4.3. Global Modal Shell Mounting di `app/app.vue`",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.3. global modal shell mounting di `app/app.vue`",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L255"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_4_static_repository_selection_at_boot_zero_silent_failover",
-      "label": "4.4. Static Repository Selection at Boot (Zero Silent Failover)",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.4. static repository selection at boot (zero silent failover)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L262"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_5_server_side_auth_gate_github_allowlist",
-      "label": "4.5. Server-Side Auth Gate & GitHub Allowlist",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.5. server-side auth gate & github allowlist",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L266"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_cetak_biru_arsitektur_target_target_architectural_blueprint",
-      "label": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. cetak biru arsitektur target (target architectural blueprint)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L237"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_330",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_598",
       "label": "1. File yang Disentuh:",
       "_origin": "ast",
-      "community": 197,
-      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "community": 195,
+      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "1. file yang disentuh:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L330"
+      "source_location": "L598"
     },
     {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_340",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_602",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
-      "community": 197,
-      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "community": 195,
+      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L340"
+      "source_location": "L602"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_345",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_615",
       "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
-      "community": 197,
-      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "community": 195,
+      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "3. acceptance criteria / definition of done (dod):",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L345"
+      "source_location": "L615"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_351",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_621",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
-      "community": 197,
-      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "community": 195,
+      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "4. gate pengujian & rollback plan:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L351"
+      "source_location": "L621"
     },
     {
-      "id": "docs_master_remediation_plan_fase_1_global_workspace_store_shell_infrastructure",
-      "label": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "id": "docs_master_remediation_plan_fase_9_halaman_repositories_catalog_repos",
+      "label": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "_origin": "ast",
-      "community": 197,
-      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "community": 195,
+      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "fase 1: global workspace store & shell infrastructure",
+      "norm_label": "fase 9: halaman repositories catalog (`/repos`)",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L325"
+      "source_location": "L593"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_632",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 196,
+      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L632"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_638",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 196,
+      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L638"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_643",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 196,
+      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L643"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_648",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 196,
+      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L648"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_10_halaman_telemetry_devops_health_telemetry",
+      "label": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "_origin": "ast",
+      "community": 196,
+      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 10: halaman telemetry & devops health (`/telemetry`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L627"
+    },
+    {
+      "id": "components_project_projectpullsissuesfeed",
+      "label": "ProjectPullsIssuesFeed.vue",
+      "_origin": "ast",
+      "community": 197,
+      "community_name": "ProjectPullsIssuesFeed.vue",
+      "file_type": "code",
+      "norm_label": "projectpullsissuesfeed.vue",
+      "source_file": "components/project/ProjectPullsIssuesFeed.vue",
+      "source_location": "L1"
     },
     {
       "id": "tests_unit_supabase_task_injection_spec",
@@ -21501,64 +20892,202 @@
       "source_location": "L1"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_695",
-      "label": "1. File yang Disentuh:",
+      "id": "server_api_notes_id_delete",
+      "label": "notes/[id].delete.ts",
       "_origin": "ast",
       "community": 211,
-      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L695"
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "notes/[id].delete.ts",
+      "source_file": "server/api/notes/[id].delete.ts",
+      "source_location": "L1"
     },
     {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_706",
-      "label": "2. Logika Perubahan Teknis:",
+      "id": "server_api_notes_id_promote_post",
+      "label": "promote.post.ts",
       "_origin": "ast",
       "community": 211,
-      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L706"
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "promote.post.ts",
+      "source_file": "server/api/notes/[id]/promote.post.ts",
+      "source_location": "L1"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_716",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "id": "server_api_notes_id_put",
+      "label": "notes/[id].put.ts",
       "_origin": "ast",
       "community": 211,
-      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L716"
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "notes/[id].put.ts",
+      "source_file": "server/api/notes/[id].put.ts",
+      "source_location": "L1"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_721",
-      "label": "4. Gate Pengujian & Rollback Plan:",
+      "id": "server_api_notes_index_post",
+      "label": "index.post.ts",
       "_origin": "ast",
       "community": 211,
-      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L721"
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "index.post.ts",
+      "source_file": "server/api/notes/index.post.ts",
+      "source_location": "L1"
     },
     {
-      "id": "docs_master_remediation_plan_fase_12_ci_cd_quality_gate_automated_tests",
-      "label": "FASE 12: CI/CD Quality Gate & Automated Tests",
+      "id": "server_api_sprints_id_put",
+      "label": "sprints/[id].put.ts",
       "_origin": "ast",
       "community": 211,
-      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 12: ci/cd quality gate & automated tests",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L690"
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "sprints/[id].put.ts",
+      "source_file": "server/api/sprints/[id].put.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_sprints_post",
+      "label": "sprints.post.ts",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "sprints.post.ts",
+      "source_file": "server/api/sprints.post.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_index_noterepository",
+      "label": "noteRepository",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "noterepository",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L122"
+    },
+    {
+      "id": "server_schemas_github_schema",
+      "label": "github.schema.ts",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "github.schema.ts",
+      "source_file": "server/schemas/github.schema.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_github_schema_createissueschema",
+      "label": "createIssueSchema",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "createissueschema",
+      "source_file": "server/schemas/github.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_github_schema_workflowrerunschema",
+      "label": "workflowRerunSchema",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "workflowrerunschema",
+      "source_file": "server/schemas/github.schema.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "server_schemas_helper",
+      "label": "helper.ts",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "helper.ts",
+      "source_file": "server/schemas/helper.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_index",
+      "label": "schemas/index.ts",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "schemas/index.ts",
+      "source_file": "server/schemas/index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_sprint_schema",
+      "label": "sprint.schema.ts",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "sprint.schema.ts",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_sprint_schema_basesprintfields",
+      "label": "baseSprintFields",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "basesprintfields",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "server_schemas_sprint_schema_createsprintschema",
+      "label": "createSprintSchema",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "createsprintschema",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "server_schemas_sprint_schema_sprintstatusschema",
+      "label": "sprintStatusSchema",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "sprintstatusschema",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_sprint_schema_updatesprintschema",
+      "label": "updateSprintSchema",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "code",
+      "norm_label": "updatesprintschema",
+      "source_file": "server/schemas/sprint.schema.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "ref_zod",
+      "label": "zod",
+      "_origin": "ast",
+      "community": 211,
+      "community_name": "helper.ts",
+      "file_type": "concept",
+      "norm_label": "zod",
+      "source_file": "package.json",
+      "source_location": "L25"
     },
     {
       "id": "components_ui_baseemptystate",
@@ -21625,6 +21154,259 @@
       "norm_label": "totalpackages",
       "source_file": "components/project/ProjectPackageCard.vue",
       "source_location": "L118"
+    },
+    {
+      "id": "components_addideamodal",
+      "label": "AddIdeaModal.vue",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "addideamodal.vue",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_addideamodal_available_tags",
+      "label": "AVAILABLE_TAGS",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "available_tags",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L161"
+    },
+    {
+      "id": "components_addideamodal_data_fetchedprojects",
+      "label": "{ data: fetchedProjects }",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "{ data: fetchedprojects }",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L190"
+    },
+    {
+      "id": "components_addideamodal_description",
+      "label": "description",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "description",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L228"
+    },
+    {
+      "id": "components_addideamodal_dialogref",
+      "label": "dialogRef",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "dialogref",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L241"
+    },
+    {
+      "id": "components_addideamodal_emit",
+      "label": "emit",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "emit",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L176"
+    },
+    {
+      "id": "components_addideamodal_issubmitting",
+      "label": "isSubmitting",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "issubmitting",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L231"
+    },
+    {
+      "id": "components_addideamodal_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L227"
+    },
+    {
+      "id": "components_addideamodal_nameinputref",
+      "label": "nameInputRef",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "nameinputref",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L242"
+    },
+    {
+      "id": "components_addideamodal_projectsapi",
+      "label": "projectsApi",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "projectsapi",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L189"
+    },
+    {
+      "id": "components_addideamodal_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L163"
+    },
+    {
+      "id": "components_addideamodal_resolvedprojectoptions",
+      "label": "resolvedProjectOptions",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "resolvedprojectoptions",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L192"
+    },
+    {
+      "id": "components_addideamodal_selectedproject",
+      "label": "selectedProject",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "selectedproject",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L213"
+    },
+    {
+      "id": "components_addideamodal_selectedtags",
+      "label": "selectedTags",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "selectedtags",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L229"
+    },
+    {
+      "id": "components_addideamodal_validationerror",
+      "label": "validationError",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "validationerror",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L230"
+    },
+    {
+      "id": "components_addideamodal_workspacestore",
+      "label": "workspaceStore",
+      "_origin": "ast",
+      "community": 214,
+      "community_name": "AddIdeaModal.vue",
+      "file_type": "code",
+      "norm_label": "workspacestore",
+      "source_file": "components/AddIdeaModal.vue",
+      "source_location": "L188"
+    },
+    {
+      "id": "server_api_auth_session_get",
+      "label": "session.get.ts",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "session.get.ts",
+      "source_file": "server/api/auth/session.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_auth_session_post",
+      "label": "session.post.ts",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "session.post.ts",
+      "source_file": "server/api/auth/session.post.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_auth_session_post_sessionschema",
+      "label": "sessionSchema",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "sessionschema",
+      "source_file": "server/api/auth/session.post.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "server_api_backup_export_get",
+      "label": "export.get.ts",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "export.get.ts",
+      "source_file": "server/api/backup/export.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_middleware_auth",
+      "label": "middleware/auth.ts",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "middleware/auth.ts",
+      "source_file": "server/middleware/auth.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_utils_auth",
+      "label": "utils/auth.ts",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "utils/auth.ts",
+      "source_file": "server/utils/auth.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_unit_auth_middleware_spec",
+      "label": "auth-middleware.spec.mjs",
+      "_origin": "ast",
+      "community": 215,
+      "community_name": "export.get.ts",
+      "file_type": "code",
+      "norm_label": "auth-middleware.spec.mjs",
+      "source_file": "tests/unit/auth-middleware.spec.mjs",
+      "source_location": "L1"
     },
     {
       "id": "project_context_design_4_1_app_shell_app_app_vue",
@@ -22097,6 +21879,259 @@
       "norm_label": "use this skill when",
       "source_file": "skill/application-performance-performance-optimization/SKILL.md",
       "source_location": "L10"
+    },
+    {
+      "id": "server_api_tasks_get",
+      "label": "tasks.get.ts",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "tasks.get.ts",
+      "source_file": "server/api/tasks.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_tasks_post",
+      "label": "tasks.post.ts",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "tasks.post.ts",
+      "source_file": "server/api/tasks.post.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_task_schema",
+      "label": "task.schema.ts",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "task.schema.ts",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_task_schema_basetaskfields",
+      "label": "baseTaskFields",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "basetaskfields",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L19"
+    },
+    {
+      "id": "server_schemas_task_schema_createtaskschema",
+      "label": "createTaskSchema",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "createtaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_schemas_task_schema_legacystatusmap",
+      "label": "legacyStatusMap",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "legacystatusmap",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_task_schema_taskpriorityschema",
+      "label": "taskPrioritySchema",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskpriorityschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "server_schemas_task_schema_taskqueryschema",
+      "label": "taskQuerySchema",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskqueryschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L49"
+    },
+    {
+      "id": "server_schemas_task_schema_taskstatusschema",
+      "label": "taskStatusSchema",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "taskstatusschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "server_schemas_task_schema_updatetaskschema",
+      "label": "updateTaskSchema",
+      "_origin": "ast",
+      "community": 220,
+      "community_name": "task.schema.ts",
+      "file_type": "code",
+      "norm_label": "updatetaskschema",
+      "source_file": "server/schemas/task.schema.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "server_api_projects_get",
+      "label": "projects.get.ts",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projects.get.ts",
+      "source_file": "server/api/projects.get.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_projects_post",
+      "label": "projects.post.ts",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projects.post.ts",
+      "source_file": "server/api/projects.post.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_api_projects_slug_put",
+      "label": "[slug].put.ts",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "[slug].put.ts",
+      "source_file": "server/api/projects/[slug].put.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_repositories_index_projectrepository",
+      "label": "projectRepository",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projectrepository",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L106"
+    },
+    {
+      "id": "server_schemas_project_schema",
+      "label": "project.schema.ts",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "project.schema.ts",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "server_schemas_project_schema_baseprojectfields",
+      "label": "baseProjectFields",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "baseprojectfields",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "server_schemas_project_schema_createprojectschema",
+      "label": "createProjectSchema",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "createprojectschema",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "server_schemas_project_schema_projectpriorityschema",
+      "label": "projectPrioritySchema",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projectpriorityschema",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "server_schemas_project_schema_projectqueryschema",
+      "label": "projectQuerySchema",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projectqueryschema",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "server_schemas_project_schema_projectstatusschema",
+      "label": "projectStatusSchema",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "projectstatusschema",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "server_schemas_project_schema_updateprojectschema",
+      "label": "updateProjectSchema",
+      "_origin": "ast",
+      "community": 222,
+      "community_name": "project.schema.ts",
+      "file_type": "code",
+      "norm_label": "updateprojectschema",
+      "source_file": "server/schemas/project.schema.ts",
+      "source_location": "L27"
+    },
+    {
+      "id": "composables_useheaderactions",
+      "label": "useHeaderActions.ts",
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "useheaderactions.ts",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "composables_useheaderactions_actionsstate",
+      "label": "actionsState",
+      "_origin": "ast",
+      "community": 223,
+      "community_name": "useHeaderActions.ts",
+      "file_type": "code",
+      "norm_label": "actionsstate",
+      "source_file": "composables/useHeaderActions.ts",
+      "source_location": "L36"
     },
     {
       "id": "skill_kpi_dashboard_design_skill",
@@ -31660,7 +31695,7 @@
       "file_type": "code",
       "norm_label": "activesprint",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L151"
+      "source_location": "L163"
     },
     {
       "id": "components_headerbar_breadcrumbroot",
@@ -31671,7 +31706,7 @@
       "file_type": "code",
       "norm_label": "breadcrumbroot",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L117"
+      "source_location": "L129"
     },
     {
       "id": "components_headerbar_closesearch",
@@ -31693,7 +31728,7 @@
       "file_type": "code",
       "norm_label": "currentpagetitle",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L124"
+      "source_location": "L136"
     },
     {
       "id": "components_headerbar_daysleft",
@@ -31704,7 +31739,7 @@
       "file_type": "code",
       "norm_label": "daysleft",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L161"
+      "source_location": "L173"
     },
     {
       "id": "components_headerbar_route",
@@ -31726,7 +31761,7 @@
       "file_type": "code",
       "norm_label": "sprintcode",
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L153"
+      "source_location": "L165"
     },
     {
       "id": "components_headerbar_workspacestore",
@@ -46510,7 +46545,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -53377,13 +53412,24 @@
     },
     {
       "source": "components_headerbar",
+      "target": "components_headerbar_getbuttonsizeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/HeaderBar.vue",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "components_headerbar",
       "target": "components_headerbar_breadcrumbroot",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L117",
+      "source_location": "L129",
       "weight": 1.0
     },
     {
@@ -53394,7 +53440,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L124",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -53405,7 +53451,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L151",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -53416,7 +53462,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L153",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -53427,7 +53473,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/HeaderBar.vue",
-      "source_location": "L161",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -57656,6 +57702,17 @@
     },
     {
       "source": "components_ui_basesegmentedcontrol",
+      "target": "components_ui_basesegmentedcontrol_sizeclasses",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/ui/BaseSegmentedControl.vue",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "components_ui_basesegmentedcontrol",
       "target": "components_ui_basesegmentedcontrol_segmentedcontrolsize",
       "relation": "contains",
       "_origin": "ast",
@@ -57733,7 +57790,7 @@
     },
     {
       "source": "components_ui_basesegmentedcontrol",
-      "target": "components_ui_basesegmentedcontrol_sizeclasses",
+      "target": "components_ui_basesegmentedcontrol_trackheightclasses",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -58443,7 +58500,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -58465,7 +58522,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L32",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
@@ -58476,7 +58533,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -58487,7 +58544,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L37",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -70884,7 +70941,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -70895,7 +70952,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -70906,7 +70963,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L14",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -70917,7 +70974,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -70928,7 +70985,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L26",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -70939,7 +70996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L35",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -70950,7 +71007,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L399",
+      "source_location": "L400",
       "weight": 1.0
     },
     {
@@ -70961,7 +71018,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L423",
+      "source_location": "L424",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_unit_header_actions_lifecycle_spec",
+      "target": "tests_unit_header_actions_lifecycle_spec_getbuttonsizeclass",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
+      "source_location": "L448",
       "weight": 1.0
     },
     {
@@ -70972,7 +71040,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/unit/header-actions-lifecycle.spec.mjs",
-      "source_location": "L45",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -75160,7 +75228,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L52",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -75172,7 +75240,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useHeaderActions.ts",
-      "source_location": "L53",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -76149,5 +76217,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6e39fa3585f52975a6db45ab1af44c361cf7a282"
+  "built_at_commit": "a7a2f263f53d3e20cbd1bca86c8d21aa76a95345"
 }

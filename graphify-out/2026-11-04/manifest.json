@@ -342,9 +342,9 @@
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
-    "mtime": 1793765256.00022,
-    "seen": 1793765270.6217372,
-    "ast_hash": "9801680da1649146717e51e47b5d0971",
+    "mtime": 1793766156.151602,
+    "seen": 1793766215.8235154,
+    "ast_hash": "d3cb2c502a753da0588f85d7b64b75bc",
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1793766004.8541062,
-    "seen": 1793766065.2396495,
-    "ast_hash": "647e945c0b03d8d808e7d4b18de299cc",
+    "mtime": 1793766930.9356909,
+    "seen": 1793767014.4595015,
+    "ast_hash": "5d238452ced2898e7accca1f835cb1c2",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
@@ -1248,9 +1248,9 @@
     "semantic_hash": ""
   },
   "tests/unit/roadmap-workspace.spec.mjs": {
-    "mtime": 1793267958.9394088,
-    "seen": 1793268006.352248,
-    "ast_hash": "b55ec947c655c8c59099ace74a65f4be",
+    "mtime": 1793766419.0951176,
+    "seen": 1793766479.6432824,
+    "ast_hash": "dc3574da0cae57507215c68eba3b0e93",
     "semantic_hash": ""
   },
   "server/api/backup/export.get.ts": {
@@ -1296,9 +1296,9 @@
     "semantic_hash": ""
   },
   "composables/useHeaderActions.ts": {
-    "mtime": 1793765989.1023555,
-    "seen": 1793766065.2872171,
-    "ast_hash": "fed823aff4afbb379783cf391aabb921",
+    "mtime": 1793766889.9714487,
+    "seen": 1793767014.5093164,
+    "ast_hash": "dbe9efae08f54a4d937dd8430773c551",
     "semantic_hash": ""
   },
   "docs/master-ux-redesign-architecture-plan.md": {
@@ -1464,9 +1464,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseSegmentedControl.vue": {
-    "mtime": 1793765961.7459786,
-    "seen": 1793766065.2828205,
-    "ast_hash": "f6e3dff953d4233b4093491418b3e92c",
+    "mtime": 1793766900.1806867,
+    "seen": 1793767014.5043209,
+    "ast_hash": "87d801e7b9cf36c7480b0364475066b1",
     "semantic_hash": ""
   },
   "components/ui/BaseSelect.vue": {

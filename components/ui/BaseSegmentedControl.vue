@@ -1,7 +1,7 @@
 <template>
   <div
     class="bg-[#07080A] border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 sm:p-1 rounded-lg sm:rounded-xl gap-1 inline-flex items-center select-none"
-    :class="[fullWidth ? 'w-full flex' : '', props.class]"
+    :class="[fullWidth ? 'w-full flex' : '', trackHeightClasses, props.class]"
     role="tablist"
   >
     <button
@@ -96,15 +96,27 @@ function onSelect(val: string | number) {
   emit('change', val)
 }
 
+const trackHeightClasses = computed(() => {
+  switch (props.size) {
+    case 'xs':
+      return 'h-8'
+    case 'md':
+      return 'h-10'
+    case 'sm':
+    default:
+      return 'h-[38px]'
+  }
+})
+
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'xs':
-      return 'px-2.5 py-1 text-xs rounded-md gap-1.5'
+      return 'h-full px-2.5 py-1 text-xs rounded-md gap-1.5'
     case 'md':
-      return 'px-4 py-2 text-xs sm:text-sm rounded-lg gap-2.5 font-medium'
+      return 'h-full px-4 py-2 text-xs sm:text-sm rounded-lg gap-2.5 font-medium'
     case 'sm':
     default:
-      return 'px-3.5 py-1.5 text-xs rounded-lg gap-2 font-medium'
+      return 'h-full px-3.5 py-1.5 text-xs rounded-lg gap-2 font-medium'
   }
 })
 </script>

@@ -360,9 +360,9 @@
     "semantic_hash": ""
   },
   "components/HeaderBar.vue": {
-    "mtime": 1793766004.8541062,
-    "seen": 1793766065.2396495,
-    "ast_hash": "647e945c0b03d8d808e7d4b18de299cc",
+    "mtime": 1793766930.9356909,
+    "seen": 1793767014.4595015,
+    "ast_hash": "5d238452ced2898e7accca1f835cb1c2",
     "semantic_hash": ""
   },
   "components/Sidebar.vue": {
@@ -1296,9 +1296,9 @@
     "semantic_hash": ""
   },
   "composables/useHeaderActions.ts": {
-    "mtime": 1793765989.1023555,
-    "seen": 1793766065.2872171,
-    "ast_hash": "fed823aff4afbb379783cf391aabb921",
+    "mtime": 1793766889.9714487,
+    "seen": 1793767014.5093164,
+    "ast_hash": "dbe9efae08f54a4d937dd8430773c551",
     "semantic_hash": ""
   },
   "docs/master-ux-redesign-architecture-plan.md": {
@@ -1308,9 +1308,9 @@
     "semantic_hash": ""
   },
   "tests/unit/header-actions-lifecycle.spec.mjs": {
-    "mtime": 1793320003.176599,
-    "seen": 1793320125.7191598,
-    "ast_hash": "ab7180ca376850c86644b40f6a39c1f1",
+    "mtime": 1793767127.5343695,
+    "seen": 1793767188.6292818,
+    "ast_hash": "4f2d2dee899c35b753e62b44a8ac5923",
     "semantic_hash": ""
   },
   "tests/unit/scratchpad-smart-promotion.spec.mjs": {
@@ -1464,9 +1464,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseSegmentedControl.vue": {
-    "mtime": 1793765961.7459786,
-    "seen": 1793766065.2828205,
-    "ast_hash": "f6e3dff953d4233b4093491418b3e92c",
+    "mtime": 1793766900.1806867,
+    "seen": 1793767014.5043209,
+    "ast_hash": "87d801e7b9cf36c7480b0364475066b1",
     "semantic_hash": ""
   },
   "components/ui/BaseSelect.vue": {

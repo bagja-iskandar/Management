@@ -8,6 +8,7 @@ export interface HeaderButtonAction {
   label: string
   icon?: any
   variant?: HeaderActionVariant
+  size?: 'xs' | 'sm' | 'md'
   shortcut?: string
   disabled?: boolean
   loading?: boolean
