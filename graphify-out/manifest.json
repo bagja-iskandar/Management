@@ -24,21 +24,9 @@
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {
-    "mtime": 1793765276.5512764,
-    "seen": 1793765342.9970095,
-    "ast_hash": "dff565a4fe2e41b4539ffd84b886d297",
-    "semantic_hash": ""
-  },
-  "components/AddProjectModal.vue": {
-    "mtime": 1793772293.556991,
-    "seen": 1793772392.978067,
-    "ast_hash": "f953cbd789a4618f7ddcdbda6c028f7d",
-    "semantic_hash": ""
-  },
-  "components/ConfirmDialog.vue": {
-    "mtime": 1793772284.9729197,
-    "seen": 1793772392.9793446,
-    "ast_hash": "f8a3fc440f63de9431d8315614780221",
+    "mtime": 1793781652.4143853,
+    "seen": 1793781775.9872248,
+    "ast_hash": "7fa94b0a5904a5f3ca3ab180a444fc38",
     "semantic_hash": ""
   },
   "components/dashboard.vue": {
@@ -60,9 +48,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1793762941.4279308,
-    "seen": 1793763019.6239388,
-    "ast_hash": "79cbe306352ac8dfe7d4410798b8779b",
+    "mtime": 1793781391.7957735,
+    "seen": 1793781588.126949,
+    "ast_hash": "e43b0a9dd07fbfa296cbeccbaa5bbda7",
     "semantic_hash": ""
   },
   "package.json": {
@@ -462,9 +450,9 @@
     "semantic_hash": ""
   },
   "app/pages/projects/index.vue": {
-    "mtime": 1793323150.509366,
-    "seen": 1793323333.982584,
-    "ast_hash": "90315175f3803c49eff65268a725bcb1",
+    "mtime": 1793782215.182537,
+    "seen": 1793782298.966208,
+    "ast_hash": "dab25d590aae287ba6291204b9b9df66",
     "semantic_hash": ""
   },
   "components/AlertBar.vue": {
@@ -527,16 +515,10 @@
     "ast_hash": "fc780f14117348859d081e4a2f7f24ed",
     "semantic_hash": ""
   },
-  "components/PullRequestsIssuesModal.vue": {
-    "mtime": 1793772312.3972273,
-    "seen": 1793772392.9836938,
-    "ast_hash": "d30fd24ba2f0425bcee5077655158c8d",
-    "semantic_hash": ""
-  },
   "components/RepoActivityBadge.vue": {
-    "mtime": 1792830549.2164626,
-    "seen": 1792830890.4893067,
-    "ast_hash": "70d92c7e5ea885bb29e59e5e346172ed",
+    "mtime": 1793782219.3412378,
+    "seen": 1793782298.9768329,
+    "ast_hash": "4b4b488fdd18184faa3c2812f92508a7",
     "semantic_hash": ""
   },
   "server/api/github/packages.get.ts": {
@@ -1175,12 +1157,6 @@
     "ast_hash": "3ec5da2b597513525f6cf3f6aabb175f",
     "semantic_hash": ""
   },
-  "components/EditProjectModal.vue": {
-    "mtime": 1793772300.8301723,
-    "seen": 1793772392.9811153,
-    "ast_hash": "3e3b01574fc9b71c447ab3ca99b70c18",
-    "semantic_hash": ""
-  },
   "tests/unit/projects-workspace.spec.mjs": {
     "mtime": 1793243544.6854153,
     "seen": 1793243577.9092627,
@@ -1215,12 +1191,6 @@
     "mtime": 1793273287.5474403,
     "seen": 1793273357.5933516,
     "ast_hash": "7c1e0556c50c8b2cdc66bf9998f43a1f",
-    "semantic_hash": ""
-  },
-  "components/sprint/SprintRolloverModal.vue": {
-    "mtime": 1793772316.6205702,
-    "seen": 1793772393.0310977,
-    "ast_hash": "58020305e417dcd7e5e740887ad1f8aa",
     "semantic_hash": ""
   },
   "server/api/github/sync.post.ts": {
@@ -1302,9 +1272,9 @@
     "semantic_hash": ""
   },
   "composables/useMarkdownChecklist.ts": {
-    "mtime": 1793761961.332662,
-    "seen": 1793762020.5729632,
-    "ast_hash": "378e26d9688ca7564223222e8fd3b0dd",
+    "mtime": 1793781644.8469183,
+    "seen": 1793781776.045486,
+    "ast_hash": "e2c7dda0acfba9841d382f19a06e589b",
     "semantic_hash": ""
   },
   "composables/useModalLifecycle.ts": {
@@ -1368,8 +1338,8 @@
     "semantic_hash": ""
   },
   "components/ui/BaseBadge.vue": {
-    "mtime": 1793763139.1297238,
-    "seen": 1793763223.5080168,
+    "mtime": 1793781837.0791938,
+    "seen": 1793782140.7484243,
     "ast_hash": "bf7c75809f1b4f5c50d5880683b19c36",
     "semantic_hash": ""
   },

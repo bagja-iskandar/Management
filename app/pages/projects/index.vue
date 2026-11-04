@@ -389,8 +389,6 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import type { Project } from '~/types'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
-import EditProjectModal from '~~/components/EditProjectModal.vue'
-import AddProjectModal from '~~/components/AddProjectModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import { useHeaderActions } from '~/composables/useHeaderActions'

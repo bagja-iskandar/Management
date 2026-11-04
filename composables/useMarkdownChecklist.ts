@@ -5,7 +5,7 @@ import {
   appendChecklistStep,
   removeChecklistStep,
   type ChecklistItem
-} from '~/utils/markdown-checklist'
+} from '~~/utils/markdown-checklist'
 
 export interface ChecklistStats {
   total: number

@@ -16,7 +16,11 @@ export default defineNuxtConfig({
     '~/components': fileURLToPath(new URL('./components', import.meta.url)),
     '@/components': fileURLToPath(new URL('./components', import.meta.url)),
     '~~/components': fileURLToPath(new URL('./components', import.meta.url)),
-    '@@/components': fileURLToPath(new URL('./components', import.meta.url))
+    '@@/components': fileURLToPath(new URL('./components', import.meta.url)),
+    '~/utils': fileURLToPath(new URL('./utils', import.meta.url)),
+    '@/utils': fileURLToPath(new URL('./utils', import.meta.url)),
+    '~~/utils': fileURLToPath(new URL('./utils', import.meta.url)),
+    '@@/utils': fileURLToPath(new URL('./utils', import.meta.url))
   },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~~/assets/css/main.css'],
@@ -26,7 +30,7 @@ export default defineNuxtConfig({
   },
   components: [{ path: '~~/components', pathPrefix: false }],
   imports: {
-    dirs: ['~~/composables', '~~/composables/**']
+    dirs: ['~~/composables', '~~/composables/**', '~~/utils', '~~/utils/**']
   },
   runtimeConfig: {
     githubToken: process.env.GITHUB_TOKEN || '',
