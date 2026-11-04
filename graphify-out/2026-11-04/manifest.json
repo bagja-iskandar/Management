@@ -18,15 +18,15 @@
     "semantic_hash": ""
   },
   "app/pages/projects/[slug].vue": {
-    "mtime": 1793765287.797562,
-    "seen": 1793765342.992943,
-    "ast_hash": "5b17590533015301b984615d144ec8e9",
+    "mtime": 1793787786.5395534,
+    "seen": 1793787922.2947676,
+    "ast_hash": "9a0499a0fdc52b1630d33cdfcd1b98b7",
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {
-    "mtime": 1793781652.4143853,
-    "seen": 1793781775.9872248,
-    "ast_hash": "7fa94b0a5904a5f3ca3ab180a444fc38",
+    "mtime": 1793787833.0630233,
+    "seen": 1793787922.302115,
+    "ast_hash": "3bda2e9af7c7f2ce62613a941ea2b73f",
     "semantic_hash": ""
   },
   "components/dashboard.vue": {
@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "composables/useTasks.ts": {
-    "mtime": 1793023255.0974154,
-    "seen": 1793023313.849348,
-    "ast_hash": "c1259635b11ebb43ffee5a37f0a12607",
+    "mtime": 1793787579.3223014,
+    "seen": 1793787670.0360296,
+    "ast_hash": "fa49e57bf1293c64b185d700540a2987",
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
@@ -450,9 +450,9 @@
     "semantic_hash": ""
   },
   "app/pages/projects/index.vue": {
-    "mtime": 1793323150.509366,
-    "seen": 1793323333.982584,
-    "ast_hash": "90315175f3803c49eff65268a725bcb1",
+    "mtime": 1793782215.182537,
+    "seen": 1793782298.966208,
+    "ast_hash": "dab25d590aae287ba6291204b9b9df66",
     "semantic_hash": ""
   },
   "components/AlertBar.vue": {
@@ -516,9 +516,9 @@
     "semantic_hash": ""
   },
   "components/RepoActivityBadge.vue": {
-    "mtime": 1792830549.2164626,
-    "seen": 1792830890.4893067,
-    "ast_hash": "70d92c7e5ea885bb29e59e5e346172ed",
+    "mtime": 1793782219.3412378,
+    "seen": 1793782298.9768329,
+    "ast_hash": "4b4b488fdd18184faa3c2812f92508a7",
     "semantic_hash": ""
   },
   "server/api/github/packages.get.ts": {
@@ -600,9 +600,9 @@
     "semantic_hash": ""
   },
   "components/project/ProjectTaskMatrix.vue": {
-    "mtime": 1792832347.035257,
-    "seen": 1792832438.9967935,
-    "ast_hash": "d5561d483c168b01b74baab2b5925ba8",
+    "mtime": 1793787817.840223,
+    "seen": 1793787922.4007723,
+    "ast_hash": "4bb24f5aef81a9c4a098c1119c4208ab",
     "semantic_hash": ""
   },
   "components/sprint/DeliverablesMatrix.vue": {
@@ -696,9 +696,9 @@
     "semantic_hash": ""
   },
   "server/repositories/nitro/nitro-task.repository.ts": {
-    "mtime": 1791278320.017298,
-    "seen": 1791278571.2760239,
-    "ast_hash": "c7fbfc61908f3bf9ae4b7b78a8697123",
+    "mtime": 1793787512.3083234,
+    "seen": 1793787670.1108818,
+    "ast_hash": "4f4ed69c41bd2f79d72aaaa9d34284c0",
     "semantic_hash": ""
   },
   "server/schemas/helper.ts": {
@@ -1482,15 +1482,15 @@
     "semantic_hash": ""
   },
   "components/modals/task/AddTaskModal.vue": {
-    "mtime": 1793771776.7918081,
-    "seen": 1793772393.0022922,
-    "ast_hash": "064f899915721e02254b88a7374af3f5",
+    "mtime": 1793787792.0767899,
+    "seen": 1793787922.376448,
+    "ast_hash": "a5f28ec416343b50111219074c23734f",
     "semantic_hash": ""
   },
   "components/modals/task/TaskDrawer.vue": {
-    "mtime": 1793771825.0106623,
-    "seen": 1793772393.0022986,
-    "ast_hash": "d5a38246ff75601f7b8b176eb307503d",
+    "mtime": 1793787698.3219957,
+    "seen": 1793787922.3764603,
+    "ast_hash": "7ae97f6d3485eff2f2d43fe4df5c2256",
     "semantic_hash": ""
   },
   "tests/unit/modals-architecture.spec.mjs": {

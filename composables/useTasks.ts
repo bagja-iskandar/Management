@@ -116,6 +116,11 @@ export function useTasks() {
           const res = await $fetch(`/api/tasks/${encodeURIComponent(id)}`, { method: 'DELETE' })
           return res
         } catch (err: any) {
+          const status = err?.statusCode || err?.data?.statusCode || err?.response?.status
+          if (status === 404) {
+            console.warn(`[useTasks.deleteTask] Task ${id} already removed from server (404), skipping rollback.`)
+            return { ok: true, deleted: true }
+          }
           if (snapshot) {
             workspaceStore.addTaskToStore(snapshot)
           }

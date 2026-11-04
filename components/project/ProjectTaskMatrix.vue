@@ -95,7 +95,7 @@
         </div>
 
         <div class="col-span-1 font-mono text-xs text-[#8A8F9E] tabular-nums whitespace-nowrap">
-          {{ t.dueDate || 'Nov 15, 2026' }}
+          {{ t.dueDate || '—' }}
         </div>
 
         <div class="col-span-1 flex items-center justify-end gap-1.5" @click.stop>

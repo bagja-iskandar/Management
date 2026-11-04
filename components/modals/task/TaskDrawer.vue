@@ -172,9 +172,26 @@
             </div>
 
             <div class="space-y-1.5">
-              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
-                Due Date
-              </label>
+              <div class="flex items-center justify-between">
+                <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                  Due Date
+                </label>
+                <button
+                  v-if="form.dueDate"
+                  type="button"
+                  class="font-mono text-[10px] text-[#8A8F9E] hover:text-rose-400 transition-colors inline-flex items-center gap-1 cursor-pointer"
+                  @click="form.dueDate = ''"
+                >
+                  <NexuraIcon name="X" size="xs" />
+                  <span>Clear Date</span>
+                </button>
+                <span
+                  v-else
+                  class="font-mono text-[10px] text-[#8A8F9E]/60 italic"
+                >
+                  No deadline
+                </span>
+              </div>
               <input
                 v-model="form.dueDate"
                 type="date"
@@ -282,7 +299,7 @@
               type="button"
               class="font-sans text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors px-3 py-1.5 rounded-lg border border-transparent hover:border-rose-500/20 inline-flex items-center gap-1.5 cursor-pointer"
               :disabled="busy || isBusyAction"
-              @click="handleDelete"
+              @click="confirmDeleteOpen = true"
             >
               <NexuraIcon name="Trash2" size="xs" />
               <span>Delete Task</span>
@@ -338,6 +355,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Confirmation Dialog for Task Deletion -->
+      <ConfirmDialog
+        v-if="confirmDeleteOpen"
+        title="Delete Deliverable"
+        :message="`Are you sure you want to permanently delete #${displayTaskId} (${form.name || 'Untitled'})? This action cannot be undone.`"
+        confirm-text="Delete Deliverable"
+        cancel-text="Keep Deliverable"
+        :busy="isBusyAction"
+        @confirm="executeDelete"
+        @cancel="confirmDeleteOpen = false"
+      />
     </div>
   </Teleport>
 </template>
@@ -474,6 +503,7 @@ const availableProjects = computed<Project[]>(() => {
 })
 
 const isCreatingIssue = ref(false)
+const confirmDeleteOpen = ref(false)
 const newTagInput = ref('')
 
 const form = reactive({
@@ -574,19 +604,20 @@ function removeTag(index: number) {
 }
 
 function handleClose() {
+  confirmDeleteOpen.value = false
   emit('close')
   closeTaskDrawer()
 }
 
-async function handleDelete() {
+async function executeDelete() {
   if (!currentTask.value) return
   const taskToDelete = currentTask.value
-  emit('delete', taskToDelete)
 
   try {
     isBusyAction.value = true
     await tasksApi.deleteTask(taskToDelete.id)
-    removeTaskFromStore(taskToDelete.id)
+    confirmDeleteOpen.value = false
+    emit('delete', taskToDelete)
     handleClose()
   } catch (err) {
     console.error('[TaskDrawer] Failed to delete task:', err)
@@ -605,7 +636,7 @@ async function submitSave() {
     priority: form.priority,
     projectSlug: form.projectSlug || undefined,
     techTags: form.techTags,
-    dueDate: form.dueDate || undefined,
+    dueDate: form.dueDate && form.dueDate.trim() ? form.dueDate.trim() : null,
     githubIssueUrl: form.githubIssueUrl || undefined,
     githubIssueNumber: form.githubIssueNumber || undefined,
     githubPrUrl: form.githubPrUrl || undefined
@@ -651,7 +682,7 @@ async function handleCreateIssue() {
         priority: form.priority,
         projectSlug: form.projectSlug || undefined,
         techTags: form.techTags,
-        dueDate: form.dueDate || undefined,
+        dueDate: form.dueDate && form.dueDate.trim() ? form.dueDate.trim() : null,
         githubIssueUrl: res.issue.htmlUrl,
         githubIssueNumber: res.issue.number,
         githubPrUrl: form.githubPrUrl || undefined

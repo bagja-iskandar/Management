@@ -1,17 +1,17 @@
 # Graph Report - Management  (2026-11-04)
 
 ## Corpus Check
-- 248 files · ~249,033 words
+- 248 files · ~250,563 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: .example 1, (none) 1, .css 1)
 
 ## Summary
-- 2902 nodes · 3726 edges · 216 communities (179 shown, 12 thin omitted)
+- 2901 nodes · 3725 edges · 212 communities (176 shown, 13 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 122 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72db0be7`
+- Built from commit: `0b77199e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -32,8 +32,8 @@
 - optimizer/SKILL.md
 - tsconfig.json
 - UnifiedHeroBanner.vue
-- SupabaseNoteRepository
-- KanbanColumn.vue
+- supabase-sprint.repository.ts
+- createGitHubClient
 - Architectural Decision Records (ADRs)
 - Code Review Excellence Implementation Playbook
 - BAB I Pendahuluan
@@ -55,7 +55,7 @@
 - useOmniSearch
 - DESIGN.md — Precision Dark Obsidian Design System
 - Code Review Excellence
-- supabase.ts
+- repositories/index.ts
 - rules/graphify.md
 - workflows/graphify.md
 - priorityTasksList
@@ -102,7 +102,7 @@
 - IdeaScratchpadPanel.vue
 - shared-utils.spec.mjs
 - ConfirmDialog.vue
-- TaskCard.vue
+- github-allowlist.spec.mjs
 - throwIfSupabaseError
 - ProjectSecurityCard.vue
 - ConnectRepoModal.vue
@@ -119,7 +119,7 @@
 - project-detail-cockpit.spec.mjs
 - normalizeStatus
 - WorkspacePulse.vue
-- useSprintCalendar
+- session-auth.spec.mjs
 - FASE 0: Security Lockdown, Database Alignment & Core Safety
 - omni-search.spec.mjs
 - FASE 11: Otomasi Lanjutan & GitHub Sync
@@ -147,7 +147,6 @@
 - BLOK 2: REMEDIASI 1 HALAMAN PER FASE
 - 16. Implementation Roadmap
 - 20.2. Rekomendasi Memaksimalkan Fitur `OmniSearch` (`RECOMMENDATION`)
-- SessionAuthModal.vue
 - closeSearch
 - FASE 2: Global OmniSearch & Command Engine (`⌘K` / `Ctrl+K`)
 - roadmap-workspace.spec.mjs
@@ -166,12 +165,11 @@
 - FASE 13: Dead Code Pruning & Final Audit Sign-Off
 - applyOptimisticPatch
 - workspace-store.spec.mjs
-- project.ts
 - pages/telemetry.vue
 - MASTER IMPLEMENTATION PLAN: POST-COMPLETION UX REDESIGN & ARCHITECTURE PLANNING
 - useTasks
 - ProjectTaskMatrix.vue
-- repositories/index.ts
+- task.schema.ts
 - scratchpad-smart-promotion.spec.mjs
 - useThemePreset.ts
 - github-sync-automation.spec.mjs
@@ -189,9 +187,8 @@
 - FASE 1: Global Workspace Store & Shell Infrastructure
 - FASE 12: CI/CD Quality Gate & Automated Tests
 - BaseSwitch.vue
-- session-auth.spec.mjs
 - vue
-- pages/index.vue
+- KanbanColumn.vue
 - supabase-task-injection.spec.mjs
 - ENGINEERING.md — Standar Engineering & Konvensi Teknis Nexura
 - 5. Component Design Specifications
@@ -201,12 +198,13 @@
 - 5. Dokumentasi REST API
 - ui-primitives.spec.mjs
 - modals-architecture.spec.mjs
-- github-allowlist.spec.mjs
+- NitroTaskRepository
+- SprintRolloverModal.vue
+- export.get.ts
 - 4. Layout Architecture (Linear / Cursor Inset Shell)
 - 2. Standar Desain Visual: Precision Dark Obsidian Bento UI
 - 1. Design Philosophy
 - 6. Interaction, Accessibility & Animation Rules
-- useHeaderActions.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `vue` - 85 edges
@@ -236,15 +234,15 @@
 - 3-file cycle: `server/repositories/index.ts -> server/repositories/nitro/nitro-note.repository.ts -> server/utils/note.ts -> server/repositories/index.ts`
 - 3-file cycle: `server/repositories/index.ts -> server/repositories/supabase/supabase-note.repository.ts -> server/utils/note.ts -> server/repositories/index.ts`
 
-## Communities (216 total, 12 thin omitted)
+## Communities (212 total, 13 thin omitted)
 
 ### Community 0 - "TaskDrawer.vue"
 Cohesion: 0.07
-Nodes (27): availableProjects, {
+Nodes (28): availableProjects, {
   checklistItems,
   toggle: toggleChecklistStep,
   add: addChecklistStep
-}, currentTask, descRef, displayTaskId, effectiveIsOpen, effectiveRepo, effectiveTaskId (+19 more)
+}, confirmDeleteOpen, currentTask, descRef, displayTaskId, effectiveIsOpen, effectiveRepo (+20 more)
 
 ### Community 1 - "🚀 Nexura Deployment & Production Readiness Guide"
 Cohesion: 0.20
@@ -255,8 +253,8 @@ Cohesion: 0.05
 Nodes (29): allCount, availableTags, confirmOpen, confirmTarget, isBusy, { isOpen: isOmniSearchOpen }, notesCount, { openAddTask, openAddIdea } (+21 more)
 
 ### Community 3 - "[slug].vue"
-Cohesion: 0.02
-Nodes (68): activeDrawerTask, activeTabLiveUrl, { activity: projectPullsIssues, pending: pullsIssuesPending, refresh: refreshPullsIssues }, { branches, pending: branchesPending }, { commits, pending: commitsPending }, commitsCount, completedCount, confirmDeleteProject (+60 more)
+Cohesion: 0.03
+Nodes (64): activeTabLiveUrl, { activity: projectPullsIssues, pending: pullsIssuesPending, refresh: refreshPullsIssues }, { branches, pending: branchesPending }, { commits, pending: commitsPending }, commitsCount, completedCount, confirmDeleteProject, confirmSlugInput (+56 more)
 
 ### Community 4 - "projects/index.vue"
 Cohesion: 0.06
@@ -291,8 +289,8 @@ Cohesion: 0.10
 Nodes (21): { data: fetchedProjects }, description, dialogRef, dueDate, emit, isSubmitting, name, nameInputRef (+13 more)
 
 ### Community 12 - "store.ts"
-Cohesion: 0.17
-Nodes (20): NitroTaskRepository, createStorageAdapter(), createItem(), genId(), getArray(), getById(), getBySlug(), getNextTaskId() (+12 more)
+Cohesion: 0.24
+Nodes (18): createStorageAdapter(), createItem(), genId(), getArray(), getById(), getBySlug(), getNextTaskId(), getValue() (+10 more)
 
 ### Community 13 - "optimizer/SKILL.md"
 Cohesion: 0.05
@@ -302,13 +300,13 @@ Nodes (39): 10. Completion Criteria, 11. Priority Rule, 2.1 Inspect Before Modif
 Cohesion: 0.15
 Nodes (12): activeReposCount, ciChecksSummary, completedCount, highPriorityCount, inFlightCount, openPrCount, progressPercentage, props (+4 more)
 
-### Community 16 - "SupabaseNoteRepository"
-Cohesion: 0.50
-Nodes (3): mapNoteRow(), mapNoteToRow(), SupabaseNoteRepository
+### Community 16 - "supabase-sprint.repository.ts"
+Cohesion: 0.24
+Nodes (4): mapSprintRow(), mapSprintToRow(), SupabaseSprintRepository, requireSupabaseClient()
 
-### Community 17 - "KanbanColumn.vue"
-Cohesion: 0.29
-Nodes (6): badgeClass, containerBorderClass, headerBorderClass, props, titleClass, topAddBtnClass
+### Community 17 - "createGitHubClient"
+Cohesion: 0.17
+Nodes (21): fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages, fetchCachedPullsAndIssues, fetchCachedRepos (+13 more)
 
 ### Community 19 - "Architectural Decision Records (ADRs)"
 Cohesion: 0.07
@@ -347,8 +345,8 @@ Cohesion: 0.10
 Nodes (19): Accessibility & Inclusive Design, Behavioral Traits, Capabilities, Core React Expertise, Developer Experience & Tooling, Do not use this skill when, Example Interactions, Instructions (+11 more)
 
 ### Community 28 - "tasks-workspace.spec.mjs"
-Cohesion: 0.12
-Nodes (12): addStep(), deleteStep(), __dirname, __filename, getTask(), jiti, nuxtState, projectRoot (+4 more)
+Cohesion: 0.09
+Nodes (17): addStep(), { createTaskSchema, updateTaskSchema }, deleteStep(), __dirname, __filename, { getArray, setArray }, getTask(), jiti (+9 more)
 
 ### Community 29 - "Instructions"
 Cohesion: 0.12
@@ -371,8 +369,8 @@ Cohesion: 0.20
 Nodes (9): Context, Do not use this skill when, Instructions, Output Format, Refactor and Clean Code, Requirements, Resources, Safety (+1 more)
 
 ### Community 34 - "Dashboard.vue"
-Cohesion: 0.10
-Nodes (17): activeProjects, activeSprint, blockedTasks, completionRate, deployedTasksCount, highPriorityCount, inFlightCount, isBusy (+9 more)
+Cohesion: 0.05
+Nodes (30): hasAlerts, props, activeProjects, activeSprint, blockedTasks, completionRate, deployedTasksCount, highPriorityCount (+22 more)
 
 ### Community 35 - "PROJECT.md — Identitas, Tujuan, Scope, dan Target Sistem Nexura"
 Cohesion: 0.20
@@ -394,9 +392,9 @@ Nodes (10): 2. Color Tokens (`tailwind.config.ts` & CSS Variables), 3. Typograph
 Cohesion: 0.29
 Nodes (6): Code Review Excellence, Do not use this skill when, Instructions, Output Format, Resources, Use this skill when
 
-### Community 40 - "supabase.ts"
-Cohesion: 0.24
-Nodes (5): markSupabaseOffline(), markSupabaseOnline(), getSupabaseClient(), isNetworkError(), requireSupabaseClient()
+### Community 40 - "repositories/index.ts"
+Cohesion: 0.15
+Nodes (16): getNoteRepo(), getProjectRepo(), getTaskRepo(), isSupabaseActive(), markSupabaseOffline(), markSupabaseOnline(), noteRepository, projectRepository (+8 more)
 
 ### Community 45 - "NEXURA_SYSTEM_SPEC.md — Spesifikasi Sistem & Blueprint Transformasi"
 Cohesion: 0.20
@@ -487,8 +485,8 @@ Cohesion: 0.10
 Nodes (20): activeSprintCode, currentRouteProjectSlug, defaultProjects, displayedProjects, ensureProjectExpanded(), expandedProjects, isProjectActive(), isSubItemActive() (+12 more)
 
 ### Community 68 - "IProjectRepository"
-Cohesion: 0.15
-Nodes (3): IProjectRepository, NitroProjectRepository, normalizeProject()
+Cohesion: 0.13
+Nodes (4): IProjectRepository, ProjectFilterOptions, NitroProjectRepository, normalizeProject()
 
 ### Community 69 - "BAGIAN I — DOKUMEN SPESIFIKASI REQUIREMENT (HASIL DISCOVERY SESI 1–8)"
 Cohesion: 0.05
@@ -570,13 +568,17 @@ Nodes (12): __dirname, __filename, jiti, projectRoot, getStatusBadgeClass(), get
 Cohesion: 0.16
 Nodes (15): cancelButton, descId, displayBusy, displayCancelText, displayConfirmText, displayMessage, displayTitle, emits (+7 more)
 
-### Community 88 - "TaskCard.vue"
-Cohesion: 0.11
-Nodes (13): hasAlerts, props, displayTaskId, dueDateBadgeClass, formattedDueDate, priorityClasses, props, NoteCategory (+5 more)
+### Community 88 - "github-allowlist.spec.mjs"
+Cohesion: 0.40
+Nodes (3): jiti, {
+  normalizeGitHubRepo,
+  isGitHubRepoAllowed,
+  assertGitHubRepoAllowed
+}, repos
 
 ### Community 89 - "throwIfSupabaseError"
-Cohesion: 0.21
-Nodes (8): ProjectFilterOptions, mapProjectRow(), mapProjectToRow(), mapSprintRow(), mapSprintToRow(), SupabaseProjectRepository, SupabaseSprintRepository, throwIfSupabaseError()
+Cohesion: 0.24
+Nodes (7): mapNoteRow(), mapNoteToRow(), mapProjectRow(), mapProjectToRow(), SupabaseNoteRepository, SupabaseProjectRepository, throwIfSupabaseError()
 
 ### Community 90 - "ProjectSecurityCard.vue"
 Cohesion: 0.25
@@ -611,7 +613,7 @@ Cohesion: 0.07
 Nodes (27): 10. HARMONISASI DENGAN ATURAN & STANDAR PROYEK EKSISTING, 1.1. Kewajiban Membaca Sebelum Bekerja, 1.2. Prosedur Penanganan Anomali & Konflik Dokumen, 1. KEDUDUKAN DOKUMEN & KEWAJIBAN MUTLAK MEMBACA (MANDATORY READ PROTOCOL), 2.1. Otonomi dan Inisiatif Proaktif Head Agent, 2.2. Batas Mutlak Otonomi Head Agent, 2. OTONOMI, INISIATIF, DAN BATASAN KEWENANGAN HEAD AGENT, 3.1. Hak dan Kewajiban Komunikasi Subagent (+19 more)
 
 ### Community 99 - "nitro-note.repository.ts"
-Cohesion: 0.12
+Cohesion: 0.11
 Nodes (17): INoteRepository, PromoteNoteOverrides, PromoteNoteResult, getStoredNotes(), NitroNoteRepository, normalizeNote(), CreateNoteInput, createNoteSchema (+9 more)
 
 ### Community 100 - "2. SEPULUH BAGIAN WAJIB LAPORAN FASE"
@@ -634,9 +636,9 @@ Nodes (10): blockedCount, deployedCount, filteredTasks, getProjectName(), getSta
 Cohesion: 0.33
 Nodes (6): blockedCount, getLocalDateString(), overdueCount, props, pulseState, PulseStateType
 
-### Community 106 - "useSprintCalendar"
-Cohesion: 0.33
-Nodes (5): getMonday(), getSunday(), getWeekNumber(), toIsoDate(), useSprintCalendar()
+### Community 106 - "session-auth.spec.mjs"
+Cohesion: 0.13
+Nodes (10): getMonday(), getSunday(), getWeekNumber(), toIsoDate(), useSprintCalendar(), { createSessionToken }, jiti, nuxtState (+2 more)
 
 ### Community 107 - "FASE 0: Security Lockdown, Database Alignment & Core Safety"
 Cohesion: 0.25
@@ -668,7 +670,7 @@ Nodes (3): __dirname, __filename, projectRoot
 
 ### Community 117 - "NexuraIcon.vue"
 Cohesion: 0.06
-Nodes (14): packagesList, props, totalPackages, BaseEmptyStateProps, EmptyStateVariant, props, getIconRegistry(), IconSizePreset (+6 more)
+Nodes (8): getIconRegistry(), IconSizePreset, NexuraIconProps, numericStrokeWidth, props, resolvedIcon, resolvedSize, SIZE_MAP
 
 ### Community 118 - "5.9. System Telemetry (`/telemetry`)"
 Cohesion: 0.12
@@ -746,10 +748,6 @@ Nodes (7): 16. Implementation Roadmap, Phase 0 — Security Hardening, Data Hone
 Cohesion: 0.29
 Nodes (7): 1. Buka `<TaskDrawer />` Langsung dari `OmniSearch` & Perbaiki *Deep-Link* Entitas (`P0`), 20.2. Rekomendasi Memaksimalkan Fitur `OmniSearch` (`RECOMMENDATION`), 2. Aksi Mutasi Cepat di Dalam `OmniSearchPreviewPane` (*In-Palette Quick Mutators* — `P1`), 3. Sintaks *Quick Capture* & *Zero-Result Fallback Creation* (`P1`), 4. Operator Filter Lanjutan (*Compound Prefix & Field Operators* — `P1`), 5. Memori *"Recent & Pinned Items"* Saat Input Kosong (`P2`), 6. Pengindeksan *Live Commits* dari Cache GitHub (`P2`)
 
-### Community 137 - "SessionAuthModal.vue"
-Cohesion: 0.22
-Nodes (6): accessKeyInput, dialogRef, inputRef, localError, session, showSuccess
-
 ### Community 138 - "closeSearch"
 Cohesion: 0.27
 Nodes (11): handleEscAction(), onBackdropClick(), onInputKeydown(), onItemClick(), isRecordableQuery(), addSearchHistory(), closeSearch(), cycleScope() (+3 more)
@@ -824,10 +822,6 @@ Nodes (8): getEntityKey(), applyOptimisticPatch(), enqueueEntityMutation(), hand
 Cohesion: 0.17
 Nodes (5): jiti, nuxtState, { useSession }, { useTasks }, { useWorkspaceStore }
 
-### Community 159 - "project.ts"
-Cohesion: 0.29
-Nodes (5): CANONICAL_RELEASE_PHASES, Project, ProjectPriority, ProjectStatus, ReleasePhase
-
 ### Community 160 - "pages/telemetry.vue"
 Cohesion: 0.13
 Nodes (16): { data: telemetryData, status, refresh: refreshTelemetry }, feedbackMessage, feedbackType, isExporting, isRefreshing, isStaleData, onExportBackup(), onRefresh() (+8 more)
@@ -840,9 +834,9 @@ Nodes (36): 10. TESTING AND QUALITY GATES, 11. DATA INTEGRITY AND MIGRATION, 12.
 Cohesion: 0.25
 Nodes (5): filteredMatrixTasks, matrixFilter, matrixFilterOptions, matrixSearch, props
 
-### Community 166 - "repositories/index.ts"
-Cohesion: 0.05
-Nodes (69): zod, sessionSchema, fetchCachedBranches, fetchCachedCommitDetail, fetchCachedCommits, fetchCachedDeployments, fetchCachedGlobalCommits, fetchCachedPackages (+61 more)
+### Community 166 - "task.schema.ts"
+Cohesion: 0.06
+Nodes (29): zod, CreateIssueInput, createIssueSchema, WorkflowRerunInput, workflowRerunSchema, baseProjectFields, CreateProjectInput, createProjectSchema (+21 more)
 
 ### Community 167 - "scratchpad-smart-promotion.spec.mjs"
 Cohesion: 0.29
@@ -866,7 +860,7 @@ Cohesion: 0.28
 Nodes (7): buildSprintRolloverPayload(), extractEngCodes(), filterRolloverTasks(), GitHubPullRequestInfo, reconcileTaskWithPr(), ReconciliationResult, TaskSyncCandidate
 
 ### Community 174 - "ISprintRepository"
-Cohesion: 0.13
+Cohesion: 0.15
 Nodes (3): ISprintRepository, getSprintRepo(), NitroSprintRepository
 
 ### Community 175 - "useWorkspaceStore.ts"
@@ -882,8 +876,8 @@ Cohesion: 0.29
 Nodes (7): 1.1. Hakikat dan Karakteristik Nexura Management, 1.2. Koreksi Arsitektural Pemilik Proyek: Dari 4 Fase Menjadi 13 Fase Terpadu (3 Blok), 1.3. Status UI/UX "Dark Obsidian Bento" yang Aktif & Wajib Dilindungi (Styling Freeze Rule), 1.4. Diagram Arsitektur: Saat Ini (Flawed/Fragmented) vs Target (Hardened/Unified), 1. Executive Summary & Latar Belakang Arsitektur, A. Arsitektur Sebelum Remediasi (Kondisi Rentan & Terfragmentasi), B. Arsitektur Target (Kondisi Kokoh, Terpadu & Jujur)
 
 ### Community 182 - "header-actions-lifecycle.spec.mjs"
-Cohesion: 0.18
-Nodes (5): __dirname, __filename, jiti, nuxtState, projectRoot
+Cohesion: 0.10
+Nodes (11): actionsState, HeaderAction, HeaderActionVariant, HeaderButtonAction, HeaderSegmentedAction, useHeaderActions(), __dirname, __filename (+3 more)
 
 ### Community 183 - "openSearch"
 Cohesion: 0.67
@@ -905,17 +899,13 @@ Nodes (5): 1. File yang Disentuh:, 2. Logika Perubahan Teknis:, 3. Acceptance Cr
 Cohesion: 0.22
 Nodes (9): BaseSwitchProps, emit, props, switchId, SwitchSize, thumbSizeClasses, thumbTranslateClasses, toggle() (+1 more)
 
-### Community 192 - "session-auth.spec.mjs"
-Cohesion: 0.22
-Nodes (5): { createSessionToken }, jiti, nuxtState, { useSession }, { useWorkspaceStore }
-
 ### Community 194 - "vue"
-Cohesion: 0.12
-Nodes (9): emit, markCurrentCompleted, panelRef, props, props, svgClass, ChecklistStats, useMarkdownChecklist() (+1 more)
+Cohesion: 0.06
+Nodes (20): { openAddTask }, { setActions, clearActions }, workspaceStore, accessKeyInput, dialogRef, inputRef, localError, session (+12 more)
 
-### Community 195 - "pages/index.vue"
-Cohesion: 0.50
-Nodes (3): { openAddTask }, { setActions, clearActions }, workspaceStore
+### Community 196 - "KanbanColumn.vue"
+Cohesion: 0.15
+Nodes (11): badgeClass, containerBorderClass, headerBorderClass, props, titleClass, topAddBtnClass, displayTaskId, dueDateBadgeClass (+3 more)
 
 ### Community 199 - "supabase-task-injection.spec.mjs"
 Cohesion: 0.29
@@ -953,13 +943,13 @@ Nodes (3): __dirname, __filename, projectRoot
 Cohesion: 0.40
 Nodes (3): __dirname, __filename, projectRoot
 
-### Community 215 - "github-allowlist.spec.mjs"
-Cohesion: 0.40
-Nodes (3): jiti, {
-  normalizeGitHubRepo,
-  isGitHubRepoAllowed,
-  assertGitHubRepoAllowed
-}, repos
+### Community 211 - "SprintRolloverModal.vue"
+Cohesion: 0.33
+Nodes (4): emit, markCurrentCompleted, panelRef, props
+
+### Community 215 - "export.get.ts"
+Cohesion: 0.30
+Nodes (7): sessionSchema, createSessionToken(), CreateSessionTokenOptions, resolveSecurityKeys(), SessionTokenValidationResult, verifyAccessKey(), verifySessionToken()
 
 ### Community 216 - "4. Layout Architecture (Linear / Cursor Inset Shell)"
 Cohesion: 0.50
@@ -977,12 +967,8 @@ Nodes (3): 1. Design Philosophy, Mengapa Charcoal-Ochre Ditinggalkan?, Prinsip V
 Cohesion: 0.67
 Nodes (3): 6. Interaction, Accessibility & Animation Rules, Focus & Selection, Minimum Text & Contrast Guardrails
 
-### Community 223 - "useHeaderActions.ts"
-Cohesion: 0.22
-Nodes (6): actionsState, HeaderAction, HeaderActionVariant, HeaderButtonAction, HeaderSegmentedAction, useHeaderActions()
-
 ## Knowledge Gaps
-- **1662 isolated node(s):** `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }`, `tasksApi`, `{
+- **1664 isolated node(s):** `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }`, `tasksApi`, `{
   isAddTaskOpen,
   isAddIdeaOpen,
   taskContext,
@@ -990,24 +976,24 @@ Nodes (6): actionsState, HeaderAction, HeaderActionVariant, HeaderButtonAction, 
   closeAddTask,
   openAddIdea,
   closeAddIdea
-}` (+1657 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2079 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+}` (+1659 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2078 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vue` connect `vue` to `TaskDrawer.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `dashboard-command-center.spec.mjs`, `devops/PullRequestsIssuesModal.vue`, `LiveDevOpsStream.vue`, `AddProjectModal.vue`, `AddTaskModal.vue`, `UnifiedHeroBanner.vue`, `KanbanColumn.vue`, `tasks-workspace.spec.mjs`, `Dashboard.vue`, `BaseButton.vue`, `EditProjectModal.vue`, `DeploymentModal.vue`, `AddIdeaModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `AddTargetModal.vue`, `WorkflowLogModal.vue`, `ActiveFocusPanel.vue`, `telemetry-workspace.spec.mjs`, `PackageModal.vue`, `useGitHub.ts`, `BaseBadge.vue`, `BaseSelect.vue`, `SecurityAlertModal.vue`, `HeaderSearch.vue`, `components/Sidebar.vue`, `package.json`, `RepoActivityBadge.vue`, `useModalLifecycle`, `github-branch-commits.spec.mjs`, `useNotes`, `projects-workspace.spec.mjs`, `ProjectLiveDeploymentCard.vue`, `BaseDrawer.vue`, `HeaderBar.vue`, `BaseModal.vue`, `app.vue`, `useOmniSearch.ts`, `IdeaScratchpadPanel.vue`, `ConfirmDialog.vue`, `TaskCard.vue`, `ProjectSecurityCard.vue`, `ConnectRepoModal.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `dashboard/InfrastructureMeshCard.vue`, `ProjectExecutionOverview.vue`, `deliverable-and-idea-modals.spec.mjs`, `BaseCard.vue`, `project-detail-cockpit.spec.mjs`, `WorkspacePulse.vue`, `useSprintCalendar`, `omni-search.spec.mjs`, `useSession`, `NexuraIcon.vue`, `BaseInput.vue`, `BaseSegmentedControl.vue`, `SessionAuthModal.vue`, `roadmap-workspace.spec.mjs`, `settings.vue`, `sprints-workspace.spec.mjs`, `SprintObjectiveBanner.vue`, `RecentShipmentsCard.vue`, `workspace-store.spec.mjs`, `pages/telemetry.vue`, `ProjectTaskMatrix.vue`, `useThemePreset.ts`, `header-actions-lifecycle.spec.mjs`, `BaseSwitch.vue`, `session-auth.spec.mjs`, `pages/index.vue`, `useHeaderActions.ts`?**
-  _High betweenness centrality (0.366) - this node is a cross-community bridge._
-- **Why does `zod` connect `repositories/index.ts` to `nitro-note.repository.ts`, `package.json`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **Why does `@supabase/supabase-js` connect `package.json` to `supabase.ts`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
+- **Why does `vue` connect `vue` to `TaskDrawer.vue`, `tasks.vue`, `[slug].vue`, `projects/index.vue`, `KanbanBoard.vue`, `BaseSegmentedControl.vue`, `devops/PullRequestsIssuesModal.vue`, `LiveDevOpsStream.vue`, `AddProjectModal.vue`, `dashboard-command-center.spec.mjs`, `AddTaskModal.vue`, `roadmap-workspace.spec.mjs`, `settings.vue`, `UnifiedHeroBanner.vue`, `sprints-workspace.spec.mjs`, `SprintObjectiveBanner.vue`, `RecentShipmentsCard.vue`, `tasks-workspace.spec.mjs`, `workspace-store.spec.mjs`, `pages/telemetry.vue`, `Dashboard.vue`, `ProjectTaskMatrix.vue`, `useThemePreset.ts`, `telemetry-workspace.spec.mjs`, `BaseButton.vue`, `EditProjectModal.vue`, `DeploymentModal.vue`, `AddIdeaModal.vue`, `repos.vue`, `roadmap.vue`, `sprints.vue`, `AddTargetModal.vue`, `WorkflowLogModal.vue`, `ActiveFocusPanel.vue`, `header-actions-lifecycle.spec.mjs`, `PackageModal.vue`, `useGitHub.ts`, `BaseBadge.vue`, `BaseSelect.vue`, `BaseSwitch.vue`, `SecurityAlertModal.vue`, `HeaderSearch.vue`, `components/Sidebar.vue`, `KanbanColumn.vue`, `package.json`, `RepoActivityBadge.vue`, `useModalLifecycle`, `github-branch-commits.spec.mjs`, `useNotes`, `projects-workspace.spec.mjs`, `ProjectLiveDeploymentCard.vue`, `BaseDrawer.vue`, `HeaderBar.vue`, `BaseModal.vue`, `app.vue`, `SprintRolloverModal.vue`, `IdeaScratchpadPanel.vue`, `useOmniSearch.ts`, `ConfirmDialog.vue`, `ProjectSecurityCard.vue`, `ConnectRepoModal.vue`, `ProjectVercelTab.vue`, `ProjectCicdCard.vue`, `dashboard/InfrastructureMeshCard.vue`, `ProjectExecutionOverview.vue`, `deliverable-and-idea-modals.spec.mjs`, `BaseCard.vue`, `project-detail-cockpit.spec.mjs`, `WorkspacePulse.vue`, `session-auth.spec.mjs`, `omni-search.spec.mjs`, `useSession`, `NexuraIcon.vue`, `BaseInput.vue`?**
+  _High betweenness centrality (0.368) - this node is a cross-community bridge._
+- **Why does `zod` connect `task.schema.ts` to `repositories/index.ts`, `export.get.ts`, `nitro-note.repository.ts`, `package.json`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+- **Why does `@supabase/supabase-js` connect `package.json` to `repositories/index.ts`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Are the 21 inferred relationships involving `useWorkspaceStore()` (e.g. with `addNoteToStore()` and `addProjectToStore()`) actually correct?**
   _`useWorkspaceStore()` has 21 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `workspaceStore`, `session`, `{ isDrawerOpen, activeTaskId, closeTaskDrawer }` to the rest of the system?**
-  _1662 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1664 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `TaskDrawer.vue` be split into smaller, more focused modules?**
-  _Cohesion score 0.07459677419354839 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07196969696969698 - nodes in this community are weakly interconnected._
 - **Should `tasks.vue` be split into smaller, more focused modules?**
   _Cohesion score 0.047619047619047616 - nodes in this community are weakly interconnected._

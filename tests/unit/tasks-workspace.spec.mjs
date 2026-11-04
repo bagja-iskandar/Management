@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import path from 'node:path'
+import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { ref, computed } from 'vue'
 import { createJiti } from 'jiti'
@@ -46,10 +47,22 @@ globalThis.useState = mockUseState
 globalThis.defineEventHandler = (fn) => fn
 globalThis.$fetch = async () => []
 
+// In-memory Nitro storage mock for repository tests
+const memoryStorage = new Map()
+globalThis.useStorage = () => ({
+  getItem: async (k) => memoryStorage.get(k) ?? null,
+  setItem: async (k, v) => memoryStorage.set(k, v),
+  removeItem: async (k) => memoryStorage.delete(k)
+})
+
 const jiti = createJiti(import.meta.url, { alias: { '~': projectRoot } })
 const { useWorkspaceStore } = jiti('../../composables/useWorkspaceStore.ts')
 const { useTasks } = jiti('../../composables/useTasks.ts')
 const { withApiHandler } = jiti('../../server/utils/handler.ts')
+const { NitroTaskRepository } = jiti('../../server/repositories/nitro/nitro-task.repository.ts')
+const { getArray, setArray } = jiti('../../server/utils/store.ts')
+const { mapTaskToRow } = jiti('../../server/repositories/supabase/mappers.ts')
+const { createTaskSchema, updateTaskSchema } = jiti('../../server/schemas/task.schema.ts')
 
 // Helper function to reset reactive store between tests
 function resetWorkspaceStore() {
@@ -591,4 +604,370 @@ test('TEST-NOTE-PROMOTE-IDEMPOTENCY-01: Note promotion idempotency, 409 Conflict
   assert.ok(errorNotFound, 'Non-existent note must reject')
   assert.equal(errorNotFound.statusCode, 404)
   assert.equal(errorNotFound.statusMessage, 'Note not found')
+})
+
+// =============================================================================
+// TASK-DEL-01: Single Execution Flow & Lifecycle (No Double-Delete)
+// =============================================================================
+
+test('TASK-DEL-01: TaskDrawer.vue implements internal confirmation dialog and single execution deletion flow without page duplication', () => {
+  // 1. Verify app/pages/projects/[slug].vue has eliminated local duplicate TaskDrawer
+  const slugContent = fs.readFileSync(path.resolve(projectRoot, 'app/pages/projects/[slug].vue'), 'utf-8')
+  assert.equal(
+    slugContent.includes('<TaskDrawer'),
+    false,
+    'projects/[slug].vue must not render local TaskDrawer component (prevents duplicate instance with app.vue)'
+  )
+  assert.equal(
+    slugContent.includes('deleteTaskFromDrawer'),
+    false,
+    'projects/[slug].vue must not retain secondary deleteTaskFromDrawer handler that triggers double-delete'
+  )
+
+  // 2. Verify TaskDrawer.vue internal confirmation dialog wiring
+  const drawerContent = fs.readFileSync(path.resolve(projectRoot, 'components/modals/task/TaskDrawer.vue'), 'utf-8')
+  assert.ok(
+    drawerContent.includes('confirmDeleteOpen'),
+    'TaskDrawer must define confirmDeleteOpen state for internal deletion confirmation'
+  )
+  assert.ok(
+    drawerContent.includes('<ConfirmDialog'),
+    'TaskDrawer must render ConfirmDialog internally to protect destructive deletion'
+  )
+  assert.ok(
+    drawerContent.includes('@confirm="executeDelete"'),
+    'ConfirmDialog must bind @confirm to executeDelete handler'
+  )
+  assert.ok(
+    drawerContent.includes('@click="confirmDeleteOpen = true"'),
+    'Delete button in drawer header/footer must open ConfirmDialog instead of directly executing deletion'
+  )
+
+  // 3. Verify executeDelete single execution flow
+  assert.ok(
+    drawerContent.includes('async function executeDelete()'),
+    'TaskDrawer must implement executeDelete handler'
+  )
+  assert.ok(
+    drawerContent.includes('await tasksApi.deleteTask(taskToDelete.id)'),
+    'executeDelete must invoke tasksApi.deleteTask once'
+  )
+  assert.ok(
+    drawerContent.includes("emit('delete', taskToDelete)"),
+    'executeDelete must emit delete event after deletion execution'
+  )
+})
+
+// =============================================================================
+// TASK-DEL-02: Anti-Resurrection Guard (HTTP 404 on deleteTask does not rollback)
+// =============================================================================
+
+test('TASK-DEL-02: useTasks.deleteTask treats HTTP 404 as idempotent success and never resurrects deleted task snapshot', async () => {
+  const store = resetWorkspaceStore()
+  const tasksApi = useTasks()
+
+  const ghostTask = {
+    id: 'task-ghost-404-uuid',
+    taskId: 'ENG-601',
+    name: 'Ghost Deliverable Already Removed on Server',
+    status: 'in_queue',
+    priority: 'high'
+  }
+
+  // 1. Seed store with task
+  store.addTaskToStore(ghostTask)
+  assert.equal(store.tasks.value.length, 1)
+
+  // 2. Mock $fetch returning HTTP 404 (simulating task already removed on server or deleted in concurrent tab)
+  globalThis.$fetch = async (url, opts) => {
+    if (typeof url === 'string' && url.includes('/api/tasks/')) {
+      const err = new Error('HTTP 404 Not Found: Task does not exist')
+      err.statusCode = 404
+      throw err
+    }
+    return {}
+  }
+
+  // 3. Execute deleteTask - should NOT throw and should NOT restore snapshot
+  const res = await tasksApi.deleteTask('task-ghost-404-uuid')
+  assert.deepEqual(res, { ok: true, deleted: true }, 'deleteTask on 404 must return idempotent { ok: true, deleted: true }')
+
+  // 4. Assert anti-resurrection: task must remain removed from store
+  const foundInStore = store.tasks.value.find((t) => t.id === 'task-ghost-404-uuid')
+  assert.equal(foundInStore, undefined, 'Task must not be resurrected into store on HTTP 404')
+  assert.equal(store.tasks.value.length, 0, 'Store must remain empty after 404 deletion')
+
+  // 5. Verify that true server errors (e.g., HTTP 500) STILL trigger targeted rollback
+  const realErrorTask = {
+    id: 'task-real-err-500',
+    taskId: 'ENG-602',
+    name: 'Deliverable With Server Error',
+    status: 'running_sprint',
+    priority: 'critical'
+  }
+  store.addTaskToStore(realErrorTask)
+  assert.equal(store.tasks.value.length, 1)
+
+  globalThis.$fetch = async () => {
+    const err = new Error('HTTP 500 Internal Server Error: Database Deadlock')
+    err.statusCode = 500
+    throw err
+  }
+
+  let caughtErr = null
+  try {
+    await tasksApi.deleteTask('task-real-err-500')
+  } catch (e) {
+    caughtErr = e
+  }
+  assert.ok(caughtErr, 'HTTP 500 must reject')
+  assert.equal(caughtErr.statusCode, 500)
+  const rolledBackTask = store.tasks.value.find((t) => t.id === 'task-real-err-500')
+  assert.ok(rolledBackTask, 'Task snapshot MUST be restored on true server failure (HTTP 500)')
+  assert.equal(rolledBackTask.name, 'Deliverable With Server Error')
+})
+
+// =============================================================================
+// TASK-DEL-03: Cascading Sprint taskIds Cleanup
+// =============================================================================
+
+test('TASK-DEL-03: NitroTaskRepository.delete cascades deletion to remove task reference from sprints.taskIds', async () => {
+  memoryStorage.clear()
+  const repo = new NitroTaskRepository()
+
+  const targetTask = {
+    id: 'task-sprint-clean-uuid',
+    taskId: 'ENG-701',
+    name: 'Deliverable To Clean From Sprint',
+    status: 'in_queue',
+    priority: 'medium'
+  }
+  await setArray('tasks', [targetTask, { id: 'task-other-uuid', taskId: 'ENG-702', name: 'Other Task', status: 'in_queue', priority: 'low' }])
+
+  const initialSprint = {
+    id: 'sprint-active-01',
+    name: 'Sprint 42 Bento Focus',
+    taskIds: ['task-sprint-clean-uuid', 'ENG-702', 'task-keep-uuid']
+  }
+  await setArray('sprints', [initialSprint])
+
+  // Execute deletion
+  const deleted = await repo.delete('task-sprint-clean-uuid')
+  assert.equal(deleted, true, 'Repository delete must return true')
+
+  // Verify task removed from repository
+  const foundTask = await repo.findById('task-sprint-clean-uuid')
+  assert.equal(foundTask, null, 'Task must no longer exist in repository')
+
+  // Verify sprint taskIds cleaned up
+  const sprints = await getArray('sprints')
+  assert.equal(sprints.length, 1)
+  assert.equal(
+    sprints[0].taskIds.includes('task-sprint-clean-uuid'),
+    false,
+    'Sprint taskIds must not contain the deleted task UUID'
+  )
+  assert.equal(
+    sprints[0].taskIds.includes('ENG-701'),
+    false,
+    'Sprint taskIds must not contain the deleted taskId code'
+  )
+  assert.deepEqual(
+    sprints[0].taskIds,
+    ['ENG-702', 'task-keep-uuid'],
+    'Sprint taskIds must retain un-deleted task references'
+  )
+})
+
+// =============================================================================
+// TASK-DEL-04: Cascading Note promotedTaskId Cleanup
+// =============================================================================
+
+test('TASK-DEL-04: NitroTaskRepository.delete resets promotedTaskId to null on project_notes and notes (ON DELETE SET NULL parity)', async () => {
+  memoryStorage.clear()
+  const repo = new NitroTaskRepository()
+
+  const taskFromNote = {
+    id: 'task-note-promoted-uuid',
+    taskId: 'ENG-703',
+    name: 'Task Converted From Note',
+    status: 'in_queue',
+    priority: 'high'
+  }
+  await setArray('tasks', [taskFromNote])
+
+  // Seed project_notes with pointer to task UUID
+  const projectNote = {
+    id: 'note-project-01',
+    title: 'Architecture Idea',
+    promotedTaskId: 'task-note-promoted-uuid',
+    updatedAt: '2026-10-01T00:00:00.000Z'
+  }
+  await setArray('project_notes', [projectNote])
+
+  // Seed notes with pointer to taskId
+  const generalNote = {
+    id: 'note-general-02',
+    title: 'Feature Idea',
+    promotedTaskId: 'ENG-703',
+    updatedAt: '2026-10-01T00:00:00.000Z'
+  }
+  await setArray('notes', [generalNote])
+
+  // Execute deletion
+  const deleted = await repo.delete('task-note-promoted-uuid')
+  assert.equal(deleted, true)
+
+  // Verify project_notes promotedTaskId is reset to null
+  const projectNotes = await getArray('project_notes')
+  assert.equal(projectNotes.length, 1)
+  assert.equal(
+    projectNotes[0].promotedTaskId,
+    null,
+    'project_notes.promotedTaskId must be reset to null when linked task is deleted'
+  )
+
+  // Verify notes promotedTaskId is reset to null
+  const notes = await getArray('notes')
+  assert.equal(notes.length, 1)
+  assert.equal(
+    notes[0].promotedTaskId,
+    null,
+    'notes.promotedTaskId must be reset to null when linked task is deleted'
+  )
+})
+
+// =============================================================================
+// TASK-DATE-01: Explicit Null Update Payload (Clearing due date sends null)
+// =============================================================================
+
+test('TASK-DATE-01: Clearing task due date sends explicit null payload and persists null in Nitro and Supabase mappers', async () => {
+  // 1. Verify TaskDrawer.vue implementation
+  const drawerContent = fs.readFileSync(path.resolve(projectRoot, 'components/modals/task/TaskDrawer.vue'), 'utf-8')
+  assert.ok(
+    drawerContent.includes("form.dueDate && form.dueDate.trim() ? form.dueDate.trim() : null"),
+    'TaskDrawer must map empty form.dueDate to explicit null instead of undefined'
+  )
+  assert.ok(
+    drawerContent.includes('Clear Date'),
+    'TaskDrawer must provide a Clear Date button in UI'
+  )
+  assert.ok(
+    drawerContent.includes("form.dueDate = ''"),
+    'Clear Date button must clear form.dueDate'
+  )
+
+  // 2. Verify NitroTaskRepository persists explicit null
+  memoryStorage.clear()
+  const repo = new NitroTaskRepository()
+  const initialTask = {
+    id: 'task-date-update-uuid',
+    taskId: 'ENG-801',
+    name: 'Task With Deadline',
+    status: 'in_queue',
+    priority: 'medium',
+    dueDate: '2026-11-20'
+  }
+  await setArray('tasks', [initialTask])
+
+  const updated = await repo.update('task-date-update-uuid', { dueDate: null })
+  assert.ok(updated, 'Update must return updated task')
+  assert.equal(updated.dueDate, null, 'Repository must persist null dueDate')
+
+  const fetched = await repo.findById('task-date-update-uuid')
+  assert.equal(fetched.dueDate, null, 'Persisted task in Nitro must have null dueDate')
+
+  // 3. Verify Supabase mapper maps explicit null to database column due_date: null
+  const rowWithNull = mapTaskToRow({ dueDate: null })
+  assert.equal(rowWithNull.due_date, null, 'mapTaskToRow must map { dueDate: null } to due_date: null')
+
+  const rowWithUndefined = mapTaskToRow({ dueDate: undefined })
+  assert.equal(rowWithUndefined.due_date, undefined, 'mapTaskToRow must omit due_date when undefined')
+})
+
+// =============================================================================
+// TASK-DATE-02: Optional Due Date Creation (Task without dueDate stored without date)
+// =============================================================================
+
+test('TASK-DATE-02: createTaskSchema and NitroTaskRepository support creating tasks without dueDate', async () => {
+  // 1. Verify createTaskSchema accepts absent, null, or empty dueDate
+  const parseOmitted = createTaskSchema.safeParse({
+    name: 'Task with omitted dueDate',
+    techTags: []
+  })
+  assert.equal(parseOmitted.success, true, 'createTaskSchema must accept omitted dueDate')
+  assert.equal(parseOmitted.data.dueDate, undefined)
+
+  const parseNull = createTaskSchema.safeParse({
+    name: 'Task with null dueDate',
+    dueDate: null,
+    techTags: []
+  })
+  assert.equal(parseNull.success, true, 'createTaskSchema must accept null dueDate')
+  assert.equal(parseNull.data.dueDate, null)
+
+  const parseEmpty = createTaskSchema.safeParse({
+    name: 'Task with empty string dueDate',
+    dueDate: '',
+    techTags: []
+  })
+  assert.equal(parseEmpty.success, true, 'createTaskSchema must accept empty string dueDate')
+  assert.equal(parseEmpty.data.dueDate, '')
+
+  // 2. Verify NitroTaskRepository.create without dueDate
+  memoryStorage.clear()
+  const repo = new NitroTaskRepository()
+  const created = await repo.create({
+    name: 'Task Created Without Due Date',
+    status: 'in_queue',
+    priority: 'low',
+    techTags: [],
+    dueDate: undefined
+  })
+  assert.ok(created.id)
+  assert.equal(created.dueDate, undefined, 'Created task must not have artificial dueDate')
+
+  const fetched = await repo.findById(created.id)
+  assert.equal(fetched.dueDate, undefined, 'Stored task must reflect undefined dueDate')
+
+  // 3. Verify AddTaskModal.vue handles optional empty dueDate submission
+  const addModalContent = fs.readFileSync(path.resolve(projectRoot, 'components/modals/task/AddTaskModal.vue'), 'utf-8')
+  assert.ok(
+    addModalContent.includes("dueDate: dueDate.value.trim() ? dueDate.value.trim() : undefined"),
+    'AddTaskModal must submit empty dueDate as undefined instead of mandatory date'
+  )
+  assert.ok(
+    addModalContent.includes("const dueDate = ref('')"),
+    "AddTaskModal must initialize dueDate as empty string (optional by default)"
+  )
+})
+
+// =============================================================================
+// TASK-DATE-03: Honest Date Rendering (Zero fake metric in ProjectTaskMatrix & tasks.vue)
+// =============================================================================
+
+test('TASK-DATE-03: ProjectTaskMatrix and tasks.vue render honest due date fallbacks without fake metrics or date masking', () => {
+  // 1. Verify ProjectTaskMatrix.vue does NOT contain hardcoded fake metric date 'Nov 15, 2026'
+  const matrixContent = fs.readFileSync(path.resolve(projectRoot, 'components/project/ProjectTaskMatrix.vue'), 'utf-8')
+  assert.equal(
+    matrixContent.includes('Nov 15, 2026'),
+    false,
+    'ProjectTaskMatrix.vue must never contain hardcoded fake metric date "Nov 15, 2026"'
+  )
+  assert.ok(
+    matrixContent.includes("t.dueDate || '—'") || matrixContent.includes('t.dueDate || "—"'),
+    'ProjectTaskMatrix.vue must display honest dash fallback "—" when dueDate is absent'
+  )
+
+  // 2. Verify app/pages/tasks.vue does not mask missing dueDate with task creation date
+  const tasksPageContent = fs.readFileSync(path.resolve(projectRoot, 'app/pages/tasks.vue'), 'utf-8')
+  assert.equal(
+    tasksPageContent.includes('t.dueDate || t.date'),
+    false,
+    'tasks.vue must not mask missing dueDate with creation date (t.dueDate || t.date)'
+  )
+  assert.ok(
+    tasksPageContent.includes('formatDate(t.dueDate)'),
+    'tasks.vue must pass t.dueDate directly to formatDate to allow honest "No Due Date" rendering'
+  )
 })

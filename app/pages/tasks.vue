@@ -342,7 +342,7 @@
 
         <!-- Date (Clean Honest Fallback: if (!d) return 'No Due Date') -->
         <div class="col-span-1 font-mono text-xs text-[#8A8F9E] whitespace-nowrap">
-          {{ formatDate(t.dueDate || t.date) }}
+          {{ formatDate(t.dueDate) }}
         </div>
 
         <!-- Action Buttons -->

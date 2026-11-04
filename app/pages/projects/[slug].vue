@@ -250,7 +250,7 @@
           :tasks="projectTasks"
           @task-click="onTaskClick"
           @toggle-status="toggleMatrixTaskStatus"
-          @delete-task="deleteTaskFromDrawer"
+          @delete-task="onTaskClick"
         />
       </section>
 
@@ -496,29 +496,6 @@
         </div>
       </section>
 
-      <!-- Modals & Drawers -->
-      <TaskDrawer
-        v-if="activeDrawerTask"
-        :task="activeDrawerTask"
-        :busy="isDrawerBusy"
-        :repo="currentProject.githubRepo"
-        @close="activeDrawerTask = null"
-        @save="onSaveDrawerTask"
-        @delete="deleteTaskFromDrawer"
-      />
-
-
-      <ConfirmDialog
-        v-if="confirmDeleteTask"
-        title="Delete Task?"
-        :message="`Are you sure you want to delete task '${taskToDelete?.name}'? This action cannot be undone.`"
-        confirm-text="Delete Task"
-        cancel-text="Cancel"
-        :busy="isBusy"
-        @confirm="onConfirmDeleteTask"
-        @cancel="() => { confirmDeleteTask = false; taskToDelete = null }"
-      />
-
       <!-- Double-Confirmation Delete Project Modal -->
       <div
         v-if="confirmDeleteProject"
@@ -644,6 +621,7 @@ import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import { useTasks } from '~/composables/useTasks'
 import { useQuickTask } from '~/composables/useQuickTask'
+import { useTaskDrawer } from '~/composables/useTaskDrawer'
 import { useHeaderActions, type HeaderAction } from '~/composables/useHeaderActions'
 import {
   useGitHubCommits,
@@ -748,6 +726,7 @@ const currentProject = computed<Project | null>(() => {
 // Contextual Action Bar integration
 const { setActions, clearActions } = useHeaderActions()
 const { openAddTask, openAddIdea } = useQuickTask()
+const { openTaskDrawer } = useTaskDrawer()
 
 onMounted(() => {
   watchEffect(() => {
@@ -828,12 +807,6 @@ async function retryFetchProjects() {
     console.error('[projects] Failed to retry fetch projects:', err)
   }
 }
-
-const isBusy = ref(false)
-const isDrawerBusy = ref(false)
-const activeDrawerTask = ref<Task | null>(null)
-const confirmDeleteTask = ref(false)
-const taskToDelete = ref<Task | null>(null)
 
 // Double-Confirmation Delete Project State
 const confirmDeleteProject = ref(false)
@@ -1194,7 +1167,7 @@ async function onUpdateTaskStatus(taskId: string, newStatus: TaskStatus) {
 }
 
 function onTaskClick(task: Task) {
-  activeDrawerTask.value = task
+  openTaskDrawer(task.id)
 }
 
 function onAddTaskToColumn(status: TaskStatus = 'in_queue') {
@@ -1203,43 +1176,6 @@ function onAddTaskToColumn(status: TaskStatus = 'in_queue') {
     openAddIdea(slug)
   } else {
     openAddTask(slug, status)
-  }
-}
-
-async function onSaveDrawerTask(payload: Partial<Task>) {
-  if (!activeDrawerTask.value) return
-  const currentId = activeDrawerTask.value.id
-  isDrawerBusy.value = true
-  try {
-    await tasksApi.updateTask(currentId, payload)
-    activeDrawerTask.value = null
-  } catch (err) {
-    console.error('Failed to save drawer task:', err)
-  } finally {
-    isDrawerBusy.value = false
-  }
-}
-
-function deleteTaskFromDrawer(task: Task) {
-  taskToDelete.value = task
-  confirmDeleteTask.value = true
-}
-
-async function onConfirmDeleteTask() {
-  if (!taskToDelete.value) return
-  const deleteId = taskToDelete.value.id
-  isBusy.value = true
-  try {
-    await tasksApi.deleteTask(deleteId)
-    confirmDeleteTask.value = false
-    if (activeDrawerTask.value?.id === deleteId) {
-      activeDrawerTask.value = null
-    }
-    taskToDelete.value = null
-  } catch (err) {
-    console.error('Failed to delete task:', err)
-  } finally {
-    isBusy.value = false
   }
 }
 

@@ -88,6 +88,26 @@ export class NitroTaskRepository implements ITaskRepository {
       } catch (err) {
         console.warn('[NitroTaskRepository.delete] Sprint cleanup warning:', err)
       }
+
+      // Cascade cleanup: reset promotedTaskId pada project_notes jika task terkait dihapus (ON DELETE SET NULL parity)
+      try {
+        for (const noteKey of ['project_notes', 'notes']) {
+          const notes = await getArray<any>(noteKey)
+          let notesChanged = false
+          const updatedNotes = notes.map((n) => {
+            if (n.promotedTaskId && (n.promotedTaskId === existing.id || n.promotedTaskId === existing.taskId)) {
+              notesChanged = true
+              return { ...n, promotedTaskId: null, updatedAt: new Date().toISOString() }
+            }
+            return n
+          })
+          if (notesChanged) {
+            await setArray(noteKey, updatedNotes)
+          }
+        }
+      } catch (err) {
+        console.warn('[NitroTaskRepository.delete] Note cleanup warning:', err)
+      }
     }
     return removed
   }

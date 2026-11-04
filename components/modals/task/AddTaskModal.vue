@@ -130,7 +130,10 @@
         <!-- Due Date with Quick Presets -->
         <div class="flex flex-col gap-1.5">
           <div class="flex items-center justify-between">
-            <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F3F4F6]">Due Date</label>
+            <div class="flex items-center gap-2">
+              <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F3F4F6]">Due Date</label>
+              <span v-if="!dueDate" class="font-mono text-[10px] text-[#8A8F9E]/70 italic">No deadline set (Optional)</span>
+            </div>
             <div class="flex items-center gap-1 font-mono text-[10px]">
               <button
                 type="button"
@@ -298,7 +301,7 @@ const name = ref('')
 const description = ref('')
 const techTagsInput = ref('')
 const priority = ref<TaskPriority>('medium')
-const dueDate = ref(getDefaultDueDate())
+const dueDate = ref('')
 const validationError = ref('')
 const isSubmitting = ref(false)
 
@@ -382,7 +385,7 @@ function onSubmit() {
     projectSlug: targetSlug,
     status: props.status || 'in_queue',
     priority: priority.value,
-    dueDate: dueDate.value || undefined,
+    dueDate: dueDate.value.trim() ? dueDate.value.trim() : undefined,
     techTags
   })
 }
