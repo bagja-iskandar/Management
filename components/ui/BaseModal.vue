@@ -3,7 +3,7 @@
     <Transition name="modal-fade">
       <div
         v-if="isOpen"
-        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-y-auto bg-black/80 backdrop-blur-md"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="titleId"
@@ -11,14 +11,14 @@
       >
         <div
           ref="panelRef"
-          class="w-full rounded-2xl bg-[#111318] border border-white/[0.1] shadow-2xl text-[#F3F4F6] flex flex-col overflow-hidden max-h-[90vh] focus:outline-none"
+          class="w-full rounded-2xl bg-[#111318] border border-white/[0.1] shadow-2xl text-[#F3F4F6] flex flex-col overflow-hidden max-h-[90vh] my-auto focus:outline-none"
           :class="[resolvedMaxWidth, props.class]"
           tabindex="-1"
         >
           <!-- Modal Header -->
           <header
             v-if="$slots.header || title || closable"
-            class="flex items-center justify-between gap-3 px-6 py-4.5 border-b border-white/[0.07] shrink-0"
+            class="flex items-center justify-between gap-3 px-6 sm:px-7 pt-6 pb-5 sm:pt-7 sm:pb-5.5 border-b border-white/[0.07] shrink-0"
           >
             <slot name="header">
               <div class="flex items-center gap-3 min-w-0">
@@ -67,14 +67,14 @@
           </header>
 
           <!-- Modal Body -->
-          <div class="p-6 overflow-y-auto flex-1 min-h-0 space-y-4">
+          <div class="p-6 sm:p-7 overflow-y-auto flex-1 min-h-0 space-y-4">
             <slot />
           </div>
 
           <!-- Modal Footer -->
           <footer
             v-if="$slots.footer"
-            class="px-6 py-4 border-t border-white/[0.07] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
+            class="px-6 sm:px-7 py-4.5 border-t border-white/[0.07] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
           >
             <slot name="footer" />
           </footer>
