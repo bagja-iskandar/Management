@@ -55,7 +55,7 @@
           @click="handleActionClick(action)"
           :disabled="action.disabled || action.loading"
           :class="[getActionClass(action.variant), getButtonSizeClass(action.size)]"
-          class="inline-flex items-center font-medium transition-all select-none cursor-pointer focus:outline-none active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+          class="inline-flex items-center font-medium transition-all duration-150 ease-out select-none cursor-pointer focus:outline-none active:scale-[0.97] motion-reduce:transition-none motion-reduce:transform-none disabled:opacity-50 disabled:pointer-events-none"
           :title="action.shortcut ? `${action.label} (${action.shortcut})` : action.label"
         >
           <NexuraIcon v-if="action.icon" :name="action.icon" size="xs" class="shrink-0" />

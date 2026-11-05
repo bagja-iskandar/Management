@@ -11,7 +11,7 @@
       role="tab"
       :aria-selected="modelValue === opt.value ? 'true' : 'false'"
       :disabled="disabled || opt.disabled"
-      class="inline-flex items-center justify-center font-sans transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/50 disabled:opacity-40 disabled:cursor-not-allowed"
+      class="inline-flex items-center justify-center font-sans transition-all duration-150 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:transform-none cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/50 disabled:opacity-40 disabled:cursor-not-allowed"
       :class="[
         sizeClasses,
         fullWidth ? 'flex-1' : '',

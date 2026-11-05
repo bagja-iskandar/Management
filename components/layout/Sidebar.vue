@@ -260,7 +260,7 @@
               <button
                 type="button"
                 @click.stop="toggleProjectExpand(project.slug, $event)"
-                class="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-transform duration-200 cursor-pointer shrink-0"
+                class="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-transform duration-200 ease-out cursor-pointer shrink-0 motion-reduce:transition-none motion-reduce:transform-none"
                 :class="isExpanded(project.slug) ? 'rotate-90 text-[#F3F4F6]' : 'rotate-0'"
                 aria-label="Toggle Project Navigation"
               >
@@ -286,7 +286,7 @@
 
           <!-- Contextual Tree Accordion Container -->
           <div
-            class="grid transition-[grid-template-rows] duration-200 ease-out"
+            class="grid transition-[grid-template-rows] duration-200 ease-out motion-reduce:transition-none"
             :class="isExpanded(project.slug) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0 pointer-events-none'"
           >
             <div class="overflow-hidden">

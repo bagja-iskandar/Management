@@ -25,7 +25,7 @@
     >
       <!-- Switch Thumb -->
       <span
-        class="rounded-full bg-white shadow-sm transform transition-transform pointer-events-none inline-block"
+        class="rounded-full bg-white shadow-sm transform transition-transform pointer-events-none inline-block duration-150 ease-out motion-reduce:transition-none motion-reduce:transform-none"
         :class="[
           thumbSizeClasses,
           modelValue ? thumbTranslateClasses : 'translate-x-0'

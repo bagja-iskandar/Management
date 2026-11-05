@@ -3,7 +3,8 @@
     <!-- Optional Status/Priority Dot -->
     <span
       v-if="dot"
-      class="w-1.5 h-1.5 rounded-full shrink-0"
+      class="w-1.5 h-1.5 rounded-full shrink-0 motion-reduce:animate-none"
+      :class="isPulseStatus ? 'animate-pulse' : ''"
       :style="dotStyle"
       aria-hidden="true"
     />
@@ -70,6 +71,11 @@ const dotStyle = computed(() => {
     return { backgroundColor: getPriorityColor(props.value as TaskPriority) }
   }
   return { backgroundColor: 'currentColor' }
+})
+
+const isPulseStatus = computed(() => {
+  if (props.variant !== 'status') return false
+  return props.value === 'running_sprint'
 })
 
 const computedBadgeClasses = computed(() => {

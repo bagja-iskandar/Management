@@ -115,9 +115,9 @@ const iconSize = computed<IconSize>(() => {
 
 const computedClasses = computed(() => {
   return [
-    'inline-flex items-center justify-center transition-all duration-150 select-none cursor-pointer',
+    'inline-flex items-center justify-center transition-all duration-150 ease-out select-none cursor-pointer motion-reduce:transition-none motion-reduce:transform-none',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50',
-    isDisabled.value ? 'opacity-50 pointer-events-none cursor-not-allowed' : 'active:scale-[0.98]',
+    isDisabled.value ? 'opacity-50 pointer-events-none cursor-not-allowed' : 'active:scale-[0.97]',
     variantClasses[props.variant] || variantClasses.secondary,
     sizeClasses[props.size] || sizeClasses.md,
     props.class

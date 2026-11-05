@@ -1218,9 +1218,9 @@
     "semantic_hash": ""
   },
   "docs/master-refactoring-and-ui-enhancement-roadmap.md": {
-    "mtime": 1793761260.9529343,
-    "seen": 1793761733.5629265,
-    "ast_hash": "890762ca0732ba1bd9cb9d41b7dc2bc0",
+    "mtime": 1793870156.4213746,
+    "seen": 1793870276.1272874,
+    "ast_hash": "5aba7b02e308bcf2aca8d126a3a0e99a",
     "semantic_hash": ""
   },
   "composables/useMarkdownChecklist.ts": {
@@ -1290,15 +1290,15 @@
     "semantic_hash": ""
   },
   "components/ui/BaseBadge.vue": {
-    "mtime": 1793781837.0791938,
-    "seen": 1793782140.7484243,
-    "ast_hash": "bf7c75809f1b4f5c50d5880683b19c36",
+    "mtime": 1793869983.5587006,
+    "seen": 1793870115.4659846,
+    "ast_hash": "61eaad482b46a3bfb1b963eb24d107e6",
     "semantic_hash": ""
   },
   "components/ui/BaseButton.vue": {
-    "mtime": 1793763019.5689323,
-    "seen": 1793763223.5080225,
-    "ast_hash": "724d6b2f027465c49b2ceb664e24e78b",
+    "mtime": 1793869928.7819512,
+    "seen": 1793870115.4659882,
+    "ast_hash": "aa4e87f13b73a852625ea1117e21856e",
     "semantic_hash": ""
   },
   "components/ui/BaseCard.vue": {
@@ -1332,9 +1332,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseSegmentedControl.vue": {
-    "mtime": 1793766900.1806867,
-    "seen": 1793767014.5043209,
-    "ast_hash": "87d801e7b9cf36c7480b0364475066b1",
+    "mtime": 1793869943.870457,
+    "seen": 1793870115.4691005,
+    "ast_hash": "c5abf33cc8a93dcd277137a61cc261af",
     "semantic_hash": ""
   },
   "components/ui/BaseSelect.vue": {
@@ -1350,9 +1350,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseSwitch.vue": {
-    "mtime": 1793765139.565164,
-    "seen": 1793765270.6612713,
-    "ast_hash": "616c58b64fd12dc9bb4b14b868041548",
+    "mtime": 1793870012.7680087,
+    "seen": 1793870115.4695995,
+    "ast_hash": "ea032295a66054693db27852a1d886bd",
     "semantic_hash": ""
   },
   "components/modals/ConfirmDialog.vue": {
@@ -1494,21 +1494,21 @@
     "semantic_hash": ""
   },
   "components/layout/AlertBar.vue": {
-    "mtime": 1793793132.8605967,
-    "seen": 1793793691.3469687,
-    "ast_hash": "9817457188d3eedd375253351c0bd156",
+    "mtime": 1793870060.1022546,
+    "seen": 1793870115.4452584,
+    "ast_hash": "ebc1756665d90cf2a7866d031a90e8de",
     "semantic_hash": ""
   },
   "components/layout/HeaderBar.vue": {
-    "mtime": 1793793103.480029,
-    "seen": 1793793691.346977,
-    "ast_hash": "f67bed8a0cc3704a6fe2d74e60ac3c0c",
+    "mtime": 1793870029.2740574,
+    "seen": 1793870115.445264,
+    "ast_hash": "5e4f0d01b7242973b861855e2d2b9989",
     "semantic_hash": ""
   },
   "components/layout/Sidebar.vue": {
-    "mtime": 1793793116.8342128,
-    "seen": 1793793691.3469834,
-    "ast_hash": "ffd016216759d92e5bc05ffe294f012d",
+    "mtime": 1793870190.7009208,
+    "seen": 1793870275.9122536,
+    "ast_hash": "e9b3a758530aea699de939a3834e0797",
     "semantic_hash": ""
   },
   "components/project/RepoActivityBadge.vue": {
@@ -1527,6 +1527,12 @@
     "mtime": 1793793415.6173992,
     "seen": 1793793691.4509065,
     "ast_hash": "6a241115a963d1dcfc3e7bec6cf791fc",
+    "semantic_hash": ""
+  },
+  "tests/unit/micro-animations.spec.mjs": {
+    "mtime": 1793870416.6512177,
+    "seen": 1793870561.4551094,
+    "ast_hash": "790c5b510a1c697c8967c9d40d8bf268",
     "semantic_hash": ""
   }
 }
