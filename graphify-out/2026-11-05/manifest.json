@@ -1528,5 +1528,11 @@
     "seen": 1793793691.4509065,
     "ast_hash": "6a241115a963d1dcfc3e7bec6cf791fc",
     "semantic_hash": ""
+  },
+  "tests/unit/micro-animations.spec.mjs": {
+    "mtime": 1793870416.6512177,
+    "seen": 1793870561.4551094,
+    "ast_hash": "790c5b510a1c697c8967c9d40d8bf268",
+    "semantic_hash": ""
   }
 }

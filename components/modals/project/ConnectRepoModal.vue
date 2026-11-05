@@ -1,6 +1,7 @@
 <template>
   <BaseModal
     :model-value="effectiveIsOpen"
+    :closable="false"
     title="Connect to Project"
     subtitle="Map GitHub repository to Nexura Management"
     icon="FolderPlus"
@@ -8,18 +9,25 @@
     max-width="lg"
     @close="onClose"
   >
-    <form class="space-y-4" @submit.prevent="onConfirm">
-      <!-- Target Repository (Read-only Security Safeguard) -->
-      <div class="space-y-1.5 p-3 rounded-xl bg-[#0B0C10] border border-white/[0.06]">
-        <span class="font-sans text-[11px] font-medium text-[#8A8F9E] block">
-          Target Repository
-        </span>
-        <div class="flex items-center gap-2">
-          <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400" />
-          <BaseBadge variant="tech" :label="repo?.name || repo?.fullName || 'No Repository Selected'" />
-          <span v-if="repo?.language" class="text-[11px] font-mono text-[#8A8F9E] ml-auto">
+    <form id="connect-repo-form" class="space-y-4" @submit.prevent="onConfirm">
+      <!-- Target Repository Bento Card -->
+      <div class="p-3.5 rounded-xl bg-[#07080A]/80 border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.6)] space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span class="font-mono text-[11px] font-medium text-[#8A8F9E] flex items-center gap-1.5 uppercase tracking-wider">
+            <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400" />
+            Target Repository
+          </span>
+          <span
+            v-if="repo?.language"
+            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.04] text-[#8A8F9E] border border-white/[0.06]"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
             {{ repo.language }}
           </span>
+        </div>
+        <div class="flex items-center gap-2 font-mono text-xs text-[#F3F4F6] bg-black/40 px-3 py-2 rounded-lg border border-white/[0.05]">
+          <NexuraIcon name="Github" size="xs" class="text-[#8A8F9E] shrink-0" />
+          <span class="truncate font-semibold tracking-tight">{{ repo?.fullName || repo?.name || 'No Repository Selected' }}</span>
         </div>
       </div>
 
@@ -65,10 +73,12 @@
           :options="priorityOptions"
         />
       </div>
+    </form>
 
-      <!-- Modal Footer -->
-      <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/[0.06] mt-4">
+    <template #footer>
+      <div class="flex items-center justify-end gap-3 w-full">
         <BaseButton
+          type="button"
           variant="secondary"
           :disabled="isConnecting"
           @click="onClose"
@@ -78,6 +88,7 @@
 
         <BaseButton
           type="submit"
+          form="connect-repo-form"
           variant="primary"
           :loading="isConnecting"
           icon="Plus"
@@ -85,7 +96,7 @@
           Connect Project
         </BaseButton>
       </div>
-    </form>
+    </template>
   </BaseModal>
 </template>
 
@@ -95,7 +106,6 @@ import BaseModal from '~/components/ui/BaseModal.vue'
 import BaseInput from '~/components/ui/BaseInput.vue'
 import BaseSelect from '~/components/ui/BaseSelect.vue'
 import BaseButton from '~/components/ui/BaseButton.vue'
-import BaseBadge from '~/components/ui/BaseBadge.vue'
 import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import type { GitHubRepoSummary } from '~/types'
 
