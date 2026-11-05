@@ -1808,7 +1808,7 @@
       "file_type": "code",
       "norm_label": "connectrepomodalprops",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L112"
+      "source_location": "L102"
     },
     {
       "id": "components_dashboard_infrastructuremeshcard_telemetrysummary",
@@ -10232,7 +10232,7 @@
       "file_type": "code",
       "norm_label": "onclose()",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L196"
+      "source_location": "L186"
     },
     {
       "id": "components_modals_project_connectrepomodal_onconfirm",
@@ -10244,7 +10244,7 @@
       "file_type": "code",
       "norm_label": "onconfirm()",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L201"
+      "source_location": "L191"
     },
     {
       "id": "components_modals_project_connectrepomodal_ontitleinput",
@@ -10256,7 +10256,7 @@
       "file_type": "code",
       "norm_label": "ontitleinput()",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L173"
+      "source_location": "L163"
     },
     {
       "id": "components_modals_project_connectrepomodal_slugify",
@@ -10268,7 +10268,7 @@
       "file_type": "code",
       "norm_label": "slugify()",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L164"
+      "source_location": "L154"
     },
     {
       "id": "components_project_projectverceltab_copyurl",
@@ -32794,7 +32794,7 @@
       "file_type": "code",
       "norm_label": "effectiveisopen",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L142"
+      "source_location": "L132"
     },
     {
       "id": "components_modals_project_connectrepomodal_emit",
@@ -32805,7 +32805,7 @@
       "file_type": "code",
       "norm_label": "emit",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L126"
+      "source_location": "L116"
     },
     {
       "id": "components_modals_project_connectrepomodal_form",
@@ -32816,7 +32816,7 @@
       "file_type": "code",
       "norm_label": "form",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L154"
+      "source_location": "L144"
     },
     {
       "id": "components_modals_project_connectrepomodal_iscustomslug",
@@ -32827,7 +32827,7 @@
       "file_type": "code",
       "norm_label": "iscustomslug",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L162"
+      "source_location": "L152"
     },
     {
       "id": "components_modals_project_connectrepomodal_priorityoptions",
@@ -32838,7 +32838,7 @@
       "file_type": "code",
       "norm_label": "priorityoptions",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L148"
+      "source_location": "L138"
     },
     {
       "id": "components_modals_project_connectrepomodal_props",
@@ -32849,7 +32849,7 @@
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L119"
+      "source_location": "L109"
     },
     {
       "id": "components_project_projectverceltab",
@@ -34334,7 +34334,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L197",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -34346,7 +34346,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L204",
+      "source_location": "L194",
       "weight": 1.0
     },
     {
@@ -34358,7 +34358,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L175",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -42700,7 +42700,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L104",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -52759,7 +52759,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L112",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -52770,7 +52770,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L119",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -52781,7 +52781,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L126",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -52792,7 +52792,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L142",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -52803,7 +52803,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L148",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -52814,7 +52814,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L154",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -52825,7 +52825,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L162",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -52836,7 +52836,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L164",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -52847,7 +52847,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L173",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -52858,7 +52858,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L196",
+      "source_location": "L186",
       "weight": 1.0
     },
     {
@@ -52869,7 +52869,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/project/ConnectRepoModal.vue",
-      "source_location": "L201",
+      "source_location": "L191",
       "weight": 1.0
     },
     {
@@ -75864,5 +75864,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6af5c5bb469700b73c173d56a6902547df236675"
+  "built_at_commit": "6210c9bd3a2b63e0615162d2c230a768f383c3af"
 }
