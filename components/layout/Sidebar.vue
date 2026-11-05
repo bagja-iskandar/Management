@@ -25,7 +25,7 @@
     </div>
 
     <!-- Zona 2A (Fixed Top Navigation): Primary Workspace Navigation -->
-    <div class="shrink-0 space-y-0.5 pb-3">
+    <div class="shrink-0 space-y-0.5">
         <div class="px-2.5 pb-1 text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
           Workspace
         </div>
@@ -222,21 +222,22 @@
             class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
-    </div>
 
-    <!-- Zona 2B (Isolated Scrollable Area): Active Projects Tree -->
-    <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1">
-      <div class="px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
-        <span>Active Projects</span>
-        <NuxtLink
-          to="/projects"
-          class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
-          title="All Projects"
-        >
-          <NexuraIcon name="ChevronRight" size="xs" />
-        </NuxtLink>
+        <!-- Section Header: Active Projects (Fixed, tidak ikut scroll) -->
+        <div class="pt-3 px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+          <span>Active Projects</span>
+          <NuxtLink
+            to="/projects"
+            class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
+            title="All Projects"
+          >
+            <NexuraIcon name="ChevronRight" size="xs" />
+          </NuxtLink>
+        </div>
       </div>
 
+      <!-- Zona 2B (Isolated Scrollable Area): Active Projects Tree Items ONLY -->
+      <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-0.5">
         <!-- Project Tree List -->
         <div
           v-for="project in displayedProjects"

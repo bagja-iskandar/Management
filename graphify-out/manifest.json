@@ -1506,9 +1506,9 @@
     "semantic_hash": ""
   },
   "components/layout/Sidebar.vue": {
-    "mtime": 1793878646.0792582,
-    "seen": 1793878698.4622183,
-    "ast_hash": "0c7e8bc971a4063d5c6b769c91bd4d48",
+    "mtime": 1793879010.0196433,
+    "seen": 1793879106.1127,
+    "ast_hash": "fab6047c3ca422512c21cbaf4b770c6f",
     "semantic_hash": ""
   },
   "components/project/RepoActivityBadge.vue": {

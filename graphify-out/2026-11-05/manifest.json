@@ -1326,9 +1326,9 @@
     "semantic_hash": ""
   },
   "components/ui/BaseModal.vue": {
-    "mtime": 1793763071.3796196,
-    "seen": 1793763223.5080357,
-    "ast_hash": "c8dc5fa4d682a2177c90c0df7684212b",
+    "mtime": 1793874034.4057498,
+    "seen": 1793874112.5675826,
+    "ast_hash": "00318c2d5e36100166a49b97498778d0",
     "semantic_hash": ""
   },
   "components/ui/BaseSegmentedControl.vue": {
@@ -1404,9 +1404,9 @@
     "semantic_hash": ""
   },
   "components/modals/project/ConnectRepoModal.vue": {
-    "mtime": 1793771580.1616569,
-    "seen": 1793772393.0022628,
-    "ast_hash": "73ba26277778c2eb97f9839384fd542b",
+    "mtime": 1793872578.4857874,
+    "seen": 1793872623.4456742,
+    "ast_hash": "cc8932a7ffb7da8232b2c0a6555e50e5",
     "semantic_hash": ""
   },
   "components/modals/project/EditProjectModal.vue": {
@@ -1506,9 +1506,9 @@
     "semantic_hash": ""
   },
   "components/layout/Sidebar.vue": {
-    "mtime": 1793870190.7009208,
-    "seen": 1793870275.9122536,
-    "ast_hash": "e9b3a758530aea699de939a3834e0797",
+    "mtime": 1793878646.0792582,
+    "seen": 1793878698.4622183,
+    "ast_hash": "0c7e8bc971a4063d5c6b769c91bd4d48",
     "semantic_hash": ""
   },
   "components/project/RepoActivityBadge.vue": {
