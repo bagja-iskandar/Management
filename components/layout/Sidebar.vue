@@ -24,10 +24,8 @@
       </div>
     </div>
 
-    <!-- Zona 2 (Scrollable Body): Workspace Navigation & Active Projects Tree -->
-    <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-4">
-      <!-- Primary Workspace Navigation -->
-      <div class="space-y-0.5">
+    <!-- Zona 2A (Fixed Top Navigation): Primary Workspace Navigation -->
+    <div class="shrink-0 space-y-0.5 pb-3">
         <div class="px-2.5 pb-1 text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
           Workspace
         </div>
@@ -224,20 +222,20 @@
             class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
-      </div>
+    </div>
 
-      <!-- Section: Active Projects -->
-      <div class="space-y-1 pt-1">
-        <div class="px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
-          <span>Active Projects</span>
-          <NuxtLink
-            to="/projects"
-            class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
-            title="All Projects"
-          >
-            <NexuraIcon name="ChevronRight" size="xs" />
-          </NuxtLink>
-        </div>
+    <!-- Zona 2B (Isolated Scrollable Area): Active Projects Tree -->
+    <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-1">
+      <div class="px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+        <span>Active Projects</span>
+        <NuxtLink
+          to="/projects"
+          class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
+          title="All Projects"
+        >
+          <NexuraIcon name="ChevronRight" size="xs" />
+        </NuxtLink>
+      </div>
 
         <!-- Project Tree List -->
         <div
@@ -468,7 +466,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
 
     <!-- Zona 3 (Pinned Bottom Dock): System Telemetry Status Pod -->
