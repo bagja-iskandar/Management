@@ -18,9 +18,9 @@
     "semantic_hash": ""
   },
   "app/pages/projects/[slug].vue": {
-    "mtime": 1793793606.055647,
-    "seen": 1793793691.3206193,
-    "ast_hash": "879eeab505e3cee1b344e61809494de9",
+    "mtime": 1793863970.672665,
+    "seen": 1793864032.36097,
+    "ast_hash": "4cfa08c0435e07aba699ff715d49b859",
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {

@@ -820,7 +820,7 @@
       "file_type": "code",
       "norm_label": "detailstate",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L634"
+      "source_location": "L618"
     },
     {
       "id": "app_pages_projects_slug_projecttabitem",
@@ -833,7 +833,7 @@
       "file_type": "code",
       "norm_label": "projecttabitem",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L914"
+      "source_location": "L898"
     },
     {
       "id": "types_note_notecategory",
@@ -6548,7 +6548,7 @@
       "file_type": "code",
       "norm_label": "onaddtasktocolumn()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L951"
+      "source_location": "L935"
     },
     {
       "id": "app_pages_projects_slug_onsaveprojectsettings",
@@ -6560,7 +6560,7 @@
       "file_type": "code",
       "norm_label": "onsaveprojectsettings()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L755"
+      "source_location": "L739"
     },
     {
       "id": "app_pages_projects_slug_ontaskclick",
@@ -6572,7 +6572,7 @@
       "file_type": "code",
       "norm_label": "ontaskclick()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L947"
+      "source_location": "L931"
     },
     {
       "id": "app_pages_projects_slug_retryfetchprojects",
@@ -6584,7 +6584,7 @@
       "file_type": "code",
       "norm_label": "retryfetchprojects()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L855"
+      "source_location": "L839"
     },
     {
       "id": "components_layout_sidebar_ensureprojectexpanded",
@@ -6836,7 +6836,7 @@
       "file_type": "code",
       "norm_label": "sortbypriority()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L893"
+      "source_location": "L877"
     },
     {
       "id": "components_modals_project_editprojectmodal_initializeform",
@@ -7076,7 +7076,7 @@
       "file_type": "code",
       "norm_label": "onupdatetaskstatus()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L939"
+      "source_location": "L923"
     },
     {
       "id": "app_pages_projects_slug_togglematrixtaskstatus",
@@ -7088,7 +7088,7 @@
       "file_type": "code",
       "norm_label": "togglematrixtaskstatus()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L960"
+      "source_location": "L944"
     },
     {
       "id": "components_modals_task_addideamodal_oncancel",
@@ -10520,7 +10520,7 @@
       "file_type": "code",
       "norm_label": "handletabworkflowrerun()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L873"
+      "source_location": "L857"
     },
     {
       "id": "app_pages_projects_slug_onrerunworkflowbyid",
@@ -10532,7 +10532,7 @@
       "file_type": "code",
       "norm_label": "onrerunworkflowbyid()",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L866"
+      "source_location": "L850"
     },
     {
       "id": "server_repositories_contracts_note_repository_inoterepository_create",
@@ -24829,7 +24829,7 @@
       "file_type": "code",
       "norm_label": "{ activity: projectpullsissues, pending: pullsissuespending, refresh: refreshpullsissues }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L674"
+      "source_location": "L658"
     },
     {
       "id": "app_pages_projects_slug_branches_pending_branchespending",
@@ -24840,7 +24840,7 @@
       "file_type": "code",
       "norm_label": "{ branches, pending: branchespending }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L666"
+      "source_location": "L650"
     },
     {
       "id": "app_pages_projects_slug_cockpit",
@@ -24851,7 +24851,7 @@
       "file_type": "code",
       "norm_label": "cockpit",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L678"
+      "source_location": "L662"
     },
     {
       "id": "app_pages_projects_slug_commits_pending_commitspending",
@@ -24862,7 +24862,7 @@
       "file_type": "code",
       "norm_label": "{ commits, pending: commitspending }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L665"
+      "source_location": "L649"
     },
     {
       "id": "app_pages_projects_slug_commitscount",
@@ -24873,7 +24873,7 @@
       "file_type": "code",
       "norm_label": "commitscount",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L908"
+      "source_location": "L892"
     },
     {
       "id": "app_pages_projects_slug_completedcount",
@@ -24884,7 +24884,7 @@
       "file_type": "code",
       "norm_label": "completedcount",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L906"
+      "source_location": "L890"
     },
     {
       "id": "app_pages_projects_slug_currentproject",
@@ -24895,7 +24895,7 @@
       "file_type": "code",
       "norm_label": "currentproject",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L656"
+      "source_location": "L640"
     },
     {
       "id": "app_pages_projects_slug_data_projectsecurity_pending_securitypending_refresh_refreshsecurity",
@@ -24906,7 +24906,7 @@
       "file_type": "code",
       "norm_label": "{ data: projectsecurity, pending: securitypending, refresh: refreshsecurity }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L672"
+      "source_location": "L656"
     },
     {
       "id": "app_pages_projects_slug_deployments_projectdeployments_pending_deploymentspending_refresh_refreshdeployments",
@@ -24917,7 +24917,7 @@
       "file_type": "code",
       "norm_label": "{ deployments: projectdeployments, pending: deploymentspending, refresh: refreshdeployments }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L673"
+      "source_location": "L657"
     },
     {
       "id": "app_pages_projects_slug_derivedpercentage",
@@ -24928,7 +24928,7 @@
       "file_type": "code",
       "norm_label": "derivedpercentage",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L909"
+      "source_location": "L893"
     },
     {
       "id": "app_pages_projects_slug_isstaleprojectserror",
@@ -24939,7 +24939,7 @@
       "file_type": "code",
       "norm_label": "isstaleprojectserror",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L851"
+      "source_location": "L835"
     },
     {
       "id": "app_pages_projects_slug_openaddtask_openaddidea",
@@ -24950,7 +24950,7 @@
       "file_type": "code",
       "norm_label": "{ openaddtask, openaddidea }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L780"
+      "source_location": "L764"
     },
     {
       "id": "app_pages_projects_slug_opentaskdrawer",
@@ -24961,7 +24961,7 @@
       "file_type": "code",
       "norm_label": "{ opentaskdrawer }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L781"
+      "source_location": "L765"
     },
     {
       "id": "app_pages_projects_slug_packages_projectpackages_pending_packagespending_refresh_refreshpackages",
@@ -24972,7 +24972,7 @@
       "file_type": "code",
       "norm_label": "{ packages: projectpackages, pending: packagespending, refresh: refreshpackages }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L675"
+      "source_location": "L659"
     },
     {
       "id": "app_pages_projects_slug_projectnav",
@@ -24983,7 +24983,7 @@
       "file_type": "code",
       "norm_label": "projectnav",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L640"
+      "source_location": "L624"
     },
     {
       "id": "app_pages_projects_slug_projectsapi",
@@ -24994,7 +24994,7 @@
       "file_type": "code",
       "norm_label": "projectsapi",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L646"
+      "source_location": "L630"
     },
     {
       "id": "app_pages_projects_slug_projecttabs",
@@ -25005,7 +25005,7 @@
       "file_type": "code",
       "norm_label": "projecttabs",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L921"
+      "source_location": "L905"
     },
     {
       "id": "app_pages_projects_slug_projecttasks",
@@ -25016,7 +25016,7 @@
       "file_type": "code",
       "norm_label": "projecttasks",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L887"
+      "source_location": "L871"
     },
     {
       "id": "app_pages_projects_slug_rerunningrunid",
@@ -25027,7 +25027,7 @@
       "file_type": "code",
       "norm_label": "rerunningrunid",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L864"
+      "source_location": "L848"
     },
     {
       "id": "app_pages_projects_slug_route",
@@ -25038,7 +25038,7 @@
       "file_type": "code",
       "norm_label": "route",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L636"
+      "source_location": "L620"
     },
     {
       "id": "app_pages_projects_slug_router",
@@ -25049,7 +25049,7 @@
       "file_type": "code",
       "norm_label": "router",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L637"
+      "source_location": "L621"
     },
     {
       "id": "app_pages_projects_slug_selectedbranch",
@@ -25060,7 +25060,7 @@
       "file_type": "code",
       "norm_label": "selectedbranch",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L664"
+      "source_location": "L648"
     },
     {
       "id": "app_pages_projects_slug_setactions_clearactions",
@@ -25071,7 +25071,7 @@
       "file_type": "code",
       "norm_label": "{ setactions, clearactions }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L779"
+      "source_location": "L763"
     },
     {
       "id": "app_pages_projects_slug_slug",
@@ -25082,7 +25082,7 @@
       "file_type": "code",
       "norm_label": "slug",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L638"
+      "source_location": "L622"
     },
     {
       "id": "app_pages_projects_slug_targetrepo",
@@ -25093,7 +25093,7 @@
       "file_type": "code",
       "norm_label": "targetrepo",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L663"
+      "source_location": "L647"
     },
     {
       "id": "app_pages_projects_slug_tasksapi",
@@ -25104,7 +25104,7 @@
       "file_type": "code",
       "norm_label": "tasksapi",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L647"
+      "source_location": "L631"
     },
     {
       "id": "app_pages_projects_slug_totaltaskscount",
@@ -25115,7 +25115,7 @@
       "file_type": "code",
       "norm_label": "totaltaskscount",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L907"
+      "source_location": "L891"
     },
     {
       "id": "app_pages_projects_slug_workflows_projectworkflows_pending_workflowspending_refresh_refreshworkflows",
@@ -25126,7 +25126,7 @@
       "file_type": "code",
       "norm_label": "{ workflows: projectworkflows, pending: workflowspending, refresh: refreshworkflows }",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L671"
+      "source_location": "L655"
     },
     {
       "id": "app_pages_projects_slug_workspacestore",
@@ -25137,7 +25137,7 @@
       "file_type": "code",
       "norm_label": "workspacestore",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L644"
+      "source_location": "L628"
     },
     {
       "id": "project_context_architecture_1_gambaran_arsitektur_sistem",
@@ -26805,7 +26805,7 @@
       "file_type": "code",
       "norm_label": "prioritytaskslist",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L900"
+      "source_location": "L884"
     },
     {
       "id": "project_context_design",
@@ -33643,7 +33643,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L869",
+      "source_location": "L853",
       "weight": 1.0
     },
     {
@@ -33655,7 +33655,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L969",
+      "source_location": "L953",
       "weight": 1.0
     },
     {
@@ -42092,7 +42092,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L607",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -42104,7 +42104,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L608",
+      "source_location": "L592",
       "weight": 1.0
     },
     {
@@ -47631,7 +47631,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L636",
+      "source_location": "L620",
       "weight": 1.0
     },
     {
@@ -47642,7 +47642,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L637",
+      "source_location": "L621",
       "weight": 1.0
     },
     {
@@ -47653,7 +47653,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L638",
+      "source_location": "L622",
       "weight": 1.0
     },
     {
@@ -47664,7 +47664,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L640",
+      "source_location": "L624",
       "weight": 1.0
     },
     {
@@ -47675,7 +47675,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L644",
+      "source_location": "L628",
       "weight": 1.0
     },
     {
@@ -47686,7 +47686,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L646",
+      "source_location": "L630",
       "weight": 1.0
     },
     {
@@ -47697,7 +47697,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L647",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -47708,7 +47708,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L656",
+      "source_location": "L640",
       "weight": 1.0
     },
     {
@@ -47719,7 +47719,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L663",
+      "source_location": "L647",
       "weight": 1.0
     },
     {
@@ -47730,7 +47730,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L664",
+      "source_location": "L648",
       "weight": 1.0
     },
     {
@@ -47741,7 +47741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L665",
+      "source_location": "L649",
       "weight": 1.0
     },
     {
@@ -47752,7 +47752,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L666",
+      "source_location": "L650",
       "weight": 1.0
     },
     {
@@ -47763,7 +47763,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L671",
+      "source_location": "L655",
       "weight": 1.0
     },
     {
@@ -47774,7 +47774,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L672",
+      "source_location": "L656",
       "weight": 1.0
     },
     {
@@ -47785,7 +47785,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L673",
+      "source_location": "L657",
       "weight": 1.0
     },
     {
@@ -47796,7 +47796,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L674",
+      "source_location": "L658",
       "weight": 1.0
     },
     {
@@ -47807,7 +47807,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L675",
+      "source_location": "L659",
       "weight": 1.0
     },
     {
@@ -47818,7 +47818,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L678",
+      "source_location": "L662",
       "weight": 1.0
     },
     {
@@ -47829,7 +47829,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L755",
+      "source_location": "L739",
       "weight": 1.0
     },
     {
@@ -47840,7 +47840,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L779",
+      "source_location": "L763",
       "weight": 1.0
     },
     {
@@ -47851,7 +47851,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L780",
+      "source_location": "L764",
       "weight": 1.0
     },
     {
@@ -47862,7 +47862,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L781",
+      "source_location": "L765",
       "weight": 1.0
     },
     {
@@ -47873,7 +47873,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L831",
+      "source_location": "L815",
       "weight": 1.0
     },
     {
@@ -47884,7 +47884,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L851",
+      "source_location": "L835",
       "weight": 1.0
     },
     {
@@ -47895,7 +47895,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L855",
+      "source_location": "L839",
       "weight": 1.0
     },
     {
@@ -47906,7 +47906,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L864",
+      "source_location": "L848",
       "weight": 1.0
     },
     {
@@ -47917,7 +47917,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L866",
+      "source_location": "L850",
       "weight": 1.0
     },
     {
@@ -47928,7 +47928,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L873",
+      "source_location": "L857",
       "weight": 1.0
     },
     {
@@ -47939,7 +47939,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L887",
+      "source_location": "L871",
       "weight": 1.0
     },
     {
@@ -47950,7 +47950,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L893",
+      "source_location": "L877",
       "weight": 1.0
     },
     {
@@ -47961,7 +47961,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L900",
+      "source_location": "L884",
       "weight": 1.0
     },
     {
@@ -47972,7 +47972,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L906",
+      "source_location": "L890",
       "weight": 1.0
     },
     {
@@ -47983,7 +47983,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L907",
+      "source_location": "L891",
       "weight": 1.0
     },
     {
@@ -47994,7 +47994,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L908",
+      "source_location": "L892",
       "weight": 1.0
     },
     {
@@ -48005,7 +48005,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L909",
+      "source_location": "L893",
       "weight": 1.0
     },
     {
@@ -48016,7 +48016,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L914",
+      "source_location": "L898",
       "weight": 1.0
     },
     {
@@ -48027,7 +48027,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L921",
+      "source_location": "L905",
       "weight": 1.0
     },
     {
@@ -48038,7 +48038,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L939",
+      "source_location": "L923",
       "weight": 1.0
     },
     {
@@ -48049,7 +48049,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L947",
+      "source_location": "L931",
       "weight": 1.0
     },
     {
@@ -48060,7 +48060,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L951",
+      "source_location": "L935",
       "weight": 1.0
     },
     {
@@ -48071,7 +48071,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L960",
+      "source_location": "L944",
       "weight": 1.0
     },
     {
@@ -73997,7 +73997,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "app/pages/projects/[slug].vue",
-      "source_location": "L903",
+      "source_location": "L887",
       "weight": 1.0
     },
     {
@@ -75730,5 +75730,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "1c0cad8c4ab676ad2494ab60cbe69492aef0c6a7"
+  "built_at_commit": "48c3f8c3bd3bebd6972721cf2bbcc0a9e5df20d3"
 }
