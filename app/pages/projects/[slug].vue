@@ -112,22 +112,6 @@
         </button>
       </div>
 
-      <!-- Top Action Bar -->
-      <div
-        v-if="activeTab !== 'deliverables' && activeTab !== 'kanban' && activeTab !== 'matrix' && activeTab !== 'settings'"
-        class="flex items-center justify-end pb-1 border-b border-white/[0.06] shrink-0"
-      >
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 border border-rose-500/20 font-mono text-xs transition cursor-pointer"
-          title="Delete Project Permanently"
-          @click="openDeleteProjectModal"
-        >
-          <NexuraIcon name="Trash2" size="xs" />
-          <span>Delete Project</span>
-        </button>
-      </div>
-
       <!-- Mobile / Tablet Tab Strip (< lg only) -->
       <div class="lg:hidden sticky top-0 z-20 -mx-3 sm:-mx-5 -mt-3 sm:-mt-5 lg:mt-0 px-3 sm:px-5 py-2 bg-[#0B0C10]/95 backdrop-blur-md border-b border-white/[0.06] flex items-center gap-1.5 overflow-x-auto no-scrollbar select-none">
         <button
