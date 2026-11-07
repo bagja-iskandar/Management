@@ -84,7 +84,13 @@ export function useSession() {
    */
   function handleApiError(error: any): void {
     const status = error?.statusCode || error?.status || error?.response?.status
-    const code = error?.data?.code || error?.code
+    const code = error?.data?.code || error?.code || error?.data?.data?.code
+
+    // Isolate external GitHub errors: do not revoke Nexura internal session or prompt login
+    if (code === 'GITHUB_AUTH_FAILED' || code === 'GITHUB_RATE_LIMITED') {
+      console.warn('[useSession] External GitHub error isolated (internal session preserved):', code, error?.message || error)
+      return
+    }
 
     if (status === 401 || code === 'UNAUTHORIZED') {
       authStatus.value = 'unauthenticated'

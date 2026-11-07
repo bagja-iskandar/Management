@@ -18,65 +18,53 @@ const fetchCachedPullsAndIssues = defineCachedFunction(
     }
 
     const client = createGitHubClient(token)
-    let rawPulls: any[] = []
-    let rawIssues: any[] = []
 
-    await Promise.all([
-      (async () => {
-        try {
-          const res = await client.fetch<any[]>(
-            `/repos/${repo}/pulls?state=all&per_page=${limit}&sort=updated&direction=desc`
-          )
-          if (Array.isArray(res)) {
-            rawPulls = res
-          }
-        } catch {
-          rawPulls = []
-        }
-      })(),
-      (async () => {
-        try {
-          const res = await client.fetch<any[]>(
-            `/repos/${repo}/issues?state=all&per_page=${limit}&sort=updated&direction=desc`
-          )
-          if (Array.isArray(res)) {
-            rawIssues = res
-          }
-        } catch {
-          rawIssues = []
-        }
-      })()
+    // SYS-12: Fetch pulls and issues with a paging buffer (100 for issues) before filtering
+    // and rethrow fatal errors so Nitro does NOT cache false empty results.
+    const [rawPulls, rawIssues] = await Promise.all([
+      client.fetch<any[]>(
+        `/repos/${repo}/pulls?state=all&per_page=${Math.max(limit, 30)}&sort=updated&direction=desc`
+      ),
+      client.fetch<any[]>(
+        `/repos/${repo}/issues?state=all&per_page=100&sort=updated&direction=desc`
+      )
     ])
 
-    const pullRequests: GitHubPullRequest[] = rawPulls.map((p: any): GitHubPullRequest => {
-      const state: 'open' | 'closed' | 'merged' = p.merged_at
-        ? 'merged'
-        : p.state === 'closed'
-          ? 'closed'
-          : 'open'
-
-      return {
-        id: p.id,
-        number: p.number,
-        title: p.title || '',
-        state,
-        draft: Boolean(p.draft),
-        htmlUrl: p.html_url || '',
-        authorName: p.user?.login || 'unknown',
-        authorAvatar: p.user?.avatar_url,
-        headBranch: p.head?.ref || '',
-        baseBranch: p.base?.ref || '',
-        headSha: p.head?.sha ? p.head.sha.slice(0, 7) : '',
-        createdAt: p.created_at || '',
-        updatedAt: p.updated_at || '',
-        mergedAt: p.merged_at || undefined,
-        closedAt: p.closed_at || undefined,
-        commentsCount: Number(p.comments || 0)
-      }
-    })
-
-    const issues: GitHubIssueItem[] = rawIssues
+    const allPullRequests: any[] = Array.isArray(rawPulls) ? rawPulls : []
+    const allFilteredIssues: any[] = (Array.isArray(rawIssues) ? rawIssues : [])
       .filter((item: any) => !item.pull_request)
+
+    const pullRequests: GitHubPullRequest[] = allPullRequests
+      .slice(0, limit)
+      .map((p: any): GitHubPullRequest => {
+        const state: 'open' | 'closed' | 'merged' = p.merged_at
+          ? 'merged'
+          : p.state === 'closed'
+            ? 'closed'
+            : 'open'
+
+        return {
+          id: p.id,
+          number: p.number,
+          title: p.title || '',
+          state,
+          draft: Boolean(p.draft),
+          htmlUrl: p.html_url || '',
+          authorName: p.user?.login || 'unknown',
+          authorAvatar: p.user?.avatar_url,
+          headBranch: p.head?.ref || '',
+          baseBranch: p.base?.ref || '',
+          headSha: p.head?.sha ? p.head.sha.slice(0, 7) : '',
+          createdAt: p.created_at || '',
+          updatedAt: p.updated_at || '',
+          mergedAt: p.merged_at || undefined,
+          closedAt: p.closed_at || undefined,
+          commentsCount: Number(p.comments || 0)
+        }
+      })
+
+    const issues: GitHubIssueItem[] = allFilteredIssues
+      .slice(0, limit)
       .map((item: any): GitHubIssueItem => {
         const labels = (item.labels || []).map((l: any) => ({
           name: typeof l === 'string' ? l : l.name || '',
@@ -99,10 +87,10 @@ const fetchCachedPullsAndIssues = defineCachedFunction(
         }
       })
 
-    const openPrCount = pullRequests.filter((p) => p.state === 'open').length
-    const closedPrCount = pullRequests.filter((p) => p.state === 'closed' || p.state === 'merged').length
-    const openIssueCount = issues.filter((i) => i.state === 'open').length
-    const closedIssueCount = issues.filter((i) => i.state === 'closed').length
+    const openPrCount = allPullRequests.filter((p: any) => p.state === 'open' && !p.merged_at).length
+    const closedPrCount = allPullRequests.filter((p: any) => p.state === 'closed' || p.merged_at).length
+    const openIssueCount = allFilteredIssues.filter((i: any) => i.state === 'open').length
+    const closedIssueCount = allFilteredIssues.filter((i: any) => i.state === 'closed').length
 
     return {
       openPrCount,

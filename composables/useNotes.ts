@@ -69,38 +69,53 @@ export function useNotes() {
     const existing = notes.value.find((n) => n.id === id)
     if (!existing) return null
 
-    const updated = { ...existing, ...patch, updatedAt: new Date().toISOString() }
-    workspaceStore.updateNoteInStore(id, patch)
-
-    try {
-      const res = await $fetch<ProjectNote>(`/api/notes/${id}`, {
-        method: 'PUT',
-        body: patch
-      })
-      if (res) {
-        workspaceStore.updateNoteInStore(id, res)
-        return res
-      }
-      return updated
-    } catch (err) {
-      console.warn('[useNotes] Failed to update note on server:', err)
-      return updated
-    }
+    return await workspaceStore.enqueueEntityMutation(
+      'note',
+      id,
+      async () => {
+        try {
+          const res = await $fetch<ProjectNote>(`/api/notes/${encodeURIComponent(id)}`, {
+            method: 'PUT',
+            body: patch
+          })
+          if (res) {
+            workspaceStore.updateNoteInStore(id, res)
+            return res
+          }
+          return { ...existing, ...patch, updatedAt: new Date().toISOString() }
+        } catch (err) {
+          console.warn('[useNotes] Failed to update note on server:', err)
+          throw err
+        }
+      },
+      patch
+    )
   }
 
   async function deleteNote(id: string): Promise<void> {
     const existing = notes.value.find((n) => n.id === id)
+    const snapshot = existing ? JSON.parse(JSON.stringify(existing)) : null
     workspaceStore.removeNoteFromStore(id)
 
-    try {
-      await $fetch(`/api/notes/${id}`, { method: 'DELETE' })
-    } catch (err) {
-      console.warn('[useNotes] Failed to delete note on server:', err)
-      if (existing) {
-        workspaceStore.addNoteToStore(existing)
+    return await workspaceStore.enqueueEntityMutation(
+      'note',
+      id,
+      async () => {
+        try {
+          await $fetch(`/api/notes/${encodeURIComponent(id)}`, { method: 'DELETE' })
+        } catch (err: any) {
+          const status = err?.statusCode || err?.data?.statusCode || err?.response?.status
+          if (status === 404) {
+            console.warn(`[useNotes.deleteNote] Note ${id} already removed from server (404), skipping rollback.`)
+            return
+          }
+          if (snapshot) {
+            workspaceStore.addNoteToStore(snapshot)
+          }
+          throw err
+        }
       }
-      throw err
-    }
+    )
   }
 
   async function promoteNoteToTask(note: ProjectNote): Promise<Task> {
@@ -111,7 +126,7 @@ export function useNotes() {
 
     try {
       const res = await $fetch<{ success: boolean; task: Task; note?: ProjectNote }>(
-        `/api/notes/${note.id}/promote`,
+        `/api/notes/${encodeURIComponent(note.id)}/promote`,
         { method: 'POST' }
       )
 
@@ -125,42 +140,8 @@ export function useNotes() {
       }
       throw new Error('Promotion response did not contain task')
     } catch (err) {
-      console.warn('[useNotes] Remote promote failed, performing optimistic promotion fallback:', err)
-
-      const firstLine = note.content.split('\n')[0].replace(/^[-*#\s]+/, '').trim()
-      const taskTitle = firstLine.length > 80 ? firstLine.slice(0, 80) + '...' : firstLine || 'Promoted Idea'
-
-      let fallbackStatus: TaskStatus = 'idea'
-      let fallbackPriority: TaskPriority = 'medium'
-
-      if (note.category === 'bug') {
-        fallbackStatus = 'in_queue'
-        fallbackPriority = 'high'
-      } else if (note.category === 'maintenance') {
-        fallbackStatus = 'in_queue'
-        fallbackPriority = 'medium'
-      }
-
-      const localNewTask: Task = {
-        id: 'task-' + Date.now(),
-        taskId: 'ENG-' + Math.floor(100 + Math.random() * 900),
-        projectSlug: note.projectSlug || null,
-        name: taskTitle,
-        description: note.content,
-        status: fallbackStatus,
-        priority: fallbackPriority,
-        techTags: [note.category],
-        date: new Date().toISOString().slice(0, 10),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      }
-
-      workspaceStore.addTaskToStore(localNewTask)
-      workspaceStore.updateNoteInStore(note.id, {
-        promotedTaskId: localNewTask.id
-      })
-
-      return localNewTask
+      console.error('[useNotes] Remote note promotion failed:', err)
+      throw err
     } finally {
       promotingNoteId.value = null
     }

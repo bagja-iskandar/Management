@@ -33,6 +33,24 @@
       </div>
     </div>
 
+    <!-- Error Feedback Alert -->
+    <div
+      v-if="feedbackError"
+      class="mx-4 mt-3 p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-mono flex items-center justify-between gap-2 shrink-0"
+    >
+      <div class="flex items-center gap-1.5 min-w-0">
+        <NexuraIcon name="AlertTriangle" size="xs" class="shrink-0" />
+        <span class="truncate">{{ feedbackError }}</span>
+      </div>
+      <button
+        type="button"
+        class="text-rose-400/80 hover:text-rose-300 cursor-pointer p-0.5"
+        @click="feedbackError = ''"
+      >
+        <NexuraIcon name="X" size="xs" />
+      </button>
+    </div>
+
     <!-- Quick Capture Bar -->
     <div class="p-4 border-b border-white/[0.08] bg-[#111318]/40 space-y-3 shrink-0">
       <div class="flex flex-wrap items-center justify-between gap-2.5">
@@ -217,17 +235,51 @@
           <div class="flex items-center gap-1">
             <button
               type="button"
+              class="p-1 rounded text-[#565B68] hover:text-[#F3F4F6] hover:bg-white/10 transition-colors focus:outline-none cursor-pointer"
+              title="Edit note"
+              @click="startEditNote(note)"
+            >
+              <NexuraIcon name="Edit3" size="xs" />
+            </button>
+            <button
+              type="button"
               class="p-1 rounded text-[#565B68] hover:text-rose-400 hover:bg-rose-500/10 transition-colors focus:outline-none cursor-pointer"
               title="Delete note"
-              @click="deleteNote(note.id)"
+              @click="handleDeleteNote(note.id)"
             >
               <NexuraIcon name="Trash2" size="xs" />
             </button>
           </div>
         </div>
 
-        <!-- Note Content -->
-        <p class="text-xs text-[#F3F4F6] font-sans whitespace-pre-wrap leading-relaxed select-text">
+        <!-- Note Content / Inline Edit Form -->
+        <div v-if="editingNoteId === note.id" class="space-y-2 py-1">
+          <textarea
+            v-model="editingContent"
+            rows="3"
+            class="w-full bg-[#07080A] border border-white/[0.12] focus:border-indigo-500/60 rounded-lg p-2.5 text-xs text-[#F3F4F6] outline-none font-sans transition custom-scrollbar"
+            placeholder="Edit note content..."
+          ></textarea>
+          <div class="flex items-center justify-end gap-2">
+            <button
+              type="button"
+              class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans text-[#8A8F9E] hover:text-[#F3F4F6] transition cursor-pointer"
+              @click="cancelEditNote"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              :disabled="isSavingEdit || !editingContent.trim()"
+              class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-sans font-medium text-white transition flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-sm"
+              @click="saveEditNote(note.id)"
+            >
+              <NexuraIcon v-if="isSavingEdit" name="RotateCw" size="xs" class="animate-spin" />
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+        <p v-else class="text-xs text-[#F3F4F6] font-sans whitespace-pre-wrap leading-relaxed select-text">
           {{ note.content }}
         </p>
 
@@ -236,10 +288,16 @@
           <!-- Promoted state -->
           <div v-if="note.promotedTaskId" class="inline-flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
             <NexuraIcon name="CheckCircle2" size="xs" />
-            <span>Promoted to Kanban</span>
-            <span v-if="getPromotedTaskLabel(note.promotedTaskId)" class="text-[#8A8F9E]">
-              ({{ getPromotedTaskLabel(note.promotedTaskId) }})
-            </span>
+            <span>Promoted:</span>
+            <button
+              type="button"
+              class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/25 transition-colors cursor-pointer"
+              title="Open task in drawer"
+              @click="openTaskDrawer(note.promotedTaskId)"
+            >
+              <span>{{ getPromotedTaskLabel(note.promotedTaskId) || 'Task' }}</span>
+              <NexuraIcon name="ExternalLink" size="xs" />
+            </button>
           </div>
 
           <!-- Promote to Kanban Button -->
@@ -270,6 +328,8 @@
 import { ref, computed, onMounted } from 'vue'
 import type { ProjectNote, NoteCategory, Task, TaskStatus, TaskPriority } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
+import { useNotes } from '~/composables/useNotes'
+import { useTaskDrawer } from '~/composables/useTaskDrawer'
 import NexuraIcon from '../ui/NexuraIcon.vue'
 
 const props = withDefaults(
@@ -291,22 +351,35 @@ const emit = defineEmits<{
 }>()
 
 const workspaceStore = useWorkspaceStore()
+const {
+  notes,
+  createNote,
+  updateNote,
+  deleteNote,
+  promoteNoteToTask,
+  promotingNoteId,
+  isSubmitting,
+  fetchNotes
+} = useNotes()
+const { openTaskDrawer } = useTaskDrawer()
 
 // State
 const category = ref<NoteCategory>('idea')
 const selectedProjectSlug = ref(props.projectSlug || '')
 const newContent = ref('')
-const isSubmitting = ref(false)
-const promotingNoteId = ref<string | null>(null)
+const feedbackError = ref('')
+const editingNoteId = ref<string | null>(null)
+const editingContent = ref('')
+const isSavingEdit = ref(false)
 const activeFilter = ref<'all' | 'idea' | 'bug' | 'maintenance'>('all')
 const searchQuery = ref('')
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
 // Initialize notes if empty
 onMounted(async () => {
-  if (!workspaceStore.notes.value.length) {
+  if (!notes.value.length) {
     try {
-      await workspaceStore.fetchWorkspaceNotes(props.projectSlug || undefined)
+      await fetchNotes(props.projectSlug || undefined)
     } catch {
       // Gracefully handled in store
     }
@@ -325,7 +398,7 @@ const availableProjects = computed(() => {
 
 // Filter tabs with dynamic counts
 const filterTabs = computed(() => {
-  const allNotes = workspaceStore.notes.value || []
+  const allNotes = notes.value || []
   return [
     { id: 'all' as const, label: 'All', count: allNotes.length },
     { id: 'idea' as const, label: 'Ideas', count: allNotes.filter((n) => n.category === 'idea').length },
@@ -336,7 +409,7 @@ const filterTabs = computed(() => {
 
 // Filtered notes list
 const filteredNotes = computed(() => {
-  let list = workspaceStore.notes.value || []
+  let list = notes.value || []
 
   // Project context filter (if props.projectSlug passed)
   if (props.projectSlug) {
@@ -421,128 +494,95 @@ function getPromotedTaskLabel(taskId: string): string {
   return t ? `#${t.taskId || t.id.slice(0, 6)}` : ''
 }
 
-// Submit new note
+// Submit new note using canonical useNotes composable
 async function submitNote() {
   const content = newContent.value.trim()
   if (!content || isSubmitting.value) return
 
   const pSlug = selectedProjectSlug.value || (availableProjects.value[0]?.slug ?? 'core')
-  const tempId = 'note-' + Date.now()
-  const nowIso = new Date().toISOString()
-
-  const optimisticNote: ProjectNote = {
-    id: tempId,
-    projectSlug: pSlug,
-    category: category.value,
-    content,
-    promotedTaskId: null,
-    createdAt: nowIso,
-    updatedAt: nowIso
-  }
-
-  // 0ms optimistic add
-  workspaceStore.addNoteToStore(optimisticNote)
-  newContent.value = ''
-  isSubmitting.value = true
+  feedbackError.value = ''
 
   try {
-    const res = await $fetch<ProjectNote>('/api/notes', {
-      method: 'POST',
-      body: {
-        projectSlug: pSlug,
-        category: optimisticNote.category,
-        content: optimisticNote.content
-      }
+    await createNote({
+      projectSlug: pSlug,
+      category: category.value,
+      content
     })
-
-    if (res && res.id) {
-      // Replace temp note with saved note
-      workspaceStore.updateNoteInStore(tempId, res)
-    }
-  } catch (err) {
-    console.warn('[IdeaScratchpadPanel] API error, keeping optimistic note:', err)
+    newContent.value = ''
+  } catch (err: any) {
+    feedbackError.value = `Failed to create note: ${err.message || 'Unknown error'}`
   } finally {
-    isSubmitting.value = false
     textareaRef.value?.focus()
   }
 }
 
-// Delete note
-async function deleteNote(id: string) {
-  // 0ms optimistic remove
-  workspaceStore.removeNoteFromStore(id)
+// Inline note editing handlers
+function startEditNote(note: ProjectNote) {
+  editingNoteId.value = note.id
+  editingContent.value = note.content
+}
+
+function cancelEditNote() {
+  editingNoteId.value = null
+  editingContent.value = ''
+}
+
+async function saveEditNote(id: string) {
+  const content = editingContent.value.trim()
+  if (!content || isSavingEdit.value) return
+
+  isSavingEdit.value = true
+  feedbackError.value = ''
   try {
-    await $fetch(`/api/notes/${id}`, { method: 'DELETE' })
-  } catch (err) {
-    console.warn('[IdeaScratchpadPanel] Failed to delete note on server:', err)
+    await updateNote(id, { content })
+    editingNoteId.value = null
+    editingContent.value = ''
+  } catch (err: any) {
+    feedbackError.value = `Failed to update note: ${err.message || 'Unknown error'}`
+  } finally {
+    isSavingEdit.value = false
   }
 }
 
-// Promote note to Kanban
+// Delete note using canonical useNotes composable
+async function handleDeleteNote(id: string) {
+  feedbackError.value = ''
+  try {
+    await deleteNote(id)
+  } catch (err: any) {
+    feedbackError.value = `Failed to delete note: ${err.message || 'Unknown error'}`
+  }
+}
+
+// Category status/priority mapping contracts helper
+function getCategoryFallback(note: ProjectNote) {
+  let fallbackStatus: TaskStatus = 'idea'
+  let fallbackPriority: TaskPriority = 'medium'
+
+  if (note.category === 'bug') {
+    fallbackStatus = 'in_queue'
+    fallbackPriority = 'high'
+  } else if (note.category === 'maintenance') {
+    fallbackStatus = 'in_queue'
+    fallbackPriority = 'medium'
+  } else {
+    fallbackStatus = 'idea'
+    fallbackPriority = 'medium'
+  }
+
+  return { fallbackStatus, fallbackPriority }
+}
+
+// Promote note to Kanban using canonical useNotes composable with honest error feedback
 async function promoteNoteToKanban(note: ProjectNote) {
   if (promotingNoteId.value) return
-  promotingNoteId.value = note.id
+  feedbackError.value = ''
 
   try {
-    const res = await $fetch<{ success: boolean; task: Task; note?: ProjectNote }>(
-      `/api/notes/${note.id}/promote`,
-      { method: 'POST' }
-    )
-
-    if (res && res.task) {
-      // Add task to store in 'idea' status
-      workspaceStore.addTaskToStore(res.task)
-
-      // Mark note as promoted
-      workspaceStore.updateNoteInStore(note.id, {
-        promotedTaskId: res.task.id,
-        updatedAt: new Date().toISOString()
-      })
-
-      emit('promoted', res.task)
-    }
-  } catch (err) {
-    console.warn('[IdeaScratchpadPanel] Promote API fallback:', err)
-
-    // Fallback if backend route failed: create task directly via workspaceStore
-    const firstLine = note.content.split('\n')[0].replace(/^[-*#\s]+/, '').trim()
-    const taskTitle = firstLine.length > 80 ? firstLine.slice(0, 80) + '...' : firstLine || 'Promoted Idea'
-
-    let fallbackStatus: TaskStatus = 'idea'
-    let fallbackPriority: TaskPriority = 'medium'
-
-    if (note.category === 'bug') {
-      fallbackStatus = 'in_queue'
-      fallbackPriority = 'high'
-    } else if (note.category === 'maintenance') {
-      fallbackStatus = 'in_queue'
-      fallbackPriority = 'medium'
-    } else {
-      fallbackStatus = 'idea'
-      fallbackPriority = 'medium'
-    }
-
-    const localNewTask: Task = {
-      id: 'task-' + Date.now(),
-      taskId: 'ENG-' + Math.floor(100 + Math.random() * 900),
-      projectSlug: note.projectSlug || null,
-      name: taskTitle,
-      description: note.content,
-      status: fallbackStatus,
-      priority: fallbackPriority,
-      techTags: [note.category],
-      date: new Date().toISOString().slice(0, 10),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    }
-
-    workspaceStore.addTaskToStore(localNewTask)
-    workspaceStore.updateNoteInStore(note.id, {
-      promotedTaskId: localNewTask.id
-    })
-    emit('promoted', localNewTask)
-  } finally {
-    promotingNoteId.value = null
+    const task = await promoteNoteToTask(note)
+    emit('promoted', task)
+  } catch (err: any) {
+    feedbackError.value = `Failed to promote note: ${err.message || 'Server error'}`
   }
 }
 </script>

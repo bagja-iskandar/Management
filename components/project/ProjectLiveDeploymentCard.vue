@@ -30,14 +30,16 @@
       <div class="flex items-center gap-1.5 font-mono text-xs">
         <button
           type="button"
-          class="px-2.5 py-1 rounded-lg bg-[#07080A] hover:bg-emerald-500/20 hover:text-emerald-300 text-[#8A8F9E] border border-white/[0.07] transition cursor-pointer flex items-center gap-1 text-[10px]"
+          class="px-2.5 py-1 rounded-lg bg-[#07080A] transition cursor-pointer flex items-center gap-1 text-[10px]"
+          :class="pingStatus === 'offline' ? 'hover:bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'hover:bg-emerald-500/20 hover:text-emerald-300 text-[#8A8F9E] border border-white/[0.07]'"
           :disabled="isPinging"
           title="Run instant ping check to live production URL"
           @click="pingLiveHealth"
         >
           <NexuraIcon v-if="isPinging" name="RotateCw" size="xs" class="animate-spin text-emerald-400" />
+          <NexuraIcon v-else-if="pingStatus === 'offline'" name="AlertTriangle" size="xs" class="text-rose-400" />
           <NexuraIcon v-else name="Zap" size="xs" class="text-emerald-400" />
-          <span class="tabular-nums">{{ isPinging ? 'Pinging...' : pingLatency ? `${pingLatency}ms` : 'Ping' }}</span>
+          <span class="tabular-nums">{{ isPinging ? 'Pinging...' : pingLatency ? `${pingLatency}ms` : pingStatus === 'offline' ? 'Offline' : 'Ping' }}</span>
         </button>
 
         <button
@@ -102,7 +104,7 @@
         <div class="pt-2 border-t border-white/[0.04] grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-[10px]">
           <div>
             <span class="text-[#8A8F9E] block text-[9px]">ACTIVE COMMIT</span>
-            <span class="text-indigo-400 font-bold tabular-nums">#{{ deployedShortSha }}</span>
+            <span class="text-indigo-400 font-bold tabular-nums">{{ deployedShortSha ? '#' + deployedShortSha : '-' }}</span>
           </div>
           <div>
             <span class="text-[#8A8F9E] block text-[9px]">TARGET ENV</span>
@@ -122,10 +124,10 @@
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
             <span>Vercel Build in Progress...</span>
           </span>
-          <span class="text-[#8A8F9E] tabular-nums">~65%</span>
+          <span class="text-amber-400/80">In Progress</span>
         </div>
         <div class="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
-          <div class="bg-gradient-to-r from-amber-500 to-emerald-400 h-1.5 rounded-full w-2/3 animate-pulse"></div>
+          <div class="bg-gradient-to-r from-amber-500 to-emerald-400 h-1.5 rounded-full w-full animate-pulse"></div>
         </div>
       </div>
 
@@ -177,6 +179,7 @@ defineEmits<{
 const copySuccess = ref(false)
 const isPinging = ref(false)
 const pingLatency = ref<number | null>(null)
+const pingStatus = ref<'idle' | 'online' | 'offline'>('idle')
 
 const isLive = computed(() => {
   if (props.deployments?.latestDeployment) {
@@ -205,7 +208,7 @@ const activeLiveUrl = computed(() => {
 })
 
 const deployedShortSha = computed(() => {
-  return props.deployments?.latestDeployment?.shortSha || '943bce0'
+  return props.deployments?.latestDeployment?.shortSha || ''
 })
 
 const environmentName = computed(() => {
@@ -246,9 +249,11 @@ async function pingLiveHealth() {
     // Attempt HEAD or GET ping to url
     await fetch(activeLiveUrl.value, { method: 'HEAD', mode: 'no-cors' })
     const duration = Math.round(performance.now() - startTime)
-    pingLatency.value = duration > 0 ? duration : 38
+    pingLatency.value = duration > 0 ? duration : 18
+    pingStatus.value = 'online'
   } catch {
-    pingLatency.value = 45
+    pingLatency.value = null
+    pingStatus.value = 'offline'
   } finally {
     isPinging.value = false
   }

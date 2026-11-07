@@ -273,32 +273,28 @@ test('SMART-PROMOTE-HANDLER-E2E: promote.post.ts executes successfully via withA
 })
 
 // =============================================================================
-// 3. FRONTEND FALLBACK PROMOTION INTEGRITY (IdeaScratchpadPanel.vue)
+// 3. FRONTEND PROMOTION INTEGRITY & ERROR FEEDBACK (IdeaScratchpadPanel.vue)
 // =============================================================================
 
-test('SCRATCHPAD-PANEL-FALLBACK: IdeaScratchpadPanel fallback mirrors smart category mapping contracts', () => {
+test('SCRATCHPAD-PANEL-FALLBACK: IdeaScratchpadPanel integrates useNotes promoteNoteToTask and honest error feedback', () => {
   const panelFilePath = path.resolve(projectRoot, 'components/notes/IdeaScratchpadPanel.vue')
   const content = fs.readFileSync(panelFilePath, 'utf-8')
 
-  // Verify bug fallback mapping
-  assert.match(
-    content,
-    /if\s*\(\s*note\.category\s*===\s*'bug'\s*\)\s*\{[\s\S]*?fallbackStatus\s*=\s*'in_queue'[\s\S]*?fallbackPriority\s*=\s*'high'/s,
-    'IdeaScratchpadPanel fallback must map category bug to in_queue and high'
+  // Verify canonical useNotes promoteNoteToTask integration
+  assert.ok(
+    content.includes('await promoteNoteToTask(note)'),
+    'IdeaScratchpadPanel must call canonical promoteNoteToTask from useNotes'
   )
 
-  // Verify maintenance fallback mapping
-  assert.match(
-    content,
-    /else\s+if\s*\(\s*note\.category\s*===\s*'maintenance'\s*\)\s*\{[\s\S]*?fallbackStatus\s*=\s*'in_queue'[\s\S]*?fallbackPriority\s*=\s*'medium'/s,
-    'IdeaScratchpadPanel fallback must map category maintenance to in_queue and medium'
+  // Verify honest error feedback without fake task synthesis (SYS-09)
+  assert.ok(
+    content.includes('feedbackError.value = `Failed to promote note:'),
+    'IdeaScratchpadPanel must set honest feedbackError on promotion failure'
   )
-
-  // Verify idea fallback mapping
-  assert.match(
-    content,
-    /else\s*\{[\s\S]*?fallbackStatus\s*=\s*'idea'[\s\S]*?fallbackPriority\s*=\s*'medium'/s,
-    'IdeaScratchpadPanel fallback must map other categories to idea and medium'
+  assert.equal(
+    content.includes("id: 'task-' + Date.now()"),
+    false,
+    'IdeaScratchpadPanel must not synthesize fake local tasks on failure'
   )
 })
 

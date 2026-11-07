@@ -18,10 +18,14 @@
           </h2>
           <p class="font-mono text-xs text-[#8A8F9E] flex items-center gap-2 flex-wrap">
             <span>Branch: <strong class="text-[#F3F4F6]">main</strong></span>
-            <span>•</span>
-            <span>Commit: <strong class="text-indigo-400 tabular-nums">#{{ activeSha }}</strong></span>
-            <span>•</span>
-            <span>Framework: <strong class="text-[#F3F4F6]">Nuxt 4 / Nitro</strong></span>
+            <template v-if="activeSha">
+              <span>•</span>
+              <span>Commit: <strong class="text-indigo-400 tabular-nums">#{{ activeSha }}</strong></span>
+            </template>
+            <template v-if="project.primaryTech">
+              <span>•</span>
+              <span>Stack: <strong class="text-[#F3F4F6]">{{ project.primaryTech }}</strong></span>
+            </template>
           </p>
         </div>
 
@@ -52,16 +56,18 @@
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-white/[0.06] font-mono relative z-10">
         <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
           <span class="text-[10px] text-[#8A8F9E] uppercase">STATUS</span>
-          <div class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>Ready (Live)</span>
+          <div class="text-xs font-bold flex items-center gap-1.5" :class="pingStatus === 'offline' ? 'text-rose-400' : 'text-emerald-400'">
+            <span class="w-1.5 h-1.5 rounded-full" :class="pingStatus === 'offline' ? 'bg-rose-400' : 'bg-emerald-400'"></span>
+            <span>{{ pingStatus === 'offline' ? 'Offline' : 'Ready (Live)' }}</span>
           </div>
         </div>
 
         <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
           <span class="text-[10px] text-[#8A8F9E] uppercase">RESPONSE PING</span>
           <div class="text-xs font-bold text-[#F3F4F6] flex items-center justify-between">
-            <span class="tabular-nums">{{ pingLatency }}ms</span>
+            <span v-if="pingStatus === 'offline'" class="text-rose-400 text-xs">Offline</span>
+            <span v-else-if="pingLatency !== null" class="tabular-nums">{{ pingLatency }}ms</span>
+            <span v-else class="text-[#8A8F9E] text-xs">Not tested</span>
             <button
               type="button"
               class="text-[9px] text-indigo-400 hover:underline cursor-pointer"
@@ -74,16 +80,16 @@
         </div>
 
         <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">SSL CERTIFICATE</span>
+          <span class="text-[10px] text-[#8A8F9E] uppercase">SSL PROTOCOL</span>
           <div class="text-xs font-bold text-[#F3F4F6]">
-            Let's Encrypt (Active)
+            {{ liveUrl.startsWith('https://') ? 'HTTPS (Active)' : 'HTTP' }}
           </div>
         </div>
 
         <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">BUILD DURATION</span>
-          <div class="text-xs font-bold text-[#F3F4F6] tabular-nums">
-            48s (Nitro server)
+          <span class="text-[10px] text-[#8A8F9E] uppercase">LATEST RELEASE</span>
+          <div class="text-xs font-bold text-[#F3F4F6] truncate">
+            {{ latestDeploymentTime }}
           </div>
         </div>
       </div>
@@ -105,7 +111,7 @@
           </span>
         </div>
 
-        <div class="space-y-2.5">
+        <div v-if="deploymentList.length > 0" class="space-y-2.5">
           <div
             v-for="(d, idx) in deploymentList"
             :key="d.id || idx"
@@ -122,7 +128,7 @@
                 <span class="text-[#F3F4F6] font-bold truncate">
                   {{ d.name || 'Commit Release' }}
                 </span>
-                <span class="text-indigo-400 font-bold tabular-nums">#{{ d.shortSha }}</span>
+                <span v-if="d.shortSha" class="text-indigo-400 font-bold tabular-nums">#{{ d.shortSha }}</span>
               </div>
               <p class="text-[11px] text-[#8A8F9E] font-sans truncate">
                 {{ d.message || 'Automated deployment via GitHub push' }}
@@ -144,48 +150,46 @@
             </div>
           </div>
         </div>
+
+        <BaseEmptyState
+          v-else
+          icon="CloudOff"
+          title="No Deployment History Found"
+          description="No GitHub deployments or release environments are recorded for this repository yet."
+        />
       </div>
 
-      <!-- Right Column: Vercel Settings & Quick Redeploy (4 cols) -->
+      <!-- Right Column: Production Configuration & Meta (4 cols) -->
       <div class="lg:col-span-4 space-y-4">
-        <!-- Live Console Terminal Snippet -->
-        <div class="bg-[#111318] border border-white/[0.07] rounded-2xl p-4 space-y-3 shadow-xl font-mono text-xs">
-          <div class="flex items-center justify-between border-b border-white/[0.06] pb-2">
-            <span class="text-[10px] text-[#8A8F9E] uppercase tracking-wider font-bold">
-              Latest Build Log Snippet
-            </span>
-            <span class="text-[9px] text-emerald-400 font-semibold">Exit 0</span>
-          </div>
-          <div class="bg-[#07080A] p-3 rounded-xl border border-white/[0.04] text-[11px] text-[#8A8F9E] font-mono space-y-1 overflow-x-auto custom-scrollbar">
-            <p class="text-[#565B68]">// Vercel Build Output</p>
-            <p class="flex items-center gap-1.5"><NexuraIcon name="CheckCircle2" size="xs" class="text-emerald-400" /> <span>Nuxt 4 production bundle ready</span></p>
-            <p class="flex items-center gap-1.5"><NexuraIcon name="CheckCircle2" size="xs" class="text-emerald-400" /> <span>Nitro preset: node-server / edge</span></p>
-            <p class="flex items-center gap-1.5"><NexuraIcon name="CheckCircle2" size="xs" class="text-emerald-400" /> <span>Total assets: 2.81 MB (gzip 660 kB)</span></p>
-            <p class="text-[#F3F4F6] font-bold pt-1">● Deployment completed in 48s</p>
-          </div>
-        </div>
-
-        <!-- Quick Redeploy Action Card -->
-        <div class="bg-[#111318] border border-white/[0.07] rounded-2xl p-4 space-y-3 shadow-xl font-mono text-xs">
-          <div class="space-y-1">
-            <h4 class="text-xs font-bold text-[#F3F4F6] uppercase tracking-wider">
-              Trigger Production Redeploy
+        <div class="bg-[#111318] border border-white/[0.07] rounded-2xl p-5 space-y-4 shadow-xl font-mono text-xs">
+          <div class="flex items-center gap-2 border-b border-white/[0.06] pb-3">
+            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <h4 class="font-mono text-xs font-bold text-[#F3F4F6] uppercase tracking-wider">
+              Environment Meta
             </h4>
-            <p class="text-[11px] text-[#8A8F9E] font-sans">
-              Deploy without caching to clear edge CDN and refresh environment variables.
-            </p>
           </div>
 
-          <button
-            type="button"
-            class="w-full py-2.5 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(99,102,241,0.25)] focus:ring-1 focus:ring-indigo-500/50 focus:outline-none cursor-pointer active:scale-95"
-            :disabled="isRedeploying"
-            @click="triggerRedeploy"
-          >
-            <NexuraIcon v-if="isRedeploying" name="RotateCw" size="xs" class="animate-spin" />
-            <NexuraIcon v-else name="Zap" size="xs" />
-            <span>{{ isRedeploying ? 'Deploying to Vercel...' : 'Trigger Redeploy' }}</span>
-          </button>
+          <div class="space-y-3">
+            <div class="space-y-1">
+              <span class="text-[10px] text-[#8A8F9E] uppercase block">Assigned Project</span>
+              <p class="text-xs font-sans text-[#F3F4F6] font-medium">{{ project.title }}</p>
+            </div>
+
+            <div class="space-y-1">
+              <span class="text-[10px] text-[#8A8F9E] uppercase block">GitHub Repository</span>
+              <p class="text-xs font-mono text-indigo-300 truncate">{{ project.githubRepo || 'No linked repository' }}</p>
+            </div>
+
+            <div class="space-y-1">
+              <span class="text-[10px] text-[#8A8F9E] uppercase block">Primary Tech Stack</span>
+              <p class="text-xs font-mono text-[#F3F4F6]">{{ project.primaryTech || 'Not specified' }}</p>
+            </div>
+
+            <div class="space-y-1">
+              <span class="text-[10px] text-[#8A8F9E] uppercase block">Edge Runtime</span>
+              <p class="text-xs font-mono text-emerald-400">Vercel Serverless / Edge</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -196,6 +200,7 @@
 import { ref, computed } from 'vue'
 import type { Project, GitHubDeploymentSummary } from '~/types'
 import NexuraIcon from '../ui/NexuraIcon.vue'
+import BaseEmptyState from '../ui/BaseEmptyState.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -209,8 +214,8 @@ const props = withDefaults(
 
 const copied = ref(false)
 const isPinging = ref(false)
-const pingLatency = ref(42)
-const isRedeploying = ref(false)
+const pingLatency = ref<number | null>(null)
+const pingStatus = ref<'idle' | 'online' | 'offline'>('idle')
 
 const liveUrl = computed(() => {
   if (props.project.deployUrl) return props.project.deployUrl
@@ -234,7 +239,12 @@ const liveDomain = computed(() => {
 })
 
 const activeSha = computed(() => {
-  return props.deployments?.latestDeployment?.shortSha || '943bce0'
+  return props.deployments?.latestDeployment?.shortSha || ''
+})
+
+const latestDeploymentTime = computed(() => {
+  const d = props.deployments?.latestDeployment?.updatedAt || props.deployments?.latestDeployment?.createdAt
+  return d ? formatTimeAgo(d) : 'No releases recorded'
 })
 
 const deploymentList = computed(() => {
@@ -243,41 +253,13 @@ const deploymentList = computed(() => {
       id: d.id,
       name: d.description || 'Production Release',
       environment: d.environment || 'production',
-      shortSha: d.shortSha || '943bce0',
+      shortSha: d.shortSha || '',
       message: d.description || 'Verified production release build',
       timeAgo: formatTimeAgo(d.updatedAt || d.createdAt),
       url: d.environmentUrl || liveUrl.value
     }))
   }
-  return [
-    {
-      id: 1,
-      name: 'Production Release (Phase 4 & 5)',
-      environment: 'production',
-      shortSha: '943bce0',
-      message: 'Phase 4 & 5 (Completed) - Production deploy',
-      timeAgo: '15m ago',
-      url: liveUrl.value
-    },
-    {
-      id: 2,
-      name: 'Preview Branch (PR #12)',
-      environment: 'preview',
-      shortSha: 'aa56120',
-      message: 'Phase 2 & 3 (Completed)',
-      timeAgo: '2h ago',
-      url: liveUrl.value
-    },
-    {
-      id: 3,
-      name: 'Initial Setup Release',
-      environment: 'production',
-      shortSha: '5856ac9',
-      message: 'Phase 1: Critical Fixes',
-      timeAgo: '1d ago',
-      url: liveUrl.value
-    }
-  ]
+  return []
 })
 
 function copyUrl() {
@@ -294,19 +276,13 @@ async function ping() {
   try {
     await fetch(liveUrl.value, { mode: 'no-cors' })
     pingLatency.value = Math.max(18, Math.round(performance.now() - start))
+    pingStatus.value = 'online'
   } catch {
-    pingLatency.value = Math.floor(Math.random() * 20) + 35
+    pingLatency.value = null
+    pingStatus.value = 'offline'
   } finally {
     isPinging.value = false
   }
-}
-
-function triggerRedeploy() {
-  isRedeploying.value = true
-  setTimeout(() => {
-    isRedeploying.value = false
-    alert('Redeployment triggered successfully via Vercel Webhook!')
-  }, 2000)
 }
 
 function formatTimeAgo(dateStr?: string): string {

@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "app/pages/repos.vue": {
-    "mtime": 1793793173.7772417,
-    "seen": 1793793691.3219695,
-    "ast_hash": "a6cd2667093f01be17daa588d148702e",
+    "mtime": 1794020382.581511,
+    "seen": 1794020429.2200844,
+    "ast_hash": "b9b29ad471d4f188b8f5e66daed58557",
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
@@ -324,9 +324,9 @@
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
-    "mtime": 1793793450.8526516,
-    "seen": 1793793691.3271353,
-    "ast_hash": "ca1991c8cf1cc1f703056a0a325c00d7",
+    "mtime": 1794020251.4305348,
+    "seen": 1794020429.2219076,
+    "ast_hash": "cb26b24d7ff8106190bb5b46c0b4da26",
     "semantic_hash": ""
   },
   "app/pages/telemetry.vue": {
@@ -474,9 +474,9 @@
     "semantic_hash": ""
   },
   "server/api/github/pulls-issues.get.ts": {
-    "mtime": 1794019968.034006,
-    "seen": 1794020080.4759414,
-    "ast_hash": "fc9f680a2f5cbba6017d02067c6e22e4",
+    "mtime": 1794021823.072028,
+    "seen": 1794021877.6255562,
+    "ast_hash": "e70b5f847a6bb892546330a94365f5fa",
     "semantic_hash": ""
   },
   "server/api/github/packages.get.ts": {
@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "components/project/ProjectLiveDeploymentCard.vue": {
-    "mtime": 1792832346.974057,
-    "seen": 1792832438.9967723,
-    "ast_hash": "96d4821ac350026bb12d819045a93d85",
+    "mtime": 1794021890.7199795,
+    "seen": 1794021909.5136755,
+    "ast_hash": "3580700ace9c1b12da2f723ec99d1fa4",
     "semantic_hash": ""
   },
   "components/project/ProjectPackageCard.vue": {
@@ -516,9 +516,9 @@
     "semantic_hash": ""
   },
   "components/project/ProjectVercelTab.vue": {
-    "mtime": 1792832347.0470014,
-    "seen": 1792832438.9967964,
-    "ast_hash": "8bcd5ccb096abd7ff00461d1fb2d6251",
+    "mtime": 1794021890.714697,
+    "seen": 1794021909.519766,
+    "ast_hash": "edf8273793ecfbdfe00b0acf4a445f9b",
     "semantic_hash": ""
   },
   "composables/useProjectNav.ts": {
@@ -528,9 +528,9 @@
     "semantic_hash": ""
   },
   "components/kanban/KanbanColumn.vue": {
-    "mtime": 1793793079.1734426,
-    "seen": 1793793691.3435826,
-    "ast_hash": "1885943d28709146e76787154517efe6",
+    "mtime": 1794020267.1245022,
+    "seen": 1794020429.2250454,
+    "ast_hash": "7ffdad17ce4425efc3f4bffa635da998",
     "semantic_hash": ""
   },
   "components/kanban/KanbanDragGhost.vue": {
@@ -822,9 +822,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/UnifiedHeroBanner.vue": {
-    "mtime": 1793181411.8997579,
-    "seen": 1793181533.0706048,
-    "ast_hash": "a8b60dcc96a84059d0e37591522392ab",
+    "mtime": 1794020350.5875742,
+    "seen": 1794020429.2246616,
+    "ast_hash": "538a46898ee4a208e86ccd8292054f75",
     "semantic_hash": ""
   },
   "components/dashboard/InfrastructureMeshCard.vue": {
@@ -840,9 +840,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/RecentShipmentsCard.vue": {
-    "mtime": 1793626516.7567375,
-    "seen": 1793626995.395804,
-    "ast_hash": "140b17a8a205741e3fb93e9cff67c723",
+    "mtime": 1794020357.897287,
+    "seen": 1794020429.2246573,
+    "ast_hash": "464cbe80fb745e8da9081c4d1db5a63c",
     "semantic_hash": ""
   },
   "project_context/dashboard-v2-mockup.html": {
@@ -978,15 +978,15 @@
     "semantic_hash": ""
   },
   "components/notes/IdeaScratchpadPanel.vue": {
-    "mtime": 1793432386.8125608,
-    "seen": 1793432506.3229227,
+    "mtime": 1794021925.5010216,
+    "seen": 1794021929.5937319,
     "ast_hash": "682c795f7f77d5aa57924238e5c1c209",
     "semantic_hash": ""
   },
   "components/tasks/ActiveFocusPanel.vue": {
-    "mtime": 1793173776.9989614,
-    "seen": 1793173837.533692,
-    "ast_hash": "f31e84f8aae56854c227cd646bd49101",
+    "mtime": 1794020340.4314666,
+    "seen": 1794020429.250542,
+    "ast_hash": "2494695c0c2266f1de509a8497873a1b",
     "semantic_hash": ""
   },
   "tests/unit/metric-honesty.spec.mjs": {
@@ -1068,9 +1068,9 @@
     "semantic_hash": ""
   },
   "composables/useSession.ts": {
-    "mtime": 1794018843.193576,
-    "seen": 1794018916.6120524,
-    "ast_hash": "e95070831aaec7d8f5fadc513305eeb0",
+    "mtime": 1794021862.30834,
+    "seen": 1794021877.6054838,
+    "ast_hash": "56fe3dac31c8686aad96c2a88a0fbca0",
     "semantic_hash": ""
   },
   "tests/unit/session-auth.spec.mjs": {
@@ -1194,9 +1194,9 @@
     "semantic_hash": ""
   },
   "tests/unit/github-branch-commits.spec.mjs": {
-    "mtime": 1793625936.0361047,
-    "seen": 1793625979.612427,
-    "ast_hash": "6a4aea8eb703c7d6acb3c84fbfe14c98",
+    "mtime": 1794020319.179173,
+    "seen": 1794020429.35055,
+    "ast_hash": "77b2d030afc38a7ed98c7066362b7c87",
     "semantic_hash": ""
   },
   "tests/unit/deliverable-and-idea-modals.spec.mjs": {
@@ -1236,9 +1236,9 @@
     "semantic_hash": ""
   },
   "composables/useNotes.ts": {
-    "mtime": 1793761986.0099375,
-    "seen": 1793762020.5729704,
-    "ast_hash": "9362e1ce1a44ed29604b4e1b1d82bb9b",
+    "mtime": 1794021884.0886397,
+    "seen": 1794021909.5449467,
+    "ast_hash": "a0c17f5a0fc2ec4678dc3ecaeb59e8de",
     "semantic_hash": ""
   },
   "composables/useThemePreset.ts": {
@@ -1476,21 +1476,21 @@
     "semantic_hash": ""
   },
   "components/dashboard/Dashboard.vue": {
-    "mtime": 1793793092.9199498,
-    "seen": 1793793691.3290334,
-    "ast_hash": "5f6b863a7bb8f1bc43aaaf2f3d83388b",
+    "mtime": 1794020375.7384045,
+    "seen": 1794020429.2232296,
+    "ast_hash": "39af3ca608830e8525dc494a0358ad42",
     "semantic_hash": ""
   },
   "components/kanban/KanbanBoard.vue": {
-    "mtime": 1794018895.0717714,
-    "seen": 1794018916.5870094,
-    "ast_hash": "569be556c2e6f8db4afb9c276f762c9a",
+    "mtime": 1794020258.4030502,
+    "seen": 1794020429.225041,
+    "ast_hash": "49fec63536be92ebec7a65bc93c39341",
     "semantic_hash": ""
   },
   "components/kanban/TaskCard.vue": {
-    "mtime": 1793793163.189703,
-    "seen": 1793793691.3469524,
-    "ast_hash": "635a205eba26d32888f4eba05e88436c",
+    "mtime": 1794020305.1672616,
+    "seen": 1794020429.2254934,
+    "ast_hash": "fb326e7e910fd5b80056d96b90718a54",
     "semantic_hash": ""
   },
   "components/layout/AlertBar.vue": {

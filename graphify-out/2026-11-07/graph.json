@@ -212,32 +212,6 @@
       "source_location": "L58"
     },
     {
-      "id": "components_ui_basedrawer_basedrawerprops",
-      "label": "BaseDrawerProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "basedrawerprops",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L80"
-    },
-    {
-      "id": "components_ui_basedrawer_drawerwidth",
-      "label": "DrawerWidth",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "drawerwidth",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L78"
-    },
-    {
       "id": "app_pages_settings_themepreset",
       "label": "ThemePreset",
       "_callable": true,
@@ -277,19 +251,6 @@
       "source_location": "L6"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
-      "label": "SupabaseSprintRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 159,
-      "community_name": "throwIfSupabaseError",
-      "file_type": "code",
-      "norm_label": "supabasesprintrepository",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L6"
-    },
-    {
       "id": "app_pages_telemetry_telemetryresponse",
       "label": "TelemetryResponse",
       "_callable": true,
@@ -301,32 +262,6 @@
       "norm_label": "telemetryresponse",
       "source_file": "app/pages/telemetry.vue",
       "source_location": "L385"
-    },
-    {
-      "id": "components_ui_basemodal_basemodalprops",
-      "label": "BaseModalProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "basemodalprops",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L95"
-    },
-    {
-      "id": "components_ui_basemodal_modalmaxwidth",
-      "label": "ModalMaxWidth",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "modalmaxwidth",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L93"
     },
     {
       "id": "server_schemas_github_schema_createissueinput",
@@ -550,6 +485,19 @@
       "source_location": "L11"
     },
     {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository",
+      "label": "SupabaseSprintRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "supabasesprintrepository",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L6"
+    },
+    {
       "id": "composables_useworkspacestore_entitycontext",
       "label": "EntityContext",
       "_callable": true,
@@ -732,19 +680,6 @@
       "source_location": "L1"
     },
     {
-      "id": "components_dashboard_infrastructuremeshcard_telemetrysummary",
-      "label": "TelemetrySummary",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 194,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "telemetrysummary",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L104"
-    },
-    {
       "id": "components_ui_baseemptystate_baseemptystateprops",
       "label": "BaseEmptyStateProps",
       "_callable": true,
@@ -810,13 +745,26 @@
       "source_location": "L55"
     },
     {
+      "id": "server_repositories_contracts_project_repository_iprojectrepository",
+      "label": "IProjectRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 232,
+      "community_name": "IProjectRepository",
+      "file_type": "code",
+      "norm_label": "iprojectrepository",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L8"
+    },
+    {
       "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository",
       "label": "NitroProjectRepository",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": "nitroprojectrepository",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -1028,7 +976,7 @@
       "file_type": "code",
       "norm_label": "workspacedatastate",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L82"
+      "source_location": "L83"
     },
     {
       "id": "components_ui_basebutton_basebuttonprops",
@@ -1068,6 +1016,58 @@
       "norm_label": "buttonvariant",
       "source_file": "components/ui/BaseButton.vue",
       "source_location": "L47"
+    },
+    {
+      "id": "components_ui_basedrawer_basedrawerprops",
+      "label": "BaseDrawerProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "basedrawerprops",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L80"
+    },
+    {
+      "id": "components_ui_basedrawer_drawerwidth",
+      "label": "DrawerWidth",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "drawerwidth",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L78"
+    },
+    {
+      "id": "components_ui_basemodal_basemodalprops",
+      "label": "BaseModalProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "basemodalprops",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L95"
+    },
+    {
+      "id": "components_ui_basemodal_modalmaxwidth",
+      "label": "ModalMaxWidth",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "modalmaxwidth",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L93"
     },
     {
       "id": "components_ui_nexuraicon_iconsize",
@@ -1421,19 +1421,6 @@
       "source_location": "L669"
     },
     {
-      "id": "components_tasks_activefocuspanel_parsedchecklistitem",
-      "label": "ParsedChecklistItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "ActiveFocusPanel.vue",
-      "file_type": "code",
-      "norm_label": "parsedchecklistitem",
-      "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L364"
-    },
-    {
       "id": "components_ui_basebadge_badgevariant",
       "label": "BadgeVariant",
       "_callable": true,
@@ -1694,19 +1681,6 @@
       "source_location": "L22"
     },
     {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository",
-      "label": "IProjectRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": "iprojectrepository",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L8"
-    },
-    {
       "id": "composables_usemodallifecycle_usemodallifecycleoptions",
       "label": "UseModalLifecycleOptions",
       "_callable": true,
@@ -1744,6 +1718,19 @@
       "norm_label": "devopsstreamitem",
       "source_file": "components/dashboard/LiveDevOpsStream.vue",
       "source_location": "L240"
+    },
+    {
+      "id": "components_dashboard_infrastructuremeshcard_telemetrysummary",
+      "label": "TelemetrySummary",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 80,
+      "community_name": "InfrastructureMeshCard.vue",
+      "file_type": "code",
+      "norm_label": "telemetrysummary",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L104"
     },
     {
       "id": "composables_useprojectcockpit_useprojectcockpitoptions",
@@ -1796,19 +1783,6 @@
       "norm_label": "checklistitem",
       "source_file": "utils/markdown-checklist.ts",
       "source_location": "L5"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository",
-      "label": "SupabaseNoteRepository",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": "supabasenoterepository",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L8"
     },
     {
       "id": "components_modals_project_connectrepomodal_connectrepomodalprops",
@@ -1913,6 +1887,19 @@
       "norm_label": "nitronoterepository",
       "source_file": "server/repositories/nitro/nitro-note.repository.ts",
       "source_location": "L37"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository",
+      "label": "SupabaseNoteRepository",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": "supabasenoterepository",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L8"
     },
     {
       "id": "server_schemas_note_schema_createnoteinput",
@@ -2792,7 +2779,7 @@
       "file_type": "code",
       "norm_label": "clearwarnings()",
       "source_file": "composables/useSession.ts",
-      "source_location": "L140"
+      "source_location": "L146"
     },
     {
       "id": "composables_usesession_usesession_closeauthmodal",
@@ -2804,7 +2791,7 @@
       "file_type": "code",
       "norm_label": "closeauthmodal()",
       "source_file": "composables/useSession.ts",
-      "source_location": "L135"
+      "source_location": "L141"
     },
     {
       "id": "composables_usesession_usesession_handleapierror",
@@ -2840,7 +2827,7 @@
       "file_type": "code",
       "norm_label": "logout()",
       "source_file": "composables/useSession.ts",
-      "source_location": "L120"
+      "source_location": "L126"
     },
     {
       "id": "composables_usesession_usesession_openauthmodal",
@@ -2852,7 +2839,7 @@
       "file_type": "code",
       "norm_label": "openauthmodal()",
       "source_file": "composables/useSession.ts",
-      "source_location": "L130"
+      "source_location": "L136"
     },
     {
       "id": "composables_usesprints_usesprints",
@@ -3057,54 +3044,6 @@
       "norm_label": "getprstatustext()",
       "source_file": "components/project/ProjectPullsIssuesFeed.vue",
       "source_location": "L289"
-    },
-    {
-      "id": "components_project_projectworkflowrunsfeed_formattime",
-      "label": "formatTime()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "formattime()",
-      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L181"
-    },
-    {
-      "id": "components_project_projectworkflowrunsfeed_getworkflowrunbadgeclass",
-      "label": "getWorkflowRunBadgeClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "getworkflowrunbadgeclass()",
-      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L153"
-    },
-    {
-      "id": "components_project_projectworkflowrunsfeed_getworkflowrundotclass",
-      "label": "getWorkflowRunDotClass()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "getworkflowrundotclass()",
-      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L166"
-    },
-    {
-      "id": "components_project_projectworkflowrunsfeed_getworkflowrunstatustext",
-      "label": "getWorkflowRunStatusText()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "getworkflowrunstatustext()",
-      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
-      "source_location": "L173"
     },
     {
       "id": "components_ui_nexuraicon_geticonregistry",
@@ -3479,28 +3418,52 @@
       "source_location": "L93"
     },
     {
-      "id": "components_ui_basedrawer_close",
-      "label": "close()",
+      "id": "components_project_projectworkflowrunsfeed_formattime",
+      "label": "formatTime()",
       "_callable": true,
       "_origin": "ast",
       "community": 137,
-      "community_name": "BaseDrawer.vue",
+      "community_name": "ProjectWorkflowRunsFeed.vue",
       "file_type": "code",
-      "norm_label": "close()",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L114"
+      "norm_label": "formattime()",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L181"
     },
     {
-      "id": "components_ui_basedrawer_handlebackdropclick",
-      "label": "handleBackdropClick()",
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrunbadgeclass",
+      "label": "getWorkflowRunBadgeClass()",
       "_callable": true,
       "_origin": "ast",
       "community": 137,
-      "community_name": "BaseDrawer.vue",
+      "community_name": "ProjectWorkflowRunsFeed.vue",
       "file_type": "code",
-      "norm_label": "handlebackdropclick()",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L119"
+      "norm_label": "getworkflowrunbadgeclass()",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L153"
+    },
+    {
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrundotclass",
+      "label": "getWorkflowRunDotClass()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "file_type": "code",
+      "norm_label": "getworkflowrundotclass()",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L166"
+    },
+    {
+      "id": "components_project_projectworkflowrunsfeed_getworkflowrunstatustext",
+      "label": "getWorkflowRunStatusText()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 137,
+      "community_name": "ProjectWorkflowRunsFeed.vue",
+      "file_type": "code",
+      "norm_label": "getworkflowrunstatustext()",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
+      "source_location": "L173"
     },
     {
       "id": "components_search_headersearch_handleescaction",
@@ -4208,7 +4171,7 @@
       "file_type": "code",
       "norm_label": "formatrelativetime()",
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L112"
+      "source_location": "L118"
     },
     {
       "id": "components_dashboard_recentshipmentscard_gettechtags",
@@ -4220,7 +4183,7 @@
       "file_type": "code",
       "norm_label": "gettechtags()",
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L105"
+      "source_location": "L111"
     },
     {
       "id": "tests_unit_dashboard_command_center_spec_promise_finally",
@@ -4415,6 +4378,30 @@
       "source_location": "L14"
     },
     {
+      "id": "server_repositories_index_marksupabaseoffline",
+      "label": "markSupabaseOffline()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 159,
+      "community_name": "throwIfSupabaseError",
+      "file_type": "code",
+      "norm_label": "marksupabaseoffline()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_repositories_index_marksupabaseonline",
+      "label": "markSupabaseOnline()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 159,
+      "community_name": "throwIfSupabaseError",
+      "file_type": "code",
+      "norm_label": "marksupabaseonline()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L42"
+    },
+    {
       "id": "server_repositories_supabase_mappers_mapprojectrow",
       "label": "mapProjectRow()",
       "_callable": true,
@@ -4439,28 +4426,28 @@
       "source_location": "L62"
     },
     {
-      "id": "server_repositories_supabase_mappers_mapsprintrow",
-      "label": "mapSprintRow()",
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_client",
+      "label": ".client()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": "mapsprintrow()",
-      "source_file": "server/repositories/supabase/mappers.ts",
-      "source_location": "L78"
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L9"
     },
     {
-      "id": "server_repositories_supabase_mappers_mapsprinttorow",
-      "label": "mapSprintToRow()",
+      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
+      "label": ".client()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": "mapsprinttorow()",
-      "source_file": "server/repositories/supabase/mappers.ts",
-      "source_location": "L92"
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
+      "source_location": "L7"
     },
     {
       "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_create",
@@ -4547,64 +4534,52 @@
       "source_location": "L71"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
-      "label": ".create()",
+      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
+      "label": ".client()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L34"
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
+      "source_location": "L23"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
-      "label": ".delete()",
+      "id": "server_utils_supabase_getsupabaseclient",
+      "label": "getSupabaseClient()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L64"
+      "norm_label": "getsupabaseclient()",
+      "source_file": "server/utils/supabase.ts",
+      "source_location": "L19"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
-      "label": ".findAll()",
+      "id": "server_utils_supabase_isnetworkerror",
+      "label": "isNetworkError()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L11"
+      "norm_label": "isnetworkerror()",
+      "source_file": "server/utils/supabase.ts",
+      "source_location": "L6"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
-      "label": ".findById()",
+      "id": "server_utils_supabase_requiresupabaseclient",
+      "label": "requireSupabaseClient()",
       "_callable": true,
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L22"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 159,
-      "community_name": "throwIfSupabaseError",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L49"
+      "norm_label": "requiresupabaseclient()",
+      "source_file": "server/utils/supabase.ts",
+      "source_location": "L57"
     },
     {
       "id": "server_utils_supabase_throwifsupabaseerror",
@@ -4859,30 +4834,6 @@
       "source_location": "L12"
     },
     {
-      "id": "components_ui_basemodal_close",
-      "label": "close()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "close()",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L133"
-    },
-    {
-      "id": "components_ui_basemodal_handlebackdropclick",
-      "label": "handleBackdropClick()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "handlebackdropclick()",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L138"
-    },
-    {
       "id": "server_api_github_security_get_normalizeseverity",
       "label": "normalizeSeverity()",
       "_callable": true,
@@ -4917,6 +4868,54 @@
       "norm_label": "iscsrfsafe()",
       "source_file": "server/middleware/auth.ts",
       "source_location": "L24"
+    },
+    {
+      "id": "server_repositories_index_getnoterepo",
+      "label": "getNoteRepo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "getnoterepo()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L88"
+    },
+    {
+      "id": "server_repositories_index_getprojectrepo",
+      "label": "getProjectRepo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "getprojectrepo()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L70"
+    },
+    {
+      "id": "server_repositories_index_gettaskrepo",
+      "label": "getTaskRepo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "gettaskrepo()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L61"
+    },
+    {
+      "id": "server_repositories_index_issupabaseactive",
+      "label": "isSupabaseActive()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "repositories/index.ts",
+      "file_type": "code",
+      "norm_label": "issupabaseactive()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L49"
     },
     {
       "id": "server_schemas_helper_requirerouterparam",
@@ -5303,6 +5302,18 @@
       "source_location": "L7"
     },
     {
+      "id": "server_repositories_index_getsprintrepo",
+      "label": "getSprintRepo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "getsprintrepo()",
+      "source_file": "server/repositories/index.ts",
+      "source_location": "L79"
+    },
+    {
       "id": "server_repositories_nitro_nitro_sprint_repository_nitrosprintrepository_create",
       "label": ".create()",
       "_callable": true,
@@ -5361,6 +5372,102 @@
       "norm_label": ".update()",
       "source_file": "server/repositories/nitro/nitro-sprint.repository.ts",
       "source_location": "L25"
+    },
+    {
+      "id": "server_repositories_supabase_mappers_mapsprintrow",
+      "label": "mapSprintRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "mapsprintrow()",
+      "source_file": "server/repositories/supabase/mappers.ts",
+      "source_location": "L78"
+    },
+    {
+      "id": "server_repositories_supabase_mappers_mapsprinttorow",
+      "label": "mapSprintToRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "mapsprinttorow()",
+      "source_file": "server/repositories/supabase/mappers.ts",
+      "source_location": "L92"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
+      "label": ".client()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".client()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L34"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_delete",
+      "label": ".delete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L64"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findall",
+      "label": ".findAll()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".findall()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_findbyid",
+      "label": ".findById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".findbyid()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_update",
+      "label": ".update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": ".update()",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L49"
     },
     {
       "id": "components_modals_sprint_sprintrollovermodal_getstatusbadge",
@@ -5771,18 +5878,6 @@
       "source_location": "L26"
     },
     {
-      "id": "components_dashboard_infrastructuremeshcard_pingedge",
-      "label": "pingEdge()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 194,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "pingedge()",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L139"
-    },
-    {
       "id": "composables_usemarkdownchecklist_usemarkdownchecklist",
       "label": "useMarkdownChecklist()",
       "_callable": true,
@@ -6167,64 +6262,88 @@
       "source_location": "L84"
     },
     {
-      "id": "server_repositories_index_getnoterepo",
-      "label": "getNoteRepo()",
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_create",
+      "label": ".create()",
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
-      "norm_label": "getnoterepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L88"
+      "norm_label": ".create()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L12"
     },
     {
-      "id": "server_repositories_index_getprojectrepo",
-      "label": "getProjectRepo()",
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_delete",
+      "label": ".delete()",
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
-      "norm_label": "getprojectrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L70"
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L14"
     },
     {
-      "id": "server_repositories_index_getsprintrepo",
-      "label": "getSprintRepo()",
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_findall",
+      "label": ".findAll()",
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
-      "norm_label": "getsprintrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L79"
+      "norm_label": ".findall()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L9"
     },
     {
-      "id": "server_repositories_index_gettaskrepo",
-      "label": "getTaskRepo()",
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_findbyid",
+      "label": ".findById()",
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
-      "norm_label": "gettaskrepo()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L61"
+      "norm_label": ".findbyid()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L11"
     },
     {
-      "id": "server_repositories_index_issupabaseactive",
-      "label": "isSupabaseActive()",
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_findbyslug",
+      "label": ".findBySlug()",
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
-      "norm_label": "issupabaseactive()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L49"
+      "norm_label": ".findbyslug()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_slugexists",
+      "label": ".slugExists()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 232,
+      "community_name": "IProjectRepository",
+      "file_type": "code",
+      "norm_label": ".slugexists()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L15"
+    },
+    {
+      "id": "server_repositories_contracts_project_repository_iprojectrepository_update",
+      "label": ".update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 232,
+      "community_name": "IProjectRepository",
+      "file_type": "code",
+      "norm_label": ".update()",
+      "source_file": "server/repositories/contracts/project.repository.ts",
+      "source_location": "L13"
     },
     {
       "id": "server_repositories_nitro_nitro_project_repository_nitroprojectrepository_create",
@@ -6232,7 +6351,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".create()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6244,7 +6363,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".delete()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6256,7 +6375,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".findall()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6268,7 +6387,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".findbyid()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6280,7 +6399,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".findbyslug()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6292,7 +6411,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".slugexists()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6304,7 +6423,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": ".update()",
       "source_file": "server/repositories/nitro/nitro-project.repository.ts",
@@ -6316,7 +6435,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 232,
-      "community_name": "NitroProjectRepository",
+      "community_name": "IProjectRepository",
       "file_type": "code",
       "norm_label": "normalizeproject()",
       "source_file": "server/utils/store.ts",
@@ -6764,7 +6883,7 @@
       "file_type": "code",
       "norm_label": "opentaskmodal()",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L179"
+      "source_location": "L180"
     },
     {
       "id": "components_dashboard_dashboard_refreshdata",
@@ -6776,7 +6895,7 @@
       "file_type": "code",
       "norm_label": "refreshdata()",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L115"
+      "source_location": "L116"
     },
     {
       "id": "app_pages_projects_slug_sortbypriority",
@@ -6789,6 +6908,54 @@
       "norm_label": "sortbypriority()",
       "source_file": "app/pages/projects/[slug].vue",
       "source_location": "L877"
+    },
+    {
+      "id": "components_ui_basedrawer_close",
+      "label": "close()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "close()",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L114"
+    },
+    {
+      "id": "components_ui_basedrawer_handlebackdropclick",
+      "label": "handleBackdropClick()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "handlebackdropclick()",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L119"
+    },
+    {
+      "id": "components_ui_basemodal_close",
+      "label": "close()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "close()",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L133"
+    },
+    {
+      "id": "components_ui_basemodal_handlebackdropclick",
+      "label": "handleBackdropClick()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "handlebackdropclick()",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L138"
     },
     {
       "id": "components_modals_project_editprojectmodal_initializeform",
@@ -7100,7 +7267,7 @@
       "file_type": "code",
       "norm_label": "formatrelativetime()",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L693"
+      "source_location": "L694"
     },
     {
       "id": "app_pages_repos_onpromptremovefrommanagement",
@@ -7148,7 +7315,7 @@
       "file_type": "code",
       "norm_label": "toggleexpand()",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L663"
+      "source_location": "L664"
     },
     {
       "id": "app_pages_roadmap_classifyreleasephase",
@@ -7427,6 +7594,18 @@
       "source_location": "L282"
     },
     {
+      "id": "components_modals_sprint_addtargetmodal_handleaddexisting",
+      "label": "handleAddExisting()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 56,
+      "community_name": "AddTargetModal.vue",
+      "file_type": "code",
+      "norm_label": "handleaddexisting()",
+      "source_file": "components/modals/sprint/AddTargetModal.vue",
+      "source_location": "L289"
+    },
+    {
       "id": "components_modals_sprint_addtargetmodal_handlekeydown",
       "label": "handleKeydown()",
       "_callable": true,
@@ -7436,7 +7615,7 @@
       "file_type": "code",
       "norm_label": "handlekeydown()",
       "source_file": "components/modals/sprint/AddTargetModal.vue",
-      "source_location": "L305"
+      "source_location": "L310"
     },
     {
       "id": "components_modals_sprint_addtargetmodal_handlesubmit",
@@ -7448,7 +7627,7 @@
       "file_type": "code",
       "norm_label": "handlesubmit()",
       "source_file": "components/modals/sprint/AddTargetModal.vue",
-      "source_location": "L289"
+      "source_location": "L294"
     },
     {
       "id": "components_modals_devops_workflowlogmodal_close",
@@ -7532,7 +7711,7 @@
       "file_type": "code",
       "norm_label": "addstep()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L455"
+      "source_location": "L404"
     },
     {
       "id": "components_tasks_activefocuspanel_deletestep",
@@ -7544,7 +7723,7 @@
       "file_type": "code",
       "norm_label": "deletestep()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L479"
+      "source_location": "L426"
     },
     {
       "id": "components_tasks_activefocuspanel_getdisplayid",
@@ -7556,7 +7735,7 @@
       "file_type": "code",
       "norm_label": "getdisplayid()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L342"
+      "source_location": "L349"
     },
     {
       "id": "components_tasks_activefocuspanel_markdeliverabledeployed",
@@ -7568,7 +7747,7 @@
       "file_type": "code",
       "norm_label": "markdeliverabledeployed()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L497"
+      "source_location": "L440"
     },
     {
       "id": "components_tasks_activefocuspanel_opentaskindrawer",
@@ -7580,7 +7759,7 @@
       "file_type": "code",
       "norm_label": "opentaskindrawer()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L521"
+      "source_location": "L464"
     },
     {
       "id": "components_tasks_activefocuspanel_prioritybadgeclass",
@@ -7592,7 +7771,7 @@
       "file_type": "code",
       "norm_label": "prioritybadgeclass()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L349"
+      "source_location": "L356"
     },
     {
       "id": "components_tasks_activefocuspanel_starttaskimmediately",
@@ -7604,7 +7783,7 @@
       "file_type": "code",
       "norm_label": "starttaskimmediately()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L510"
+      "source_location": "L453"
     },
     {
       "id": "components_tasks_activefocuspanel_togglestep",
@@ -7616,7 +7795,7 @@
       "file_type": "code",
       "norm_label": "togglestep()",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L429"
+      "source_location": "L390"
     },
     {
       "id": "composables_usesprintworkspace_usesprintworkspace",
@@ -8819,88 +8998,28 @@
       "source_location": "L27"
     },
     {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_create",
-      "label": ".create()",
+      "id": "app_pages_sprints_handleaddexistingtask",
+      "label": "handleAddExistingTask()",
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "IProjectRepository",
+      "community_name": "sprints.vue",
       "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L12"
+      "norm_label": "handleaddexistingtask()",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L325"
     },
     {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_delete",
-      "label": ".delete()",
+      "id": "app_pages_sprints_handletaskclick",
+      "label": "handleTaskClick()",
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "IProjectRepository",
+      "community_name": "sprints.vue",
       "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L14"
-    },
-    {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L11"
-    },
-    {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_findbyslug",
-      "label": ".findBySlug()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".findbyslug()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_slugexists",
-      "label": ".slugExists()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".slugexists()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L15"
-    },
-    {
-      "id": "server_repositories_contracts_project_repository_iprojectrepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 72,
-      "community_name": "IProjectRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L13"
+      "norm_label": "handletaskclick()",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L319"
     },
     {
       "id": "composables_usemodallifecycle_usemodallifecycle",
@@ -9068,7 +9187,7 @@
       "file_type": "code",
       "norm_label": "deletenote()",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L91"
+      "source_location": "L95"
     },
     {
       "id": "composables_usenotes_usenotes_fetchnotes",
@@ -9092,7 +9211,7 @@
       "file_type": "code",
       "norm_label": "promotenotetotask()",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L106"
+      "source_location": "L121"
     },
     {
       "id": "composables_usenotes_usenotes_updatenote",
@@ -9359,112 +9478,16 @@
       "source_location": "L423"
     },
     {
-      "id": "server_repositories_index_marksupabaseoffline",
-      "label": "markSupabaseOffline()",
+      "id": "components_dashboard_infrastructuremeshcard_pingedge",
+      "label": "pingEdge()",
       "_callable": true,
       "_origin": "ast",
       "community": 80,
-      "community_name": "supabase.ts",
+      "community_name": "InfrastructureMeshCard.vue",
       "file_type": "code",
-      "norm_label": "marksupabaseoffline()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L34"
-    },
-    {
-      "id": "server_repositories_index_marksupabaseonline",
-      "label": "markSupabaseOnline()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": "marksupabaseonline()",
-      "source_file": "server/repositories/index.ts",
-      "source_location": "L42"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L9"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_project_repository_supabaseprojectrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-project.repository.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_sprint_repository_supabasesprintrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
-      "source_location": "L7"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_task_repository_supabasetaskrepository_client",
-      "label": ".client()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": ".client()",
-      "source_file": "server/repositories/supabase/supabase-task.repository.ts",
-      "source_location": "L23"
-    },
-    {
-      "id": "server_utils_supabase_getsupabaseclient",
-      "label": "getSupabaseClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": "getsupabaseclient()",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L19"
-    },
-    {
-      "id": "server_utils_supabase_isnetworkerror",
-      "label": "isNetworkError()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": "isnetworkerror()",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L6"
-    },
-    {
-      "id": "server_utils_supabase_requiresupabaseclient",
-      "label": "requireSupabaseClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 80,
-      "community_name": "supabase.ts",
-      "file_type": "code",
-      "norm_label": "requiresupabaseclient()",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L57"
+      "norm_label": "pingedge()",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L139"
     },
     {
       "id": "composables_useprojectcockpit_resolvetab",
@@ -10127,90 +10150,6 @@
       "source_location": "L112"
     },
     {
-      "id": "server_repositories_supabase_mappers_mapnoterow",
-      "label": "mapNoteRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": "mapnoterow()",
-      "source_file": "server/repositories/supabase/mappers.ts",
-      "source_location": "L104"
-    },
-    {
-      "id": "server_repositories_supabase_mappers_mapnotetorow",
-      "label": "mapNoteToRow()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": "mapnotetorow()",
-      "source_file": "server/repositories/supabase/mappers.ts",
-      "source_location": "L116"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_create",
-      "label": ".create()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": ".create()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L45"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_delete",
-      "label": ".delete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": ".delete()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L78"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_findall",
-      "label": ".findAll()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": ".findall()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L13"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_findbyid",
-      "label": ".findById()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": ".findbyid()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L33"
-    },
-    {
-      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_update",
-      "label": ".update()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 89,
-      "community_name": "SupabaseNoteRepository",
-      "file_type": "code",
-      "norm_label": ".update()",
-      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
-      "source_location": "L62"
-    },
-    {
       "id": "components_modals_project_addprojectmodal_oncancel",
       "label": "onCancel()",
       "_callable": true,
@@ -10859,6 +10798,78 @@
       "source_location": "L17"
     },
     {
+      "id": "server_repositories_supabase_mappers_mapnoterow",
+      "label": "mapNoteRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": "mapnoterow()",
+      "source_file": "server/repositories/supabase/mappers.ts",
+      "source_location": "L104"
+    },
+    {
+      "id": "server_repositories_supabase_mappers_mapnotetorow",
+      "label": "mapNoteToRow()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": "mapnotetorow()",
+      "source_file": "server/repositories/supabase/mappers.ts",
+      "source_location": "L116"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_create",
+      "label": ".create()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": ".create()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L45"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_delete",
+      "label": ".delete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": ".delete()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L78"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_findall",
+      "label": ".findAll()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": ".findall()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_findbyid",
+      "label": ".findById()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": ".findbyid()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L33"
+    },
+    {
       "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_promotetotask",
       "label": ".promoteToTask()",
       "_callable": true,
@@ -10869,6 +10880,18 @@
       "norm_label": ".promotetotask()",
       "source_file": "server/repositories/supabase/supabase-note.repository.ts",
       "source_location": "L92"
+    },
+    {
+      "id": "server_repositories_supabase_supabase_note_repository_supabasenoterepository_update",
+      "label": ".update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": ".update()",
+      "source_file": "server/repositories/supabase/supabase-note.repository.ts",
+      "source_location": "L62"
     },
     {
       "id": "server_utils_note_extractnotetitle",
@@ -12042,18 +12065,6 @@
       "source_location": "L291"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_330",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 107,
-      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L330"
-    },
-    {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
@@ -12064,18 +12075,6 @@
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L304"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_340",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 107,
-      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L340"
     },
     {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod",
@@ -12090,18 +12089,6 @@
       "source_location": "L312"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_345",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 107,
-      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L345"
-    },
-    {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
@@ -12114,16 +12101,16 @@
       "source_location": "L319"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_351",
-      "label": "4. Gate Pengujian & Rollback Plan:",
+      "id": "docs_master_remediation_plan_5_rencana_remediasi_terperinci_13_fase_mandiri_dalam_3_blok",
+      "label": "5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok",
       "_origin": "ast",
       "community": 107,
       "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
+      "norm_label": "5. rencana remediasi terperinci: 13 fase mandiri dalam 3 blok",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L351"
+      "source_location": "L272"
     },
     {
       "id": "docs_master_remediation_plan_blok_1_fondasi_arsitektur_fitur_global",
@@ -12138,6 +12125,18 @@
       "source_location": "L276"
     },
     {
+      "id": "docs_master_remediation_plan_blok_3_otomasi_sistem_pengujian_sign_off",
+      "label": "BLOK 3: OTOMASI SISTEM, PENGUJIAN & SIGN-OFF",
+      "_origin": "ast",
+      "community": 107,
+      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "blok 3: otomasi sistem, pengujian & sign-off",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L654"
+    },
+    {
       "id": "docs_master_remediation_plan_fase_0_security_lockdown_database_alignment_core_safety",
       "label": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
       "_origin": "ast",
@@ -12148,18 +12147,6 @@
       "norm_label": "fase 0: security lockdown, database alignment & core safety",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L286"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_1_global_workspace_store_shell_infrastructure",
-      "label": "FASE 1: Global Workspace Store & Shell Infrastructure",
-      "_origin": "ast",
-      "community": 107,
-      "community_name": "FASE 0: Security Lockdown, Database Alignment & Core Safety",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 1: global workspace store & shell infrastructure",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L325"
     },
     {
       "id": "node_fs",
@@ -12537,18 +12524,6 @@
       "source_location": "L669"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_695",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L695"
-    },
-    {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_675",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
@@ -12559,18 +12534,6 @@
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L675"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_706",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L706"
     },
     {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_679",
@@ -12585,18 +12548,6 @@
       "source_location": "L679"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_716",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L716"
-    },
-    {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_684",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
@@ -12609,30 +12560,6 @@
       "source_location": "L684"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_721",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L721"
-    },
-    {
-      "id": "docs_master_remediation_plan_blok_3_otomasi_sistem_pengujian_sign_off",
-      "label": "BLOK 3: OTOMASI SISTEM, PENGUJIAN & SIGN-OFF",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "blok 3: otomasi sistem, pengujian & sign-off",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L654"
-    },
-    {
       "id": "docs_master_remediation_plan_fase_11_otomasi_lanjutan_github_sync",
       "label": "FASE 11: Otomasi Lanjutan & GitHub Sync",
       "_origin": "ast",
@@ -12643,18 +12570,6 @@
       "norm_label": "fase 11: otomasi lanjutan & github sync",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L664"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_12_ci_cd_quality_gate_automated_tests",
-      "label": "FASE 12: CI/CD Quality Gate & Automated Tests",
-      "_origin": "ast",
-      "community": 112,
-      "community_name": "FASE 11: Otomasi Lanjutan & GitHub Sync",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 12: ci/cd quality gate & automated tests",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L690"
     },
     {
       "id": "composables_usesession",
@@ -13117,17 +13032,6 @@
       "file_type": "code",
       "norm_label": "projectsecurityfeed.vue",
       "source_file": "components/project/ProjectSecurityFeed.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_project_projectworkflowrunsfeed",
-      "label": "ProjectWorkflowRunsFeed.vue",
-      "_origin": "ast",
-      "community": 117,
-      "community_name": "NexuraIcon.vue",
-      "file_type": "code",
-      "norm_label": "projectworkflowrunsfeed.vue",
-      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L1"
     },
     {
@@ -14792,78 +14696,6 @@
       "source_location": "L197"
     },
     {
-      "id": "docs_master_remediation_plan_4_1_single_source_of_truth_ssot_relasi_task_sprint",
-      "label": "4.1. Single Source of Truth (SSOT) Relasi Task\u2013Sprint",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.1. single source of truth (ssot) relasi task\u2013sprint",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L239"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_2_unified_reactive_workspace_store_useworkspacestore_ts",
-      "label": "4.2. Unified Reactive Workspace Store (`useWorkspaceStore.ts`)",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.2. unified reactive workspace store (`useworkspacestore.ts`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L250"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_3_global_modal_shell_mounting_di_app_app_vue",
-      "label": "4.3. Global Modal Shell Mounting di `app/app.vue`",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.3. global modal shell mounting di `app/app.vue`",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L255"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_4_static_repository_selection_at_boot_zero_silent_failover",
-      "label": "4.4. Static Repository Selection at Boot (Zero Silent Failover)",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.4. static repository selection at boot (zero silent failover)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L262"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_5_server_side_auth_gate_github_allowlist",
-      "label": "4.5. Server-Side Auth Gate & GitHub Allowlist",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4.5. server-side auth gate & github allowlist",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L266"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_cetak_biru_arsitektur_target_target_architectural_blueprint",
-      "label": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "Master Remediation & Architectural Alignment Plan: Nexura Management",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. cetak biru arsitektur target (target architectural blueprint)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L237"
-    },
-    {
       "id": "docs_master_remediation_plan_6_matriks_kepemilikan_file_distribusi_subagent_anti_tabrakan",
       "label": "6. Matriks Kepemilikan File & Distribusi Subagent (Anti-Tabrakan)",
       "_origin": "ast",
@@ -15726,6 +15558,18 @@
       "source_location": "L99"
     },
     {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_409",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L409"
+    },
+    {
       "id": "docs_master_remediation_plan_1_file_yang_disentuh_444",
       "label": "1. File yang Disentuh:",
       "_origin": "ast",
@@ -15736,6 +15580,90 @@
       "norm_label": "1. file yang disentuh:",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L444"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_473",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L473"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_509",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L509"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_538",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L538"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_567",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L567"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_598",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L598"
+    },
+    {
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_632",
+      "label": "1. File yang Disentuh:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L632"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_419",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L419"
     },
     {
       "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_451",
@@ -15750,6 +15678,90 @@
       "source_location": "L451"
     },
     {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_479",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L479"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_515",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L515"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_545",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L545"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_572",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L572"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_602",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L602"
+    },
+    {
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_638",
+      "label": "2. Logika Perubahan Teknis:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L638"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_426",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L426"
+    },
+    {
       "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_456",
       "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
@@ -15760,6 +15772,90 @@
       "norm_label": "3. acceptance criteria / definition of done (dod):",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L456"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_492",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L492"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_521",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L521"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_550",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L550"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_582",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L582"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_615",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L615"
+    },
+    {
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_643",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L643"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_433",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L433"
     },
     {
       "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_462",
@@ -15774,16 +15870,76 @@
       "source_location": "L462"
     },
     {
-      "id": "docs_master_remediation_plan_5_rencana_remediasi_terperinci_13_fase_mandiri_dalam_3_blok",
-      "label": "5. Rencana Remediasi Terperinci: 13 Fase Mandiri dalam 3 Blok",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_498",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 134,
       "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "5. rencana remediasi terperinci: 13 fase mandiri dalam 3 blok",
+      "norm_label": "4. gate pengujian & rollback plan:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L272"
+      "source_location": "L498"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_527",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L527"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_556",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L556"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_587",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L587"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_621",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L621"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_648",
+      "label": "4. Gate Pengujian & Rollback Plan:",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L648"
     },
     {
       "id": "docs_master_remediation_plan_blok_2_remediasi_1_halaman_per_fase",
@@ -15798,6 +15954,30 @@
       "source_location": "L389"
     },
     {
+      "id": "docs_master_remediation_plan_fase_10_halaman_telemetry_devops_health_telemetry",
+      "label": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 10: halaman telemetry & devops health (`/telemetry`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L627"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_3_halaman_tasks_queue_workspace_tasks",
+      "label": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 3: halaman tasks & queue workspace (`/tasks`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L404"
+    },
+    {
       "id": "docs_master_remediation_plan_fase_4_halaman_dashboard_command_center",
       "label": "FASE 4: Halaman Dashboard Command Center (`/`)",
       "_origin": "ast",
@@ -15808,6 +15988,66 @@
       "norm_label": "fase 4: halaman dashboard command center (`/`)",
       "source_file": "docs/master-remediation-plan.md",
       "source_location": "L439"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_5_halaman_projects_hub_projects",
+      "label": "FASE 5: Halaman Projects Hub (`/projects`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 5: halaman projects hub (`/projects`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L468"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_6_halaman_project_detail_cockpit_projects_slug",
+      "label": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 6: halaman project detail cockpit (`/projects/[slug]`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L504"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_7_halaman_sprints_iterations_sprints",
+      "label": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 7: halaman sprints & iterations (`/sprints`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L533"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_8_halaman_release_phase_roadmap_roadmap",
+      "label": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 8: halaman release phase roadmap (`/roadmap`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L562"
+    },
+    {
+      "id": "docs_master_remediation_plan_fase_9_halaman_repositories_catalog_repos",
+      "label": "FASE 9: Halaman Repositories Catalog (`/repos`)",
+      "_origin": "ast",
+      "community": 134,
+      "community_name": "BLOK 2: REMEDIASI 1 HALAMAN PER FASE",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 9: halaman repositories catalog (`/repos`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L593"
     },
     {
       "id": "docs_management_system_audit_16_implementation_roadmap",
@@ -15978,81 +16218,15 @@
       "source_location": "L1803"
     },
     {
-      "id": "components_ui_basedrawer",
-      "label": "BaseDrawer.vue",
+      "id": "components_project_projectworkflowrunsfeed",
+      "label": "ProjectWorkflowRunsFeed.vue",
       "_origin": "ast",
       "community": 137,
-      "community_name": "BaseDrawer.vue",
+      "community_name": "ProjectWorkflowRunsFeed.vue",
       "file_type": "code",
-      "norm_label": "basedrawer.vue",
-      "source_file": "components/ui/BaseDrawer.vue",
+      "norm_label": "projectworkflowrunsfeed.vue",
+      "source_file": "components/project/ProjectWorkflowRunsFeed.vue",
       "source_location": "L1"
-    },
-    {
-      "id": "components_ui_basedrawer_emit",
-      "label": "emit",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "emit",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L100"
-    },
-    {
-      "id": "components_ui_basedrawer_isopen",
-      "label": "isOpen",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "isopen",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L108"
-    },
-    {
-      "id": "components_ui_basedrawer_panelref",
-      "label": "panelRef",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "panelref",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L106"
-    },
-    {
-      "id": "components_ui_basedrawer_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L90"
-    },
-    {
-      "id": "components_ui_basedrawer_resolvedwidth",
-      "label": "resolvedWidth",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "resolvedwidth",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L142"
-    },
-    {
-      "id": "components_ui_basedrawer_widthmap",
-      "label": "widthMap",
-      "_origin": "ast",
-      "community": 137,
-      "community_name": "BaseDrawer.vue",
-      "file_type": "code",
-      "norm_label": "widthmap",
-      "source_file": "components/ui/BaseDrawer.vue",
-      "source_location": "L134"
     },
     {
       "id": "docs_master_remediation_plan_1_file_yang_disentuh_362",
@@ -16807,7 +16981,7 @@
       "file_type": "code",
       "norm_label": "activereposcount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L180"
+      "source_location": "L187"
     },
     {
       "id": "components_dashboard_unifiedherobanner_cicheckssummary",
@@ -16818,7 +16992,7 @@
       "file_type": "code",
       "norm_label": "cicheckssummary",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L169"
+      "source_location": "L176"
     },
     {
       "id": "components_dashboard_unifiedherobanner_completedcount",
@@ -16829,7 +17003,7 @@
       "file_type": "code",
       "norm_label": "completedcount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L136"
+      "source_location": "L143"
     },
     {
       "id": "components_dashboard_unifiedherobanner_highprioritycount",
@@ -16840,7 +17014,7 @@
       "file_type": "code",
       "norm_label": "highprioritycount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L153"
+      "source_location": "L160"
     },
     {
       "id": "components_dashboard_unifiedherobanner_inflightcount",
@@ -16851,7 +17025,7 @@
       "file_type": "code",
       "norm_label": "inflightcount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L149"
+      "source_location": "L156"
     },
     {
       "id": "components_dashboard_unifiedherobanner_openprcount",
@@ -16862,7 +17036,7 @@
       "file_type": "code",
       "norm_label": "openprcount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L175"
+      "source_location": "L182"
     },
     {
       "id": "components_dashboard_unifiedherobanner_progresspercentage",
@@ -16873,7 +17047,7 @@
       "file_type": "code",
       "norm_label": "progresspercentage",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L144"
+      "source_location": "L151"
     },
     {
       "id": "components_dashboard_unifiedherobanner_props",
@@ -16885,6 +17059,17 @@
       "norm_label": "props",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
       "source_location": "L98"
+    },
+    {
+      "id": "components_dashboard_unifiedherobanner_sprinttasks",
+      "label": "sprintTasks",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "UnifiedHeroBanner.vue",
+      "file_type": "code",
+      "norm_label": "sprinttasks",
+      "source_file": "components/dashboard/UnifiedHeroBanner.vue",
+      "source_location": "L136"
     },
     {
       "id": "components_dashboard_unifiedherobanner_sprintweeklabel",
@@ -16906,7 +17091,7 @@
       "file_type": "code",
       "norm_label": "totalcount",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L140"
+      "source_location": "L147"
     },
     {
       "id": "components_dashboard_unifiedherobanner_velocityhealth",
@@ -16917,7 +17102,7 @@
       "file_type": "code",
       "norm_label": "velocityhealth",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L164"
+      "source_location": "L171"
     },
     {
       "id": "components_dashboard_unifiedherobanner_velocitypercentage",
@@ -16928,7 +17113,7 @@
       "file_type": "code",
       "norm_label": "velocitypercentage",
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L159"
+      "source_location": "L166"
     },
     {
       "id": "docs_management_system_audit_8_1_evaluasi_entitas_relasi_saat_ini_verified",
@@ -17074,7 +17259,7 @@
       "file_type": "code",
       "norm_label": "displayshipments",
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L101"
+      "source_location": "L107"
     },
     {
       "id": "components_dashboard_recentshipmentscard_props",
@@ -17214,6 +17399,17 @@
       "source_location": "L32"
     },
     {
+      "id": "server_plugins_supabase_sync",
+      "label": "supabase-sync.ts",
+      "_origin": "ast",
+      "community": 159,
+      "community_name": "throwIfSupabaseError",
+      "file_type": "code",
+      "norm_label": "supabase-sync.ts",
+      "source_file": "server/plugins/supabase-sync.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_repositories_contracts_project_repository",
       "label": "project.repository.ts",
       "_origin": "ast",
@@ -17222,17 +17418,6 @@
       "file_type": "code",
       "norm_label": "project.repository.ts",
       "source_file": "server/repositories/contracts/project.repository.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "server_repositories_supabase_mappers",
-      "label": "mappers.ts",
-      "_origin": "ast",
-      "community": 159,
-      "community_name": "throwIfSupabaseError",
-      "file_type": "code",
-      "norm_label": "mappers.ts",
-      "source_file": "server/repositories/supabase/mappers.ts",
       "source_location": "L1"
     },
     {
@@ -17247,14 +17432,14 @@
       "source_location": "L1"
     },
     {
-      "id": "server_repositories_supabase_supabase_sprint_repository",
-      "label": "supabase-sprint.repository.ts",
+      "id": "server_utils_supabase",
+      "label": "supabase.ts",
       "_origin": "ast",
       "community": 159,
       "community_name": "throwIfSupabaseError",
       "file_type": "code",
-      "norm_label": "supabase-sprint.repository.ts",
-      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "norm_label": "supabase.ts",
+      "source_file": "server/utils/supabase.ts",
       "source_location": "L1"
     },
     {
@@ -18131,81 +18316,64 @@
       "source_location": "L14"
     },
     {
-      "id": "components_ui_basemodal",
-      "label": "BaseModal.vue",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_330",
+      "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "basemodal.vue",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L1"
+      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. file yang disentuh:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L330"
     },
     {
-      "id": "components_ui_basemodal_emit",
-      "label": "emit",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_340",
+      "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "emit",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L119"
+      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. logika perubahan teknis:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L340"
     },
     {
-      "id": "components_ui_basemodal_isopen",
-      "label": "isOpen",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_345",
+      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "isopen",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L127"
+      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. acceptance criteria / definition of done (dod):",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L345"
     },
     {
-      "id": "components_ui_basemodal_panelref",
-      "label": "panelRef",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_351",
+      "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "panelref",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L125"
+      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. gate pengujian & rollback plan:",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L351"
     },
     {
-      "id": "components_ui_basemodal_props",
-      "label": "props",
+      "id": "docs_master_remediation_plan_fase_1_global_workspace_store_shell_infrastructure",
+      "label": "FASE 1: Global Workspace Store & Shell Infrastructure",
       "_origin": "ast",
       "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L107"
-    },
-    {
-      "id": "components_ui_basemodal_resolvedmaxwidth",
-      "label": "resolvedMaxWidth",
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "resolvedmaxwidth",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L162"
-    },
-    {
-      "id": "components_ui_basemodal_widthmap",
-      "label": "widthMap",
-      "_origin": "ast",
-      "community": 169,
-      "community_name": "BaseModal.vue",
-      "file_type": "code",
-      "norm_label": "widthmap",
-      "source_file": "components/ui/BaseModal.vue",
-      "source_location": "L153"
+      "community_name": "FASE 1: Global Workspace Store & Shell Infrastructure",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fase 1: global workspace store & shell infrastructure",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L325"
     },
     {
       "id": "server_api_activities_get",
@@ -19330,6 +19498,17 @@
       "source_location": "L1"
     },
     {
+      "id": "server_repositories_supabase_supabase_sprint_repository",
+      "label": "supabase-sprint.repository.ts",
+      "_origin": "ast",
+      "community": 174,
+      "community_name": "ISprintRepository",
+      "file_type": "code",
+      "norm_label": "supabase-sprint.repository.ts",
+      "source_file": "server/repositories/supabase/supabase-sprint.repository.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "composables_useworkspacestore",
       "label": "useWorkspaceStore.ts",
       "_origin": "ast",
@@ -19695,64 +19874,64 @@
       "source_location": "L15"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_409",
+      "id": "docs_master_remediation_plan_1_file_yang_disentuh_695",
       "label": "1. File yang Disentuh:",
       "_origin": "ast",
       "community": 183,
-      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "1. file yang disentuh:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L409"
+      "source_location": "L695"
     },
     {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_419",
+      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_706",
       "label": "2. Logika Perubahan Teknis:",
       "_origin": "ast",
       "community": 183,
-      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "2. logika perubahan teknis:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L419"
+      "source_location": "L706"
     },
     {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_426",
+      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_716",
       "label": "3. Acceptance Criteria / Definition of Done (DoD):",
       "_origin": "ast",
       "community": 183,
-      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "3. acceptance criteria / definition of done (dod):",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L426"
+      "source_location": "L716"
     },
     {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_433",
+      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_721",
       "label": "4. Gate Pengujian & Rollback Plan:",
       "_origin": "ast",
       "community": 183,
-      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "file_type": "document",
       "node_kind": "heading",
       "norm_label": "4. gate pengujian & rollback plan:",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L433"
+      "source_location": "L721"
     },
     {
-      "id": "docs_master_remediation_plan_fase_3_halaman_tasks_queue_workspace_tasks",
-      "label": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "id": "docs_master_remediation_plan_fase_12_ci_cd_quality_gate_automated_tests",
+      "label": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "_origin": "ast",
       "community": 183,
-      "community_name": "FASE 3: Halaman Tasks & Queue Workspace (`/tasks`)",
+      "community_name": "FASE 12: CI/CD Quality Gate & Automated Tests",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "fase 3: halaman tasks & queue workspace (`/tasks`)",
+      "norm_label": "fase 12: ci/cd quality gate & automated tests",
       "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L404"
+      "source_location": "L690"
     },
     {
       "id": "app_pages_repos_filteredrepos",
@@ -19797,126 +19976,6 @@
       "norm_label": "useprojectnav.ts",
       "source_file": "composables/useProjectNav.ts",
       "source_location": "L1"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_473",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L473"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_479",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L479"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_492",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L492"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_498",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L498"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_5_halaman_projects_hub_projects",
-      "label": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "_origin": "ast",
-      "community": 188,
-      "community_name": "FASE 5: Halaman Projects Hub (`/projects`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 5: halaman projects hub (`/projects`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L468"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_509",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L509"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_515",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L515"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_521",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L521"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_527",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L527"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_6_halaman_project_detail_cockpit_projects_slug",
-      "label": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "_origin": "ast",
-      "community": 189,
-      "community_name": "FASE 6: Halaman Project Detail Cockpit (`/projects/[slug]`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 6: halaman project detail cockpit (`/projects/[slug]`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L504"
     },
     {
       "id": "project_context_decisions",
@@ -20311,66 +20370,6 @@
       "source_location": "L16"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_538",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 192,
-      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L538"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_545",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 192,
-      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L545"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_550",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 192,
-      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L550"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_556",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 192,
-      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L556"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_7_halaman_sprints_iterations_sprints",
-      "label": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "_origin": "ast",
-      "community": 192,
-      "community_name": "FASE 7: Halaman Sprints & Iterations (`/sprints`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 7: halaman sprints & iterations (`/sprints`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L533"
-    },
-    {
       "id": "app_pages_index",
       "label": "pages/index.vue",
       "_origin": "ast",
@@ -20415,92 +20414,81 @@
       "source_location": "L13"
     },
     {
-      "id": "app_pages_sprints",
-      "label": "sprints.vue",
+      "id": "components_kanban_kanbancolumn",
+      "label": "KanbanColumn.vue",
       "_origin": "ast",
       "community": 194,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "sprints.vue",
-      "source_file": "app/pages/sprints.vue",
+      "norm_label": "kanbancolumn.vue",
+      "source_file": "components/kanban/KanbanColumn.vue",
       "source_location": "L1"
     },
     {
-      "id": "app_pages_sprints_setactions_clearactions",
-      "label": "{ setActions, clearActions }",
+      "id": "components_kanban_kanbancolumn_badgeclass",
+      "label": "badgeClass",
       "_origin": "ast",
       "community": 194,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "{ setactions, clearactions }",
-      "source_file": "app/pages/sprints.vue",
-      "source_location": "L313"
+      "norm_label": "badgeclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L153"
     },
     {
-      "id": "app_pages_sprints_sprintworkspace",
-      "label": "sprintWorkspace",
+      "id": "components_kanban_kanbancolumn_containerborderclass",
+      "label": "containerBorderClass",
       "_origin": "ast",
       "community": 194,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "sprintworkspace",
-      "source_file": "app/pages/sprints.vue",
-      "source_location": "L266"
+      "norm_label": "containerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L122"
     },
     {
-      "id": "components_dashboard_infrastructuremeshcard",
-      "label": "InfrastructureMeshCard.vue",
+      "id": "components_kanban_kanbancolumn_headerborderclass",
+      "label": "headerBorderClass",
       "_origin": "ast",
       "community": 194,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "infrastructuremeshcard.vue",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_dashboard_infrastructuremeshcard_data_telemetrydata",
-      "label": "{ data: telemetryData }",
-      "_origin": "ast",
-      "community": 194,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "{ data: telemetrydata }",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L121"
-    },
-    {
-      "id": "components_dashboard_infrastructuremeshcard_ispinging",
-      "label": "isPinging",
-      "_origin": "ast",
-      "community": 194,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "ispinging",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L136"
-    },
-    {
-      "id": "components_dashboard_infrastructuremeshcard_pingresult",
-      "label": "pingResult",
-      "_origin": "ast",
-      "community": 194,
-      "community_name": "vue",
-      "file_type": "code",
-      "norm_label": "pingresult",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "norm_label": "headerborderclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
       "source_location": "L137"
     },
     {
-      "id": "components_dashboard_infrastructuremeshcard_supabasesubtitle",
-      "label": "supabaseSubtitle",
+      "id": "components_kanban_kanbancolumn_props",
+      "label": "props",
       "_origin": "ast",
       "community": 194,
       "community_name": "vue",
       "file_type": "code",
-      "norm_label": "supabasesubtitle",
-      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
-      "source_location": "L126"
+      "norm_label": "props",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L93"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_titleclass",
+      "label": "titleClass",
+      "_origin": "ast",
+      "community": 194,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "titleclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L145"
+    },
+    {
+      "id": "components_kanban_kanbancolumn_topaddbtnclass",
+      "label": "topAddBtnClass",
+      "_origin": "ast",
+      "community": 194,
+      "community_name": "vue",
+      "file_type": "code",
+      "norm_label": "topaddbtnclass",
+      "source_file": "components/kanban/KanbanColumn.vue",
+      "source_location": "L161"
     },
     {
       "id": "components_project_projectpackagecard",
@@ -20778,83 +20766,6 @@
       "norm_label": "nexura management \u2014 deep subsystem & functional audit",
       "source_file": "docs/subsystem-functional-audit-and-remediation.md",
       "source_location": "L1"
-    },
-    {
-      "id": "components_kanban_kanbancolumn",
-      "label": "KanbanColumn.vue",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "kanbancolumn.vue",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L1"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_badgeclass",
-      "label": "badgeClass",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "badgeclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L152"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_containerborderclass",
-      "label": "containerBorderClass",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "containerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L121"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_headerborderclass",
-      "label": "headerBorderClass",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "headerborderclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L136"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_props",
-      "label": "props",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L92"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_titleclass",
-      "label": "titleClass",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "titleclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L144"
-    },
-    {
-      "id": "components_kanban_kanbancolumn_topaddbtnclass",
-      "label": "topAddBtnClass",
-      "_origin": "ast",
-      "community": 196,
-      "community_name": "KanbanColumn.vue",
-      "file_type": "code",
-      "norm_label": "topaddbtnclass",
-      "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L160"
     },
     {
       "id": "docs_subsystem_functional_audit_and_remediation_11_1_wave_1_core_engine_state_integrity_p0_foundations",
@@ -23637,66 +23548,6 @@
       "source_location": "L142"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_567",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 223,
-      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L567"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_572",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 223,
-      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L572"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_582",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 223,
-      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L582"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_587",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 223,
-      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L587"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_8_halaman_release_phase_roadmap_roadmap",
-      "label": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "_origin": "ast",
-      "community": 223,
-      "community_name": "FASE 8: Halaman Release Phase Roadmap (`/roadmap`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 8: halaman release phase roadmap (`/roadmap`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L562"
-    },
-    {
       "id": "docs_subsystem_functional_audit_and_remediation_12_1_skema_zod_tipe_typescript_types_task_ts_server_schemas_task_schema_ts",
       "label": "12.1. Skema Zod & Tipe TypeScript (`types/task.ts` & `server/schemas/task.schema.ts`)",
       "_origin": "ast",
@@ -23899,66 +23750,6 @@
       "norm_label": "5. domain 4: weekly sprints (`/sprints`) & architecture roadmap (`/roadmap`)",
       "source_file": "docs/subsystem-functional-audit-and-remediation.md",
       "source_location": "L201"
-    },
-    {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_598",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 229,
-      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L598"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_602",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 229,
-      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L602"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_615",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 229,
-      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L615"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_621",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 229,
-      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L621"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_9_halaman_repositories_catalog_repos",
-      "label": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "_origin": "ast",
-      "community": 229,
-      "community_name": "FASE 9: Halaman Repositories Catalog (`/repos`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 9: halaman repositories catalog (`/repos`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L593"
     },
     {
       "id": "skill_kpi_dashboard_design_skill",
@@ -24265,66 +24056,6 @@
       "source_location": "L21"
     },
     {
-      "id": "docs_master_remediation_plan_1_file_yang_disentuh_632",
-      "label": "1. File yang Disentuh:",
-      "_origin": "ast",
-      "community": 230,
-      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. file yang disentuh:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L632"
-    },
-    {
-      "id": "docs_master_remediation_plan_2_logika_perubahan_teknis_638",
-      "label": "2. Logika Perubahan Teknis:",
-      "_origin": "ast",
-      "community": 230,
-      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. logika perubahan teknis:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L638"
-    },
-    {
-      "id": "docs_master_remediation_plan_3_acceptance_criteria_definition_of_done_dod_643",
-      "label": "3. Acceptance Criteria / Definition of Done (DoD):",
-      "_origin": "ast",
-      "community": 230,
-      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. acceptance criteria / definition of done (dod):",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L643"
-    },
-    {
-      "id": "docs_master_remediation_plan_4_gate_pengujian_rollback_plan_648",
-      "label": "4. Gate Pengujian & Rollback Plan:",
-      "_origin": "ast",
-      "community": 230,
-      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. gate pengujian & rollback plan:",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L648"
-    },
-    {
-      "id": "docs_master_remediation_plan_fase_10_halaman_telemetry_devops_health_telemetry",
-      "label": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "_origin": "ast",
-      "community": 230,
-      "community_name": "FASE 10: Halaman Telemetry & DevOps Health (`/telemetry`)",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "fase 10: halaman telemetry & devops health (`/telemetry`)",
-      "source_file": "docs/master-remediation-plan.md",
-      "source_location": "L627"
-    },
-    {
       "id": "components_ui_baseswitch",
       "label": "BaseSwitch.vue",
       "_origin": "ast",
@@ -24443,7 +24174,7 @@
       "file_type": "code",
       "norm_label": "displaytaskid",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L164"
+      "source_location": "L178"
     },
     {
       "id": "components_kanban_taskcard_duedatebadgeclass",
@@ -24454,7 +24185,7 @@
       "file_type": "code",
       "norm_label": "duedatebadgeclass",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L205"
+      "source_location": "L232"
     },
     {
       "id": "components_kanban_taskcard_formattedduedate",
@@ -24465,7 +24196,7 @@
       "file_type": "code",
       "norm_label": "formattedduedate",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L185"
+      "source_location": "L212"
     },
     {
       "id": "components_kanban_taskcard_priorityclasses",
@@ -24476,7 +24207,7 @@
       "file_type": "code",
       "norm_label": "priorityclasses",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L171"
+      "source_location": "L198"
     },
     {
       "id": "components_kanban_taskcard_props",
@@ -24487,7 +24218,29 @@
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L141"
+      "source_location": "L155"
+    },
+    {
+      "id": "components_kanban_taskcard_sprintlabel",
+      "label": "sprintLabel",
+      "_origin": "ast",
+      "community": 234,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "sprintlabel",
+      "source_file": "components/kanban/TaskCard.vue",
+      "source_location": "L185"
+    },
+    {
+      "id": "components_kanban_taskcard_workspacestore",
+      "label": "workspaceStore",
+      "_origin": "ast",
+      "community": 234,
+      "community_name": "TaskCard.vue",
+      "file_type": "code",
+      "norm_label": "workspacestore",
+      "source_file": "components/kanban/TaskCard.vue",
+      "source_location": "L153"
     },
     {
       "id": "skill_ui_ux_designer_skill",
@@ -27669,7 +27422,7 @@
       "file_type": "code",
       "norm_label": "activeprojects",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L132"
+      "source_location": "L133"
     },
     {
       "id": "components_dashboard_dashboard_activesprint",
@@ -27680,7 +27433,7 @@
       "file_type": "code",
       "norm_label": "activesprint",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L125"
+      "source_location": "L126"
     },
     {
       "id": "components_dashboard_dashboard_blockedtasks",
@@ -27691,7 +27444,7 @@
       "file_type": "code",
       "norm_label": "blockedtasks",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L147"
+      "source_location": "L148"
     },
     {
       "id": "components_dashboard_dashboard_completionrate",
@@ -27702,7 +27455,7 @@
       "file_type": "code",
       "norm_label": "completionrate",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L143"
+      "source_location": "L144"
     },
     {
       "id": "components_dashboard_dashboard_deployedtaskscount",
@@ -27713,7 +27466,7 @@
       "file_type": "code",
       "norm_label": "deployedtaskscount",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L141"
+      "source_location": "L142"
     },
     {
       "id": "components_dashboard_dashboard_highprioritycount",
@@ -27724,7 +27477,7 @@
       "file_type": "code",
       "norm_label": "highprioritycount",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L140"
+      "source_location": "L141"
     },
     {
       "id": "components_dashboard_dashboard_inflightcount",
@@ -27735,7 +27488,7 @@
       "file_type": "code",
       "norm_label": "inflightcount",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L139"
+      "source_location": "L140"
     },
     {
       "id": "components_dashboard_dashboard_isbusy",
@@ -27746,7 +27499,7 @@
       "file_type": "code",
       "norm_label": "isbusy",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L89"
+      "source_location": "L90"
     },
     {
       "id": "components_dashboard_dashboard_openprcount",
@@ -27757,7 +27510,7 @@
       "file_type": "code",
       "norm_label": "openprcount",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L144"
+      "source_location": "L145"
     },
     {
       "id": "components_dashboard_dashboard_opentaskdrawer",
@@ -27768,7 +27521,7 @@
       "file_type": "code",
       "norm_label": "{ opentaskdrawer }",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L86"
+      "source_location": "L87"
     },
     {
       "id": "components_dashboard_dashboard_tasksdatastate",
@@ -27779,7 +27532,7 @@
       "file_type": "code",
       "norm_label": "tasksdatastate",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L92"
+      "source_location": "L93"
     },
     {
       "id": "components_dashboard_dashboard_totalsprinttaskscount",
@@ -27790,7 +27543,7 @@
       "file_type": "code",
       "norm_label": "totalsprinttaskscount",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L142"
+      "source_location": "L143"
     },
     {
       "id": "components_dashboard_dashboard_urgenttasks",
@@ -27801,7 +27554,7 @@
       "file_type": "code",
       "norm_label": "urgenttasks",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L152"
+      "source_location": "L153"
     },
     {
       "id": "components_dashboard_dashboard_workspacestore",
@@ -27812,7 +27565,7 @@
       "file_type": "code",
       "norm_label": "workspacestore",
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L85"
+      "source_location": "L86"
     },
     {
       "id": "agents_rules_graphify",
@@ -28230,6 +27983,160 @@
       "norm_label": "variantclasses",
       "source_file": "components/ui/BaseButton.vue",
       "source_location": "L90"
+    },
+    {
+      "id": "components_ui_basedrawer",
+      "label": "BaseDrawer.vue",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "basedrawer.vue",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_basedrawer_emit",
+      "label": "emit",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "emit",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L100"
+    },
+    {
+      "id": "components_ui_basedrawer_isopen",
+      "label": "isOpen",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "isopen",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L108"
+    },
+    {
+      "id": "components_ui_basedrawer_panelref",
+      "label": "panelRef",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "panelref",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L106"
+    },
+    {
+      "id": "components_ui_basedrawer_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L90"
+    },
+    {
+      "id": "components_ui_basedrawer_resolvedwidth",
+      "label": "resolvedWidth",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "resolvedwidth",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L142"
+    },
+    {
+      "id": "components_ui_basedrawer_widthmap",
+      "label": "widthMap",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "widthmap",
+      "source_file": "components/ui/BaseDrawer.vue",
+      "source_location": "L134"
+    },
+    {
+      "id": "components_ui_basemodal",
+      "label": "BaseModal.vue",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "basemodal.vue",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_ui_basemodal_emit",
+      "label": "emit",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "emit",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L119"
+    },
+    {
+      "id": "components_ui_basemodal_isopen",
+      "label": "isOpen",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "isopen",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L127"
+    },
+    {
+      "id": "components_ui_basemodal_panelref",
+      "label": "panelRef",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "panelref",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L125"
+    },
+    {
+      "id": "components_ui_basemodal_props",
+      "label": "props",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L107"
+    },
+    {
+      "id": "components_ui_basemodal_resolvedmaxwidth",
+      "label": "resolvedMaxWidth",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "resolvedmaxwidth",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L162"
+    },
+    {
+      "id": "components_ui_basemodal_widthmap",
+      "label": "widthMap",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "BaseButton.vue",
+      "file_type": "code",
+      "norm_label": "widthmap",
+      "source_file": "components/ui/BaseModal.vue",
+      "source_location": "L153"
     },
     {
       "id": "components_modals_project_editprojectmodal",
@@ -28955,7 +28862,7 @@
       "file_type": "code",
       "norm_label": "branchesdata",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L661"
+      "source_location": "L662"
     },
     {
       "id": "app_pages_repos_commitsdata",
@@ -28966,7 +28873,7 @@
       "file_type": "code",
       "norm_label": "commitsdata",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L660"
+      "source_location": "L661"
     },
     {
       "id": "app_pages_repos_config",
@@ -29021,7 +28928,7 @@
       "file_type": "code",
       "norm_label": "detailsloading",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L659"
+      "source_location": "L660"
     },
     {
       "id": "app_pages_repos_displayrepos",
@@ -29043,7 +28950,7 @@
       "file_type": "code",
       "norm_label": "expandedrepo",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L658"
+      "source_location": "L659"
     },
     {
       "id": "app_pages_repos_feedbackmessage",
@@ -29186,7 +29093,7 @@
       "file_type": "code",
       "norm_label": "{ setactions, clearactions }",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L635"
+      "source_location": "L636"
     },
     {
       "id": "app_pages_repos_statusfilter",
@@ -29706,26 +29613,15 @@
       "source_location": "L1"
     },
     {
-      "id": "components_tasks_activefocuspanel_checklistitems",
-      "label": "checklistItems",
+      "id": "components_tasks_activefocuspanel_checklistitems_checkliststats",
+      "label": "{ checklistItems, checklistStats }",
       "_origin": "ast",
       "community": 58,
       "community_name": "ActiveFocusPanel.vue",
       "file_type": "code",
-      "norm_label": "checklistitems",
+      "norm_label": "{ checklistitems, checkliststats }",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L372"
-    },
-    {
-      "id": "components_tasks_activefocuspanel_checkliststats",
-      "label": "checklistStats",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "ActiveFocusPanel.vue",
-      "file_type": "code",
-      "norm_label": "checkliststats",
-      "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L407"
+      "source_location": "L373"
     },
     {
       "id": "components_tasks_activefocuspanel_cleannarrativedescription",
@@ -29736,7 +29632,7 @@
       "file_type": "code",
       "norm_label": "cleannarrativedescription",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L415"
+      "source_location": "L376"
     },
     {
       "id": "components_tasks_activefocuspanel_effectivetask",
@@ -29747,7 +29643,7 @@
       "file_type": "code",
       "norm_label": "effectivetask",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L333"
+      "source_location": "L340"
     },
     {
       "id": "components_tasks_activefocuspanel_emit",
@@ -29758,7 +29654,7 @@
       "file_type": "code",
       "norm_label": "emit",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L300"
+      "source_location": "L307"
     },
     {
       "id": "components_tasks_activefocuspanel_issaving",
@@ -29769,7 +29665,7 @@
       "file_type": "code",
       "norm_label": "issaving",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L311"
+      "source_location": "L318"
     },
     {
       "id": "components_tasks_activefocuspanel_newstepinputref",
@@ -29780,7 +29676,7 @@
       "file_type": "code",
       "norm_label": "newstepinputref",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L312"
+      "source_location": "L319"
     },
     {
       "id": "components_tasks_activefocuspanel_newsteptext",
@@ -29791,7 +29687,7 @@
       "file_type": "code",
       "norm_label": "newsteptext",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L310"
+      "source_location": "L317"
     },
     {
       "id": "components_tasks_activefocuspanel_opentaskdrawer",
@@ -29802,7 +29698,7 @@
       "file_type": "code",
       "norm_label": "{ opentaskdrawer }",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L307"
+      "source_location": "L314"
     },
     {
       "id": "components_tasks_activefocuspanel_props",
@@ -29813,7 +29709,7 @@
       "file_type": "code",
       "norm_label": "props",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L295"
+      "source_location": "L302"
     },
     {
       "id": "components_tasks_activefocuspanel_queuedtasks",
@@ -29824,7 +29720,7 @@
       "file_type": "code",
       "norm_label": "queuedtasks",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L324"
+      "source_location": "L331"
     },
     {
       "id": "components_tasks_activefocuspanel_runningtasks",
@@ -29835,7 +29731,7 @@
       "file_type": "code",
       "norm_label": "runningtasks",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L315"
+      "source_location": "L322"
     },
     {
       "id": "components_tasks_activefocuspanel_selectedtaskid",
@@ -29846,7 +29742,18 @@
       "file_type": "code",
       "norm_label": "selectedtaskid",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L309"
+      "source_location": "L316"
+    },
+    {
+      "id": "components_tasks_activefocuspanel_taskdescref",
+      "label": "taskDescRef",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "ActiveFocusPanel.vue",
+      "file_type": "code",
+      "norm_label": "taskdescref",
+      "source_file": "components/tasks/ActiveFocusPanel.vue",
+      "source_location": "L370"
     },
     {
       "id": "components_tasks_activefocuspanel_tasksapi",
@@ -29857,7 +29764,7 @@
       "file_type": "code",
       "norm_label": "tasksapi",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L306"
+      "source_location": "L313"
     },
     {
       "id": "components_tasks_activefocuspanel_workspacestore",
@@ -29868,7 +29775,7 @@
       "file_type": "code",
       "norm_label": "workspacestore",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L305"
+      "source_location": "L312"
     },
     {
       "id": "composables_usesprintworkspace",
@@ -31983,6 +31890,61 @@
       "source_location": "L33"
     },
     {
+      "id": "app_pages_sprints",
+      "label": "sprints.vue",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "sprints.vue",
+      "file_type": "code",
+      "norm_label": "sprints.vue",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_pages_sprints_opentaskdrawer",
+      "label": "{ openTaskDrawer }",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "sprints.vue",
+      "file_type": "code",
+      "norm_label": "{ opentaskdrawer }",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L270"
+    },
+    {
+      "id": "app_pages_sprints_setactions_clearactions",
+      "label": "{ setActions, clearActions }",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "sprints.vue",
+      "file_type": "code",
+      "norm_label": "{ setactions, clearactions }",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L346"
+    },
+    {
+      "id": "app_pages_sprints_sprintworkspace",
+      "label": "sprintWorkspace",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "sprints.vue",
+      "file_type": "code",
+      "norm_label": "sprintworkspace",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L273"
+    },
+    {
+      "id": "app_pages_sprints_tasksapi",
+      "label": "tasksApi",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "sprints.vue",
+      "file_type": "code",
+      "norm_label": "tasksapi",
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L271"
+    },
+    {
       "id": "project_context_nexura_system_spec_4_1_layout_shell_app_app_vue_inset_workspace_architecture",
       "label": "4.1 Layout Shell (`app/app.vue`) \u2014 Inset Workspace Architecture",
       "_origin": "ast",
@@ -32672,26 +32634,59 @@
       "source_location": "L236"
     },
     {
-      "id": "server_plugins_supabase_sync",
-      "label": "supabase-sync.ts",
+      "id": "components_dashboard_infrastructuremeshcard",
+      "label": "InfrastructureMeshCard.vue",
       "_origin": "ast",
       "community": 80,
-      "community_name": "supabase.ts",
+      "community_name": "InfrastructureMeshCard.vue",
       "file_type": "code",
-      "norm_label": "supabase-sync.ts",
-      "source_file": "server/plugins/supabase-sync.ts",
+      "norm_label": "infrastructuremeshcard.vue",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
       "source_location": "L1"
     },
     {
-      "id": "server_utils_supabase",
-      "label": "supabase.ts",
+      "id": "components_dashboard_infrastructuremeshcard_data_telemetrydata",
+      "label": "{ data: telemetryData }",
       "_origin": "ast",
       "community": 80,
-      "community_name": "supabase.ts",
+      "community_name": "InfrastructureMeshCard.vue",
       "file_type": "code",
-      "norm_label": "supabase.ts",
-      "source_file": "server/utils/supabase.ts",
-      "source_location": "L1"
+      "norm_label": "{ data: telemetrydata }",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L121"
+    },
+    {
+      "id": "components_dashboard_infrastructuremeshcard_ispinging",
+      "label": "isPinging",
+      "_origin": "ast",
+      "community": 80,
+      "community_name": "InfrastructureMeshCard.vue",
+      "file_type": "code",
+      "norm_label": "ispinging",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L136"
+    },
+    {
+      "id": "components_dashboard_infrastructuremeshcard_pingresult",
+      "label": "pingResult",
+      "_origin": "ast",
+      "community": 80,
+      "community_name": "InfrastructureMeshCard.vue",
+      "file_type": "code",
+      "norm_label": "pingresult",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L137"
+    },
+    {
+      "id": "components_dashboard_infrastructuremeshcard_supabasesubtitle",
+      "label": "supabaseSubtitle",
+      "_origin": "ast",
+      "community": 80,
+      "community_name": "InfrastructureMeshCard.vue",
+      "file_type": "code",
+      "norm_label": "supabasesubtitle",
+      "source_file": "components/dashboard/InfrastructureMeshCard.vue",
+      "source_location": "L126"
     },
     {
       "id": "composables_useprojectcockpit",
@@ -33319,6 +33314,78 @@
       "norm_label": "repos",
       "source_file": "tests/unit/github-allowlist.spec.mjs",
       "source_location": "L18"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_1_single_source_of_truth_ssot_relasi_task_sprint",
+      "label": "4.1. Single Source of Truth (SSOT) Relasi Task\u2013Sprint",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.1. single source of truth (ssot) relasi task\u2013sprint",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L239"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_2_unified_reactive_workspace_store_useworkspacestore_ts",
+      "label": "4.2. Unified Reactive Workspace Store (`useWorkspaceStore.ts`)",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.2. unified reactive workspace store (`useworkspacestore.ts`)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L250"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_3_global_modal_shell_mounting_di_app_app_vue",
+      "label": "4.3. Global Modal Shell Mounting di `app/app.vue`",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.3. global modal shell mounting di `app/app.vue`",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L255"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_4_static_repository_selection_at_boot_zero_silent_failover",
+      "label": "4.4. Static Repository Selection at Boot (Zero Silent Failover)",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.4. static repository selection at boot (zero silent failover)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L262"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_5_server_side_auth_gate_github_allowlist",
+      "label": "4.5. Server-Side Auth Gate & GitHub Allowlist",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4.5. server-side auth gate & github allowlist",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L266"
+    },
+    {
+      "id": "docs_master_remediation_plan_4_cetak_biru_arsitektur_target_target_architectural_blueprint",
+      "label": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "_origin": "ast",
+      "community": 89,
+      "community_name": "4. Cetak Biru Arsitektur Target (Target Architectural Blueprint)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. cetak biru arsitektur target (target architectural blueprint)",
+      "source_file": "docs/master-remediation-plan.md",
+      "source_location": "L237"
     },
     {
       "id": "components_modals_project_addprojectmodal",
@@ -34376,6 +34443,17 @@
       "source_location": "L1"
     },
     {
+      "id": "server_repositories_supabase_mappers",
+      "label": "mappers.ts",
+      "_origin": "ast",
+      "community": 99,
+      "community_name": "nitro-note.repository.ts",
+      "file_type": "code",
+      "norm_label": "mappers.ts",
+      "source_file": "server/repositories/supabase/mappers.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "server_repositories_supabase_supabase_note_repository",
       "label": "supabase-note.repository.ts",
       "_origin": "ast",
@@ -34570,7 +34648,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L630",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -35222,6 +35300,18 @@
       "weight": 1.0
     },
     {
+      "source": "components_modals_sprint_addtargetmodal_handleaddexisting",
+      "target": "components_modals_sprint_addtargetmodal_emit",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "components/modals/sprint/AddTargetModal.vue",
+      "source_location": "L291",
+      "weight": 1.0
+    },
+    {
       "source": "components_modals_sprint_addtargetmodal_handlekeydown",
       "target": "components_modals_sprint_addtargetmodal_emit",
       "relation": "calls",
@@ -35230,7 +35320,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/modals/sprint/AddTargetModal.vue",
-      "source_location": "L307",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -35242,7 +35332,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/modals/sprint/AddTargetModal.vue",
-      "source_location": "L295",
+      "source_location": "L300",
       "weight": 1.0
     },
     {
@@ -35638,7 +35728,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L469",
+      "source_location": "L416",
       "weight": 1.0
     },
     {
@@ -35650,7 +35740,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L490",
+      "source_location": "L433",
       "weight": 1.0
     },
     {
@@ -35662,7 +35752,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L503",
+      "source_location": "L446",
       "weight": 1.0
     },
     {
@@ -35674,7 +35764,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L515",
+      "source_location": "L458",
       "weight": 1.0
     },
     {
@@ -35686,7 +35776,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L448",
+      "source_location": "L397",
       "weight": 1.0
     },
     {
@@ -43152,7 +43242,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L262",
+      "source_location": "L263",
       "weight": 1.0
     },
     {
@@ -43380,7 +43470,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L88",
+      "source_location": "L89",
       "weight": 1.0
     },
     {
@@ -43392,7 +43482,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -43416,7 +43506,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L138",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -44028,7 +44118,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L293",
+      "source_location": "L300",
       "weight": 1.0
     },
     {
@@ -49385,7 +49475,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L635",
+      "source_location": "L636",
       "weight": 1.0
     },
     {
@@ -49396,7 +49486,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L658",
+      "source_location": "L659",
       "weight": 1.0
     },
     {
@@ -49407,7 +49497,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L659",
+      "source_location": "L660",
       "weight": 1.0
     },
     {
@@ -49418,7 +49508,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L660",
+      "source_location": "L661",
       "weight": 1.0
     },
     {
@@ -49429,7 +49519,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L661",
+      "source_location": "L662",
       "weight": 1.0
     },
     {
@@ -49440,7 +49530,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L663",
+      "source_location": "L664",
       "weight": 1.0
     },
     {
@@ -49451,7 +49541,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/repos.vue",
-      "source_location": "L693",
+      "source_location": "L694",
       "weight": 1.0
     },
     {
@@ -49940,13 +50030,57 @@
     },
     {
       "source": "app_pages_sprints",
+      "target": "app_pages_sprints_opentaskdrawer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L270",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_sprints",
+      "target": "app_pages_sprints_tasksapi",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L271",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_sprints",
       "target": "app_pages_sprints_sprintworkspace",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L266",
+      "source_location": "L273",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_sprints",
+      "target": "app_pages_sprints_handletaskclick",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L319",
+      "weight": 1.0
+    },
+    {
+      "source": "app_pages_sprints",
+      "target": "app_pages_sprints_handleaddexistingtask",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app/pages/sprints.vue",
+      "source_location": "L325",
       "weight": 1.0
     },
     {
@@ -49957,7 +50091,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "app/pages/sprints.vue",
-      "source_location": "L313",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -50727,7 +50861,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -50738,7 +50872,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L125",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -50749,7 +50883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L132",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -50760,7 +50894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L139",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -50771,7 +50905,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L140",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -50782,7 +50916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L141",
+      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -50793,7 +50927,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L142",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -50804,7 +50938,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L143",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -50815,7 +50949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -50826,7 +50960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -50837,7 +50971,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L152",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -50848,7 +50982,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L179",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -50859,7 +50993,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -50870,7 +51004,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -50881,7 +51015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L86",
+      "source_location": "L87",
       "weight": 1.0
     },
     {
@@ -50892,7 +51026,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L89",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -50903,7 +51037,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/Dashboard.vue",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -51365,7 +51499,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L101",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -51376,7 +51510,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L105",
+      "source_location": "L111",
       "weight": 1.0
     },
     {
@@ -51387,7 +51521,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/RecentShipmentsCard.vue",
-      "source_location": "L112",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -51436,7 +51570,7 @@
     },
     {
       "source": "components_dashboard_unifiedherobanner",
-      "target": "components_dashboard_unifiedherobanner_completedcount",
+      "target": "components_dashboard_unifiedherobanner_sprinttasks",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -51447,13 +51581,24 @@
     },
     {
       "source": "components_dashboard_unifiedherobanner",
+      "target": "components_dashboard_unifiedherobanner_completedcount",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/dashboard/UnifiedHeroBanner.vue",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "components_dashboard_unifiedherobanner",
       "target": "components_dashboard_unifiedherobanner_totalcount",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L140",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -51464,7 +51609,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L144",
+      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -51475,7 +51620,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L149",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -51486,7 +51631,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L153",
+      "source_location": "L160",
       "weight": 1.0
     },
     {
@@ -51497,7 +51642,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L159",
+      "source_location": "L166",
       "weight": 1.0
     },
     {
@@ -51508,7 +51653,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L164",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -51519,7 +51664,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L169",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -51530,7 +51675,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L175",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -51541,7 +51686,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/dashboard/UnifiedHeroBanner.vue",
-      "source_location": "L180",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -51882,7 +52027,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L121",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -51893,7 +52038,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L136",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -51904,7 +52049,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L144",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -51915,7 +52060,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L152",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -51926,7 +52071,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L160",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -51937,7 +52082,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/KanbanColumn.vue",
-      "source_location": "L92",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "components_kanban_taskcard",
+      "target": "components_kanban_taskcard_workspacestore",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/kanban/TaskCard.vue",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -51948,7 +52104,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L141",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -51959,23 +52115,12 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L164",
+      "source_location": "L178",
       "weight": 1.0
     },
     {
       "source": "components_kanban_taskcard",
-      "target": "components_kanban_taskcard_priorityclasses",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L171",
-      "weight": 1.0
-    },
-    {
-      "source": "components_kanban_taskcard",
-      "target": "components_kanban_taskcard_formattedduedate",
+      "target": "components_kanban_taskcard_sprintlabel",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -51986,13 +52131,35 @@
     },
     {
       "source": "components_kanban_taskcard",
+      "target": "components_kanban_taskcard_priorityclasses",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/kanban/TaskCard.vue",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "components_kanban_taskcard",
+      "target": "components_kanban_taskcard_formattedduedate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/kanban/TaskCard.vue",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "components_kanban_taskcard",
       "target": "components_kanban_taskcard_duedatebadgeclass",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/kanban/TaskCard.vue",
-      "source_location": "L205",
+      "source_location": "L232",
       "weight": 1.0
     },
     {
@@ -54252,7 +54419,7 @@
     },
     {
       "source": "components_modals_sprint_addtargetmodal",
-      "target": "components_modals_sprint_addtargetmodal_handlesubmit",
+      "target": "components_modals_sprint_addtargetmodal_handleaddexisting",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -54263,13 +54430,24 @@
     },
     {
       "source": "components_modals_sprint_addtargetmodal",
+      "target": "components_modals_sprint_addtargetmodal_handlesubmit",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components/modals/sprint/AddTargetModal.vue",
+      "source_location": "L294",
+      "weight": 1.0
+    },
+    {
+      "source": "components_modals_sprint_addtargetmodal",
       "target": "components_modals_sprint_addtargetmodal_handlekeydown",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/modals/sprint/AddTargetModal.vue",
-      "source_location": "L305",
+      "source_location": "L310",
       "weight": 1.0
     },
     {
@@ -56623,7 +56801,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L295",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -56634,7 +56812,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L300",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -56645,7 +56823,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L305",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -56656,7 +56834,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L306",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -56667,7 +56845,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L307",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -56678,7 +56856,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L309",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -56689,7 +56867,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L310",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -56700,7 +56878,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L311",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -56711,7 +56889,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L312",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -56722,7 +56900,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L315",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -56733,7 +56911,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L324",
+      "source_location": "L331",
       "weight": 1.0
     },
     {
@@ -56744,7 +56922,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L333",
+      "source_location": "L340",
       "weight": 1.0
     },
     {
@@ -56755,7 +56933,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L342",
+      "source_location": "L349",
       "weight": 1.0
     },
     {
@@ -56766,40 +56944,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L349",
+      "source_location": "L356",
       "weight": 1.0
     },
     {
       "source": "components_tasks_activefocuspanel",
-      "target": "components_tasks_activefocuspanel_parsedchecklistitem",
+      "target": "components_tasks_activefocuspanel_taskdescref",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L364",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
       "source": "components_tasks_activefocuspanel",
-      "target": "components_tasks_activefocuspanel_checklistitems",
+      "target": "components_tasks_activefocuspanel_checklistitems_checkliststats",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L372",
-      "weight": 1.0
-    },
-    {
-      "source": "components_tasks_activefocuspanel",
-      "target": "components_tasks_activefocuspanel_checkliststats",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L407",
+      "source_location": "L373",
       "weight": 1.0
     },
     {
@@ -56810,7 +56977,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L415",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -56821,7 +56988,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L429",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -56832,7 +56999,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L455",
+      "source_location": "L404",
       "weight": 1.0
     },
     {
@@ -56843,7 +57010,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L479",
+      "source_location": "L426",
       "weight": 1.0
     },
     {
@@ -56854,7 +57021,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L497",
+      "source_location": "L440",
       "weight": 1.0
     },
     {
@@ -56865,7 +57032,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L510",
+      "source_location": "L453",
       "weight": 1.0
     },
     {
@@ -56876,7 +57043,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/tasks/ActiveFocusPanel.vue",
-      "source_location": "L521",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -75853,7 +76020,7 @@
       "confidence_score": 0.85,
       "context": "call",
       "source_file": "app/pages/repos.vue",
-      "source_location": "L631",
+      "source_location": "L632",
       "weight": 1.0
     },
     {
@@ -76201,7 +76368,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L173",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -76213,7 +76380,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L174",
+      "source_location": "L155",
       "weight": 1.0
     },
     {
@@ -76225,7 +76392,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L175",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -76237,7 +76404,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L176",
+      "source_location": "L157",
       "weight": 1.0
     },
     {
@@ -76249,7 +76416,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useNotes.ts",
-      "source_location": "L177",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -76753,7 +76920,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L153",
+      "source_location": "L159",
       "weight": 1.0
     },
     {
@@ -76765,7 +76932,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L154",
+      "source_location": "L160",
       "weight": 1.0
     },
     {
@@ -76777,7 +76944,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L155",
+      "source_location": "L161",
       "weight": 1.0
     },
     {
@@ -76789,7 +76956,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L156",
+      "source_location": "L162",
       "weight": 1.0
     },
     {
@@ -76801,7 +76968,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L157",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -76813,7 +76980,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L158",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -76825,7 +76992,7 @@
       "confidence_score": 0.85,
       "context": "collection",
       "source_file": "composables/useSession.ts",
-      "source_location": "L159",
+      "source_location": "L165",
       "weight": 1.0
     },
     {
@@ -77454,5 +77621,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "42bc841d920a6d7e78a02d698f41fbb99dcfe912"
+  "built_at_commit": "63cbbee118ece840016c7793563458fa193aa196"
 }
