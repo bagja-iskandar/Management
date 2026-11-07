@@ -56,23 +56,46 @@ export default withApiHandler(async (event) => {
   let linkedCount = 0
   const updatedTaskIds: string[] = []
 
-  // 3. Fetch PRs across all allowed repositories
-  const allPullRequests: any[] = []
+  // 3. Fetch PRs across all allowed repositories, tracking source repo
+  const allPullRequests: { repo: string; pr: any }[] = []
 
   for (const repo of allowedRepos) {
     try {
       const prs = await client.fetch<any[]>(`/repos/${repo}/pulls?state=all&per_page=30`)
       if (Array.isArray(prs)) {
-        allPullRequests.push(...prs)
+        for (const pr of prs) {
+          allPullRequests.push({ repo, pr })
+        }
       }
     } catch (err) {
       console.warn(`[github-sync] Error fetching pull requests for repo ${repo}:`, err)
     }
   }
 
+  // Pre-index projectSlug to normalized githubRepo
+  const projectRepoMap = new Map<string, string>()
+  for (const project of projects) {
+    if (project.slug && project.githubRepo) {
+      const normalized = normalizeGitHubRepo(project.githubRepo, defaultOwner)
+      if (normalized) {
+        projectRepoMap.set(project.slug.toLowerCase(), normalized.toLowerCase())
+      }
+    }
+  }
+
   // 4. Reconcile tasks against pull requests
-  for (const pr of allPullRequests) {
+  for (const { repo, pr } of allPullRequests) {
+    const normalizedRepo = repo.toLowerCase()
     for (const task of tasks) {
+      // Project guard: if task has a projectSlug and that project is linked to a repository,
+      // only match PRs coming from that repository
+      if (task.projectSlug) {
+        const taskRepo = projectRepoMap.get(task.projectSlug.toLowerCase())
+        if (taskRepo && taskRepo !== normalizedRepo) {
+          continue
+        }
+      }
+
       const result = reconcileTaskWithPr(task, pr)
       if (!result) continue
 
@@ -98,8 +121,10 @@ export default withApiHandler(async (event) => {
 
   return {
     ok: true,
-    deployedCount,
+    success: true,
+    syncedCount: linkedCount,
     linkedCount,
+    deployedCount,
     updatedTasks: Array.from(new Set(updatedTaskIds)),
     timestamp: new Date().toISOString()
   }

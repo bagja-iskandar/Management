@@ -5,7 +5,7 @@ import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubWorkflowRun } from '~/types'
 
 const fetchCachedWorkflows = defineCachedFunction(
-  async (token: string, repo: string, limit: number): Promise<GitHubWorkflowRun[]> => {
+  async (token: string, repo: string, limit: number, _refresh?: boolean): Promise<GitHubWorkflowRun[]> => {
     const client = createGitHubClient(token)
     try {
       const raw = await client.fetch<any>(`/repos/${repo}/actions/runs?per_page=${limit}`)
@@ -42,12 +42,14 @@ const fetchCachedWorkflows = defineCachedFunction(
   {
     maxAge: 30,
     name: 'github-workflows',
-    getKey: (token: string, repo: string, limit: number) => `${token ? 'auth' : 'anon'}:${repo}:${limit}`
+    getKey: (token: string, repo: string, limit: number) => `${token ? 'auth' : 'anon'}:${repo}:${limit}`,
+    shouldBypassCache: (_token, _repo, _limit, refresh) => Boolean(refresh)
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubWorkflowRun[]> => {
   const query = getQuery(event)
+  const refresh = query.refresh === 'true'
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
   const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
@@ -58,5 +60,5 @@ export default withApiHandler(async (event): Promise<GitHubWorkflowRun[]> => {
   const limitParam = query.limit ? Number(query.limit) : 5
   const limit = Math.max(1, Math.min(100, isNaN(limitParam) ? 5 : limitParam))
 
-  return await fetchCachedWorkflows(token, fullRepo, limit)
+  return await fetchCachedWorkflows(token, fullRepo, limit, refresh)
 })

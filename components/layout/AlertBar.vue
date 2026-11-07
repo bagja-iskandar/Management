@@ -22,19 +22,11 @@
             <span>{{ blockedTasks.length }} BLOCKED:</span>
           </span>
           <template v-for="(task, idx) in blockedTasks" :key="task.id">
-            <NuxtLink
-              v-if="task.projectSlug"
-              :to="`/projects/${task.projectSlug}`"
-              class="underline underline-offset-2 hover:text-red-200 transition-colors"
-              :title="`Open ${task.projectSlug} project`"
-            >
-              #{{ displayTaskId(task) }} {{ task.name }}
-            </NuxtLink>
             <button
-              v-else
               type="button"
-              class="underline underline-offset-2 hover:text-red-200 text-left transition-colors"
-              @click="$emit('task-click', task)"
+              class="underline underline-offset-2 hover:text-red-200 text-left transition-colors cursor-pointer"
+              :title="task.projectSlug ? `Open task #${displayTaskId(task)} (${task.projectSlug})` : `Open task #${displayTaskId(task)}`"
+              @click="handleTaskClick(task)"
             >
               #{{ displayTaskId(task) }} {{ task.name }}
             </button>
@@ -52,19 +44,11 @@
             <span>DEADLINES:</span>
           </span>
           <template v-for="(item, idx) in urgentTasks" :key="item.task.id">
-            <NuxtLink
-              v-if="item.task.projectSlug"
-              :to="`/projects/${item.task.projectSlug}`"
-              class="underline underline-offset-2 hover:text-orange-200 transition-colors"
-              :title="`Open ${item.task.projectSlug} project`"
-            >
-              #{{ displayTaskId(item.task) }} {{ item.label }}
-            </NuxtLink>
             <button
-              v-else
               type="button"
-              class="underline underline-offset-2 hover:text-orange-200 text-left transition-colors"
-              @click="$emit('task-click', item.task)"
+              class="underline underline-offset-2 hover:text-orange-200 text-left transition-colors cursor-pointer"
+              :title="item.task.projectSlug ? `Open task #${displayTaskId(item.task)} (${item.task.projectSlug})` : `Open task #${displayTaskId(item.task)}`"
+              @click="handleTaskClick(item.task)"
             >
               #{{ displayTaskId(item.task) }} {{ item.label }}
             </button>
@@ -78,6 +62,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useTaskDrawer } from '~/composables/useTaskDrawer'
 import type { Task } from '~/types'
 
 const props = withDefaults(
@@ -93,9 +78,18 @@ const props = withDefaults(
   }
 )
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'task-click', task: Task): void
 }>()
+
+const { openTaskDrawer } = useTaskDrawer()
+
+function handleTaskClick(task: Task) {
+  emit('task-click', task)
+  if (task.id) {
+    openTaskDrawer(task.id)
+  }
+}
 
 const hasAlerts = computed(() => {
   return props.blockedTasks.length > 0 || props.urgentTasks.length > 0

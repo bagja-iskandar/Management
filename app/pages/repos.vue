@@ -627,6 +627,7 @@ async function onConfirmRemoveFromManagement() {
 }
 
 async function onSyncRepos() {
+  await $fetch('/api/github/repos?refresh=true').catch(() => null)
   await refresh()
   await refreshProjects()
 }

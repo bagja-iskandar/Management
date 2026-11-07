@@ -115,7 +115,7 @@
             <button
               type="button"
               class="px-3 py-1.5 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-medium transition shrink-0 flex items-center gap-1.5 cursor-pointer shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
-              @click="$emit('add-existing', bt)"
+              @click="handleAddExisting(bt)"
             >
               <NexuraIcon name="Plus" size="xs" />
               <span>Add to Focus</span>
@@ -284,6 +284,11 @@ function getPriorityBadgeClass(p?: TaskPriority | string) {
   if (p === 'high') return 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
   if (p === 'medium') return 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20'
   return 'bg-white/[0.04] text-[#8A8F9E] border border-white/[0.06]'
+}
+
+function handleAddExisting(task: Task) {
+  const taskToEmit = task.status === 'idea' ? { ...task, status: 'in_queue' as TaskStatus } : task
+  emit('add-existing', taskToEmit)
 }
 
 function handleSubmit() {

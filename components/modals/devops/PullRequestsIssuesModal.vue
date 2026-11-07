@@ -302,7 +302,7 @@
                   <button
                     type="button"
                     class="px-2.5 py-1.5 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 font-mono text-xs border border-indigo-500/30 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
-                    :disabled="importingIssueId === issue.id || importedIssues[issue.number]"
+                    :disabled="importingIssueId === issue.id || isIssueImported(issue) || !!importedIssues[issue.number]"
                     @click="importIssueToKanban(issue)"
                   >
                     <NexuraIcon
@@ -312,7 +312,7 @@
                       class="animate-spin text-indigo-400"
                     />
                     <NexuraIcon
-                      v-else-if="importedIssues[issue.number]"
+                      v-else-if="isIssueImported(issue) || importedIssues[issue.number]"
                       name="Check"
                       size="xs"
                       class="text-emerald-400"
@@ -323,7 +323,7 @@
                       size="xs"
                     />
                     <span>
-                      {{ importedIssues[issue.number] ? 'Imported ✓' : 'Import Deliverable' }}
+                      {{ (isIssueImported(issue) || importedIssues[issue.number]) ? 'Imported ✓' : 'Import Deliverable' }}
                     </span>
                   </button>
 
@@ -508,6 +508,7 @@ import { ref, reactive, computed, toRef } from 'vue'
 import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import { createGitHubIssue } from '~/composables/useGitHub'
 import { useTasks } from '~/composables/useTasks'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useToastFeedback } from '~/composables/useToastFeedback'
 import { useModalLifecycle } from '~/composables/useModalLifecycle'
 import type { GitHubRepoActivitySummary, GitHubPullRequest, GitHubIssueItem } from '~/types'
@@ -618,12 +619,21 @@ function formatRelativeTime(dateString?: string) {
 // IMPORT ISSUE TO KANBAN ACTION (Upgraded with useTasks + useToastFeedback)
 // ========================================================
 const tasksApi = useTasks()
+const workspaceStore = useWorkspaceStore()
 const toast = useToastFeedback()
 const importingIssueId = ref<number | null>(null)
 const importedIssues = reactive<Record<number, boolean>>({})
 
+function isIssueImported(issue: GitHubIssueItem): boolean {
+  return (workspaceStore.tasks.value || []).some(
+    (t) =>
+      t.githubIssueNumber === issue.number ||
+      (Boolean(t.githubIssueUrl) && t.githubIssueUrl === issue.htmlUrl)
+  )
+}
+
 async function importIssueToKanban(issue: GitHubIssueItem) {
-  if (importingIssueId.value || importedIssues[issue.number]) return
+  if (importingIssueId.value || isIssueImported(issue) || importedIssues[issue.number]) return
   importingIssueId.value = issue.id
 
   try {

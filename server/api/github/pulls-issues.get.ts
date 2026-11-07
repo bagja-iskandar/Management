@@ -5,7 +5,7 @@ import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubIssueItem, GitHubPullRequest, GitHubRepoActivitySummary } from '~/types'
 
 const fetchCachedPullsAndIssues = defineCachedFunction(
-  async (token: string, repo: string, limit: number): Promise<GitHubRepoActivitySummary> => {
+  async (token: string, repo: string, limit: number, _refresh?: boolean): Promise<GitHubRepoActivitySummary> => {
     if (!token) {
       return {
         openPrCount: 0,
@@ -117,12 +117,14 @@ const fetchCachedPullsAndIssues = defineCachedFunction(
     maxAge: 30,
     name: 'github-pulls-issues',
     getKey: (token: string, repo: string, limit: number) =>
-      `${token ? 'auth' : 'anon'}:${repo}:${limit}`
+      `${token ? 'auth' : 'anon'}:${repo}:${limit}`,
+    shouldBypassCache: (_token, _repo, _limit, refresh) => Boolean(refresh)
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubRepoActivitySummary> => {
   const query = getQuery(event)
+  const refresh = query.refresh === 'true'
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
   const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
@@ -144,5 +146,5 @@ export default withApiHandler(async (event): Promise<GitHubRepoActivitySummary> 
   const limitParam = query.limit ? Number(query.limit) : 10
   const limit = Math.max(1, Math.min(100, isNaN(limitParam) ? 10 : limitParam))
 
-  return await fetchCachedPullsAndIssues(token, fullRepo, limit)
+  return await fetchCachedPullsAndIssues(token, fullRepo, limit, refresh)
 })

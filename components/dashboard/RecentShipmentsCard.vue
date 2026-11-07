@@ -92,9 +92,15 @@ const allTasks = computed(() => {
   return props.tasks || []
 })
 
-// Deployed tasks
+// Deployed tasks (sorted by latest updatedAt or date descending)
 const deployedTasks = computed(() => {
-  return allTasks.value.filter((t) => t.status === 'deployed')
+  return allTasks.value
+    .filter((t) => t.status === 'deployed')
+    .sort((a, b) => {
+      const timeA = a.updatedAt || a.date || ''
+      const timeB = b.updatedAt || b.date || ''
+      return timeB.localeCompare(timeA)
+    })
 })
 
 // Display deployed items (only real deployed tasks)

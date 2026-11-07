@@ -5,7 +5,7 @@ import { assertGitHubRepoAllowed } from '../../utils/github-allowlist'
 import type { GitHubBranch } from '~/types'
 
 const fetchCachedBranches = defineCachedFunction(
-  async (token: string, repo: string): Promise<GitHubBranch[]> => {
+  async (token: string, repo: string, _refresh?: boolean): Promise<GitHubBranch[]> => {
     const client = createGitHubClient(token)
     try {
       const rawBranches = await client.fetch<any[]>(`/repos/${repo}/branches`)
@@ -25,12 +25,14 @@ const fetchCachedBranches = defineCachedFunction(
   {
     maxAge: 300,
     name: 'github-branches',
-    getKey: (token: string, repo: string) => `${token ? 'auth' : 'anon'}:${repo}`
+    getKey: (token: string, repo: string) => `${token ? 'auth' : 'anon'}:${repo}`,
+    shouldBypassCache: (_token, _repo, refresh) => Boolean(refresh)
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubBranch[]> => {
   const query = getQuery(event)
+  const refresh = query.refresh === 'true'
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
   const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
@@ -38,5 +40,5 @@ export default withApiHandler(async (event): Promise<GitHubBranch[]> => {
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
 
-  return await fetchCachedBranches(token, fullRepo)
+  return await fetchCachedBranches(token, fullRepo, refresh)
 })

@@ -1,4 +1,4 @@
-import { computed, toValue, type Ref } from "vue";
+import { ref, computed, toValue, type Ref } from "vue";
 import type {
   GitHubRepoSummary,
   GitHubCommitItem,
@@ -37,13 +37,15 @@ export function useGitHubCommits(
     branch === undefined ? undefined : typeof branch === "string" ? branch : toValue(branch),
   );
 
+  const shouldBypass = ref(false);
+
   const {
     data: commits,
     error,
     pending,
-    refresh,
+    refresh: executeRefresh,
   } = useLazyAsyncData<GitHubCommitItem[]>(
-    () => `github-commits-${repoValue.value}-${branchValue.value || "default"}`,
+    () => `github-commits-${repoValue.value}-${branchValue.value || "default"}-${limit || 20}`,
     () => {
       const r = repoValue.value;
       if (!r) return Promise.resolve([]);
@@ -51,14 +53,26 @@ export function useGitHubCommits(
       if (branchValue.value) {
         params.branch = branchValue.value;
       }
+      if (shouldBypass.value) {
+        params.refresh = 'true';
+      }
       return $fetch<GitHubCommitItem[]>("/api/github/commits", {
         params,
+      }).finally(() => {
+        shouldBypass.value = false;
       });
     },
     {
-      watch: [repoValue, branchValue],
+      watch: [repoValue, branchValue, () => limit],
     },
   );
+
+  async function refresh(opts?: { refresh?: boolean; bypassCache?: boolean }) {
+    if (opts?.refresh || opts?.bypassCache) {
+      shouldBypass.value = true;
+    }
+    return executeRefresh();
+  }
 
   return { commits, error, pending, refresh };
 }

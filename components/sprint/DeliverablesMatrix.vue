@@ -189,7 +189,7 @@
       <div
         v-for="task in deliverables"
         :key="task.id"
-        class="p-4 rounded-xl transition-all duration-200 border bg-[#111318]"
+        class="p-4 rounded-xl transition-all duration-200 border bg-[#111318] cursor-pointer hover:border-white/[0.2] hover:bg-white/[0.02]"
         :class="[
           task.status === 'deployed'
             ? 'border-emerald-500/20 bg-emerald-500/[0.02] hover:border-emerald-500/40'
@@ -199,6 +199,7 @@
             ? 'border-rose-500/30 bg-rose-500/[0.02] hover:border-rose-500/50'
             : 'border-white/[0.07] hover:border-white/[0.14]'
         ]"
+        @click="$emit('task-click', task)"
       >
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <!-- Left Information Column -->
@@ -296,7 +297,7 @@
                 class="px-2.5 py-1 rounded-md transition-colors cursor-pointer"
                 :class="task.status === 'in_queue' ? 'bg-white/[0.12] text-[#F3F4F6] font-medium' : 'text-[#8A8F9E] hover:text-[#F3F4F6]'"
                 title="Mark as In Queue"
-                @click="$emit('update-status', task, 'in_queue')"
+                @click.stop="$emit('update-status', task, 'in_queue')"
               >
                 Queue
               </button>
@@ -305,7 +306,7 @@
                 class="px-2.5 py-1 rounded-md transition-colors cursor-pointer"
                 :class="task.status === 'running_sprint' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-medium' : 'text-[#8A8F9E] hover:text-[#F3F4F6]'"
                 title="Mark as In-Flight"
-                @click="$emit('update-status', task, 'running_sprint')"
+                @click.stop="$emit('update-status', task, 'running_sprint')"
               >
                 In-Flight
               </button>
@@ -314,7 +315,7 @@
                 class="px-2.5 py-1 rounded-md transition-colors cursor-pointer"
                 :class="task.status === 'deployed' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-medium' : 'text-[#8A8F9E] hover:text-[#F3F4F6]'"
                 title="Mark as Deployed"
-                @click="$emit('update-status', task, 'deployed')"
+                @click.stop="$emit('update-status', task, 'deployed')"
               >
                 Deployed
               </button>
@@ -325,7 +326,7 @@
               type="button"
               class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/[0.04] hover:bg-rose-500/10 text-[#8A8F9E] hover:text-rose-400 font-sans text-xs border border-white/[0.06] hover:border-rose-500/20 transition-colors focus:outline-none focus:ring-1 focus:ring-rose-500 cursor-pointer"
               title="Remove from this week's focus (return to general backlog)"
-              @click="$emit('remove-task', task)"
+              @click.stop="$emit('remove-task', task)"
             >
               <NexuraIcon name="RotateCw" size="xs" />
               <span class="hidden sm:inline">Remove from Week</span>
@@ -365,6 +366,7 @@ defineEmits<{
   (e: 'update-status', task: Task, status: TaskStatus): void
   (e: 'remove-task', task: Task): void
   (e: 'return-current-week'): void
+  (e: 'task-click', task: Task): void
 }>()
 
 function getPriorityDotClass(priority?: TaskPriority | string) {

@@ -3,6 +3,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useProjectNav, type ProjectTabId } from '~/composables/useProjectNav'
 import { useProjects } from '~/composables/useProjects'
 import { useTasks } from '~/composables/useTasks'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import type {
   Project,
   Task,
@@ -57,6 +58,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
   const projectNav = useProjectNav()
   const projectsApi = useProjects()
   const tasksApi = useTasks()
+  const workspaceStore = useWorkspaceStore()
 
   // ---------------------------------------------------------------------------
   // 1. Tab Navigation & Route Sync
@@ -223,10 +225,33 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
   const tabClosedIssuesCount = computed(() => projectPullsIssues?.value?.closedIssueCount || 0)
 
   const inPanelImportingId = ref<number | null>(null)
-  const inPanelImportedIssues = reactive<Record<number, boolean>>({})
+
+  function isIssueImported(issue: GitHubIssueItem): boolean {
+    return (workspaceStore.tasks.value || []).some(
+      (t) =>
+        t.githubIssueNumber === issue.number ||
+        (Boolean(t.githubIssueUrl) && t.githubIssueUrl === issue.htmlUrl)
+    )
+  }
+
+  const inPanelImportedIssues = computed<Record<number, boolean>>(() => {
+    const map: Record<number, boolean> = {}
+    for (const t of workspaceStore.tasks.value || []) {
+      if (t.githubIssueNumber) {
+        map[t.githubIssueNumber] = true
+      }
+      if (t.githubIssueUrl) {
+        const match = t.githubIssueUrl.match(/\/issues\/(\d+)/)
+        if (match && match[1]) {
+          map[Number(match[1])] = true
+        }
+      }
+    }
+    return map
+  })
 
   async function importIssueFromFeed(issue: GitHubIssueItem) {
-    if (!currentProject.value || inPanelImportingId.value || inPanelImportedIssues[issue.number]) return
+    if (!currentProject.value || inPanelImportingId.value || isIssueImported(issue) || inPanelImportedIssues.value[issue.number]) return
     inPanelImportingId.value = issue.id
     try {
       const techTags = (issue.labels || []).map(l => l.name)
@@ -242,7 +267,6 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
       }
 
       await tasksApi.createTask(taskPayload)
-      inPanelImportedIssues[issue.number] = true
     } catch (err) {
       console.error('Failed to import issue from feed:', err)
     } finally {
@@ -358,6 +382,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
     tabClosedIssuesCount,
     inPanelImportingId,
     inPanelImportedIssues,
+    isIssueImported,
     importIssueFromFeed,
     activeTabLiveUrl,
     targetEnvironmentName,

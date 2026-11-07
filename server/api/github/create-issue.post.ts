@@ -51,6 +51,20 @@ export default withApiHandler(async (event) => {
     }
   }
 
+  // Cache invalidation for pulls & issues
+  try {
+    const storage = typeof useStorage === 'function' ? useStorage('cache') : null
+    if (storage) {
+      const keys = await storage.getKeys()
+      const matchingKeys = keys.filter((k) => k.includes('github-pulls-issues'))
+      for (const key of matchingKeys) {
+        await storage.removeItem(key)
+      }
+    }
+  } catch {
+    // Non-blocking cache clear
+  }
+
   return {
     ok: true,
     issue: {

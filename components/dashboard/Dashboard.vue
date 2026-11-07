@@ -78,6 +78,7 @@ import { ref, computed, onMounted } from 'vue'
 import type { Task } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useTaskDrawer } from '~/composables/useTaskDrawer'
+import { toIsoDate } from '~/composables/useSprintCalendar'
 
 export type WorkspaceDataState = 'NOT_LOADED' | 'LOADING' | 'SUCCESS_WITH_DATA' | 'SUCCESS_EMPTY' | 'ERROR'
 
@@ -152,9 +153,9 @@ const blockedTasks = computed(() => {
 const urgentTasks = computed(() => {
   const tasks = workspaceStore.tasks.value || []
   const now = new Date()
-  const todayStr = now.toISOString().slice(0, 10)
-  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000)
-  const tomorrowStr = tomorrow.toISOString().slice(0, 10)
+  const todayStr = toIsoDate(now)
+  const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1)
+  const tomorrowStr = toIsoDate(tomorrow)
 
   const list: { task: Task; label: string }[] = []
 

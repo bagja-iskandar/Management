@@ -3,7 +3,7 @@ import { createGitHubClient } from '../../utils/github'
 import type { GitHubRepoSummary } from '~/types'
 
 const fetchCachedRepos = defineCachedFunction(
-  async (token: string, username: string): Promise<GitHubRepoSummary[]> => {
+  async (token: string, username: string, _refresh?: boolean): Promise<GitHubRepoSummary[]> => {
     const client = createGitHubClient(token)
     try {
       const endpoint = token
@@ -37,11 +37,15 @@ const fetchCachedRepos = defineCachedFunction(
   {
     maxAge: 300,
     name: 'github-repos',
-    getKey: (token: string, username: string) => `${token ? token.slice(-8) : 'anon'}:${username}`
+    getKey: (token: string, username: string) => `${token ? token.slice(-8) : 'anon'}:${username}`,
+    shouldBypassCache: (_token, _username, refresh) => Boolean(refresh)
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubRepoSummary[]> => {
+  const query = getQuery(event)
+  const refresh = query.refresh === 'true'
+
   const config = useRuntimeConfig(event)
   const token = (config.githubToken || '').trim()
   const username = (config.githubUsername || 'bagja-iskandar').trim()
@@ -50,5 +54,5 @@ export default withApiHandler(async (event): Promise<GitHubRepoSummary[]> => {
     return []
   }
 
-  return await fetchCachedRepos(token, username)
+  return await fetchCachedRepos(token, username, refresh)
 })

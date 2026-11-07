@@ -229,6 +229,7 @@
         @reset-filters="resetFilters"
         @update-status="updateTaskStatus"
         @remove-task="removeTaskFromWeek"
+        @task-click="handleTaskClick"
       />
 
       <!-- Add Target to This Week Modal -->
@@ -240,7 +241,7 @@
         :projects="workspaceStore.projects.value || []"
         :submitting="isSubmittingDeliverable"
         @close="showAddTargetModal = false"
-        @add-existing="addExistingTaskToWeek"
+        @add-existing="handleAddExistingTask"
         @create-deliverable="onCreateDeliverable"
       />
 
@@ -262,6 +263,12 @@
 import { onMounted, onBeforeUnmount } from 'vue'
 import { useHeaderActions } from '~/composables/useHeaderActions'
 import { useSprintWorkspace } from '~/composables/useSprintWorkspace'
+import { useTaskDrawer } from '~/composables/useTaskDrawer'
+import { useTasks } from '~/composables/useTasks'
+import type { Task } from '~/types'
+
+const { openTaskDrawer } = useTaskDrawer()
+const tasksApi = useTasks()
 
 const sprintWorkspace = useSprintWorkspace()
 const {
@@ -308,6 +315,32 @@ const {
   onSyncGitHub,
   onConfirmRollover
 } = sprintWorkspace
+
+function handleTaskClick(task: Task) {
+  if (task?.id) {
+    openTaskDrawer(task.id)
+  }
+}
+
+async function handleAddExistingTask(task: Task) {
+  if (task.status === 'idea') {
+    try {
+      const sprint = await ensureSprintForCurrentWeek()
+      await tasksApi.updateTask(task.id, {
+        sprintId: sprint.id,
+        status: 'in_queue'
+      })
+      showAddTargetModal.value = false
+      feedbackMessage.value = `Promoted #${task.taskId || 'Task'} to In Queue and added to ${weekLabel.value}`
+      feedbackType.value = 'success'
+    } catch (err: any) {
+      feedbackMessage.value = 'Failed to assign task: ' + (err.message || 'Unknown error')
+      feedbackType.value = 'error'
+    }
+  } else {
+    await addExistingTaskToWeek(task)
+  }
+}
 
 // Contextual Action Bar integration
 const { setActions, clearActions } = useHeaderActions()

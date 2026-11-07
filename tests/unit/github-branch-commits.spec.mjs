@@ -186,7 +186,7 @@ test('GH-COMPOSABLE-01: useGitHubCommits passes branch parameter and generates k
   const commitsState = useGitHubCommits(repo, 20, branch)
 
   assert.ok(commitsState.commits, 'commits ref must be defined')
-  assert.equal(lastLazyKey, 'github-commits-nexura/core-development')
+  assert.equal(lastLazyKey, 'github-commits-nexura/core-development-20')
 
   await commitsState.refresh()
 
@@ -203,7 +203,7 @@ test('GH-COMPOSABLE-02: useGitHubCommits reacts dynamically when reactive branch
   const branch = ref('feature/auth')
   const commitsState = useGitHubCommits(repo, 10, branch)
 
-  assert.equal(lastLazyKey, 'github-commits-nexura/management-feature/auth')
+  assert.equal(lastLazyKey, 'github-commits-nexura/management-feature/auth-10')
   await commitsState.refresh()
   assert.equal(lastFetchCall.params.branch, 'feature/auth')
 
@@ -211,7 +211,7 @@ test('GH-COMPOSABLE-02: useGitHubCommits reacts dynamically when reactive branch
   branch.value = 'main'
   await commitsState.refresh()
 
-  assert.equal(lastLazyKey, 'github-commits-nexura/management-main')
+  assert.equal(lastLazyKey, 'github-commits-nexura/management-main-10')
   assert.equal(lastFetchCall.params.branch, 'main')
 })
 
@@ -220,7 +220,7 @@ test('GH-COMPOSABLE-03: useGitHubCommits without branch defaults key to "default
 
   const commitsState = useGitHubCommits('nexura/management', 25)
 
-  assert.equal(lastLazyKey, 'github-commits-nexura/management-default')
+  assert.equal(lastLazyKey, 'github-commits-nexura/management-default-25')
   await commitsState.refresh()
 
   assert.equal(lastFetchCall.params.repo, 'nexura/management')

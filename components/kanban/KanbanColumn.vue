@@ -62,6 +62,7 @@
           @click="$emit('task-click', task)"
           @move-left="moveLeftTarget ? $emit('move-status', task.id, moveLeftTarget) : null"
           @move-right="moveRightTarget ? $emit('move-status', task.id, moveRightTarget) : null"
+          @toggle-blocked="$emit('move-status', task.id, task.status === 'blocked' ? (moveLeftTarget || 'in_queue') : 'blocked')"
         />
 
         <!-- Empty State -->

@@ -133,12 +133,19 @@ const sprintWeekLabel = computed(() => {
   return `W${weekNo}`
 })
 
+const sprintTasks = computed(() => {
+  if (!props.sprint?.id) return props.tasks || []
+  const sprintId = props.sprint.id
+  const sprintTaskIds = new Set(props.sprint.taskIds || [])
+  return (props.tasks || []).filter((t) => t.sprintId === sprintId || sprintTaskIds.has(t.id))
+})
+
 const completedCount = computed(() => {
-  return (props.tasks || []).filter((t) => t.status === 'deployed').length
+  return sprintTasks.value.filter((t) => t.status === 'deployed').length
 })
 
 const totalCount = computed(() => {
-  return (props.tasks || []).length
+  return sprintTasks.value.length
 })
 
 const progressPercentage = computed(() => {
@@ -147,11 +154,11 @@ const progressPercentage = computed(() => {
 })
 
 const inFlightCount = computed(() => {
-  return (props.tasks || []).filter((t) => t.status === 'running_sprint').length
+  return sprintTasks.value.filter((t) => t.status === 'running_sprint').length
 })
 
 const highPriorityCount = computed(() => {
-  return (props.tasks || []).filter(
+  return sprintTasks.value.filter(
     (t) => (t.priority === 'critical' || t.priority === 'high') && t.status !== 'deployed'
   ).length
 })

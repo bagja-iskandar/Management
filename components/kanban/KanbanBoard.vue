@@ -94,7 +94,7 @@
         :can-move-left="true"
         :can-move-right="true"
         move-left-target="running_sprint"
-        move-right-target="running_sprint"
+        move-right-target="deployed"
         empty-title="NO BLOCKED TASKS"
         empty-subtitle="All deliverables running smoothly without blockers"
         quick-add-label="+ Report Blocker"

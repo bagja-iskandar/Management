@@ -172,11 +172,12 @@ export function useSprintWorkspace() {
 
     const mondayIso = toIsoDate(currentMonday.value)
     const sundayIso = toIsoDate(currentSunday.value)
+    const initialStatus = weekOffset.value > 0 ? 'planned' : 'active'
     const newSprint = await sprintsApi.createSprint({
       name: weekLabel.value,
       startDate: mondayIso,
       endDate: sundayIso,
-      status: 'active',
+      status: initialStatus,
       objective: customObjective || currentObjective.value
     })
     return newSprint
@@ -212,7 +213,7 @@ export function useSprintWorkspace() {
   // Metrics
   const completedTasks = computed(() => activeWeekTasks.value.filter((t) => t.status === 'deployed'))
   const inFlightTasks = computed(() => activeWeekTasks.value.filter((t) => t.status === 'running_sprint'))
-  const pendingTasks = computed(() => activeWeekTasks.value.filter((t) => t.status === 'in_queue' || t.status === 'blocked'))
+  const pendingTasks = computed(() => activeWeekTasks.value.filter((t) => t.status === 'in_queue' || t.status === 'blocked' || t.status === 'idea'))
 
   const totalDeliverablesCount = computed(() => activeWeekTasks.value.length)
   const completedCount = computed(() => completedTasks.value.length)
@@ -234,7 +235,7 @@ export function useSprintWorkspace() {
     if (deliverablesFilter.value === 'running') {
       list = list.filter((t) => t.status === 'running_sprint')
     } else if (deliverablesFilter.value === 'queue') {
-      list = list.filter((t) => t.status === 'in_queue' || t.status === 'blocked')
+      list = list.filter((t) => t.status === 'in_queue' || t.status === 'blocked' || t.status === 'idea')
     } else if (deliverablesFilter.value === 'deployed') {
       list = list.filter((t) => t.status === 'deployed')
     }
@@ -292,7 +293,11 @@ export function useSprintWorkspace() {
 
   async function removeTaskFromWeek(task: Task) {
     try {
-      await tasksApi.updateTask(task.id, { sprintId: '' })
+      await tasksApi.updateTask(task.id, { sprintId: null })
+      if (activeSprint.value?.taskIds?.includes(task.id)) {
+        const nextIds = activeSprint.value.taskIds.filter((id) => id !== task.id)
+        await sprintsApi.updateSprint(activeSprint.value.id, { taskIds: nextIds })
+      }
       showFeedback(`Returned #${task.taskId || 'Task'} to general backlog`)
     } catch (err: any) {
       showFeedback('Failed to remove task: ' + (err.message || 'Unknown error'), 'error')
@@ -397,9 +402,9 @@ export function useSprintWorkspace() {
 
       // 2. Mutate incomplete deliverables to target sprint
       const tasksToMove = [...incompleteDeliverables.value]
-      for (const task of tasksToMove) {
-        await tasksApi.updateTask(task.id, { sprintId: targetSprint.id })
-      }
+      await Promise.all(
+        tasksToMove.map((task) => tasksApi.updateTask(task.id, { sprintId: targetSprint.id }))
+      )
 
       // 3. Mark current sprint as completed if checkbox was enabled
       if (markCurrentCompleted && activeSprint.value?.id) {

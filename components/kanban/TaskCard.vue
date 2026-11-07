@@ -33,8 +33,8 @@
           <NexuraIcon name="Zap" size="xs" :class="task.priority === 'critical' ? 'text-rose-400' : task.priority === 'high' ? 'text-amber-400' : 'opacity-80'" />
         </div>
 
-        <!-- Quick Status Transfer Arrows (visible by default on touch screens, hover on desktop) -->
-        <div class="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-0.5 ml-1 shrink-0">
+        <!-- Quick Status Transfer Arrows & Actions (visible by default on touch screens, hover/focus on desktop) -->
+        <div class="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:focus-within:opacity-100 transition-opacity flex items-center gap-0.5 ml-1 shrink-0">
           <button
             v-if="canMoveLeft"
             type="button"
@@ -44,6 +44,17 @@
             @click.stop="$emit('move-left', task)"
           >
             <NexuraIcon name="ChevronLeft" size="xs" />
+          </button>
+          <button
+            v-if="task.status !== 'deployed'"
+            type="button"
+            class="p-1 rounded transition-colors focus:outline-none cursor-pointer"
+            :class="task.status === 'blocked' ? 'bg-rose-500/20 text-rose-300 hover:bg-rose-500/30' : 'bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-rose-400'"
+            :title="task.status === 'blocked' ? 'Unblock task' : 'Mark as blocked'"
+            :aria-label="task.status === 'blocked' ? 'Unblock task' : 'Mark as blocked'"
+            @click.stop="$emit('toggle-blocked', task)"
+          >
+            <NexuraIcon name="AlertTriangle" size="xs" />
           </button>
           <button
             v-if="canMoveRight"
@@ -87,7 +98,7 @@
           v-if="task.sprintId"
           class="text-indigo-400 bg-indigo-500/10 border border-indigo-500/25 px-1.5 py-0.5 rounded font-mono text-[10px] tabular-nums"
         >
-          Sprint
+          {{ sprintLabel }}
         </span>
         <span
           v-if="task.projectSlug"
@@ -136,7 +147,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import type { Task } from '~/types'
+
+const workspaceStore = useWorkspaceStore()
 
 const props = withDefaults(
   defineProps<{
@@ -166,6 +180,19 @@ const displayTaskId = computed(() => {
     return props.task.taskId.startsWith('#') ? props.task.taskId.slice(1) : props.task.taskId
   }
   return props.task.id ? props.task.id.slice(0, 7).toUpperCase() : 'TASK'
+})
+
+const sprintLabel = computed(() => {
+  if (!props.task.sprintId) return ''
+  const sprint = (workspaceStore.sprints.value || []).find((s) => s.id === props.task.sprintId)
+  if (sprint) {
+    if (sprint.weekNumber) return `W${sprint.weekNumber}`
+    if (sprint.name) return sprint.name
+  }
+  if (props.task.sprintId.startsWith('W') || props.task.sprintId.startsWith('w')) {
+    return props.task.sprintId.toUpperCase()
+  }
+  return 'Sprint'
 })
 
 const priorityClasses = computed(() => {

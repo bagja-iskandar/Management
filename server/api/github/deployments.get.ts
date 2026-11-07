@@ -10,7 +10,7 @@ import type {
 } from '~/types'
 
 const fetchCachedDeployments = defineCachedFunction(
-  async (token: string, repo: string, limit: number): Promise<GitHubDeploymentSummary> => {
+  async (token: string, repo: string, limit: number, _refresh?: boolean): Promise<GitHubDeploymentSummary> => {
     if (!token) {
       return {
         latestDeployment: null,
@@ -126,12 +126,14 @@ const fetchCachedDeployments = defineCachedFunction(
   {
     maxAge: 30,
     name: 'github-deployments',
-    getKey: (token: string, repo: string, limit: number) => `${token ? 'auth' : 'anon'}:${repo}:${limit}`
+    getKey: (token: string, repo: string, limit: number) => `${token ? 'auth' : 'anon'}:${repo}:${limit}`,
+    shouldBypassCache: (_token, _repo, _limit, refresh) => Boolean(refresh)
   }
 )
 
 export default withApiHandler(async (event): Promise<GitHubDeploymentSummary> => {
   const query = getQuery(event)
+  const refresh = query.refresh === 'true'
   const repoParam = typeof query.repo === 'string' ? query.repo.trim() : ''
 
   const fullRepo = await assertGitHubRepoAllowed(repoParam, event)
@@ -154,5 +156,5 @@ export default withApiHandler(async (event): Promise<GitHubDeploymentSummary> =>
   const limitParam = query.limit ? Number(query.limit) : 5
   const limit = Math.max(1, Math.min(100, isNaN(limitParam) ? 5 : limitParam))
 
-  return await fetchCachedDeployments(token, fullRepo, limit)
+  return await fetchCachedDeployments(token, fullRepo, limit, refresh)
 })

@@ -290,6 +290,13 @@ import type { Task, TaskPriority } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useTasks } from '~/composables/useTasks'
 import { useTaskDrawer } from '~/composables/useTaskDrawer'
+import { useMarkdownChecklist } from '~/composables/useMarkdownChecklist'
+import {
+  toggleChecklistStep,
+  appendChecklistStep,
+  removeChecklistStep,
+  type ChecklistItem
+} from '~~/utils/markdown-checklist'
 import NexuraIcon from '../ui/NexuraIcon.vue'
 
 const props = defineProps<{
@@ -360,56 +367,10 @@ function priorityBadgeClass(priority?: TaskPriority): string {
   }
 }
 
-// Checklist Item Interface
-interface ParsedChecklistItem {
-  index: number
-  completed: boolean
-  text: string
-  rawLine: string
-}
+const taskDescRef = computed(() => effectiveTask.value?.description || '')
 
-// Markdown checklist parser: extracts - [ ] and - [x]
-const checklistItems = computed<ParsedChecklistItem[]>(() => {
-  const desc = effectiveTask.value?.description || ''
-  if (!desc) return []
-
-  const lines = desc.split('\n')
-  const results: ParsedChecklistItem[] = []
-
-  lines.forEach((line, idx) => {
-    const trimmed = line.trim()
-    if (trimmed.startsWith('- [ ] ') || trimmed.startsWith('* [ ] ')) {
-      results.push({
-        index: idx,
-        completed: false,
-        text: trimmed.slice(6).trim(),
-        rawLine: line
-      })
-    } else if (
-      trimmed.startsWith('- [x] ') ||
-      trimmed.startsWith('- [X] ') ||
-      trimmed.startsWith('* [x] ') ||
-      trimmed.startsWith('* [X] ')
-    ) {
-      results.push({
-        index: idx,
-        completed: true,
-        text: trimmed.slice(6).trim(),
-        rawLine: line
-      })
-    }
-  })
-
-  return results
-})
-
-// Checklist statistics
-const checklistStats = computed(() => {
-  const total = checklistItems.value.length
-  const completed = checklistItems.value.filter((i) => i.completed).length
-  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
-  return { total, completed, percentage }
-})
+// Reactive checklist integration using canonical composable
+const { checklistItems, checklistStats } = useMarkdownChecklist(taskDescRef)
 
 // Non-checklist narrative description lines
 const cleanNarrativeDescription = computed(() => {
@@ -426,22 +387,10 @@ const cleanNarrativeDescription = computed(() => {
 })
 
 // Toggle a checklist step with 0ms optimistic update via tasksApi.updateTask
-async function toggleStep(item: ParsedChecklistItem) {
+async function toggleStep(item: ChecklistItem) {
   if (!effectiveTask.value) return
   const current = effectiveTask.value
-  const previousDesc = current.description || ''
-
-  const lines = previousDesc.split('\n')
-  if (item.index < lines.length) {
-    const targetLine = lines[item.index]
-    if (item.completed) {
-      lines[item.index] = targetLine.replace(/(\*|\-)\s*\[(x|X)\]/, '$1 [ ]')
-    } else {
-      lines[item.index] = targetLine.replace(/(\*|\-)\s*\[ \]/, '$1 [x]')
-    }
-  }
-
-  const updatedDesc = lines.join('\n')
+  const updatedDesc = toggleChecklistStep(current.description || '', item.index)
 
   try {
     const updated = await tasksApi.updateTask(current.id, { description: updatedDesc })
@@ -457,9 +406,7 @@ async function addStep() {
   if (!text || !effectiveTask.value || isSaving.value) return
 
   const current = effectiveTask.value
-  const previousDesc = current.description || ''
-  const newline = previousDesc && !previousDesc.endsWith('\n') ? '\n' : ''
-  const updatedDesc = `${previousDesc}${newline}- [ ] ${text}`
+  const updatedDesc = appendChecklistStep(current.description || '', text)
 
   newStepText.value = ''
   isSaving.value = true
@@ -476,14 +423,10 @@ async function addStep() {
 }
 
 // Delete an existing checklist step
-async function deleteStep(item: ParsedChecklistItem) {
+async function deleteStep(item: ChecklistItem) {
   if (!effectiveTask.value) return
   const current = effectiveTask.value
-  const previousDesc = current.description || ''
-
-  const lines = previousDesc.split('\n')
-  lines.splice(item.index, 1)
-  const updatedDesc = lines.join('\n')
+  const updatedDesc = removeChecklistStep(current.description || '', item.index)
 
   try {
     const updated = await tasksApi.updateTask(current.id, { description: updatedDesc })
