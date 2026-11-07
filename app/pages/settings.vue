@@ -358,8 +358,8 @@ async function onSubmitAccessKey() {
   }
 }
 
-function onClearSession() {
-  session.authStatus.value = 'unauthenticated'
+async function onClearSession() {
+  await session.logout()
   showFeedback('Signed out. Workspace session converted to Read-Only.')
 }
 

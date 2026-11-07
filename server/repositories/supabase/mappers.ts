@@ -5,20 +5,20 @@ export function mapTaskRow(row: any): Task {
   return {
     id: row.id,
     taskId: row.task_id,
-    projectSlug: row.project_slug || undefined,
+    projectSlug: row.project_slug ?? null,
     name: row.name,
     description: row.description || '',
     status: row.status,
     priority: row.priority,
     techTags: Array.isArray(row.tech_tags) ? row.tech_tags : [],
-    dueDate: row.due_date || undefined,
-    sprintId: row.sprint_id || undefined,
+    dueDate: row.due_date ?? null,
+    sprintId: row.sprint_id ?? null,
     date: row.date || (row.created_at ? row.created_at.slice(0, 10) : new Date().toISOString().slice(0, 10)),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
-    githubIssueUrl: row.github_issue_url || undefined,
-    githubIssueNumber: row.github_issue_number || undefined,
-    githubPrUrl: row.github_pr_url || undefined
+    githubIssueUrl: row.github_issue_url ?? null,
+    githubIssueNumber: row.github_issue_number != null ? Number(row.github_issue_number) : null,
+    githubPrUrl: row.github_pr_url ?? null
   }
 }
 

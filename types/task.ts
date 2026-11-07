@@ -16,6 +16,6 @@ export interface Task {
   createdAt: string
   updatedAt: string
   githubIssueUrl?: string | null
-  githubIssueNumber?: number
+  githubIssueNumber?: number | null
   githubPrUrl?: string | null
 }

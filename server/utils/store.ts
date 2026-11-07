@@ -70,23 +70,23 @@ export function normalizeTask(task: any): Task {
   return {
     id: task.id || genId(),
     taskId: task.taskId || 'ENG-000',
-    projectSlug: task.projectSlug,
+    projectSlug: task.projectSlug ?? null,
     name: task.name || '',
     description: task.description,
     status,
     priority: task.priority || 'medium',
     techTags: Array.isArray(task.techTags) ? task.techTags : [],
-    dueDate: task.dueDate,
-    sprintId: task.sprintId,
+    dueDate: task.dueDate === undefined ? undefined : (task.dueDate ?? null),
+    sprintId: task.sprintId ?? null,
     date: task.date || new Date().toISOString().slice(0, 10),
     createdAt: task.createdAt || new Date().toISOString(),
     updatedAt: task.updatedAt || new Date().toISOString(),
-    githubIssueUrl: task.githubIssueUrl,
+    githubIssueUrl: task.githubIssueUrl ?? null,
     githubIssueNumber:
       task.githubIssueNumber !== undefined && task.githubIssueNumber !== null
         ? Number(task.githubIssueNumber)
-        : undefined,
-    githubPrUrl: task.githubPrUrl
+        : null,
+    githubPrUrl: task.githubPrUrl ?? null
   }
 }
 

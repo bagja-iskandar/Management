@@ -226,6 +226,7 @@
     <div v-else-if="viewMode === 'kanban'" class="space-y-4">
       <KanbanBoard
         :tasks="filteredTasks"
+        :preserve-order="true"
         @update-status="handleUpdateStatus"
         @task-click="handleTaskClick"
         @add-task="onKanbanAddTask"
@@ -700,8 +701,8 @@ onBeforeUnmount(() => {
 const filteredTasks = computed(() => {
   let list = [...tasksList.value]
 
-  // Status Filter (Applied in table mode, or if filtered in kanban)
-  if (statusFilter.value !== 'all') {
+  // Status Filter (Only applied in table mode; Kanban columns group by status)
+  if (viewMode.value === 'table' && statusFilter.value !== 'all') {
     list = list.filter(t => normalizeStatus(t.status) === statusFilter.value)
   }
 

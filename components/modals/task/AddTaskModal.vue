@@ -127,6 +127,49 @@
           </div>
         </div>
 
+        <!-- Status & Sprint Iteration Selection -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Execution Status -->
+          <div class="flex flex-col gap-1.5">
+            <label for="task-status-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+              Execution Status
+            </label>
+            <select
+              id="task-status-select"
+              v-model="status"
+              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+            >
+              <option value="in_queue" class="bg-[#111318] text-[#F3F4F6]">In Queue</option>
+              <option value="running_sprint" class="bg-[#111318] text-[#F3F4F6]">Running Sprint</option>
+              <option value="blocked" class="bg-[#111318] text-[#F3F4F6]">Blocked</option>
+              <option value="deployed" class="bg-[#111318] text-[#F3F4F6]">Deployed</option>
+              <option value="idea" class="bg-[#111318] text-[#F3F4F6]">Idea</option>
+            </select>
+          </div>
+
+          <!-- Sprint Iteration -->
+          <div class="flex flex-col gap-1.5">
+            <label for="task-sprint-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+              Sprint Iteration
+            </label>
+            <select
+              id="task-sprint-select"
+              v-model="sprintId"
+              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+            >
+              <option value="" class="bg-[#111318] text-[#8A8F9E]">No Sprint (Backlog)</option>
+              <option
+                v-for="s in workspaceStore.sprints.value"
+                :key="s.id"
+                :value="s.id"
+                class="bg-[#111318] text-[#F3F4F6]"
+              >
+                {{ s.name || `Sprint ${s.id}` }} ({{ s.status || 'planned' }})
+              </option>
+            </select>
+          </div>
+        </div>
+
         <!-- Due Date with Quick Presets -->
         <div class="flex flex-col gap-1.5">
           <div class="flex items-center justify-between">
@@ -209,7 +252,6 @@
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
-import { useProjects } from '~/composables/useProjects'
 import type { TaskPriority, TaskStatus } from '~/types'
 
 export interface ProjectItemOption {
@@ -242,13 +284,12 @@ const emit = defineEmits<{
     status: TaskStatus
     priority: TaskPriority
     dueDate?: string
+    sprintId?: string
     techTags: string[]
   }): void
 }>()
 
 const workspaceStore = useWorkspaceStore()
-const projectsApi = useProjects()
-const { data: fetchedProjects } = useLazyAsyncData('add-task-modal-projects', () => projectsApi.getProjects())
 
 const resolvedProjectOptions = computed(() => {
   if (props.projects && props.projects.length > 0) {
@@ -256,12 +297,6 @@ const resolvedProjectOptions = computed(() => {
   }
   if (workspaceStore.projects.value && workspaceStore.projects.value.length > 0) {
     return workspaceStore.projects.value.map((p) => ({
-      label: p.title || p.slug,
-      value: p.slug
-    }))
-  }
-  if (fetchedProjects.value && fetchedProjects.value.length > 0) {
-    return fetchedProjects.value.map((p) => ({
       label: p.title || p.slug,
       value: p.slug
     }))
@@ -285,11 +320,14 @@ watch(resolvedProjectOptions, (opts) => {
   }
 }, { immediate: true })
 
-function getDefaultDueDate(): string {
-  const d = new Date()
-  d.setDate(d.getDate() + 7)
-  return d.toISOString().split('T')[0]
-}
+const status = ref<TaskStatus>(props.status || 'in_queue')
+const sprintId = ref<string>('')
+
+watch(() => props.status, (newStatus) => {
+  if (newStatus) {
+    status.value = newStatus
+  }
+})
 
 function setDuePreset(days: number) {
   const d = new Date()
@@ -383,9 +421,10 @@ function onSubmit() {
     description: description.value.trim(),
     project: targetSlug,
     projectSlug: targetSlug,
-    status: props.status || 'in_queue',
+    status: status.value,
     priority: priority.value,
     dueDate: dueDate.value.trim() ? dueDate.value.trim() : undefined,
+    sprintId: sprintId.value.trim() ? sprintId.value.trim() : undefined,
     techTags
   })
 }

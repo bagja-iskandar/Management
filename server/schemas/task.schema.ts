@@ -27,7 +27,7 @@ const baseTaskFields = {
   sprintId: z.string().trim().nullable().optional(),
   date: z.string().trim().nullable().optional(),
   githubIssueUrl: z.string().trim().nullable().optional(),
-  githubIssueNumber: z.coerce.number().optional(),
+  githubIssueNumber: z.coerce.number().nullable().optional(),
   githubPrUrl: z.string().trim().nullable().optional()
 }
 

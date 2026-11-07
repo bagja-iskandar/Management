@@ -83,8 +83,8 @@ export default defineEventHandler((event: H3Event) => {
   const method = (event.node?.req?.method || getMethod(event) || 'GET').toUpperCase()
 
   // 2. Whitelist explicitly public endpoints
-  // a) Handshake endpoint
-  if (normalizedPath === '/api/auth/session' && method === 'POST') {
+  // a) Handshake and logout endpoints
+  if (normalizedPath === '/api/auth/session' && (method === 'POST' || method === 'DELETE')) {
     return
   }
   // b) Aggregated dashboard stats

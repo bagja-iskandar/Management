@@ -172,6 +172,7 @@ async function onTaskCreated(payload: {
   projectSlug?: string
   techTags?: string[]
   dueDate?: string
+  sprintId?: string
 }) {
   try {
     await tasksApi.createTask({
@@ -181,7 +182,8 @@ async function onTaskCreated(payload: {
       priority: payload.priority || 'medium',
       projectSlug: payload.projectSlug || 'management',
       techTags: payload.techTags || [],
-      dueDate: payload.dueDate
+      dueDate: payload.dueDate,
+      sprintId: payload.sprintId
     })
     closeAddTask()
     closeAddIdea()

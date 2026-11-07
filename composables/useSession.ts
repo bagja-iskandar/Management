@@ -117,6 +117,16 @@ export function useSession() {
     console.error('[useSession] Unhandled API error:', error)
   }
 
+  async function logout(): Promise<void> {
+    try {
+      await $fetch('/api/auth/session', { method: 'DELETE' })
+    } catch (err) {
+      console.warn('[useSession] Error clearing session cookie on server:', err)
+    } finally {
+      authStatus.value = 'unauthenticated'
+    }
+  }
+
   function openAuthModal() {
     authError.value = null
     isAuthModalOpen.value = true
@@ -142,6 +152,7 @@ export function useSession() {
     csrfWarning,
     checkSession,
     loginWithAccessKey,
+    logout,
     handleApiError,
     openAuthModal,
     closeAuthModal,

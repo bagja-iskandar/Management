@@ -111,7 +111,7 @@
             <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
               Execution Status
             </label>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
               <button
                 v-for="s in statusOptions"
                 :key="s.value"
@@ -146,8 +146,8 @@
             </div>
           </div>
 
-          <!-- 3. Project Slug & Due Date Grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- 3. Project, Sprint & Due Date Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="space-y-1.5">
               <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
                 Linked Project
@@ -166,6 +166,29 @@
                     {{ p.slug }} ({{ p.title }})
                   </option>
                   <option value="" class="bg-[#111318] text-[#8A8F9E]">(None / General)</option>
+                </select>
+                <NexuraIcon name="ChevronDown" size="xs" class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8A8F9E]" />
+              </div>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                Sprint Iteration
+              </label>
+              <div class="relative">
+                <select
+                  v-model="form.sprintId"
+                  class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer appearance-none"
+                >
+                  <option value="" class="bg-[#111318] text-[#8A8F9E]">(None / Backlog)</option>
+                  <option
+                    v-for="s in (sprints || [])"
+                    :key="s.id"
+                    :value="s.id"
+                    class="bg-[#111318] text-[#F3F4F6]"
+                  >
+                    {{ s.name }} ({{ s.status }})
+                  </option>
                 </select>
                 <NexuraIcon name="ChevronDown" size="xs" class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#8A8F9E]" />
               </div>
@@ -290,6 +313,32 @@
               </div>
             </div>
           </div>
+
+          <!-- 6. GitHub Integration (PR URL) -->
+          <div class="space-y-1.5 p-3.5 rounded-xl bg-[#07080A]/60 border border-white/[0.06]">
+            <div class="flex items-center justify-between">
+              <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider flex items-center gap-1.5">
+                <NexuraIcon name="GitPullRequest" size="xs" class="text-indigo-400" />
+                <span>GitHub Pull Request URL</span>
+              </label>
+              <a
+                v-if="form.githubPrUrl"
+                :href="form.githubPrUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-[10px] text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1 cursor-pointer"
+              >
+                <span>View PR</span>
+                <NexuraIcon name="ExternalLink" size="xs" />
+              </a>
+            </div>
+            <input
+              v-model="form.githubPrUrl"
+              type="url"
+              placeholder="https://github.com/owner/repo/pull/123"
+              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums"
+            />
+          </div>
         </div>
 
         <!-- Footer Actions -->
@@ -406,7 +455,7 @@ const emit = defineEmits<{
 }>()
 
 const { isDrawerOpen, activeTaskId, closeTaskDrawer } = useTaskDrawer()
-const { tasks, projects, updateTaskInStore, removeTaskFromStore } = useWorkspaceStore()
+const { tasks, projects, sprints, updateTaskInStore, removeTaskFromStore } = useWorkspaceStore()
 const tasksApi = useTasks()
 
 const effectiveIsOpen = computed(() => {
@@ -476,13 +525,10 @@ watch(
 )
 
 const effectiveRepo = computed(() => {
-  if (props.repo) return props.repo
-  if (currentTask.value?.projectSlug) {
-    const slug = currentTask.value.projectSlug.toLowerCase()
-    if (slug === 'management') return 'bagja-iskandar/Management'
-    return `bagja-iskandar/${currentTask.value.projectSlug}`
-  }
-  return 'bagja-iskandar/Management'
+  const targetProject = (projects.value || []).find(
+    (p) => p.slug === currentTask.value?.projectSlug
+  )
+  return targetProject?.githubRepo || props.repo || 'bagja-iskandar/Management'
 })
 
 const availableProjects = computed<Project[]>(() => {
@@ -512,6 +558,7 @@ const form = reactive({
   status: 'in_queue' as TaskStatus,
   priority: 'medium' as TaskPriority,
   projectSlug: '',
+  sprintId: '',
   techTags: [] as string[],
   dueDate: '',
   githubIssueUrl: '',
@@ -528,6 +575,7 @@ watch(
     form.status = t.status || 'in_queue'
     form.priority = t.priority || 'medium'
     form.projectSlug = t.projectSlug || ''
+    form.sprintId = t.sprintId || ''
     form.techTags = [...(t.techTags || [])]
     form.dueDate = t.dueDate || ''
     form.githubIssueUrl = t.githubIssueUrl || ''
@@ -548,6 +596,7 @@ const displayTaskId = computed(() => {
 })
 
 const statusOptions: { label: string; value: TaskStatus; icon: string; activeClass: string }[] = [
+  { label: 'Idea', value: 'idea', icon: 'Sparkles', activeClass: 'bg-amber-500/15 text-amber-300 border-amber-500/40 font-medium shadow-[0_0_12px_rgba(245,158,11,0.15)]' },
   { label: 'In Queue', value: 'in_queue', icon: 'Clock', activeClass: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/40 font-medium shadow-[0_0_12px_rgba(99,102,241,0.15)]' },
   { label: 'Running', value: 'running_sprint', icon: 'Zap', activeClass: 'bg-sky-500/15 text-sky-300 border-sky-500/40 font-medium shadow-[0_0_12px_rgba(14,165,233,0.15)]' },
   { label: 'Deployed', value: 'deployed', icon: 'CheckCircle2', activeClass: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40 font-medium shadow-[0_0_12px_rgba(16,185,129,0.15)]' },
@@ -563,6 +612,8 @@ const priorityOptions: { label: string; value: TaskPriority; dotClass: string; a
 
 const statusBadgeClass = computed(() => {
   switch (form.status) {
+    case 'idea':
+      return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
     case 'deployed':
       return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
     case 'running_sprint':
@@ -634,16 +685,16 @@ async function submitSave() {
     description: form.description,
     status: form.status,
     priority: form.priority,
-    projectSlug: form.projectSlug || undefined,
+    projectSlug: form.projectSlug ? form.projectSlug : null,
+    sprintId: form.sprintId ? form.sprintId : null,
     techTags: form.techTags,
     dueDate: form.dueDate && form.dueDate.trim() ? form.dueDate.trim() : null,
     githubIssueUrl: form.githubIssueUrl || undefined,
     githubIssueNumber: form.githubIssueNumber || undefined,
-    githubPrUrl: form.githubPrUrl || undefined
+    githubPrUrl: form.githubPrUrl && form.githubPrUrl.trim() ? form.githubPrUrl.trim() : null
   }
 
   emit('save', payload)
-  updateTaskInStore(targetId, payload)
 
   try {
     isBusyAction.value = true
@@ -680,17 +731,17 @@ async function handleCreateIssue() {
         description: form.description,
         status: form.status,
         priority: form.priority,
-        projectSlug: form.projectSlug || undefined,
+        projectSlug: form.projectSlug ? form.projectSlug : null,
+        sprintId: form.sprintId ? form.sprintId : null,
         techTags: form.techTags,
         dueDate: form.dueDate && form.dueDate.trim() ? form.dueDate.trim() : null,
         githubIssueUrl: res.issue.htmlUrl,
         githubIssueNumber: res.issue.number,
-        githubPrUrl: form.githubPrUrl || undefined
+        githubPrUrl: form.githubPrUrl && form.githubPrUrl.trim() ? form.githubPrUrl.trim() : null
       }
 
       emit('save', patch)
       updateTaskInStore(currentTask.value.id, patch)
-      await tasksApi.updateTask(currentTask.value.id, patch)
     }
   } catch (err) {
     console.error('Failed to create GitHub issue from task:', err)

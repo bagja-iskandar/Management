@@ -148,9 +148,15 @@
 import { ref, computed, watch, onUnmounted } from 'vue'
 import type { Task, TaskStatus } from '~/types'
 
-const props = defineProps<{
-  tasks: Task[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    tasks: Task[]
+    preserveOrder?: boolean
+  }>(),
+  {
+    preserveOrder: false
+  }
+)
 
 const emit = defineEmits<{
   (e: 'update-status', taskId: string, newStatus: TaskStatus): void
@@ -185,6 +191,9 @@ const priorityOrder: Record<string, number> = {
 }
 
 const processedTasks = computed(() => {
+  if (props.preserveOrder) {
+    return [...localTasksList.value]
+  }
   return [...localTasksList.value].sort((a, b) => {
     const pA = priorityOrder[a.priority || 'medium'] || 0
     const pB = priorityOrder[b.priority || 'medium'] || 0
@@ -308,6 +317,16 @@ function onDrop(newStatus: TaskStatus, event: DragEvent) {
   const taskId = draggingTaskId.value || event.dataTransfer?.getData('text/plain')
   
   if (taskId) {
+    const task = localTasksList.value.find(t => t.id === taskId || t.taskId === taskId)
+    if (!task || task.status === newStatus) {
+      draggingTaskId.value = null
+      activeDragTask.value = null
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('dragover', onWindowDragOver)
+      }
+      return
+    }
+
     localTasksList.value = localTasksList.value.map(t => {
       if (t.id === taskId || t.taskId === taskId) {
         return { ...t, status: newStatus }
