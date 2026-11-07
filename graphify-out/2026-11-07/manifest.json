@@ -498,9 +498,9 @@
     "semantic_hash": ""
   },
   "components/project/ProjectLiveDeploymentCard.vue": {
-    "mtime": 1794021890.7199795,
-    "seen": 1794021909.5136755,
-    "ast_hash": "3580700ace9c1b12da2f723ec99d1fa4",
+    "mtime": 1794022233.7039168,
+    "seen": 1794022291.3334987,
+    "ast_hash": "fa64d12bf06ead7579eb6916fdd3b263",
     "semantic_hash": ""
   },
   "components/project/ProjectPackageCard.vue": {
@@ -516,9 +516,9 @@
     "semantic_hash": ""
   },
   "components/project/ProjectVercelTab.vue": {
-    "mtime": 1794021890.714697,
-    "seen": 1794021909.519766,
-    "ast_hash": "edf8273793ecfbdfe00b0acf4a445f9b",
+    "mtime": 1794022073.191121,
+    "seen": 1794022291.3396766,
+    "ast_hash": "3546fc0407fe3a4f27ec849a973b62f7",
     "semantic_hash": ""
   },
   "composables/useProjectNav.ts": {
@@ -978,9 +978,9 @@
     "semantic_hash": ""
   },
   "components/notes/IdeaScratchpadPanel.vue": {
-    "mtime": 1794021925.5010216,
-    "seen": 1794021929.5937319,
-    "ast_hash": "682c795f7f77d5aa57924238e5c1c209",
+    "mtime": 1794022213.0291584,
+    "seen": 1794022291.3305075,
+    "ast_hash": "f8217ccc76d05afbdf33ad7b5378039f",
     "semantic_hash": ""
   },
   "components/tasks/ActiveFocusPanel.vue": {
@@ -1188,9 +1188,9 @@
     "semantic_hash": ""
   },
   "tests/unit/scratchpad-smart-promotion.spec.mjs": {
-    "mtime": 1793792673.0019202,
-    "seen": 1793792978.7337186,
-    "ast_hash": "bb23b056bfb963b2ea806be89fc507d3",
+    "mtime": 1794022213.440865,
+    "seen": 1794022291.4382048,
+    "ast_hash": "0f4ebd3191427d3fb18b332311929b34",
     "semantic_hash": ""
   },
   "tests/unit/github-branch-commits.spec.mjs": {
@@ -1545,6 +1545,12 @@
     "mtime": 1794018823.8161056,
     "seen": 1794018916.616406,
     "ast_hash": "e789cdb427039839e1987e48ea974755",
+    "semantic_hash": ""
+  },
+  "tests/unit/subsystem-remediation.spec.mjs": {
+    "mtime": 1794022164.080927,
+    "seen": 1794022291.440762,
+    "ast_hash": "7a469c0bc6bac64ff56f2922182e389f",
     "semantic_hash": ""
   }
 }
