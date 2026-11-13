@@ -6,9 +6,9 @@
     "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
   },
   "app/app.vue": {
-    "mtime": 1794019146.7971706,
-    "seen": 1794019181.9521632,
-    "ast_hash": "cdd8d8cb7e72e8f9b6b8850612acdb93",
+    "mtime": 1794540207.5203457,
+    "seen": 1794540283.123085,
+    "ast_hash": "4362e405b7d9a8b58aa645e722be6fc3",
     "semantic_hash": ""
   },
   "app/pages/index.vue": {
@@ -312,9 +312,9 @@
     "semantic_hash": ""
   },
   "app/pages/repos.vue": {
-    "mtime": 1794020382.581511,
-    "seen": 1794020429.2200844,
-    "ast_hash": "b9b29ad471d4f188b8f5e66daed58557",
+    "mtime": 1794540315.570303,
+    "seen": 1794540372.1247613,
+    "ast_hash": "9b6a9c9f72bd72879331eb725322df95",
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
@@ -1206,9 +1206,9 @@
     "semantic_hash": ""
   },
   "app/pages/settings.vue": {
-    "mtime": 1794018938.6852264,
-    "seen": 1794018990.4215317,
-    "ast_hash": "0edbdb921b0539324a8ad6e33489d7c0",
+    "mtime": 1794540245.550279,
+    "seen": 1794540283.1259909,
+    "ast_hash": "70ab23fb6969fb7c078dbb35d388bd8c",
     "semantic_hash": ""
   },
   "tests/unit/settings-and-dashboard-polish.spec.mjs": {
@@ -1506,9 +1506,9 @@
     "semantic_hash": ""
   },
   "components/layout/Sidebar.vue": {
-    "mtime": 1794028256.2441936,
-    "seen": 1794028320.1775415,
-    "ast_hash": "e9b3a758530aea699de939a3834e0797",
+    "mtime": 1794540306.5472383,
+    "seen": 1794540372.1365783,
+    "ast_hash": "fadd20a82c58f4698abbd67932a6fa32",
     "semantic_hash": ""
   },
   "components/project/RepoActivityBadge.vue": {

@@ -440,7 +440,10 @@ const { repos, pending, refresh } = useGitHubRepos()
 const projectsApi = useProjects()
 const workspaceStore = useWorkspaceStore()
 
-const { data: projects, refresh: refreshProjects } = useLazyAsyncData('repos-projects-list', () => projectsApi.getProjects())
+const projects = computed(() => workspaceStore.projects.value || [])
+const refreshProjects = async () => {
+  await workspaceStore.refreshWorkspace()
+}
 
 const displayRepos = computed<GitHubRepoSummary[]>(() => {
   return repos.value || []

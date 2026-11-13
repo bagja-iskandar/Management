@@ -164,20 +164,28 @@
             <!-- Supabase Status -->
             <div class="flex items-center justify-between">
               <span class="text-[#8A8F9E] flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full" :class="(telemetry?.supabase?.ok || telemetry?.supabase?.healthy) ? 'bg-emerald-400' : 'bg-zinc-500'"></span>
                 <span>Supabase Live Probe</span>
               </span>
-              <span class="text-emerald-400 font-medium">Healthy · {{ telemetry?.supabase?.latencyMs ?? 42 }}ms</span>
+              <span v-if="(telemetry?.supabase?.ok || telemetry?.supabase?.healthy) && telemetry?.supabase?.latencyMs != null" class="text-emerald-400 font-medium">
+                Healthy · {{ telemetry.supabase.latencyMs }}ms
+              </span>
+              <span v-else class="text-zinc-500">
+                —
+              </span>
             </div>
 
             <!-- GitHub Rate Limit -->
             <div class="flex items-center justify-between">
               <span class="text-[#8A8F9E] flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full" :class="telemetry?.github?.rateLimit ? 'bg-indigo-400' : 'bg-zinc-500'"></span>
                 <span>GitHub API Quota</span>
               </span>
-              <span class="text-[#F3F4F6] tabular-nums font-semibold">
-                {{ telemetry?.github?.rateLimit?.remaining ?? 4892 }} / {{ telemetry?.github?.rateLimit?.limit ?? 5000 }}
+              <span v-if="telemetry?.github?.rateLimit" class="text-[#F3F4F6] tabular-nums font-semibold">
+                {{ telemetry.github.rateLimit.remaining }} / {{ telemetry.github.rateLimit.limit }}
+              </span>
+              <span v-else class="text-zinc-500 font-mono">
+                — / —
               </span>
             </div>
 

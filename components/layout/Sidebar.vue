@@ -475,13 +475,23 @@
     <div class="shrink-0 pt-3 border-t border-white/[0.06] px-2 space-y-2">
       <div class="flex items-center justify-between text-xs font-sans">
         <span class="flex items-center gap-2 text-[#8A8F9E]">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span
+            class="w-2 h-2 rounded-full"
+            :class="isSupabaseHealthy ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'"
+          ></span>
           Supabase + GitHub
         </span>
-        <span class="font-mono tabular-nums text-xs text-[#F3F4F6]">4,892/5k</span>
+        <span class="font-mono tabular-nums text-xs text-[#F3F4F6]">{{ githubRateLimitDisplay }}</span>
       </div>
-      <div class="w-full h-1 rounded-full bg-white/[0.06] overflow-hidden" title="API Rate Limit: 94% remaining">
-        <div class="h-full rounded-full bg-emerald-400/80" style="width: 94%"></div>
+      <div
+        class="w-full h-1 rounded-full bg-white/[0.06] overflow-hidden"
+        :title="telemetry?.github?.rateLimit ? `API Rate Limit: ${githubRateLimitPercent}% remaining` : 'API Rate Limit: Unknown'"
+      >
+        <div
+          class="h-full rounded-full transition-all duration-300"
+          :class="githubRateLimitPercent > 20 ? 'bg-emerald-400/80' : githubRateLimitPercent > 0 ? 'bg-amber-400/80' : 'bg-zinc-600'"
+          :style="{ width: telemetry?.github?.rateLimit ? `${githubRateLimitPercent}%` : '0%' }"
+        ></div>
       </div>
 
       <!-- Session Auth Status Button -->
@@ -668,6 +678,29 @@ const currentRouteProjectSlug = computed(() => {
 const session = useSession()
 const { repos } = useGitHubRepos()
 const { openAddTask } = useQuickTask()
+
+// System Telemetry Pod Data (SSOT Live Probe)
+const { data: telemetry } = useLazyAsyncData('system-telemetry', () =>
+  $fetch<any>('/api/telemetry').catch(() => null)
+)
+
+const isSupabaseHealthy = computed(() => {
+  return Boolean(telemetry.value?.supabase?.healthy || telemetry.value?.supabase?.ok)
+})
+
+const githubRateLimitDisplay = computed(() => {
+  const rl = telemetry.value?.github?.rateLimit
+  if (!rl) return '— / —'
+  const limitStr = rl.limit >= 1000 ? `${Math.round(rl.limit / 1000)}k` : String(rl.limit)
+  return `${rl.remaining.toLocaleString()}/${limitStr}`
+})
+
+const githubRateLimitPercent = computed(() => {
+  const rl = telemetry.value?.github?.rateLimit
+  if (!rl || !rl.limit) return 0
+  const pct = Math.round((rl.remaining / rl.limit) * 100)
+  return Math.min(100, Math.max(0, pct))
+})
 
 const workspaceStore = useWorkspaceStore()
 const tasks = workspaceStore.tasks

@@ -11,7 +11,7 @@
         <HeaderBar class="shrink-0" />
 
         <!-- Scrollable Content Canvas (Clean viewport without pt-16 hack) -->
-        <div class="flex-1 overflow-y-auto custom-scrollbar p-3 sm:p-5 min-h-0">
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-3 sm:p-5 pb-20 sm:pb-20 lg:pb-5 min-h-0">
           <NuxtPage />
         </div>
       </main>
