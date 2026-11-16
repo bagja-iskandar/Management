@@ -11,17 +11,17 @@
     >
       <div
         ref="panelRef"
-        class="w-full max-w-2xl bg-[#07080A] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-8 max-h-[88vh] text-[#F3F4F6] outline-none"
+        class="w-full max-w-2xl bg-void border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-8 max-h-[88vh] text-foreground outline-none"
         @click.stop
       >
         <!-- ======================================================== -->
         <!-- TERMINAL WINDOW HEADER                                   -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3.5 bg-[#111318] border-b border-white/[0.06] flex items-center justify-between gap-4">
+        <div class="px-5 py-3.5 bg-surface border-b border-white/[0.06] flex items-center justify-between gap-4">
           <!-- Left: Telemetry Run Path -->
           <div class="flex items-center gap-2.5 min-w-0">
-            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse shrink-0" aria-hidden="true"></span>
-            <div class="font-mono text-xs text-[#8A8F9E] truncate">
+            <span class="w-2 h-2 rounded-full bg-accent-light animate-pulse shrink-0" aria-hidden="true"></span>
+            <div class="font-mono text-xs text-muted truncate">
               telemetry://actions/{{ repo }}/run-{{ run?.id || 'null' }}
             </div>
           </div>
@@ -33,7 +33,7 @@
               :href="run.htmlUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs text-indigo-400 hover:text-[#F3F4F6] transition-colors flex items-center gap-1 group"
+              class="font-mono text-xs text-accent-light hover:text-foreground transition-colors flex items-center gap-1 group"
               title="Open workflow run on GitHub"
             >
               <span>Open on GitHub</span>
@@ -42,7 +42,7 @@
 
             <button
               type="button"
-              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-muted hover:text-foreground transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
               aria-label="Close modal"
               @click="close"
             >
@@ -54,17 +54,17 @@
         <!-- ======================================================== -->
         <!-- RUN META BAR                                             -->
         <!-- ======================================================== -->
-        <div v-if="run" class="px-5 py-3 bg-[#0D0F12] border-b border-white/[0.04] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div v-if="run" class="px-5 py-3 bg-surface border-b border-white/[0.04] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
           <div class="flex items-center gap-2 flex-wrap">
             <!-- Run Title -->
-            <span class="text-[#F3F4F6] font-bold text-sm">
+            <span class="text-foreground font-semibold text-sm">
               {{ run.name }}
             </span>
-            <span class="text-[#8A8F9E]">#{{ run.runNumber }}</span>
+            <span class="text-muted">#{{ run.runNumber }}</span>
 
             <!-- Status Pill -->
             <span
-              class="px-2 py-0.5 rounded-full text-[10px] font-medium border"
+              class="px-2 py-0.5 rounded-full text-xs font-medium border"
               :class="statusBadgeClasses"
             >
               {{ statusLabel }}
@@ -72,20 +72,20 @@
           </div>
 
           <!-- Metadata Chips -->
-          <div class="flex items-center gap-2.5 text-[11px] text-[#8A8F9E] flex-wrap">
+          <div class="flex items-center gap-2.5 text-xs text-muted flex-wrap">
             <!-- Branch -->
-            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-accent/10 text-accent-light border border-accent/20">
               <NexuraIcon name="GitBranch" size="xs" />
               <span>{{ run.branch }}</span>
             </span>
 
             <!-- SHA -->
-            <span class="px-2 py-0.5 rounded bg-white/[0.04] text-[#F3F4F6] border border-white/[0.06]">
+            <span class="px-2 py-0.5 rounded bg-white/[0.04] text-foreground border border-white/[0.06]">
               {{ run.commitSha ? run.commitSha.slice(0, 7) : 'unknown' }}
             </span>
 
             <!-- Duration -->
-            <span v-if="run.durationSeconds > 0" class="text-[#8A8F9E]">
+            <span v-if="run.durationSeconds > 0" class="text-muted">
               ⏱ {{ run.durationSeconds }}s
             </span>
           </div>
@@ -94,11 +94,11 @@
         <!-- ======================================================== -->
         <!-- TERMINAL LOG CONTENT                                     -->
         <!-- ======================================================== -->
-        <div class="p-5 overflow-y-auto space-y-4 font-mono text-xs flex-1 bg-[#07080A] custom-scrollbar">
+        <div class="p-5 overflow-y-auto space-y-4 font-mono text-xs flex-1 bg-void custom-scrollbar">
           <!-- Loading State -->
-          <div v-if="isLoading" class="py-12 flex flex-col items-center justify-center gap-3 text-[#8A8F9E]">
-            <NexuraIcon name="Loader2" size="lg" class="animate-spin text-indigo-400" />
-            <span class="text-xs text-indigo-300 animate-pulse">
+          <div v-if="isLoading" class="py-12 flex flex-col items-center justify-center gap-3 text-muted">
+            <NexuraIcon name="Loader2" size="lg" class="animate-spin text-accent-light" />
+            <span class="text-xs text-accent-light animate-pulse">
               Fetching workflow jobs telemetry from GitHub API...
             </span>
           </div>
@@ -108,21 +108,21 @@
             v-else-if="errorMessage"
             class="p-4 rounded-xl bg-rose-950/20 border border-rose-900/30 text-rose-400 space-y-1"
           >
-            <div class="flex items-center gap-2 font-bold">
+            <div class="flex items-center gap-2 font-semibold">
               <span>✕</span>
               <span>Telemetry Error</span>
             </div>
-            <p class="text-[11px] text-rose-400/80">{{ errorMessage }}</p>
+            <p class="text-xs text-rose-400/80">{{ errorMessage }}</p>
           </div>
 
           <!-- Empty State -->
           <div
             v-else-if="!jobs || jobs.length === 0"
-            class="py-12 text-center text-[#8A8F9E] border border-dashed border-white/[0.06] rounded-xl"
+            class="py-12 text-center text-muted border border-dashed border-white/[0.06] rounded-xl"
           >
-            <div class="text-indigo-400 text-lg mb-2">⚡</div>
+            <div class="text-accent-light text-lg mb-2">⚡</div>
             <p>No job execution details recorded for this run.</p>
-            <p class="text-[10px] text-[#8A8F9E]/70 mt-1">
+            <p class="text-xs text-muted/70 mt-1">
               The run may be queued, or requires GitHub authentication to inspect job logs.
             </p>
           </div>
@@ -132,7 +132,7 @@
             <div
               v-for="job in jobs"
               :key="job.id"
-              class="border border-white/[0.06] bg-[#111318]/60 rounded-xl overflow-hidden"
+              class="border border-white/[0.06] bg-surface/60 rounded-xl overflow-hidden"
             >
               <!-- Job Header -->
               <div class="px-4 py-2.5 bg-white/[0.02] border-b border-white/[0.04] flex items-center justify-between gap-2">
@@ -141,15 +141,15 @@
                     class="w-2 h-2 rounded-full shrink-0"
                     :class="getJobDotClass(job)"
                   ></span>
-                  <span class="font-bold text-[#F3F4F6] truncate">{{ job.name }}</span>
+                  <span class="font-semibold text-foreground truncate">{{ job.name }}</span>
                 </div>
 
-                <div class="flex items-center gap-2 text-[10px] text-[#8A8F9E] shrink-0">
+                <div class="flex items-center gap-2 text-xs text-muted shrink-0">
                   <span v-if="job.startedAt && job.completedAt">
                     {{ computeJobDuration(job.startedAt, job.completedAt) }}
                   </span>
                   <span
-                    class="px-1.5 py-0.2 rounded text-[10px] uppercase font-mono"
+                    class="px-1.5 py-0.5 rounded text-xs uppercase font-mono"
                     :class="getJobStatusBadgeClass(job)"
                   >
                     {{ job.conclusion || job.status }}
@@ -167,12 +167,12 @@
                 >
                   <!-- Step Icon & Name -->
                   <div class="flex items-center gap-2 min-w-0 flex-1">
-                    <span class="shrink-0 font-bold w-4 text-center">
+                    <span class="shrink-0 font-semibold w-4 text-center">
                       <span v-if="step.conclusion === 'success'" class="text-emerald-400">✓</span>
                       <span v-else-if="step.conclusion === 'failure'" class="text-rose-400">✕</span>
                       <span v-else-if="step.status === 'in_progress'" class="text-amber-400 animate-pulse">●</span>
                       <span v-else-if="step.status === 'queued'" class="text-amber-400">○</span>
-                      <span v-else class="text-[#8A8F9E]">-</span>
+                      <span v-else class="text-muted">-</span>
                     </span>
 
                     <span class="truncate font-mono">
@@ -181,7 +181,7 @@
                   </div>
 
                   <!-- Step Status Tag -->
-                  <span class="text-[10px] uppercase tracking-wider shrink-0 opacity-80">
+                  <span class="text-xs uppercase tracking-wider shrink-0 opacity-80">
                     {{ step.conclusion || step.status }}
                   </span>
                 </div>
@@ -193,16 +193,16 @@
         <!-- ======================================================== -->
         <!-- TERMINAL FOOTER                                          -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3 bg-[#111318] border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#8A8F9E]">
+        <div class="px-5 py-3 bg-surface border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-muted">
           <div class="flex items-center gap-2">
-            <span class="text-indigo-400">nexura-telemetry</span>
+            <span class="text-accent-light">nexura-telemetry</span>
             <span>•</span>
             <span>ESC to close</span>
           </div>
 
           <button
             type="button"
-            class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#F3F4F6] hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+            class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-foreground hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
             @click="close"
           >
             Close
@@ -302,21 +302,21 @@ const statusBadgeClasses = computed(() => {
   if (props.run.conclusion === 'failure' || props.run.conclusion === 'timed_out') {
     return 'border-rose-500/30 bg-rose-500/10 text-rose-400'
   }
-  return 'border-white/[0.08] bg-white/5 text-[#8A8F9E]'
+  return 'border-white/[0.08] bg-white/5 text-muted'
 })
 
 function getJobDotClass(job: GitHubWorkflowJob) {
   if (job.conclusion === 'success') return 'bg-emerald-400'
   if (job.conclusion === 'failure') return 'bg-rose-400'
   if (job.status === 'in_progress') return 'bg-amber-400 animate-pulse'
-  return 'bg-[#8A8F9E]'
+  return 'bg-muted'
 }
 
 function getJobStatusBadgeClass(job: GitHubWorkflowJob) {
   if (job.conclusion === 'success') return 'text-emerald-400 bg-emerald-500/10'
   if (job.conclusion === 'failure') return 'text-rose-400 bg-rose-500/10'
   if (job.status === 'in_progress') return 'text-amber-400 bg-amber-500/10'
-  return 'text-[#8A8F9E] bg-white/5'
+  return 'text-muted bg-white/5'
 }
 
 function getStepRowClasses(step: { status: string; conclusion: string | null }) {
@@ -329,7 +329,7 @@ function getStepRowClasses(step: { status: string; conclusion: string | null }) 
   if (step.status === 'in_progress' || step.status === 'queued') {
     return 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
   }
-  return 'bg-white/[0.02] text-[#8A8F9E] border border-white/[0.03]'
+  return 'bg-white/[0.02] text-muted border border-white/[0.03]'
 }
 
 function computeJobDuration(start?: string, end?: string | null) {

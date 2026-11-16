@@ -5,28 +5,28 @@
     title="Connect to Project"
     subtitle="Map GitHub repository to Nexura Management"
     icon="FolderPlus"
-    icon-color="text-indigo-400"
+    icon-color="text-accent-light"
     max-width="lg"
     @close="onClose"
   >
     <form id="connect-repo-form" class="space-y-4" @submit.prevent="onConfirm">
       <!-- Target Repository Bento Card -->
-      <div class="p-3.5 rounded-xl bg-[#07080A]/80 border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.6)] space-y-2">
+      <div class="p-3.5 rounded-xl bg-void/80 border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.6)] space-y-2">
         <div class="flex items-center justify-between text-xs">
-          <span class="font-mono text-[11px] font-medium text-[#8A8F9E] flex items-center gap-1.5 uppercase tracking-wider">
-            <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400" />
+          <span class="font-mono text-xs font-medium text-muted flex items-center gap-1.5 uppercase tracking-wider">
+            <NexuraIcon name="GitBranch" size="xs" class="text-accent-light" />
             Target Repository
           </span>
           <span
             v-if="repo?.language"
-            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono bg-white/[0.04] text-[#8A8F9E] border border-white/[0.06]"
+            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono bg-white/[0.04] text-muted border border-white/[0.06]"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-accent-light"></span>
             {{ repo.language }}
           </span>
         </div>
-        <div class="flex items-center gap-2 font-mono text-xs text-[#F3F4F6] bg-black/40 px-3 py-2 rounded-lg border border-white/[0.05]">
-          <NexuraIcon name="Github" size="xs" class="text-[#8A8F9E] shrink-0" />
+        <div class="flex items-center gap-2 font-mono text-xs text-foreground bg-black/40 px-3 py-2 rounded-lg border border-white/[0.05]">
+          <NexuraIcon name="Github" size="xs" class="text-muted shrink-0" />
           <span class="truncate font-semibold tracking-tight">{{ repo?.fullName || repo?.name || 'No Repository Selected' }}</span>
         </div>
       </div>

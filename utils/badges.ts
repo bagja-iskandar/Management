@@ -63,15 +63,15 @@ export function getStatusLabel(status?: TaskStatus | string | null): string {
  * Get Tailwind CSS badge class set for a TaskStatus in Precision Dark Obsidian Bento theme.
  */
 export function getStatusBadgeClass(status?: TaskStatus | string | null): string {
-  if (!status) return 'bg-white/5 text-[#8A8F9E] border-white/10'
+  if (!status) return 'bg-white/5 text-muted border-white/10'
   const normalized = normalizeStatus(status)
   switch (normalized) {
     case 'idea':
       return 'bg-amber-500/15 text-amber-300 border-amber-500/30'
     case 'in_queue':
-      return 'bg-white/5 text-[#8A8F9E] border-white/10'
+      return 'bg-white/5 text-muted border-white/10'
     case 'running_sprint':
-      return 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30'
+      return 'bg-sky-500/15 text-sky-400 border-sky-500/30'
     case 'deployed':
       return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
     case 'blocked':
@@ -91,9 +91,9 @@ export function getPriorityBadgeClass(priority?: TaskPriority | string | null): 
     case 'medium':
       return 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
     case 'low':
-      return 'bg-white/5 text-[#8A8F9E] border-white/10'
+      return 'bg-white/5 text-muted border-white/10'
     default:
-      return 'bg-white/5 text-[#8A8F9E] border-white/10'
+      return 'bg-white/5 text-muted border-white/10'
   }
 }
 

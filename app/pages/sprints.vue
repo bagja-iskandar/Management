@@ -10,13 +10,13 @@
       aria-label="Loading sprints workspace"
     >
       <!-- Skeleton Header -->
-      <div class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4">
+      <div class="obs-card p-6 rounded-2xl bg-surface border border-white/[0.07] space-y-4">
         <div class="h-6 bg-white/[0.08] rounded w-1/4"></div>
         <div class="h-4 bg-white/[0.04] rounded w-1/2"></div>
       </div>
 
       <!-- Skeleton Objective Banner -->
-      <div class="obs-card p-4 rounded-xl bg-[#111318] border border-white/[0.07] space-y-2">
+      <div class="obs-card p-4 rounded-xl bg-surface border border-white/[0.07] space-y-2">
         <div class="h-4 bg-white/[0.08] rounded w-1/6"></div>
         <div class="h-4 bg-white/[0.04] rounded w-3/4"></div>
       </div>
@@ -47,7 +47,7 @@
       <template #actions>
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-foreground border border-white/[0.08] transition-colors cursor-pointer"
           @click="workspaceStore.initializeWorkspace(true)"
         >
           <NexuraIcon name="RefreshCw" size="xs" />
@@ -62,7 +62,7 @@
     <BaseEmptyState
       v-else-if="sprintsDataState === 'SUCCESS_EMPTY'"
       icon="Target"
-      icon-color="text-indigo-400"
+      icon-color="text-accent-light"
       title="No Sprint Cycles Found"
       description="No active or planned sprint cycles currently exist in this workspace. Initialize your first cycle to track weekly execution."
       class="max-w-lg mx-auto my-12"
@@ -70,7 +70,7 @@
       <template #actions>
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground hover:bg-white text-xs font-mono text-void font-semibold transition-colors cursor-pointer"
           @click="ensureSprintForCurrentWeek()"
         >
           <NexuraIcon name="Zap" size="xs" />
@@ -115,7 +115,7 @@
       <!-- Sprint Action Sub-bar: GitHub Sync & Sprint Rollover -->
       <div class="flex items-center justify-between gap-3 flex-wrap pb-1">
         <div class="flex items-center gap-2">
-          <span class="font-mono text-xs text-[#8A8F9E]">
+          <span class="font-mono text-xs text-muted">
             Cycle Execution:
           </span>
           <span
@@ -131,14 +131,14 @@
           <button
             type="button"
             :disabled="isSyncingGitHub"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#111318] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.08] hover:border-white/[0.16] text-xs font-mono transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface hover:bg-white/[0.08] text-foreground border border-white/[0.08] hover:border-white/[0.16] text-xs font-mono transition active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
             title="Synchronize PRs, branches, and commit status from GitHub"
             @click="onSyncGitHub"
           >
             <NexuraIcon
               name="GitPullRequest"
               size="xs"
-              class="text-indigo-400"
+              class="text-accent-light"
               :class="{ 'animate-spin': isSyncingGitHub }"
             />
             <span>{{ isSyncingGitHub ? 'Syncing...' : 'Sync GitHub' }}</span>
@@ -148,7 +148,7 @@
           <button
             type="button"
             :disabled="incompleteDeliverables.length === 0 || isRollingOver"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 disabled:bg-white/[0.04] disabled:text-[#565B68] disabled:border-white/[0.06] text-white border border-indigo-500/30 text-xs font-mono font-medium transition active:scale-95 disabled:cursor-not-allowed cursor-pointer shadow-sm"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-foreground hover:bg-white disabled:bg-white/[0.04] disabled:text-dim disabled:border-white/[0.06] text-void border border-white/[0.1] text-xs font-mono font-semibold transition active:scale-95 disabled:cursor-not-allowed cursor-pointer shadow-sm"
             :title="incompleteDeliverables.length === 0 ? 'No incomplete deliverables to rollover' : 'Rollover incomplete deliverables to next sprint cycle'"
             @click="isRolloverModalOpen = true"
           >

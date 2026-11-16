@@ -10,13 +10,35 @@
       <!-- Workspace Brand Header (Pure Workspace Identity without duplicate + button) -->
       <div class="flex items-center px-2 py-1">
         <div class="flex items-center gap-2.5">
-          <div class="w-7 h-7 rounded-lg flex items-center justify-center border border-white/15 bg-gradient-to-b from-white/15 to-white/5 shadow-inner">
-            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center border border-white/[0.1] bg-surface-elevated shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] shrink-0">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <!-- Faceted Obsidian Hex Depth -->
+              <polygon points="12,2.25 3.55,7.125 3.55,16.875 12,21.75" class="text-foreground" fill="currentColor" fill-opacity="0.03" />
+              <polygon points="12,2.25 20.45,7.125 20.45,16.875 12,21.75" class="text-foreground" fill="currentColor" fill-opacity="0.08" />
+              <!-- Crisp Geometric Hexagon Frame -->
+              <polygon
+                points="12,2.25 20.45,7.125 20.45,16.875 12,21.75 3.55,16.875 3.55,7.125"
+                class="text-foreground/85"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+              />
+              <!-- Grid-Locked Split Monogram 'N' -->
+              <path
+                d="M8.25 16.5V7.5L10.75 10.5M15.75 7.5V16.5L13.25 13.5"
+                class="text-foreground"
+                stroke="currentColor"
+                stroke-width="1.85"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <!-- Theme-Aware Center Nexus Node -->
+              <circle cx="12" cy="12" r="2.6" class="text-accent-light" fill="currentColor" fill-opacity="0.22" />
+              <circle cx="12" cy="12" r="1.45" class="text-accent-light" fill="currentColor" />
             </svg>
           </div>
           <div>
-            <div class="text-sm font-bold tracking-tight text-[#F3F4F6] flex items-center gap-1.5 font-sans">
+            <div class="text-sm font-semibold tracking-tight text-foreground flex items-center gap-1.5 font-sans">
               Nexura
             </div>
           </div>
@@ -28,60 +50,66 @@
     <div class="flex-1 min-h-0 overflow-y-auto custom-scrollbar pr-1 space-y-4">
       <!-- Primary Workspace Navigation -->
       <div class="space-y-0.5">
-        <div class="px-2.5 pb-1 text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+        <div class="px-2.5 pb-1 text-xs font-semibold tracking-wider uppercase text-muted/70 font-sans">
           Workspace
         </div>
 
         <!-- 1. Command Center -->
         <NuxtLink
           to="/"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="LayoutDashboard"
               size="md"
-              :class="isRouteActive('/') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             Command Center
           </span>
           <span
             v-if="isRouteActive('/')"
-            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
-            style="background: var(--obs-accent-light)"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto bg-accent-light shadow-[0_0_6px_rgba(52,211,153,0.8)]"
           ></span>
           <NexuraIcon
             v-else
             name="ChevronRight"
             size="xs"
-            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+            class="text-muted opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
 
         <!-- 2. My Tasks & Queue -->
         <NuxtLink
           to="/tasks"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/tasks')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="CheckSquare"
               size="md"
-              :class="isRouteActive('/tasks') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/tasks') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             My Tasks & Queue
           </span>
-          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-white/[0.05] text-[#8A8F9E] border border-white/[0.06] shrink-0 ml-auto">
+          <span
+            class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center border shrink-0 ml-auto transition"
+            :class="[
+              isRouteActive('/tasks')
+                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_6px_rgba(52,211,153,0.3)]'
+                : 'bg-white/[0.05] text-muted border-white/[0.06]'
+            ]"
+          >
             {{ tasksCount }}
           </span>
         </NuxtLink>
@@ -89,22 +117,29 @@
         <!-- 3. Weekly Sprints -->
         <NuxtLink
           to="/sprints"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/sprints')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="Calendar"
               size="md"
-              :class="isRouteActive('/sprints') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/sprints') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             Weekly Sprints
           </span>
-          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0 ml-auto">
+          <span
+            class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center border shrink-0 ml-auto transition"
+            :class="[
+              isRouteActive('/sprints')
+                ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30 shadow-[0_0_6px_rgba(52,211,153,0.4)]'
+                : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+            ]"
+          >
             {{ activeSprintCode }}
           </span>
         </NuxtLink>
@@ -112,53 +147,59 @@
         <!-- 4. Architecture Roadmap -->
         <NuxtLink
           to="/roadmap"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/roadmap')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="Map"
               size="md"
-              :class="isRouteActive('/roadmap') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/roadmap') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             Roadmap
           </span>
           <span
             v-if="isRouteActive('/roadmap')"
-            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
-            style="background: var(--obs-accent-light)"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto bg-accent-light shadow-[0_0_6px_rgba(52,211,153,0.8)]"
           ></span>
           <NexuraIcon
             v-else
             name="ChevronRight"
             size="xs"
-            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+            class="text-muted opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
 
         <!-- 5. GitHub Repositories -->
         <NuxtLink
           to="/repos"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/repos')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="GitBranch"
               size="md"
-              :class="isRouteActive('/repos') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/repos') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             GitHub Repositories
           </span>
-          <span class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center bg-white/[0.05] text-[#8A8F9E] border border-white/[0.06] shrink-0 ml-auto">
+          <span
+            class="h-5 px-1.5 rounded-md font-mono tabular-nums text-xs inline-flex items-center justify-center border shrink-0 ml-auto transition"
+            :class="[
+              isRouteActive('/repos')
+                ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-[0_0_6px_rgba(52,211,153,0.3)]'
+                : 'bg-white/[0.05] text-muted border-white/[0.06]'
+            ]"
+          >
             {{ reposCount }}
           </span>
         </NuxtLink>
@@ -166,73 +207,71 @@
         <!-- 6. System Telemetry -->
         <NuxtLink
           to="/telemetry"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/telemetry')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="Activity"
               size="md"
-              :class="isRouteActive('/telemetry') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/telemetry') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             System Telemetry
           </span>
           <span
             v-if="isRouteActive('/telemetry')"
-            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
-            style="background: var(--obs-accent-light)"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto bg-accent-light shadow-[0_0_6px_rgba(52,211,153,0.8)]"
           ></span>
           <NexuraIcon
             v-else
             name="ChevronRight"
             size="xs"
-            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+            class="text-muted opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
 
         <!-- 7. Global Settings -->
         <NuxtLink
           to="/settings"
-          class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
+          class="relative overflow-hidden flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs font-medium transition group"
           :class="[
             isRouteActive('/settings')
-              ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+              ? 'bg-white/[0.07] text-foreground border border-white/[0.07] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] before:content-[\'\'] before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:rounded-r-full before:bg-accent before:shadow-[0_0_8px_rgba(52,211,153,0.8)]'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
           ]"
         >
           <span class="flex items-center gap-2.5 font-sans">
             <NexuraIcon
               name="Settings"
               size="md"
-              :class="isRouteActive('/settings') ? 'text-[#818CF8]' : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+              :class="isRouteActive('/settings') ? 'text-accent-light' : 'text-muted group-hover:text-foreground'"
             />
             Settings
           </span>
           <span
             v-if="isRouteActive('/settings')"
-            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto"
-            style="background: var(--obs-accent-light)"
+            class="w-1.5 h-1.5 rounded-full shrink-0 ml-auto bg-accent-light shadow-[0_0_6px_rgba(52,211,153,0.8)]"
           ></span>
           <NexuraIcon
             v-else
             name="ChevronRight"
             size="xs"
-            class="text-[#8A8F9E] opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
+            class="text-muted opacity-0 group-hover:opacity-60 transition-opacity shrink-0 ml-auto"
           />
         </NuxtLink>
       </div>
 
       <!-- Section: Active Projects -->
       <div class="space-y-1 pt-1">
-        <div class="px-2.5 pb-1 flex items-center justify-between text-[11px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans">
+        <div class="px-2.5 pb-1 flex items-center justify-between text-xs font-semibold tracking-wider uppercase text-muted/70 font-sans">
           <span>Active Projects</span>
           <NuxtLink
             to="/projects"
-            class="text-[#8A8F9E] hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
+            class="text-muted hover:text-white transition cursor-pointer text-xs p-0.5 rounded hover:bg-white/5"
             title="All Projects"
           >
             <NexuraIcon name="ChevronRight" size="xs" />
@@ -250,8 +289,8 @@
             class="flex items-center justify-between px-2 py-1.5 rounded-lg text-xs transition group"
             :class="[
               isProjectActive(project.slug)
-                ? 'bg-white/[0.07] text-[#F3F4F6] border border-white/[0.07]'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                ? 'bg-white/[0.07] text-foreground border border-white/[0.07]'
+                : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
             ]"
           >
             <!-- Left Group: Chevron button + Project Link (Status Dot + Name) -->
@@ -260,8 +299,8 @@
               <button
                 type="button"
                 @click.stop="toggleProjectExpand(project.slug, $event)"
-                class="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-transform duration-200 ease-out cursor-pointer shrink-0 motion-reduce:transition-none motion-reduce:transform-none"
-                :class="isExpanded(project.slug) ? 'rotate-90 text-[#F3F4F6]' : 'rotate-0'"
+                class="w-5 h-5 flex items-center justify-center rounded hover:bg-white/10 text-muted hover:text-foreground transition-transform duration-200 ease-out cursor-pointer shrink-0 motion-reduce:transition-none motion-reduce:transform-none"
+                :class="isExpanded(project.slug) ? 'rotate-90 text-foreground' : 'rotate-0'"
                 aria-label="Toggle Project Navigation"
               >
                 <NexuraIcon name="ChevronRight" size="xs" />
@@ -279,7 +318,7 @@
             </div>
 
             <!-- Right: Progress % badge -->
-            <span class="font-mono tabular-nums text-xs text-[#565B68] group-hover:text-[#8A8F9E] shrink-0 ml-1.5">
+            <span class="font-mono tabular-nums text-xs text-dim group-hover:text-muted shrink-0 ml-1.5">
               {{ project.progress }}%
             </span>
           </div>
@@ -298,21 +337,21 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     isSubItemActive(project.slug, 'dashboard')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="LayoutDashboard"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'dashboard') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="isSubItemActive(project.slug, 'dashboard') ? 'text-emerald-400' : 'text-muted group-hover/item:text-foreground'"
                     />
                     <span class="truncate font-sans">Overview</span>
                   </span>
                   <span
                     v-if="isSubItemActive(project.slug, 'dashboard')"
-                    class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                   ></span>
                 </button>
 
@@ -323,15 +362,15 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     (isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix'))
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="Columns3"
                       size="xs"
-                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'text-emerald-400' : 'text-muted group-hover/item:text-foreground'"
                     />
                     <span class="truncate font-sans">Deliverables</span>
                   </span>
@@ -339,13 +378,13 @@
                     <span
                       v-if="isProjectActive(project.slug) && (projectNav.tasksCount.value > 0 || projectNav.matrixCount.value > 0)"
                       class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
-                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                      :class="(isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')) ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' : 'bg-white/[0.06] text-muted'"
                     >
                       {{ projectNav.tasksCount.value || projectNav.matrixCount.value }}
                     </span>
                     <span
                       v-if="isSubItemActive(project.slug, 'deliverables') || isSubItemActive(project.slug, 'kanban') || isSubItemActive(project.slug, 'matrix')"
-                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                     ></span>
                   </div>
                 </button>
@@ -357,15 +396,15 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     isSubItemActive(project.slug, 'github')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="GitBranch"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'github') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="isSubItemActive(project.slug, 'github') ? 'text-emerald-400' : 'text-muted group-hover/item:text-foreground'"
                     />
                     <span class="truncate font-sans">GitHub Stream</span>
                   </span>
@@ -373,13 +412,13 @@
                     <span
                       v-if="isProjectActive(project.slug) && projectNav.commitsCount.value > 0"
                       class="h-4 px-1 rounded font-mono tabular-nums text-xs inline-flex items-center justify-center"
-                      :class="isSubItemActive(project.slug, 'github') ? 'bg-indigo-500/20 text-indigo-300' : 'bg-white/[0.06] text-[#8A8F9E]'"
+                      :class="isSubItemActive(project.slug, 'github') ? 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' : 'bg-white/[0.06] text-muted'"
                     >
                       {{ projectNav.commitsCount.value }}
                     </span>
                     <span
                       v-if="isSubItemActive(project.slug, 'github')"
-                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                     ></span>
                   </div>
                 </button>
@@ -391,15 +430,15 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     isSubItemActive(project.slug, 'vercel')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="Triangle"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'vercel') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="isSubItemActive(project.slug, 'vercel') ? 'text-emerald-400' : 'text-muted group-hover/item:text-foreground'"
                     />
                     <span class="truncate font-sans">Vercel Edge</span>
                   </span>
@@ -407,7 +446,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" title="Live Deployment"></span>
                     <span
                       v-if="isSubItemActive(project.slug, 'vercel')"
-                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                     ></span>
                   </div>
                 </button>
@@ -419,15 +458,15 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     isSubItemActive(project.slug, 'notes')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="FileText"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'notes') ? 'text-indigo-400' : 'text-amber-400/80'"
+                      :class="isSubItemActive(project.slug, 'notes') ? 'text-emerald-400' : 'text-amber-400/80'"
                     />
                     <span class="truncate font-sans">Notes &amp; Ideas</span>
                   </span>
@@ -435,7 +474,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-400/80" title="Notes &amp; Ideas"></span>
                     <span
                       v-if="isSubItemActive(project.slug, 'notes')"
-                      class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                      class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                     ></span>
                   </div>
                 </button>
@@ -447,21 +486,21 @@
                   class="w-full flex items-center justify-between px-2 py-1 rounded-md text-xs transition cursor-pointer group/item"
                   :class="[
                     isSubItemActive(project.slug, 'settings')
-                      ? 'bg-white/[0.07] text-[#F3F4F6] font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
-                      : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent'
+                      ? 'bg-white/[0.07] text-foreground font-medium border border-white/[0.08] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)]'
+                      : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent'
                   ]"
                 >
                   <span class="flex items-center gap-2 truncate">
                     <NexuraIcon
                       name="Settings"
                       size="xs"
-                      :class="isSubItemActive(project.slug, 'settings') ? 'text-indigo-400' : 'text-[#8A8F9E] group-hover/item:text-[#F3F4F6]'"
+                      :class="isSubItemActive(project.slug, 'settings') ? 'text-emerald-400' : 'text-muted group-hover/item:text-foreground'"
                     />
                     <span class="truncate font-sans">Settings</span>
                   </span>
                   <span
                     v-if="isSubItemActive(project.slug, 'settings')"
-                    class="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0"
+                    class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] shrink-0"
                   ></span>
                 </button>
               </div>
@@ -474,14 +513,14 @@
     <!-- Zona 3 (Pinned Bottom Dock): System Telemetry Status Pod -->
     <div class="shrink-0 pt-3 border-t border-white/[0.06] px-2 space-y-2">
       <div class="flex items-center justify-between text-xs font-sans">
-        <span class="flex items-center gap-2 text-[#8A8F9E]">
+        <span class="flex items-center gap-2 text-muted">
           <span
             class="w-2 h-2 rounded-full"
             :class="isSupabaseHealthy ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500'"
           ></span>
           Supabase + GitHub
         </span>
-        <span class="font-mono tabular-nums text-xs text-[#F3F4F6]">{{ githubRateLimitDisplay }}</span>
+        <span class="font-mono tabular-nums text-xs text-foreground">{{ githubRateLimitDisplay }}</span>
       </div>
       <div
         class="w-full h-1 rounded-full bg-white/[0.06] overflow-hidden"
@@ -502,16 +541,16 @@
         :title="session.isAuthenticated.value ? 'Session Active (Verified)' : 'Click to Authenticate Session'"
         aria-label="Session Authentication Status"
       >
-        <span class="flex items-center gap-1.5 text-[#8A8F9E] group-hover:text-[#F3F4F6]">
+        <span class="flex items-center gap-1.5 text-muted group-hover:text-foreground">
           <NexuraIcon
             name="KeyRound"
             size="xs"
             :class="session.isAuthenticated.value ? 'text-emerald-400' : 'text-amber-400'"
           />
-          <span class="text-[11px] font-sans font-medium">Session</span>
+          <span class="text-xs font-sans font-medium">Session</span>
         </span>
         <span
-          class="text-[10px] font-mono px-1.5 py-0.5 rounded border"
+          class="text-xs font-mono px-1.5 py-0.5 rounded border"
           :class="session.isAuthenticated.value
             ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
             : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
@@ -524,14 +563,14 @@
 
   <!-- Mobile Bottom Navigation (Floating Dock for Smartphone / Tablet) -->
   <nav
-    class="lg:hidden fixed bottom-2 inset-x-2 h-14 bg-[#111318]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl z-50 flex items-center justify-around px-2 shadow-2xl select-none"
+    class="lg:hidden fixed bottom-2 inset-x-2 h-14 bg-surface/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl z-50 flex items-center justify-around px-2 shadow-2xl select-none"
     aria-label="Mobile Navigation"
   >
     <!-- Command Center -->
     <NuxtLink
       to="/"
       class="p-2 rounded-xl transition-all"
-      :class="[isRouteActive('/') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      :class="[isRouteActive('/') ? 'text-accent-light bg-white/[0.08]' : 'text-muted hover:text-foreground']"
       aria-label="Command Center"
     >
       <NexuraIcon name="LayoutDashboard" size="lg" />
@@ -541,7 +580,7 @@
     <NuxtLink
       to="/tasks"
       class="p-2 rounded-xl transition-all relative"
-      :class="[isRouteActive('/tasks') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      :class="[isRouteActive('/tasks') ? 'text-accent-light bg-white/[0.08]' : 'text-muted hover:text-foreground']"
       aria-label="Tasks"
     >
       <NexuraIcon name="CheckSquare" size="lg" />
@@ -551,7 +590,7 @@
     <button
       type="button"
       @click="openAddTask"
-      class="w-10 h-10 rounded-full bg-[#F3F4F6] hover:bg-white text-[#07080A] flex items-center justify-center font-bold shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer"
+      class="w-10 h-10 rounded-full bg-foreground hover:bg-white text-void flex items-center justify-center font-semibold shadow-lg hover:scale-105 active:scale-95 transition cursor-pointer"
       aria-label="Create Deliverable"
     >
       <NexuraIcon name="Plus" size="md" :stroke-width="2.2" />
@@ -561,7 +600,7 @@
     <NuxtLink
       to="/sprints"
       class="p-2 rounded-xl transition-all"
-      :class="[isRouteActive('/sprints') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      :class="[isRouteActive('/sprints') ? 'text-accent-light bg-white/[0.08]' : 'text-muted hover:text-foreground']"
       aria-label="Sprints"
     >
       <NexuraIcon name="Calendar" size="lg" />
@@ -571,7 +610,7 @@
     <NuxtLink
       to="/repos"
       class="p-2 rounded-xl transition-all"
-      :class="[isRouteActive('/repos') ? 'text-[#818CF8] bg-white/[0.08]' : 'text-[#8A8F9E] hover:text-[#F3F4F6]']"
+      :class="[isRouteActive('/repos') ? 'text-accent-light bg-white/[0.08]' : 'text-muted hover:text-foreground']"
       aria-label="Repositories"
     >
       <NexuraIcon name="GitBranch" size="lg" />
@@ -721,7 +760,7 @@ const activeSprintCode = computed(() => {
 
 // 4 fallback project slots to prevent Cumulative Layout Shift (CLS)
 const defaultProjects = [
-  { slug: 'nexura-command', name: 'nexura-command', progress: 78, dotColor: 'bg-indigo-400' },
+  { slug: 'nexura-command', name: 'nexura-command', progress: 78, dotColor: 'bg-accent-light' },
   { slug: 'supabase-edge-sync', name: 'supabase-edge-sync', progress: 92, dotColor: 'bg-emerald-400' },
   { slug: 'telemetry-gateway', name: 'telemetry-gateway', progress: 45, dotColor: 'bg-amber-400' },
   { slug: 'realtime-broker', name: 'realtime-broker', progress: 60, dotColor: 'bg-sky-400' }
@@ -757,7 +796,7 @@ const projectStatsMap = computed(() => {
 
 // O(N + M) displayed projects with O(1) stats lookup
 const displayedProjects = computed(() => {
-  const colors = ['bg-indigo-400', 'bg-emerald-400', 'bg-amber-400', 'bg-sky-400', 'bg-rose-400', 'bg-violet-400']
+  const colors = ['bg-accent-light', 'bg-emerald-400', 'bg-amber-400', 'bg-sky-400', 'bg-rose-400', 'bg-violet-400']
   let list: Array<{ slug: string; name: string; progress: number; dotColor: string }> = []
   const stats = projectStatsMap.value
 
@@ -794,7 +833,7 @@ const displayedProjects = computed(() => {
         slug: activeSlug,
         name: activeSlug,
         progress: pStat ? pStat.progress : 50,
-        dotColor: 'bg-indigo-400'
+        dotColor: 'bg-accent-light'
       })
     }
   }

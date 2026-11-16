@@ -1,6 +1,6 @@
 <template>
   <header
-    class="h-14 px-4 sm:px-5 border-b border-white/[0.04] flex items-center justify-between gap-4 bg-[#0B0C10] shrink-0 select-none relative z-50"
+    class="h-14 px-4 sm:px-5 border-b border-white/[0.04] flex items-center justify-between gap-4 bg-canvas shrink-0 select-none relative z-50"
     aria-label="Unified Header Bar"
   >
     <!-- Left: Dynamic Clean Breadcrumb + Active Sprint Context Pill -->
@@ -8,12 +8,12 @@
       <nav class="flex items-center gap-2 text-xs font-sans min-w-0 truncate" aria-label="Breadcrumb">
         <NuxtLink
           to="/"
-          class="text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors shrink-0"
+          class="text-muted hover:text-foreground transition-colors shrink-0"
         >
           {{ breadcrumbRoot }}
         </NuxtLink>
         <span class="text-white/20 select-none shrink-0">/</span>
-        <span class="text-[#F3F4F6] font-medium truncate">
+        <span class="text-foreground font-medium truncate">
           {{ currentPageTitle }}
         </span>
       </nav>
@@ -21,13 +21,13 @@
       <!-- Active Sprint Context Pill -->
       <NuxtLink
         to="/sprints"
-        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs border border-white/[0.08] bg-white/[0.03] text-[#8A8F9E] hover:border-white/[0.15] hover:text-[#F3F4F6] transition shrink-0 cursor-pointer"
+        class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs border border-white/[0.08] bg-white/[0.03] text-muted hover:border-white/[0.15] hover:text-foreground transition shrink-0 cursor-pointer"
         title="View active sprint"
       >
         <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: var(--obs-accent-light)"></span>
         <span>Sprint {{ sprintCode }}</span>
         <span class="text-white/20">·</span>
-        <span class="text-[#F3F4F6] font-mono tabular-nums">{{ daysLeft }}d left</span>
+        <span class="text-foreground font-mono tabular-nums">{{ daysLeft }}d left</span>
       </NuxtLink>
     </div>
 
@@ -55,14 +55,14 @@
           @click="handleActionClick(action)"
           :disabled="action.disabled || action.loading"
           :class="[getActionClass(action.variant), getButtonSizeClass(action.size)]"
-          class="inline-flex items-center font-medium transition-all duration-150 ease-out select-none cursor-pointer focus:outline-none active:scale-[0.97] motion-reduce:transition-none motion-reduce:transform-none disabled:opacity-50 disabled:pointer-events-none"
+          class="inline-flex items-center font-medium transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)] select-none cursor-pointer focus:outline-none active:scale-[0.97] motion-reduce:transition-none motion-reduce:transform-none disabled:opacity-50 disabled:pointer-events-none"
           :title="action.shortcut ? `${action.label} (${action.shortcut})` : action.label"
         >
           <NexuraIcon v-if="action.icon" :name="action.icon" size="xs" class="shrink-0" />
           <span>{{ action.label }}</span>
           <kbd
             v-if="action.shortcut"
-            class="hidden sm:inline-block ml-1 px-1 py-0.5 rounded text-[10px] font-mono bg-black/30 text-white/50 border border-white/10"
+            class="hidden sm:inline-block ml-1 px-1 py-0.5 rounded text-xs leading-none font-mono bg-black/30 text-white/50 border border-white/10"
           >
             {{ action.shortcut }}
           </kbd>
@@ -96,15 +96,17 @@ function handleActionClick(action: HeaderAction) {
 function getActionClass(variant?: HeaderActionVariant) {
   switch (variant) {
     case 'primary':
-      return 'bg-[#F3F4F6] hover:bg-white text-[#07080A] shadow-sm font-semibold'
+      return 'bg-foreground hover:bg-white text-void shadow-sm font-semibold'
+    case 'accent':
+      return 'bg-accent hover:bg-accent-light text-void border border-accent-light/30 shadow-glow-accent font-semibold'
     case 'secondary':
-      return 'bg-white/[0.04] hover:bg-white/[0.08] text-[#D1D5DB] hover:text-[#F3F4F6] border border-white/[0.08]'
+      return 'bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-white/[0.08]'
     case 'ghost':
-      return 'hover:bg-white/[0.05] text-[#8A8F9E] hover:text-[#F3F4F6]'
+      return 'hover:bg-white/[0.05] text-muted hover:text-foreground'
     case 'danger':
       return 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30'
     default:
-      return 'bg-white/[0.04] hover:bg-white/[0.08] text-[#D1D5DB] hover:text-[#F3F4F6] border border-white/[0.08]'
+      return 'bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-white/[0.08]'
   }
 }
 

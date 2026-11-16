@@ -9,7 +9,7 @@
   >
     <div
       ref="panel"
-      class="w-full max-w-md p-6 rounded-2xl bg-[#111318] border border-white/[0.1] shadow-2xl text-[#F3F4F6] space-y-4 focus:outline-none"
+      class="w-full max-w-md p-6 rounded-2xl bg-surface border border-white/[0.08] shadow-2xl text-foreground space-y-4 focus:outline-none"
       tabindex="-1"
       @keydown="handleKeydown"
     >
@@ -17,16 +17,16 @@
         <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center shrink-0 shadow-[0_0_16px_rgba(244,63,94,0.15)]" aria-hidden="true">
           <NexuraIcon name="AlertTriangle" size="md" class="text-rose-400" />
         </div>
-        <h3 :id="titleId" class="font-sans text-base font-semibold text-[#F3F4F6]">{{ displayTitle }}</h3>
+        <h3 :id="titleId" class="font-sans text-base font-semibold text-foreground">{{ displayTitle }}</h3>
       </div>
 
-      <p :id="descId" class="font-sans text-sm text-[#8A8F9E] leading-relaxed">{{ displayMessage }}</p>
+      <p :id="descId" class="font-sans text-sm text-muted leading-relaxed">{{ displayMessage }}</p>
 
       <div class="flex items-center justify-end gap-3 pt-2 border-t border-white/[0.06]">
         <button
           ref="cancelButton"
           type="button"
-          class="px-4 py-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-[#8A8F9E] hover:text-[#F3F4F6] font-sans text-xs font-medium border border-white/[0.08] transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-white/20 cursor-pointer"
+          class="px-4 py-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-muted hover:text-foreground font-sans text-xs font-medium border border-white/[0.08] transition-colors disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-white/20 cursor-pointer"
           :disabled="displayBusy"
           @click="onCancel"
         >

@@ -3,16 +3,16 @@
     <!-- Header Sub-bar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
       <div>
-        <h1 class="font-sans text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight">
+        <h1 class="font-sans text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
           System Settings & Environment
         </h1>
-        <p class="font-sans text-xs text-[#8A8F9E] mt-0.5">
+        <p class="font-sans text-xs text-muted mt-0.5">
           Configure security credentials, inspect infrastructure telemetry, and customize workspace preferences.
         </p>
       </div>
       <div class="flex items-center gap-2">
         <span
-          class="font-mono text-[11px] px-2.5 py-0.5 rounded-full border font-medium flex items-center gap-1.5"
+          class="font-mono text-xs px-2.5 py-0.5 rounded-full border font-medium flex items-center gap-1.5"
           :class="isAuthenticated ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
         >
           <span class="w-1.5 h-1.5 rounded-full" :class="isAuthenticated ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'"></span>
@@ -61,33 +61,33 @@
       <!-- ================================================================= -->
       <!-- BENTO CARD 1: SESSION & SECURITY COCKPIT                          -->
       <!-- ================================================================= -->
-      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-[#111318] flex flex-col justify-between gap-6 shadow-sm">
+      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-surface flex flex-col justify-between gap-6 shadow-sm">
         <div class="space-y-4">
           <div class="flex items-start justify-between gap-3">
             <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                 <NexuraIcon name="ShieldCheck" size="sm" />
               </div>
               <div>
-                <h2 class="font-sans text-sm font-semibold text-[#F3F4F6] tracking-tight">Security & Session</h2>
-                <p class="font-sans text-[11px] text-[#8A8F9E]">Manage administrative access key & authorization state</p>
+                <h2 class="font-sans text-sm font-semibold text-foreground tracking-tight">Security & Session</h2>
+                <p class="font-sans text-xs text-muted">Manage administrative access key & authorization state</p>
               </div>
             </div>
             <span
-              class="font-mono text-[10px] px-2 py-0.5 rounded border"
+              class="font-mono text-xs px-2 py-0.5 rounded border"
               :class="isAuthenticated ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'"
             >
               {{ isAuthenticated ? 'WRITE ENABLED' : 'READ ONLY' }}
             </span>
           </div>
 
-          <p class="text-xs text-[#8A8F9E] leading-relaxed">
+          <p class="text-xs text-muted leading-relaxed">
             Write actions (creating, updating, and deleting tasks or projects) require a valid cryptographic access key. When unauthenticated, the workspace operates in deterministic read-only mode.
           </p>
 
           <!-- Access Key Input Form -->
           <div class="space-y-2 pt-2">
-            <label class="block font-mono text-[11px] text-[#8A8F9E]">
+            <label class="block font-mono text-xs text-muted">
               Workspace Access Key
             </label>
             <div class="relative">
@@ -97,19 +97,19 @@
                 placeholder="Enter access key..."
                 autocomplete="off"
                 spellcheck="false"
-                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 pr-10 text-xs font-mono text-[#F3F4F6] outline-none transition placeholder:text-[#565B68]"
+                class="w-full bg-void border border-white/[0.08] hover:border-white/[0.15] focus:border-emerald-500/50 rounded-xl px-3.5 py-2 pr-10 text-xs font-mono text-foreground outline-none transition placeholder:text-dim"
                 @keydown.enter="onSubmitAccessKey"
               />
               <button
                 type="button"
-                class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#8A8F9E] hover:text-[#F3F4F6] transition p-1 cursor-pointer"
+                class="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition p-1 cursor-pointer"
                 :title="showAccessKey ? 'Hide key' : 'Show key'"
                 @click="showAccessKey = !showAccessKey"
               >
                 <NexuraIcon :name="showAccessKey ? 'EyeOff' : 'Eye'" size="xs" />
               </button>
             </div>
-            <span v-if="authError" class="block font-mono text-[10px] text-rose-400">
+            <span v-if="authError" class="block font-mono text-xs text-rose-400">
               {{ authError }}
             </span>
           </div>
@@ -119,7 +119,7 @@
           <button
             type="button"
             :disabled="isSubmitting || !accessKeyInput.trim()"
-            class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 disabled:pointer-events-none text-xs font-mono font-semibold text-white transition cursor-pointer shadow-sm"
+            class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-foreground hover:bg-white disabled:opacity-50 disabled:pointer-events-none text-xs font-mono font-semibold text-void transition cursor-pointer shadow-sm"
             @click="onSubmitAccessKey"
           >
             <NexuraIcon v-if="!isSubmitting" name="KeyRound" size="xs" />
@@ -130,7 +130,7 @@
           <button
             v-if="isAuthenticated"
             type="button"
-            class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-rose-500/10 hover:text-rose-400 border border-white/[0.08] hover:border-rose-500/30 text-xs font-mono text-[#8A8F9E] transition cursor-pointer"
+            class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-rose-500/10 hover:text-rose-400 border border-white/[0.08] hover:border-rose-500/30 text-xs font-mono text-muted transition cursor-pointer"
             title="Terminate Active Session"
             @click="onClearSession"
           >
@@ -143,7 +143,7 @@
       <!-- ================================================================= -->
       <!-- BENTO CARD 2: INFRASTRUCTURE & REPO ALLOWLIST                     -->
       <!-- ================================================================= -->
-      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-[#111318] flex flex-col justify-between gap-6 shadow-sm">
+      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-surface flex flex-col justify-between gap-6 shadow-sm">
         <div class="space-y-4">
           <div class="flex items-start justify-between gap-3">
             <div class="flex items-center gap-2.5">
@@ -151,19 +151,19 @@
                 <NexuraIcon name="Server" size="sm" />
               </div>
               <div>
-                <h2 class="font-sans text-sm font-semibold text-[#F3F4F6] tracking-tight">Telemetry & Allowlist</h2>
-                <p class="font-sans text-[11px] text-[#8A8F9E]">Infrastructure connectivity & allowed repository scope</p>
+                <h2 class="font-sans text-sm font-semibold text-foreground tracking-tight">Telemetry & Allowlist</h2>
+                <p class="font-sans text-xs text-muted">Infrastructure connectivity & allowed repository scope</p>
               </div>
             </div>
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               OPERATIONAL
             </span>
           </div>
 
-          <div class="space-y-2.5 bg-[#07080A] border border-white/[0.06] rounded-xl p-3.5 font-mono text-xs">
+          <div class="space-y-2.5 bg-void border border-white/[0.06] rounded-xl p-3.5 font-mono text-xs">
             <!-- Supabase Status -->
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E] flex items-center gap-1.5">
+              <span class="text-muted flex items-center gap-1.5">
                 <span class="w-1.5 h-1.5 rounded-full" :class="(telemetry?.supabase?.ok || telemetry?.supabase?.healthy) ? 'bg-emerald-400' : 'bg-zinc-500'"></span>
                 <span>Supabase Live Probe</span>
               </span>
@@ -177,11 +177,11 @@
 
             <!-- GitHub Rate Limit -->
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E] flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full" :class="telemetry?.github?.rateLimit ? 'bg-indigo-400' : 'bg-zinc-500'"></span>
+              <span class="text-muted flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full" :class="telemetry?.github?.rateLimit ? 'bg-emerald-400' : 'bg-zinc-500'"></span>
                 <span>GitHub API Quota</span>
               </span>
-              <span v-if="telemetry?.github?.rateLimit" class="text-[#F3F4F6] tabular-nums font-semibold">
+              <span v-if="telemetry?.github?.rateLimit" class="text-foreground tabular-nums font-semibold">
                 {{ telemetry.github.rateLimit.remaining }} / {{ telemetry.github.rateLimit.limit }}
               </span>
               <span v-else class="text-zinc-500 font-mono">
@@ -191,7 +191,7 @@
 
             <!-- Environment Status -->
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E] flex items-center gap-1.5">
+              <span class="text-muted flex items-center gap-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>
                 <span>Runtime Node</span>
               </span>
@@ -201,20 +201,20 @@
 
           <!-- Permitted GitHub Allowlist Repositories -->
           <div class="space-y-1.5">
-            <span class="block font-mono text-[11px] text-[#8A8F9E]">
+            <span class="block font-mono text-xs text-muted">
               Allowed GitHub Repositories (Strict Policy)
             </span>
             <div class="max-h-[110px] overflow-y-auto custom-scrollbar space-y-1 pr-1 font-mono text-xs">
               <div
                 v-for="repo in allowedRepos"
                 :key="repo"
-                class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[#07080A]/80 border border-white/[0.04] text-[#F3F4F6]"
+                class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-void/80 border border-white/[0.04] text-foreground"
               >
                 <div class="flex items-center gap-2 truncate">
-                  <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400 shrink-0" />
-                  <span class="truncate text-[11px]">{{ repo }}</span>
+                  <NexuraIcon name="GitBranch" size="xs" class="text-emerald-400 shrink-0" />
+                  <span class="truncate text-xs">{{ repo }}</span>
                 </div>
-                <span class="text-[9px] uppercase px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-semibold">
+                <span class="text-xs leading-none uppercase px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-semibold">
                   Allowed
                 </span>
               </div>
@@ -222,34 +222,34 @@
           </div>
         </div>
 
-        <div class="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-[#8A8F9E]">
+        <div class="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-muted">
           <span>Security Policy</span>
-          <span class="text-indigo-300">Enforced via SSR Allowlist</span>
+          <span class="text-emerald-300">Enforced via SSR Allowlist</span>
         </div>
       </section>
 
       <!-- ================================================================= -->
       <!-- BENTO CARD 3: VISUAL ENVIRONMENT PREFERENCES                      -->
       <!-- ================================================================= -->
-      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-[#111318] flex flex-col justify-between gap-6 shadow-sm">
+      <section class="obs-card rounded-2xl p-5 sm:p-6 border border-white/[0.07] bg-surface flex flex-col justify-between gap-6 shadow-sm">
         <div class="space-y-4">
           <div class="flex items-start justify-between gap-3">
             <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
                 <NexuraIcon name="Palette" size="sm" />
               </div>
               <div>
-                <h2 class="font-sans text-sm font-semibold text-[#F3F4F6] tracking-tight">Theme & Appearance</h2>
-                <p class="font-sans text-[11px] text-[#8A8F9E]">Precision Dark Obsidian Bento visual presets</p>
+                <h2 class="font-sans text-sm font-semibold text-foreground tracking-tight">Theme & Appearance</h2>
+                <p class="font-sans text-xs text-muted">Precision Dark Obsidian Bento visual presets</p>
               </div>
             </div>
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
+            <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
               DARK VOID
             </span>
           </div>
 
-          <p class="text-xs text-[#8A8F9E] leading-relaxed">
-            All themes adhere to the Precision Dark Obsidian aesthetic, featuring cool void backdrops (<code class="font-mono text-[11px] text-zinc-300">#07080A</code>) and elevated glass cards.
+          <p class="text-xs text-muted leading-relaxed">
+            All themes adhere to the Precision Dark Obsidian aesthetic, featuring cool void backdrops (<code class="font-mono text-xs text-foreground">#07080A</code>) and elevated glass cards.
           </p>
 
           <!-- Theme Choices -->
@@ -259,26 +259,26 @@
               :key="preset.id"
               type="button"
               class="w-full flex items-center justify-between p-2.5 rounded-xl border text-left transition cursor-pointer"
-              :class="activeThemeId === preset.id
-                ? 'bg-white/[0.08] border-indigo-500/40 text-white shadow-sm'
-                : 'bg-[#07080A]/60 border-white/[0.05] hover:border-white/[0.12] text-[#8A8F9E] hover:text-[#F3F4F6]'"
+              :class="currentPreset === preset.id
+                ? 'bg-white/[0.08] border-accent/50 text-white shadow-sm'
+                : 'bg-void/60 border-white/[0.05] hover:border-white/[0.12] text-muted hover:text-foreground'"
               @click="onSelectTheme(preset.id)"
             >
               <div class="flex items-center gap-2.5">
                 <span class="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" :style="{ backgroundColor: preset.accentColor }"></span>
                 <div>
-                  <div class="text-xs font-medium text-[#F3F4F6]">{{ preset.label }}</div>
-                  <div class="text-[10px] text-[#8A8F9E] font-mono">{{ preset.description }}</div>
+                  <div class="text-xs font-medium text-foreground">{{ preset.label }}</div>
+                  <div class="text-xs text-muted font-mono">{{ preset.description }}</div>
                 </div>
               </div>
-              <NexuraIcon v-if="activeThemeId === preset.id" name="Check" size="xs" class="text-indigo-400" />
+              <NexuraIcon v-if="currentPreset === preset.id" name="Check" size="xs" class="text-accent-light" />
             </button>
           </div>
         </div>
 
-        <div class="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-[#8A8F9E]">
+        <div class="pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-muted">
           <span>Current Active</span>
-          <span class="text-indigo-300 font-semibold">{{ currentThemeLabel }}</span>
+          <span class="text-accent-light font-semibold">{{ presetLabel }}</span>
         </div>
       </section>
     </div>
@@ -287,6 +287,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useThemePreset, THEME_PRESETS, type ThemePresetId } from '~/composables/useThemePreset'
 import NexuraIcon from '~/components/ui/NexuraIcon.vue'
 import { useSession } from '~/composables/useSession'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
@@ -312,33 +313,14 @@ const allowedRepos = computed<string[]>(() => {
   return Array.from(new Set([...base, ...projectRepos]))
 })
 
-// Visual Theme Presets
-interface ThemePreset {
-  id: string
-  label: string
-  description: string
-  accentColor: string
-}
+// Visual Theme Presets (SSOT from useThemePreset)
+const { currentPreset, currentPresetOption, setPreset } = useThemePreset()
+const presetLabel = computed(() => currentPresetOption.value?.label ?? currentPreset.value)
+const themePresets = THEME_PRESETS
 
-const themePresets: ThemePreset[] = [
-  { id: 'indigo', label: 'Default Indigo', description: 'Obsidian void with electric indigo accents', accentColor: '#6366F1' },
-  { id: 'amethyst', label: 'Amethyst Void', description: 'Deep obsidian with royal violet highlights', accentColor: '#A855F7' },
-  { id: 'emerald', label: 'Emerald Forest', description: 'High-contrast black with vivid emerald shine', accentColor: '#10B981' },
-  { id: 'stealth', label: 'Obsidian Stealth', description: 'Monochrome pure void with cold silver zinc', accentColor: '#E4E4E7' }
-]
-
-const activeThemeId = useState<string>('obsidian_theme_preference', () => 'indigo')
-
-const currentThemeLabel = computed(() => {
-  return themePresets.find((t) => t.id === activeThemeId.value)?.label || 'Default Indigo'
-})
-
-function onSelectTheme(id: string) {
-  activeThemeId.value = id
-  if (typeof localStorage !== 'undefined') {
-    localStorage.setItem('nexura:theme', id)
-  }
-  showFeedback(`Visual theme changed to ${currentThemeLabel.value}`)
+function onSelectTheme(id: ThemePresetId) {
+  setPreset(id)
+  showFeedback(`Visual theme changed to ${presetLabel.value}`)
 }
 
 // Toast Feedback System
@@ -384,13 +366,6 @@ async function onRefreshAll() {
 const { setActions, clearActions } = useHeaderActions()
 
 onMounted(() => {
-  if (typeof localStorage !== 'undefined') {
-    const savedTheme = localStorage.getItem('nexura:theme')
-    if (savedTheme && themePresets.some((p) => p.id === savedTheme)) {
-      activeThemeId.value = savedTheme
-    }
-  }
-
   setActions([
     {
       id: 'refresh-settings',

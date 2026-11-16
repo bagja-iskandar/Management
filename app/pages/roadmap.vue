@@ -10,7 +10,7 @@
       aria-label="Loading architecture roadmap"
     >
       <!-- Skeleton Header -->
-      <div class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4">
+      <div class="obs-card p-6 rounded-2xl bg-surface border border-white/[0.07] space-y-4">
         <div class="h-6 bg-white/[0.08] rounded w-1/4"></div>
         <div class="h-4 bg-white/[0.04] rounded w-1/2"></div>
       </div>
@@ -26,20 +26,20 @@
     <!-- ================================================================= -->
     <div
       v-else-if="roadmapDataState === 'ERROR'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-rose-500/30 p-8 space-y-4 max-w-lg mx-auto my-12"
+      class="py-16 text-center rounded-2xl bg-surface border border-rose-500/30 p-8 space-y-4 max-w-lg mx-auto my-12"
       role="alert"
     >
       <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400">
         <NexuraIcon name="AlertTriangle" size="lg" />
       </div>
-      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">Connection Failed</h2>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+      <h2 class="font-mono text-lg font-semibold text-foreground">Connection Failed</h2>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">
         Failed to synchronize roadmap projects telemetry from the server.
       </p>
       <div class="flex items-center justify-center gap-3 pt-2">
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-foreground border border-white/[0.08] transition-colors cursor-pointer"
           @click="workspaceStore.initializeWorkspace(true)"
         >
           <NexuraIcon name="RefreshCw" size="xs" />
@@ -53,19 +53,19 @@
     <!-- ================================================================= -->
     <div
       v-else-if="roadmapDataState === 'SUCCESS_EMPTY'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.08] p-8 space-y-4 max-w-lg mx-auto my-12"
+      class="py-16 text-center rounded-2xl bg-surface border border-white/[0.08] p-8 space-y-4 max-w-lg mx-auto my-12"
     >
-      <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-light shadow-[0_0_20px_rgba(99,102,241,0.15)]">
         <NexuraIcon name="Layers" size="lg" />
       </div>
-      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">No Projects Registered</h2>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto leading-relaxed">
+      <h2 class="font-mono text-lg font-semibold text-foreground">No Projects Registered</h2>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto leading-relaxed">
         No architecture projects currently exist in this workspace. Create your first project in the Projects Hub to begin tracking roadmap milestones.
       </p>
       <div class="flex items-center justify-center gap-3 pt-2">
         <NuxtLink
           to="/projects"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground hover:bg-white text-xs font-mono text-void font-semibold transition-colors cursor-pointer"
         >
           <NexuraIcon name="Plus" size="xs" />
           <span>Go to Projects Hub</span>
@@ -99,10 +99,10 @@
       <!-- Header Section -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
         <div class="space-y-1">
-          <h1 class="font-sans text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight">
+          <h1 class="font-sans text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
             Architecture Roadmap
           </h1>
-          <p class="font-sans text-xs text-[#8A8F9E]">
+          <p class="font-sans text-xs text-muted">
             Strategic milestone progression across canonical release phases.
           </p>
         </div>
@@ -110,19 +110,19 @@
         <div class="flex items-center gap-3 flex-wrap">
           <!-- Deliverables Search Input -->
           <div class="relative w-44 sm:w-56">
-            <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+            <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
               <NexuraIcon name="Search" size="xs" />
             </div>
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Filter projects..."
-              class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-7 py-1.5 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 outline-none transition font-sans"
+              class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-7 py-1.5 text-xs text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 outline-none transition font-sans"
             />
             <button
               v-if="searchQuery"
               type="button"
-              class="absolute right-2 top-1/2 -translate-y-1/2 text-[#565B68] hover:text-[#F3F4F6] cursor-pointer"
+              class="absolute right-2 top-1/2 -translate-y-1/2 text-dim hover:text-foreground cursor-pointer"
               @click="searchQuery = ''"
             >
               <NexuraIcon name="X" size="xs" />
@@ -132,7 +132,7 @@
           <!-- Hub Link -->
           <NuxtLink
             to="/projects"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.08] transition"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-muted hover:text-foreground border border-white/[0.08] transition"
           >
             <span>Projects Hub</span>
             <NexuraIcon name="ArrowRight" size="xs" />
@@ -178,16 +178,16 @@
       <!-- Empty Search Result -->
       <div
         v-if="filteredProjects.length === 0"
-        class="py-12 text-center rounded-2xl bg-[#111318] border border-white/[0.07] space-y-2"
+        class="py-12 text-center rounded-2xl bg-surface border border-white/[0.07] space-y-2"
       >
-        <div class="w-10 h-10 mx-auto rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#565B68]">
+        <div class="w-10 h-10 mx-auto rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-dim">
           <NexuraIcon name="Search" size="sm" />
         </div>
-        <h3 class="font-sans text-sm font-semibold text-[#F3F4F6]">No matching projects</h3>
-        <p class="font-sans text-xs text-[#8A8F9E]">No roadmap projects match your current search criteria.</p>
+        <h3 class="font-sans text-sm font-semibold text-foreground">No matching projects</h3>
+        <p class="font-sans text-xs text-muted">No roadmap projects match your current search criteria.</p>
         <button
           type="button"
-          class="text-indigo-400 hover:text-indigo-300 font-sans text-xs underline cursor-pointer pt-1 inline-block"
+          class="text-accent-light hover:text-accent-light font-sans text-xs underline cursor-pointer pt-1 inline-block"
           @click="searchQuery = ''"
         >
           Clear Search
@@ -200,7 +200,7 @@
           <div
             v-for="phase in CANONICAL_RELEASE_PHASES"
             :key="phase.id"
-            class="flex flex-col rounded-2xl bg-[#0B0C10] border border-white/[0.06] p-3 space-y-3 min-h-[380px]"
+            class="flex flex-col rounded-2xl bg-canvas border border-white/[0.06] p-3 space-y-3 min-h-[380px]"
           >
             <!-- Column Header -->
             <div class="p-2 border-b border-white/[0.06] space-y-1">
@@ -211,11 +211,11 @@
                 >
                   {{ phase.label }}
                 </span>
-                <span class="font-mono tabular-nums text-xs px-2 py-0.5 rounded-full bg-white/[0.05] text-[#8A8F9E] border border-white/[0.08] shrink-0">
+                <span class="font-mono tabular-nums text-xs px-2 py-0.5 rounded-full bg-white/[0.05] text-muted border border-white/[0.08] shrink-0">
                   {{ getProjectsByPhase(phase.id).length }}
                 </span>
               </div>
-              <p class="font-sans text-[11px] text-[#8A8F9E] line-clamp-2 leading-tight">
+              <p class="font-sans text-xs text-muted line-clamp-2 leading-tight">
                 {{ phase.description }}
               </p>
             </div>
@@ -225,8 +225,8 @@
               v-if="getProjectsByPhase(phase.id).length === 0"
               class="flex-1 py-10 px-3 text-center rounded-xl bg-white/[0.01] border border-dashed border-white/[0.05] flex flex-col items-center justify-center space-y-1.5"
             >
-              <NexuraIcon name="Inbox" size="sm" class="text-[#565B68]" />
-              <p class="font-sans text-[11px] text-[#565B68] leading-tight max-w-[160px]">
+              <NexuraIcon name="Inbox" size="sm" class="text-dim" />
+              <p class="font-sans text-xs text-dim leading-tight max-w-[160px]">
                 No projects in this phase.
               </p>
             </div>
@@ -236,29 +236,29 @@
               <article
                 v-for="project in getProjectsByPhase(phase.id)"
                 :key="project.id"
-                class="obs-card p-3.5 rounded-xl bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] transition-all space-y-2.5 shadow-sm group"
+                class="obs-card p-3.5 rounded-xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all space-y-2.5 shadow-sm group"
               >
                 <!-- Card Header: Title & Priority -->
                 <div class="space-y-1">
                   <div class="flex items-start justify-between gap-1.5">
                     <NuxtLink
                       :to="`/projects/${project.slug}`"
-                      class="font-sans text-xs sm:text-sm font-semibold text-[#F3F4F6] group-hover:text-indigo-300 transition-colors line-clamp-1"
+                      class="font-sans text-xs sm:text-sm font-semibold text-foreground group-hover:text-accent-light transition-colors line-clamp-1"
                       :title="project.title"
                     >
                       {{ project.title }}
                     </NuxtLink>
                     <span
-                      class="font-mono text-[10px] px-1.5 py-0.5 rounded uppercase font-medium shrink-0 border"
+                      class="font-mono text-xs px-1.5 py-0.5 rounded uppercase font-medium shrink-0 border"
                       :class="getPriorityBadgeClass(project.priority)"
                     >
                       {{ project.priority }}
                     </span>
                   </div>
                   <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="font-mono text-[10px] text-[#8A8F9E]">/{{ project.slug }}</span>
+                    <span class="font-mono text-xs text-muted">/{{ project.slug }}</span>
                     <span
-                      class="font-mono text-[10px] px-1.5 py-0.5 rounded capitalize border font-medium"
+                      class="font-mono text-xs px-1.5 py-0.5 rounded capitalize border font-medium"
                       :class="getStatusBadgeClass(project.status)"
                     >
                       {{ project.status }}
@@ -266,7 +266,7 @@
                     <!-- Anomaly Badge -->
                     <span
                       v-if="classifyReleasePhase(project.releasePhase).isAnomaly"
-                      class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/25 flex items-center gap-1"
+                      class="font-mono text-xs px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/25 flex items-center gap-1"
                       :title="`Unknown release phase value: '${classifyReleasePhase(project.releasePhase).originalValue}'`"
                     >
                       <NexuraIcon name="AlertTriangle" size="xs" />
@@ -276,27 +276,27 @@
                 </div>
 
                 <!-- Description -->
-                <p v-if="project.description" class="font-sans text-[11px] text-[#8A8F9E] line-clamp-2 leading-relaxed">
+                <p v-if="project.description" class="font-sans text-xs text-muted line-clamp-2 leading-relaxed">
                   {{ project.description }}
                 </p>
 
                 <!-- Progress Bar & Deliverables Count -->
                 <div class="pt-1 border-t border-white/[0.04]">
-                  <div v-if="!isTaskMetricsAvailable" class="flex items-center gap-1 text-[10px] font-mono text-[#8A8F9E]">
+                  <div v-if="!isTaskMetricsAvailable" class="flex items-center gap-1 text-xs font-mono text-muted">
                     <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                     <span>Tasks Syncing...</span>
                   </div>
                   <div v-else class="space-y-1">
-                    <div class="flex items-center justify-between text-[10px] font-mono">
-                      <span class="text-[#8A8F9E] tabular-nums">
+                    <div class="flex items-center justify-between text-xs font-mono">
+                      <span class="text-muted tabular-nums">
                         {{ getProjectTasks(project.slug).length }} tasks
                         <span class="text-emerald-400">({{ getProjectTasks(project.slug).filter(t => t.status === 'deployed').length }} deployed)</span>
                       </span>
-                      <span class="text-[#F3F4F6] font-semibold tabular-nums">{{ getProjectProgress(project.slug) }}%</span>
+                      <span class="text-foreground font-semibold tabular-nums">{{ getProjectProgress(project.slug) }}%</span>
                     </div>
                     <div class="w-full h-1 bg-white/[0.06] rounded-full overflow-hidden">
                       <div
-                        class="h-full bg-indigo-500 transition-all duration-300 rounded-full"
+                        class="h-full bg-accent transition-all duration-300 rounded-full"
                         :style="{ width: `${getProjectProgress(project.slug)}%` }"
                       ></div>
                     </div>
@@ -308,11 +308,11 @@
                   <span
                     v-for="tech in project.techStack.slice(0, 3)"
                     :key="tech"
-                    class="font-mono text-[9px] bg-white/[0.03] text-[#8A8F9E] border border-white/[0.06] rounded px-1.5 py-0.2"
+                    class="font-mono text-xs leading-none bg-white/[0.03] text-muted border border-white/[0.06] rounded px-1.5 py-0.2"
                   >
                     {{ tech }}
                   </span>
-                  <span v-if="project.techStack.length > 3" class="font-mono text-[9px] text-[#565B68]">
+                  <span v-if="project.techStack.length > 3" class="font-mono text-xs leading-none text-dim">
                     +{{ project.techStack.length - 3 }}
                   </span>
                 </div>
@@ -326,23 +326,23 @@
                       :value="classifyReleasePhase(project.releasePhase).phase"
                       :disabled="isUpdatingPhase[project.id]"
                       aria-label="Change Release Phase"
-                      class="bg-[#07080A] text-[#F3F4F6] text-[10px] font-mono rounded px-1.5 py-0.5 pr-5 border border-white/[0.08] hover:border-white/[0.16] focus:border-indigo-500/60 outline-none transition appearance-none cursor-pointer disabled:opacity-50"
+                      class="bg-void text-foreground text-xs font-mono rounded px-1.5 py-0.5 pr-5 border border-white/[0.08] hover:border-white/[0.16] focus:border-accent/60 outline-none transition appearance-none cursor-pointer disabled:opacity-50"
                       @change="onUpdateReleasePhase(project, ($event.target as HTMLSelectElement).value as ReleasePhase)"
                     >
                       <option
                         v-for="p in CANONICAL_RELEASE_PHASES"
                         :key="p.id"
                         :value="p.id"
-                        class="bg-[#111318] text-[#F3F4F6]"
+                        class="bg-surface text-foreground"
                       >
                         {{ p.id.toUpperCase() }}
                       </option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-[#8A8F9E]">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1 text-muted">
                       <NexuraIcon
                         :name="isUpdatingPhase[project.id] ? 'RotateCw' : 'ChevronDown'"
                         size="xs"
-                        :class="{ 'animate-spin text-indigo-400': isUpdatingPhase[project.id] }"
+                        :class="{ 'animate-spin text-accent-light': isUpdatingPhase[project.id] }"
                       />
                     </div>
                   </div>
@@ -361,7 +361,7 @@
                     </a>
                     <NuxtLink
                       :to="`/projects/${project.slug}`"
-                      class="p-1 rounded hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition"
+                      class="p-1 rounded hover:bg-white/10 text-muted hover:text-foreground border border-white/[0.06] transition"
                       title="View Project Cockpit"
                     >
                       <NexuraIcon name="ArrowRight" size="xs" />
@@ -392,18 +392,18 @@
                 :class="classifyReleasePhase(project.releasePhase).phase === 'released'
                   ? 'bg-emerald-400 ring-4 ring-emerald-400/20'
                   : classifyReleasePhase(project.releasePhase).phase === 'backlog'
-                  ? 'bg-[#565B68] ring-4 ring-white/[0.05]'
-                  : 'bg-indigo-400 ring-4 ring-indigo-400/20'"
+                  ? 'bg-zinc-600 ring-4 ring-white/[0.05]'
+                  : 'bg-accent-light ring-4 ring-accent/20'"
                 :title="`Phase: ${classifyReleasePhase(project.releasePhase).phase}`"
               ></div>
             </div>
 
             <!-- Card -->
             <article
-              class="ml-10 sm:ml-16 w-full p-5 sm:p-6 rounded-2xl bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] transition-all group shadow-sm"
+              class="ml-10 sm:ml-16 w-full p-5 sm:p-6 rounded-2xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all group shadow-sm"
               :class="classifyReleasePhase(project.releasePhase).phase === 'released'
                 ? 'hover:border-emerald-500/30 hover:shadow-[0_0_24px_rgba(16,185,129,0.08)]'
-                : 'hover:border-indigo-500/30 hover:shadow-[0_0_24px_rgba(99,102,241,0.08)]'"
+                : 'hover:border-accent/30 hover:shadow-[0_0_24px_rgba(99,102,241,0.08)]'"
             >
               <!-- Card Top Header -->
               <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 pb-3 border-b border-white/[0.04]">
@@ -431,12 +431,12 @@
 
                     <NuxtLink
                       :to="`/projects/${project.slug}`"
-                      class="font-sans text-base sm:text-lg font-semibold text-[#F3F4F6] hover:text-indigo-300 transition-colors"
+                      class="font-sans text-base sm:text-lg font-semibold text-foreground hover:text-accent-light transition-colors"
                     >
                       {{ project.title }}
                     </NuxtLink>
                   </div>
-                  <span class="font-mono text-xs text-[#565B68] mt-1 block">/{{ project.slug }}</span>
+                  <span class="font-mono text-xs text-dim mt-1 block">/{{ project.slug }}</span>
                 </div>
 
                 <!-- Right Header: Status, Live Link & Quick Phase Selector -->
@@ -470,23 +470,23 @@
                       :value="classifyReleasePhase(project.releasePhase).phase"
                       :disabled="isUpdatingPhase[project.id]"
                       aria-label="Change Release Phase"
-                      class="bg-[#07080A] text-[#F3F4F6] text-xs font-mono rounded-lg px-2 py-1 pr-6 border border-white/[0.08] hover:border-white/[0.16] focus:border-indigo-500/60 outline-none transition appearance-none cursor-pointer disabled:opacity-50"
+                      class="bg-void text-foreground text-xs font-mono rounded-lg px-2 py-1 pr-6 border border-white/[0.08] hover:border-white/[0.16] focus:border-accent/60 outline-none transition appearance-none cursor-pointer disabled:opacity-50"
                       @change="onUpdateReleasePhase(project, ($event.target as HTMLSelectElement).value as ReleasePhase)"
                     >
                       <option
                         v-for="p in CANONICAL_RELEASE_PHASES"
                         :key="p.id"
                         :value="p.id"
-                        class="bg-[#111318] text-[#F3F4F6]"
+                        class="bg-surface text-foreground"
                       >
                         {{ p.label }}
                       </option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-[#8A8F9E]">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-muted">
                       <NexuraIcon
                         :name="isUpdatingPhase[project.id] ? 'RotateCw' : 'ChevronDown'"
                         size="xs"
-                        :class="{ 'animate-spin text-indigo-400': isUpdatingPhase[project.id] }"
+                        :class="{ 'animate-spin text-accent-light': isUpdatingPhase[project.id] }"
                       />
                     </div>
                   </div>
@@ -494,24 +494,24 @@
               </div>
 
               <!-- Description -->
-              <p class="font-sans text-xs text-[#8A8F9E] mt-3 leading-relaxed">
+              <p class="font-sans text-xs text-muted mt-3 leading-relaxed">
                 {{ project.description || 'Active architecture project tracked in the workspace roadmap.' }}
               </p>
 
               <!-- Progress Bar -->
               <div class="mt-3">
-                <div v-if="!isTaskMetricsAvailable" class="flex items-center gap-1.5 text-xs font-mono text-[#8A8F9E]">
+                <div v-if="!isTaskMetricsAvailable" class="flex items-center gap-1.5 text-xs font-mono text-muted">
                   <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                   <span>Tasks Syncing...</span>
                 </div>
                 <div v-else class="space-y-1.5 max-w-md">
                   <div class="flex items-center justify-between text-xs font-mono">
-                    <span class="text-[#8A8F9E] text-[11px]">Milestone Completion Progress</span>
-                    <span class="text-[#F3F4F6] font-semibold tabular-nums text-xs">{{ getProjectProgress(project.slug) }}%</span>
+                    <span class="text-muted text-xs">Milestone Completion Progress</span>
+                    <span class="text-foreground font-semibold tabular-nums text-xs">{{ getProjectProgress(project.slug) }}%</span>
                   </div>
                   <div class="w-full h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
                     <div
-                      class="h-full bg-indigo-500 transition-all duration-300 rounded-full"
+                      class="h-full bg-accent transition-all duration-300 rounded-full"
                       :style="{ width: `${getProjectProgress(project.slug)}%` }"
                     ></div>
                   </div>
@@ -521,26 +521,26 @@
               <!-- Metadata 3-Column Bento Grid -->
               <div class="mt-4 pt-3 border-t border-white/[0.04] grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
                 <!-- Tile 1: Timeline Target -->
-                <div class="p-3 rounded-xl bg-[#07080A] border border-white/[0.06]">
-                  <span class="text-[10px] text-[#8A8F9E] uppercase tracking-wider block font-mono">Timeline Target</span>
-                  <span class="text-[#F3F4F6] mt-1 block truncate tabular-nums">
+                <div class="p-3 rounded-xl bg-void border border-white/[0.06]">
+                  <span class="text-xs text-muted uppercase tracking-wider block font-mono">Timeline Target</span>
+                  <span class="text-foreground mt-1 block truncate tabular-nums">
                     {{ formatDate(project.startDate) }} – {{ formatDate(project.dueDate) }}
                   </span>
                 </div>
 
                 <!-- Tile 2: Linked Tasks Count -->
-                <div class="p-3 rounded-xl bg-[#07080A] border border-white/[0.06]">
-                  <span class="text-[10px] text-[#8A8F9E] uppercase tracking-wider block font-mono">Linked Tasks</span>
-                  <span class="text-[#F3F4F6] mt-1 block tabular-nums">
+                <div class="p-3 rounded-xl bg-void border border-white/[0.06]">
+                  <span class="text-xs text-muted uppercase tracking-wider block font-mono">Linked Tasks</span>
+                  <span class="text-foreground mt-1 block tabular-nums">
                     {{ getProjectTasks(project.slug).length }} tasks
-                    <span class="text-emerald-400 text-[11px]">({{ getProjectTasks(project.slug).filter(t => t.status === 'deployed').length }} deployed)</span>
+                    <span class="text-emerald-400 text-xs">({{ getProjectTasks(project.slug).filter(t => t.status === 'deployed').length }} deployed)</span>
                   </span>
                 </div>
 
                 <!-- Tile 3: Repository Connection -->
-                <div class="p-3 rounded-xl bg-[#07080A] border border-white/[0.06]">
-                  <span class="text-[10px] text-[#8A8F9E] uppercase tracking-wider block font-mono">Repository</span>
-                  <span class="text-indigo-300/90 mt-1 block truncate font-medium">
+                <div class="p-3 rounded-xl bg-void border border-white/[0.06]">
+                  <span class="text-xs text-muted uppercase tracking-wider block font-mono">Repository</span>
+                  <span class="text-accent-light/90 mt-1 block truncate font-medium">
                     {{ project.githubRepo || project.slug }}
                   </span>
                 </div>
@@ -552,7 +552,7 @@
                   <span
                     v-for="tech in project.techStack"
                     :key="tech"
-                    class="font-mono text-[10px] bg-white/[0.04] text-[#8A8F9E] border border-white/[0.06] rounded px-2 py-0.5"
+                    class="font-mono text-xs bg-white/[0.04] text-muted border border-white/[0.06] rounded px-2 py-0.5"
                   >
                     {{ tech }}
                   </span>
@@ -561,7 +561,7 @@
 
                 <NuxtLink
                   :to="`/projects/${project.slug}`"
-                  class="inline-flex items-center justify-center gap-1.5 font-mono text-xs px-3.5 py-1.5 rounded-lg border transition-all focus:outline-none bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.08]"
+                  class="inline-flex items-center justify-center gap-1.5 font-mono text-xs px-3.5 py-1.5 rounded-lg border transition-all focus:outline-none bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-white/[0.08]"
                 >
                   <span>View Project Cockpit</span>
                   <NexuraIcon name="ArrowRight" size="xs" />
@@ -726,7 +726,7 @@ function getProjectsByPhase(phaseId: ReleasePhase): Project[] {
 
 function getPhaseBadgeClass(phase: ReleasePhase): string {
   const match = CANONICAL_RELEASE_PHASES.find(p => p.id === phase)
-  return match?.badgeClass || 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'
+  return match?.badgeClass || 'bg-white/[0.04] text-muted border-white/[0.08]'
 }
 
 function getPhaseLabel(phase: ReleasePhase): string {
@@ -770,16 +770,16 @@ function getStatusBadgeClass(status?: string): string {
   if (s === 'completed' || s === 'deployed') return 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
   if (s === 'on-hold') return 'bg-amber-500/15 text-amber-300 border-amber-500/30'
   if (s === 'planned') return 'bg-violet-500/15 text-violet-300 border-violet-500/30'
-  if (s === 'archived') return 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'
-  return 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30'
+  if (s === 'archived') return 'bg-white/[0.04] text-muted border-white/[0.08]'
+  return 'bg-accent/15 text-accent-light border-accent/30'
 }
 
 function getPriorityBadgeClass(priority?: string): string {
   const p = (priority || '').toLowerCase()
   if (p === 'critical') return 'bg-rose-500/15 text-rose-300 border-rose-500/30'
   if (p === 'high') return 'bg-amber-500/15 text-amber-300 border-amber-500/30'
-  if (p === 'medium') return 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30'
-  return 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'
+  if (p === 'medium') return 'bg-accent/15 text-accent-light border-accent/30'
+  return 'bg-white/[0.04] text-muted border-white/[0.08]'
 }
 
 // Quick Phase Transition Handling

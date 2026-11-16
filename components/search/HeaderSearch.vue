@@ -5,7 +5,7 @@
       class="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all duration-150 select-none group"
       :class="[
         isOpen
-          ? 'bg-[#0B0C10] border border-white/[0.2] ring-1 ring-indigo-500/40 shadow-inner'
+          ? 'bg-canvas border border-white/[0.12] ring-1 ring-accent/40 shadow-inner'
           : 'bg-white/[0.04] hover:bg-white/[0.07] border border-white/[0.08] hover:border-white/[0.2] shadow-inner cursor-pointer'
       ]"
       role="search"
@@ -15,14 +15,14 @@
       <NexuraIcon
         :name="isOpen ? leadingIcon : 'Search'"
         size="sm"
-        :class="isOpen ? leadingIconColor : 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'"
+        :class="isOpen ? leadingIconColor : 'text-muted group-hover:text-foreground'"
         class="shrink-0 transition-colors"
       />
 
       <!-- Dynamic Inline Prefix Chip (when prefix detected and search is open) -->
       <span
         v-if="isOpen && prefixChip"
-        class="px-1.5 py-0.5 rounded text-[10px] font-mono shrink-0 select-none animate-fadeIn"
+        class="px-1.5 py-0.5 rounded text-xs leading-none font-mono shrink-0 select-none animate-fadeIn"
         :class="prefixChip.class"
       >
         {{ prefixChip.label }}
@@ -39,7 +39,7 @@
         aria-autocomplete="list"
         :aria-activedescendant="isOpen && activeVisualItem ? 'omni-item-' + activeVisualItem.id : undefined"
         :placeholder="isOpen ? 'Search deliverables, projects... (or > @ # !)' : 'Search deliverables, projects... (Ctrl+K or /)'"
-        class="w-full bg-transparent text-xs text-[#F3F4F6] placeholder-[#565B68] outline-none font-sans min-w-0"
+        class="w-full bg-transparent text-xs text-foreground placeholder-dim outline-none font-sans min-w-0"
         spellcheck="false"
         autocomplete="off"
         @focus="onInputFocus"
@@ -50,7 +50,7 @@
       <button
         v-if="isOpen && rawQuery"
         type="button"
-        class="text-[#8A8F9E] hover:text-[#F3F4F6] transition p-0.5 rounded hover:bg-white/[0.08] cursor-pointer shrink-0"
+        class="text-muted hover:text-foreground transition p-0.5 rounded hover:bg-white/[0.08] cursor-pointer shrink-0"
         aria-label="Clear query"
         @mousedown.prevent
         @click.stop="clearQuery"
@@ -61,7 +61,7 @@
       <!-- ESC Badge when open -->
       <kbd
         v-if="isOpen"
-        class="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.08] border border-white/[0.12] text-white/70 font-mono text-[10px] cursor-pointer hover:text-white shrink-0 select-none"
+        class="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.08] border border-white/[0.12] text-white/70 font-mono text-xs leading-none cursor-pointer hover:text-white shrink-0 select-none"
         title="Press Esc to clear or close"
         @mousedown.prevent
         @click.stop="handleEscAction"
@@ -72,9 +72,9 @@
       <!-- Cmd+K badge when closed -->
       <kbd
         v-else
-        class="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-[#8A8F9E] font-mono text-[10px] pointer-events-none select-none shrink-0"
+        class="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-muted font-mono text-xs leading-none pointer-events-none select-none shrink-0"
       >
-        <NexuraIcon name="Command" size="xs" class="text-[#8A8F9E]" />
+        <NexuraIcon name="Command" size="xs" class="text-muted" />
         <span class="font-semibold text-white/90">K</span>
       </kbd>
     </div>
@@ -84,7 +84,7 @@
       <div
         v-if="isOpen"
         ref="popupRef"
-        class="absolute top-full mt-2 left-0 right-0 w-full z-50 bg-[#0B0C10] border border-white/[0.08] rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden flex flex-col max-h-[min(65vh,480px)] select-none"
+        class="absolute top-full mt-2 left-0 right-0 w-full z-50 bg-canvas border border-white/[0.08] rounded-xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden flex flex-col max-h-[min(65vh,480px)] select-none"
         role="dialog"
         aria-modal="false"
         aria-label="OmniSearch Results"
@@ -120,11 +120,11 @@
           <template v-if="isIdleState">
             <!-- Zone 1: Recent Searches (only shown when history exists) -->
             <div v-if="searchHistory.length > 0" class="space-y-1">
-              <div class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans flex items-center justify-between border-b border-white/[0.04]">
+              <div class="px-2.5 py-1 text-xs font-medium tracking-[0.06em] uppercase text-muted font-sans flex items-center justify-between border-b border-white/[0.04]">
                 <span>RECENT SEARCHES</span>
                 <button
                   type="button"
-                  class="text-[10px] font-mono text-[#8A8F9E] hover:text-white transition cursor-pointer"
+                  class="text-xs font-mono text-muted hover:text-foreground transition cursor-pointer"
                   @mousedown.prevent
                   @click.stop="clearSearchHistory"
                 >
@@ -135,17 +135,17 @@
                 <div
                   v-for="query in searchHistory"
                   :key="query"
-                  class="group px-3 py-1.5 rounded-lg hover:bg-white/[0.04] transition-colors flex items-center justify-between gap-2 cursor-pointer text-xs text-[#D1D5DB]"
+                  class="group px-3 py-1.5 rounded-lg hover:bg-white/[0.04] transition-colors flex items-center justify-between gap-2 cursor-pointer text-xs text-foreground"
                   @mousedown.prevent
                   @click="onSelectHistory(query)"
                 >
                   <div class="flex items-center gap-2 min-w-0 flex-1">
-                    <NexuraIcon name="Clock" size="xs" class="text-[#8A8F9E] shrink-0" />
+                    <NexuraIcon name="Clock" size="xs" class="text-muted shrink-0" />
                     <span class="font-mono text-xs truncate">{{ query }}</span>
                   </div>
                   <button
                     type="button"
-                    class="text-[#8A8F9E] hover:text-rose-300 p-0.5 rounded hover:bg-white/[0.08] transition cursor-pointer shrink-0"
+                    class="text-muted hover:text-rose-300 p-0.5 rounded hover:bg-white/[0.08] transition cursor-pointer shrink-0"
                     :aria-label="'Remove ' + query + ' from recent searches'"
                     @mousedown.prevent
                     @click.stop="removeSearchHistory(query)"
@@ -158,12 +158,12 @@
 
             <!-- Zone 2: Search Guidance (Operators & Scope Triggers) -->
             <div class="space-y-1.5">
-              <div class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans flex items-center justify-between border-b border-white/[0.04]">
+              <div class="px-2.5 py-1 text-xs font-medium tracking-[0.06em] uppercase text-muted font-sans flex items-center justify-between border-b border-white/[0.04]">
                 <span>SEARCH GUIDANCE</span>
-                <span class="text-[10px] font-mono text-[#565B68]">Operators &amp; Scopes</span>
+                <span class="text-xs font-mono text-dim">Operators &amp; Scopes</span>
               </div>
               <!-- Interactive Operator Pills -->
-              <div class="px-2 pt-0.5 flex flex-wrap items-center gap-1.5 text-[10px] font-mono">
+              <div class="px-2 pt-0.5 flex flex-wrap items-center gap-1.5 text-xs font-mono">
                 <button
                   type="button"
                   class="px-2 py-1 rounded-md bg-emerald-500/[0.08] hover:bg-emerald-500/[0.15] border border-emerald-500/20 text-emerald-300 transition cursor-pointer"
@@ -174,7 +174,7 @@
                 </button>
                 <button
                   type="button"
-                  class="px-2 py-1 rounded-md bg-indigo-500/[0.08] hover:bg-indigo-500/[0.15] border border-indigo-500/20 text-indigo-300 transition cursor-pointer"
+                  class="px-2 py-1 rounded-md bg-accent/10 hover:bg-accent/20 border border-accent/20 text-accent-light transition cursor-pointer"
                   @mousedown.prevent
                   @click.stop="applyOperatorPrefix('#')"
                 >
@@ -198,12 +198,12 @@
                 </button>
               </div>
               <!-- Interactive Scope Trigger Pills -->
-              <div class="px-2 flex flex-wrap items-center gap-1.5 text-[10px] font-sans">
+              <div class="px-2 flex flex-wrap items-center gap-1.5 text-xs font-sans">
                 <button
                   v-for="scopePill in scopeTriggerPills"
                   :key="scopePill.scope"
                   type="button"
-                  class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-[#D1D5DB] hover:text-white transition cursor-pointer inline-flex items-center gap-1"
+                  class="px-2 py-0.5 rounded-md bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] text-muted hover:text-foreground transition cursor-pointer inline-flex items-center gap-1"
                   @mousedown.prevent
                   @click.stop="onSelectScope(scopePill.scope)"
                 >
@@ -214,9 +214,9 @@
 
             <!-- Zone 3: Quick Actions -->
             <div v-if="idleQuickActions.length > 0" class="space-y-1">
-              <div class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans flex items-center justify-between border-b border-white/[0.04]">
+              <div class="px-2.5 py-1 text-xs font-medium tracking-[0.06em] uppercase text-muted font-sans flex items-center justify-between border-b border-white/[0.04]">
                 <span>QUICK ACTIONS</span>
-                <span class="text-[10px] font-mono text-[#565B68]">{{ idleQuickActions.length }}</span>
+                <span class="text-xs font-mono text-dim">{{ idleQuickActions.length }}</span>
               </div>
               <div class="space-y-0.5 pt-0.5">
                 <div
@@ -229,8 +229,8 @@
                   class="group px-3 py-2 rounded-xl transition-colors duration-75 flex flex-col gap-1 cursor-pointer text-xs"
                   :class="[
                     selectedIndex === item.visualIndex
-                      ? 'bg-white/[0.08] border-l-2 border-indigo-400 text-[#F3F4F6] shadow-sm'
-                      : 'hover:bg-white/[0.03] border-l-2 border-transparent text-[#8A8F9E]'
+                      ? 'bg-white/[0.08] border-l-2 border-accent text-foreground shadow-sm'
+                      : 'hover:bg-white/[0.03] border-l-2 border-transparent text-muted'
                   ]"
                   @mousedown.prevent
                   @click="onItemClick(item)"
@@ -243,46 +243,46 @@
                         :class="[
                           selectedIndex === item.visualIndex
                             ? 'bg-white/[0.08] text-white shadow-inner'
-                            : 'bg-white/[0.03] text-[#8A8F9E]'
+                            : 'bg-white/[0.03] text-muted'
                         ]"
                       >
                         <NexuraIcon
                           :name="item.icon"
                           size="xs"
-                          :class="item.iconColor || 'text-indigo-400'"
+                          :class="item.iconColor || 'text-accent-light'"
                         />
                       </div>
                       <div
                         class="font-medium font-sans truncate text-xs min-w-0 flex-1"
-                        :class="selectedIndex === item.visualIndex ? 'text-white' : 'text-[#D1D5DB]'"
+                        :class="selectedIndex === item.visualIndex ? 'text-white' : 'text-foreground'"
                       >
                         {{ item.title }}
                       </div>
                     </div>
                     <span
                       v-if="item.badge"
-                      class="px-1.5 py-0.5 rounded text-[10px] font-mono tabular-nums uppercase shrink-0 transition-colors"
-                      :class="item.badgeColor || 'bg-white/[0.05] text-[#8A8F9E] border border-white/[0.08]'"
+                      class="px-1.5 py-0.5 rounded text-xs leading-none font-mono tabular-nums uppercase shrink-0 transition-colors"
+                      :class="item.badgeColor || 'bg-white/[0.05] text-muted border border-white/[0.08]'"
                     >
                       {{ item.badge }}
                     </span>
                   </div>
                   <div class="flex items-center justify-between gap-2 pl-[34px] min-w-0">
-                    <div class="text-[11px] font-mono text-[#8A8F9E] truncate min-w-0 flex-1">
+                    <div class="text-xs font-mono text-muted truncate min-w-0 flex-1">
                       {{ item.subtitle || item.description }}
                     </div>
                     <div class="shrink-0 flex items-center gap-1.5">
                       <kbd
                         v-if="item.shortcutHint"
-                        class="hidden sm:inline-flex px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-[9px] text-[#8A8F9E] font-mono"
+                        class="hidden sm:inline-flex px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-xs leading-none text-muted font-mono"
                       >
                         {{ item.shortcutHint }}
                       </kbd>
                       <span
-                        class="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono transition-opacity"
+                        class="hidden sm:inline-flex items-center gap-1 text-xs leading-none font-mono transition-opacity"
                         :class="selectedIndex === item.visualIndex ? 'opacity-100 text-white/70' : 'opacity-0 text-transparent'"
                       >
-                        <kbd class="px-1 py-0.5 rounded bg-white/[0.08] border border-white/[0.1] text-[9px]">↵</kbd>
+                        <kbd class="px-1 py-0.5 rounded bg-white/[0.08] border border-white/[0.1] text-xs leading-none">↵</kbd>
                       </span>
                     </div>
                   </div>
@@ -298,13 +298,13 @@
               v-if="filteredResults.length === 0"
               class="py-10 px-4 text-center flex flex-col items-center justify-center space-y-2 select-none"
             >
-              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#565B68]">
+              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-dim">
                 <NexuraIcon name="SearchX" size="md" />
               </div>
-              <p class="text-xs text-[#8A8F9E] font-sans">
+              <p class="text-xs text-muted font-sans">
                 No matching results for "<span class="text-white font-mono">{{ rawQuery }}</span>"
               </p>
-              <div class="pt-2 flex flex-wrap items-center justify-center gap-1.5 text-[10px] font-mono text-[#8A8F9E]">
+              <div class="pt-2 flex flex-wrap items-center justify-center gap-1.5 text-xs font-mono text-muted">
                 <button
                   type="button"
                   class="px-1.5 py-0.5 rounded bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-emerald-300 transition cursor-pointer"
@@ -315,7 +315,7 @@
                 </button>
                 <button
                   type="button"
-                  class="px-1.5 py-0.5 rounded bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-indigo-300 transition cursor-pointer"
+                  class="px-1.5 py-0.5 rounded bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-accent-light transition cursor-pointer"
                   @mousedown.prevent
                   @click.stop="applyOperatorPrefix('#')"
                 >
@@ -356,9 +356,9 @@
               class="space-y-1"
             >
               <!-- Section Header -->
-              <div class="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-[#8A8F9E]/70 font-sans flex items-center justify-between border-b border-white/[0.04]">
+              <div class="px-2.5 py-1 text-xs font-medium tracking-[0.06em] uppercase text-muted font-sans flex items-center justify-between border-b border-white/[0.04]">
                 <span>{{ group.category }}</span>
-                <span class="text-[10px] font-mono text-[#565B68]">{{ group.totalCount }}</span>
+                <span class="text-xs font-mono text-dim">{{ group.totalCount }}</span>
               </div>
 
               <!-- Item Rows: Two-Line Bento Row -->
@@ -373,8 +373,8 @@
                   class="group px-3 py-2 rounded-xl transition-colors duration-75 flex flex-col gap-1 cursor-pointer text-xs"
                   :class="[
                     selectedIndex === item.visualIndex
-                      ? 'bg-white/[0.08] border-l-2 border-indigo-400 text-[#F3F4F6] shadow-sm'
-                      : 'hover:bg-white/[0.03] border-l-2 border-transparent text-[#8A8F9E]'
+                      ? 'bg-white/[0.08] border-l-2 border-accent text-foreground shadow-sm'
+                      : 'hover:bg-white/[0.03] border-l-2 border-transparent text-muted'
                   ]"
                   @mousedown.prevent
                   @click="onItemClick(item)"
@@ -389,25 +389,25 @@
                         :class="[
                           selectedIndex === item.visualIndex
                             ? 'bg-white/[0.08] text-white shadow-inner'
-                            : 'bg-white/[0.03] text-[#8A8F9E]'
+                            : 'bg-white/[0.03] text-muted'
                         ]"
                       >
                         <NexuraIcon
                           :name="item.icon"
                           size="xs"
-                          :class="item.iconColor || 'text-indigo-400'"
+                          :class="item.iconColor || 'text-accent-light'"
                         />
                       </div>
 
                       <!-- Title with fuzzy highlight -->
                       <div
                         class="font-medium font-sans truncate text-xs min-w-0 flex-1"
-                        :class="selectedIndex === item.visualIndex ? 'text-white' : 'text-[#D1D5DB]'"
+                        :class="selectedIndex === item.visualIndex ? 'text-white' : 'text-foreground'"
                       >
                         <template v-for="(part, pIdx) in splitHighlights(item.title, item.titleHighlights)" :key="pIdx">
                           <mark
                             v-if="part.isHighlight"
-                            class="bg-indigo-500/35 text-indigo-200 px-0.5 rounded font-semibold underline decoration-indigo-400"
+                            class="bg-accent/30 text-accent-light px-0.5 rounded font-semibold underline decoration-accent"
                           >{{ part.text }}</mark>
                           <span v-else>{{ part.text }}</span>
                         </template>
@@ -417,8 +417,8 @@
                     <!-- Status Capsule / Badge -->
                     <span
                       v-if="item.badge"
-                      class="px-1.5 py-0.5 rounded text-[10px] font-mono tabular-nums uppercase shrink-0 transition-colors"
-                      :class="item.badgeColor || 'bg-white/[0.05] text-[#8A8F9E] border border-white/[0.08]'"
+                      class="px-1.5 py-0.5 rounded text-xs leading-none font-mono tabular-nums uppercase shrink-0 transition-colors"
+                      :class="item.badgeColor || 'bg-white/[0.05] text-muted border border-white/[0.08]'"
                     >
                       {{ item.badge }}
                     </span>
@@ -428,17 +428,17 @@
                   <div class="flex items-center justify-between gap-2 pl-[34px] min-w-0">
                     <!-- Monospaced Context Subtitle with fuzzy highlight + inline tech tags -->
                     <div class="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
-                      <div class="text-[11px] font-mono text-[#8A8F9E] truncate min-w-0">
+                      <div class="text-xs font-mono text-muted truncate min-w-0">
                         <template v-if="item.subtitle">
                           <template v-for="(part, pIdx) in splitHighlights(item.subtitle, item.subtitleHighlights)" :key="pIdx">
                             <mark
                               v-if="part.isHighlight"
-                              class="bg-indigo-500/25 text-indigo-200 px-0.5 rounded underline decoration-indigo-400"
+                              class="bg-accent/25 text-accent-light px-0.5 rounded underline decoration-accent"
                             >{{ part.text }}</mark>
                             <span v-else>{{ part.text }}</span>
                           </template>
                         </template>
-                        <span v-else-if="item.description" class="text-[11px] font-sans text-[#8A8F9E]/70 truncate">
+                        <span v-else-if="item.description" class="text-xs font-sans text-muted truncate">
                           {{ item.description }}
                         </span>
                       </div>
@@ -446,7 +446,7 @@
                         <span
                           v-for="tag in item.tags.slice(0, 3)"
                           :key="tag"
-                          class="px-1 py-0.2 rounded bg-white/[0.04] border border-white/[0.06] text-[10px] font-mono text-[#8A8F9E] shrink-0"
+                          class="px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/[0.06] text-xs leading-none font-mono text-muted shrink-0"
                         >
                           #{{ tag }}
                         </span>
@@ -457,15 +457,15 @@
                     <div class="shrink-0 flex items-center gap-1.5">
                       <kbd
                         v-if="item.shortcutHint"
-                        class="hidden sm:inline-flex px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-[9px] text-[#8A8F9E] font-mono"
+                        class="hidden sm:inline-flex px-1.5 py-0.5 rounded bg-white/[0.06] border border-white/[0.08] text-xs leading-none text-muted font-mono"
                       >
                         {{ item.shortcutHint }}
                       </kbd>
                       <span
-                        class="hidden sm:inline-flex items-center gap-1 text-[10px] font-mono transition-opacity"
+                        class="hidden sm:inline-flex items-center gap-1 text-xs leading-none font-mono transition-opacity"
                         :class="selectedIndex === item.visualIndex ? 'opacity-100 text-white/70' : 'opacity-0 text-transparent'"
                       >
-                        <kbd class="px-1 py-0.5 rounded bg-white/[0.08] border border-white/[0.1] text-[9px]">↵</kbd>
+                        <kbd class="px-1 py-0.5 rounded bg-white/[0.08] border border-white/[0.1] text-xs leading-none">↵</kbd>
                       </span>
                     </div>
                   </div>
@@ -475,7 +475,7 @@
                 <button
                   v-if="group.hiddenCount > 0"
                   type="button"
-                  class="w-full px-3 py-1.5 text-left text-[11px] font-mono text-indigo-300/80 hover:text-indigo-200 hover:bg-white/[0.03] rounded-lg transition cursor-pointer"
+                  class="w-full px-3 py-1.5 text-left text-xs font-mono text-accent-light/80 hover:text-accent-light hover:bg-white/[0.03] rounded-lg transition cursor-pointer"
                   @mousedown.prevent
                   @click.stop="expandCategory(group.category)"
                 >
@@ -488,7 +488,7 @@
 
         <!-- Footer: Monospaced Helper Bar -->
         <footer
-          class="px-3.5 py-2 bg-[#090A0D]/90 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-[#8A8F9E] select-none shrink-0"
+          class="px-3.5 py-2 bg-canvas/90 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-muted select-none shrink-0"
         >
           <div class="flex items-center gap-3">
             <span class="inline-flex items-center gap-1">
@@ -596,7 +596,7 @@ const prefixChip = computed<{ label: string; class: string } | null>(() => {
     return { label: '> Actions', class: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' }
   }
   if (mode === 'tag') {
-    return { label: '# Tech Tags', class: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20' }
+    return { label: '# Tech Tags', class: 'bg-accent/10 text-accent-light border border-accent/20' }
   }
   if (mode === 'project') {
     return { label: '@ Projects', class: 'bg-blue-500/10 text-blue-300 border border-blue-500/20' }
@@ -605,7 +605,7 @@ const prefixChip = computed<{ label: string; class: string } | null>(() => {
     return { label: '! Blockers', class: 'bg-rose-500/10 text-rose-300 border border-rose-500/20' }
   }
   if (activeScope.value === 'task') {
-    return { label: 'Scope: Tasks', class: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20' }
+    return { label: 'Scope: Tasks', class: 'bg-accent/10 text-accent-light border border-accent/20' }
   }
   if (activeScope.value === 'project') {
     return { label: 'Scope: Projects', class: 'bg-blue-500/10 text-blue-300 border border-blue-500/20' }

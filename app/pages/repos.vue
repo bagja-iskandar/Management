@@ -2,7 +2,7 @@
   <div class="space-y-6 pb-12">
     <!-- Header Row -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
-      <h1 class="font-sans text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight">
+      <h1 class="font-sans text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
         GitHub Repository Hub
       </h1>
     </div>
@@ -43,17 +43,17 @@
 
     <!-- Repos Telemetry 3 Specular KPI Cards (Row 1) -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-      <div class="bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
+      <div class="bg-surface border border-white/[0.07] hover:border-white/[0.14] rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
         <div>
-          <span class="font-mono text-xs uppercase text-[#8A8F9E] tracking-wider font-medium">Total Repositories</span>
-          <div class="font-mono tabular-nums text-2xl font-semibold text-[#F3F4F6] mt-1">{{ totalReposCount }}</div>
+          <span class="font-mono text-xs uppercase text-muted tracking-wider font-medium">Total Repositories</span>
+          <div class="font-mono tabular-nums text-2xl font-semibold text-foreground mt-1">{{ totalReposCount }}</div>
         </div>
-        <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[#8A8F9E]">
+        <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-muted">
           <NexuraIcon name="GitBranch" size="sm" />
         </div>
       </div>
 
-      <div class="bg-[#111318] border border-emerald-500/20 hover:border-emerald-500/40 rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
+      <div class="bg-surface border border-emerald-500/20 hover:border-emerald-500/40 rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
         <div>
           <span class="font-mono text-xs uppercase text-emerald-400 tracking-wider font-medium">Managed in Nexura</span>
           <div class="font-mono tabular-nums text-2xl font-semibold text-emerald-400 mt-1">{{ managedCount }}</div>
@@ -63,33 +63,33 @@
         </div>
       </div>
 
-      <div class="bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
+      <div class="bg-surface border border-white/[0.07] hover:border-white/[0.14] rounded-xl p-4 shadow-sm transition-all flex items-center justify-between">
         <div>
-          <span class="font-mono text-xs uppercase text-[#8A8F9E] tracking-wider font-medium">Available to Connect</span>
-          <div class="font-mono tabular-nums text-2xl font-semibold text-[#F3F4F6] mt-1">{{ unmanagedCount }}</div>
+          <span class="font-mono text-xs uppercase text-muted tracking-wider font-medium">Available to Connect</span>
+          <div class="font-mono tabular-nums text-2xl font-semibold text-foreground mt-1">{{ unmanagedCount }}</div>
         </div>
-        <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-indigo-400">
+        <div class="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-accent-light">
           <NexuraIcon name="FolderPlus" size="sm" />
         </div>
       </div>
     </div>
 
     <!-- Search & Filter Toolbar (Row 2) -->
-    <div class="bg-[#111318] border border-white/[0.07] rounded-xl p-3.5 space-y-3.5 shadow-sm">
+    <div class="bg-surface border border-white/[0.07] rounded-xl p-3.5 space-y-3.5 shadow-sm">
       <div class="flex flex-col sm:flex-row gap-3">
         <!-- Search Input -->
         <div class="relative flex-1">
-          <NexuraIcon name="Search" size="xs" class="absolute left-3 top-1/2 -translate-y-1/2 text-[#565B68] pointer-events-none" />
+          <NexuraIcon name="Search" size="xs" class="absolute left-3 top-1/2 -translate-y-1/2 text-dim pointer-events-none" />
           <input
             v-model="searchQuery"
             type="search"
             placeholder="Search repositories by name, description, or topic..."
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-9 pr-8 py-2 text-xs font-mono text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none transition-colors"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-9 pr-8 py-2 text-xs font-mono text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none transition-colors"
           />
           <button
             v-if="searchQuery"
             type="button"
-            class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#565B68] hover:text-[#F3F4F6] p-0.5 rounded cursor-pointer"
+            class="absolute right-2.5 top-1/2 -translate-y-1/2 text-dim hover:text-foreground p-0.5 rounded cursor-pointer"
             @click="searchQuery = ''"
           >
             <NexuraIcon name="X" size="xs" />
@@ -100,7 +100,7 @@
         <div class="w-full sm:w-56">
           <select
             v-model="selectedLanguage"
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+            class="w-full bg-void border border-white/[0.08] rounded-lg px-3 py-2 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
           >
             <option value="all">All Languages ({{ languages.length }})</option>
             <option v-for="lang in languages" :key="lang" :value="lang">
@@ -111,50 +111,50 @@
       </div>
 
       <!-- Management Status Filter Tabs -->
-      <div class="p-1 rounded-lg bg-[#07080A] border border-white/[0.06] inline-flex items-center gap-1 overflow-x-auto max-w-full" role="tablist" aria-label="Filter management status">
+      <div class="p-1 rounded-lg bg-void border border-white/[0.06] inline-flex items-center gap-1 overflow-x-auto max-w-full" role="tablist" aria-label="Filter management status">
         <button
           type="button"
           class="px-3 py-1.5 rounded-md font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer focus:outline-none"
           :class="statusFilter === 'all'
-            ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-            : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+            ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+            : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
           @click="statusFilter = 'all'"
         >
           <span>All Repos</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">{{ totalReposCount }}</span>
+          <span class="text-xs px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">{{ totalReposCount }}</span>
         </button>
 
         <button
           type="button"
           class="px-3 py-1.5 rounded-md font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer focus:outline-none"
           :class="statusFilter === 'managed'
-            ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-            : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+            ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+            : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
           @click="statusFilter = 'managed'"
         >
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
           <span>Managed in Project</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] text-emerald-400 font-mono tabular-nums">{{ managedCount }}</span>
+          <span class="text-xs px-1.5 py-0.5 rounded-full bg-white/[0.06] text-emerald-400 font-mono tabular-nums">{{ managedCount }}</span>
         </button>
 
         <button
           type="button"
           class="px-3 py-1.5 rounded-md font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer focus:outline-none"
           :class="statusFilter === 'unmanaged'
-            ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-            : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+            ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+            : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
           @click="statusFilter = 'unmanaged'"
         >
           <span>Available to Connect</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">{{ unmanagedCount }}</span>
+          <span class="text-xs px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">{{ unmanagedCount }}</span>
         </button>
       </div>
     </div>
 
     <!-- Loading State -->
     <div v-if="pending && (!displayRepos || displayRepos.length === 0)" class="py-16 text-center">
-      <NexuraIcon name="RotateCw" size="lg" class="animate-spin text-indigo-400 inline-block mb-3" />
-      <p class="font-mono text-xs text-[#8A8F9E]">Fetching repositories from GitHub API...</p>
+      <NexuraIcon name="RotateCw" size="lg" class="animate-spin text-accent-light inline-block mb-3" />
+      <p class="font-mono text-xs text-muted">Fetching repositories from GitHub API...</p>
     </div>
 
     <!-- Repositories List Grid (Row 3) -->
@@ -162,14 +162,14 @@
       <article
         v-for="repo in filteredRepos"
         :key="repo.id"
-        class="bg-[#111318] border rounded-xl p-4 sm:p-5 transition-all duration-200 group"
+        class="bg-surface border rounded-xl p-4 sm:p-5 transition-all duration-200 group"
         :class="isRepoManaged(repo) ? 'border-emerald-500/20 hover:border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.06)]' : 'border-white/[0.07] hover:border-white/[0.14]'"
       >
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <!-- Left Column: Repo Info & Tags -->
           <div class="space-y-2.5 min-w-0 flex-1">
             <div class="flex items-center gap-2.5 flex-wrap">
-              <h2 class="font-sans text-base font-semibold text-[#F3F4F6] group-hover:text-indigo-300 transition-colors flex items-center gap-2">
+              <h2 class="font-sans text-base font-semibold text-foreground group-hover:text-accent-light transition-colors flex items-center gap-2">
                 <span>{{ repo.name }}</span>
               </h2>
 
@@ -183,15 +183,15 @@
               </span>
               <span
                 v-else
-                class="font-mono text-xs text-[#8A8F9E] bg-white/[0.03] border border-white/[0.06] px-2 py-0.5 rounded-full font-medium"
+                class="font-mono text-xs text-muted bg-white/[0.03] border border-white/[0.06] px-2 py-0.5 rounded-full font-medium"
               >
                 Not Connected
               </span>
 
               <!-- Public / Private Pill -->
               <span
-                :class="repo.private ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'"
-                class="font-mono text-[10px] px-2 py-0.5 rounded-full border"
+                :class="repo.private ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-white/[0.04] text-muted border-white/[0.08]'"
+                class="font-mono text-xs px-2 py-0.5 rounded-full border"
               >
                 {{ repo.private ? 'Private' : 'Public' }}
               </span>
@@ -199,29 +199,29 @@
               <!-- Language Monospace Pill -->
               <span
                 v-if="repo.language"
-                class="font-mono text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/20 font-medium"
+                class="font-mono text-xs bg-accent/10 text-accent-light px-2 py-0.5 rounded-full border border-accent/20 font-medium"
               >
                 {{ repo.language }}
               </span>
             </div>
 
             <!-- Description -->
-            <p class="text-xs text-[#8A8F9E] leading-relaxed line-clamp-2 max-w-3xl">
+            <p class="text-xs text-muted leading-relaxed line-clamp-2 max-w-3xl">
               {{ repo.description || 'No description provided for this repository.' }}
             </p>
 
             <!-- Meta telemetry row -->
-            <div class="flex flex-wrap items-center gap-y-1.5 gap-x-4 pt-1 font-mono text-xs text-[#8A8F9E]">
+            <div class="flex flex-wrap items-center gap-y-1.5 gap-x-4 pt-1 font-mono text-xs text-muted">
               <div class="flex items-center gap-1.5">
-                <NexuraIcon name="GitBranch" size="xs" class="text-[#8A8F9E]" />
-                <span class="text-[#8A8F9E]">Branch:</span>
-                <strong class="text-[#F3F4F6] font-mono">{{ repo.defaultBranch }}</strong>
+                <NexuraIcon name="GitBranch" size="xs" class="text-muted" />
+                <span class="text-muted">Branch:</span>
+                <strong class="text-foreground font-mono">{{ repo.defaultBranch }}</strong>
               </div>
 
               <div class="flex items-center gap-1.5">
-                <NexuraIcon name="Clock" size="xs" class="text-[#8A8F9E]" />
-                <span class="text-[#8A8F9E]">Last push:</span>
-                <strong class="text-[#F3F4F6] font-mono">{{ formatRelativeTime(repo.pushedAt) }}</strong>
+                <NexuraIcon name="Clock" size="xs" class="text-muted" />
+                <span class="text-muted">Last push:</span>
+                <strong class="text-foreground font-mono">{{ formatRelativeTime(repo.pushedAt) }}</strong>
               </div>
 
               <div v-if="repo.stargazersCount > 0" class="flex items-center gap-1 text-amber-400">
@@ -233,7 +233,7 @@
                 :href="repo.htmlUrl"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#8A8F9E] hover:text-indigo-400 transition-colors inline-flex items-center gap-1 ml-auto sm:ml-0 group/link"
+                class="text-muted hover:text-accent-light transition-colors inline-flex items-center gap-1 ml-auto sm:ml-0 group/link"
               >
                 <span>GitHub</span>
                 <NexuraIcon name="ExternalLink" size="xs" class="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
@@ -252,7 +252,7 @@
 
               <NuxtLink
                 :to="`/projects/${getManagedProject(repo)?.slug || repo.name.toLowerCase()}`"
-                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans text-xs font-medium transition active:scale-95 shadow-sm"
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-foreground hover:bg-white text-void font-semibold font-sans text-xs font-medium transition active:scale-95 shadow-sm"
                 title="Open dedicated dashboard and Kanban board for this project"
               >
                 <NexuraIcon name="LayoutDashboard" size="xs" />
@@ -262,7 +262,7 @@
 
               <button
                 type="button"
-                class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-rose-500/15 text-[#8A8F9E] hover:text-rose-400 border border-white/[0.06] hover:border-rose-500/30 transition-colors focus:ring-1 focus:ring-rose-500/50 cursor-pointer"
+                class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-rose-500/15 text-muted hover:text-rose-400 border border-white/[0.06] hover:border-rose-500/30 transition-colors focus:ring-1 focus:ring-rose-500/50 cursor-pointer"
                 title="Detach project from management"
                 @click="onPromptRemoveFromManagement(repo)"
               >
@@ -274,7 +274,7 @@
             <template v-else>
               <button
                 type="button"
-                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-sans text-xs font-medium transition active:scale-95 shadow-sm cursor-pointer"
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-foreground hover:bg-white text-void font-sans text-xs font-semibold transition active:scale-95 shadow-sm cursor-pointer"
                 @click="openConnectModal(repo)"
               >
                 <NexuraIcon name="FolderPlus" size="xs" />
@@ -285,7 +285,7 @@
             <!-- Inspect Commits/Branches Toggle -->
             <button
               type="button"
-              class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition-colors cursor-pointer"
+              class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-muted hover:text-foreground border border-white/[0.06] transition-colors cursor-pointer"
               :title="expandedRepo === repo.fullName ? 'Collapse commit details' : 'Inspect repository commits & branches'"
               @click="toggleExpand(repo.fullName)"
             >
@@ -293,7 +293,7 @@
                 name="ChevronDown"
                 size="xs"
                 class="transition-transform duration-200"
-                :class="{ 'rotate-180 text-indigo-400': expandedRepo === repo.fullName }"
+                :class="{ 'rotate-180 text-accent-light': expandedRepo === repo.fullName }"
               />
             </button>
           </div>
@@ -305,18 +305,18 @@
           class="mt-4 pt-4 border-t border-white/[0.06] space-y-4"
         >
           <div v-if="detailsLoading" class="py-4 text-center">
-            <NexuraIcon name="RotateCw" size="sm" class="animate-spin text-indigo-400 inline-block mb-1" />
-            <p class="font-mono text-xs text-[#8A8F9E]">Fetching commit & branch telemetry...</p>
+            <NexuraIcon name="RotateCw" size="sm" class="animate-spin text-accent-light inline-block mb-1" />
+            <p class="font-mono text-xs text-muted">Fetching commit & branch telemetry...</p>
           </div>
 
           <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Recent Commits -->
-            <div class="bg-[#07080A] border border-white/[0.07] rounded-xl p-3.5">
+            <div class="bg-void border border-white/[0.07] rounded-xl p-3.5">
               <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-white/[0.04]">
-                <span class="font-mono text-xs font-semibold text-[#F3F4F6]">Recent Commits (5)</span>
-                <span class="font-mono text-[10px] text-[#8A8F9E]">Latest Activity</span>
+                <span class="font-mono text-xs font-semibold text-foreground">Recent Commits (5)</span>
+                <span class="font-mono text-xs text-muted">Latest Activity</span>
               </div>
-              <div v-if="commitsData.length === 0" class="font-mono text-xs text-[#8A8F9E] py-2">
+              <div v-if="commitsData.length === 0" class="font-mono text-xs text-muted py-2">
                 No recent commits found or API rate limit reached.
               </div>
               <div v-else class="space-y-2">
@@ -326,10 +326,10 @@
                   class="flex items-start justify-between gap-2 border-b border-white/[0.03] pb-2 last:border-0 last:pb-0"
                 >
                   <div class="min-w-0 flex-1">
-                    <p class="text-xs text-[#F3F4F6] truncate" :title="commit.message">
+                    <p class="text-xs text-foreground truncate" :title="commit.message">
                       {{ commit.message }}
                     </p>
-                    <div class="flex items-center gap-2 font-mono text-[10px] text-[#8A8F9E] mt-0.5">
+                    <div class="flex items-center gap-2 font-mono text-xs text-muted mt-0.5">
                       <span>{{ commit.authorName }}</span>
                       <span class="text-white/20">•</span>
                       <span>{{ formatRelativeTime(commit.date) }}</span>
@@ -339,7 +339,7 @@
                     :href="commit.htmlUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="font-mono text-[10px] text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-1.5 py-0.5 rounded hover:underline shrink-0"
+                    class="font-mono text-xs text-accent-light bg-accent/10 border border-accent/20 px-1.5 py-0.5 rounded hover:underline shrink-0"
                   >
                     {{ commit.shortSha }}
                   </a>
@@ -348,12 +348,12 @@
             </div>
 
             <!-- Branches -->
-            <div class="bg-[#07080A] border border-white/[0.07] rounded-xl p-3.5">
+            <div class="bg-void border border-white/[0.07] rounded-xl p-3.5">
               <div class="flex items-center justify-between mb-2.5 pb-2 border-b border-white/[0.04]">
-                <span class="font-mono text-xs font-semibold text-[#F3F4F6]">Branches</span>
-                <span class="font-mono text-[10px] text-[#8A8F9E]">{{ branchesData.length }} total</span>
+                <span class="font-mono text-xs font-semibold text-foreground">Branches</span>
+                <span class="font-mono text-xs text-muted">{{ branchesData.length }} total</span>
               </div>
-              <div v-if="branchesData.length === 0" class="font-mono text-xs text-[#8A8F9E] py-2">
+              <div v-if="branchesData.length === 0" class="font-mono text-xs text-muted py-2">
                 No branch information available.
               </div>
               <div v-else class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
@@ -363,13 +363,13 @@
                   class="flex items-center justify-between font-mono text-xs py-1 px-2 rounded bg-white/[0.02]"
                 >
                   <div class="flex items-center gap-2 truncate">
-                    <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400 shrink-0" />
-                    <span class="text-[#F3F4F6] truncate">{{ branch.name }}</span>
-                    <span v-if="branch.protected" class="text-[9px] bg-rose-950/60 text-rose-400 px-1.5 py-0.5 rounded border border-rose-800/40">
+                    <NexuraIcon name="GitBranch" size="xs" class="text-accent-light shrink-0" />
+                    <span class="text-foreground truncate">{{ branch.name }}</span>
+                    <span v-if="branch.protected" class="text-xs leading-none bg-rose-950/60 text-rose-400 px-1.5 py-0.5 rounded border border-rose-800/40">
                       protected
                     </span>
                   </div>
-                  <span class="text-[10px] text-[#8A8F9E] shrink-0">
+                  <span class="text-xs text-muted shrink-0">
                     {{ branch.commitSha.slice(0, 7) }}
                   </span>
                 </div>
@@ -383,16 +383,16 @@
     <!-- Empty Filtered Results -->
     <div
       v-else-if="displayRepos.length > 0"
-      class="bg-[#111318] border border-white/[0.07] rounded-xl p-12 text-center space-y-3"
+      class="bg-surface border border-white/[0.07] rounded-xl p-12 text-center space-y-3"
     >
-      <div class="w-12 h-12 mx-auto rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[#565B68]">
+      <div class="w-12 h-12 mx-auto rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-dim">
         <NexuraIcon name="SearchX" size="md" />
       </div>
-      <h3 class="font-sans text-sm font-semibold text-[#F3F4F6]">No repositories match the query</h3>
-      <p class="font-sans text-xs text-[#8A8F9E]">No repositories matched the selected keyword or language filters.</p>
+      <h3 class="font-sans text-sm font-semibold text-foreground">No repositories match the query</h3>
+      <p class="font-sans text-xs text-muted">No repositories matched the selected keyword or language filters.</p>
       <button
         type="button"
-        class="mt-2 font-mono text-xs text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer"
+        class="mt-2 font-mono text-xs text-accent-light hover:text-accent-light transition-colors cursor-pointer"
         @click="resetFilters"
       >
         Reset Filters

@@ -10,7 +10,7 @@
       aria-label="Loading project detail"
     >
       <!-- Skeleton Hero -->
-      <div class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4">
+      <div class="obs-card p-6 rounded-2xl bg-surface border border-white/[0.07] space-y-4">
         <div class="h-6 bg-white/[0.08] rounded w-1/3"></div>
         <div class="h-4 bg-white/[0.04] rounded w-2/3"></div>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
@@ -35,20 +35,20 @@
     <!-- ================================================================= -->
     <div
       v-else-if="detailState === 'ERROR'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-rose-500/30 p-8 space-y-4 max-w-lg mx-auto my-12"
+      class="py-16 text-center rounded-2xl bg-surface border border-rose-500/30 p-8 space-y-4 max-w-lg mx-auto my-12"
       role="alert"
     >
       <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400">
         <NexuraIcon name="AlertTriangle" size="lg" />
       </div>
-      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">Connection Failed</h2>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+      <h2 class="font-mono text-lg font-semibold text-foreground">Connection Failed</h2>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">
         Failed to synchronize project telemetry from the server.
       </p>
       <div class="flex items-center justify-center gap-3 pt-2">
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-foreground border border-white/[0.08] transition-colors cursor-pointer"
           @click="retryFetchProjects"
         >
           <NexuraIcon name="RefreshCw" size="xs" />
@@ -56,7 +56,7 @@
         </button>
         <NuxtLink
           to="/projects"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground hover:bg-white text-xs font-mono text-void font-semibold transition-colors cursor-pointer"
         >
           <NexuraIcon name="ArrowLeft" size="xs" />
           <span>Back to Projects Hub</span>
@@ -69,19 +69,19 @@
     <!-- ================================================================= -->
     <div
       v-else-if="detailState === 'NOT_FOUND'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.08] p-8 space-y-4 max-w-lg mx-auto my-12"
+      class="py-16 text-center rounded-2xl bg-surface border border-white/[0.08] p-8 space-y-4 max-w-lg mx-auto my-12"
     >
-      <div class="w-14 h-14 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#8A8F9E]">
+      <div class="w-14 h-14 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-muted">
         <NexuraIcon name="FolderX" size="lg" />
       </div>
-      <h2 class="font-mono text-lg font-semibold text-[#F3F4F6]">Project Not Found</h2>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
-        No project with slug <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/5 border border-white/10 text-indigo-300">{{ slug }}</span> exists in the current workspace.
+      <h2 class="font-mono text-lg font-semibold text-foreground">Project Not Found</h2>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">
+        No project with slug <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/5 border border-white/10 text-accent-light">{{ slug }}</span> exists in the current workspace.
       </p>
       <div class="pt-2">
         <NuxtLink
           to="/projects"
-          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-xs font-mono text-white font-semibold transition-colors cursor-pointer"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground hover:bg-white text-xs font-mono text-void font-semibold transition-colors cursor-pointer"
         >
           <NexuraIcon name="ArrowLeft" size="xs" />
           <span>Back to Projects Hub</span>
@@ -113,7 +113,7 @@
       </div>
 
       <!-- Mobile / Tablet Tab Strip (< lg only) -->
-      <div class="lg:hidden sticky top-0 z-20 -mx-3 sm:-mx-5 -mt-3 sm:-mt-5 lg:mt-0 px-3 sm:px-5 py-2 bg-[#0B0C10]/95 backdrop-blur-md border-b border-white/[0.06] flex items-center gap-1.5 overflow-x-auto no-scrollbar select-none">
+      <div class="lg:hidden sticky top-0 z-20 -mx-3 sm:-mx-5 -mt-3 sm:-mt-5 lg:mt-0 px-3 sm:px-5 py-2 bg-canvas/95 backdrop-blur-md border-b border-white/[0.06] flex items-center gap-1.5 overflow-x-auto no-scrollbar select-none">
         <button
           v-for="tab in projectTabs"
           :key="tab.id"
@@ -121,12 +121,12 @@
           @click="onSelectTab(tab.id)"
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all border shrink-0 cursor-pointer"
           :class="activeTab === tab.id
-            ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 shadow-[0_0_8px_rgba(99,102,241,0.2)] font-semibold'
-            : 'bg-white/[0.03] text-[#8A8F9E] hover:text-[#F3F4F6] border-white/[0.06] hover:bg-white/[0.06]'"
+            ? 'bg-accent/15 text-accent-light border-accent/30 shadow-[0_0_8px_rgba(99,102,241,0.2)] font-semibold'
+            : 'bg-white/[0.03] text-muted hover:text-foreground border-white/[0.06] hover:bg-white/[0.06]'"
         >
           <NexuraIcon :name="tab.icon" size="xs" />
           <span>{{ tab.label }}</span>
-          <span v-if="tab.count !== undefined && tab.count > 0" class="font-mono tabular-nums text-[10px] px-1 rounded bg-white/[0.06]">
+          <span v-if="tab.count !== undefined && tab.count > 0" class="font-mono tabular-nums text-xs px-1 rounded bg-white/[0.06]">
             {{ tab.count }}
           </span>
         </button>
@@ -241,13 +241,13 @@
       <!-- ================================================================= -->
       <!-- VIEW 4: GITHUB INTEGRATION DEEP COCKPIT                           -->
       <!-- ================================================================= -->
-      <section v-else-if="activeTab === 'github'" aria-label="GitHub Integration" class="obs-card p-6 rounded-2xl bg-[#111318] border border-white/[0.07] space-y-4 shadow-sm">
+      <section v-else-if="activeTab === 'github'" aria-label="GitHub Integration" class="obs-card p-6 rounded-2xl bg-surface border border-white/[0.07] space-y-4 shadow-sm">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
           <div class="flex items-center gap-2.5">
-            <NexuraIcon name="GitBranch" size="md" class="text-indigo-400" />
+            <NexuraIcon name="GitBranch" size="md" class="text-accent-light" />
             <div>
-              <h2 class="font-mono text-sm font-semibold text-[#F3F4F6]">GitHub Repository Integration</h2>
-              <p class="text-xs text-[#8A8F9E]">
+              <h2 class="font-mono text-sm font-semibold text-foreground">GitHub Repository Integration</h2>
+              <p class="text-xs text-muted">
                 Live branch telemetry and latest commit log from {{ currentProject.githubRepo || 'linked repository' }}.
               </p>
             </div>
@@ -258,7 +258,7 @@
             :href="`https://github.com/${currentProject.githubRepo}`"
             target="_blank"
             rel="noopener noreferrer"
-            class="group font-mono text-xs text-indigo-400 hover:underline flex items-center gap-1.5"
+            class="group font-mono text-xs text-accent-light hover:underline flex items-center gap-1.5"
           >
             <span>Open on GitHub</span>
             <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -367,18 +367,18 @@
       <!-- ================================================================= -->
       <section v-else-if="activeTab === 'settings'" aria-label="Project Settings" class="space-y-6">
         <!-- Card 1: Project Metadata & Configuration -->
-        <div class="obs-card rounded-2xl p-6 bg-[#111318] border border-white/[0.07] space-y-5">
+        <div class="obs-card rounded-2xl p-6 bg-surface border border-white/[0.07] space-y-5">
           <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
             <div class="flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+              <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-light">
                 <NexuraIcon name="Settings" size="sm" />
               </div>
               <div>
-                <h2 class="font-mono text-sm font-semibold text-[#F3F4F6]">Project Configuration</h2>
-                <p class="text-xs text-[#8A8F9E]">Update repository bindings, project title, and deployment URLs</p>
+                <h2 class="font-mono text-sm font-semibold text-foreground">Project Configuration</h2>
+                <p class="text-xs text-muted">Update repository bindings, project title, and deployment URLs</p>
               </div>
             </div>
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-white/[0.05] border border-white/[0.08] text-[#8A8F9E]">
+            <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.05] border border-white/[0.08] text-muted">
               SLUG: {{ currentProject.slug }}
             </span>
           </div>
@@ -386,42 +386,42 @@
           <!-- Metadata Form Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
             <div class="space-y-1.5">
-              <label class="text-[#8A8F9E]">Project Title</label>
+              <label class="text-muted">Project Title</label>
               <input
                 v-model="editProjectForm.title"
                 type="text"
                 placeholder="Project title..."
-                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+                class="w-full bg-void border border-white/[0.08] hover:border-white/[0.15] focus:border-accent/50 rounded-xl px-3.5 py-2 text-xs text-foreground outline-none transition"
               />
             </div>
 
             <div class="space-y-1.5">
-              <label class="text-[#8A8F9E]">GitHub Repository (owner/repo)</label>
+              <label class="text-muted">GitHub Repository (owner/repo)</label>
               <input
                 v-model="editProjectForm.githubRepo"
                 type="text"
                 placeholder="e.g. bagja-iskandar/Management"
-                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+                class="w-full bg-void border border-white/[0.08] hover:border-white/[0.15] focus:border-accent/50 rounded-xl px-3.5 py-2 text-xs text-foreground outline-none transition"
               />
             </div>
 
             <div class="space-y-1.5 md:col-span-2">
-              <label class="text-[#8A8F9E]">Project Description</label>
+              <label class="text-muted">Project Description</label>
               <textarea
                 v-model="editProjectForm.description"
                 rows="3"
                 placeholder="Short description of this project..."
-                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl p-3 text-xs text-[#F3F4F6] outline-none transition resize-none"
+                class="w-full bg-void border border-white/[0.08] hover:border-white/[0.15] focus:border-accent/50 rounded-xl p-3 text-xs text-foreground outline-none transition resize-none"
               ></textarea>
             </div>
 
             <div class="space-y-1.5 md:col-span-2">
-              <label class="text-[#8A8F9E]">Live Production URL</label>
+              <label class="text-muted">Live Production URL</label>
               <input
                 v-model="editProjectForm.deployUrl"
                 type="url"
                 placeholder="https://..."
-                class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/50 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] outline-none transition"
+                class="w-full bg-void border border-white/[0.08] hover:border-white/[0.15] focus:border-accent/50 rounded-xl px-3.5 py-2 text-xs text-foreground outline-none transition"
               />
             </div>
           </div>
@@ -436,7 +436,7 @@
             <button
               type="button"
               :disabled="isSavingProject"
-              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-xs font-mono font-semibold text-white transition cursor-pointer shadow-sm"
+              class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-foreground hover:bg-white disabled:opacity-50 text-xs font-mono font-semibold text-void transition cursor-pointer shadow-sm"
               @click="onSaveProjectSettings"
             >
               <NexuraIcon v-if="!isSavingProject" name="Save" size="xs" />
@@ -447,7 +447,7 @@
         </div>
 
         <!-- Card 2: Danger Zone -->
-        <div class="obs-card rounded-2xl p-6 bg-[#111318] border border-rose-500/30 space-y-4 shadow-sm">
+        <div class="obs-card rounded-2xl p-6 bg-surface border border-rose-500/30 space-y-4 shadow-sm">
           <div class="flex items-center justify-between border-b border-rose-500/20 pb-3">
             <div class="flex items-center gap-2.5">
               <div class="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-400">
@@ -455,15 +455,15 @@
               </div>
               <div>
                 <h2 class="font-mono text-sm font-semibold text-rose-400">Danger Zone</h2>
-                <p class="text-xs text-[#8A8F9E]">Irreversible project deletion and telemetry purge</p>
+                <p class="text-xs text-muted">Irreversible project deletion and telemetry purge</p>
               </div>
             </div>
-            <span class="font-mono text-[10px] px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400">
+            <span class="font-mono text-xs px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-400">
               DESTRUCTIVE
             </span>
           </div>
 
-          <p class="text-xs text-[#8A8F9E] leading-relaxed">
+          <p class="text-xs text-muted leading-relaxed">
             Deleting this project will permanently decouple all associated deliverables, purge cached GitHub & deployment activity, and erase project workspace metadata. This action requires typing the exact project slug to confirm.
           </p>
 
@@ -488,16 +488,16 @@
         aria-modal="true"
         aria-labelledby="delete-project-modal-title"
       >
-        <div class="w-full max-w-md bg-[#111318] border border-rose-500/30 rounded-2xl p-6 shadow-2xl space-y-4 text-left">
+        <div class="w-full max-w-md bg-surface border border-rose-500/30 rounded-2xl p-6 shadow-2xl space-y-4 text-left">
           <div class="flex items-start gap-3">
             <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 shrink-0">
               <NexuraIcon name="AlertTriangle" size="md" />
             </div>
             <div>
-              <h3 id="delete-project-modal-title" class="font-mono text-base font-semibold text-[#F3F4F6]">
+              <h3 id="delete-project-modal-title" class="font-mono text-base font-semibold text-foreground">
                 Delete Project Permanently?
               </h3>
-              <p class="font-sans text-xs text-[#8A8F9E] mt-1">
+              <p class="font-sans text-xs text-muted mt-1">
                 This action cannot be undone. All associated task milestone links will be permanently unlinked.
               </p>
             </div>
@@ -508,8 +508,8 @@
           </div>
 
           <div class="space-y-2 pt-1">
-            <label for="confirm-slug-input" class="block font-mono text-xs text-[#8A8F9E]">
-              Type <span class="font-bold text-rose-400 font-mono select-all">{{ currentProject.slug }}</span> to confirm:
+            <label for="confirm-slug-input" class="block font-mono text-xs text-muted">
+              Type <span class="font-semibold text-rose-400 font-mono select-all">{{ currentProject.slug }}</span> to confirm:
             </label>
             <input
               id="confirm-slug-input"
@@ -517,7 +517,7 @@
               type="text"
               autofocus
               placeholder="Enter project slug"
-              class="w-full bg-[#07080A] border border-white/[0.08] focus:border-rose-500/50 focus:ring-1 focus:ring-rose-500/50 rounded-xl px-3.5 py-2 text-sm text-[#F3F4F6] font-mono placeholder-[#565B68] focus:outline-none"
+              class="w-full bg-void border border-white/[0.08] focus:border-rose-500/50 focus:ring-1 focus:ring-rose-500/50 rounded-xl px-3.5 py-2 text-sm text-foreground font-mono placeholder:text-dim focus:outline-none"
               :disabled="isDeleting"
               @keydown.enter="onProjectDeleted"
             />
@@ -526,7 +526,7 @@
           <div class="flex items-center justify-end gap-2.5 pt-2">
             <button
               type="button"
-              class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-[#8A8F9E] hover:text-[#F3F4F6] transition cursor-pointer"
+              class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-mono text-muted hover:text-foreground transition cursor-pointer"
               :disabled="isDeleting"
               @click="closeDeleteProjectModal"
             >

@@ -7,7 +7,7 @@
   >
     <div
       ref="dialogRef"
-      class="w-full max-w-xl bg-[#111318] border border-white/[0.1] rounded-2xl p-6 sm:p-7 shadow-2xl flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
+      class="w-full max-w-xl bg-surface border border-white/[0.08] rounded-2xl p-6 sm:p-7 shadow-2xl flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-edit-project-title"
@@ -16,17 +16,17 @@
       <!-- Header -->
       <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <h2 id="modal-edit-project-title" class="font-sans text-base font-semibold text-[#F3F4F6] flex items-center gap-2">
-            <NexuraIcon name="Edit3" size="sm" class="text-indigo-400" />
+          <h2 id="modal-edit-project-title" class="font-sans text-base font-semibold text-foreground flex items-center gap-2">
+            <NexuraIcon name="Edit3" size="sm" class="text-accent-light" />
             Edit Project
           </h2>
-          <p class="font-sans text-xs text-[#8A8F9E] mt-1">
+          <p class="font-sans text-xs text-muted mt-1">
             Update scope, tech stack, roadmap status, and delivery milestones.
           </p>
         </div>
         <button
           type="button"
-          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted hover:text-foreground transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
           aria-label="Close modal"
           @click="onCancel"
         >
@@ -48,7 +48,7 @@
 
         <!-- Project Title -->
         <div class="flex flex-col gap-1.5">
-          <label for="edit-project-title-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="edit-project-title-input" class="font-sans text-xs font-semibold text-foreground">
             Project Name <span class="text-rose-400">*</span>
           </label>
           <input
@@ -57,7 +57,7 @@
             v-model="title"
             type="text"
             placeholder="e.g. TF-HiTNet EEG Transformer"
-            class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+            class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
             :class="{ 'border-rose-500/60 focus:ring-rose-500/40': !!validationError && !title.trim() }"
             required
           />
@@ -65,74 +65,74 @@
 
         <!-- Description -->
         <div class="flex flex-col gap-1.5">
-          <label for="edit-project-desc-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Description</label>
+          <label for="edit-project-desc-input" class="font-sans text-xs font-semibold text-foreground">Description</label>
           <textarea
             id="edit-project-desc-input"
             v-model="description"
             rows="2"
             placeholder="High-performance architecture with derived task milestone velocity tracking."
-            class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none custom-scrollbar"
+            class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none custom-scrollbar"
           ></textarea>
         </div>
 
         <!-- GitHub Repo & Deploy URL (Row) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col gap-1.5">
-            <label for="edit-project-repo-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">GitHub Repository</label>
+            <label for="edit-project-repo-input" class="font-sans text-xs font-semibold text-foreground">GitHub Repository</label>
             <input
               id="edit-project-repo-input"
               v-model="githubRepo"
               type="text"
               placeholder="e.g. bagja-iskandar/TF-HiTNet"
-              class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+              class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
             />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label for="edit-project-deploy-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Deployment URL</label>
+            <label for="edit-project-deploy-input" class="font-sans text-xs font-semibold text-foreground">Deployment URL</label>
             <input
               id="edit-project-deploy-input"
               v-model="deployUrl"
               type="url"
               placeholder="https://app.vercel.app"
-              class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+              class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
             />
           </div>
         </div>
 
         <!-- Tech Stack Tags (comma separated) -->
         <div class="flex flex-col gap-1.5">
-          <label for="edit-project-tech-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Tech Stack (comma-separated)</label>
+          <label for="edit-project-tech-input" class="font-sans text-xs font-semibold text-foreground">Tech Stack (comma-separated)</label>
           <input
             id="edit-project-tech-input"
             v-model="techStackInput"
             type="text"
             placeholder="e.g. Nuxt 4, Vue 3, Tailwind, TypeScript"
-            class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+            class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
           />
         </div>
 
         <!-- Release Phase -->
         <div class="flex flex-col gap-1.5">
-          <label for="edit-project-phase-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Release Phase</label>
+          <label for="edit-project-phase-input" class="font-sans text-xs font-semibold text-foreground">Release Phase</label>
           <input
             id="edit-project-phase-input"
             v-model="releasePhase"
             type="text"
             placeholder="e.g. Phase 2: Engine Calibration"
-            class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+            class="bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
           />
         </div>
 
         <!-- Status Selector -->
         <div class="flex flex-col gap-1.5">
-          <label class="font-sans text-xs font-semibold text-[#F3F4F6]">Status</label>
+          <label class="font-sans text-xs font-semibold text-foreground">Status</label>
           <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Project Status">
             <button
               v-for="s in ['active', 'maintenance', 'planned', 'on-hold', 'completed', 'archived']"
               :key="s"
               type="button"
               class="px-3 py-1.5 rounded-lg text-xs font-mono capitalize transition-all border cursor-pointer select-none"
-              :class="status === s ? 'bg-indigo-500/15 text-indigo-300 border-indigo-500/40 font-medium shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:border-white/[0.15]'"
+              :class="status === s ? 'bg-accent/15 text-accent-light border-accent/40 font-medium shadow-sm' : 'bg-canvas text-muted border-white/[0.08] hover:text-foreground hover:border-white/[0.15]'"
               role="radio"
               :aria-checked="status === s"
               @click="status = s as any"
@@ -144,14 +144,14 @@
 
         <!-- Priority Selector -->
         <div class="flex flex-col gap-1.5">
-          <label class="font-sans text-xs font-semibold text-[#F3F4F6]">Priority</label>
+          <label class="font-sans text-xs font-semibold text-foreground">Priority</label>
           <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Project Priority">
             <button
               v-for="p in ['low', 'medium', 'high', 'critical']"
               :key="p"
               type="button"
               class="px-3 py-1.5 rounded-lg text-xs font-mono capitalize transition-all border cursor-pointer select-none"
-              :class="priority === p ? 'bg-indigo-500/15 text-indigo-300 border-indigo-500/40 font-medium shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:border-white/[0.15]'"
+              :class="priority === p ? 'bg-accent/15 text-accent-light border-accent/40 font-medium shadow-sm' : 'bg-canvas text-muted border-white/[0.08] hover:text-foreground hover:border-white/[0.15]'"
               role="radio"
               :aria-checked="priority === p"
               @click="priority = p as any"
@@ -164,21 +164,21 @@
         <!-- Timeline: Start & Target Date -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col gap-1.5">
-            <label for="edit-start-date-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Start Date</label>
+            <label for="edit-start-date-input" class="font-sans text-xs font-semibold text-foreground">Start Date</label>
             <input
               id="edit-start-date-input"
               v-model="startDate"
               type="date"
-              class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+              class="bg-canvas border border-white/[0.08] text-foreground rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
             />
           </div>
           <div class="flex flex-col gap-1.5">
-            <label for="edit-due-date-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Target Due Date</label>
+            <label for="edit-due-date-input" class="font-sans text-xs font-semibold text-foreground">Target Due Date</label>
             <input
               id="edit-due-date-input"
               v-model="dueDate"
               type="date"
-              class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+              class="bg-canvas border border-white/[0.08] text-foreground rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
             />
           </div>
         </div>
@@ -187,17 +187,17 @@
         <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/[0.06]">
           <button
             type="button"
-            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
+            class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-muted hover:text-foreground transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
             @click="onCancel"
           >
             Cancel
           </button>
           <button
             type="submit"
-            class="px-4 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-sans font-semibold text-[#07080A] shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-indigo-500/40 focus:outline-none"
+            class="px-4 py-2 rounded-lg bg-foreground hover:bg-white text-xs font-sans font-semibold text-void shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-accent/40 focus:outline-none"
             :disabled="isSubmitting"
           >
-            <NexuraIcon v-if="isSubmitting" name="Loader2" size="sm" class="animate-spin text-[#07080A]" />
+            <NexuraIcon v-if="isSubmitting" name="Loader2" size="sm" class="animate-spin text-void" />
             <NexuraIcon v-else name="Check" size="sm" :stroke-width="2.2" />
             <span>{{ isSubmitting ? 'Saving...' : 'Save Changes' }}</span>
           </button>

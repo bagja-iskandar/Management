@@ -1,10 +1,10 @@
 <template>
-  <section class="obs-card rounded-xl p-3.5 space-y-2.5 border border-white/[0.08] bg-[#0E1015]/90 flex flex-col flex-1">
+  <section class="obs-card rounded-2xl p-4 space-y-2.5 border border-white/[0.06] bg-surface flex flex-col flex-1 min-h-0 overflow-hidden">
     <!-- Header -->
     <div class="flex items-center justify-between border-b border-white/[0.06] pb-2">
       <div class="flex items-center gap-2">
         <NexuraIcon name="CheckCircle2" size="sm" class="text-emerald-400 shrink-0" />
-        <h2 class="text-sm font-semibold text-[#F3F4F6]">Shipped Deliverables</h2>
+        <h2 class="text-sm font-semibold text-foreground">Shipped Deliverables</h2>
       </div>
       <span class="font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
         {{ deployedTasks.length }} Shipped Wins
@@ -14,7 +14,7 @@
     <!-- Shipments List (3-5 items) -->
     <div
       v-if="displayShipments.length > 0"
-      class="flex-1 min-h-[140px] max-h-[220px] overflow-y-auto custom-scrollbar space-y-2.5 pr-0.5"
+      class="flex-1 min-h-0 max-h-[260px] overflow-y-auto custom-scrollbar space-y-2.5 pr-0.5"
       tabindex="0"
       role="region"
       aria-label="Recent shipments"
@@ -22,27 +22,27 @@
       <div
         v-for="task in displayShipments"
         :key="task.id"
-        class="p-2.5 rounded-lg bg-[#0B0C10]/80 hover:bg-white/[0.04] border border-white/[0.06] hover:border-white/[0.12] transition cursor-pointer group"
+        class="p-2.5 rounded-lg bg-canvas/80 hover:bg-surface-hover hover:bg-white/[0.04] border border-white/[0.06] hover:border-white/[0.12] transition cursor-pointer group"
         @click="$emit('task-click', task)"
       >
         <!-- Top row: ID + Verified Live badge + Release date -->
         <div class="flex items-center justify-between text-xs">
           <div class="flex items-center gap-2">
-            <span class="font-mono text-xs text-[#8A8F9E]">
+            <span class="font-mono text-xs text-muted">
               {{ task.taskId || `#${task.id.slice(0, 7)}` }}
             </span>
-            <span class="font-mono text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.2 rounded font-medium flex items-center gap-1">
+            <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded font-medium flex items-center gap-1">
               <NexuraIcon name="Check" size="xs" />
               Verified Live
             </span>
           </div>
-          <span class="font-mono text-[11px] text-[#8A8F9E]">
+          <span class="font-mono text-xs text-muted">
             {{ formatRelativeTime(task.updatedAt || task.createdAt) }}
           </span>
         </div>
 
         <!-- Title -->
-        <h3 class="text-xs font-semibold text-[#F3F4F6] line-clamp-1 group-hover:text-white transition mt-1.5">
+        <h3 class="text-xs font-semibold text-foreground line-clamp-1 group-hover:text-white transition mt-1.5">
           {{ task.name }}
         </h3>
 
@@ -51,7 +51,7 @@
           <span
             v-for="tag in getTechTags(task)"
             :key="tag"
-            class="font-mono text-[10px] text-[#8A8F9E] bg-white/[0.04] border border-white/[0.06] px-1.5 py-0.5 rounded"
+            class="font-mono text-xs text-muted bg-white/[0.04] border border-white/[0.06] px-1.5 py-0.5 rounded"
           >
             {{ tag }}
           </span>
@@ -62,10 +62,10 @@
     <!-- Empty fallback -->
     <div
       v-else
-      class="p-4 bg-[#0B0C10]/60 border border-white/[0.06] rounded-lg text-center font-mono space-y-1 flex-1 flex flex-col justify-center"
+      class="p-4 bg-canvas/60 border border-white/[0.06] rounded-lg text-center font-mono space-y-1 flex-1 flex flex-col justify-center"
     >
-      <div class="text-xs text-[#8A8F9E]">No deliverables marked as deployed yet.</div>
-      <p class="text-[10px] text-zinc-500">Move tasks to DONE in Kanban to showcase wins here.</p>
+      <div class="text-xs text-muted">No deliverables marked as deployed yet.</div>
+      <p class="text-xs text-zinc-500">Move tasks to DONE in Kanban to showcase wins here.</p>
     </div>
   </section>
 </template>

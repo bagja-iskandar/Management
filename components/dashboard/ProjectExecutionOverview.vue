@@ -1,17 +1,17 @@
 <template>
-  <section class="obs-card rounded-xl p-3.5 space-y-2 border border-white/[0.08] bg-[#0E1015]/90 flex flex-col">
+  <section class="obs-card rounded-2xl p-4 space-y-2.5 border border-white/[0.06] bg-surface flex flex-col justify-between">
     <!-- Header -->
     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.06] pb-2">
       <div class="flex items-center gap-2">
-        <NexuraIcon name="BarChart3" size="sm" class="text-indigo-400 shrink-0" />
-        <h2 class="text-sm font-semibold text-[#F3F4F6]">Project Execution Overview</h2>
-        <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.05] text-[#8A8F9E]">
+        <NexuraIcon name="BarChart3" size="sm" class="text-accent-light shrink-0" />
+        <h2 class="text-sm font-semibold text-foreground">Project Execution Overview</h2>
+        <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.05] text-muted">
           {{ projects.length }} Projects
         </span>
       </div>
 
       <!-- Horizontal Color Legend (5 dots) -->
-      <div class="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-[11px] font-mono text-[#8A8F9E] flex-wrap">
+      <div class="flex items-center gap-2 sm:gap-3 text-xs font-mono text-muted flex-wrap">
         <div
           v-for="cfg in STATUS_CONFIG"
           :key="cfg.status"
@@ -25,10 +25,10 @@
 
     <!-- Pinned Axis Row (Scale Header) -->
     <div class="flex items-center gap-3 px-1 pt-0.5">
-      <div class="w-36 sm:w-40 shrink-0 font-mono text-[11px] text-[#8A8F9E] pl-1">
+      <div class="w-36 sm:w-40 shrink-0 font-mono text-xs text-muted pl-1">
         Project
       </div>
-      <div class="flex-1 relative flex justify-between font-mono text-[10px] text-[#8A8F9E] px-1">
+      <div class="flex-1 relative flex justify-between font-mono text-xs text-muted px-1">
         <span v-for="(tick, idx) in tickMarks" :key="idx">{{ tick }}</span>
       </div>
     </div>
@@ -50,12 +50,12 @@
         <!-- Left Label: Title + Total -->
         <div class="w-36 sm:w-40 shrink-0 flex items-center justify-between pr-2 min-w-0">
           <span
-            class="text-xs text-[#F3F4F6] truncate group-hover:text-white transition font-medium"
+            class="text-xs text-foreground truncate group-hover:text-white transition font-medium"
             :title="project.title"
           >
             {{ project.title }}
           </span>
-          <span class="font-mono text-[11px] text-[#8A8F9E] shrink-0 ml-1.5">
+          <span class="font-mono text-xs text-muted shrink-0 ml-1.5">
             {{ project.total }}
           </span>
         </div>
@@ -70,7 +70,7 @@
           <!-- Ghost Track when 0 deliverables -->
           <div
             v-if="project.total === 0"
-            class="absolute inset-0 flex items-center px-2 text-[10px] text-zinc-500 font-mono italic select-none"
+            class="absolute inset-0 flex items-center px-2 text-xs text-zinc-500 font-mono italic select-none"
           >
             0 deliverables staged
           </div>
@@ -95,7 +95,7 @@
     <!-- Empty State -->
     <div
       v-else
-      class="p-4 text-center text-xs text-[#8A8F9E] font-mono bg-white/[0.02] border border-white/[0.04] rounded-lg"
+      class="p-4 text-center text-xs text-muted font-mono bg-white/[0.02] border border-white/[0.04] rounded-lg"
     >
       No active projects staged.
     </div>
@@ -104,14 +104,14 @@
     <Teleport to="body">
       <div
         v-if="hoveredTooltip"
-        class="fixed z-50 pointer-events-none -translate-x-1/2 -translate-y-full px-2.5 py-1.5 rounded-lg bg-[#0E1015] border border-white/[0.12] shadow-xl text-xs font-mono space-y-0.5"
+        class="fixed z-50 pointer-events-none -translate-x-1/2 -translate-y-full px-2.5 py-1.5 rounded-lg bg-surface border border-white/[0.12] shadow-xl text-xs font-mono space-y-0.5"
         :style="{ left: `${hoveredTooltip.x}px`, top: `${hoveredTooltip.y}px` }"
       >
-        <div class="text-[#F3F4F6] font-semibold font-sans">{{ hoveredTooltip.projectTitle }}</div>
-        <div class="text-[#8A8F9E] flex items-center gap-2">
+        <div class="text-foreground font-semibold font-sans">{{ hoveredTooltip.projectTitle }}</div>
+        <div class="text-muted flex items-center gap-2">
           <span>{{ hoveredTooltip.statusLabel }}:</span>
-          <span class="text-white font-bold">{{ hoveredTooltip.count }}</span>
-          <span class="text-indigo-300">({{ hoveredTooltip.percentage }}%)</span>
+          <span class="text-white font-semibold">{{ hoveredTooltip.count }}</span>
+          <span class="text-accent-light">({{ hoveredTooltip.percentage }}%)</span>
         </div>
       </div>
     </Teleport>
@@ -156,7 +156,7 @@ const props = withDefaults(
 const STATUS_CONFIG: { status: TaskStatus; label: string; bgClass: string; dotClass: string }[] = [
   { status: 'idea', label: 'Idea', bgClass: 'bg-slate-500/80', dotClass: 'bg-slate-500' },
   { status: 'in_queue', label: 'In Queue', bgClass: 'bg-sky-400/90', dotClass: 'bg-sky-400' },
-  { status: 'running_sprint', label: 'In Progress', bgClass: 'bg-indigo-500', dotClass: 'bg-indigo-500' },
+  { status: 'running_sprint', label: 'In Progress', bgClass: 'bg-accent', dotClass: 'bg-accent' },
   { status: 'blocked', label: 'Blocked', bgClass: 'bg-rose-500', dotClass: 'bg-rose-500' },
   { status: 'deployed', label: 'Deployed', bgClass: 'bg-emerald-400', dotClass: 'bg-emerald-400' }
 ]

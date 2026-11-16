@@ -17,7 +17,7 @@
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 flex-1 min-w-0">
         <!-- 1. Blocked Tasks Section -->
         <div v-if="blockedTasks.length > 0" class="flex items-center gap-1.5 flex-wrap">
-          <span class="font-bold text-red-300 inline-flex items-center gap-1">
+          <span class="font-semibold text-red-300 inline-flex items-center gap-1">
             <NexuraIcon name="AlertTriangle" size="xs" class="text-rose-400 shrink-0" />
             <span>{{ blockedTasks.length }} BLOCKED:</span>
           </span>
@@ -39,7 +39,7 @@
 
         <!-- 2. Overdue or Due Tomorrow Tasks -->
         <div v-if="urgentTasks.length > 0" class="flex items-center gap-1.5 flex-wrap">
-          <span class="font-bold text-orange-300 inline-flex items-center gap-1">
+          <span class="font-semibold text-orange-300 inline-flex items-center gap-1">
             <NexuraIcon name="Calendar" size="xs" class="text-amber-400 shrink-0" />
             <span>DEADLINES:</span>
           </span>

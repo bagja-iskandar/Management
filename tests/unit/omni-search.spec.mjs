@@ -748,14 +748,14 @@ test('TEST-OMNI-PHASE-A-HEADERBAR-CLEAN: HeaderBar zero backdrop-blur, closeSear
     'HeaderBar.vue must NOT contain backdrop-blur classes'
   )
 
-  // 2. HeaderBar.vue must still retain relative z-50 and solid bg-[#0B0C10]
+  // 2. HeaderBar.vue must still retain relative z-50 and solid bg-canvas
   assert.ok(
     headerBarContent.includes('relative z-50'),
     'HeaderBar.vue <header> must retain "relative z-50"'
   )
   assert.ok(
-    headerBarContent.includes('bg-[#0B0C10]'),
-    'HeaderBar.vue <header> must use solid "bg-[#0B0C10]"'
+    headerBarContent.includes('bg-canvas'),
+    'HeaderBar.vue <header> must use solid "bg-canvas"'
   )
 
   // 3. HeaderBar.vue must call closeSearch() when opening auth or add-task modals

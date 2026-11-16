@@ -11,13 +11,13 @@
     >
       <div
         ref="panelRef"
-        class="w-full max-w-2xl bg-[#07080A] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-8 max-h-[88vh] text-[#F3F4F6] outline-none"
+        class="w-full max-w-2xl bg-void border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-8 max-h-[88vh] text-foreground outline-none"
         @click.stop
       >
         <!-- ======================================================== -->
         <!-- TERMINAL WINDOW HEADER                                   -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3.5 bg-[#111318] border-b border-white/[0.06] flex items-center justify-between gap-4">
+        <div class="px-5 py-3.5 bg-surface border-b border-white/[0.06] flex items-center justify-between gap-4">
           <!-- Left: Title & Target -->
           <div class="flex items-center gap-2.5 min-w-0">
             <span
@@ -26,10 +26,10 @@
               aria-hidden="true"
             ></span>
             <div class="min-w-0">
-              <div class="font-sans text-xs font-bold text-[#F3F4F6] truncate">
+              <div class="font-sans text-xs font-semibold text-foreground truncate">
                 Repository Security Audit
               </div>
-              <div class="font-mono text-[10px] text-[#8A8F9E] truncate">
+              <div class="font-mono text-xs text-muted truncate">
                 security://audit/{{ repo }}
               </div>
             </div>
@@ -42,7 +42,7 @@
               :href="`https://github.com/${repo}/security`"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs text-indigo-400 hover:text-[#F3F4F6] transition-colors flex items-center gap-1 group"
+              class="font-mono text-xs text-accent-light hover:text-foreground transition-colors flex items-center gap-1 group"
               title="Open GitHub Security advisory page"
             >
               <span>Security Hub</span>
@@ -51,7 +51,7 @@
 
             <button
               type="button"
-              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+              class="p-1 rounded-lg bg-white/5 hover:bg-white/10 text-muted hover:text-foreground transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
               aria-label="Close modal"
               @click="close"
             >
@@ -63,36 +63,36 @@
         <!-- ======================================================== -->
         <!-- TELEMETRY COUNTER STRIP (4 BENTO TILES)                 -->
         <!-- ======================================================== -->
-        <div class="p-5 pb-0 bg-[#07080A]">
+        <div class="p-5 pb-0 bg-void">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             <!-- Bento 1: Total Alerts -->
-            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Total Alerts</span>
+            <div class="p-3 rounded-xl bg-surface border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-xs uppercase tracking-wider text-muted">Total Alerts</span>
               <div class="flex items-baseline gap-1.5">
                 <span
-                  class="font-mono text-xl font-bold"
+                  class="font-mono text-xl font-semibold"
                   :class="summary?.totalAlerts ? 'text-rose-400' : 'text-emerald-400'"
                 >
                   {{ summary ? summary.totalAlerts : '—' }}
                 </span>
-                <span class="font-mono text-[10px] text-[#8A8F9E]">issues</span>
+                <span class="font-mono text-xs text-muted">issues</span>
               </div>
             </div>
 
             <!-- Bento 2: Critical / High alerts counter -->
-            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Critical / High</span>
+            <div class="p-3 rounded-xl bg-surface border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-xs uppercase tracking-wider text-muted">Critical / High</span>
               <div class="flex items-baseline gap-1 font-mono text-xs">
                 <span
-                  class="font-bold"
-                  :class="summary?.criticalCount ? 'text-rose-400' : 'text-[#8A8F9E]'"
+                  class="font-semibold"
+                  :class="summary?.criticalCount ? 'text-rose-400' : 'text-muted'"
                 >
                   {{ summary ? summary.criticalCount : 0 }} Crit
                 </span>
                 <span class="text-white/20">•</span>
                 <span
-                  class="font-bold"
-                  :class="summary?.highCount ? 'text-amber-400' : 'text-[#8A8F9E]'"
+                  class="font-semibold"
+                  :class="summary?.highCount ? 'text-amber-400' : 'text-muted'"
                 >
                   {{ summary ? summary.highCount : 0 }} High
                 </span>
@@ -100,8 +100,8 @@
             </div>
 
             <!-- Bento 3: Secret Scanning status -->
-            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Secret Scanning</span>
+            <div class="p-3 rounded-xl bg-surface border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-xs uppercase tracking-wider text-muted">Secret Scanning</span>
               <div class="flex items-center gap-1.5">
                 <span
                   class="w-1.5 h-1.5 rounded-full shrink-0"
@@ -117,16 +117,16 @@
             </div>
 
             <!-- Bento 4: Dependabot status -->
-            <div class="p-3 rounded-xl bg-[#111318] border border-white/[0.06] flex flex-col justify-between gap-1">
-              <span class="font-mono text-[10px] uppercase tracking-wider text-[#8A8F9E]">Dependabot</span>
+            <div class="p-3 rounded-xl bg-surface border border-white/[0.06] flex flex-col justify-between gap-1">
+              <span class="font-mono text-xs uppercase tracking-wider text-muted">Dependabot</span>
               <div class="flex items-center gap-1.5">
                 <span
                   class="w-1.5 h-1.5 rounded-full shrink-0"
-                  :class="summary?.enabled.dependabot ? 'bg-emerald-400' : 'bg-[#8A8F9E]'"
+                  :class="summary?.enabled.dependabot ? 'bg-emerald-400' : 'bg-muted'"
                 ></span>
                 <span
                   class="font-mono text-xs font-semibold"
-                  :class="summary?.enabled.dependabot ? 'text-emerald-400' : 'text-[#8A8F9E]'"
+                  :class="summary?.enabled.dependabot ? 'text-emerald-400' : 'text-muted'"
                 >
                   {{ summary?.enabled.dependabot ? 'Active' : 'Disabled' }}
                 </span>
@@ -138,7 +138,7 @@
         <!-- ======================================================== -->
         <!-- MAIN AUDIT BODY                                          -->
         <!-- ======================================================== -->
-        <div class="p-5 overflow-y-auto space-y-4 flex-1 bg-[#07080A] custom-scrollbar">
+        <div class="p-5 overflow-y-auto space-y-4 flex-1 bg-void custom-scrollbar">
           <!-- Dependabot Disabled Callout Box -->
           <div
             v-if="summary && !summary.enabled.dependabot"
@@ -147,10 +147,10 @@
             <div class="flex items-start gap-2.5 min-w-0">
               <NexuraIcon name="AlertCircle" size="sm" class="text-amber-400 shrink-0 mt-0.5" />
               <div class="space-y-0.5 min-w-0">
-                <div class="font-mono font-bold text-[#F3F4F6]">
+                <div class="font-mono font-semibold text-foreground">
                   Dependabot alerts disabled
                 </div>
-                <p class="text-[#8A8F9E] leading-relaxed">
+                <p class="text-muted leading-relaxed">
                   Dependabot alerts are disabled for this repository. Enable it in GitHub to automatically detect vulnerable npm packages and CVEs.
                 </p>
               </div>
@@ -168,9 +168,9 @@
           </div>
 
           <!-- Loading State -->
-          <div v-if="!summary" class="py-12 flex flex-col items-center justify-center gap-3 text-[#8A8F9E]">
-            <NexuraIcon name="Loader2" size="lg" class="animate-spin text-indigo-400" />
-            <span class="font-mono text-xs text-indigo-300 animate-pulse">
+          <div v-if="!summary" class="py-12 flex flex-col items-center justify-center gap-3 text-muted">
+            <NexuraIcon name="Loader2" size="lg" class="animate-spin text-accent-light" />
+            <span class="font-mono text-xs text-accent-light animate-pulse">
               Fetching repository security telemetry from GitHub API...
             </span>
           </div>
@@ -178,22 +178,22 @@
           <!-- Clean State (Zero Alerts) -->
           <div
             v-else-if="summary.alerts.length === 0"
-            class="py-10 px-4 rounded-xl bg-[#111318]/60 border border-white/[0.06] flex flex-col items-center justify-center text-center space-y-3"
+            class="py-10 px-4 rounded-xl bg-surface/60 border border-white/[0.06] flex flex-col items-center justify-center text-center space-y-3"
           >
             <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
               <NexuraIcon name="ShieldCheck" size="md" />
             </div>
 
             <div class="space-y-1">
-              <h4 class="font-mono text-sm font-bold text-emerald-400">
+              <h4 class="font-mono text-sm font-semibold text-emerald-400">
                 All Clear
               </h4>
-              <p class="font-mono text-xs text-[#8A8F9E] max-w-md">
+              <p class="font-mono text-xs text-muted max-w-md">
                 No secret leaks or known vulnerabilities detected.
               </p>
             </div>
 
-            <div class="font-mono text-[11px] text-[#8A8F9E]/70 pt-2 flex items-center gap-3">
+            <div class="font-mono text-xs text-muted/70 pt-2 flex items-center gap-3">
               <span>Secret Scanning: Monitored</span>
               <span>•</span>
               <span>Code Scanning: Monitored</span>
@@ -202,7 +202,7 @@
 
           <!-- Alerts List -->
           <div v-else class="space-y-3">
-            <div class="flex items-center justify-between font-mono text-xs text-[#8A8F9E] px-1">
+            <div class="flex items-center justify-between font-mono text-xs text-muted px-1">
               <span class="uppercase tracking-wider">Detected Vulnerabilities ({{ summary.alerts.length }})</span>
               <span>Sorted by Severity</span>
             </div>
@@ -210,26 +210,26 @@
             <div
               v-for="alert in summary.alerts"
               :key="alert.id"
-              class="p-4 rounded-xl bg-[#111318] border border-white/[0.06] hover:border-white/[0.12] transition-all space-y-3"
+              class="p-4 rounded-xl bg-surface border border-white/[0.06] hover:border-white/[0.12] transition-all space-y-3"
             >
               <!-- Alert Row Header: Badges & Links -->
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <div class="flex items-center gap-2 flex-wrap">
                   <!-- Severity Badge -->
                   <span
-                    class="font-mono text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border"
+                    class="font-mono text-xs uppercase font-semibold px-2 py-0.5 rounded-full border"
                     :class="getSeverityBadgeClass(alert.severity)"
                   >
                     {{ alert.severity }}
                   </span>
 
                   <!-- Type Badge -->
-                  <span class="font-mono text-[10px] uppercase px-2 py-0.5 rounded bg-white/5 text-[#8A8F9E] border border-white/[0.06]">
+                  <span class="font-mono text-xs uppercase px-2 py-0.5 rounded bg-white/5 text-muted border border-white/[0.06]">
                     {{ alert.type.replace('_', ' ') }}
                   </span>
 
                   <!-- State Pill -->
-                  <span class="font-mono text-[10px] capitalize px-1.5 py-0.2 rounded bg-white/[0.03] text-[#8A8F9E]">
+                  <span class="font-mono text-xs capitalize px-1.5 py-0.5 rounded bg-white/[0.03] text-muted">
                     {{ alert.state }}
                   </span>
                 </div>
@@ -240,7 +240,7 @@
                   :href="alert.htmlUrl"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="font-mono text-xs text-indigo-400 hover:text-[#F3F4F6] flex items-center gap-1 transition-colors group"
+                  class="font-mono text-xs text-accent-light hover:text-foreground flex items-center gap-1 transition-colors group"
                 >
                   <span>View Advisory</span>
                   <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -249,10 +249,10 @@
 
               <!-- Alert Title & Description -->
               <div class="space-y-1">
-                <div class="font-mono text-xs font-bold text-[#F3F4F6]">
+                <div class="font-mono text-xs font-semibold text-foreground">
                   {{ alert.title }}
                 </div>
-                <p v-if="alert.description" class="text-xs text-[#8A8F9E] line-clamp-2 leading-relaxed">
+                <p v-if="alert.description" class="text-xs text-muted line-clamp-2 leading-relaxed">
                   {{ alert.description }}
                 </p>
               </div>
@@ -260,41 +260,41 @@
               <!-- Package & Vulnerability Specs -->
               <div
                 v-if="alert.packageName || alert.vulnerableVersion || alert.patchedVersion || alert.secretType"
-                class="p-2.5 rounded-lg bg-[#15171E] border border-white/[0.04] grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono"
+                class="p-2.5 rounded-lg bg-surface-elevated border border-white/[0.04] grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono"
               >
                 <div v-if="alert.packageName" class="flex items-center gap-1.5 truncate">
-                  <span class="text-[#8A8F9E]">Package:</span>
-                  <span class="text-[#F3F4F6] font-semibold truncate">{{ alert.packageName }}</span>
+                  <span class="text-muted">Package:</span>
+                  <span class="text-foreground font-semibold truncate">{{ alert.packageName }}</span>
                 </div>
 
                 <div v-if="alert.secretType" class="flex items-center gap-1.5 truncate">
-                  <span class="text-[#8A8F9E]">Secret:</span>
+                  <span class="text-muted">Secret:</span>
                   <span class="text-amber-400 font-semibold truncate">{{ alert.secretType }}</span>
                 </div>
 
                 <div v-if="alert.vulnerableVersion" class="flex items-center gap-1.5 truncate">
-                  <span class="text-[#8A8F9E]">Vulnerable:</span>
+                  <span class="text-muted">Vulnerable:</span>
                   <span class="text-rose-400 truncate">{{ alert.vulnerableVersion }}</span>
                 </div>
 
                 <div v-if="alert.patchedVersion" class="flex items-center gap-1.5 truncate">
-                  <span class="text-[#8A8F9E]">Patched:</span>
+                  <span class="text-muted">Patched:</span>
                   <span class="text-emerald-400 font-semibold truncate">{{ alert.patchedVersion }}</span>
                 </div>
               </div>
 
               <!-- CVE / GHSA Identifiers & Date -->
-              <div class="flex items-center justify-between gap-3 text-[11px] font-mono text-[#8A8F9E] pt-1 border-t border-white/[0.04]">
+              <div class="flex items-center justify-between gap-3 text-xs font-mono text-muted pt-1 border-t border-white/[0.04]">
                 <div class="flex items-center gap-2 flex-wrap">
                   <span
                     v-if="alert.cveId"
-                    class="px-2 py-0.5 rounded bg-rose-950/40 text-rose-300 border border-rose-900/40 text-[10px]"
+                    class="px-2 py-0.5 rounded bg-rose-950/40 text-rose-300 border border-rose-900/40 text-xs"
                   >
                     {{ alert.cveId }}
                   </span>
                   <span
                     v-if="alert.ghsaId"
-                    class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-[10px]"
+                    class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs"
                   >
                     {{ alert.ghsaId }}
                   </span>
@@ -311,16 +311,16 @@
         <!-- ======================================================== -->
         <!-- TERMINAL FOOTER                                          -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3 bg-[#111318] border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-[#8A8F9E]">
+        <div class="px-5 py-3 bg-surface border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-muted">
           <div class="flex items-center gap-2">
-            <span class="text-indigo-400">nexura-security-telemetry</span>
+            <span class="text-accent-light">nexura-security-telemetry</span>
             <span>•</span>
             <span>ESC to close</span>
           </div>
 
           <button
             type="button"
-            class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[#F3F4F6] hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+            class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-foreground hover:text-white transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
             @click="close"
           >
             Close
@@ -369,7 +369,7 @@ function close() {
 
 // Status Dot in Header
 const statusDotClass = computed(() => {
-  if (!props.summary) return 'bg-[#8A8F9E]'
+  if (!props.summary) return 'bg-muted'
   if (props.summary.criticalCount > 0) return 'bg-rose-400 animate-pulse'
   if (props.summary.highCount > 0) return 'bg-amber-400'
   if (props.summary.totalAlerts > 0) return 'bg-yellow-400'
@@ -390,12 +390,12 @@ const secretScanningLabel = computed(() => {
 })
 
 const secretScanningDotClass = computed(() => {
-  if (!props.summary || !props.summary.enabled.secretScanning) return 'bg-[#8A8F9E]'
+  if (!props.summary || !props.summary.enabled.secretScanning) return 'bg-muted'
   return hasSecretLeaks.value ? 'bg-rose-400' : 'bg-emerald-400'
 })
 
 const secretScanningTextClass = computed(() => {
-  if (!props.summary || !props.summary.enabled.secretScanning) return 'text-[#8A8F9E]'
+  if (!props.summary || !props.summary.enabled.secretScanning) return 'text-muted'
   return hasSecretLeaks.value ? 'text-rose-400' : 'text-emerald-400'
 })
 
@@ -410,7 +410,7 @@ function getSeverityBadgeClass(severity: GitHubSecuritySeverity) {
       return 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
     case 'low':
     default:
-      return 'bg-white/5 text-[#8A8F9E] border-white/10'
+      return 'bg-white/5 text-muted border-white/10'
   }
 }
 

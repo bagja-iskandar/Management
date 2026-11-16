@@ -1,7 +1,7 @@
 <template>
   <div class="space-y-6">
     <!-- Top Production Banner -->
-    <div class="obs-card bg-[#111318] border border-white/[0.07] rounded-2xl p-6 shadow-xl relative overflow-hidden space-y-5">
+    <div class="obs-card bg-surface border border-white/[0.07] rounded-2xl p-6 shadow-xl relative overflow-hidden space-y-5">
       <!-- Ambient Glow -->
       <div class="absolute -top-16 -right-16 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -9,22 +9,22 @@
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+            <span class="font-mono text-xs uppercase tracking-wider text-emerald-400 font-semibold">
               VERCEL PRODUCTION DEPLOYMENT
             </span>
           </div>
-          <h2 class="font-mono text-xl sm:text-2xl font-bold text-[#F3F4F6] flex items-center gap-2">
+          <h2 class="font-mono text-xl sm:text-2xl font-semibold text-foreground flex items-center gap-2">
             <span>{{ liveDomain }}</span>
           </h2>
-          <p class="font-mono text-xs text-[#8A8F9E] flex items-center gap-2 flex-wrap">
-            <span>Branch: <strong class="text-[#F3F4F6]">main</strong></span>
+          <p class="font-mono text-xs text-muted flex items-center gap-2 flex-wrap">
+            <span>Branch: <strong class="text-foreground">main</strong></span>
             <template v-if="activeSha">
               <span>•</span>
-              <span>Commit: <strong class="text-indigo-400 tabular-nums">#{{ activeSha }}</strong></span>
+              <span>Commit: <strong class="text-accent-light tabular-nums">#{{ activeSha }}</strong></span>
             </template>
             <template v-if="project.primaryTech">
               <span>•</span>
-              <span>Stack: <strong class="text-[#F3F4F6]">{{ project.primaryTech }}</strong></span>
+              <span>Stack: <strong class="text-foreground">{{ project.primaryTech }}</strong></span>
             </template>
           </p>
         </div>
@@ -33,7 +33,7 @@
         <div class="flex items-center gap-2.5 flex-wrap">
           <button
             type="button"
-            class="px-3 py-1.5 rounded-lg bg-[#07080A] hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.08] font-mono text-xs transition cursor-pointer flex items-center gap-1.5"
+            class="px-3 py-1.5 rounded-lg bg-void hover:bg-white/10 text-muted hover:text-foreground border border-white/[0.08] font-mono text-xs transition cursor-pointer flex items-center gap-1.5"
             @click="copyUrl"
           >
             <NexuraIcon :name="copied ? 'Check' : 'Copy'" size="xs" :class="copied ? 'text-emerald-400' : ''" />
@@ -44,7 +44,7 @@
             :href="liveUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-black font-mono text-xs font-bold transition inline-flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 group"
+            class="px-4 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-black font-mono text-xs font-semibold transition inline-flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 group"
           >
             <span>Buka Website</span>
             <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -54,23 +54,23 @@
 
       <!-- Live Vercel Metric Grid -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-white/[0.06] font-mono relative z-10">
-        <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">STATUS</span>
-          <div class="text-xs font-bold flex items-center gap-1.5" :class="pingStatus === 'offline' ? 'text-rose-400' : 'text-emerald-400'">
+        <div class="bg-void/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
+          <span class="text-xs text-muted uppercase">STATUS</span>
+          <div class="text-xs font-semibold flex items-center gap-1.5" :class="pingStatus === 'offline' ? 'text-rose-400' : 'text-emerald-400'">
             <span class="w-1.5 h-1.5 rounded-full" :class="pingStatus === 'offline' ? 'bg-rose-400' : 'bg-emerald-400'"></span>
             <span>{{ pingStatus === 'offline' ? 'Offline' : 'Ready (Live)' }}</span>
           </div>
         </div>
 
-        <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">RESPONSE PING</span>
-          <div class="text-xs font-bold text-[#F3F4F6] flex items-center justify-between">
+        <div class="bg-void/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
+          <span class="text-xs text-muted uppercase">RESPONSE PING</span>
+          <div class="text-xs font-semibold text-foreground flex items-center justify-between">
             <span v-if="pingStatus === 'offline'" class="text-rose-400 text-xs">Offline</span>
             <span v-else-if="pingLatency !== null" class="tabular-nums">{{ pingLatency }}ms</span>
-            <span v-else class="text-[#8A8F9E] text-xs">Not tested</span>
+            <span v-else class="text-muted text-xs">Not tested</span>
             <button
               type="button"
-              class="text-[9px] text-indigo-400 hover:underline cursor-pointer"
+              class="text-xs leading-none text-accent-light hover:underline cursor-pointer"
               :disabled="isPinging"
               @click="ping"
             >
@@ -79,16 +79,16 @@
           </div>
         </div>
 
-        <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">SSL PROTOCOL</span>
-          <div class="text-xs font-bold text-[#F3F4F6]">
+        <div class="bg-void/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
+          <span class="text-xs text-muted uppercase">SSL PROTOCOL</span>
+          <div class="text-xs font-semibold text-foreground">
             {{ liveUrl.startsWith('https://') ? 'HTTPS (Active)' : 'HTTP' }}
           </div>
         </div>
 
-        <div class="bg-[#07080A]/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
-          <span class="text-[10px] text-[#8A8F9E] uppercase">LATEST RELEASE</span>
-          <div class="text-xs font-bold text-[#F3F4F6] truncate">
+        <div class="bg-void/60 p-3 rounded-xl border border-white/[0.05] space-y-1">
+          <span class="text-xs text-muted uppercase">LATEST RELEASE</span>
+          <div class="text-xs font-semibold text-foreground truncate">
             {{ latestDeploymentTime }}
           </div>
         </div>
@@ -98,15 +98,15 @@
     <!-- Deployment History & Environments -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       <!-- Left Column: Deployments List (8 cols) -->
-      <div class="lg:col-span-8 bg-[#111318] border border-white/[0.07] rounded-2xl p-5 space-y-4 shadow-xl">
+      <div class="lg:col-span-8 bg-surface border border-white/[0.07] rounded-2xl p-5 space-y-4 shadow-xl">
         <div class="flex items-center justify-between border-b border-white/[0.06] pb-3">
           <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-            <h3 class="font-mono text-xs font-bold text-[#F3F4F6] uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-accent"></span>
+            <h3 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">
               Deployment Releases History
             </h3>
           </div>
-          <span class="font-mono text-[10px] tabular-nums bg-white/5 text-[#8A8F9E] px-2 py-0.5 rounded border border-white/[0.06]">
+          <span class="font-mono text-xs tabular-nums bg-white/5 text-muted px-2 py-0.5 rounded border border-white/[0.06]">
             {{ deploymentList.length }} Deployments
           </span>
         </div>
@@ -115,34 +115,34 @@
           <div
             v-for="(d, idx) in deploymentList"
             :key="d.id || idx"
-            class="bg-[#07080A]/60 hover:bg-[#171920] border border-white/[0.05] hover:border-white/[0.12] rounded-xl p-3.5 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs"
+            class="bg-void/60 hover:bg-surface-elevated border border-white/[0.05] hover:border-white/[0.12] rounded-xl p-3.5 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 font-mono text-xs"
           >
             <div class="space-y-1 min-w-0">
               <div class="flex items-center gap-2 flex-wrap">
                 <span
-                  class="px-2 py-0.5 rounded text-[10px] font-semibold border"
+                  class="px-2 py-0.5 rounded text-xs font-semibold border"
                   :class="d.environment === 'production' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-sky-500/15 text-sky-400 border-sky-500/30'"
                 >
                   {{ d.environment.toUpperCase() }}
                 </span>
-                <span class="text-[#F3F4F6] font-bold truncate">
+                <span class="text-foreground font-semibold truncate">
                   {{ d.name || 'Commit Release' }}
                 </span>
-                <span v-if="d.shortSha" class="text-indigo-400 font-bold tabular-nums">#{{ d.shortSha }}</span>
+                <span v-if="d.shortSha" class="text-accent-light font-semibold tabular-nums">#{{ d.shortSha }}</span>
               </div>
-              <p class="text-[11px] text-[#8A8F9E] font-sans truncate">
+              <p class="text-xs text-muted font-sans truncate">
                 {{ d.message || 'Automated deployment via GitHub push' }}
               </p>
             </div>
 
-            <div class="flex items-center gap-3 shrink-0 text-[#8A8F9E] text-[11px] justify-between sm:justify-end">
+            <div class="flex items-center gap-3 shrink-0 text-muted text-xs justify-between sm:justify-end">
               <span class="tabular-nums">{{ d.timeAgo }}</span>
               <a
                 v-if="d.url"
                 :href="d.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#111318] hover:bg-white/10 text-[#F3F4F6] font-mono text-[10px] transition border border-white/[0.06] group"
+                class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface hover:bg-white/10 text-foreground font-mono text-xs transition border border-white/[0.06] group"
               >
                 <span>Visit</span>
                 <NexuraIcon name="ArrowUpRight" size="xs" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -161,32 +161,32 @@
 
       <!-- Right Column: Production Configuration & Meta (4 cols) -->
       <div class="lg:col-span-4 space-y-4">
-        <div class="bg-[#111318] border border-white/[0.07] rounded-2xl p-5 space-y-4 shadow-xl font-mono text-xs">
+        <div class="bg-surface border border-white/[0.07] rounded-2xl p-5 space-y-4 shadow-xl font-mono text-xs">
           <div class="flex items-center gap-2 border-b border-white/[0.06] pb-3">
-            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
-            <h4 class="font-mono text-xs font-bold text-[#F3F4F6] uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-accent"></span>
+            <h4 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">
               Environment Meta
             </h4>
           </div>
 
           <div class="space-y-3">
             <div class="space-y-1">
-              <span class="text-[10px] text-[#8A8F9E] uppercase block">Assigned Project</span>
-              <p class="text-xs font-sans text-[#F3F4F6] font-medium">{{ project.title }}</p>
+              <span class="text-xs text-muted uppercase block">Assigned Project</span>
+              <p class="text-xs font-sans text-foreground font-medium">{{ project.title }}</p>
             </div>
 
             <div class="space-y-1">
-              <span class="text-[10px] text-[#8A8F9E] uppercase block">GitHub Repository</span>
-              <p class="text-xs font-mono text-indigo-300 truncate">{{ project.githubRepo || 'No linked repository' }}</p>
+              <span class="text-xs text-muted uppercase block">GitHub Repository</span>
+              <p class="text-xs font-mono text-accent-light truncate">{{ project.githubRepo || 'No linked repository' }}</p>
             </div>
 
             <div class="space-y-1">
-              <span class="text-[10px] text-[#8A8F9E] uppercase block">Primary Tech Stack</span>
-              <p class="text-xs font-mono text-[#F3F4F6]">{{ project.primaryTech || 'Not specified' }}</p>
+              <span class="text-xs text-muted uppercase block">Primary Tech Stack</span>
+              <p class="text-xs font-mono text-foreground">{{ project.primaryTech || 'Not specified' }}</p>
             </div>
 
             <div class="space-y-1">
-              <span class="text-[10px] text-[#8A8F9E] uppercase block">Edge Runtime</span>
+              <span class="text-xs text-muted uppercase block">Edge Runtime</span>
               <p class="text-xs font-mono text-emerald-400">Vercel Serverless / Edge</p>
             </div>
           </div>

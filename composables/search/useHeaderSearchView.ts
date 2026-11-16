@@ -45,14 +45,14 @@ export function resolveLeadingIcon(prefixMode: string, activeScope: string): str
 
 export function resolveLeadingIconColor(prefixMode: string, activeScope: string): string {
   if (prefixMode === 'action' || activeScope === 'action') return 'text-emerald-400'
-  if (prefixMode === 'tag') return 'text-indigo-400'
+  if (prefixMode === 'tag') return 'text-accent-light'
   if (prefixMode === 'project' || activeScope === 'project') return 'text-blue-400'
   if (prefixMode === 'blocker') return 'text-rose-400'
-  if (activeScope === 'task') return 'text-indigo-400'
+  if (activeScope === 'task') return 'text-accent-light'
   if (activeScope === 'sprint') return 'text-purple-400'
   if (activeScope === 'repo') return 'text-emerald-400'
   if (activeScope === 'note') return 'text-yellow-400'
-  return 'text-[#8A8F9E] group-hover:text-[#F3F4F6]'
+  return 'text-muted group-hover:text-foreground'
 }
 
 export function resolvePrefixChip(prefixMode: string, activeScope: string): { label: string; class: string } | null {
@@ -60,7 +60,7 @@ export function resolvePrefixChip(prefixMode: string, activeScope: string): { la
     return { label: '> Actions', class: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' }
   }
   if (prefixMode === 'tag') {
-    return { label: '# Tech Tags', class: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20' }
+    return { label: '# Tech Tags', class: 'bg-accent/10 text-accent-light border border-accent/20' }
   }
   if (prefixMode === 'project') {
     return { label: '@ Projects', class: 'bg-blue-500/10 text-blue-300 border border-blue-500/20' }
@@ -69,7 +69,7 @@ export function resolvePrefixChip(prefixMode: string, activeScope: string): { la
     return { label: '! Blockers', class: 'bg-rose-500/10 text-rose-300 border border-rose-500/20' }
   }
   if (activeScope === 'task') {
-    return { label: 'Scope: Tasks', class: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20' }
+    return { label: 'Scope: Tasks', class: 'bg-accent/10 text-accent-light border border-accent/20' }
   }
   if (activeScope === 'project') {
     return { label: 'Scope: Projects', class: 'bg-blue-500/10 text-blue-300 border border-blue-500/20' }

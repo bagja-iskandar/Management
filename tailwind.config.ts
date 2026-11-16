@@ -10,47 +10,47 @@ export default {
   theme: {
     extend: {
       colors: {
-        void: '#07080A',
-        canvas: '#0B0C10',
+        void: 'rgb(var(--obs-void-rgb) / <alpha-value>)',
+        canvas: 'rgb(var(--obs-canvas-rgb) / <alpha-value>)',
         surface: {
-          DEFAULT: '#111318',
-          elevated: '#171920',
-          hover: '#1D2029'
+          DEFAULT: 'rgb(var(--obs-surface-rgb) / <alpha-value>)',
+          elevated: 'rgb(var(--obs-elevated-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--obs-hover-rgb) / <alpha-value>)'
         },
-        'surface-elevated': '#171920',
-        'surface-hover': '#1D2029',
-        foreground: '#F3F4F6',
-        muted: '#8A8F9E',
-        dim: '#565B68',
+        'surface-elevated': 'rgb(var(--obs-elevated-rgb) / <alpha-value>)',
+        'surface-hover': 'rgb(var(--obs-hover-rgb) / <alpha-value>)',
+        foreground: 'rgb(var(--obs-text-rgb) / <alpha-value>)',
+        muted: 'rgb(var(--obs-muted-rgb) / <alpha-value>)',
+        dim: 'rgb(var(--obs-dim-rgb) / <alpha-value>)',
         accent: {
-          DEFAULT: '#6366F1',
-          light: '#818CF8',
-          dim: '#4338CA'
+          DEFAULT: 'rgb(var(--obs-accent-rgb) / <alpha-value>)',
+          light: 'rgb(var(--obs-accent-light-rgb) / <alpha-value>)',
+          dim: 'rgb(var(--obs-accent-dim-rgb) / <alpha-value>)'
         },
-        'accent-light': '#818CF8',
-        'accent-dim': '#4338CA',
+        'accent-light': 'rgb(var(--obs-accent-light-rgb) / <alpha-value>)',
+        'accent-dim': 'rgb(var(--obs-accent-dim-rgb) / <alpha-value>)',
         // Backward-compatibility aliases
-        bone: '#F3F4F6',
+        bone: 'rgb(var(--obs-text-rgb) / <alpha-value>)',
         ochre: {
-          DEFAULT: '#6366F1',
-          dim: '#4338CA'
+          DEFAULT: 'rgb(var(--obs-accent-rgb) / <alpha-value>)',
+          dim: 'rgb(var(--obs-accent-dim-rgb) / <alpha-value>)'
         },
-        'ochre-dim': '#4338CA',
+        'ochre-dim': 'rgb(var(--obs-accent-dim-rgb) / <alpha-value>)',
         // Semantic status
         'status-critical': '#F43F5E',
         'status-high': '#F59E0B',
-        'status-medium': '#6366F1',
+        'status-medium': '#38BDF8',
         'status-low': '#8A8F9E',
         'status-success': '#10B981',
-        'status-running': '#818CF8'
+        'status-running': '#38BDF8'
       },
       height: {
         '13': '3.25rem',
         '14': '3.5rem'
       },
       fontFamily: {
-        sans: ['"Geist Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['"Geist Mono"', '"JetBrains Mono"', '"Cascadia Code"', 'monospace']
+        sans: ['"Geist Sans Variable"', '"Geist Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"Geist Mono Variable"', '"Geist Mono"', '"JetBrains Mono"', 'monospace']
       },
       boxShadow: {
         specular: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.07)',

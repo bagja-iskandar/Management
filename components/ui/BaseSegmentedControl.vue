@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-[#07080A] border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 sm:p-1 rounded-lg sm:rounded-xl gap-1 inline-flex items-center select-none"
+    class="bg-void border border-white/[0.08] shadow-[inset_0_1px_3px_rgba(0,0,0,0.7)] p-0.5 sm:p-1 rounded-lg sm:rounded-xl gap-1 inline-flex items-center select-none"
     :class="[fullWidth ? 'w-full flex' : '', trackHeightClasses, props.class]"
     role="tablist"
   >
@@ -11,17 +11,17 @@
       role="tab"
       :aria-selected="modelValue === opt.value ? 'true' : 'false'"
       :disabled="disabled || opt.disabled"
-      class="inline-flex items-center justify-center font-sans transition-all duration-150 ease-out active:scale-[0.98] motion-reduce:transition-none motion-reduce:transform-none cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-500/50 disabled:opacity-40 disabled:cursor-not-allowed"
+      class="inline-flex items-center justify-center font-sans transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)] active:scale-[0.98] motion-reduce:transition-none motion-reduce:transform-none cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40 disabled:opacity-40 disabled:cursor-not-allowed"
       :class="[
         sizeClasses,
         fullWidth ? 'flex-1' : '',
         modelValue === opt.value
           ? (variant === 'glass'
-              ? 'bg-white/[0.08] text-[#F3F4F6] font-medium shadow-sm border border-white/[0.08]'
-              : 'bg-[#171920] text-[#F3F4F6] font-medium border border-white/[0.14] shadow-[0_2px_4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]')
+              ? 'bg-white/[0.08] text-foreground font-medium shadow-sm border border-white/[0.08]'
+              : 'bg-surface-elevated text-foreground font-medium border border-white/[0.14] shadow-[0_2px_4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08)]')
           : (variant === 'glass'
-              ? 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border border-transparent'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] border border-transparent')
+              ? 'text-muted hover:text-foreground hover:bg-white/[0.03] border border-transparent'
+              : 'text-muted hover:text-foreground hover:bg-white/[0.04] border border-transparent')
       ]"
       @click="onSelect(opt.value)"
     >
@@ -30,18 +30,18 @@
         :name="opt.icon"
         size="xs"
         class="shrink-0"
-        :class="modelValue === opt.value ? 'text-indigo-400' : 'text-[#8A8F9E]'"
+        :class="modelValue === opt.value ? 'text-accent-light' : 'text-muted'"
       />
 
       <span class="truncate">{{ opt.label }}</span>
 
       <span
         v-if="typeof opt.count === 'number'"
-        class="font-mono text-[10px] px-1.5 py-0.2 rounded-full shrink-0"
+        class="font-mono text-xs leading-none px-1.5 py-0.5 rounded-full shrink-0"
         :class="
           modelValue === opt.value
-            ? 'bg-white/10 text-[#F3F4F6]'
-            : 'bg-white/[0.04] text-[#8A8F9E]'
+            ? 'bg-white/10 text-foreground'
+            : 'bg-white/[0.04] text-muted'
         "
       >
         {{ opt.count }}

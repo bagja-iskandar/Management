@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col bg-[#111318]/70 rounded-2xl p-3.5 transition-all duration-150 h-full min-h-[calc(100vh-175px)] shadow-sm backdrop-blur-sm"
+    class="flex flex-col bg-surface/70 rounded-2xl p-3.5 transition-all duration-150 h-full min-h-[calc(100vh-175px)] shadow-sm backdrop-blur-sm"
     :class="containerBorderClass"
     @dragover.prevent="$emit('drag-over', status, $event)"
     @dragenter.prevent="$emit('drag-enter', status)"
@@ -16,15 +16,15 @@
         <span class="w-2.5 h-2.5 rounded-full" :class="dotClass" aria-hidden="true"></span>
         <div>
           <h3
-            class="font-mono text-xs tracking-wider uppercase font-bold"
+            class="font-mono text-xs tracking-wider uppercase font-semibold"
             :class="titleClass"
           >
             {{ title }}
           </h3>
-          <p class="text-[10px] text-[#8A8F9E] font-sans">{{ subtitle }}</p>
+          <p class="text-xs text-muted font-sans">{{ subtitle }}</p>
         </div>
         <span
-          class="font-mono text-[11px] tabular-nums rounded-full px-2 py-0.5 ml-1"
+          class="font-mono text-xs tabular-nums rounded-full px-2 py-0.5 ml-1"
           :class="badgeClass"
         >
           {{ tasks.length }}
@@ -68,17 +68,17 @@
         <!-- Empty State -->
         <div
           v-if="!tasks.length"
-          class="h-48 flex flex-col items-center justify-center border border-white/[0.06] rounded-xl text-[#8A8F9E] text-xs font-mono gap-1.5 px-4 text-center bg-[#07080A]/40"
+          class="h-48 flex flex-col items-center justify-center border border-white/[0.06] rounded-xl text-muted text-xs font-mono gap-1.5 px-4 text-center bg-void/40"
         >
           <span
             class="font-semibold flex items-center gap-1.5"
-            :class="status === 'blocked' || status === 'deployed' ? 'text-emerald-400' : status === 'idea' ? 'text-amber-400' : 'text-[#8A8F9E]'"
+            :class="status === 'blocked' || status === 'deployed' ? 'text-emerald-400' : status === 'idea' ? 'text-amber-400' : 'text-muted'"
           >
             <NexuraIcon v-if="status === 'blocked' || status === 'deployed'" name="CheckCircle2" size="sm" class="text-emerald-400" />
             <NexuraIcon v-else-if="status === 'idea'" name="Sparkles" size="sm" class="text-amber-400" />
             <span>{{ emptyTitle }}</span>
           </span>
-          <span class="text-[10px] text-[#565B68]">{{ emptySubtitle }}</span>
+          <span class="text-xs text-dim">{{ emptySubtitle }}</span>
         </div>
       </div>
     </div>
@@ -121,15 +121,15 @@ defineEmits<{
 
 const containerBorderClass = computed(() => {
   if (props.isDragOver) {
-    if (props.status === 'idea') return 'border-2 border-amber-500 ring-2 ring-amber-500/40 bg-[#171920]'
-    if (props.status === 'blocked') return 'border-2 border-rose-500 ring-2 ring-rose-500/40 bg-[#171920]'
-    if (props.status === 'running_sprint') return 'border-2 border-indigo-500 ring-2 ring-indigo-500/40 bg-[#171920]'
-    if (props.status === 'deployed') return 'border-2 border-emerald-500 ring-2 ring-emerald-500/40 bg-[#171920]'
-    return 'border-2 border-indigo-500 ring-2 ring-indigo-500/40 bg-[#171920]'
+    if (props.status === 'idea') return 'border-2 border-amber-500 ring-2 ring-amber-500/40 bg-surface-elevated'
+    if (props.status === 'blocked') return 'border-2 border-rose-500 ring-2 ring-rose-500/40 bg-surface-elevated'
+    if (props.status === 'running_sprint') return 'border-2 border-accent ring-2 ring-accent/40 bg-surface-elevated'
+    if (props.status === 'deployed') return 'border-2 border-emerald-500 ring-2 ring-emerald-500/40 bg-surface-elevated'
+    return 'border-2 border-accent ring-2 ring-accent/40 bg-surface-elevated'
   }
   if (props.status === 'idea') return 'border border-amber-500/25'
   if (props.status === 'blocked') return 'border border-rose-500/25'
-  if (props.status === 'running_sprint') return 'border border-indigo-500/25'
+  if (props.status === 'running_sprint') return 'border border-accent/25'
   if (props.status === 'deployed') return 'border border-emerald-500/25'
   return 'border border-white/[0.06]'
 })
@@ -137,7 +137,7 @@ const containerBorderClass = computed(() => {
 const headerBorderClass = computed(() => {
   if (props.status === 'idea') return 'border-b border-amber-500/20'
   if (props.status === 'blocked') return 'border-b border-rose-500/20'
-  if (props.status === 'running_sprint') return 'border-b border-indigo-500/20'
+  if (props.status === 'running_sprint') return 'border-b border-accent/20'
   if (props.status === 'deployed') return 'border-b border-emerald-500/20'
   return 'border-b border-white/[0.06]'
 })
@@ -145,24 +145,24 @@ const headerBorderClass = computed(() => {
 const titleClass = computed(() => {
   if (props.status === 'idea') return 'text-amber-400'
   if (props.status === 'blocked') return 'text-rose-400'
-  if (props.status === 'running_sprint') return 'text-indigo-400'
+  if (props.status === 'running_sprint') return 'text-accent-light'
   if (props.status === 'deployed') return 'text-emerald-400'
-  return 'text-[#F3F4F6]'
+  return 'text-foreground'
 })
 
 const badgeClass = computed(() => {
   if (props.status === 'idea') return 'bg-amber-500/10 text-amber-400 border border-amber-500/25'
   if (props.status === 'blocked') return 'bg-rose-500/10 text-rose-400 border border-rose-500/25'
-  if (props.status === 'running_sprint') return 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/25'
+  if (props.status === 'running_sprint') return 'bg-accent/10 text-accent-light border border-accent/25'
   if (props.status === 'deployed') return 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/25'
-  return 'bg-white/5 text-[#8A8F9E] border border-white/[0.06]'
+  return 'bg-white/5 text-muted border border-white/[0.06]'
 })
 
 const topAddBtnClass = computed(() => {
   if (props.status === 'idea') return 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400'
   if (props.status === 'blocked') return 'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400'
-  if (props.status === 'running_sprint') return 'bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400'
+  if (props.status === 'running_sprint') return 'bg-accent/10 hover:bg-accent/20 text-accent-light'
   if (props.status === 'deployed') return 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400'
-  return 'bg-white/5 hover:bg-indigo-500/20 text-[#8A8F9E] hover:text-indigo-300'
+  return 'bg-white/5 hover:bg-accent/20 text-muted hover:text-accent-light'
 })
 </script>

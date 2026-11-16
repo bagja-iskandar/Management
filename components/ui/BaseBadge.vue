@@ -93,7 +93,7 @@ const computedBadgeClasses = computed(() => {
   if (props.variant === 'tech') {
     return [
       base,
-      'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08] font-mono hover:text-[#F3F4F6] hover:border-white/[0.15]',
+      'bg-white/[0.04] text-muted border-white/[0.08] font-mono hover:text-foreground hover:border-white/[0.15]',
       props.class
     ]
   }
@@ -101,11 +101,11 @@ const computedBadgeClasses = computed(() => {
   if (props.variant === 'phase') {
     return [
       base,
-      'bg-indigo-500/10 text-indigo-300 border-indigo-500/20 font-mono font-normal',
+      'bg-accent/10 text-accent-light border-accent/20 font-mono font-normal',
       props.class
     ]
   }
 
-  return [base, 'bg-white/5 text-[#8A8F9E] border-white/10', props.class]
+  return [base, 'bg-white/5 text-muted border-white/10', props.class]
 })
 </script>

@@ -6,7 +6,7 @@
   >
     <div
       ref="dialogRef"
-      class="w-full max-w-lg bg-[#111318] border border-white/[0.1] shadow-2xl rounded-2xl p-6 sm:p-7 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
+      class="w-full max-w-lg bg-surface border border-white/[0.08] shadow-2xl rounded-2xl p-6 sm:p-7 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-task-title"
@@ -15,17 +15,17 @@
       <!-- Header -->
       <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <h2 id="modal-task-title" class="font-sans text-base font-semibold text-[#F3F4F6] flex items-center gap-2">
-            <NexuraIcon name="CheckSquare" size="sm" class="text-indigo-400" />
+          <h2 id="modal-task-title" class="font-sans text-base font-semibold text-foreground flex items-center gap-2">
+            <NexuraIcon name="CheckSquare" size="sm" class="text-accent-light" />
             Create New Deliverable
           </h2>
-          <p class="font-sans text-xs text-[#8A8F9E] mt-1">
+          <p class="font-sans text-xs text-muted mt-1">
             Assign an engineering deliverable to a project to track milestones and velocity.
           </p>
         </div>
         <button
           type="button"
-          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/40 cursor-pointer"
+          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted hover:text-foreground transition-colors focus:outline-none focus:ring-1 focus:ring-accent/40 cursor-pointer"
           aria-label="Close modal"
           @click="onCancel"
         >
@@ -47,20 +47,20 @@
 
         <!-- Project Association (shown if not scoped to a specific project) -->
         <div v-if="!projectSlug" class="flex flex-col gap-1.5">
-          <label for="task-project-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="task-project-select" class="font-sans text-xs font-semibold text-foreground">
             Project Association <span class="text-rose-400">*</span>
           </label>
           <select
             id="task-project-select"
             v-model="selectedProject"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
             required
           >
             <option
               v-for="p in resolvedProjectOptions"
               :key="p.value"
               :value="p.value"
-              class="bg-[#111318] text-[#F3F4F6]"
+              class="bg-surface text-foreground"
             >
               {{ p.label }}
             </option>
@@ -69,7 +69,7 @@
 
         <!-- Deliverable Name -->
         <div class="flex flex-col gap-1.5">
-          <label for="task-name-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="task-name-input" class="font-sans text-xs font-semibold text-foreground">
             Deliverable Name <span class="text-rose-400">*</span>
           </label>
           <input
@@ -78,7 +78,7 @@
             v-model="name"
             type="text"
             placeholder="e.g. Implement neural co-attention module"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
             :class="{ 'border-rose-500/60 focus:ring-rose-500/40': !!validationError && !name.trim() }"
             required
           />
@@ -86,38 +86,38 @@
 
         <!-- Description -->
         <div class="flex flex-col gap-1.5">
-          <label for="task-desc-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Description</label>
+          <label for="task-desc-input" class="font-sans text-xs font-semibold text-foreground">Description</label>
           <textarea
             id="task-desc-input"
             v-model="description"
             rows="2"
             placeholder="Build multi-head spatial attention mechanism to align multi-modal EEG feature maps."
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none custom-scrollbar"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none custom-scrollbar"
           ></textarea>
         </div>
 
         <!-- Tech Tags (comma separated) -->
         <div class="flex flex-col gap-1.5">
-          <label for="task-tags-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">Tech Tags (comma separated)</label>
+          <label for="task-tags-input" class="font-sans text-xs font-semibold text-foreground">Tech Tags (comma separated)</label>
           <input
             id="task-tags-input"
             v-model="techTagsInput"
             type="text"
             placeholder="e.g. vue, typescript, telemetry"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
           />
         </div>
 
         <!-- Priority Level -->
         <div class="flex flex-col gap-1.5">
-          <label class="font-sans text-xs font-semibold text-[#F3F4F6]">Priority Level</label>
+          <label class="font-sans text-xs font-semibold text-foreground">Priority Level</label>
           <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Priority Level">
             <button
               v-for="p in priorityOptions"
               :key="p.id"
               type="button"
               class="px-3 py-1.5 rounded-lg text-xs font-mono tabular-nums capitalize transition-all border cursor-pointer select-none"
-              :class="priority === p.id ? p.activeClass : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:border-white/[0.15]'"
+              :class="priority === p.id ? p.activeClass : 'bg-canvas text-muted border-white/[0.08] hover:text-foreground hover:border-white/[0.15]'"
               role="radio"
               :aria-checked="priority === p.id"
               @click="priority = p.id"
@@ -131,38 +131,38 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <!-- Execution Status -->
           <div class="flex flex-col gap-1.5">
-            <label for="task-status-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+            <label for="task-status-select" class="font-sans text-xs font-semibold text-foreground">
               Execution Status
             </label>
             <select
               id="task-status-select"
               v-model="status"
-              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+              class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
             >
-              <option value="in_queue" class="bg-[#111318] text-[#F3F4F6]">In Queue</option>
-              <option value="running_sprint" class="bg-[#111318] text-[#F3F4F6]">Running Sprint</option>
-              <option value="blocked" class="bg-[#111318] text-[#F3F4F6]">Blocked</option>
-              <option value="deployed" class="bg-[#111318] text-[#F3F4F6]">Deployed</option>
-              <option value="idea" class="bg-[#111318] text-[#F3F4F6]">Idea</option>
+              <option value="in_queue" class="bg-surface text-foreground">In Queue</option>
+              <option value="running_sprint" class="bg-surface text-foreground">Running Sprint</option>
+              <option value="blocked" class="bg-surface text-foreground">Blocked</option>
+              <option value="deployed" class="bg-surface text-foreground">Deployed</option>
+              <option value="idea" class="bg-surface text-foreground">Idea</option>
             </select>
           </div>
 
           <!-- Sprint Iteration -->
           <div class="flex flex-col gap-1.5">
-            <label for="task-sprint-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+            <label for="task-sprint-select" class="font-sans text-xs font-semibold text-foreground">
               Sprint Iteration
             </label>
             <select
               id="task-sprint-select"
               v-model="sprintId"
-              class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+              class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
             >
-              <option value="" class="bg-[#111318] text-[#8A8F9E]">No Sprint (Backlog)</option>
+              <option value="" class="bg-surface text-muted">No Sprint (Backlog)</option>
               <option
                 v-for="s in workspaceStore.sprints.value"
                 :key="s.id"
                 :value="s.id"
-                class="bg-[#111318] text-[#F3F4F6]"
+                class="bg-surface text-foreground"
               >
                 {{ s.name || `Sprint ${s.id}` }} ({{ s.status || 'planned' }})
               </option>
@@ -174,34 +174,34 @@
         <div class="flex flex-col gap-1.5">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <label for="task-due-date" class="font-sans text-xs font-semibold text-[#F3F4F6]">Due Date</label>
-              <span v-if="!dueDate" class="font-mono text-[10px] text-[#8A8F9E]/70 italic">No deadline set (Optional)</span>
+              <label for="task-due-date" class="font-sans text-xs font-semibold text-foreground">Due Date</label>
+              <span v-if="!dueDate" class="font-mono text-xs text-muted/70 italic">No deadline set (Optional)</span>
             </div>
-            <div class="flex items-center gap-1 font-mono text-[10px]">
+            <div class="flex items-center gap-1 font-mono text-xs">
               <button
                 type="button"
-                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-muted hover:text-foreground border border-white/[0.06] transition cursor-pointer"
                 @click="setDuePreset(3)"
               >
                 +3d
               </button>
               <button
                 type="button"
-                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-muted hover:text-foreground border border-white/[0.06] transition cursor-pointer"
                 @click="setDuePreset(7)"
               >
                 +1w
               </button>
               <button
                 type="button"
-                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition cursor-pointer"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-white/[0.08] text-muted hover:text-foreground border border-white/[0.06] transition cursor-pointer"
                 @click="setDuePreset(14)"
               >
                 +2w
               </button>
               <button
                 type="button"
-                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-rose-500/10 text-[#8A8F9E] hover:text-rose-400 border border-white/[0.06] transition cursor-pointer"
+                class="px-1.5 py-0.5 rounded bg-white/[0.04] hover:bg-rose-500/10 text-muted hover:text-rose-400 border border-white/[0.06] transition cursor-pointer"
                 @click="dueDate = ''"
               >
                 Clear
@@ -212,28 +212,28 @@
             id="task-due-date"
             v-model="dueDate"
             type="date"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-xs font-mono tabular-nums focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
           />
         </div>
 
         <!-- Actions -->
         <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/[0.06]">
-          <span class="text-[11px] font-mono text-[#565B68]">⌘ + Enter to create</span>
+          <span class="text-xs font-mono text-dim">⌘ + Enter to create</span>
           <div class="flex items-center gap-3">
             <button
               type="button"
-              class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
+              class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-muted hover:text-foreground transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
               @click="onCancel"
             >
               Cancel
             </button>
             <button
               type="submit"
-              class="px-4 py-2 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-sans font-medium text-[#07080A] shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-indigo-500/40 focus:outline-none"
+              class="px-4 py-2 rounded-lg bg-foreground hover:bg-white text-xs font-sans font-semibold text-void shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-50 active:scale-95 cursor-pointer focus:ring-2 focus:ring-accent/40 focus:outline-none"
               :disabled="isSubmitting || disabled"
             >
               <span v-if="isSubmitting" class="flex items-center gap-1.5">
-                <NexuraIcon name="Loader2" size="sm" class="animate-spin" />
+                <NexuraIcon name="Loader2" size="sm" class="animate-spin text-void" />
                 <span>Creating...</span>
               </span>
               <span v-else class="flex items-center gap-1.5">
@@ -345,7 +345,7 @@ const isSubmitting = ref(false)
 
 const priorityOptions = [
   { id: 'low', label: 'Low', activeClass: 'bg-slate-500/15 text-slate-300 border-slate-500/40' },
-  { id: 'medium', label: 'Medium', activeClass: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/40 shadow-sm' },
+  { id: 'medium', label: 'Medium', activeClass: 'bg-accent/15 text-accent-light border-accent/40 shadow-sm' },
   { id: 'high', label: 'High', activeClass: 'bg-amber-500/15 text-amber-300 border-amber-500/40' },
   { id: 'critical', label: 'Critical', activeClass: 'bg-rose-500/15 text-rose-300 border-rose-500/40' }
 ] as const

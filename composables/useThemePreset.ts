@@ -1,6 +1,6 @@
 import { computed, watch, onMounted } from 'vue'
 
-export type ThemePresetId = 'default' | 'indigo' | 'amethyst' | 'stealth' | 'emerald'
+export type ThemePresetId = 'emerald' | 'indigo' | 'amethyst' | 'stealth' | 'default'
 
 export interface ThemePresetOption {
   id: ThemePresetId
@@ -11,8 +11,14 @@ export interface ThemePresetOption {
 
 export const THEME_PRESETS: ThemePresetOption[] = [
   {
-    id: 'default',
-    label: 'Default Indigo',
+    id: 'emerald',
+    label: 'Emerald (Canonical)',
+    description: 'High-contrast neutral obsidian with micro-emerald highlights',
+    accentColor: '#10B981'
+  },
+  {
+    id: 'indigo',
+    label: 'Electric Indigo',
     description: 'Obsidian void with electric indigo accents',
     accentColor: '#6366F1'
   },
@@ -23,12 +29,6 @@ export const THEME_PRESETS: ThemePresetOption[] = [
     accentColor: '#A855F7'
   },
   {
-    id: 'emerald',
-    label: 'Emerald Forest',
-    description: 'High-contrast black with vivid emerald shine',
-    accentColor: '#10B981'
-  },
-  {
     id: 'stealth',
     label: 'Obsidian Stealth',
     description: 'Monochrome pure void with cold silver zinc',
@@ -36,21 +36,31 @@ export const THEME_PRESETS: ThemePresetOption[] = [
   }
 ]
 
+const ALLOWED_PRESETS: ThemePresetId[] = ['emerald', 'indigo', 'amethyst', 'stealth']
+
+function normalizePreset(preset: string | null | undefined): ThemePresetId {
+  if (!preset || preset === 'default') return 'emerald'
+  if (ALLOWED_PRESETS.includes(preset as ThemePresetId)) {
+    return preset as ThemePresetId
+  }
+  return 'emerald'
+}
+
 /**
  * Shared theme preset composable.
  * Synchronizes selected theme across localStorage and document.body.dataset.preset.
  */
 export function useThemePreset() {
-  const currentPreset = useState<ThemePresetId>('obsidian_theme_preference', () => 'default')
+  const currentPreset = useState<ThemePresetId>('obsidian_theme_preference', () => 'emerald')
 
   function applyPresetToDom(preset: ThemePresetId) {
     if (typeof document === 'undefined') return
-    const resolved = preset === 'indigo' ? 'default' : preset
+    const resolved = normalizePreset(preset)
     document.body.dataset.preset = resolved
   }
 
   function setPreset(preset: ThemePresetId) {
-    const resolved = preset === 'indigo' ? 'default' : preset
+    const resolved = normalizePreset(preset)
     currentPreset.value = resolved
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('nexura:theme', resolved)
@@ -59,7 +69,7 @@ export function useThemePreset() {
   }
 
   const currentPresetOption = computed(() => {
-    const id = currentPreset.value === 'indigo' ? 'default' : currentPreset.value
+    const id = normalizePreset(currentPreset.value)
     return THEME_PRESETS.find((p) => p.id === id) || THEME_PRESETS[0]
   })
 
@@ -71,12 +81,11 @@ export function useThemePreset() {
   // Init on client mount
   onMounted(() => {
     if (typeof localStorage !== 'undefined') {
-      const saved = localStorage.getItem('nexura:theme') as ThemePresetId | null
-      if (saved && (THEME_PRESETS.some((p) => p.id === saved) || saved === 'indigo')) {
-        setPreset(saved)
-      } else {
-        applyPresetToDom(currentPreset.value)
-      }
+      const saved = localStorage.getItem('nexura:theme')
+      const resolved = normalizePreset(saved || currentPreset.value)
+      setPreset(resolved)
+    } else {
+      applyPresetToDom(currentPreset.value)
     }
   })
 

@@ -2,7 +2,7 @@
   <!-- Skeleton Mode -->
   <div
     v-if="variant === 'skeleton'"
-    class="obs-card rounded-2xl p-6 border border-white/[0.07] bg-white/[0.02] animate-pulse space-y-4 w-full"
+    class="obs-card rounded-2xl p-6 border border-white/[0.06] bg-white/[0.02] animate-pulse space-y-4 w-full"
     :class="props.class"
     aria-hidden="true"
   >
@@ -53,26 +53,26 @@
   <!-- Standard Empty Mode -->
   <div
     v-else
-    class="obs-card rounded-2xl p-8 border border-white/[0.07] bg-[#111318] text-center flex flex-col items-center justify-center space-y-3 w-full"
+    class="obs-card rounded-2xl p-8 border border-white/[0.06] bg-surface text-center flex flex-col items-center justify-center space-y-3 w-full"
     :class="props.class"
   >
     <div
       v-if="icon !== false"
-      class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-[#8A8F9E] shadow-sm"
+      class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-muted shadow-sm"
       aria-hidden="true"
     >
       <NexuraIcon
         :name="icon || 'Inbox'"
         size="md"
-        :class="iconColor || 'text-[#8A8F9E]'"
+        :class="iconColor || 'text-muted'"
       />
     </div>
 
     <div class="space-y-1 max-w-sm">
-      <h4 v-if="title" class="font-sans text-sm font-semibold text-[#F3F4F6]">
+      <h4 v-if="title" class="font-sans text-sm font-semibold text-foreground">
         {{ title }}
       </h4>
-      <p v-if="description" class="font-sans text-xs text-[#8A8F9E] leading-relaxed">
+      <p v-if="description" class="font-sans text-xs text-muted leading-relaxed">
         {{ description }}
       </p>
     </div>

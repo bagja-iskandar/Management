@@ -13,26 +13,26 @@
           <div
             v-if="isOpen"
             ref="panelRef"
-            class="h-full w-full bg-[#111318] border-l border-white/[0.1] shadow-2xl text-[#F3F4F6] flex flex-col overflow-hidden focus:outline-none"
+            class="h-full w-full bg-surface border-l border-white/[0.08] shadow-2xl text-foreground flex flex-col overflow-hidden focus:outline-none"
             :class="[resolvedWidth, props.class]"
             tabindex="-1"
           >
             <!-- Drawer Header -->
             <header
               v-if="$slots.header || title || closable"
-              class="flex items-center justify-between gap-3 px-6 py-4.5 border-b border-white/[0.07] shrink-0"
+              class="flex items-center justify-between gap-3 px-6 py-4.5 border-b border-white/[0.06] shrink-0"
             >
               <slot name="header">
                 <div class="space-y-0.5 min-w-0">
                   <h3
                     :id="titleId"
-                    class="font-sans text-base font-semibold text-[#F3F4F6] truncate"
+                    class="font-sans text-base font-semibold text-foreground truncate"
                   >
                     {{ title }}
                   </h3>
                   <p
                     v-if="subtitle"
-                    class="font-sans text-xs text-[#8A8F9E] truncate"
+                    class="font-sans text-xs text-muted truncate"
                   >
                     {{ subtitle }}
                   </p>
@@ -59,7 +59,7 @@
             <!-- Drawer Footer -->
             <footer
               v-if="$slots.footer"
-              class="px-6 py-4 border-t border-white/[0.07] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
+              class="px-6 py-4 border-t border-white/[0.06] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
             >
               <slot name="footer" />
             </footer>

@@ -1,37 +1,88 @@
+@import '@fontsource-variable/geist/index.css';
+@import '@fontsource-variable/geist-mono/index.css';
+
 /* ==== assets/css/main.css — Precision Dark Obsidian Design System ==== */
 
 :root {
-  --obs-void: #07080A;
-  --obs-canvas: #0B0C10;
-  --obs-surface: #111318;
-  --obs-elevated: #171920;
-  --obs-hover: #1D2029;
-  --obs-text: #F3F4F6;
-  --obs-muted: #8A8F9E;
-  --obs-dim: #565B68;
-  --obs-accent: #6366F1;
-  --obs-accent-light: #818CF8;
-  --obs-accent-glow: rgba(99, 102, 241, 0.16);
-  --obs-border: rgba(255, 255, 255, 0.07);
-  --obs-border-strong: rgba(255, 255, 255, 0.13);
+  /* Fonts */
+  --font-sans: 'Geist Sans Variable', 'Geist Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', monospace;
+
+  /* 60% Dominan (Background Void & Canvas RGB Channels) */
+  --obs-void-rgb: 7 8 10;
+  --obs-canvas-rgb: 11 12 16;
+
+  /* 30% Struktural (Card Surfaces & Elevation RGB Channels) */
+  --obs-surface-rgb: 17 19 24;
+  --obs-elevated-rgb: 23 25 32;
+  --obs-hover-rgb: 29 32 41;
+
+  /* Tipografi WCAG 2.1 Compliant RGB Channels */
+  --obs-text-rgb: 243 244 246;
+  --obs-muted-rgb: 138 143 158;
+  --obs-dim-rgb: 118 123 138;
+
+  /* 10% Aksen Default (Micro-Emerald) RGB Channels */
+  --obs-accent-rgb: 16 185 129;
+  --obs-accent-light-rgb: 52 211 153;
+  --obs-accent-dim-rgb: 5 150 105;
+
+  /* Direct CSS Variable Aliases */
+  --obs-void: rgb(var(--obs-void-rgb));
+  --obs-canvas: rgb(var(--obs-canvas-rgb));
+  --obs-surface: rgb(var(--obs-surface-rgb));
+  --obs-elevated: rgb(var(--obs-elevated-rgb));
+  --obs-hover: rgb(var(--obs-hover-rgb));
+
+  --obs-text: rgb(var(--obs-text-rgb));
+  --obs-muted: rgb(var(--obs-muted-rgb));
+  --obs-dim: rgb(var(--obs-dim-rgb));
+
+  --obs-accent: rgb(var(--obs-accent-rgb));
+  --obs-accent-light: rgb(var(--obs-accent-light-rgb));
+  --obs-accent-dim: rgb(var(--obs-accent-dim-rgb));
+  --obs-accent-dark: var(--obs-accent-dim);
+  --obs-accent-glow: rgba(var(--obs-accent-rgb), 0.14);
+
+  /* Specular Hairline Borders */
+  --obs-border: rgba(255, 255, 255, 0.06);
+  --obs-border-strong: rgba(255, 255, 255, 0.12);
+  --obs-border-specular: rgba(255, 255, 255, 0.04);
+
+  /* Micro-luminescence Halos */
+  --obs-halo-emerald: rgba(52, 211, 153, 0.7);
+  --obs-halo-teal: rgba(45, 212, 191, 0.65);
+  --obs-halo-rose: rgba(251, 113, 133, 0.7);
+  --obs-halo-amber: rgba(251, 191, 36, 0.5);
+}
+
+/* Theme Presets — STRICT RULE: Only modify accent tokens, NEVER surfaces/void/canvas */
+body[data-preset="emerald"] {
+  --obs-accent-rgb: 16 185 129;
+  --obs-accent-light-rgb: 52 211 153;
+  --obs-accent-dim-rgb: 5 150 105;
+  --obs-accent-glow: rgba(16, 185, 129, 0.14);
+}
+
+body[data-preset="indigo"] {
+  --obs-accent-rgb: 99 102 241;
+  --obs-accent-light-rgb: 129 140 248;
+  --obs-accent-dim-rgb: 67 56 202;
+  --obs-accent-glow: rgba(99, 102, 241, 0.18);
 }
 
 body[data-preset="amethyst"] {
-  --obs-accent: #8B5CF6;
-  --obs-accent-light: #A78BFA;
+  --obs-accent-rgb: 139 92 246;
+  --obs-accent-light-rgb: 167 139 250;
+  --obs-accent-dim-rgb: 109 40 217;
   --obs-accent-glow: rgba(139, 92, 246, 0.18);
 }
 
 body[data-preset="stealth"] {
-  --obs-accent: #E4E4E7;
-  --obs-accent-light: #FAFAFA;
+  --obs-accent-rgb: 228 228 231;
+  --obs-accent-light-rgb: 250 250 250;
+  --obs-accent-dim-rgb: 161 161 170;
   --obs-accent-glow: rgba(255, 255, 255, 0.10);
-}
-
-body[data-preset="emerald"] {
-  --obs-accent: #10B981;
-  --obs-accent-light: #34D399;
-  --obs-accent-glow: rgba(16, 185, 129, 0.16);
 }
 
 @tailwind base;
@@ -52,33 +103,33 @@ body[data-preset="emerald"] {
     text-rendering: optimizeLegibility;
   }
 
+  /* Level 1: Disambiguation glif pada teks sans (l vs I vs 1, geometri modern) */
   html,
   body,
   #__nuxt {
     min-height: 100%;
     background-color: var(--obs-void);
     color: var(--obs-text);
-    font-family: 'Geist Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Geist Sans Variable', 'Geist Sans', 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    text-rendering: optimizeLegibility;
   }
 
   body {
     margin: 0;
   }
 
-  /* Monospace Stack */
+  /* Level 2: Tabular numbers & slashed-zero untuk angka metrik, SHA commit & task ID */
+  .font-mono,
+  .tabular-nums,
   code,
   kbd,
   samp,
-  pre {
-    font-family: 'Geist Mono', 'JetBrains Mono', 'Cascadia Code', monospace;
-  }
-
-  /* Tabular numbers for financial & metric data */
-  .font-mono,
-  .tabular-nums,
+  pre,
   [data-numeric] {
-    font-variant-numeric: tabular-nums;
-    font-feature-settings: 'tnum', 'zero';
+    font-family: 'Geist Mono Variable', 'Geist Mono', 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums slashed-zero;
+    font-feature-settings: 'tnum', 'zero', 'cv02', 'cv03', 'cv04';
   }
 
   /* Accessibility focus ring defaults */
@@ -97,31 +148,48 @@ body[data-preset="emerald"] {
   .obs-card,
   .console-card,
   .card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, rgba(255, 255, 255, 0) 100%), var(--obs-surface);
-    border: 1px solid var(--obs-border);
+    background-color: var(--obs-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
       0 4px 20px -4px rgba(0, 0, 0, 0.5);
-    border-radius: 0.75rem;
-    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    border-radius: 1rem;
+    transition: border-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   .obs-card-interactive:hover {
-    border-color: var(--obs-border-strong);
+    border-color: rgba(255, 255, 255, 0.12);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.11),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
       0 8px 28px -6px rgba(0, 0, 0, 0.65);
   }
 
-  /* Inset Workspace Container (.obs-workspace) */
+  /* Inset Workspace Container (.obs-workspace) — Zero green glow */
   .obs-workspace {
     background:
-      radial-gradient(900px 280px at 50% -60px, var(--obs-accent-glow), transparent 70%),
+      radial-gradient(900px 280px at 50% -60px, rgba(255, 255, 255, 0.02), transparent 70%),
       var(--obs-canvas);
     border: 1px solid var(--obs-border);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 1px 0 0 var(--obs-border-specular),
       0 20px 50px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Micro-luminescence Halos */
+  .obs-halo-emerald {
+    box-shadow: 0 0 8px var(--obs-halo-emerald);
+  }
+
+  .obs-halo-teal {
+    box-shadow: 0 0 8px var(--obs-halo-teal);
+  }
+
+  .obs-halo-rose {
+    box-shadow: 0 0 8px var(--obs-halo-rose);
+  }
+
+  .obs-halo-amber {
+    box-shadow: 0 0 6px var(--obs-halo-amber);
   }
 
   /* Reusable Pill / Badge */
@@ -131,9 +199,14 @@ body[data-preset="emerald"] {
     gap: 0.375rem;
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
     line-height: 1rem;
+  }
+
+  /* Mechanical Snappy Transition */
+  .obs-transition {
+    transition: all 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   /* Glow Border Pattern */
@@ -210,5 +283,16 @@ body[data-preset="emerald"] {
   .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

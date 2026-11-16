@@ -3,11 +3,11 @@
     <!-- Header Sub-bar Halus (tanpa border-b untuk seamless flow dengan HeaderBar) -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
       <div class="flex items-center gap-3">
-        <h1 class="font-sans text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight">
+        <h1 class="font-sans text-xl sm:text-2xl font-semibold text-foreground tracking-tight">
           System Telemetry
         </h1>
         <span
-          class="font-mono text-[11px] px-2.5 py-0.5 rounded-full border font-medium capitalize"
+          class="font-mono text-xs px-2.5 py-0.5 rounded-full border font-medium capitalize"
           :class="telemetryData?.environment === 'production' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-white/[0.04] text-zinc-400 border-white/[0.08]'"
         >
           {{ telemetryData?.environment || 'Development' }}
@@ -69,31 +69,31 @@
     </div>
 
     <!-- Overview Connectivity Matrix Strip -->
-    <div class="obs-card rounded-xl p-3.5 px-4 flex items-center gap-4 sm:gap-6 flex-wrap font-mono text-xs border border-white/[0.07]">
-      <span class="text-[#8A8F9E] uppercase text-[10px] tracking-wider font-semibold">Service Mesh:</span>
+    <div class="obs-card rounded-2xl p-3.5 px-4 flex items-center gap-4 sm:gap-6 flex-wrap font-mono text-xs border border-white/[0.07]">
+      <span class="text-muted uppercase text-xs tracking-wider font-semibold">Service Mesh:</span>
       
       <!-- Nitro KV -->
       <div class="flex items-center gap-2">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-        <span class="text-[#F3F4F6] font-medium">Nitro KV</span>
+        <span class="text-foreground font-medium">Nitro KV</span>
       </div>
 
       <!-- GitHub API -->
       <div class="flex items-center gap-2">
         <span
           class="w-1.5 h-1.5 rounded-full"
-          :class="telemetryData?.github?.configured ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-[#565B68]'"
+          :class="telemetryData?.github?.configured ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-zinc-600'"
         />
-        <span :class="telemetryData?.github?.configured ? 'text-[#F3F4F6] font-medium' : 'text-[#8A8F9E]'">GitHub API</span>
+        <span :class="telemetryData?.github?.configured ? 'text-foreground font-medium' : 'text-muted'">GitHub API</span>
       </div>
 
       <!-- Supabase PG -->
       <div class="flex items-center gap-2">
         <span
           class="w-1.5 h-1.5 rounded-full"
-          :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-[#565B68]')"
+          :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-zinc-600')"
         />
-        <span :class="telemetryData?.supabase?.healthy ? 'text-[#F3F4F6] font-medium' : 'text-[#8A8F9E]'">
+        <span :class="telemetryData?.supabase?.healthy ? 'text-foreground font-medium' : 'text-muted'">
           Supabase PG {{ telemetryData?.supabase?.latencyMs != null ? `(${telemetryData.supabase.latencyMs}ms)` : '' }}
         </span>
       </div>
@@ -102,9 +102,9 @@
       <div class="flex items-center gap-2">
         <span
           class="w-1.5 h-1.5 rounded-full"
-          :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-[#565B68]'"
+          :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-zinc-600'"
         />
-        <span :class="telemetryData?.vercel?.isRuntime ? 'text-[#F3F4F6] font-medium' : 'text-[#8A8F9E]'">
+        <span :class="telemetryData?.vercel?.isRuntime ? 'text-foreground font-medium' : 'text-muted'">
           {{ telemetryData?.vercel?.isRuntime ? 'Vercel Edge (Live)' : 'Node.js (Local)' }}
         </span>
       </div>
@@ -124,14 +124,14 @@
         <NexuraIcon name="AlertTriangle" size="md" />
       </div>
       <div>
-        <h3 class="text-base font-semibold text-[#F3F4F6]">Unable to Load System Telemetry</h3>
-        <p class="text-xs text-[#8A8F9E] mt-1 max-w-md mx-auto">
+        <h3 class="text-base font-semibold text-foreground">Unable to Load System Telemetry</h3>
+        <p class="text-xs text-muted mt-1 max-w-md mx-auto">
           The telemetry endpoint failed to return metrics. Check server logs or verify backend API connectivity.
         </p>
       </div>
       <button
         type="button"
-        class="inline-flex items-center gap-2 bg-[#F3F4F6] hover:bg-white text-[#07080A] text-xs font-medium px-4 py-2 rounded-lg transition cursor-pointer"
+        class="inline-flex items-center gap-2 bg-foreground hover:bg-white text-void text-xs font-semibold px-4 py-2 rounded-lg transition cursor-pointer"
         @click="onRefresh"
       >
         <NexuraIcon name="RotateCw" size="xs" />
@@ -148,11 +148,11 @@
             <div>
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
-                <h2 class="font-sans text-base font-semibold text-[#F3F4F6] tracking-tight">
+                <h2 class="font-sans text-base font-semibold text-foreground tracking-tight">
                   Storage: {{ telemetryData?.storage?.provider || 'Supabase PostgreSQL (Cloud)' }}
                 </h2>
               </div>
-              <p class="font-sans text-xs text-[#8A8F9E] mt-1 leading-relaxed">
+              <p class="font-sans text-xs text-muted mt-1 leading-relaxed">
                 {{ telemetryData?.storage?.provider?.includes('Supabase') ? 'Remote Supabase PostgreSQL relational engine with Nitro KV fallback adapter.' : 'Unstorage filesystem driver persisting records to local key-value store.' }}
               </p>
             </div>
@@ -164,47 +164,47 @@
 
           <!-- 4-Tile Entity Record Counts Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
-            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
-              <div class="flex items-center justify-between text-[#8A8F9E]">
-                <span class="text-[10px] font-mono uppercase tracking-wider block">Tasks</span>
-                <NexuraIcon name="CheckSquare" size="xs" class="text-indigo-400/80" />
+            <div class="bg-void border border-white/[0.08] hover:border-white/[0.14] text-foreground rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-muted">
+                <span class="text-xs font-mono uppercase tracking-wider block">Tasks</span>
+                <NexuraIcon name="CheckSquare" size="xs" class="text-accent-light/80" />
               </div>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
+              <span class="font-mono tabular-nums text-xl font-semibold text-foreground mt-2 block">
                 {{ telemetryData?.storage?.counts?.tasks ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
-              <div class="flex items-center justify-between text-[#8A8F9E]">
-                <span class="text-[10px] font-mono uppercase tracking-wider block">Projects</span>
-                <NexuraIcon name="Folder" size="xs" class="text-indigo-400/80" />
+            <div class="bg-void border border-white/[0.08] hover:border-white/[0.14] text-foreground rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-muted">
+                <span class="text-xs font-mono uppercase tracking-wider block">Projects</span>
+                <NexuraIcon name="Folder" size="xs" class="text-accent-light/80" />
               </div>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
+              <span class="font-mono tabular-nums text-xl font-semibold text-foreground mt-2 block">
                 {{ telemetryData?.storage?.counts?.projects ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
-              <div class="flex items-center justify-between text-[#8A8F9E]">
-                <span class="text-[10px] font-mono uppercase tracking-wider block">Sprints</span>
-                <NexuraIcon name="Target" size="xs" class="text-indigo-400/80" />
+            <div class="bg-void border border-white/[0.08] hover:border-white/[0.14] text-foreground rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-muted">
+                <span class="text-xs font-mono uppercase tracking-wider block">Sprints</span>
+                <NexuraIcon name="Target" size="xs" class="text-accent-light/80" />
               </div>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
+              <span class="font-mono tabular-nums text-xl font-semibold text-foreground mt-2 block">
                 {{ telemetryData?.storage?.counts?.sprints ?? 0 }}
               </span>
             </div>
-            <div class="bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] text-[#F3F4F6] rounded-xl p-3 flex flex-col justify-between transition-colors">
-              <div class="flex items-center justify-between text-[#8A8F9E]">
-                <span class="text-[10px] font-mono uppercase tracking-wider block">Notes</span>
-                <NexuraIcon name="FileText" size="xs" class="text-indigo-400/80" />
+            <div class="bg-void border border-white/[0.08] hover:border-white/[0.14] text-foreground rounded-xl p-3 flex flex-col justify-between transition-colors">
+              <div class="flex items-center justify-between text-muted">
+                <span class="text-xs font-mono uppercase tracking-wider block">Notes</span>
+                <NexuraIcon name="FileText" size="xs" class="text-accent-light/80" />
               </div>
-              <span class="font-mono tabular-nums text-xl font-semibold text-[#F3F4F6] mt-2 block">
+              <span class="font-mono tabular-nums text-xl font-semibold text-foreground mt-2 block">
                 {{ telemetryData?.storage?.counts?.notes ?? 0 }}
               </span>
             </div>
           </div>
         </div>
 
-        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-[#8A8F9E]">
-          <span class="flex items-center gap-1.5">Path: <strong class="text-[#F3F4F6] font-normal truncate max-w-[200px]">{{ telemetryData?.storage?.path || 'Remote PostgreSQL' }}</strong></span>
+        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-muted">
+          <span class="flex items-center gap-1.5">Path: <strong class="text-foreground font-normal truncate max-w-[200px]">{{ telemetryData?.storage?.path || 'Remote PostgreSQL' }}</strong></span>
           <span class="flex items-center gap-1.5">Routing: <strong class="text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>{{ telemetryData?.storage?.routing || 'supabase' }}</strong></span>
         </div>
       </section>
@@ -217,37 +217,37 @@
               <div class="flex items-center gap-2">
                 <span
                   class="w-2 h-2 rounded-full"
-                  :class="telemetryData?.github?.configured ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-[#565B68]'"
+                  :class="telemetryData?.github?.configured ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-zinc-600'"
                 />
-                <h2 class="font-sans text-base font-semibold text-[#F3F4F6] tracking-tight">GitHub API Gateway</h2>
+                <h2 class="font-sans text-base font-semibold text-foreground tracking-tight">GitHub API Gateway</h2>
               </div>
-              <p class="font-sans text-xs text-[#8A8F9E] mt-1 leading-relaxed">REST API v3 rate limits, proxy caching, and token telemetry.</p>
+              <p class="font-sans text-xs text-muted mt-1 leading-relaxed">REST API v3 rate limits, proxy caching, and token telemetry.</p>
             </div>
             <span
               class="font-mono text-xs px-2.5 py-0.5 rounded-md border font-medium shrink-0 flex items-center gap-1.5"
-              :class="telemetryData?.github?.configured ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'"
+              :class="telemetryData?.github?.configured ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-white/[0.04] text-muted border-white/[0.08]'"
             >
-              <span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.github?.configured ? 'bg-emerald-400' : 'bg-[#565B68]'"></span>
+              <span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.github?.configured ? 'bg-emerald-400' : 'bg-zinc-600'"></span>
               {{ telemetryData?.github?.configured ? 'Authenticated' : 'Standard Rate' }}
             </span>
           </div>
 
           <!-- Rate Limit Meter Tile -->
-          <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3.5 space-y-3">
+          <div class="bg-void border border-white/[0.08] text-foreground rounded-xl p-3.5 space-y-3">
             <div class="flex items-baseline justify-between">
-              <span class="text-xs font-mono text-[#8A8F9E]">Rate Limit Quota</span>
+              <span class="text-xs font-mono text-muted">Rate Limit Quota</span>
               <div class="flex items-baseline gap-1.5">
-                <span class="font-mono tabular-nums text-lg font-semibold text-[#F3F4F6]">
+                <span class="font-mono tabular-nums text-lg font-semibold text-foreground">
                   {{ telemetryData?.github?.rateLimit?.remaining ?? 0 }} / {{ telemetryData?.github?.rateLimit?.limit ?? 60 }}
                 </span>
-                <span class="font-mono tabular-nums text-xs text-[#8A8F9E]">({{ ratePercent }}%)</span>
+                <span class="font-mono tabular-nums text-xs text-muted">({{ ratePercent }}%)</span>
               </div>
             </div>
 
             <!-- Rate bar with gradient indigo/emerald and specular top highlight -->
-            <div class="relative w-full bg-[#111318] rounded-full h-2.5 border border-white/[0.06] overflow-hidden p-[1px]">
+            <div class="relative w-full bg-surface rounded-full h-2.5 border border-white/[0.06] overflow-hidden p-[1px]">
               <div
-                class="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-indigo-500 to-emerald-400 relative overflow-hidden"
+                class="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-accent-dim to-accent relative overflow-hidden"
                 :style="{ width: `${ratePercent}%` }"
               >
                 <!-- Specular top highlight -->
@@ -255,15 +255,15 @@
               </div>
             </div>
 
-            <div class="flex items-center justify-between text-xs font-mono text-[#8A8F9E] pt-0.5">
-              <span>Account: <strong class="text-[#F3F4F6] font-normal">{{ telemetryData?.github?.username || 'bagja-iskandar' }}</strong></span>
-              <span>Reset in: <strong class="text-indigo-400 font-mono tabular-nums font-medium">{{ resetMinutes }}m</strong></span>
+            <div class="flex items-center justify-between text-xs font-mono text-muted pt-0.5">
+              <span>Account: <strong class="text-foreground font-normal">{{ telemetryData?.github?.username || 'bagja-iskandar' }}</strong></span>
+              <span>Reset in: <strong class="text-accent-light font-mono tabular-nums font-medium">{{ resetMinutes }}m</strong></span>
             </div>
           </div>
         </div>
 
-        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-[#8A8F9E]">
-          <span>Cache: <strong class="text-[#F3F4F6] font-normal">TTL 300s</strong></span>
+        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-muted">
+          <span>Cache: <strong class="text-foreground font-normal">TTL 300s</strong></span>
           <span>Status: <strong :class="telemetryData?.github?.error ? 'text-rose-400' : 'text-emerald-400'" class="font-medium inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.github?.error ? 'bg-rose-400' : 'bg-emerald-400'"></span>{{ telemetryData?.github?.error || 'Healthy' }}</strong></span>
         </div>
       </section>
@@ -276,34 +276,34 @@
               <div class="flex items-center gap-2">
                 <span
                   class="w-2 h-2 rounded-full"
-                  :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-[#565B68]')"
+                  :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-zinc-600')"
                 />
-                <h2 class="font-sans text-base font-semibold text-[#F3F4F6] tracking-tight">Supabase PostgreSQL</h2>
+                <h2 class="font-sans text-base font-semibold text-foreground tracking-tight">Supabase PostgreSQL</h2>
               </div>
-              <p class="font-sans text-xs text-[#8A8F9E] mt-1 leading-relaxed">Cloud PostgreSQL relational database persistence & RLS security.</p>
+              <p class="font-sans text-xs text-muted mt-1 leading-relaxed">Cloud PostgreSQL relational database persistence & RLS security.</p>
             </div>
             <span
               class="font-mono text-xs px-2.5 py-0.5 rounded-md border font-medium shrink-0 flex items-center gap-1.5"
               :class="supabaseBadgeClass"
             >
-              <span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-[#565B68]')"></span>
+              <span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400' : (telemetryData?.supabase?.configured ? 'bg-rose-400' : 'bg-zinc-600')"></span>
               {{ supabaseBadgeText }}
             </span>
           </div>
 
-          <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3.5 space-y-2.5 font-mono text-xs">
+          <div class="bg-void border border-white/[0.08] text-foreground rounded-xl p-3.5 space-y-2.5 font-mono text-xs">
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Host Instance:</span>
-              <span class="text-[#F3F4F6] font-medium truncate max-w-[240px]">{{ telemetryData?.supabase?.url || 'iklvthppfigprjhqmrlo.supabase.co' }}</span>
+              <span class="text-muted">Host Instance:</span>
+              <span class="text-foreground font-medium truncate max-w-[240px]">{{ telemetryData?.supabase?.url || 'iklvthppfigprjhqmrlo.supabase.co' }}</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Live Probe Latency:</span>
+              <span class="text-muted">Live Probe Latency:</span>
               <span class="font-mono font-medium tabular-nums" :class="telemetryData?.supabase?.latencyMs != null ? 'text-emerald-400' : 'text-zinc-500'">
                 {{ telemetryData?.supabase?.latencyMs != null ? `${telemetryData.supabase.latencyMs}ms roundtrip` : 'No live probe latency' }}
               </span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Active Routing:</span>
+              <span class="text-muted">Active Routing:</span>
               <span :class="telemetryData?.supabase?.active ? 'text-emerald-400' : 'text-amber-400'" class="font-medium">
                 {{ telemetryData?.supabase?.active ? 'Connected to Remote PostgreSQL' : 'Fallback to Local Nitro KV' }}
               </span>
@@ -311,8 +311,8 @@
           </div>
         </div>
 
-        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-[#8A8F9E]">
-          <span>Engine: <strong class="text-[#F3F4F6] font-normal">Supabase REST + Realtime</strong></span>
+        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-muted">
+          <span>Engine: <strong class="text-foreground font-normal">Supabase REST + Realtime</strong></span>
           <span>Status: <strong :class="telemetryData?.supabase?.healthy ? 'text-emerald-400' : 'text-rose-400'" class="font-medium inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.supabase?.healthy ? 'bg-emerald-400' : 'bg-rose-400'"></span>{{ telemetryData?.supabase?.status || 'Not Configured' }}</strong></span>
         </div>
       </section>
@@ -325,11 +325,11 @@
               <div class="flex items-center gap-2">
                 <span
                   class="w-2 h-2 rounded-full"
-                  :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-[#565B68]'"
+                  :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]' : 'bg-zinc-600'"
                 />
-                <h2 class="font-sans text-base font-semibold text-[#F3F4F6] tracking-tight">Vercel Edge Platform</h2>
+                <h2 class="font-sans text-base font-semibold text-foreground tracking-tight">Vercel Edge Platform</h2>
               </div>
-              <p class="font-sans text-xs text-[#8A8F9E] mt-1 leading-relaxed">Serverless edge infrastructure, auto-deploy git trigger & SSL certificates.</p>
+              <p class="font-sans text-xs text-muted mt-1 leading-relaxed">Serverless edge infrastructure, auto-deploy git trigger & SSL certificates.</p>
             </div>
             <span
               class="font-mono text-xs px-2.5 py-0.5 rounded-md border font-medium shrink-0 flex items-center gap-1.5"
@@ -340,15 +340,15 @@
             </span>
           </div>
 
-          <div class="bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] rounded-xl p-3.5 space-y-2.5 font-mono text-xs">
+          <div class="bg-void border border-white/[0.08] text-foreground rounded-xl p-3.5 space-y-2.5 font-mono text-xs">
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Live Domain:</span>
+              <span class="text-muted">Live Domain:</span>
               <a
                 v-if="telemetryData?.vercel?.url"
                 :href="`https://${telemetryData.vercel.url}`"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-indigo-400 hover:text-indigo-300 font-medium inline-flex items-center gap-1 hover:underline transition-colors"
+                class="text-accent-light hover:text-accent-light font-medium inline-flex items-center gap-1 hover:underline transition-colors"
               >
                 <span>{{ telemetryData.vercel.url }}</span>
                 <NexuraIcon name="ExternalLink" size="xs" />
@@ -356,11 +356,11 @@
               <span v-else class="text-zinc-500 font-normal">None (Localhost Dev)</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Deployment Target:</span>
-              <span class="text-[#F3F4F6]">{{ telemetryData?.vercel?.isRuntime ? 'Production Edge Network' : 'Local Node.js Development' }}</span>
+              <span class="text-muted">Deployment Target:</span>
+              <span class="text-foreground">{{ telemetryData?.vercel?.isRuntime ? 'Production Edge Network' : 'Local Node.js Development' }}</span>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-[#8A8F9E]">Vercel Token:</span>
+              <span class="text-muted">Vercel Token:</span>
               <span :class="telemetryData?.vercel?.configured ? 'text-emerald-400' : 'text-zinc-500'" class="font-medium">
                 {{ telemetryData?.vercel?.configured ? 'Configured' : 'Not Set' }}
               </span>
@@ -368,8 +368,8 @@
           </div>
         </div>
 
-        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-[#8A8F9E]">
-          <span>CDN: <strong class="text-[#F3F4F6] font-normal">{{ telemetryData?.vercel?.isRuntime ? 'Global Edge Cache' : 'Local Memory' }}</strong></span>
+        <div class="pt-3.5 border-t border-white/[0.06] flex items-center justify-between font-mono text-xs text-muted">
+          <span>CDN: <strong class="text-foreground font-normal">{{ telemetryData?.vercel?.isRuntime ? 'Global Edge Cache' : 'Local Memory' }}</strong></span>
           <span>Status: <strong :class="telemetryData?.vercel?.isRuntime ? 'text-emerald-400' : 'text-zinc-400'" class="font-medium inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" :class="telemetryData?.vercel?.isRuntime ? 'bg-emerald-400' : 'bg-zinc-500'"></span>{{ telemetryData?.vercel?.status || 'Offline' }}</strong></span>
         </div>
       </section>
@@ -557,7 +557,7 @@ const supabaseBadgeText = computed(() => {
 
 const supabaseBadgeClass = computed(() => {
   const s = telemetryData.value?.supabase
-  if (!s || !s.configured) return 'bg-white/[0.04] text-[#8A8F9E] border-white/[0.08]'
+  if (!s || !s.configured) return 'bg-white/[0.04] text-muted border-white/[0.08]'
   if (s.healthy) return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
   return 'bg-rose-500/10 text-rose-400 border-rose-500/20'
 })

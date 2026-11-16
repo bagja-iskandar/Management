@@ -45,8 +45,8 @@ test('ANIM-BTN-01: BaseButton.vue applies 150ms press feedback scale-[0.97] and 
     'BaseButton must define duration-150 for fluid micro-interaction'
   )
   assert.ok(
-    content.includes('ease-out'),
-    'BaseButton must define ease-out curve for natural tactile feel'
+    content.includes('ease-[cubic-bezier(0.2,0.8,0.2,1)]'),
+    'BaseButton must define mechanical snappy easing curve'
   )
 
   // Verify active press scale
@@ -85,8 +85,8 @@ test('ANIM-SEG-01: BaseSegmentedControl.vue tab items apply 150ms press feedback
     'BaseSegmentedControl tabs must define duration-150'
   )
   assert.ok(
-    content.includes('ease-out'),
-    'BaseSegmentedControl tabs must define ease-out'
+    content.includes('ease-[cubic-bezier(0.2,0.8,0.2,1)]'),
+    'BaseSegmentedControl tabs must define mechanical snappy easing curve'
   )
 
   // Verify active press scale
@@ -149,8 +149,8 @@ test('ANIM-SWITCH-01: BaseSwitch.vue preserves thumb transform classes with 150m
 
   // Verify thumb class definition
   assert.ok(
-    content.includes('duration-150 ease-out'),
-    'BaseSwitch thumb must define duration-150 ease-out'
+    content.includes('duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)]'),
+    'BaseSwitch thumb must define duration-150 with mechanical snappy easing'
   )
   assert.ok(
     content.includes('motion-reduce:transition-none motion-reduce:transform-none'),
@@ -231,8 +231,8 @@ test('ANIM-HEADER-01: HeaderBar.vue contextual action buttons apply tactile pres
     'HeaderBar action buttons must apply active:scale-[0.97] tactile feedback'
   )
   assert.ok(
-    content.includes('duration-150 ease-out'),
-    'HeaderBar action buttons must define duration-150 ease-out'
+    content.includes('duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)]'),
+    'HeaderBar action buttons must define duration-150 with mechanical snappy easing'
   )
   assert.ok(
     content.includes('motion-reduce:transition-none motion-reduce:transform-none'),
@@ -257,8 +257,8 @@ test('ANIM-SIDEBAR-01: Sidebar.vue project tree accordion and chevron apply 200m
     'Sidebar project chevron must define transition-transform duration-200 ease-out'
   )
   assert.ok(
-    content.includes("isExpanded(project.slug) ? 'rotate-90 text-[#F3F4F6]' : 'rotate-0'"),
-    'Sidebar project chevron must rotate 90 degrees when expanded'
+    content.includes("isExpanded(project.slug) ? 'rotate-90 text-foreground' : 'rotate-0'"),
+    'Sidebar project chevron must rotate 90 degrees and highlight with text-foreground when expanded'
   )
   assert.ok(
     content.includes('motion-reduce:transition-none motion-reduce:transform-none'),

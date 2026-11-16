@@ -11,11 +11,11 @@
       role="switch"
       :aria-checked="modelValue ? 'true' : 'false'"
       :disabled="disabled"
-      class="rounded-full p-0.5 transition-all select-none relative inline-flex items-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
+      class="rounded-full p-0.5 transition-all select-none relative inline-flex items-center shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       :class="[
         trackSizeClasses,
         modelValue
-          ? 'bg-indigo-600 shadow-[0_0_10px_rgba(99,102,241,0.35)] border border-indigo-400/30'
+          ? 'bg-accent shadow-glow-accent border border-accent-light/30'
           : 'bg-white/[0.1] border border-white/[0.08]',
         disabled ? 'cursor-not-allowed pointer-events-none' : 'cursor-pointer'
       ]"
@@ -25,7 +25,7 @@
     >
       <!-- Switch Thumb -->
       <span
-        class="rounded-full bg-white shadow-sm transform transition-transform pointer-events-none inline-block duration-150 ease-out motion-reduce:transition-none motion-reduce:transform-none"
+        class="rounded-full bg-white shadow-sm transform transition-transform pointer-events-none inline-block duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-reduce:transition-none motion-reduce:transform-none"
         :class="[
           thumbSizeClasses,
           modelValue ? thumbTranslateClasses : 'translate-x-0'
@@ -38,11 +38,11 @@
       <label
         v-if="label || $slots.default"
         :for="switchId"
-        class="font-sans text-xs font-medium text-[#F3F4F6] pointer-events-none"
+        class="font-sans text-xs font-medium text-foreground pointer-events-none"
       >
         <slot>{{ label }}</slot>
       </label>
-      <span v-if="hint" class="font-sans text-[11px] text-[#8A8F9E] pointer-events-none">
+      <span v-if="hint" class="font-sans text-xs text-muted pointer-events-none">
         {{ hint }}
       </span>
     </div>

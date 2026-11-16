@@ -47,7 +47,7 @@ test('UI-BUTTON-02: BaseButton supports all 5 Obsidian Bento variants, sizes, an
   // Variants contract
   assert.ok(content.includes("'primary' | 'accent' | 'secondary' | 'ghost' | 'danger'"), 'Must declare ButtonVariant union')
   assert.ok(content.includes('variantClasses: Record<ButtonVariant, string>'), 'Must map all ButtonVariant classes')
-  assert.ok(content.includes('bg-indigo-600'), 'Accent variant must utilize indigo theme accent')
+  assert.ok(content.includes('bg-accent'), 'Accent variant must utilize semantic accent token')
   assert.ok(content.includes('bg-rose-500/10'), 'Danger variant must utilize subtle rose backdrop')
 
   // Sizes contract
@@ -73,9 +73,9 @@ test('UI-CARD-01: BaseCard supports polymorphic container tag, variants, and pad
 
   // Variants contract
   assert.ok(content.includes("'default' | 'interactive' | 'inset'"), 'Must declare CardVariant union')
-  assert.ok(content.includes('obs-card rounded-2xl bg-[#111318] border border-white/[0.07]'), 'Default card must use obsidian #111318 surface')
+  assert.ok(content.includes('obs-card rounded-2xl bg-surface border border-white/[0.06]'), 'Default card must use semantic bg-surface')
   assert.ok(content.includes('obs-card-interactive'), 'Interactive card must apply interactive elevation styling')
-  assert.ok(content.includes('bg-[#0B0C10] border border-white/[0.06] rounded-xl'), 'Inset card must use deeper #0B0C10 void background')
+  assert.ok(content.includes('bg-canvas border border-white/[0.06] rounded-xl'), 'Inset card must use semantic bg-canvas')
 
   // Padding scales
   assert.ok(content.includes("'none' | 'sm' | 'md' | 'lg'"), 'Must declare CardPadding scale')
@@ -89,7 +89,7 @@ test('UI-CARD-02: BaseCard structures header, actions, default content, and foot
   assert.ok(content.includes('<slot name="actions" />'), 'Must support dedicated actions header slot')
   assert.ok(content.includes('<slot />'), 'Must render default content slot')
   assert.ok(content.includes('<slot name="footer" />'), 'Must support footer slot with border separation')
-  assert.ok(content.includes('class="font-sans text-sm font-semibold text-[#F3F4F6] truncate"'), 'Header title must follow typography standard')
+  assert.ok(content.includes('class="font-sans text-sm font-semibold text-foreground truncate"'), 'Header title must follow typography standard with text-foreground')
 })
 
 // =============================================================================
@@ -133,7 +133,7 @@ test('UI-DRAWER-01: BaseDrawer renders right-sheet slide drawer with accessible 
   // Teleportation and Right-aligned layout
   assert.ok(content.includes('<Teleport to="body">'), 'Must teleport drawer to body')
   assert.ok(content.includes('flex justify-end'), 'Drawer container must align panel to the right edge')
-  assert.ok(content.includes('bg-[#111318] border-l border-white/[0.1]'), 'Drawer panel must use obsidian surface with left border')
+  assert.ok(content.includes('bg-surface border-l border-white/[0.08]'), 'Drawer panel must use obsidian surface with left border')
 
   // Transition classes
   assert.ok(content.includes('transform: translateX(100%)'), 'Drawer slide transition must animate from 100% X offset')
@@ -167,9 +167,9 @@ test('UI-INPUT-01: BaseInput supports text and textarea modes, prefix/suffix slo
 test('UI-INPUT-02: BaseInput applies Obsidian Bento focus and validation error styles', () => {
   const content = loadComponentSource('components/ui/BaseInput.vue')
 
-  assert.ok(content.includes('bg-[#0B0C10] rounded-xl text-xs font-sans text-[#F3F4F6]'), 'Input must use void #0B0C10 styling')
+  assert.ok(content.includes('bg-canvas rounded-lg text-xs font-sans text-foreground'), 'Input must use semantic bg-canvas styling')
   assert.ok(content.includes('border-rose-500/40 text-rose-300'), 'Error state must apply subtle rose borders and text')
-  assert.ok(content.includes('border-white/[0.08] focus:border-indigo-500/50'), 'Standard state must apply obsidian border and indigo focus ring')
+  assert.ok(content.includes('border-white/[0.08] focus:border-accent/60'), 'Standard state must apply obsidian border and accent focus ring')
   assert.ok(content.includes('v-if="error" class="font-sans text-xs text-rose-400'), 'Must render error feedback paragraph')
 })
 
@@ -186,8 +186,8 @@ test('UI-SELECT-01: BaseSelect applies appearance-none, custom ChevronDown, and 
   assert.ok(content.includes('pointer-events-none'), 'ChevronDown container must pass clicks to underlying select')
 
   // Option dropdown styling
-  assert.ok(content.includes('class="bg-[#111318] text-[#565B68] py-1.5"'), 'Placeholder option must use #111318 surface')
-  assert.ok(content.includes('class="bg-[#111318] text-[#F3F4F6] py-1.5"'), 'Standard options must use #111318 surface and #F3F4F6 text')
+  assert.ok(content.includes('class="bg-surface text-dim py-1.5"'), 'Placeholder option must use bg-surface and text-dim')
+  assert.ok(content.includes('class="bg-surface text-foreground py-1.5"'), 'Standard options must use bg-surface and text-foreground')
 })
 
 test('UI-SELECT-02: BaseSelect normalizes primitive string options and structured option objects', () => {
@@ -223,7 +223,7 @@ test('UI-BADGE-02: BaseBadge supports status, priority, tech, phase, and custom 
   assert.ok(content.includes("'status' | 'priority' | 'tech' | 'phase' | 'custom'"), 'Must declare BadgeVariant union')
   assert.ok(content.includes('v-if="dot"'), 'Must conditionally render status/priority dot indicator')
   assert.ok(content.includes("raw.startsWith('#') ? raw : `#${raw}`"), 'Tech tag variant must ensure single hash prefix')
-  assert.ok(content.includes('bg-indigo-500/10 text-indigo-300'), 'Phase variant must use subtle indigo branding')
+  assert.ok(content.includes('bg-accent/10 text-accent-light border-accent/20'), 'Phase variant must use subtle accent branding')
 })
 
 // =============================================================================
@@ -240,21 +240,21 @@ test('UI-SEGMENTED-01: BaseSegmentedControl renders tablist with active pill sta
 
   // True Switch Bento Container Styling
   assert.ok(
-    content.includes('bg-[#07080A]') && content.includes('border-white/[0.08]'),
-    'Container must apply dark void #07080A with inset shadow styling'
+    content.includes('bg-void') && content.includes('border-white/[0.08]'),
+    'Container must apply dark void bg-void with inset shadow styling'
   )
 
-  // Active vs Inactive visual styling (Default Bento #171920 & Glass fallback)
+  // Active vs Inactive visual styling (Default Bento surface-elevated & Glass fallback)
   assert.ok(
-    content.includes('bg-[#171920]') && content.includes('text-[#F3F4F6]'),
-    'Default active pill must apply elevated #171920 obsidian styling'
+    content.includes('bg-surface-elevated') && content.includes('text-foreground'),
+    'Default active pill must apply elevated bg-surface-elevated obsidian styling'
   )
   assert.ok(
     content.includes('bg-white/[0.08]'),
     'Glass variant must support bg-white/[0.08]'
   )
   assert.ok(
-    content.includes("text-[#8A8F9E] hover:text-[#F3F4F6]"),
+    content.includes("text-muted hover:text-foreground"),
     'Inactive pill must apply muted text and transparent border'
   )
 
@@ -307,8 +307,8 @@ test('UI-SWITCH-01: BaseSwitch supports accessible switch role, track styling, a
 
   // Track styling
   assert.ok(
-    content.includes('bg-indigo-600') && content.includes('border-indigo-400/30'),
-    'Active switch track must use vibrant indigo glow styling'
+    content.includes('bg-accent') && content.includes('border-accent-light/30'),
+    'Active switch track must use vibrant accent glow styling'
   )
   assert.ok(
     content.includes('bg-white/[0.1]'),

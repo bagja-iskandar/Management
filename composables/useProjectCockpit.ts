@@ -191,10 +191,10 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
   // 5. GitHub Feed & Snippet Helpers
   // ---------------------------------------------------------------------------
   const tabPackageStatusDotClass = computed(() => {
-    if (!projectPackages?.value) return 'bg-[#565B68]'
+    if (!projectPackages?.value) return 'bg-dim'
     if (!projectPackages.value.hasScope) return 'bg-amber-400'
     if ((projectPackages.value.packages || []).length > 0) return 'bg-emerald-400'
-    return 'bg-[#565B68]'
+    return 'bg-dim'
   })
 
   const tabDockerSnippet = computed(() => {
@@ -297,7 +297,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
       if (latest.state === 'failure' || latest.state === 'error') return 'bg-rose-400'
     }
     if (currentProject.value?.deployUrl) return 'bg-emerald-400'
-    return 'bg-[#565B68]'
+    return 'bg-dim'
   })
 
   const tabTotalChecksCount = computed(() => projectDeployments?.value?.commitStatus?.totalCount || 0)
@@ -310,7 +310,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
     if (s === 'success') return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
     if (s === 'pending') return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
     if (s === 'failure') return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
-    return 'bg-white/5 text-[#8A8F9E] border-white/10'
+    return 'bg-white/5 text-muted border-white/10'
   })
 
   const tabCommitCheckSummaryText = computed(() => {
@@ -324,7 +324,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
 
   // Security Computeds
   const tabSecurityStatusDotClass = computed(() => {
-    if (!projectSecurity?.value) return 'bg-[#565B68]'
+    if (!projectSecurity?.value) return 'bg-dim'
     if (projectSecurity.value.criticalCount > 0) return 'bg-rose-400 animate-pulse'
     if (projectSecurity.value.highCount > 0) return 'bg-amber-400'
     if (projectSecurity.value.totalAlerts > 0) return 'bg-yellow-400'
@@ -334,7 +334,7 @@ export function useProjectCockpit(options: UseProjectCockpitOptions) {
 
   const scannerSecretClass = computed(() => {
     if (!projectSecurity?.value || !projectSecurity.value.enabled?.secretScanning) {
-      return 'border-white/[0.06] bg-white/[0.02] text-[#8A8F9E]'
+      return 'border-white/[0.06] bg-white/[0.02] text-muted'
     }
     const hasLeaks = (projectSecurity.value.alerts || []).some((a: any) => a.type === 'secret_scanning')
     return hasLeaks ? 'border-rose-500/30 bg-rose-500/10 text-rose-400' : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'

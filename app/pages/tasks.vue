@@ -3,10 +3,10 @@
     <!-- Header Section with Dual-Mode Toggle & Companion Panel Triggers -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-white/[0.06]">
       <div>
-        <h1 class="text-xl sm:text-2xl font-semibold text-[#F3F4F6] tracking-tight font-sans">
+        <h1 class="text-xl sm:text-2xl font-semibold text-foreground tracking-tight font-sans">
           Tasks &amp; Queue Workspace
         </h1>
-        <p class="text-xs text-[#8A8F9E] font-sans mt-0.5">
+        <p class="text-xs text-muted font-sans mt-0.5">
           Unified deliverable execution center with full 5-column Kanban, checklist cockpit, and scratchpad.
         </p>
       </div>
@@ -61,30 +61,30 @@
     </div>
 
     <!-- Multi-Filter & Search Toolbar -->
-    <div class="obs-card rounded-xl p-3.5 space-y-3.5 border border-white/[0.07]">
+    <div class="obs-card rounded-2xl p-3.5 space-y-3.5 border border-white/[0.07]">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
         <!-- Search Input -->
         <div class="lg:col-span-4 relative">
-          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
             <NexuraIcon name="Search" size="sm" />
           </div>
           <input
             v-model="search"
             type="search"
             placeholder="Search deliverables by name, ID, or description..."
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 outline-none transition"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-3 py-1.5 text-xs text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 outline-none transition"
             aria-label="Search tasks"
           />
         </div>
 
         <!-- Project Selector -->
         <div class="lg:col-span-2 relative">
-          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
             <NexuraIcon name="Folder" size="sm" />
           </div>
           <select
             v-model="projectFilter"
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 cursor-pointer outline-none transition"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 cursor-pointer outline-none transition"
             aria-label="Filter by Project"
           >
             <option value="all">All Projects</option>
@@ -94,12 +94,12 @@
 
         <!-- Priority Selector -->
         <div class="lg:col-span-2 relative">
-          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
             <NexuraIcon name="Zap" size="sm" />
           </div>
           <select
             v-model="priorityFilter"
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 cursor-pointer outline-none transition"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 cursor-pointer outline-none transition"
             aria-label="Filter by Priority"
           >
             <option value="all">All Priority</option>
@@ -112,12 +112,12 @@
 
         <!-- Tech Tag Selector -->
         <div class="lg:col-span-2 relative">
-          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
             <NexuraIcon name="Tag" size="sm" />
           </div>
           <select
             v-model="tagFilter"
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 cursor-pointer outline-none transition"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 cursor-pointer outline-none transition"
             aria-label="Filter by Tag"
           >
             <option value="all">All Tags</option>
@@ -127,12 +127,12 @@
 
         <!-- Sort Dropdown -->
         <div class="lg:col-span-2 relative">
-          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#565B68]">
+          <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-dim">
             <NexuraIcon name="SlidersHorizontal" size="sm" />
           </div>
           <select
             v-model="sortBy"
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 cursor-pointer outline-none transition"
+            class="w-full bg-void border border-white/[0.08] rounded-lg pl-8 pr-2.5 py-1.5 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 cursor-pointer outline-none transition"
             aria-label="Sort tasks"
           >
             <option value="date-desc">Newest First</option>
@@ -147,7 +147,7 @@
       <!-- Status Tabs Segmented Control (Visible in Table mode) -->
       <div
         v-if="viewMode === 'table'"
-        class="p-1 rounded-lg bg-[#07080A] border border-white/[0.06] inline-flex items-center gap-1 overflow-x-auto max-w-full"
+        class="p-1 rounded-lg bg-void border border-white/[0.06] inline-flex items-center gap-1 overflow-x-auto max-w-full"
         role="tablist"
         aria-label="Task Status Filter"
       >
@@ -164,12 +164,12 @@
           type="button"
           class="px-2.5 py-1 rounded-md text-xs font-mono flex items-center gap-1.5 transition whitespace-nowrap cursor-pointer border"
           :class="statusFilter === tab.id
-            ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-            : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+            ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+            : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
           @click="statusFilter = tab.id as any"
         >
           <span>{{ tab.label }}</span>
-          <span class="text-xs px-1.5 py-0.5 rounded font-mono bg-white/[0.05] text-[#8A8F9E]">{{ tab.count }}</span>
+          <span class="text-xs px-1.5 py-0.5 rounded font-mono bg-white/[0.05] text-muted">{{ tab.count }}</span>
         </button>
       </div>
     </div>
@@ -198,22 +198,22 @@
       v-if="!filteredTasks.length && !tasksError"
       class="py-16 text-center rounded-xl obs-card border border-white/[0.07] space-y-3"
     >
-      <div class="w-10 h-10 mx-auto rounded-full bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-[#565B68]">
-        <NexuraIcon name="Inbox" size="lg" class="text-[#565B68]" />
+      <div class="w-10 h-10 mx-auto rounded-full bg-white/[0.04] border border-white/[0.07] flex items-center justify-center text-dim">
+        <NexuraIcon name="Inbox" size="lg" class="text-dim" />
       </div>
-      <h3 class="font-sans text-sm font-semibold text-[#F3F4F6]">No deliverables match query</h3>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">Try resetting your status, priority, or project filters.</p>
+      <h3 class="font-sans text-sm font-semibold text-foreground">No deliverables match query</h3>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">Try resetting your status, priority, or project filters.</p>
       <div class="flex items-center justify-center gap-2 pt-1">
         <button
           type="button"
-          class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-xs font-sans text-[#F3F4F6] border border-white/[0.08] transition cursor-pointer"
+          class="inline-flex items-center px-3 py-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-xs font-sans text-foreground border border-white/[0.08] transition cursor-pointer"
           @click="resetFilters"
         >
           Clear Filters
         </button>
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#F3F4F6] hover:bg-white text-xs font-medium text-[#07080A] transition cursor-pointer active:scale-95"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-foreground hover:bg-white text-xs font-semibold text-void transition cursor-pointer active:scale-95"
           @click="openAddTask"
         >
           <NexuraIcon name="Plus" size="xs" :stroke-width="2.2" />
@@ -234,9 +234,9 @@
     </div>
 
     <!-- DUAL-MODE VIEW: CONCISE TASKS TABLE -->
-    <div v-else class="obs-card rounded-xl p-3 sm:p-4 space-y-2 border border-white/[0.07]">
+    <div v-else class="obs-card rounded-2xl p-3 sm:p-4 space-y-2 border border-white/[0.07]">
       <!-- Header Table (Desktop) -->
-      <div class="hidden md:grid md:grid-cols-12 gap-3 px-3 py-2 font-mono text-xs uppercase tracking-wider text-[#565B68] border-b border-white/[0.06] pb-2">
+      <div class="hidden md:grid md:grid-cols-12 gap-3 px-3 py-2 font-mono text-xs uppercase tracking-wider text-dim border-b border-white/[0.06] pb-2">
         <span class="col-span-2">Task ID</span>
         <span class="col-span-4">Deliverable &amp; Tech</span>
         <span class="col-span-2">Project</span>
@@ -250,12 +250,12 @@
       <div
         v-for="t in filteredTasks"
         :key="t.id"
-        class="bg-[#07080A] hover:bg-[#171920] border border-white/[0.05] hover:border-white/[0.1] rounded-lg p-3 transition items-center grid grid-cols-1 md:grid-cols-12 gap-3 group cursor-pointer"
+        class="bg-void hover:bg-surface-elevated border border-white/[0.05] hover:border-white/[0.1] rounded-lg p-3 transition items-center grid grid-cols-1 md:grid-cols-12 gap-3 group cursor-pointer"
         @click="handleTaskClick(t)"
       >
         <!-- Task ID Monospace -->
         <div class="col-span-2 flex items-center gap-2">
-          <span class="font-mono text-xs text-[#8A8F9E] bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.06] shrink-0">
+          <span class="font-mono text-xs text-muted bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.06] shrink-0">
             #{{ formatTaskId(t) }}
           </span>
         </div>
@@ -264,12 +264,12 @@
         <div class="col-span-4 min-w-0">
           <div
             class="text-sm font-medium truncate group-hover:text-white transition"
-            :class="normalizeStatus(t.status) === 'deployed' ? 'text-[#565B68] line-through' : 'text-[#F3F4F6]'"
+            :class="normalizeStatus(t.status) === 'deployed' ? 'text-dim line-through' : 'text-foreground'"
             :title="t.name"
           >
             {{ t.name }}
           </div>
-          <div class="font-sans text-xs text-[#8A8F9E] truncate mt-0.5" :title="t.description">
+          <div class="font-sans text-xs text-muted truncate mt-0.5" :title="t.description">
             {{ t.description || 'Milestone deliverable for personal engineering workspace.' }}
           </div>
           <!-- Tech Tags & Linked Issue/PR -->
@@ -277,7 +277,7 @@
             <span
               v-for="tag in t.techTags"
               :key="tag"
-              class="font-mono text-xs bg-white/[0.04] text-[#8A8F9E] border border-white/[0.06] rounded px-1.5 py-0.5"
+              class="font-mono text-xs bg-white/[0.04] text-muted border border-white/[0.06] rounded px-1.5 py-0.5"
             >
               {{ tag }}
             </span>
@@ -286,7 +286,7 @@
               :href="t.githubPrUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1 font-mono text-xs text-indigo-400 hover:text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 rounded px-1.5 py-0.5 transition"
+              class="inline-flex items-center gap-1 font-mono text-xs text-accent-light hover:text-white bg-accent/10 border border-accent/20 rounded px-1.5 py-0.5 transition"
               title="Open Pull Request"
               @click.stop
             >
@@ -310,8 +310,8 @@
 
         <!-- Project Badge (Clean Honest Fallback: task.projectSlug || 'Unassigned') -->
         <div class="col-span-2">
-          <span class="inline-flex items-center gap-1.5 text-xs text-[#8A8F9E] bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded font-mono truncate max-w-full">
-            <NexuraIcon name="Folder" size="xs" class="shrink-0 text-[#8A8F9E]" />
+          <span class="inline-flex items-center gap-1.5 text-xs text-muted bg-white/[0.04] border border-white/[0.06] px-2 py-0.5 rounded font-mono truncate max-w-full">
+            <NexuraIcon name="Folder" size="xs" class="shrink-0 text-muted" />
             <span class="truncate">{{ getProjectName(t) }}</span>
           </span>
         </div>
@@ -342,7 +342,7 @@
         </div>
 
         <!-- Date (Clean Honest Fallback: if (!d) return 'No Due Date') -->
-        <div class="col-span-1 font-mono text-xs text-[#8A8F9E] whitespace-nowrap">
+        <div class="col-span-1 font-mono text-xs text-muted whitespace-nowrap">
           {{ formatDate(t.dueDate) }}
         </div>
 
@@ -350,7 +350,7 @@
         <div class="col-span-1 flex items-center justify-end gap-1">
           <button
             type="button"
-            class="p-1.5 rounded-lg hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-indigo-500/50 focus:outline-none cursor-pointer"
+            class="p-1.5 rounded-lg hover:bg-white/[0.08] text-muted hover:text-foreground transition-colors focus:ring-1 focus:ring-accent/50 focus:outline-none cursor-pointer"
             :aria-label="`Toggle status for ${t.name}`"
             title="Cycle status (Queued → In Flight → Deployed)"
             @click.stop="toggleStatus(t)"
@@ -359,7 +359,7 @@
           </button>
           <button
             type="button"
-            class="p-1.5 rounded-lg hover:bg-rose-500/15 text-[#8A8F9E] hover:text-rose-400 transition-colors focus:ring-1 focus:ring-rose-500/50 focus:outline-none cursor-pointer"
+            class="p-1.5 rounded-lg hover:bg-rose-500/15 text-muted hover:text-rose-400 transition-colors focus:ring-1 focus:ring-rose-500/50 focus:outline-none cursor-pointer"
             :aria-label="`Delete ${t.name}`"
             title="Delete deliverable"
             @click.stop="deleteTask(t)"
@@ -371,26 +371,26 @@
     </div>
 
     <!-- Analytics Summary Panel -->
-    <section class="obs-card rounded-xl p-4 space-y-2.5 border border-white/[0.07]">
+    <section class="obs-card rounded-2xl p-4 space-y-2.5 border border-white/[0.07]">
       <div class="flex items-center justify-between">
-        <h2 class="text-xs font-mono uppercase tracking-wider text-[#8A8F9E] font-semibold flex items-center gap-2">
-          <NexuraIcon name="Sparkles" size="xs" class="text-indigo-400" />
+        <h2 class="text-xs font-mono uppercase tracking-wider text-muted font-semibold flex items-center gap-2">
+          <NexuraIcon name="Sparkles" size="xs" class="text-accent-light" />
           <span>Deliverables Analytics Summary</span>
         </h2>
-        <span class="text-xs text-[#565B68] font-mono">Live Matrix</span>
+        <span class="text-xs text-dim font-mono">Live Matrix</span>
       </div>
       <div class="flex items-center gap-2.5 flex-wrap font-mono text-xs">
-        <span class="px-2.5 py-1 rounded-lg bg-[#07080A] text-[#F3F4F6] border border-white/[0.08] shadow-specular">
+        <span class="px-2.5 py-1 rounded-lg bg-void text-foreground border border-white/[0.08] shadow-specular">
           Total: <span class="text-white font-semibold">{{ allCount }}</span>
         </span>
         <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
           Deployed: <span class="font-semibold">{{ deployedCount }}</span>
         </span>
-        <span class="px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+        <span class="px-2.5 py-1 rounded-lg bg-sky-500/15 text-sky-400 border border-sky-500/30">
           In Flight: <span class="font-semibold">{{ runningSprintCount }}</span>
         </span>
-        <span class="px-2.5 py-1 rounded-lg bg-[#07080A] text-[#8A8F9E] border border-white/[0.06]">
-          Queued: <span class="font-semibold text-[#F3F4F6]">{{ inQueueCount }}</span>
+        <span class="px-2.5 py-1 rounded-lg bg-void text-muted border border-white/[0.06]">
+          Queued: <span class="font-semibold text-foreground">{{ inQueueCount }}</span>
         </span>
         <span v-if="ideaCount > 0" class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/20">
           Ideas: <span class="font-semibold">{{ ideaCount }}</span>
@@ -399,7 +399,7 @@
           Blocked: <span class="font-semibold">{{ blockedCount }}</span>
         </span>
       </div>
-      <p class="font-sans text-xs text-[#8A8F9E] leading-relaxed">
+      <p class="font-sans text-xs text-muted leading-relaxed">
         Deliverables are systematically linked with managed projects to calculate derived milestone velocities and burn-down rates across the workspace.
       </p>
     </section>
@@ -628,25 +628,25 @@ function getStatusBadgeClass(status?: string): string {
   const s = normalizeStatus(status)
   if (s === 'idea') return 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
   if (s === 'deployed') return 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
-  if (s === 'running_sprint') return 'bg-indigo-500/15 text-indigo-300 border border-indigo-500/30'
+  if (s === 'running_sprint') return 'bg-accent/15 text-accent-light border border-accent/30'
   if (s === 'blocked') return 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
-  return 'bg-white/[0.04] text-[#8A8F9E] border border-white/[0.08]'
+  return 'bg-white/[0.04] text-muted border border-white/[0.08]'
 }
 
 function getPriorityBadgeClass(priority?: string): string {
   const p = (priority || '').toLowerCase()
   if (p === 'critical') return 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
   if (p === 'high') return 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-  if (p === 'medium') return 'bg-indigo-500/15 text-indigo-300 border border-indigo-500/30'
-  return 'bg-white/[0.04] text-[#8A8F9E] border border-white/[0.08]'
+  if (p === 'medium') return 'bg-accent/15 text-accent-light border border-accent/30'
+  return 'bg-white/[0.04] text-muted border border-white/[0.08]'
 }
 
 function getPriorityDotClass(priority?: string): string {
   const p = (priority || '').toLowerCase()
   if (p === 'critical') return 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]'
   if (p === 'high') return 'bg-amber-400'
-  if (p === 'medium') return 'bg-indigo-400'
-  return 'bg-[#565B68]'
+  if (p === 'medium') return 'bg-accent-light'
+  return 'bg-zinc-600'
 }
 
 // Live Counts

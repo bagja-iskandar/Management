@@ -11,14 +11,14 @@
       >
         <div
           ref="panelRef"
-          class="w-full rounded-2xl bg-[#111318] border border-white/[0.1] shadow-2xl text-[#F3F4F6] flex flex-col overflow-hidden max-h-[90vh] my-auto focus:outline-none"
+          class="w-full rounded-2xl bg-surface border border-white/[0.08] shadow-2xl text-foreground flex flex-col overflow-hidden max-h-[90vh] my-auto focus:outline-none"
           :class="[resolvedMaxWidth, props.class]"
           tabindex="-1"
         >
           <!-- Modal Header -->
           <header
             v-if="$slots.header || title || closable"
-            class="flex items-center justify-between gap-3 px-6 sm:px-7 pt-6 pb-5 sm:pt-7 sm:pb-5.5 border-b border-white/[0.07] shrink-0"
+            class="flex items-center justify-between gap-3 px-6 sm:px-7 pt-6 pb-5 sm:pt-7 sm:pb-5.5 border-b border-white/[0.06] shrink-0"
           >
             <slot name="header">
               <div class="flex items-center gap-3 min-w-0">
@@ -31,20 +31,20 @@
                   <NexuraIcon
                     :name="icon"
                     size="sm"
-                    :class="iconColor || 'text-indigo-400'"
+                    :class="iconColor || 'text-accent-light'"
                   />
                 </div>
 
                 <div class="space-y-0.5 min-w-0">
                   <h3
                     :id="titleId"
-                    class="font-sans text-base font-semibold text-[#F3F4F6] truncate"
+                    class="font-sans text-base font-semibold text-foreground truncate"
                   >
                     {{ title }}
                   </h3>
                   <p
                     v-if="subtitle"
-                    class="font-sans text-xs text-[#8A8F9E] truncate"
+                    class="font-sans text-xs text-muted truncate"
                   >
                     {{ subtitle }}
                   </p>
@@ -74,7 +74,7 @@
           <!-- Modal Footer -->
           <footer
             v-if="$slots.footer"
-            class="px-6 sm:px-7 pt-4.5 pb-6 sm:pt-5 sm:pb-6.5 border-t border-white/[0.07] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
+            class="px-6 sm:px-7 pt-4.5 pb-6 sm:pt-5 sm:pb-6.5 border-t border-white/[0.06] bg-white/[0.02] flex items-center justify-end gap-3 shrink-0"
           >
             <slot name="footer" />
           </footer>
@@ -110,7 +110,7 @@ const props = withDefaults(defineProps<BaseModalProps>(), {
   title: '',
   subtitle: '',
   icon: undefined,
-  iconColor: 'text-indigo-400',
+  iconColor: 'text-accent-light',
   maxWidth: 'lg',
   closable: true,
   class: ''

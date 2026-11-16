@@ -23,7 +23,6 @@ export default defineNuxtConfig({
     '@@/utils': fileURLToPath(new URL('./utils', import.meta.url))
   },
   modules: ['@nuxtjs/tailwindcss'],
-  css: ['~~/assets/css/main.css'],
   tailwindcss: {
     cssPath: '~~/assets/css/main.css',
     configPath: 'tailwind.config'
@@ -50,7 +49,8 @@ export default defineNuxtConfig({
         headers: {
           'X-Content-Type-Options': 'nosniff',
           'X-Frame-Options': 'SAMEORIGIN',
-          'Referrer-Policy': 'strict-origin-when-cross-origin'
+          'Referrer-Policy': 'strict-origin-when-cross-origin',
+          'Content-Security-Policy': "default-src 'self'; font-src 'self'; img-src 'self' data: https://avatars.githubusercontent.com https://*.githubusercontent.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
         }
       },
       '/_nuxt/**': {
@@ -62,14 +62,14 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Nexura — Personal Workspace',
+      title: 'Nexura | Personal Project',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Nexura: Modern personal engineering and project management workspace.' }
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg?v=2' },
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=2' }
       ]
     }
   },

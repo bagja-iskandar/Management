@@ -1,22 +1,22 @@
 <template>
   <div
-    class="flex flex-col bg-[#0D0E12] border border-white/[0.08] rounded-2xl shadow-xl overflow-hidden transition-all duration-200"
+    class="flex flex-col bg-surface border border-white/[0.08] rounded-2xl shadow-xl overflow-hidden transition-all duration-200"
     :class="containerClass"
   >
     <!-- Header Bar -->
-    <div class="px-4 py-3.5 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-[#111318]/60 backdrop-blur-sm">
+    <div class="px-4 py-3.5 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-surface/60 backdrop-blur-sm">
       <div class="flex items-center gap-2.5">
         <div class="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
           <NexuraIcon name="Lightbulb" size="sm" />
         </div>
         <div>
-          <h2 class="text-sm font-semibold text-[#F3F4F6] flex items-center gap-2">
+          <h2 class="text-sm font-semibold text-foreground flex items-center gap-2">
             <span>Idea Scratchpad & Bug Inbox</span>
-            <span class="text-[10px] font-mono font-normal px-2 py-0.5 rounded-full bg-white/5 border border-white/[0.08] text-[#8A8F9E]">
+            <span class="text-xs font-mono font-normal px-2 py-0.5 rounded-full bg-white/5 border border-white/[0.08] text-muted">
               {{ filteredNotes.length }}
             </span>
           </h2>
-          <p class="text-[11px] text-[#8A8F9E]">Quick capture thoughts, defects, & maintenance items</p>
+          <p class="text-xs text-muted">Quick capture thoughts, defects, & maintenance items</p>
         </div>
       </div>
 
@@ -24,7 +24,7 @@
         <button
           v-if="isDrawer"
           type="button"
-          class="p-1.5 rounded-lg text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/5 transition-colors focus:outline-none"
+          class="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-white/5 transition-colors focus:outline-none"
           title="Close panel"
           @click="$emit('close')"
         >
@@ -52,19 +52,19 @@
     </div>
 
     <!-- Quick Capture Bar -->
-    <div class="p-4 border-b border-white/[0.08] bg-[#111318]/40 space-y-3 shrink-0">
+    <div class="p-4 border-b border-white/[0.08] bg-surface/40 space-y-3 shrink-0">
       <div class="flex flex-wrap items-center justify-between gap-2.5">
         <!-- Category Pill Selection -->
-        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-[#07080A] border border-white/[0.06]">
+        <div class="flex items-center gap-1.5 p-1 rounded-xl bg-void border border-white/[0.06]">
           <button
             type="button"
             class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 cursor-pointer"
             :class="category === 'idea'
               ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-[0_0_12px_rgba(245,158,11,0.15)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/5 border border-transparent'"
+              : 'text-muted hover:text-foreground hover:bg-white/5 border border-transparent'"
             @click="category = 'idea'"
           >
-            <NexuraIcon name="Sparkles" size="xs" :class="category === 'idea' ? 'text-amber-400' : 'text-[#8A8F9E]'" />
+            <NexuraIcon name="Sparkles" size="xs" :class="category === 'idea' ? 'text-amber-400' : 'text-muted'" />
             <span>Idea</span>
           </button>
 
@@ -73,10 +73,10 @@
             class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 cursor-pointer"
             :class="category === 'bug'
               ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30 shadow-[0_0_12px_rgba(244,63,94,0.15)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/5 border border-transparent'"
+              : 'text-muted hover:text-foreground hover:bg-white/5 border border-transparent'"
             @click="category = 'bug'"
           >
-            <NexuraIcon name="Bug" size="xs" :class="category === 'bug' ? 'text-rose-400' : 'text-[#8A8F9E]'" />
+            <NexuraIcon name="Bug" size="xs" :class="category === 'bug' ? 'text-rose-400' : 'text-muted'" />
             <span>Bug</span>
           </button>
 
@@ -84,23 +84,23 @@
             type="button"
             class="px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all flex items-center gap-1.5 cursor-pointer"
             :class="category === 'maintenance'
-              ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 shadow-[0_0_12px_rgba(99,102,241,0.15)]'
-              : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/5 border border-transparent'"
+              ? 'bg-accent/20 text-accent-light border border-accent/30 shadow-[0_0_12px_rgba(99,102,241,0.15)]'
+              : 'text-muted hover:text-foreground hover:bg-white/5 border border-transparent'"
             @click="category = 'maintenance'"
           >
-            <NexuraIcon name="Wrench" size="xs" :class="category === 'maintenance' ? 'text-indigo-400' : 'text-[#8A8F9E]'" />
+            <NexuraIcon name="Wrench" size="xs" :class="category === 'maintenance' ? 'text-accent-light' : 'text-muted'" />
             <span>Maintenance</span>
           </button>
         </div>
 
         <!-- Project Selector Dropdown -->
         <div class="flex items-center gap-1.5">
-          <label for="project-select" class="text-[11px] font-mono text-[#8A8F9E] hidden sm:inline">Project:</label>
+          <label for="project-select" class="text-xs font-mono text-muted hidden sm:inline">Project:</label>
           <div class="relative">
             <select
               id="project-select"
               v-model="selectedProjectSlug"
-              class="appearance-none bg-[#07080A] border border-white/[0.08] hover:border-white/[0.15] text-[#F3F4F6] text-xs font-mono rounded-lg px-2.5 py-1.5 pr-7 focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer"
+              class="appearance-none bg-void border border-white/[0.08] hover:border-white/[0.15] text-foreground text-xs font-mono rounded-lg px-2.5 py-1.5 pr-7 focus:outline-none focus:border-accent transition-colors cursor-pointer"
             >
               <option value="" disabled>Select project...</option>
               <option
@@ -111,7 +111,7 @@
                 {{ proj.title || proj.slug }}
               </option>
             </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#8A8F9E]">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-muted">
               <NexuraIcon name="ChevronDown" size="xs" />
             </div>
           </div>
@@ -125,13 +125,13 @@
           v-model="newContent"
           rows="2"
           placeholder="Capture a raw idea, defect note, or technical chore... (Ctrl+Enter to save)"
-          class="w-full bg-[#07080A] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 resize-none transition-all font-sans"
+          class="w-full bg-void border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-xs text-foreground placeholder:text-dim focus:outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/30 resize-none transition-all font-sans"
           @keydown.ctrl.enter.prevent="submitNote"
           @keydown.meta.enter.prevent="submitNote"
         ></textarea>
 
         <div class="flex items-center justify-between pt-1 px-1">
-          <span class="text-[10px] font-mono text-[#565B68]">Press <kbd class="px-1 py-0.5 rounded bg-white/5 border border-white/[0.08] text-[#8A8F9E]">Ctrl+Enter</kbd> to save</span>
+          <span class="text-xs font-mono text-dim">Press <kbd class="px-1 py-0.5 rounded bg-white/5 border border-white/[0.08] text-muted">Ctrl+Enter</kbd> to save</span>
           <button
             type="button"
             :disabled="!newContent.trim() || isSubmitting"
@@ -148,20 +148,20 @@
     </div>
 
     <!-- Filter Tabs & Search -->
-    <div class="px-4 py-2 border-b border-white/[0.06] bg-[#0A0B0E] flex items-center justify-between gap-2 shrink-0">
+    <div class="px-4 py-2 border-b border-white/[0.06] bg-surface-elevated flex items-center justify-between gap-2 shrink-0">
       <div class="flex items-center gap-1 overflow-x-auto no-scrollbar">
         <button
           v-for="tab in filterTabs"
           :key="tab.id"
           type="button"
-          class="px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors shrink-0 flex items-center gap-1 cursor-pointer"
+          class="px-2.5 py-1 rounded-md text-xs font-mono transition-colors shrink-0 flex items-center gap-1 cursor-pointer"
           :class="activeFilter === tab.id
-            ? 'bg-white/10 text-[#F3F4F6] font-semibold'
-            : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/5'"
+            ? 'bg-white/10 text-foreground font-semibold'
+            : 'text-muted hover:text-foreground hover:bg-white/5'"
           @click="activeFilter = tab.id"
         >
           <span>{{ tab.label }}</span>
-          <span class="text-[9px] px-1 rounded-full bg-white/5 tabular-nums">{{ tab.count }}</span>
+          <span class="text-xs leading-none px-1 rounded-full bg-white/5 tabular-nums">{{ tab.count }}</span>
         </button>
       </div>
 
@@ -170,9 +170,9 @@
           v-model="searchQuery"
           type="text"
           placeholder="Filter notes..."
-          class="w-full bg-[#111318] border border-white/[0.06] rounded-md pl-7 pr-2 py-1 text-[11px] text-[#F3F4F6] placeholder-[#565B68] focus:outline-none focus:border-indigo-500/40"
+          class="w-full bg-surface border border-white/[0.06] rounded-md pl-7 pr-2 py-1 text-xs text-foreground placeholder:text-dim focus:outline-none focus:border-accent/40"
         />
-        <NexuraIcon name="Search" size="xs" class="absolute left-2 top-2 text-[#565B68]" />
+        <NexuraIcon name="Search" size="xs" class="absolute left-2 top-2 text-dim" />
       </div>
     </div>
 
@@ -181,13 +181,13 @@
       <!-- Empty state -->
       <div
         v-if="!filteredNotes.length"
-        class="h-44 flex flex-col items-center justify-center text-center border border-dashed border-white/[0.08] rounded-xl p-4 bg-[#07080A]/40"
+        class="h-44 flex flex-col items-center justify-center text-center border border-dashed border-white/[0.08] rounded-xl p-4 bg-void/40"
       >
-        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-[#8A8F9E] mb-2">
+        <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-muted mb-2">
           <NexuraIcon name="Sparkles" size="sm" />
         </div>
-        <p class="text-xs font-mono text-[#F3F4F6] font-medium">No notes in this view</p>
-        <p class="text-[11px] text-[#8A8F9E] mt-0.5 max-w-xs">
+        <p class="text-xs font-mono text-foreground font-medium">No notes in this view</p>
+        <p class="text-xs text-muted mt-0.5 max-w-xs">
           Capture fresh thoughts, edge-case bugs, or maintenance ideas using the bar above.
         </p>
       </div>
@@ -196,12 +196,12 @@
       <div
         v-for="note in filteredNotes"
         :key="note.id"
-        class="group relative bg-[#111318]/70 border border-white/[0.06] hover:border-white/[0.14] rounded-xl p-3.5 transition-all duration-150 flex flex-col gap-2.5"
+        class="group relative bg-surface/70 border border-white/[0.06] hover:border-white/[0.14] rounded-xl p-3.5 transition-all duration-150 flex flex-col gap-2.5"
         :class="[
           note.category === 'idea' ? 'hover:border-amber-500/30' : '',
           note.category === 'bug' ? 'hover:border-rose-500/30' : '',
-          note.category === 'maintenance' ? 'hover:border-indigo-500/30' : '',
-          note.promotedTaskId ? 'opacity-85 bg-[#090A0D]' : ''
+          note.category === 'maintenance' ? 'hover:border-accent/30' : '',
+          note.promotedTaskId ? 'opacity-85 bg-void' : ''
         ]"
       >
         <!-- Header row of note card: Badge, Project, Time, Delete button -->
@@ -209,7 +209,7 @@
           <div class="flex items-center gap-1.5 flex-wrap">
             <!-- Category Badge -->
             <span
-              class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-mono text-[10px] tabular-nums uppercase font-semibold border"
+              class="inline-flex items-center gap-1 px-2 py-0.5 rounded font-mono text-xs tabular-nums uppercase font-semibold border"
               :class="getCategoryBadgeClass(note.category)"
             >
               <NexuraIcon :name="getCategoryIcon(note.category)" size="xs" />
@@ -219,14 +219,14 @@
             <!-- Project Tag -->
             <span
               v-if="note.projectSlug"
-              class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-mono text-[10px] bg-white/5 border border-white/[0.06] text-[#8A8F9E]"
+              class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-mono text-xs bg-white/5 border border-white/[0.06] text-muted"
             >
               <NexuraIcon name="Folder" size="xs" />
               <span>{{ note.projectSlug }}</span>
             </span>
 
             <!-- Relative Timestamp -->
-            <span class="text-[10px] font-mono text-[#565B68]">
+            <span class="text-xs font-mono text-dim">
               {{ formatRelativeTime(note.createdAt) }}
             </span>
           </div>
@@ -235,7 +235,7 @@
           <div class="flex items-center gap-1">
             <button
               type="button"
-              class="p-1 rounded text-[#565B68] hover:text-[#F3F4F6] hover:bg-white/10 transition-colors focus:outline-none cursor-pointer"
+              class="p-1 rounded text-dim hover:text-foreground hover:bg-white/10 transition-colors focus:outline-none cursor-pointer"
               title="Edit note"
               @click="startEditNote(note)"
             >
@@ -243,7 +243,7 @@
             </button>
             <button
               type="button"
-              class="p-1 rounded text-[#565B68] hover:text-rose-400 hover:bg-rose-500/10 transition-colors focus:outline-none cursor-pointer"
+              class="p-1 rounded text-dim hover:text-rose-400 hover:bg-rose-500/10 transition-colors focus:outline-none cursor-pointer"
               title="Delete note"
               @click="handleDeleteNote(note.id)"
             >
@@ -257,13 +257,13 @@
           <textarea
             v-model="editingContent"
             rows="3"
-            class="w-full bg-[#07080A] border border-white/[0.12] focus:border-indigo-500/60 rounded-lg p-2.5 text-xs text-[#F3F4F6] outline-none font-sans transition custom-scrollbar"
+            class="w-full bg-void border border-white/[0.12] focus:border-accent/60 rounded-lg p-2.5 text-xs text-foreground outline-none font-sans transition custom-scrollbar"
             placeholder="Edit note content..."
           ></textarea>
           <div class="flex items-center justify-end gap-2">
             <button
               type="button"
-              class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans text-[#8A8F9E] hover:text-[#F3F4F6] transition cursor-pointer"
+              class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans text-muted hover:text-foreground transition cursor-pointer"
               @click="cancelEditNote"
             >
               Cancel
@@ -271,7 +271,7 @@
             <button
               type="button"
               :disabled="isSavingEdit || !editingContent.trim()"
-              class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-sans font-medium text-white transition flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-sm"
+              class="px-2.5 py-1 rounded-lg bg-foreground text-void font-semibold hover:bg-accent text-xs font-sans font-medium text-white transition flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-sm"
               @click="saveEditNote(note.id)"
             >
               <NexuraIcon v-if="isSavingEdit" name="RotateCw" size="xs" class="animate-spin" />
@@ -279,14 +279,14 @@
             </button>
           </div>
         </div>
-        <p v-else class="text-xs text-[#F3F4F6] font-sans whitespace-pre-wrap leading-relaxed select-text">
+        <p v-else class="text-xs text-foreground font-sans whitespace-pre-wrap leading-relaxed select-text">
           {{ note.content }}
         </p>
 
         <!-- Footer / Promote Action -->
         <div class="pt-2 border-t border-white/[0.04] flex items-center justify-between gap-2">
           <!-- Promoted state -->
-          <div v-if="note.promotedTaskId" class="inline-flex items-center gap-1.5 text-[10px] font-mono text-emerald-400">
+          <div v-if="note.promotedTaskId" class="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-400">
             <NexuraIcon name="CheckCircle2" size="xs" />
             <span>Promoted:</span>
             <button
@@ -438,9 +438,9 @@ function getCategoryBadgeClass(cat: NoteCategory) {
     case 'bug':
       return 'bg-rose-500/15 text-rose-400 border-rose-500/30'
     case 'maintenance':
-      return 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30'
+      return 'bg-accent/15 text-accent-light border-accent/30'
     default:
-      return 'bg-white/5 text-[#8A8F9E] border-white/[0.08]'
+      return 'bg-white/5 text-muted border-white/[0.08]'
   }
 }
 
@@ -462,7 +462,7 @@ const categorySubmitButtonClass = computed(() => {
     return 'bg-rose-600 hover:bg-rose-500 text-white shadow-[0_0_12px_rgba(244,63,94,0.25)]'
   }
   if (category.value === 'maintenance') {
-    return 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-[0_0_12px_rgba(99,102,241,0.25)]'
+    return 'bg-foreground hover:bg-white text-void font-semibold shadow-[0_0_12px_rgba(99,102,241,0.25)]'
   }
   return 'bg-amber-600 hover:bg-amber-500 text-white shadow-[0_0_12px_rgba(245,158,11,0.25)]'
 })

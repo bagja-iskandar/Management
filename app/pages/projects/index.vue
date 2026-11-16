@@ -4,12 +4,12 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.06]">
       <div>
-        <div class="inline-flex items-center gap-1.5 font-mono text-xs text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20 uppercase tracking-wider mb-2">
+        <div class="inline-flex items-center gap-1.5 font-mono text-xs text-accent-light bg-accent/10 px-2.5 py-0.5 rounded-full border border-accent/20 uppercase tracking-wider mb-2">
           <span>◆</span>
           <span>Projects Hub</span>
         </div>
-        <h1 class="font-mono text-2xl font-bold text-[#F3F4F6]">Projects</h1>
-        <p class="font-sans text-xs text-[#8A8F9E] mt-1">Managed personal repositories, status tracking, and derived task milestones.</p>
+        <h1 class="font-mono text-2xl font-semibold text-foreground">Projects</h1>
+        <p class="font-sans text-xs text-muted mt-1">Managed personal repositories, status tracking, and derived task milestones.</p>
       </div>
     </div>
 
@@ -65,7 +65,7 @@
     </div>
 
     <!-- Toolbar: Search, Sort & Status Tabs -->
-    <div class="obs-card p-4 rounded-2xl bg-[#111318] border border-white/[0.07] shadow-sm space-y-4">
+    <div class="obs-card p-4 rounded-2xl bg-surface border border-white/[0.07] shadow-sm space-y-4">
       <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <!-- Search -->
         <div class="relative flex-1">
@@ -73,7 +73,7 @@
             v-model="search"
             type="search"
             placeholder="Filter projects by title, description, or stack..."
-            class="w-full bg-[#07080A] border border-white/[0.08] rounded-xl px-3.5 py-2 text-sm text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none transition-all"
+            class="w-full bg-void border border-white/[0.08] rounded-xl px-3.5 py-2 text-sm text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none transition-all"
             aria-label="Filter projects"
           />
         </div>
@@ -81,7 +81,7 @@
         <!-- Sort Select -->
         <select
           v-model="sortBy"
-          class="bg-[#07080A] border border-white/[0.08] rounded-xl px-3 py-2 text-xs font-mono text-[#F3F4F6] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none cursor-pointer"
+          class="bg-void border border-white/[0.08] rounded-xl px-3 py-2 text-xs font-mono text-foreground focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none cursor-pointer"
           aria-label="Sort projects"
         >
           <option value="progress-desc">Progress: High to Low</option>
@@ -96,65 +96,65 @@
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'all' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'all' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'all'"
         >
           <span>All</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ allCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ allCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'active' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'active' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'active'"
         >
           <span>Active</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ activeCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ activeCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'maintenance' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'maintenance' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'maintenance'"
         >
           <span>Maintenance</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ maintenanceCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ maintenanceCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'planned' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'planned' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'planned'"
         >
           <span>Planned</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ plannedCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ plannedCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'on-hold' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'on-hold' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'on-hold'"
         >
           <span>On Hold</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ onHoldCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ onHoldCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'completed' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'completed' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'completed'"
         >
           <span>Completed</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ completedCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ completedCount }}</span>
         </button>
         <button
           type="button"
           class="px-3 py-1.5 rounded-xl font-mono text-xs flex items-center gap-1.5 transition-all whitespace-nowrap border cursor-pointer"
-          :class="activeStatus === 'archived' ? 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30 font-semibold shadow-sm' : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.06] hover:text-[#F3F4F6]'"
+          :class="activeStatus === 'archived' ? 'bg-accent/15 text-accent-light border-accent/30 font-semibold shadow-sm' : 'bg-void text-muted border-white/[0.06] hover:text-foreground'"
           @click="activeStatus = 'archived'"
         >
           <span>Archived</span>
-          <span class="text-[10px] tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ archivedCount }}</span>
+          <span class="text-xs tabular-nums px-1.5 py-0.2 rounded-full bg-white/5">{{ archivedCount }}</span>
         </button>
       </div>
     </div>
@@ -162,18 +162,18 @@
     <!-- Empty Workspace State (SUCCESS_EMPTY) -->
     <div
       v-if="projectsDataState === 'SUCCESS_EMPTY'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.06] space-y-3"
+      class="py-16 text-center rounded-2xl bg-surface border border-white/[0.06] space-y-3"
     >
-      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#8A8F9E]">
+      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-muted">
         <NexuraIcon name="Folder" size="lg" />
       </div>
-      <h3 class="font-mono text-sm font-semibold text-[#F3F4F6]">No projects in workspace</h3>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">
+      <h3 class="font-mono text-sm font-semibold text-foreground">No projects in workspace</h3>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">
         Get started by creating your first managed project or repository.
       </p>
       <button
         type="button"
-        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono text-xs font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-foreground hover:bg-white text-void font-mono text-xs font-semibold transition-all shadow-sm active:scale-95 cursor-pointer"
         @click="showAddModal = true"
       >
         <NexuraIcon name="Plus" size="xs" />
@@ -184,16 +184,16 @@
     <!-- Filter Yields Zero Results -->
     <div
       v-else-if="filteredProjects.length === 0 && projectsDataState !== 'ERROR'"
-      class="py-16 text-center rounded-2xl bg-[#111318] border border-white/[0.06] space-y-3"
+      class="py-16 text-center rounded-2xl bg-surface border border-white/[0.06] space-y-3"
     >
-      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-[#8A8F9E]">
+      <div class="w-12 h-12 mx-auto rounded-xl bg-white/5 border border-white/[0.08] flex items-center justify-center text-muted">
         <NexuraIcon name="Folder" size="lg" />
       </div>
-      <h3 class="font-mono text-sm font-semibold text-[#F3F4F6]">No projects found</h3>
-      <p class="font-sans text-xs text-[#8A8F9E] max-w-sm mx-auto">No projects match your current filter or search query.</p>
+      <h3 class="font-mono text-sm font-semibold text-foreground">No projects found</h3>
+      <p class="font-sans text-xs text-muted max-w-sm mx-auto">No projects match your current filter or search query.</p>
       <button
         type="button"
-        class="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F3F4F6] border border-white/[0.08] transition-colors cursor-pointer"
+        class="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-foreground border border-white/[0.08] transition-colors cursor-pointer"
         @click="resetFilters"
       >
         Clear Filters
@@ -205,7 +205,7 @@
       <article
         v-for="project in filteredProjects"
         :key="project.slug"
-        class="obs-card rounded-2xl bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] p-5 hover:shadow-lg transition-all flex flex-col justify-between gap-4 group"
+        class="obs-card rounded-2xl bg-surface border border-white/[0.07] hover:border-white/[0.14] p-5 hover:shadow-lg transition-all flex flex-col justify-between gap-4 group"
       >
         <!-- Top Section -->
         <div class="space-y-3">
@@ -213,24 +213,24 @@
           <div class="flex items-start justify-between gap-3">
             <div class="min-w-0">
               <NuxtLink :to="`/projects/${project.slug}`" class="block">
-                <h2 class="font-sans text-base font-semibold text-[#F3F4F6] group-hover:text-indigo-400 transition-colors truncate">
+                <h2 class="font-sans text-base font-semibold text-foreground group-hover:text-accent-light transition-colors truncate">
                   {{ project.title }}
                 </h2>
               </NuxtLink>
-              <span class="font-mono text-[11px] text-[#8A8F9E]">/{{ project.slug }}</span>
+              <span class="font-mono text-xs text-muted">/{{ project.slug }}</span>
             </div>
 
             <!-- Status Badge + Edit Button -->
             <div class="flex items-center gap-1.5 shrink-0">
               <span
-                class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-mono capitalize whitespace-nowrap border"
+                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono capitalize whitespace-nowrap border"
                 :class="getStatusBadgeClass(project.status)"
               >
                 {{ project.status || 'active' }}
               </span>
               <button
                 type="button"
-                class="p-1 rounded-lg text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.08] transition-colors focus:outline-none cursor-pointer"
+                class="p-1 rounded-lg text-muted hover:text-foreground hover:bg-white/[0.08] transition-colors focus:outline-none cursor-pointer"
                 title="Edit Project Metadata"
                 aria-label="Edit project"
                 @click.stop="openEditModal(project)"
@@ -241,20 +241,20 @@
           </div>
 
           <!-- Description -->
-          <p class="font-sans text-xs text-[#8A8F9E] leading-relaxed line-clamp-2">
+          <p class="font-sans text-xs text-muted leading-relaxed line-clamp-2">
             {{ project.description || 'Active development workstream with milestone tracking.' }}
           </p>
 
           <!-- Visual GitHub Repo Link & Deploy URL -->
           <div class="space-y-1.5 pt-1">
             <!-- GitHub repo link -->
-            <div v-if="project.githubRepo" class="flex items-center gap-1.5 font-mono text-xs text-[#8A8F9E]">
-              <NexuraIcon name="GitBranch" size="xs" class="text-indigo-400 shrink-0" />
+            <div v-if="project.githubRepo" class="flex items-center gap-1.5 font-mono text-xs text-muted">
+              <NexuraIcon name="GitBranch" size="xs" class="text-accent-light shrink-0" />
               <a
                 :href="`https://github.com/${project.githubRepo}`"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="hover:text-[#F3F4F6] hover:underline truncate"
+                class="hover:text-foreground hover:underline truncate"
                 @click.stop
               >
                 {{ project.githubRepo }}
@@ -267,7 +267,7 @@
                 :href="project.deployUrl"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex items-center gap-1.5 font-mono text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
+                class="inline-flex items-center gap-1.5 font-mono text-xs bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/20 hover:border-emerald-500/40 transition-colors"
                 @click.stop
               >
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -280,7 +280,7 @@
               <span
                 v-for="tech in getTechStack(project)"
                 :key="tech"
-                class="font-mono text-[10px] bg-white/5 text-[#8A8F9E] rounded-md px-2 py-0.5 border border-white/[0.06]"
+                class="font-mono text-xs bg-white/5 text-muted rounded-md px-2 py-0.5 border border-white/[0.06]"
               >
                 {{ tech }}
               </span>
@@ -291,26 +291,26 @@
         <!-- Bottom Section: Meta, Progress, Action -->
         <div class="space-y-3 pt-3 border-t border-white/[0.04]">
           <!-- Meta row -->
-          <div class="flex items-center justify-between font-mono text-xs text-[#8A8F9E]">
+          <div class="flex items-center justify-between font-mono text-xs text-muted">
             <span class="inline-flex items-center gap-1">
-              <NexuraIcon name="CheckSquare" size="xs" class="text-[#8A8F9E]" />
+              <NexuraIcon name="CheckSquare" size="xs" class="text-muted" />
               <span class="tabular-nums">{{ getTaskCountLabel(project.slug) }}</span>
             </span>
             <span class="inline-flex items-center gap-1">
-              <NexuraIcon name="Calendar" size="xs" class="text-[#8A8F9E]" />
+              <NexuraIcon name="Calendar" size="xs" class="text-muted" />
               <span>{{ formatDate(project.dueDate) }}</span>
             </span>
           </div>
 
           <!-- Progress Bar -->
           <div class="space-y-1">
-            <div class="flex justify-between font-mono text-[11px]">
-              <span class="text-[#8A8F9E]">Milestone Progress</span>
-              <span class="text-indigo-400 font-semibold tabular-nums">{{ getProgress(project.slug) }}%</span>
+            <div class="flex justify-between font-mono text-xs">
+              <span class="text-muted">Milestone Progress</span>
+              <span class="text-accent-light font-semibold tabular-nums">{{ getProgress(project.slug) }}%</span>
             </div>
             <div class="w-full bg-white/5 rounded-full h-1.5 border border-white/[0.06] overflow-hidden">
               <div
-                class="bg-gradient-to-r from-indigo-600 via-indigo-500 to-indigo-400 h-full rounded-full transition-all duration-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
+                class="bg-gradient-to-r from-accent-dim via-accent to-accent-light h-full rounded-full transition-all duration-500 shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
                 :style="{ width: `${getProgress(project.slug)}%` }"
               ></div>
             </div>
@@ -318,12 +318,12 @@
 
           <!-- Card Footer Action -->
           <div class="flex items-center justify-between pt-1">
-            <span class="font-mono text-[11px] text-[#8A8F9E]">
+            <span class="font-mono text-xs text-muted">
               {{ project.priority ? `${project.priority.toUpperCase()} PRIORITY` : 'ACTIVE' }}
             </span>
             <NuxtLink
               :to="`/projects/${project.slug}`"
-              class="inline-flex items-center gap-1.5 font-mono text-xs text-[#F3F4F6] bg-white/5 hover:bg-indigo-500/20 hover:text-indigo-300 px-3.5 py-1.5 rounded-xl border border-white/[0.08] hover:border-indigo-500/40 transition-all focus:ring-1 focus:ring-indigo-500/50 focus:outline-none"
+              class="inline-flex items-center gap-1.5 font-mono text-xs text-foreground bg-white/5 hover:bg-accent/20 hover:text-accent-light px-3.5 py-1.5 rounded-xl border border-white/[0.08] hover:border-accent/40 transition-all focus:ring-1 focus:ring-accent/50 focus:outline-none"
               :title="`Open ${project.title} Dashboard & Kanban`"
             >
               <span>Dashboard & Kanban</span>
@@ -336,15 +336,15 @@
     </div>
 
     <!-- Sticky Bottom Summary Panel -->
-    <section class="sticky bottom-0 z-20 mt-auto obs-card p-4 sm:p-5 rounded-2xl bg-[#111318]/95 backdrop-blur-md border border-white/[0.1] space-y-2 shadow-[0_-8px_24px_rgba(0,0,0,0.6)]">
+    <section class="sticky bottom-0 z-20 mt-auto obs-card p-4 sm:p-5 rounded-2xl bg-surface/95 backdrop-blur-md border border-white/[0.1] space-y-2 shadow-[0_-8px_24px_rgba(0,0,0,0.6)]">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <h2 class="font-mono text-xs sm:text-sm font-semibold text-[#F3F4F6] uppercase tracking-wider">Projects Overview Summary</h2>
-        <p class="font-sans text-[11px] text-[#8A8F9E] hidden md:block">
+        <h2 class="font-mono text-xs sm:text-sm font-semibold text-foreground uppercase tracking-wider">Projects Overview Summary</h2>
+        <p class="font-sans text-xs text-muted hidden md:block">
           Derived task completion rates &amp; milestone velocity.
         </p>
       </div>
       <div class="flex items-center gap-2.5 flex-wrap font-mono text-xs tabular-nums">
-        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-[#F3F4F6] border border-white/[0.08]">
+        <span class="px-2.5 py-1 rounded-lg bg-white/5 text-foreground border border-white/[0.08]">
           Total: {{ storeProjects.length }}
         </span>
         <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">

@@ -1,19 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Dark Obsidian Squircle Canvas -->
-  <rect width="32" height="32" rx="8" fill="#111114" />
-  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="#C98A4B" stroke-opacity="0.35" stroke-width="1" />
-  
-  <defs>
-    <linearGradient id="nexura-favicon-gradient" x1="7" y1="7" x2="25" y2="25" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F3C68F" />
-      <stop offset="50%" stop-color="#C98A4B" />
-      <stop offset="100%" stop-color="#8B5A27" />
-    </linearGradient>
-  </defs>
-  
-  <!-- Geometric Monogram 'N' (Nexura) -->
-  <path
-    d="M7 7H11.5L20.5 20.8V7H25V25H20.5L11.5 11.2V25H7V7Z"
-    fill="url(#nexura-favicon-gradient)"
+  <!-- Neutral Obsidian Squircle Pod -->
+  <rect width="32" height="32" rx="8" fill="#111318" />
+  <rect x="0.5" y="0.5" width="31" height="31" rx="7.5" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="1" />
+
+  <!-- Faceted Obsidian Hex Depth -->
+  <polygon points="16,4.5 6.04,10.25 6.04,21.75 16,27.5" fill="#F3F4F6" fill-opacity="0.03" />
+  <polygon points="16,4.5 25.96,10.25 25.96,21.75 16,27.5" fill="#F3F4F6" fill-opacity="0.08" />
+
+  <!-- Crisp Geometric Hexagon Frame -->
+  <polygon
+    points="16,4.5 25.96,10.25 25.96,21.75 16,27.5 6.04,21.75 6.04,10.25"
+    stroke="#F3F4F6"
+    stroke-opacity="0.88"
+    stroke-width="2"
+    stroke-linejoin="round"
   />
+
+  <!-- Grid-Locked Split Monogram 'N' -->
+  <path
+    d="M11.6 21.3V10.7L14.5 14.2M20.4 10.7V21.3L17.5 17.8"
+    stroke="#F3F4F6"
+    stroke-width="2.3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Micro-Emerald Center Nexus Node -->
+  <circle cx="16" cy="16" r="3.2" fill="#34D399" fill-opacity="0.22" />
+  <circle cx="16" cy="16" r="1.8" fill="#34D399" />
 </svg>

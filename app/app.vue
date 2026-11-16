@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-screen bg-[#07080A] text-[#F3F4F6] antialiased selection:bg-indigo-500/30 selection:text-white overflow-hidden relative">
+  <div class="w-full h-screen bg-void text-foreground antialiased selection:bg-accent/25 selection:text-foreground overflow-hidden relative">
     <!-- Frame Dalam: Unified Left Sidebar + Inset Workspace Panel -->
     <div class="w-full flex h-full p-2 sm:p-2.5 gap-2">
       <!-- Sidebar (Unified Left Rail on Desktop + Fixed Mobile Dock) -->
@@ -56,6 +56,7 @@ import { useTasks } from '~/composables/useTasks'
 import { useQuickTask } from '~/composables/useQuickTask'
 import { useSession } from '~/composables/useSession'
 import { useOmniSearch } from '~/composables/useOmniSearch'
+import { useThemePreset } from '~/composables/useThemePreset'
 import type { TaskPriority, TaskStatus } from '~/types'
 
 const workspaceStore = useWorkspaceStore()
@@ -140,6 +141,7 @@ function handleGlobalKeydown(e: KeyboardEvent) {
 
 // Initialize unified reactive workspace store and check session at boot
 onMounted(async () => {
+  useThemePreset()
   try {
     await Promise.allSettled([
       workspaceStore.initializeWorkspace(),

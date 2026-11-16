@@ -12,10 +12,10 @@
     >
       <slot name="header">
         <div class="space-y-0.5 min-w-0">
-          <h3 v-if="title" class="font-sans text-sm font-semibold text-[#F3F4F6] truncate">
+          <h3 v-if="title" class="font-sans text-sm font-semibold text-foreground truncate">
             {{ title }}
           </h3>
-          <p v-if="subtitle" class="font-sans text-xs text-[#8A8F9E] truncate">
+          <p v-if="subtitle" class="font-sans text-xs text-muted truncate">
             {{ subtitle }}
           </p>
         </div>
@@ -67,17 +67,17 @@ const props = withDefaults(defineProps<BaseCardProps>(), {
 })
 
 const variantClasses: Record<CardVariant, string> = {
-  default: 'obs-card rounded-2xl bg-[#111318] border border-white/[0.07]',
+  default: 'obs-card rounded-2xl bg-surface border border-white/[0.06]',
   interactive:
-    'obs-card obs-card-interactive rounded-2xl bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] cursor-pointer transition-all',
-  inset: 'bg-[#0B0C10] border border-white/[0.06] rounded-xl'
+    'obs-card obs-card-interactive rounded-2xl bg-surface border border-white/[0.06] hover:border-white/[0.12] cursor-pointer transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)]',
+  inset: 'bg-canvas border border-white/[0.06] rounded-xl'
 }
 
 const paddingClasses: Record<CardPadding, string> = {
   none: 'p-0',
   sm: 'p-3',
-  md: 'p-5',
-  lg: 'p-6'
+  md: 'p-4',
+  lg: 'p-5'
 }
 
 const computedClasses = computed(() => {

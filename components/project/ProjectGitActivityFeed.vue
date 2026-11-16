@@ -4,14 +4,14 @@
     <div class="lg:col-span-2 space-y-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Commit Log</h3>
+          <h3 class="font-mono text-xs uppercase tracking-wider text-muted">Commit Log</h3>
           <div class="flex items-center gap-2">
             <label for="branch-selector" class="sr-only">Select Branch</label>
             <div class="relative">
               <select
                 id="branch-selector"
                 :value="selectedBranch || (branches?.[0]?.name || '')"
-                class="bg-[#07080A] border border-white/[0.08] rounded-lg pl-7 pr-8 py-1 text-xs font-mono text-[#F3F4F6] outline-none transition focus:border-indigo-500/50 cursor-pointer appearance-none"
+                class="bg-void border border-white/[0.08] rounded-lg pl-7 pr-8 py-1 text-xs font-mono text-foreground outline-none transition focus:border-accent/50 cursor-pointer appearance-none"
                 :disabled="branchesPending"
                 @change="(e: Event) => $emit('select-branch', (e.target as HTMLSelectElement).value)"
               >
@@ -19,16 +19,16 @@
                   {{ b.name }} {{ b.protected ? '(protected)' : '' }}
                 </option>
               </select>
-              <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-indigo-400">
+              <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none text-accent-light">
                 <NexuraIcon name="GitBranch" size="xs" />
               </div>
-              <div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-[#8A8F9E]">
+              <div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none text-muted">
                 <NexuraIcon name="ChevronDown" size="xs" />
               </div>
             </div>
           </div>
         </div>
-        <span v-if="commitsPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Syncing...</span>
+        <span v-if="commitsPending" class="font-mono text-xs text-accent-light animate-pulse">Syncing...</span>
       </div>
 
       <div
@@ -38,27 +38,27 @@
         <div
           v-for="commit in commits"
           :key="commit.sha"
-          class="p-3 rounded-xl bg-[#07080A]/60 border border-white/[0.05] space-y-1 hover:border-white/[0.12] transition-colors"
+          class="p-3 rounded-xl bg-void/60 border border-white/[0.05] space-y-1 hover:border-white/[0.12] transition-colors"
         >
           <div class="flex items-baseline justify-between gap-2">
-            <span class="font-mono text-xs text-[#F3F4F6] font-medium truncate">{{ commit.message }}</span>
+            <span class="font-mono text-xs text-foreground font-medium truncate">{{ commit.message }}</span>
             <a
               :href="commit.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-[10px] tabular-nums text-indigo-400 hover:underline shrink-0 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20"
+              class="font-mono text-xs tabular-nums text-accent-light hover:underline shrink-0 bg-accent/10 px-2 py-0.5 rounded border border-accent/20"
             >
               {{ commit.sha.slice(0, 7) }}
             </a>
           </div>
-          <div class="flex items-center gap-3 font-mono text-[10px] text-[#8A8F9E]">
+          <div class="flex items-center gap-3 font-mono text-xs text-muted">
             <span>{{ commit.authorName }}</span>
             <span>•</span>
             <span class="tabular-nums">{{ formatTime(commit.date) }}</span>
           </div>
         </div>
       </div>
-      <div v-else class="py-8 text-center text-xs font-mono text-[#8A8F9E] border border-dashed border-white/[0.06] rounded-xl">
+      <div v-else class="py-8 text-center text-xs font-mono text-muted border border-dashed border-white/[0.06] rounded-xl">
         No commit data available.
       </div>
     </div>
@@ -66,8 +66,8 @@
     <!-- Branches List -->
     <div class="space-y-3">
       <div class="flex items-center justify-between">
-        <h3 class="font-mono text-xs uppercase tracking-wider text-[#8A8F9E]">Branches</h3>
-        <span v-if="branchesPending" class="font-mono text-[10px] text-indigo-400 animate-pulse">Loading...</span>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-muted">Branches</h3>
+        <span v-if="branchesPending" class="font-mono text-xs text-accent-light animate-pulse">Loading...</span>
       </div>
 
       <div
@@ -80,24 +80,24 @@
           class="flex items-center justify-between font-mono text-xs py-2 px-3 rounded-lg border transition-colors cursor-pointer"
           :class="[
             selectedBranch === branch.name
-              ? 'border-indigo-500/40 bg-indigo-500/10'
-              : 'bg-[#07080A]/60 border-white/[0.05] hover:border-white/[0.1]'
+              ? 'border-accent/40 bg-accent/10'
+              : 'bg-void/60 border-white/[0.05] hover:border-white/[0.1]'
           ]"
           @click="$emit('select-branch', branch.name)"
         >
           <div class="flex items-center gap-2 truncate">
-            <NexuraIcon name="GitBranch" size="xs" :class="selectedBranch === branch.name ? 'text-indigo-300' : 'text-indigo-400'" class="shrink-0" />
-            <span :class="selectedBranch === branch.name ? 'text-indigo-200 font-medium' : 'text-[#F3F4F6]'" class="truncate">{{ branch.name }}</span>
-            <span v-if="branch.protected" class="text-[9px] bg-rose-500/10 text-rose-400 px-1.5 py-0.2 rounded border border-rose-500/20 font-semibold uppercase">
+            <NexuraIcon name="GitBranch" size="xs" :class="selectedBranch === branch.name ? 'text-accent-light' : 'text-accent-light'" class="shrink-0" />
+            <span :class="selectedBranch === branch.name ? 'text-accent-light font-medium' : 'text-foreground'" class="truncate">{{ branch.name }}</span>
+            <span v-if="branch.protected" class="text-xs leading-none bg-rose-500/10 text-rose-400 px-1.5 py-0.5 rounded border border-rose-500/20 font-semibold uppercase">
               protected
             </span>
           </div>
-          <span class="text-[10px] text-[#8A8F9E] shrink-0 font-mono tabular-nums">
+          <span class="text-xs text-muted shrink-0 font-mono tabular-nums">
             {{ branch.commitSha.slice(0, 7) }}
           </span>
         </div>
       </div>
-      <div v-else class="py-8 text-center text-xs font-mono text-[#8A8F9E] border border-dashed border-white/[0.06] rounded-xl">
+      <div v-else class="py-8 text-center text-xs font-mono text-muted border border-dashed border-white/[0.06] rounded-xl">
         No branch information.
       </div>
     </div>

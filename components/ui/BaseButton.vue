@@ -89,13 +89,13 @@ const componentTag = computed(() => {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#F3F4F6] hover:bg-white text-[#07080A] font-sans font-semibold shadow-[0_1px_2px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.9)]',
+    'bg-foreground hover:bg-white text-void font-sans font-semibold shadow-[0_1px_2px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.9)]',
   accent:
-    'bg-indigo-600 hover:bg-indigo-500 text-white border border-indigo-400/20 font-sans font-medium shadow-[0_1px_12px_rgba(99,102,241,0.25)]',
+    'bg-accent hover:bg-accent-light text-void font-sans font-semibold border border-accent-light/30 shadow-glow-accent',
   secondary:
-    'bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.08] hover:border-white/[0.15] font-sans font-medium',
+    'bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-white/[0.08] hover:border-white/[0.15] font-sans font-medium',
   ghost:
-    'bg-transparent hover:bg-white/[0.05] text-[#8A8F9E] hover:text-[#F3F4F6] font-sans font-medium',
+    'bg-transparent hover:bg-white/[0.05] text-muted hover:text-foreground font-sans font-medium',
   danger:
     'bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/25 font-sans font-medium'
 }
@@ -115,8 +115,8 @@ const iconSize = computed<IconSize>(() => {
 
 const computedClasses = computed(() => {
   return [
-    'inline-flex items-center justify-center transition-all duration-150 ease-out select-none cursor-pointer motion-reduce:transition-none motion-reduce:transform-none',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50',
+    'inline-flex items-center justify-center transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)] select-none cursor-pointer motion-reduce:transition-none motion-reduce:transform-none',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40',
     isDisabled.value ? 'opacity-50 pointer-events-none cursor-not-allowed' : 'active:scale-[0.97]',
     variantClasses[props.variant] || variantClasses.secondary,
     sizeClasses[props.size] || sizeClasses.md,

@@ -4,13 +4,13 @@
     <label
       v-if="label"
       :for="selectId"
-      class="font-sans text-xs font-medium text-[#8A8F9E] flex items-center justify-between"
+      class="font-sans text-xs font-medium text-muted flex items-center justify-between"
     >
       <span>
         {{ label }}
         <span v-if="required" class="text-rose-400 ml-0.5">*</span>
       </span>
-      <span v-if="hint && !error" class="text-[11px] font-mono text-[#565B68]">
+      <span v-if="hint && !error" class="text-xs font-mono text-dim">
         {{ hint }}
       </span>
     </label>
@@ -30,7 +30,7 @@
           v-if="placeholder"
           value=""
           disabled
-          class="bg-[#111318] text-[#565B68] py-1.5"
+          class="bg-surface text-dim py-1.5"
         >
           {{ placeholder }}
         </option>
@@ -40,7 +40,7 @@
           :key="String(opt.value)"
           :value="opt.value"
           :disabled="opt.disabled"
-          class="bg-[#111318] text-[#F3F4F6] py-1.5"
+          class="bg-surface text-foreground py-1.5"
         >
           {{ opt.label }}
         </option>
@@ -48,7 +48,7 @@
 
       <!-- Custom Chevron Down Icon -->
       <div
-        class="absolute right-3 pointer-events-none text-[#8A8F9E] flex items-center"
+        class="absolute right-3 pointer-events-none text-muted flex items-center"
         aria-hidden="true"
       >
         <NexuraIcon name="ChevronDown" size="sm" />
@@ -129,17 +129,17 @@ function onChange(event: Event) {
 
 const sizeClasses: Record<SelectSize, string> = {
   sm: 'py-1 pl-2.5 pr-8 text-xs rounded-lg',
-  md: 'py-2 pl-3.5 pr-9 text-xs rounded-xl',
-  lg: 'py-2.5 pl-4 pr-10 text-xs rounded-xl'
+  md: 'py-2 pl-3.5 pr-9 text-xs rounded-lg',
+  lg: 'py-2.5 pl-4 pr-10 text-xs rounded-lg'
 }
 
 const selectClasses = computed(() => {
   return [
-    'w-full bg-[#0B0C10] appearance-none font-sans text-[#F3F4F6] cursor-pointer transition-all',
+    'w-full bg-canvas appearance-none font-sans text-foreground cursor-pointer transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)]',
     'focus:outline-none focus:ring-1',
     props.error
       ? 'border border-rose-500/40 text-rose-300 focus:border-rose-500/60 focus:ring-rose-500/30'
-      : 'border border-white/[0.08] focus:border-indigo-500/50 focus:ring-indigo-500/50',
+      : 'border border-white/[0.08] focus:border-accent/60 focus:ring-accent/40',
     props.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '',
     sizeClasses[props.size] || sizeClasses.md,
     props.class

@@ -4,13 +4,13 @@
     <label
       v-if="label"
       :for="inputId"
-      class="font-sans text-xs font-medium text-[#8A8F9E] flex items-center justify-between"
+      class="font-sans text-xs font-medium text-muted flex items-center justify-between"
     >
       <span>
         {{ label }}
         <span v-if="required" class="text-rose-400 ml-0.5">*</span>
       </span>
-      <span v-if="hint && !error" class="text-[11px] font-mono text-[#565B68]">
+      <span v-if="hint && !error" class="text-xs font-mono text-dim">
         {{ hint }}
       </span>
     </label>
@@ -20,7 +20,7 @@
       <!-- Prefix Slot or Left Icon -->
       <div
         v-if="$slots.prefix || icon"
-        class="absolute left-3 flex items-center pointer-events-none text-[#8A8F9E]"
+        class="absolute left-3 flex items-center pointer-events-none text-muted"
         aria-hidden="true"
       >
         <slot name="prefix">
@@ -63,12 +63,12 @@
       <!-- Suffix Slot or Clear Button -->
       <div
         v-if="$slots.suffix || (clearable && Boolean(modelValue))"
-        class="absolute right-3 flex items-center gap-1.5 text-[#8A8F9E]"
+        class="absolute right-3 flex items-center gap-1.5 text-muted"
       >
         <button
           v-if="clearable && Boolean(modelValue) && !disabled"
           type="button"
-          class="hover:text-[#F3F4F6] p-0.5 rounded transition-colors cursor-pointer"
+          class="hover:text-foreground p-0.5 rounded transition-colors cursor-pointer"
           aria-label="Clear input"
           @click="onClear"
         >
@@ -149,11 +149,11 @@ const inputClasses = computed(() => {
   const hasSuffix = Boolean(props.clearable)
 
   return [
-    'w-full bg-[#0B0C10] rounded-xl text-xs font-sans text-[#F3F4F6] placeholder:text-[#565B68] transition-all',
+    'w-full bg-canvas rounded-lg text-xs font-sans text-foreground placeholder:text-dim transition-all duration-150 ease-[cubic-bezier(0.2,0.8,0.2,1)]',
     'focus:outline-none focus:ring-1',
     props.error
       ? 'border border-rose-500/40 text-rose-300 focus:border-rose-500/60 focus:ring-rose-500/30'
-      : 'border border-white/[0.08] focus:border-indigo-500/50 focus:ring-indigo-500/50',
+      : 'border border-white/[0.08] focus:border-accent/60 focus:ring-accent/40',
     props.disabled ? 'opacity-50 cursor-not-allowed' : '',
     hasPrefix ? 'pl-9' : 'pl-3.5',
     hasSuffix ? 'pr-9' : 'pr-3.5',

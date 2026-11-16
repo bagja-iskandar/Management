@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 
-export type HeaderActionVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
+export type HeaderActionVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'accent'
 
 export interface HeaderButtonAction {
   type?: 'button'

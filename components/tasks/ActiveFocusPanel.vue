@@ -1,22 +1,22 @@
 <template>
-  <div class="bg-[#0D0E12] border border-white/[0.08] rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-200">
+  <div class="bg-surface border border-white/[0.08] rounded-2xl shadow-xl overflow-hidden flex flex-col transition-all duration-200">
     <!-- Panel Header -->
-    <div class="px-5 py-3.5 border-b border-white/[0.08] bg-[#111318]/70 backdrop-blur-sm flex items-center justify-between gap-3 shrink-0">
+    <div class="px-5 py-3.5 border-b border-white/[0.08] bg-surface/70 backdrop-blur-sm flex items-center justify-between gap-3 shrink-0">
       <div class="flex items-center gap-2.5">
-        <div class="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+        <div class="w-7 h-7 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent-light">
           <NexuraIcon name="Zap" size="sm" class="animate-pulse" />
         </div>
         <div>
-          <h2 class="text-sm font-semibold text-[#F3F4F6] flex items-center gap-2">
+          <h2 class="text-sm font-semibold text-foreground flex items-center gap-2">
             <span>Active Sprint Focus</span>
             <span
               v-if="effectiveTask"
-              class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 font-medium"
+              class="text-xs font-mono px-2 py-0.5 rounded-full bg-accent/15 text-accent-light border border-accent/30 font-medium"
             >
               RUNNING
             </span>
           </h2>
-          <p class="text-[11px] text-[#8A8F9E]">Real-time execution & interactive checklist breakdown</p>
+          <p class="text-xs text-muted">Real-time execution & interactive checklist breakdown</p>
         </div>
       </div>
 
@@ -29,8 +29,8 @@
             type="button"
             class="px-2.5 py-1 rounded-lg text-xs font-mono transition-colors shrink-0 flex items-center gap-1 cursor-pointer"
             :class="effectiveTask?.id === t.id
-              ? 'bg-indigo-600 text-white font-medium shadow-[0_0_10px_rgba(99,102,241,0.3)]'
-              : 'bg-white/5 text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/10 border border-white/[0.06]'"
+              ? 'bg-foreground text-void font-semibold text-white font-medium shadow-[0_0_10px_rgba(99,102,241,0.3)]'
+              : 'bg-white/5 text-muted hover:text-foreground hover:bg-white/10 border border-white/[0.06]'"
             @click="selectedTaskId = t.id"
           >
             <span>#{{ getDisplayId(t) }}</span>
@@ -40,7 +40,7 @@
         <!-- Close button -->
         <button
           type="button"
-          class="p-1.5 rounded-lg text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/10 transition-colors cursor-pointer"
+          class="p-1.5 rounded-lg text-muted hover:text-foreground hover:bg-white/10 transition-colors cursor-pointer"
           aria-label="Close focus panel"
           title="Close focus panel"
           @click="$emit('close')"
@@ -53,22 +53,22 @@
     <!-- Main Content Body -->
     <div v-if="effectiveTask" class="p-5 flex flex-col gap-4">
       <!-- Deliverable Overview Card -->
-      <div class="bg-[#111318] border border-white/[0.08] rounded-xl p-4 flex flex-col gap-3">
+      <div class="bg-surface border border-white/[0.08] rounded-xl p-4 flex flex-col gap-3">
         <!-- Top Info Row -->
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <div class="flex items-center gap-2">
-            <span class="font-mono text-xs tabular-nums text-[#8A8F9E] bg-white/5 border border-white/[0.08] px-2 py-0.5 rounded">
+            <span class="font-mono text-xs tabular-nums text-muted bg-white/5 border border-white/[0.08] px-2 py-0.5 rounded">
               #{{ getDisplayId(effectiveTask) }}
             </span>
             <span
               v-if="effectiveTask.projectSlug"
-              class="font-mono text-[11px] text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded flex items-center gap-1"
+              class="font-mono text-xs text-accent-light bg-accent/10 border border-accent/20 px-2 py-0.5 rounded flex items-center gap-1"
             >
               <NexuraIcon name="Folder" size="xs" />
               <span>{{ effectiveTask.projectSlug }}</span>
             </span>
             <span
-              class="font-mono text-[10px] uppercase font-semibold px-2 py-0.5 rounded border tracking-wider"
+              class="font-mono text-xs uppercase font-semibold px-2 py-0.5 rounded border tracking-wider"
               :class="priorityBadgeClass(effectiveTask.priority)"
             >
               {{ effectiveTask.priority || 'medium' }}
@@ -76,14 +76,14 @@
           </div>
 
           <div class="flex items-center gap-2">
-            <span v-if="effectiveTask.dueDate" class="text-[11px] font-mono text-[#8A8F9E] flex items-center gap-1 bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.06]">
+            <span v-if="effectiveTask.dueDate" class="text-xs font-mono text-muted flex items-center gap-1 bg-white/[0.03] px-2 py-0.5 rounded border border-white/[0.06]">
               <NexuraIcon name="Calendar" size="xs" />
               <span>Due: {{ effectiveTask.dueDate }}</span>
             </span>
 
             <button
               type="button"
-              class="text-[11px] font-mono text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-lg border border-white/[0.08] transition-colors flex items-center gap-1 cursor-pointer"
+              class="text-xs font-mono text-muted hover:text-foreground bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-lg border border-white/[0.08] transition-colors flex items-center gap-1 cursor-pointer"
               title="Open full drawer"
               @click="openTaskInDrawer(effectiveTask.id)"
             >
@@ -95,11 +95,11 @@
 
         <!-- Task Title -->
         <div>
-          <h3 class="text-base font-medium text-[#F3F4F6] leading-snug">
+          <h3 class="text-base font-medium text-foreground leading-snug">
             {{ effectiveTask.name }}
           </h3>
           <!-- Non-checklist description preview if any -->
-          <p v-if="cleanNarrativeDescription" class="text-xs text-[#8A8F9E] mt-1 line-clamp-2">
+          <p v-if="cleanNarrativeDescription" class="text-xs text-muted mt-1 line-clamp-2">
             {{ cleanNarrativeDescription }}
           </p>
         </div>
@@ -107,11 +107,11 @@
         <!-- Progress Bar & Ratio -->
         <div class="pt-2 border-t border-white/[0.06] space-y-1.5">
           <div class="flex items-center justify-between text-xs font-mono">
-            <span class="text-[#8A8F9E] flex items-center gap-1.5">
-              <NexuraIcon name="CheckSquare" size="xs" class="text-indigo-400" />
+            <span class="text-muted flex items-center gap-1.5">
+              <NexuraIcon name="CheckSquare" size="xs" class="text-accent-light" />
               <span>Checklist Progress</span>
             </span>
-            <span class="font-semibold tabular-nums" :class="checklistStats.percentage === 100 ? 'text-emerald-400' : 'text-[#F3F4F6]'">
+            <span class="font-semibold tabular-nums" :class="checklistStats.percentage === 100 ? 'text-emerald-400' : 'text-foreground'">
               {{ checklistStats.completed }}/{{ checklistStats.total }} completed ({{ checklistStats.percentage }}%)
             </span>
           </div>
@@ -122,7 +122,7 @@
               class="h-full rounded-full transition-all duration-300"
               :class="checklistStats.percentage === 100
                 ? 'bg-gradient-to-r from-emerald-500 to-teal-400 shadow-[0_0_12px_rgba(16,185,129,0.4)]'
-                : 'bg-gradient-to-r from-indigo-500 via-indigo-400 to-sky-400 shadow-[0_0_12px_rgba(99,102,241,0.3)]'"
+                : 'bg-gradient-to-r from-accent-dim via-accent to-accent-light shadow-[0_0_12px_rgba(52,211,153,0.3)]'"
               :style="{ width: `${checklistStats.percentage}%` }"
             ></div>
           </div>
@@ -132,10 +132,10 @@
       <!-- Checklist Items Section -->
       <div class="space-y-2">
         <div class="flex items-center justify-between">
-          <h4 class="text-xs font-mono uppercase tracking-wider text-[#8A8F9E] font-semibold">
+          <h4 class="text-xs font-mono uppercase tracking-wider text-muted font-semibold">
             Execution Steps
           </h4>
-          <span v-if="checklistStats.total > 0 && checklistStats.percentage === 100" class="text-[11px] font-mono text-emerald-400 flex items-center gap-1">
+          <span v-if="checklistStats.total > 0 && checklistStats.percentage === 100" class="text-xs font-mono text-emerald-400 flex items-center gap-1">
             <NexuraIcon name="CheckCircle2" size="xs" />
             <span>All steps finished! Ready to deploy.</span>
           </span>
@@ -146,11 +146,11 @@
           <!-- Empty Checklist Prompt -->
           <div
             v-if="!checklistItems.length"
-            class="py-6 px-4 rounded-xl border border-dashed border-white/[0.08] text-center bg-[#07080A]/40"
+            class="py-6 px-4 rounded-xl border border-dashed border-white/[0.08] text-center bg-void/40"
           >
-            <NexuraIcon name="ListTodo" size="sm" class="text-[#565B68] mx-auto mb-1.5" />
-            <p class="text-xs font-mono text-[#8A8F9E]">No checklist steps found in task description</p>
-            <p class="text-[11px] text-[#565B68] mt-0.5">Type steps below to break this deliverable into tangible progress.</p>
+            <NexuraIcon name="ListTodo" size="sm" class="text-dim mx-auto mb-1.5" />
+            <p class="text-xs font-mono text-muted">No checklist steps found in task description</p>
+            <p class="text-xs text-dim mt-0.5">Type steps below to break this deliverable into tangible progress.</p>
           </div>
 
           <!-- Items -->
@@ -159,8 +159,8 @@
             :key="item.index"
             class="group flex items-start justify-between gap-3 p-2.5 rounded-xl border transition-all duration-150"
             :class="item.completed
-              ? 'bg-white/[0.02] border-white/[0.04] text-[#8A8F9E]'
-              : 'bg-[#111318]/60 border-white/[0.06] hover:border-white/[0.14] text-[#F3F4F6]'"
+              ? 'bg-white/[0.02] border-white/[0.04] text-muted'
+              : 'bg-surface/60 border-white/[0.06] hover:border-white/[0.14] text-foreground'"
           >
             <!-- Checkbox & Label -->
             <button
@@ -174,14 +174,14 @@
                 class="w-4 h-4 rounded-md border mt-0.5 shrink-0 flex items-center justify-center transition-all duration-150"
                 :class="item.completed
                   ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.3)]'
-                  : 'bg-[#07080A] border-white/[0.15] group-hover:border-indigo-400 text-transparent'"
+                  : 'bg-void border-white/[0.15] group-hover:border-accent-light text-transparent'"
               >
                 <NexuraIcon name="Check" size="xs" :stroke-width="2.5" />
               </span>
 
               <span
                 class="text-xs font-sans leading-relaxed select-text transition-colors"
-                :class="item.completed ? 'line-through text-[#8A8F9E]' : 'text-[#F3F4F6]'"
+                :class="item.completed ? 'line-through text-muted' : 'text-foreground'"
               >
                 {{ item.text }}
               </span>
@@ -190,7 +190,7 @@
             <!-- Delete Step Button (visible on hover) -->
             <button
               type="button"
-              class="opacity-0 group-hover:opacity-100 p-1 text-[#565B68] hover:text-rose-400 hover:bg-rose-500/10 rounded transition-all focus:opacity-100 cursor-pointer"
+              class="opacity-0 group-hover:opacity-100 p-1 text-dim hover:text-rose-400 hover:bg-rose-500/10 rounded transition-all focus:opacity-100 cursor-pointer"
               title="Delete step"
               @click="deleteStep(item)"
             >
@@ -208,13 +208,13 @@
                 v-model="newStepText"
                 type="text"
                 placeholder="+ Add step... (press Enter to commit)"
-                class="w-full bg-[#111318] border border-white/[0.08] hover:border-white/[0.15] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 rounded-xl px-3.5 py-2 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:outline-none transition-all font-sans"
+                class="w-full bg-surface border border-white/[0.08] hover:border-white/[0.15] focus:border-accent/60 focus:ring-1 focus:ring-accent/30 rounded-xl px-3.5 py-2 text-xs text-foreground placeholder:text-dim focus:outline-none transition-all font-sans"
               />
             </div>
             <button
               type="submit"
               :disabled="!newStepText.trim() || isSaving"
-              class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-mono font-medium transition-all shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_12px_rgba(99,102,241,0.25)] flex items-center gap-1.5"
+              class="px-3.5 py-2 rounded-xl bg-foreground hover:bg-white text-void font-semibold text-xs font-mono font-medium transition-all shrink-0 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed shadow-[0_0_12px_rgba(99,102,241,0.25)] flex items-center gap-1.5"
             >
               <NexuraIcon name="Plus" size="xs" />
               <span>Add</span>
@@ -231,7 +231,7 @@
             <NexuraIcon name="CheckCircle2" size="sm" class="text-emerald-400" />
             <div>
               <p class="text-xs font-medium text-emerald-300">Deliverable Ready</p>
-              <p class="text-[10px] text-[#8A8F9E]">All verification steps passed</p>
+              <p class="text-xs text-muted">All verification steps passed</p>
             </div>
           </div>
           <button
@@ -247,19 +247,19 @@
 
     <!-- Empty State: No active running task -->
     <div v-else class="p-8 text-center flex flex-col items-center justify-center gap-3">
-      <div class="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#8A8F9E]">
+      <div class="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-muted">
         <NexuraIcon name="Inbox" size="md" />
       </div>
       <div class="space-y-1 max-w-sm">
-        <h3 class="text-sm font-semibold text-[#F3F4F6]">No Deliverable in RUNNING Sprint</h3>
-        <p class="text-xs text-[#8A8F9E] leading-relaxed">
-          Drag a card from <strong class="text-indigo-300">IN QUEUE</strong> to <strong class="text-indigo-400">RUNNING</strong> on your Kanban board to focus execution and track interactive checklist steps here.
+        <h3 class="text-sm font-semibold text-foreground">No Deliverable in RUNNING Sprint</h3>
+        <p class="text-xs text-muted leading-relaxed">
+          Drag a card from <strong class="text-accent-light">IN QUEUE</strong> to <strong class="text-accent-light">RUNNING</strong> on your Kanban board to focus execution and track interactive checklist steps here.
         </p>
       </div>
 
       <!-- Quick pick from in_queue if available -->
       <div v-if="queuedTasks.length" class="pt-2 w-full max-w-md">
-        <p class="text-[11px] font-mono text-[#8A8F9E] mb-2 uppercase tracking-wider font-semibold">
+        <p class="text-xs font-mono text-muted mb-2 uppercase tracking-wider font-semibold">
           Or pick from queue:
         </p>
         <div class="space-y-1.5 max-h-36 overflow-y-auto custom-scrollbar">
@@ -267,14 +267,14 @@
             v-for="qt in queuedTasks.slice(0, 3)"
             :key="qt.id"
             type="button"
-            class="w-full p-2.5 rounded-xl bg-[#111318] border border-white/[0.06] hover:border-indigo-500/40 text-left flex items-center justify-between text-xs transition-colors cursor-pointer"
+            class="w-full p-2.5 rounded-xl bg-surface border border-white/[0.06] hover:border-accent/40 text-left flex items-center justify-between text-xs transition-colors cursor-pointer"
             @click="startTaskImmediately(qt)"
           >
             <div class="flex items-center gap-2 truncate">
-              <span class="font-mono text-[#8A8F9E]">#{{ getDisplayId(qt) }}</span>
-              <span class="text-[#F3F4F6] truncate">{{ qt.name }}</span>
+              <span class="font-mono text-muted">#{{ getDisplayId(qt) }}</span>
+              <span class="text-foreground truncate">{{ qt.name }}</span>
             </div>
-            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20 shrink-0 ml-2">
+            <span class="text-xs font-mono text-accent-light bg-accent/10 px-2 py-0.5 rounded border border-accent/20 shrink-0 ml-2">
               Start & Focus
             </span>
           </button>
@@ -360,10 +360,10 @@ function priorityBadgeClass(priority?: TaskPriority): string {
     case 'high':
       return 'bg-amber-500/15 text-amber-400 border-amber-500/30'
     case 'low':
-      return 'bg-white/5 text-[#8A8F9E] border-white/[0.08]'
+      return 'bg-white/5 text-muted border-white/[0.08]'
     case 'medium':
     default:
-      return 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30'
+      return 'bg-accent/15 text-accent-light border-accent/30'
   }
 }
 

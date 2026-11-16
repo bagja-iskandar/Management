@@ -11,21 +11,21 @@
     >
       <div
         ref="panelRef"
-        class="w-full max-w-4xl bg-[#111318] border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-auto max-h-[90vh] text-[#F3F4F6] outline-none"
+        class="w-full max-w-4xl bg-surface border border-white/[0.1] rounded-2xl shadow-2xl flex flex-col overflow-hidden my-auto max-h-[90vh] text-foreground outline-none"
         @click.stop
       >
         <!-- ======================================================== -->
         <!-- TERMINAL WINDOW HEADER                                   -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3.5 bg-[#0D0F12] border-b border-white/[0.07] flex items-center justify-between gap-4 shrink-0">
+        <div class="px-5 py-3.5 bg-surface border-b border-white/[0.07] flex items-center justify-between gap-4 shrink-0">
           <!-- Left: Title & Subtitle -->
           <div class="flex items-center gap-2.5 min-w-0">
-            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse shrink-0" aria-hidden="true"></span>
+            <span class="w-2 h-2 rounded-full bg-accent-light animate-pulse shrink-0" aria-hidden="true"></span>
             <div class="min-w-0">
-              <div class="font-sans text-sm font-semibold text-[#F3F4F6] truncate">
+              <div class="font-sans text-sm font-semibold text-foreground truncate">
                 GitHub PRs &amp; Issues Cockpit
               </div>
-              <div class="font-mono text-xs text-[#8A8F9E] truncate">
+              <div class="font-mono text-xs text-muted truncate">
                 telemetry://cockpit/{{ repo || 'bagja-iskandar/Management' }}
               </div>
             </div>
@@ -38,16 +38,16 @@
               :href="`https://github.com/${repo}`"
               target="_blank"
               rel="noopener noreferrer"
-              class="font-mono text-xs text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] group"
+              class="font-mono text-xs text-muted hover:text-foreground transition-colors inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.06] group"
               title="Open repository on GitHub"
             >
               <span>GitHub</span>
-              <NexuraIcon name="ExternalLink" size="xs" class="text-[#8A8F9E] group-hover:text-indigo-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <NexuraIcon name="ExternalLink" size="xs" class="text-muted group-hover:text-accent-light transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
             <button
               type="button"
-              class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.06] transition-colors focus:outline-none focus:ring-1 focus:ring-indigo-500/50 cursor-pointer"
+              class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-muted hover:text-foreground border border-white/[0.06] transition-colors focus:outline-none focus:ring-1 focus:ring-accent/50 cursor-pointer"
               aria-label="Close modal"
               @click="close"
             >
@@ -59,8 +59,8 @@
         <!-- ======================================================== -->
         <!-- TAB SWITCHER                                             -->
         <!-- ======================================================== -->
-        <div class="px-5 py-2.5 bg-[#0D0F12]/80 border-b border-white/[0.07] flex items-center justify-between gap-3 shrink-0 flex-wrap">
-          <div class="p-1 rounded-lg bg-[#07080A] border border-white/[0.06] inline-flex items-center gap-1" role="tablist">
+        <div class="px-5 py-2.5 bg-surface/80 border-b border-white/[0.07] flex items-center justify-between gap-3 shrink-0 flex-wrap">
+          <div class="p-1 rounded-lg bg-void border border-white/[0.06] inline-flex items-center gap-1" role="tablist">
             <!-- Tab 1: Pull Requests -->
             <button
               type="button"
@@ -68,13 +68,13 @@
               :aria-selected="currentTab === 'prs'"
               class="px-3 py-1.5 rounded-md font-mono text-xs transition-all border flex items-center gap-1.5 cursor-pointer focus:outline-none"
               :class="currentTab === 'prs'
-                ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+                ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+                : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
               @click="currentTab = 'prs'"
             >
-              <NexuraIcon name="GitPullRequest" size="xs" class="text-indigo-400" />
+              <NexuraIcon name="GitPullRequest" size="xs" class="text-accent-light" />
               <span>Pull Requests</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">
+              <span class="text-xs px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">
                 {{ summary?.openPrCount ?? 0 }}
               </span>
             </button>
@@ -86,13 +86,13 @@
               :aria-selected="currentTab === 'issues'"
               class="px-3 py-1.5 rounded-md font-mono text-xs transition-all border flex items-center gap-1.5 cursor-pointer focus:outline-none"
               :class="currentTab === 'issues'
-                ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+                ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+                : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
               @click="currentTab = 'issues'"
             >
               <NexuraIcon name="CircleDot" size="xs" class="text-amber-400" />
               <span>Issues</span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">
+              <span class="text-xs px-1.5 py-0.5 rounded-full bg-white/[0.06] font-mono tabular-nums">
                 {{ summary?.openIssueCount ?? 0 }}
               </span>
             </button>
@@ -104,8 +104,8 @@
               :aria-selected="currentTab === 'new_issue'"
               class="px-3 py-1.5 rounded-md font-mono text-xs transition-all border flex items-center gap-1.5 cursor-pointer focus:outline-none"
               :class="currentTab === 'new_issue'
-                ? 'bg-white/[0.08] text-[#F3F4F6] border-white/[0.1] shadow-inner font-semibold'
-                : 'text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.03] border-transparent'"
+                ? 'bg-white/[0.08] text-foreground border-white/[0.1] shadow-inner font-semibold'
+                : 'text-muted hover:text-foreground hover:bg-white/[0.03] border-transparent'"
               @click="currentTab = 'new_issue'"
             >
               <NexuraIcon name="Plus" size="xs" />
@@ -114,7 +114,7 @@
           </div>
 
           <!-- Total Summary Pill -->
-          <div class="font-mono tabular-nums text-xs text-[#8A8F9E] hidden sm:flex items-center gap-2">
+          <div class="font-mono tabular-nums text-xs text-muted hidden sm:flex items-center gap-2">
             <span>{{ (summary?.pullRequests || []).length }} PRs</span>
             <span class="text-white/20">·</span>
             <span>{{ (summary?.issues || []).length }} Issues</span>
@@ -124,7 +124,7 @@
         <!-- ======================================================== -->
         <!-- TAB CONTENT BODY                                         -->
         <!-- ======================================================== -->
-        <div class="p-5 overflow-y-auto space-y-3 max-h-[65vh] bg-[#111318] custom-scrollbar">
+        <div class="p-5 overflow-y-auto space-y-3 max-h-[65vh] bg-surface custom-scrollbar">
           <!-- ======================================================== -->
           <!-- TAB 1: PULL REQUESTS STREAM                              -->
           <!-- ======================================================== -->
@@ -133,14 +133,14 @@
               <div
                 v-for="pr in pullRequestsList"
                 :key="pr.id"
-                class="p-4 rounded-xl bg-[#0D0F12] border border-white/[0.07] hover:border-white/[0.14] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3.5"
+                class="p-4 rounded-xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3.5"
               >
                 <!-- PR Details -->
                 <div class="space-y-1.5 flex-1 min-w-0">
                   <div class="flex items-center gap-2 flex-wrap">
                     <!-- PR Status Pill -->
                     <span
-                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[10px] font-semibold border uppercase tracking-wider"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-xs font-semibold border uppercase tracking-wider"
                       :class="getPrBadgeClass(pr)"
                     >
                       <span class="w-1.5 h-1.5 rounded-full" :class="getPrDotClass(pr)"></span>
@@ -148,18 +148,18 @@
                     </span>
 
                     <!-- PR Number -->
-                    <span class="font-mono tabular-nums text-xs text-indigo-400 font-semibold">
+                    <span class="font-mono tabular-nums text-xs text-accent-light font-semibold">
                       #{{ pr.number }}
                     </span>
 
                     <!-- PR Title -->
-                    <span class="font-sans text-xs text-[#F3F4F6] font-semibold truncate max-w-md" :title="pr.title">
+                    <span class="font-sans text-xs text-foreground font-semibold truncate max-w-md" :title="pr.title">
                       {{ pr.title }}
                     </span>
                   </div>
 
                   <!-- Metadata Row: Author + Branches + SHA + Comments -->
-                  <div class="flex items-center gap-2.5 font-mono text-xs text-[#8A8F9E] flex-wrap">
+                  <div class="flex items-center gap-2.5 font-mono text-xs text-muted flex-wrap">
                     <!-- Author avatar & name -->
                     <div class="inline-flex items-center gap-1.5">
                       <img
@@ -168,31 +168,31 @@
                         :alt="pr.authorName"
                         class="w-4 h-4 rounded-full border border-white/10"
                       />
-                      <span class="text-[#8A8F9E]">{{ pr.authorName }}</span>
+                      <span class="text-muted">{{ pr.authorName }}</span>
                     </div>
 
                     <span class="text-white/20">•</span>
 
                     <!-- Branch routing -->
-                    <div class="inline-flex items-center gap-1.5 bg-[#07080A] px-2 py-0.5 rounded border border-white/[0.06] text-[10px]">
-                      <span class="text-indigo-400 font-medium">{{ pr.headBranch }}</span>
-                      <NexuraIcon name="ArrowRight" size="xs" class="text-[#565B68]" />
-                      <span class="text-[#F3F4F6]/80">{{ pr.baseBranch }}</span>
+                    <div class="inline-flex items-center gap-1.5 bg-void px-2 py-0.5 rounded border border-white/[0.06] text-xs">
+                      <span class="text-accent-light font-medium">{{ pr.headBranch }}</span>
+                      <NexuraIcon name="ArrowRight" size="xs" class="text-dim" />
+                      <span class="text-foreground/80">{{ pr.baseBranch }}</span>
                     </div>
 
                     <!-- Short commit SHA -->
-                    <span v-if="pr.headSha" class="bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.06] text-[10px] text-[#F3F4F6]">
+                    <span v-if="pr.headSha" class="bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/[0.06] text-xs text-foreground">
                       {{ pr.headSha }}
                     </span>
 
                     <!-- Comments count -->
-                    <span v-if="pr.commentsCount > 0" class="inline-flex items-center gap-1 text-[#8A8F9E]">
-                      <NexuraIcon name="MessageSquare" size="xs" class="text-[#8A8F9E]" />
+                    <span v-if="pr.commentsCount > 0" class="inline-flex items-center gap-1 text-muted">
+                      <NexuraIcon name="MessageSquare" size="xs" class="text-muted" />
                       <span class="font-mono tabular-nums">{{ pr.commentsCount }}</span>
                     </span>
 
                     <span class="text-white/20">•</span>
-                    <span class="text-[#8A8F9E]">{{ formatRelativeTime(pr.updatedAt || pr.createdAt) }}</span>
+                    <span class="text-muted">{{ formatRelativeTime(pr.updatedAt || pr.createdAt) }}</span>
                   </div>
                 </div>
 
@@ -202,11 +202,11 @@
                     :href="pr.htmlUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] font-mono text-xs border border-white/[0.08] hover:border-indigo-500/40 transition-colors inline-flex items-center gap-1.5 group cursor-pointer"
+                    class="px-3 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-foreground font-mono text-xs border border-white/[0.08] hover:border-accent/40 transition-colors inline-flex items-center gap-1.5 group cursor-pointer"
                     title="Open PR on GitHub"
                   >
                     <span>Open on GitHub</span>
-                    <NexuraIcon name="ExternalLink" size="xs" class="text-[#8A8F9E] group-hover:text-indigo-400 transition-colors" />
+                    <NexuraIcon name="ExternalLink" size="xs" class="text-muted group-hover:text-accent-light transition-colors" />
                   </a>
                 </div>
               </div>
@@ -215,13 +215,13 @@
             <!-- Empty PR state -->
             <div
               v-else
-              class="py-12 flex flex-col items-center justify-center border border-white/[0.07] rounded-xl bg-[#0D0F12] text-center space-y-2 font-mono"
+              class="py-12 flex flex-col items-center justify-center border border-white/[0.07] rounded-xl bg-surface text-center space-y-2 font-mono"
             >
-              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#565B68]">
+              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-dim">
                 <NexuraIcon name="GitPullRequest" size="md" />
               </div>
-              <div class="text-xs text-[#F3F4F6] font-medium">No pull requests found.</div>
-              <div class="text-xs text-[#8A8F9E]">There are currently no pull requests recorded for this repository.</div>
+              <div class="text-xs text-foreground font-medium">No pull requests found.</div>
+              <div class="text-xs text-muted">There are currently no pull requests recorded for this repository.</div>
             </div>
           </div>
 
@@ -233,14 +233,14 @@
               <div
                 v-for="issue in issuesList"
                 :key="issue.id"
-                class="p-4 rounded-xl bg-[#0D0F12] border border-white/[0.07] hover:border-white/[0.14] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3.5"
+                class="p-4 rounded-xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3.5"
               >
                 <!-- Issue Details -->
                 <div class="space-y-1.5 flex-1 min-w-0">
                   <div class="flex items-center gap-2 flex-wrap">
                     <!-- Issue Status Pill -->
                     <span
-                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[10px] font-semibold border uppercase tracking-wider"
+                      class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-xs font-semibold border uppercase tracking-wider"
                       :class="issue.state === 'open' ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400' : 'border-rose-500/30 bg-rose-500/10 text-rose-400'"
                     >
                       <span class="w-1.5 h-1.5 rounded-full" :class="issue.state === 'open' ? 'bg-emerald-400' : 'bg-rose-400'"></span>
@@ -248,18 +248,18 @@
                     </span>
 
                     <!-- Issue #number -->
-                    <span class="font-mono tabular-nums text-xs text-indigo-400 font-semibold">
+                    <span class="font-mono tabular-nums text-xs text-accent-light font-semibold">
                       #{{ issue.number }}
                     </span>
 
                     <!-- Issue Title -->
-                    <span class="font-sans text-xs text-[#F3F4F6] font-semibold truncate max-w-md" :title="issue.title">
+                    <span class="font-sans text-xs text-foreground font-semibold truncate max-w-md" :title="issue.title">
                       {{ issue.title }}
                     </span>
                   </div>
 
                   <!-- Metadata Row: Author + Labels + Comments -->
-                  <div class="flex items-center gap-2.5 font-mono text-xs text-[#8A8F9E] flex-wrap">
+                  <div class="flex items-center gap-2.5 font-mono text-xs text-muted flex-wrap">
                     <!-- Author avatar & name -->
                     <div class="inline-flex items-center gap-1.5">
                       <img
@@ -268,7 +268,7 @@
                         :alt="issue.authorName"
                         class="w-4 h-4 rounded-full border border-white/10"
                       />
-                      <span class="text-[#8A8F9E]">{{ issue.authorName }}</span>
+                      <span class="text-muted">{{ issue.authorName }}</span>
                     </div>
 
                     <span class="text-white/20">•</span>
@@ -278,7 +278,7 @@
                       <span
                         v-for="lbl in issue.labels"
                         :key="lbl.name"
-                        class="text-[10px] px-1.5 py-0.2 rounded border font-mono"
+                        class="text-xs px-1.5 py-0.5 rounded border font-mono"
                         :style="getLabelStyle(lbl.color)"
                       >
                         {{ lbl.name }}
@@ -286,13 +286,13 @@
                     </div>
 
                     <!-- Comments count -->
-                    <span v-if="issue.commentsCount > 0" class="inline-flex items-center gap-1 text-[#8A8F9E]">
-                      <NexuraIcon name="MessageSquare" size="xs" class="text-[#8A8F9E]" />
+                    <span v-if="issue.commentsCount > 0" class="inline-flex items-center gap-1 text-muted">
+                      <NexuraIcon name="MessageSquare" size="xs" class="text-muted" />
                       <span class="font-mono tabular-nums">{{ issue.commentsCount }}</span>
                     </span>
 
                     <span class="text-white/20">•</span>
-                    <span class="text-[#8A8F9E]">{{ formatRelativeTime(issue.updatedAt || issue.createdAt) }}</span>
+                    <span class="text-muted">{{ formatRelativeTime(issue.updatedAt || issue.createdAt) }}</span>
                   </div>
                 </div>
 
@@ -301,7 +301,7 @@
                   <!-- Import to Kanban Deliverable Button -->
                   <button
                     type="button"
-                    class="px-2.5 py-1.5 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 font-mono text-xs border border-indigo-500/30 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
+                    class="px-2.5 py-1.5 rounded-lg bg-accent/15 hover:bg-accent/25 text-accent-light font-mono text-xs border border-accent/30 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 cursor-pointer shadow-sm"
                     :disabled="importingIssueId === issue.id || isIssueImported(issue) || !!importedIssues[issue.number]"
                     @click="importIssueToKanban(issue)"
                   >
@@ -309,7 +309,7 @@
                       v-if="importingIssueId === issue.id"
                       name="Loader2"
                       size="xs"
-                      class="animate-spin text-indigo-400"
+                      class="animate-spin text-accent-light"
                     />
                     <NexuraIcon
                       v-else-if="isIssueImported(issue) || importedIssues[issue.number]"
@@ -331,10 +331,10 @@
                     :href="issue.htmlUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-[#F3F4F6] border border-white/[0.08] hover:border-indigo-500/40 transition-colors inline-flex items-center justify-center group cursor-pointer"
+                    class="p-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] text-foreground border border-white/[0.08] hover:border-accent/40 transition-colors inline-flex items-center justify-center group cursor-pointer"
                     title="Open Issue on GitHub"
                   >
-                    <NexuraIcon name="ExternalLink" size="xs" class="text-[#8A8F9E] group-hover:text-indigo-400 transition-colors" />
+                    <NexuraIcon name="ExternalLink" size="xs" class="text-muted group-hover:text-accent-light transition-colors" />
                   </a>
                 </div>
               </div>
@@ -343,13 +343,13 @@
             <!-- Empty Issue state -->
             <div
               v-else
-              class="py-12 flex flex-col items-center justify-center border border-white/[0.07] rounded-xl bg-[#0D0F12] text-center space-y-2 font-mono"
+              class="py-12 flex flex-col items-center justify-center border border-white/[0.07] rounded-xl bg-surface text-center space-y-2 font-mono"
             >
-              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-[#565B68]">
+              <div class="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-dim">
                 <NexuraIcon name="CircleDot" size="md" />
               </div>
-              <div class="text-xs text-[#F3F4F6] font-medium">No issues found.</div>
-              <div class="text-xs text-[#8A8F9E]">Create a new issue using the tab above.</div>
+              <div class="text-xs text-foreground font-medium">No issues found.</div>
+              <div class="text-xs text-muted">Create a new issue using the tab above.</div>
             </div>
           </div>
 
@@ -391,7 +391,7 @@
               <form class="space-y-4" @submit.prevent="submitNewIssue">
                 <!-- Title input -->
                 <div class="space-y-1.5">
-                  <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                  <label class="font-sans text-xs font-semibold text-muted uppercase tracking-wider block">
                     Issue Title <span class="text-rose-400">*</span>
                   </label>
                   <input
@@ -399,38 +399,38 @@
                     type="text"
                     required
                     placeholder="Short descriptive summary of bug or feature..."
-                    class="w-full bg-[#07080A] border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 focus:outline-none"
+                    class="w-full bg-void border border-white/[0.08] rounded-lg px-3.5 py-2 text-xs text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 focus:outline-none"
                   />
                 </div>
 
                 <!-- Description / Markdown Body -->
                 <div class="space-y-1.5">
-                  <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                  <label class="font-sans text-xs font-semibold text-muted uppercase tracking-wider block">
                     Issue Body (Markdown Supported)
                   </label>
                   <textarea
                     v-model="newIssueForm.body"
                     rows="5"
                     placeholder="Provide reproduction steps, expected behavior, logs, or requirements..."
-                    class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 rounded-lg p-3 text-xs font-mono tabular-nums leading-relaxed custom-scrollbar focus:outline-none"
+                    class="w-full bg-void border border-white/[0.08] text-foreground placeholder:text-dim focus:border-accent/60 focus:ring-1 focus:ring-accent/40 rounded-lg p-3 text-xs font-mono tabular-nums leading-relaxed custom-scrollbar focus:outline-none"
                   ></textarea>
                 </div>
 
                 <!-- Tech Tags / GitHub Labels -->
                 <div class="space-y-1.5">
-                  <label class="font-sans text-xs font-semibold text-[#8A8F9E] uppercase tracking-wider block">
+                  <label class="font-sans text-xs font-semibold text-muted uppercase tracking-wider block">
                     Labels / Tech Tags
                   </label>
                   <div class="flex items-center gap-2 flex-wrap">
                     <span
                       v-for="(tag, idx) in newIssueForm.techTags"
                       :key="tag"
-                      class="inline-flex items-center gap-1.5 font-mono text-xs tabular-nums bg-indigo-500/10 text-indigo-300 border border-indigo-500/25 rounded-md px-2.5 py-1"
+                      class="inline-flex items-center gap-1.5 font-mono text-xs tabular-nums bg-accent/10 text-accent-light border border-accent/25 rounded-md px-2.5 py-1"
                     >
                       <span>{{ tag }}</span>
                       <button
                         type="button"
-                        class="hover:text-rose-400 text-[#8A8F9E] transition-colors focus:outline-none cursor-pointer flex items-center justify-center"
+                        class="hover:text-rose-400 text-muted transition-colors focus:outline-none cursor-pointer flex items-center justify-center"
                         @click="removeNewIssueTag(idx)"
                         title="Remove tag"
                       >
@@ -438,17 +438,17 @@
                       </button>
                     </span>
 
-                    <div class="inline-flex items-center gap-1 bg-[#07080A] border border-white/[0.08] rounded-md px-2.5 py-1 focus-within:border-indigo-500/60">
+                    <div class="inline-flex items-center gap-1 bg-void border border-white/[0.08] rounded-md px-2.5 py-1 focus-within:border-accent/60">
                       <input
                         v-model="newTagInput"
                         type="text"
                         placeholder="+ add label"
-                        class="bg-transparent text-xs font-mono tabular-nums text-[#F3F4F6] placeholder-[#565B68] focus:outline-none w-24"
+                        class="bg-transparent text-xs font-mono tabular-nums text-foreground placeholder:text-dim focus:outline-none w-24"
                         @keydown.enter.prevent="addNewIssueTag"
                       />
                       <button
                         type="button"
-                        class="w-5 h-5 rounded bg-white/[0.05] hover:bg-indigo-500 hover:text-white text-[#8A8F9E] flex items-center justify-center transition-colors cursor-pointer"
+                        class="w-5 h-5 rounded bg-white/[0.05] hover:bg-accent hover:text-white text-muted flex items-center justify-center transition-colors cursor-pointer"
                         @click="addNewIssueTag"
                         title="Add label"
                       >
@@ -462,7 +462,7 @@
                 <div class="pt-3 border-t border-white/[0.07] flex items-center justify-end gap-3">
                   <button
                     type="button"
-                    class="px-4 py-2 rounded-lg font-sans text-xs font-medium text-[#8A8F9E] hover:text-[#F3F4F6] bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-colors cursor-pointer"
+                    class="px-4 py-2 rounded-lg font-sans text-xs font-medium text-muted hover:text-foreground bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] transition-colors cursor-pointer"
                     @click="resetNewIssueForm"
                   >
                     Reset Form
@@ -470,10 +470,10 @@
 
                   <button
                     type="submit"
-                    class="px-5 py-2 rounded-lg font-sans text-xs font-medium bg-[#F3F4F6] hover:bg-white text-[#07080A] shadow-md transition-all flex items-center gap-1.5 disabled:opacity-50 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                    class="px-5 py-2 rounded-lg font-sans text-xs font-medium bg-foreground hover:bg-white text-void shadow-md transition-all flex items-center gap-1.5 disabled:opacity-50 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                     :disabled="isSubmittingIssue || !newIssueForm.title.trim()"
                   >
-                    <NexuraIcon v-if="isSubmittingIssue" name="Loader2" size="xs" class="animate-spin text-[#07080A]" />
+                    <NexuraIcon v-if="isSubmittingIssue" name="Loader2" size="xs" class="animate-spin text-void" />
                     <NexuraIcon v-else name="Send" size="xs" />
                     <span>{{ isSubmittingIssue ? 'Submitting to GitHub...' : 'Submit Issue to GitHub' }}</span>
                   </button>
@@ -486,7 +486,7 @@
         <!-- ======================================================== -->
         <!-- TERMINAL MODAL FOOTER                                    -->
         <!-- ======================================================== -->
-        <div class="px-5 py-3 bg-[#0D0F12] border-t border-white/[0.07] flex items-center justify-between text-xs font-mono text-[#8A8F9E] shrink-0">
+        <div class="px-5 py-3 bg-surface border-t border-white/[0.07] flex items-center justify-between text-xs font-mono text-muted shrink-0">
           <div class="flex items-center gap-2">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
             <span>REST API v3 Ready</span>
@@ -494,7 +494,7 @@
 
           <div>
             <span>Press </span>
-            <kbd class="px-1.5 py-0.5 rounded bg-white/[0.06] text-[#F3F4F6] text-[10px] border border-white/[0.08] font-mono">ESC</kbd>
+            <kbd class="px-1.5 py-0.5 rounded bg-white/[0.06] text-foreground text-xs border border-white/[0.08] font-mono">ESC</kbd>
             <span> to close</span>
           </div>
         </div>
@@ -557,7 +557,7 @@ function getPrBadgeClass(pr: GitHubPullRequest) {
     return 'border-purple-500/30 bg-purple-500/10 text-purple-400'
   }
   if (pr.draft) {
-    return 'border-white/[0.1] bg-white/[0.04] text-[#8A8F9E]'
+    return 'border-white/[0.1] bg-white/[0.04] text-muted'
   }
   if (pr.state === 'open') {
     return 'border-emerald-500/30 bg-emerald-500/10 text-emerald-400'
@@ -567,7 +567,7 @@ function getPrBadgeClass(pr: GitHubPullRequest) {
 
 function getPrDotClass(pr: GitHubPullRequest) {
   if (pr.state === 'merged') return 'bg-purple-400'
-  if (pr.draft) return 'bg-[#8A8F9E]'
+  if (pr.draft) return 'bg-muted'
   if (pr.state === 'open') return 'bg-emerald-400'
   return 'bg-rose-400'
 }

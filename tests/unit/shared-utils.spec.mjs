@@ -235,12 +235,12 @@ test('BADGE-LABEL-01: getStatusLabel returns human-readable label for any status
 })
 
 test('BADGE-CLASS-01: getStatusBadgeClass returns Tailwind class set conforming to Obsidian Bento design', () => {
-  assert.equal(getStatusBadgeClass(null), 'bg-white/5 text-[#8A8F9E] border-white/10')
-  assert.equal(getStatusBadgeClass(undefined), 'bg-white/5 text-[#8A8F9E] border-white/10')
+  assert.equal(getStatusBadgeClass(null), 'bg-white/5 text-muted border-white/10')
+  assert.equal(getStatusBadgeClass(undefined), 'bg-white/5 text-muted border-white/10')
 
   assert.equal(getStatusBadgeClass('idea'), 'bg-amber-500/15 text-amber-300 border-amber-500/30')
-  assert.equal(getStatusBadgeClass('in_queue'), 'bg-white/5 text-[#8A8F9E] border-white/10')
-  assert.equal(getStatusBadgeClass('running_sprint'), 'bg-indigo-500/15 text-indigo-400 border-indigo-500/30')
+  assert.equal(getStatusBadgeClass('in_queue'), 'bg-white/5 text-muted border-white/10')
+  assert.equal(getStatusBadgeClass('running_sprint'), 'bg-sky-500/15 text-sky-400 border-sky-500/30')
   assert.equal(getStatusBadgeClass('deployed'), 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30')
   assert.equal(getStatusBadgeClass('blocked'), 'bg-rose-500/15 text-rose-400 border-rose-500/30')
 })
@@ -250,9 +250,9 @@ test('BADGE-PRIORITY-01: getPriorityBadgeClass and getPriorityColor return appro
   assert.equal(getPriorityBadgeClass('critical'), 'bg-rose-500/15 text-rose-400 border-rose-500/30')
   assert.equal(getPriorityBadgeClass('high'), 'bg-amber-500/15 text-amber-400 border-amber-500/30')
   assert.equal(getPriorityBadgeClass('medium'), 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30')
-  assert.equal(getPriorityBadgeClass('low'), 'bg-white/5 text-[#8A8F9E] border-white/10')
-  assert.equal(getPriorityBadgeClass(null), 'bg-white/5 text-[#8A8F9E] border-white/10')
-  assert.equal(getPriorityBadgeClass('unknown'), 'bg-white/5 text-[#8A8F9E] border-white/10')
+  assert.equal(getPriorityBadgeClass('low'), 'bg-white/5 text-muted border-white/10')
+  assert.equal(getPriorityBadgeClass(null), 'bg-white/5 text-muted border-white/10')
+  assert.equal(getPriorityBadgeClass('unknown'), 'bg-white/5 text-muted border-white/10')
 
   // Hex Colors
   assert.equal(getPriorityColor('critical'), '#F43F5E')

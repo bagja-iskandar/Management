@@ -6,7 +6,7 @@
   >
     <div
       ref="dialogRef"
-      class="w-full max-w-lg bg-[#111318] border border-white/[0.1] shadow-2xl rounded-2xl p-6 sm:p-7 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
+      class="w-full max-w-lg bg-surface border border-white/[0.08] shadow-2xl rounded-2xl p-6 sm:p-7 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-idea-title"
@@ -15,17 +15,17 @@
       <!-- Header -->
       <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div>
-          <h2 id="modal-idea-title" class="font-sans text-base font-semibold text-[#F3F4F6] flex items-center gap-2">
+          <h2 id="modal-idea-title" class="font-sans text-base font-semibold text-foreground flex items-center gap-2">
             <NexuraIcon name="Lightbulb" size="sm" class="text-amber-400" />
             Capture New Idea
           </h2>
-          <p class="font-sans text-xs text-[#8A8F9E] mt-1">
+          <p class="font-sans text-xs text-muted mt-1">
             Log inspiration, hypotheses, and architectural concepts to the idea backlog.
           </p>
         </div>
         <button
           type="button"
-          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:outline-none focus:ring-1 focus:ring-amber-500/40 cursor-pointer"
+          class="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-muted hover:text-foreground transition-colors focus:outline-none focus:ring-1 focus:ring-amber-500/40 cursor-pointer"
           aria-label="Close modal"
           @click="onCancel"
         >
@@ -47,19 +47,19 @@
 
         <!-- Project Scope (compact dropdown) -->
         <div class="flex flex-col gap-1.5">
-          <label for="idea-project-select" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="idea-project-select" class="font-sans text-xs font-semibold text-foreground">
             Project Scope
           </label>
           <select
             id="idea-project-select"
             v-model="selectedProject"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none cursor-pointer"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none cursor-pointer"
           >
             <option
               v-for="p in resolvedProjectOptions"
               :key="p.value"
               :value="p.value"
-              class="bg-[#111318] text-[#F3F4F6]"
+              class="bg-surface text-foreground"
             >
               {{ p.label }}
             </option>
@@ -68,7 +68,7 @@
 
         <!-- Idea Headline -->
         <div class="flex flex-col gap-1.5">
-          <label for="idea-name-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="idea-name-input" class="font-sans text-xs font-semibold text-foreground">
             Idea Headline <span class="text-rose-400">*</span>
           </label>
           <input
@@ -77,7 +77,7 @@
             v-model="name"
             type="text"
             placeholder="What's the spark? (e.g. Explore WebGPU for real-time visualization)"
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none"
             :class="{ 'border-rose-500/60 focus:ring-rose-500/40': !!validationError && !name.trim() }"
             required
           />
@@ -85,7 +85,7 @@
 
         <!-- Context & Notes -->
         <div class="flex flex-col gap-1.5">
-          <label for="idea-desc-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="idea-desc-input" class="font-sans text-xs font-semibold text-foreground">
             Context & Notes
           </label>
           <textarea
@@ -93,13 +93,13 @@
             v-model="description"
             rows="4"
             placeholder="Why does this matter? Add context, references, or raw notes..."
-            class="w-full bg-[#07080A] border border-white/[0.08] text-[#F3F4F6] placeholder-[#565B68] rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none custom-scrollbar"
+            class="w-full bg-canvas border border-white/[0.08] text-foreground placeholder-dim rounded-lg px-3.5 py-2 text-sm focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/40 focus:outline-none custom-scrollbar"
           ></textarea>
         </div>
 
         <!-- Topic Tags (Quick Selectable Pills) -->
         <div class="flex flex-col gap-1.5">
-          <label class="font-sans text-xs font-semibold text-[#F3F4F6]">Topic Tags</label>
+          <label class="font-sans text-xs font-semibold text-foreground">Topic Tags</label>
           <div class="flex flex-wrap gap-2 pt-0.5">
             <button
               v-for="tag in AVAILABLE_TAGS"
@@ -108,7 +108,7 @@
               class="px-2.5 py-1 rounded-full text-xs font-mono transition-all border cursor-pointer select-none"
               :class="selectedTags.includes(tag)
                 ? 'bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-sm'
-                : 'bg-[#07080A] text-[#8A8F9E] border-white/[0.08] hover:text-[#F3F4F6] hover:border-white/[0.15]'"
+                : 'bg-canvas text-muted border-white/[0.08] hover:text-foreground hover:border-white/[0.15]'"
               @click="toggleTag(tag)"
             >
               #{{ tag }}
@@ -118,11 +118,11 @@
 
         <!-- Actions -->
         <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/[0.06]">
-          <span class="text-[11px] font-mono text-[#565B68]">⌘ + Enter to capture</span>
+          <span class="text-xs font-mono text-dim">⌘ + Enter to capture</span>
           <div class="flex items-center gap-3">
             <button
               type="button"
-              class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
+              class="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-sans font-medium text-muted hover:text-foreground transition-colors focus:ring-1 focus:ring-white/20 focus:outline-none cursor-pointer"
               @click="onCancel"
             >
               Cancel

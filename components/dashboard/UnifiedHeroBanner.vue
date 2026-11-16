@@ -1,13 +1,13 @@
 <template>
-  <section class="obs-card rounded-2xl p-4 sm:p-5 border border-white/[0.08] bg-[#0E1015]/90 backdrop-blur-md">
+  <section class="obs-card rounded-2xl p-4 sm:p-5 border border-white/[0.06] bg-surface">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-center">
       <!-- Blok Kiri (LG 5 Kolom - Weekly Focus) -->
       <div class="lg:col-span-5 flex flex-col justify-center space-y-2.5">
         <!-- Top header row -->
         <div class="flex items-center justify-between gap-2">
           <div class="flex items-center gap-2 min-w-0">
-            <NexuraIcon name="Target" size="sm" class="text-indigo-400 shrink-0" />
-            <h2 class="text-sm font-semibold text-[#F3F4F6] font-sans truncate">
+            <NexuraIcon name="Target" size="sm" class="text-accent-light shrink-0" />
+            <h2 class="text-sm font-semibold text-foreground font-sans truncate">
               Weekly Focus · Sprint {{ sprintWeekLabel }}
             </h2>
           </div>
@@ -19,7 +19,7 @@
         <!-- Progress bar -->
         <div class="h-1.5 rounded-full bg-white/[0.06] overflow-hidden w-full">
           <div
-            class="h-full rounded-full bg-gradient-to-r from-indigo-500 via-indigo-400 to-purple-500 transition-all duration-700 ease-out"
+            class="h-full rounded-full bg-gradient-to-r from-accent-dim via-accent to-accent-light transition-all duration-500 ease-out"
             :style="{ width: `${progressPercentage}%` }"
           ></div>
         </div>
@@ -30,57 +30,57 @@
         <div class="grid grid-cols-2 sm:grid-cols-4">
           <!-- 1. In-Flight -->
           <div class="flex flex-col justify-between pr-4 sm:pr-5 border-r border-white/[0.06] pb-3 sm:pb-0">
-            <div class="flex items-center justify-between gap-1.5 text-xs text-[#8A8F9E]">
+            <div class="flex items-center justify-between gap-1.5 text-xs text-muted">
               <span class="truncate">In-Flight</span>
             </div>
-            <div class="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-[#F3F4F6] tabular-nums mt-1">
+            <div class="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground tabular-nums mt-1">
               {{ inFlightCount }}
             </div>
-            <div class="text-[11px] text-[#8A8F9E] mt-0.5 truncate">
+            <div class="text-xs text-muted mt-0.5 truncate">
               {{ highPriorityCount }} high priority
             </div>
           </div>
 
           <!-- 2. Completion Rate -->
           <div class="flex flex-col justify-between pl-4 sm:px-5 sm:border-r border-white/[0.06] pb-3 sm:pb-0">
-            <div class="flex items-center justify-between gap-1.5 text-xs text-[#8A8F9E]">
+            <div class="flex items-center justify-between gap-1.5 text-xs text-muted">
               <span class="truncate">Completion Rate</span>
-              <span class="font-mono text-[11px] text-indigo-300 bg-indigo-500/20 px-1.5 py-0.5 rounded border border-indigo-500/30 shrink-0">
+              <span class="font-mono text-xs text-accent-light bg-accent/20 px-1.5 py-0.5 rounded border border-accent/30 shrink-0">
                 {{ sprintWeekLabel }}
               </span>
             </div>
-            <div class="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-[#F3F4F6] tabular-nums mt-1">
+            <div class="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground tabular-nums mt-1">
               {{ velocityPercentage }}%
             </div>
-            <div class="text-[11px] text-[#8A8F9E] mt-0.5 truncate">
+            <div class="text-xs text-muted mt-0.5 truncate">
               {{ velocityHealth }}
             </div>
           </div>
 
           <!-- 3. CI/CD Builds -->
           <div class="flex flex-col justify-between pt-3 sm:pt-0 pr-4 sm:px-5 border-r border-white/[0.06] border-t sm:border-t-0">
-            <div class="flex items-center justify-between gap-1.5 text-xs text-[#8A8F9E]">
+            <div class="flex items-center justify-between gap-1.5 text-xs text-muted">
               <span class="truncate">CI/CD Builds</span>
               <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)] animate-pulse shrink-0"></span>
             </div>
-            <div class="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-[#F3F4F6] tabular-nums mt-1">
+            <div class="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground tabular-nums mt-1">
               <span v-if="ciSuccessRate !== null">{{ ciSuccessRate }}%</span>
               <span v-else>--</span>
             </div>
-            <div class="text-[11px] font-mono text-emerald-400/90 font-medium mt-0.5 truncate">
+            <div class="text-xs font-mono text-emerald-400/90 font-medium mt-0.5 truncate">
               {{ ciChecksSummary }}
             </div>
           </div>
 
           <!-- 4. Open PRs -->
           <div class="flex flex-col justify-between pt-3 sm:pt-0 pl-4 sm:pl-5 border-t sm:border-t-0 border-white/[0.06]">
-            <div class="flex items-center justify-between gap-1.5 text-xs text-[#8A8F9E]">
+            <div class="flex items-center justify-between gap-1.5 text-xs text-muted">
               <span class="truncate">Open PRs</span>
             </div>
-            <div class="font-mono text-2xl sm:text-3xl font-bold tracking-tight text-[#F3F4F6] tabular-nums mt-1">
+            <div class="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground tabular-nums mt-1">
               {{ openPrCount }}
             </div>
-            <div class="text-[11px] text-[#8A8F9E] mt-0.5 truncate">
+            <div class="text-xs text-muted mt-0.5 truncate">
               Across {{ activeReposCount }} repos
             </div>
           </div>

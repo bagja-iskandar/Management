@@ -1,16 +1,16 @@
 <template>
-  <section class="obs-card rounded-xl overflow-hidden flex flex-col">
+  <section class="obs-card rounded-2xl border border-white/[0.06] bg-surface overflow-hidden flex flex-col">
     <!-- Header -->
     <div class="px-4 py-3 border-b border-white/[0.06] flex flex-wrap items-center justify-between gap-2 shrink-0">
       <div>
         <div class="flex items-center gap-2">
-          <NexuraIcon name="Activity" size="sm" class="text-indigo-400 shrink-0" />
-          <h2 class="text-sm font-semibold text-[#F3F4F6]">Live DevOps Activity Stream</h2>
-          <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.05] text-[#8A8F9E] hidden sm:inline">
+          <NexuraIcon name="Activity" size="sm" class="text-accent-light shrink-0" />
+          <h2 class="text-sm font-semibold text-foreground">Live DevOps Activity Stream</h2>
+          <span class="font-mono text-xs px-2 py-0.5 rounded bg-white/[0.05] text-muted hidden sm:inline">
             Live GitHub Sync
           </span>
         </div>
-        <p class="text-xs text-[#8A8F9E] mt-0.5">
+        <p class="text-xs text-muted mt-0.5">
           Multi-channel commit, build, deployment &amp; review pulse
         </p>
       </div>
@@ -31,7 +31,7 @@
         <!-- Refresh Button -->
         <button
           type="button"
-          class="p-1 rounded bg-[#0B0C10] hover:bg-white/[0.08] border border-white/[0.06] text-[#8A8F9E] hover:text-[#F3F4F6] transition cursor-pointer"
+          class="p-1 rounded bg-canvas hover:bg-white/[0.08] border border-white/[0.06] text-muted hover:text-foreground transition cursor-pointer"
           title="Refresh DevOps Stream"
           :disabled="isRefreshing"
           @click="refreshStream"
@@ -39,7 +39,7 @@
           <NexuraIcon
             name="RotateCw"
             size="xs"
-            :class="{ 'animate-spin text-indigo-400': isRefreshing }"
+            :class="{ 'animate-spin text-accent-light': isRefreshing }"
           />
         </button>
       </div>
@@ -48,7 +48,7 @@
     <!-- Activity Stream List -->
     <div
       v-if="displayItems.length > 0"
-      class="flex-1 min-h-0 overflow-hidden divide-y divide-white/[0.05]"
+      class="flex-1 min-h-0 overflow-y-auto custom-scrollbar divide-y divide-white/[0.05]"
       tabindex="0"
       role="region"
       aria-label="DevOps activity feed"
@@ -78,7 +78,7 @@
 
             <!-- Action Title -->
             <span
-              class="text-xs sm:text-sm text-[#F3F4F6] truncate group-hover:text-white transition"
+              class="text-xs sm:text-sm text-foreground truncate group-hover:text-white transition"
               :title="item.title"
             >
               {{ item.title }}
@@ -86,11 +86,11 @@
           </div>
 
           <!-- Right: Repo pill + Relative time + Diff toggle indicator if commit -->
-          <div class="flex items-center gap-2.5 shrink-0 font-mono text-xs text-[#8A8F9E]">
-            <span v-if="item.authorName" class="text-[#8A8F9E] text-[11px] truncate max-w-[120px] hidden sm:inline">
+          <div class="flex items-center gap-2.5 shrink-0 font-mono text-xs text-muted">
+            <span v-if="item.authorName" class="text-muted text-xs truncate max-w-[120px] hidden sm:inline">
               {{ item.authorName }}
             </span>
-            <span v-if="item.repoName" class="hidden md:inline text-indigo-300">
+            <span v-if="item.repoName" class="hidden md:inline text-accent-light">
               {{ cleanRepoName(item.repoName) }}
             </span>
             <span>{{ formatRelativeTime(item.date) }}</span>
@@ -99,7 +99,7 @@
               :href="item.htmlUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-[#8A8F9E] hover:text-[#F3F4F6] transition inline-flex items-center"
+              class="text-muted hover:text-foreground transition inline-flex items-center"
               title="Open on GitHub"
               @click.stop
             >
@@ -107,7 +107,7 @@
             </a>
             <span
               v-if="item.type === 'commit'"
-              class="text-xs text-[#8A8F9E] w-3 text-center transition-transform"
+              class="text-xs text-muted w-3 text-center transition-transform"
             >
               {{ expandedShas.has(item.id) ? '▾' : '▸' }}
             </span>
@@ -117,14 +117,14 @@
         <!-- Inline Code Diff Preview (Only for commits when expanded) -->
         <div
           v-if="item.type === 'commit' && expandedShas.has(item.id)"
-          class="px-4 py-3 bg-[#07080A] border-t border-white/[0.05] font-mono text-xs space-y-2.5"
+          class="px-4 py-3 bg-void border-t border-white/[0.05] font-mono text-xs space-y-2.5"
         >
           <!-- Loading State -->
           <div
             v-if="commitDetails[item.id]?.loading"
-            class="text-[#8A8F9E] flex items-center gap-2 py-1.5 text-xs"
+            class="text-muted flex items-center gap-2 py-1.5 text-xs"
           >
-            <NexuraIcon name="Loader2" size="xs" class="animate-spin text-indigo-400" />
+            <NexuraIcon name="Loader2" size="xs" class="animate-spin text-accent-light" />
             <span>Fetching commit diff from GitHub...</span>
           </div>
 
@@ -139,7 +139,7 @@
           <!-- No files recorded -->
           <div
             v-else-if="!commitDetails[item.id]?.data?.files?.length"
-            class="text-[#8A8F9E] py-1 italic text-xs"
+            class="text-muted py-1 italic text-xs"
           >
             No file changes recorded for this commit.
           </div>
@@ -151,13 +151,13 @@
               :key="file.filename"
               class="space-y-1"
             >
-              <div class="text-[#8A8F9E] pb-1 flex justify-between items-center text-xs border-b border-white/[0.04]">
-                <span class="truncate pr-2 text-[#F3F4F6]">
+              <div class="text-muted pb-1 flex justify-between items-center text-xs border-b border-white/[0.04]">
+                <span class="truncate pr-2 text-foreground">
                   {{ file.filename }} ·
                   <span class="text-emerald-400">+{{ file.additions }}</span>
                   <span class="text-rose-400"> -{{ file.deletions }}</span>
                 </span>
-                <span class="text-emerald-400 shrink-0 text-[11px] font-sans">✓ Verified</span>
+                <span class="text-emerald-400 shrink-0 text-xs font-sans">✓ Verified</span>
               </div>
 
               <!-- Patch Lines -->
@@ -165,14 +165,14 @@
                 <div
                   v-for="(line, lineIdx) in getFormattedPatchLines(file.patch)"
                   :key="lineIdx"
-                  class="px-2 py-0.5 rounded text-[11px] truncate font-mono"
+                  class="px-2 py-0.5 rounded text-xs truncate font-mono"
                   :class="line.startsWith('+') ? 'text-emerald-400/90 bg-emerald-500/10' : 'text-rose-400/90 bg-rose-500/10'"
                 >
                   {{ line }}
                 </div>
               </div>
 
-              <div v-else class="text-[11px] text-[#8A8F9E] italic px-1">
+              <div v-else class="text-xs text-muted italic px-1">
                 {{ file.status }} · +{{ file.additions }} / -{{ file.deletions }}
               </div>
             </div>
@@ -184,7 +184,7 @@
     <!-- Empty State -->
     <div
       v-else
-      class="p-6 text-center text-xs text-[#8A8F9E] font-mono flex flex-col items-center justify-center space-y-1.5"
+      class="p-6 text-center text-xs text-muted font-mono flex flex-col items-center justify-center space-y-1.5"
     >
       <NexuraIcon name="Activity" size="md" class="text-zinc-600 mb-1" />
       <div>{{ isRefreshing ? 'Synchronizing stream from GitHub...' : 'No activity recorded under current filter.' }}</div>
@@ -259,7 +259,7 @@ const commitItems = computed<DevOpsStreamItem[]>(() => {
     status: 'success',
     title: c.message,
     badge: c.shortSha || c.sha.slice(0, 7),
-    badgeClass: 'bg-white/[0.05] border-white/[0.07] text-[#F3F4F6]',
+    badgeClass: 'bg-white/[0.05] border-white/[0.07] text-foreground',
     repoName: c.repoName,
     authorName: c.authorName || (c as any).commitRaw?.authorName,
     date: c.date,
@@ -312,7 +312,7 @@ const deploymentItems = computed<DevOpsStreamItem[]>(() => {
         status: d.state === 'success' ? 'success' : d.state === 'failure' ? 'failure' : 'in_progress',
         title: `Deployment to ${d.environment} (${d.ref || d.shortSha || 'production'})`,
         badge: 'DEPLOY',
-        badgeClass: 'bg-indigo-500/15 border-indigo-500/30 text-indigo-300',
+        badgeClass: 'bg-accent/15 border-accent/30 text-accent-light',
         repoName: primaryRepo.value,
         date: d.updatedAt || d.createdAt,
         htmlUrl: d.environmentUrl || d.logUrl

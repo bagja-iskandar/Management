@@ -21,9 +21,9 @@ export function buildNavigationItems(deps: { router: any; closeSearch: () => voi
       type: 'navigation',
       categoryLabel: 'Quick Navigation',
       icon: 'LayoutDashboard',
-      iconColor: 'text-indigo-400',
+      iconColor: 'text-accent-light',
       badge: 'PAGE',
-      badgeColor: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20',
+      badgeColor: 'bg-accent/10 text-accent-light border border-accent/20',
       action: async () => {
         closeSearch()
         await router.push('/')
@@ -239,7 +239,7 @@ export function buildTaskItems(
     const isRunning = t.status === 'running_sprint'
 
     let icon = 'CheckSquare'
-    let iconColor = 'text-indigo-400'
+    let iconColor = 'text-accent-light'
     if (isBlocked) {
       icon = 'AlertTriangle'
       iconColor = 'text-rose-400'
@@ -251,7 +251,7 @@ export function buildTaskItems(
       iconColor = 'text-amber-400'
     }
 
-    let badgeColor = 'bg-white/[0.06] text-[#8A8F9E] border border-white/[0.08]'
+    let badgeColor = 'bg-white/[0.06] text-muted border border-white/[0.08]'
     if (isCritical || isBlocked) {
       badgeColor = 'bg-rose-500/15 text-rose-300 border border-rose-500/30'
     } else if (isDeployed) {
@@ -319,9 +319,9 @@ export function buildProjectItems(
       type: 'project',
       categoryLabel: 'Projects',
       icon: 'Folder',
-      iconColor: 'text-indigo-400',
+      iconColor: 'text-accent-light',
       badge: (p.status || 'PROJECT').toUpperCase(),
-      badgeColor: 'bg-indigo-500/10 text-indigo-300 border border-indigo-500/20',
+      badgeColor: 'bg-accent/10 text-accent-light border border-accent/20',
       tags: p.techStack || [],
       projectSlug: p.slug,
       priority: p.priority,
@@ -363,7 +363,7 @@ export function buildSprintItems(
       badge: sprintCode,
       badgeColor: isActive
         ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-        : 'bg-white/[0.06] text-[#8A8F9E] border border-white/[0.08]',
+        : 'bg-white/[0.06] text-muted border border-white/[0.08]',
       status: s.status,
       payload: s,
       action: async () => {

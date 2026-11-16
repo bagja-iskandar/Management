@@ -1,5 +1,5 @@
 <template>
-  <div class="obs-card bg-[#111318] border border-white/[0.07] hover:border-white/[0.14] rounded-2xl p-4 sm:p-4.5 space-y-3.5 shadow-sm relative overflow-hidden flex flex-col justify-between transition-all">
+  <div class="obs-card bg-surface border border-white/[0.07] hover:border-white/[0.14] rounded-2xl p-4 sm:p-4.5 space-y-3.5 shadow-sm relative overflow-hidden flex flex-col justify-between transition-all">
     <!-- Ambient Green Glow for Live Production -->
     <div
       v-if="isLive"
@@ -13,10 +13,10 @@
           <NexuraIcon name="Globe" size="xs" />
         </div>
         <div>
-          <h3 class="font-mono text-xs font-bold text-[#F3F4F6] uppercase tracking-wide flex items-center gap-2">
+          <h3 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
             <span>LIVE PRODUCTION</span>
             <span
-              class="px-2 py-0.5 rounded text-[9px] font-mono border flex items-center gap-1 uppercase tracking-wider"
+              class="px-2 py-0.5 rounded text-xs font-mono border flex items-center gap-1 uppercase tracking-wider leading-none min-h-[1.25rem]"
               :class="isLive ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30'"
             >
               <span class="w-1.5 h-1.5 rounded-full" :class="isLive ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'"></span>
@@ -30,8 +30,8 @@
       <div class="flex items-center gap-1.5 font-mono text-xs">
         <button
           type="button"
-          class="px-2.5 py-1 rounded-lg bg-[#07080A] transition cursor-pointer flex items-center gap-1 text-[10px]"
-          :class="pingStatus === 'offline' ? 'hover:bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'hover:bg-emerald-500/20 hover:text-emerald-300 text-[#8A8F9E] border border-white/[0.07]'"
+          class="px-2.5 py-1 rounded-lg bg-void transition cursor-pointer flex items-center gap-1 text-xs"
+          :class="pingStatus === 'offline' ? 'hover:bg-rose-500/20 text-rose-400 border border-rose-500/30' : 'hover:bg-emerald-500/20 hover:text-emerald-300 text-muted border border-white/[0.07]'"
           :disabled="isPinging"
           title="Run instant ping check to live production URL"
           @click="pingLiveHealth"
@@ -44,7 +44,7 @@
 
         <button
           type="button"
-          class="p-1 rounded-lg bg-[#07080A] hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.07] transition cursor-pointer"
+          class="p-1 rounded-lg bg-void hover:bg-white/10 text-muted hover:text-foreground border border-white/[0.07] transition cursor-pointer"
           :disabled="pending"
           title="Refresh Deployments"
           @click="$emit('refresh')"
@@ -52,7 +52,7 @@
           <NexuraIcon
             name="RotateCw"
             size="xs"
-            :class="{ 'animate-spin text-indigo-400': pending }"
+            :class="{ 'animate-spin text-accent-light': pending }"
           />
         </button>
       </div>
@@ -61,15 +61,15 @@
     <!-- Main Live Production Box -->
     <div class="space-y-3 flex-1 flex flex-col justify-between relative z-10">
       <!-- Live Production URL & Quick Actions Bar -->
-      <div class="bg-[#07080A]/60 border border-white/[0.07] rounded-xl p-3 space-y-2.5">
+      <div class="bg-void/60 border border-white/[0.07] rounded-xl p-3 space-y-2.5">
         <div class="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
           <div class="min-w-0 flex-1">
-            <span class="font-mono text-[9px] uppercase tracking-wider text-[#8A8F9E] font-bold block mb-0.5">
+            <span class="font-mono text-xs leading-none uppercase tracking-wider text-muted font-semibold block mb-0.5">
               Production Domain & SSL
             </span>
             <div class="flex items-center gap-1.5 min-w-0">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
-              <span class="font-mono text-xs font-semibold text-[#F3F4F6] truncate hover:text-indigo-400 transition">
+              <span class="font-mono text-xs font-semibold text-foreground truncate hover:text-accent-light transition">
                 {{ activeLiveUrl }}
               </span>
             </div>
@@ -79,7 +79,7 @@
           <div class="flex items-center gap-1.5 shrink-0">
             <button
               type="button"
-              class="px-2.5 py-1 rounded-lg bg-[#111318] hover:bg-white/10 text-[#8A8F9E] hover:text-[#F3F4F6] border border-white/[0.08] font-mono text-[10px] transition cursor-pointer flex items-center gap-1"
+              class="px-2.5 py-1 rounded-lg bg-surface hover:bg-white/10 text-muted hover:text-foreground border border-white/[0.08] font-mono text-xs transition cursor-pointer flex items-center gap-1"
               title="Copy production URL"
               @click="copyLiveUrl"
             >
@@ -91,7 +91,7 @@
               :href="activeLiveUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 font-mono text-[10px] font-semibold transition inline-flex items-center gap-1 group"
+              class="px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 font-mono text-xs font-semibold transition inline-flex items-center gap-1 group"
               title="Open Live Production Web App in new tab"
             >
               <span>Buka Website</span>
@@ -101,25 +101,25 @@
         </div>
 
         <!-- Deployed Release Info -->
-        <div class="pt-2 border-t border-white/[0.04] grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-[10px]">
+        <div class="pt-2 border-t border-white/[0.04] grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono text-xs">
           <div>
-            <span class="text-[#8A8F9E] block text-[9px]">ACTIVE COMMIT</span>
-            <span class="text-indigo-400 font-bold tabular-nums">{{ deployedShortSha ? '#' + deployedShortSha : '-' }}</span>
+            <span class="text-muted block text-xs leading-none">ACTIVE COMMIT</span>
+            <span class="text-accent-light font-semibold tabular-nums">{{ deployedShortSha ? '#' + deployedShortSha : '-' }}</span>
           </div>
           <div>
-            <span class="text-[#8A8F9E] block text-[9px]">TARGET ENV</span>
-            <span class="text-[#F3F4F6] font-medium">{{ environmentName }}</span>
+            <span class="text-muted block text-xs leading-none">TARGET ENV</span>
+            <span class="text-foreground font-medium">{{ environmentName }}</span>
           </div>
           <div class="col-span-2 sm:col-span-1">
-            <span class="text-[#8A8F9E] block text-[9px]">DEPLOYED VIA</span>
-            <span class="text-[#F3F4F6]">{{ deployedTimeAgo }}</span>
+            <span class="text-muted block text-xs leading-none">DEPLOYED VIA</span>
+            <span class="text-foreground">{{ deployedTimeAgo }}</span>
           </div>
         </div>
       </div>
 
       <!-- Deploy Progress if Building or Recent Deployments -->
-      <div v-if="isBuilding" class="bg-[#07080A]/60 border border-amber-500/30 rounded-xl p-2.5 space-y-1.5">
-        <div class="flex items-center justify-between text-[10px] font-mono">
+      <div v-if="isBuilding" class="bg-void/60 border border-amber-500/30 rounded-xl p-2.5 space-y-1.5">
+        <div class="flex items-center justify-between text-xs font-mono">
           <span class="text-amber-400 font-semibold flex items-center gap-1.5">
             <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
             <span>Vercel Build in Progress...</span>
@@ -132,15 +132,15 @@
       </div>
 
       <!-- Bottom Mini-Strip: Recent Deployments + Open Telemetry Button -->
-      <div class="flex items-center justify-between pt-1 font-mono text-[10px]">
-        <div class="flex items-center gap-1.5 text-[#8A8F9E] truncate">
+      <div class="flex items-center justify-between pt-1 font-mono text-xs">
+        <div class="flex items-center gap-1.5 text-muted truncate">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
           <span class="truncate">Edge Network: Global Multi-region</span>
         </div>
 
         <button
           type="button"
-          class="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition font-semibold shrink-0 cursor-pointer group"
+          class="inline-flex items-center gap-1 text-accent-light hover:text-accent-light transition font-semibold shrink-0 cursor-pointer group"
           @click="$emit('open-modal')"
         >
           <span>Deployments</span>

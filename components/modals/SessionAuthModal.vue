@@ -7,7 +7,7 @@
   >
     <div
       ref="dialogRef"
-      class="w-full max-w-md bg-[#0B0C10] border border-white/[0.08] shadow-[0_24px_50px_-12px_rgba(0,0,0,0.85)] rounded-2xl p-5 sm:p-6 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
+      class="w-full max-w-md bg-surface border border-white/[0.08] shadow-[0_24px_50px_-12px_rgba(0,0,0,0.85)] rounded-2xl p-5 sm:p-6 flex flex-col gap-5 outline-none my-8 max-h-[90vh] overflow-y-auto custom-scrollbar"
       role="dialog"
       aria-modal="true"
       aria-labelledby="session-auth-title"
@@ -16,21 +16,21 @@
       <!-- Header -->
       <div class="flex items-start justify-between gap-4 pb-3 border-b border-white/[0.06]">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-indigo-400 shrink-0 shadow-inner">
+          <div class="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-accent-light shrink-0 shadow-inner">
             <NexuraIcon name="KeyRound" size="sm" :stroke-width="2" />
           </div>
           <div>
-            <h2 id="session-auth-title" class="font-sans text-sm font-semibold text-[#F3F4F6]">
+            <h2 id="session-auth-title" class="font-sans text-sm font-semibold text-foreground">
               Verify Session Access
             </h2>
-            <p class="font-sans text-xs text-[#8A8F9E] mt-0.5">
+            <p class="font-sans text-xs text-muted mt-0.5">
               Authenticate your active session to sync changes to the server.
             </p>
           </div>
         </div>
         <button
           type="button"
-          class="w-7 h-7 rounded-lg hover:bg-white/[0.06] text-[#8A8F9E] hover:text-[#F3F4F6] transition-colors flex items-center justify-center cursor-pointer shrink-0"
+          class="w-7 h-7 rounded-lg hover:bg-white/[0.06] text-muted hover:text-foreground transition-colors flex items-center justify-center cursor-pointer shrink-0"
           aria-label="Close modal"
           @click="onCancel"
         >
@@ -61,7 +61,7 @@
       <!-- Auth Form -->
       <form v-if="!showSuccess" class="flex flex-col gap-4" @submit.prevent="submitKey" novalidate>
         <div class="flex flex-col gap-1.5">
-          <label for="session-access-key-input" class="font-sans text-xs font-semibold text-[#F3F4F6]">
+          <label for="session-access-key-input" class="font-sans text-xs font-semibold text-foreground">
             Secret Access Key <span class="text-rose-400">*</span>
           </label>
           <input
@@ -72,10 +72,10 @@
             autocomplete="current-password"
             placeholder="Enter Nexura access key..."
             :disabled="isSubmitting"
-            class="w-full bg-[#07080A] border border-white/[0.08] hover:border-white/[0.14] focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/40 text-[#F3F4F6] placeholder-[#8A8F9E]/40 rounded-xl px-3.5 py-2.5 text-xs font-sans tracking-normal transition-all outline-none disabled:opacity-50"
+            class="w-full bg-canvas border border-white/[0.08] hover:border-white/[0.14] focus:border-accent/60 focus:ring-1 focus:ring-accent/40 text-foreground placeholder-muted/40 rounded-lg px-3.5 py-2 text-xs font-sans tracking-normal transition-all outline-none disabled:opacity-50"
             @keydown.esc="onCancel"
           />
-          <div class="flex items-center gap-1.5 text-[11px] text-[#8A8F9E]/70 font-sans mt-0.5">
+          <div class="flex items-center gap-1.5 text-xs text-muted/70 font-sans mt-0.5">
             <NexuraIcon name="ShieldCheck" size="xs" class="text-emerald-400 shrink-0" />
             <span>Keys are verified server-side and issued as an encrypted HttpOnly cookie.</span>
           </div>
@@ -86,7 +86,7 @@
           <button
             type="button"
             :disabled="isSubmitting"
-            class="px-3 py-1.5 rounded-lg text-xs font-medium font-sans text-[#8A8F9E] hover:text-[#F3F4F6] hover:bg-white/[0.04] transition-colors cursor-pointer disabled:opacity-40"
+            class="px-3 py-1.5 rounded-lg text-xs font-medium font-sans text-muted hover:text-foreground hover:bg-white/[0.04] transition-colors cursor-pointer disabled:opacity-40"
             @click="onCancel"
           >
             Cancel
@@ -94,13 +94,13 @@
           <button
             type="submit"
             :disabled="!accessKeyInput.trim() || isSubmitting"
-            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold font-sans bg-[#F3F4F6] hover:bg-white text-[#07080A] shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/20"
+            class="px-3.5 py-1.5 rounded-lg text-xs font-semibold font-sans bg-foreground hover:bg-white text-void shadow-sm flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/20"
           >
             <NexuraIcon
               v-if="isSubmitting"
               name="Loader2"
               size="xs"
-              class="animate-spin text-[#07080A]"
+              class="animate-spin text-void"
             />
             <NexuraIcon
               v-else
