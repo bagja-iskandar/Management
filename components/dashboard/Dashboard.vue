@@ -33,8 +33,8 @@
       :tasks="workspaceStore.tasks.value || []"
       :sprint="activeSprint"
       :projects="activeProjects"
-      :ci-workflow-count="0"
-      :ci-success-rate="null"
+      :ci-workflow-count="ciWorkflowCount"
+      :ci-success-rate="ciSuccessRate"
       :open-pr-count="openPrCount"
       class="shrink-0"
     />
@@ -74,17 +74,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import type { Task } from '~/types'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useTaskDrawer } from '~/composables/useTaskDrawer'
 import { toIsoDate } from '~/composables/useSprintCalendar'
+import { useSession } from '~/composables/useSession'
 
 export type WorkspaceDataState = 'NOT_LOADED' | 'LOADING' | 'SUCCESS_WITH_DATA' | 'SUCCESS_EMPTY' | 'ERROR'
 
 // Workspace Store SSOT
 const workspaceStore = useWorkspaceStore()
 const { openTaskDrawer } = useTaskDrawer()
+const session = useSession()
+
+// Live CI/CD Aggregation State
+const ciWorkflowCount = ref(0)
+const ciSuccessRate = ref<number | null>(null)
 
 // Local Busy State
 const isBusy = ref(false)
@@ -105,23 +111,6 @@ const tasksDataState = computed<WorkspaceDataState>(() => {
   return 'NOT_LOADED'
 })
 
-// Auto-hydrate workspace if not initialized
-onMounted(async () => {
-  if (!workspaceStore.isInitialized.value) {
-    await workspaceStore.initializeWorkspace()
-  }
-})
-
-// Refresh Workspace SSOT
-async function refreshData() {
-  isBusy.value = true
-  try {
-    await workspaceStore.refreshWorkspace()
-  } finally {
-    isBusy.value = false
-  }
-}
-
 // Active Sprint SSOT
 const activeSprint = computed(() => {
   const sprints = workspaceStore.sprints.value || []
@@ -135,6 +124,83 @@ const activeProjects = computed(() => {
     (p) => p.status === 'active' || !p.status
   )
 })
+
+// Live CI/CD Aggregation Helper (Honest Live Metrics)
+async function syncDashboardCiMetrics() {
+  if (!session.isAuthenticated.value) {
+    ciWorkflowCount.value = 0
+    ciSuccessRate.value = null
+    return
+  }
+
+  const rawRepos = activeProjects.value
+    .map((p) => p.githubRepo?.trim())
+    .filter((r): r is string => Boolean(r))
+  const repos = Array.from(new Set(rawRepos)).slice(0, 5)
+
+  if (repos.length === 0) {
+    ciWorkflowCount.value = 0
+    ciSuccessRate.value = null
+    return
+  }
+
+  try {
+    const results = await Promise.allSettled(
+      repos.map((repo) => $fetch<any[]>('/api/github/workflows', { params: { repo, limit: 10 } }))
+    )
+
+    const allRuns: any[] = []
+    for (const res of results) {
+      if (res.status === 'fulfilled' && Array.isArray(res.value)) {
+        allRuns.push(...res.value)
+      }
+    }
+
+    if (allRuns.length === 0) {
+      ciWorkflowCount.value = 0
+      ciSuccessRate.value = null
+      return
+    }
+
+    const completedRuns = allRuns.filter((r) => Boolean(r?.conclusion))
+    const denom = completedRuns.length || allRuns.length
+    const passed = completedRuns.filter((r) => r.conclusion === 'success').length
+
+    ciWorkflowCount.value = allRuns.length
+    ciSuccessRate.value = Math.round((passed / denom) * 100)
+  } catch {
+    ciWorkflowCount.value = 0
+    ciSuccessRate.value = null
+  }
+}
+
+// Auto-hydrate workspace if not initialized
+onMounted(async () => {
+  if (!workspaceStore.isInitialized.value) {
+    await workspaceStore.initializeWorkspace()
+  }
+  await syncDashboardCiMetrics()
+})
+
+// Refresh Workspace SSOT
+async function refreshData() {
+  isBusy.value = true
+  try {
+    await Promise.allSettled([
+      workspaceStore.refreshWorkspace(),
+      syncDashboardCiMetrics()
+    ])
+  } finally {
+    isBusy.value = false
+  }
+}
+
+watch(
+  [() => session.isAuthenticated.value, () => activeProjects.value.map((p) => p.githubRepo || '').join(',')],
+  () => {
+    syncDashboardCiMetrics()
+  }
+)
 
 // KPI Metrics: Honest Mathematical Calculations (Zero Fake Numbers)
 const inFlightCount = computed(() => (workspaceStore.tasks.value || []).filter(t => t.status === 'running_sprint').length)

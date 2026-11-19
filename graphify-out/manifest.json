@@ -12,9 +12,9 @@
     "semantic_hash": ""
   },
   "app/pages/index.vue": {
-    "mtime": 1793323062.9433608,
-    "seen": 1793323333.9825718,
-    "ast_hash": "b02e7fc8a245e15391440f125d8f5ca0",
+    "mtime": 1794966270.7223692,
+    "seen": 1794966479.532543,
+    "ast_hash": "d1562e929f187f1f105014f4aaa1d594",
     "semantic_hash": ""
   },
   "app/pages/projects/[slug].vue": {
@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "app/pages/tasks.vue": {
-    "mtime": 1794576069.3695018,
-    "seen": 1794577034.7597764,
-    "ast_hash": "48b6b81f833cea388a69c3764e1bf9af",
+    "mtime": 1794966303.4151704,
+    "seen": 1794966479.5337863,
+    "ast_hash": "75ce6d31f1c353273973f17a5ecad8d7",
     "semantic_hash": ""
   },
   "composables/useProjects.ts": {
@@ -174,9 +174,9 @@
     "semantic_hash": ""
   },
   "graphify-out/converted/Software_Documentation_Management_Dashboard_v2.4_Bab1-3_fc4a1a46.md": {
-    "mtime": 1789395979.185529,
-    "seen": 1789396701.5565436,
-    "ast_hash": "eca6385b605c76a32e225b5fe27ebc0c",
+    "mtime": 1794819142.977279,
+    "seen": 1794820080.6118214,
+    "ast_hash": "efd54495b761c359bbc23315a377e653",
     "semantic_hash": ""
   },
   "project_context/ARCHITECTURE.md": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "app/pages/roadmap.vue": {
-    "mtime": 1794576176.0032978,
-    "seen": 1794577034.7597604,
-    "ast_hash": "7439659f7e903b4c837f25e47954c0e5",
+    "mtime": 1794966492.467211,
+    "seen": 1794966690.0104535,
+    "ast_hash": "d37eef1d62ed12b94b98f459839bf1d6",
     "semantic_hash": ""
   },
   "app/pages/sprints.vue": {
@@ -498,21 +498,21 @@
     "semantic_hash": ""
   },
   "components/project/ProjectLiveDeploymentCard.vue": {
-    "mtime": 1794576780.8653386,
-    "seen": 1794577034.7674818,
-    "ast_hash": "49b3d0ea410ee9f4d5d09734c0a3100e",
+    "mtime": 1794819994.9541852,
+    "seen": 1794820080.4678617,
+    "ast_hash": "991114eb646ad379c8aaa19b02c7f7ca",
     "semantic_hash": ""
   },
   "components/project/ProjectPackageCard.vue": {
-    "mtime": 1794576780.8733122,
-    "seen": 1794577034.7674856,
-    "ast_hash": "bd986f957d92881e02e6c88c2b9f6ed5",
+    "mtime": 1794819990.0172527,
+    "seen": 1794820080.4678676,
+    "ast_hash": "378afc4fee9abb59d992675547f92535",
     "semantic_hash": ""
   },
   "components/project/ProjectSecurityCard.vue": {
-    "mtime": 1794576780.921832,
-    "seen": 1794577034.767498,
-    "ast_hash": "f7ac79080b58ffec28e32a91159380f7",
+    "mtime": 1794819983.5932238,
+    "seen": 1794820080.469956,
+    "ast_hash": "1ec67954c19e348c807d4a0ee4ccbf5d",
     "semantic_hash": ""
   },
   "components/project/ProjectVercelTab.vue": {
@@ -822,9 +822,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/UnifiedHeroBanner.vue": {
-    "mtime": 1794577209.0202217,
-    "seen": 1794577248.930044,
-    "ast_hash": "1a52c5cdce8182e50e08cf3fb9464843",
+    "mtime": 1794966226.0061965,
+    "seen": 1794966479.534947,
+    "ast_hash": "c3ac4184844f928248b7950f1652382e",
     "semantic_hash": ""
   },
   "components/dashboard/InfrastructureMeshCard.vue": {
@@ -1476,9 +1476,9 @@
     "semantic_hash": ""
   },
   "components/dashboard/Dashboard.vue": {
-    "mtime": 1794659858.7128005,
-    "seen": 1794659984.7669947,
-    "ast_hash": "5c0bf5af38d59d421b7f7d38ef3028f3",
+    "mtime": 1794966266.5166845,
+    "seen": 1794966479.5340004,
+    "ast_hash": "4576185006c5167bdc72f90ce499ef8f",
     "semantic_hash": ""
   },
   "components/kanban/KanbanBoard.vue": {
@@ -1536,9 +1536,9 @@
     "semantic_hash": ""
   },
   "docs/subsystem-functional-audit-and-remediation.md": {
-    "mtime": 1793973760.5802495,
-    "seen": 1794018795.8372605,
-    "ast_hash": "353b965f11534d1438fedd9de14641e2",
+    "mtime": 1794966741.9422233,
+    "seen": 1794966785.861391,
+    "ast_hash": "0bff35130d3cd7bca67db696dec0c44c",
     "semantic_hash": ""
   },
   "server/api/auth/session.delete.ts": {
@@ -1548,15 +1548,21 @@
     "semantic_hash": ""
   },
   "tests/unit/subsystem-remediation.spec.mjs": {
-    "mtime": 1794022164.080927,
-    "seen": 1794022291.440762,
-    "ast_hash": "7a469c0bc6bac64ff56f2922182e389f",
+    "mtime": 1794966642.613859,
+    "seen": 1794966690.0581148,
+    "ast_hash": "178ed17081af7ad9d7b5e7172b1527ed",
     "semantic_hash": ""
   },
   "tests/unit/design-token-audit.spec.mjs": {
     "mtime": 1794659880.689809,
     "seen": 1794659984.935992,
     "ast_hash": "0142c1d116b5782dabeefba2ddd87570",
+    "semantic_hash": ""
+  },
+  "docs/planning/security-architecture-and-github-integration-plan.md": {
+    "mtime": 1794882960.668165,
+    "seen": 1794966479.5914721,
+    "ast_hash": "4eb20284c4428e12bf336710c645a081",
     "semantic_hash": ""
   }
 }

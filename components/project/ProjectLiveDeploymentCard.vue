@@ -132,8 +132,8 @@
       </div>
 
       <!-- Bottom Mini-Strip: Recent Deployments + Open Telemetry Button -->
-      <div class="flex items-center justify-between pt-1 font-mono text-xs">
-        <div class="flex items-center gap-1.5 text-muted truncate">
+      <div class="flex items-center justify-between gap-2 pt-1 font-mono text-xs">
+        <div class="flex items-center gap-1.5 text-muted min-w-0">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
           <span class="truncate">Edge Network: Global Multi-region</span>
         </div>

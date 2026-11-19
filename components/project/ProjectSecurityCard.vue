@@ -73,28 +73,39 @@
       </div>
 
       <!-- Vulnerability Severity Breakdown Bar -->
-      <div class="bg-void/60 border border-white/[0.06] rounded-xl p-2.5 flex items-center justify-between font-mono text-xs">
-        <div class="flex items-center gap-3 tabular-nums">
+      <div class="bg-void/60 border border-white/[0.06] rounded-xl p-2.5 font-mono text-xs">
+        <div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1.5 tabular-nums">
           <div class="flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            <span class="w-2 h-2 rounded-full bg-rose-500 shrink-0"></span>
             <span class="text-muted">Crit:</span>
             <span :class="criticalCount > 0 ? 'text-rose-400 font-semibold' : 'text-dim'">{{ criticalCount }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span class="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
             <span class="text-muted">High:</span>
             <span :class="highCount > 0 ? 'text-amber-400 font-semibold' : 'text-dim'">{{ highCount }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+            <span class="w-2 h-2 rounded-full bg-yellow-500 shrink-0"></span>
             <span class="text-muted">Med:</span>
             <span class="text-dim">{{ mediumCount }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <span class="w-2 h-2 rounded-full bg-zinc-600"></span>
+            <span class="w-2 h-2 rounded-full bg-zinc-600 shrink-0"></span>
             <span class="text-muted">Low:</span>
             <span class="text-dim">{{ lowCount }}</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Bottom Action Strip (Unified with sibling Cockpit cards) -->
+      <div class="flex items-center justify-between gap-2 pt-1 font-mono text-xs">
+        <div class="flex items-center gap-1.5 text-muted min-w-0">
+          <span
+            class="w-1.5 h-1.5 rounded-full shrink-0"
+            :class="isClean ? 'bg-emerald-400' : 'bg-rose-400'"
+          ></span>
+          <span class="truncate">{{ isClean ? 'Dependabot · CodeQL' : `${totalAlerts} open security alerts` }}</span>
         </div>
 
         <button

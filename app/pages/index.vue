@@ -26,7 +26,7 @@ onMounted(() => {
       label: 'Quick Task',
       icon: 'Plus',
       variant: 'primary',
-      shortcut: 'Ctrl+N',
+      shortcut: 'C',
       handler: () => openAddTask()
     }
   ])

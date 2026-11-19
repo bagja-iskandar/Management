@@ -74,8 +74,8 @@
       </div>
 
       <!-- Action Strip -->
-      <div class="flex items-center justify-between pt-1 font-mono text-xs">
-        <span class="text-muted">
+      <div class="flex items-center justify-between gap-2 pt-1 font-mono text-xs">
+        <span class="text-muted truncate min-w-0">
           Target: {{ repo ? `${repo} packages` : 'GitHub Packages' }}
         </span>
 

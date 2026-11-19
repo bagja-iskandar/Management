@@ -566,3 +566,175 @@ test('TEST-SYS-13-DDL-01: all_in_one_setup.sql supports idea status, project_not
     'DDL must grant full access on project_notes exclusively to service_role'
   )
 })
+
+// =============================================================================
+// 14. FINAL AUDIT CLEANUP REGRESSION CONTRACTS (SYS-14 to SYS-17)
+// =============================================================================
+
+test('TEST-SYS-14-CI-01: UnifiedHeroBanner dynamic CI dot/classes and Dashboard.vue syncDashboardCiMetrics integration', () => {
+  const heroSource = loadSource('components/dashboard/UnifiedHeroBanner.vue')
+  const dashboardSource = loadSource('components/dashboard/Dashboard.vue')
+
+  // UnifiedHeroBanner: no unconditional hardcoded pulse on CI/CD Builds dot
+  assert.ok(
+    !heroSource.includes('<span class="truncate">CI/CD Builds</span>\n              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>'),
+    'UnifiedHeroBanner must not hardcode unconditional bg-emerald-400 animate-pulse on CI/CD Builds dot'
+  )
+  assert.ok(
+    heroSource.includes(':class="ciStatusDotClass"'),
+    'CI/CD Builds dot must bind dynamic :class="ciStatusDotClass"'
+  )
+  assert.ok(
+    heroSource.includes(':class="ciSummaryTextClass"'),
+    'CI/CD summary text must bind dynamic :class="ciSummaryTextClass"'
+  )
+  assert.ok(
+    heroSource.includes('props.ciSuccessRate === null || props.ciSuccessRate === undefined || props.ciWorkflowCount === 0'),
+    'ciStatusDotClass & ciSummaryTextClass must check for null/undefined rate or zero workflows'
+  )
+  assert.ok(
+    heroSource.includes("'bg-zinc-600'"),
+    'ciStatusDotClass must fallback to neutral bg-zinc-600 when CI data is missing'
+  )
+  assert.ok(
+    heroSource.includes("'text-muted'"),
+    'ciSummaryTextClass must fallback to neutral text-muted when CI data is missing'
+  )
+
+  // Dashboard.vue: syncDashboardCiMetrics checks session.isAuthenticated before calling /api/github/workflows
+  assert.ok(
+    dashboardSource.includes('async function syncDashboardCiMetrics()'),
+    'Dashboard.vue must implement syncDashboardCiMetrics helper'
+  )
+  assert.ok(
+    dashboardSource.includes('if (!session.isAuthenticated.value)'),
+    'syncDashboardCiMetrics must guard with session.isAuthenticated check'
+  )
+  assert.ok(
+    dashboardSource.includes("'/api/github/workflows'"),
+    'syncDashboardCiMetrics must query /api/github/workflows'
+  )
+  assert.ok(
+    dashboardSource.includes(':ci-workflow-count="ciWorkflowCount"') &&
+    dashboardSource.includes(':ci-success-rate="ciSuccessRate"'),
+    'Dashboard.vue must bind :ci-workflow-count and :ci-success-rate to UnifiedHeroBanner'
+  )
+})
+
+test('TEST-SYS-15-SHORTCUT-01: Quick task keyboard shortcut uses "C" across index.vue and tasks.vue without Ctrl+N', () => {
+  const indexSource = loadSource('app/pages/index.vue')
+  const tasksSource = loadSource('app/pages/tasks.vue')
+
+  // Both pages must register shortcut: 'C'
+  assert.ok(
+    indexSource.includes("shortcut: 'C'"),
+    'index.vue quick-task header action must declare shortcut: "C"'
+  )
+  assert.ok(
+    tasksSource.includes("shortcut: 'C'"),
+    'tasks.vue new-task header action must declare shortcut: "C"'
+  )
+
+  // Neither page should have legacy shortcut: 'Ctrl+N'
+  assert.ok(
+    !indexSource.includes("shortcut: 'Ctrl+N'"),
+    'index.vue must not contain legacy shortcut: "Ctrl+N"'
+  )
+  assert.ok(
+    !tasksSource.includes("shortcut: 'Ctrl+N'"),
+    'tasks.vue must not contain legacy shortcut: "Ctrl+N"'
+  )
+})
+
+test('TEST-SYS-16-SCOPED-COUNTS-01: tasks.vue defines scopedTasks and derives live filter counts and filteredTasks from it', () => {
+  const tasksSource = loadSource('app/pages/tasks.vue')
+
+  // Scoped tasks definition without statusFilter
+  assert.ok(
+    tasksSource.includes('const scopedTasks = computed('),
+    'tasks.vue must declare computed scopedTasks'
+  )
+  assert.ok(
+    tasksSource.includes("projectFilter.value !== 'all'"),
+    'scopedTasks must apply projectFilter'
+  )
+  assert.ok(
+    tasksSource.includes("priorityFilter.value !== 'all'"),
+    'scopedTasks must apply priorityFilter'
+  )
+  assert.ok(
+    tasksSource.includes("tagFilter.value !== 'all'"),
+    'scopedTasks must apply tagFilter'
+  )
+
+  // Live Counts derivation from scopedTasks.value
+  assert.ok(
+    tasksSource.includes('const allCount = computed(() => scopedTasks.value.length)'),
+    'allCount must be derived from scopedTasks.value.length'
+  )
+  assert.ok(
+    tasksSource.includes('const ideaCount = computed(() => scopedTasks.value.filter('),
+    'ideaCount must be derived from scopedTasks.value'
+  )
+  assert.ok(
+    tasksSource.includes('const inQueueCount = computed(() => scopedTasks.value.filter('),
+    'inQueueCount must be derived from scopedTasks.value'
+  )
+  assert.ok(
+    tasksSource.includes('const runningSprintCount = computed(() => scopedTasks.value.filter('),
+    'runningSprintCount must be derived from scopedTasks.value'
+  )
+  assert.ok(
+    tasksSource.includes('const deployedCount = computed(() => scopedTasks.value.filter('),
+    'deployedCount must be derived from scopedTasks.value'
+  )
+  assert.ok(
+    tasksSource.includes('const blockedCount = computed(() => scopedTasks.value.filter('),
+    'blockedCount must be derived from scopedTasks.value'
+  )
+
+  // filteredTasks derivation from scopedTasks.value
+  assert.ok(
+    tasksSource.includes('const filteredTasks = computed(() => {') &&
+    tasksSource.includes('let list = [...scopedTasks.value]'),
+    'filteredTasks must spread scopedTasks.value before applying statusFilter in table mode'
+  )
+})
+
+test('TEST-SYS-17-ROADMAP-DND-01: roadmap.vue integrates AddProjectModal, action id new-project, and HTML5 drag and drop', () => {
+  const roadmapSource = loadSource('app/pages/roadmap.vue')
+
+  // AddProjectModal component integration
+  assert.ok(
+    roadmapSource.includes('<AddProjectModal') &&
+    roadmapSource.includes('@create="onProjectCreated"'),
+    'roadmap.vue must mount <AddProjectModal with @create="onProjectCreated"'
+  )
+  assert.ok(
+    roadmapSource.includes("id: 'new-project'"),
+    'roadmap.vue must register header action with id: "new-project"'
+  )
+  assert.ok(
+    roadmapSource.includes('async function onProjectCreated('),
+    'roadmap.vue must implement onProjectCreated handler'
+  )
+
+  // HTML5 Drag and Drop attributes and events
+  assert.ok(
+    roadmapSource.includes('draggable="true"'),
+    'Roadmap project cards must have draggable="true"'
+  )
+  assert.ok(
+    roadmapSource.includes('@dragstart="onCardDragStart($event, project)"'),
+    'Roadmap project cards must bind @dragstart="onCardDragStart($event, project)"'
+  )
+  assert.ok(
+    roadmapSource.includes('@drop.prevent="onColumnDrop($event, phase.id)"'),
+    'Phase columns must bind @drop.prevent="onColumnDrop($event, phase.id)"'
+  )
+  assert.ok(
+    roadmapSource.includes('async function onColumnDrop(') &&
+    roadmapSource.includes('await onUpdateReleasePhase(project, targetPhase)'),
+    'onColumnDrop must route dropped project and targetPhase into onUpdateReleasePhase'
+  )
+})

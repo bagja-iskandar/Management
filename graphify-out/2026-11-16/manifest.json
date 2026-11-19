@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "nuxt.config.ts": {
-    "mtime": 1794573363.6110508,
-    "seen": 1794574580.4758754,
-    "ast_hash": "acef12ddeedf0172ea06952149382644",
+    "mtime": 1794817023.7834127,
+    "seen": 1794817084.7979283,
+    "ast_hash": "47eaaa4d2fe3c8c233710fd341aa8d41",
     "semantic_hash": ""
   },
   "package.json": {
@@ -756,9 +756,9 @@
     "semantic_hash": ""
   },
   "public/favicon.svg": {
-    "mtime": 1791355621.5365887,
-    "seen": 1791355738.9228394,
-    "ast_hash": "e7e62b59a0ede9c8a6387bcc1f87fd54",
+    "mtime": 1794816162.1879394,
+    "seen": 1794816228.3817985,
+    "ast_hash": "c1e3bf5195ab1fb7b6c3f01a6401ac44",
     "semantic_hash": ""
   },
   "components/project/ProjectDeploymentFeed.vue": {
@@ -1506,9 +1506,9 @@
     "semantic_hash": ""
   },
   "components/layout/Sidebar.vue": {
-    "mtime": 1794576069.3549175,
-    "seen": 1794577034.7619152,
-    "ast_hash": "518001b08ce1f3c1b7bcb9ac8e072ae2",
+    "mtime": 1794816183.2152286,
+    "seen": 1794816228.231653,
+    "ast_hash": "f6347edbae2a513abedaa7469de048da",
     "semantic_hash": ""
   },
   "components/project/RepoActivityBadge.vue": {

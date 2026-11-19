@@ -61,13 +61,13 @@
           <div class="flex flex-col justify-between pt-3 sm:pt-0 pr-4 sm:px-5 border-r border-white/[0.06] border-t sm:border-t-0">
             <div class="flex items-center justify-between gap-1.5 text-xs text-muted">
               <span class="truncate">CI/CD Builds</span>
-              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)] animate-pulse shrink-0"></span>
+              <span class="w-2 h-2 rounded-full shrink-0" :class="ciStatusDotClass"></span>
             </div>
             <div class="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground tabular-nums mt-1">
               <span v-if="ciSuccessRate !== null">{{ ciSuccessRate }}%</span>
               <span v-else>--</span>
             </div>
-            <div class="text-xs font-mono text-emerald-400/90 font-medium mt-0.5 truncate">
+            <div class="text-xs font-mono font-medium mt-0.5 truncate" :class="ciSummaryTextClass">
               {{ ciChecksSummary }}
             </div>
           </div>
@@ -173,10 +173,36 @@ const velocityHealth = computed(() => {
   return velocityPercentage.value >= 70 ? 'On track' : 'Attention needed'
 })
 
+const ciStatusDotClass = computed(() => {
+  if (props.ciSuccessRate === null || props.ciSuccessRate === undefined || props.ciWorkflowCount === 0) {
+    return 'bg-zinc-600'
+  }
+  if (props.ciSuccessRate >= 80) {
+    return 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)] animate-pulse'
+  }
+  if (props.ciSuccessRate >= 50) {
+    return 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]'
+  }
+  return 'bg-rose-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]'
+})
+
+const ciSummaryTextClass = computed(() => {
+  if (props.ciSuccessRate === null || props.ciSuccessRate === undefined || props.ciWorkflowCount === 0) {
+    return 'text-muted'
+  }
+  if (props.ciSuccessRate >= 80) {
+    return 'text-emerald-400/90'
+  }
+  if (props.ciSuccessRate >= 50) {
+    return 'text-amber-400/90'
+  }
+  return 'text-rose-400/90'
+})
+
 const ciChecksSummary = computed(() => {
   if (props.ciChecksSummary) return props.ciChecksSummary
-  if (props.ciSuccessRate === null || props.ciWorkflowCount === 0) return 'No active checks'
-  return `${props.ciWorkflowCount} checks passed`
+  if (props.ciSuccessRate === null || props.ciSuccessRate === undefined || props.ciWorkflowCount === 0) return 'No active checks'
+  return `${props.ciWorkflowCount} ${props.ciWorkflowCount === 1 ? 'workflow run' : 'workflow runs'}`
 })
 
 const openPrCount = computed(() => {

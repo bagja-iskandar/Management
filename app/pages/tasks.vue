@@ -649,13 +649,47 @@ function getPriorityDotClass(priority?: string): string {
   return 'bg-zinc-600'
 }
 
-// Live Counts
-const allCount = computed(() => tasksList.value.length)
-const ideaCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'idea').length)
-const inQueueCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'in_queue').length)
-const runningSprintCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'running_sprint').length)
-const deployedCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'deployed').length)
-const blockedCount = computed(() => tasksList.value.filter(t => normalizeStatus(t.status) === 'blocked').length)
+// Scoped deliverables (filtered by project, priority, tag, search — WITHOUT status filter)
+const scopedTasks = computed(() => {
+  let list = [...tasksList.value]
+
+  // Project Filter
+  if (projectFilter.value !== 'all') {
+    list = list.filter(t => getProjectName(t).toLowerCase() === projectFilter.value.toLowerCase())
+  }
+
+  // Priority Filter
+  if (priorityFilter.value !== 'all') {
+    list = list.filter(t => (t.priority || 'medium').toLowerCase() === priorityFilter.value.toLowerCase())
+  }
+
+  // Tag Filter
+  if (tagFilter.value !== 'all') {
+    list = list.filter(t => (t.techTags || []).includes(tagFilter.value))
+  }
+
+  // Search Filter
+  if (search.value.trim()) {
+    const q = search.value.toLowerCase()
+    list = list.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      (t.description ?? '').toLowerCase().includes(q) ||
+      (t.taskId ?? '').toLowerCase().includes(q) ||
+      getProjectName(t).toLowerCase().includes(q) ||
+      (t.techTags ?? []).some(tag => tag.toLowerCase().includes(q))
+    )
+  }
+
+  return list
+})
+
+// Live Counts (Scoped to active project/priority/tag/search filters)
+const allCount = computed(() => scopedTasks.value.length)
+const ideaCount = computed(() => scopedTasks.value.filter(t => normalizeStatus(t.status) === 'idea').length)
+const inQueueCount = computed(() => scopedTasks.value.filter(t => normalizeStatus(t.status) === 'in_queue').length)
+const runningSprintCount = computed(() => scopedTasks.value.filter(t => normalizeStatus(t.status) === 'running_sprint').length)
+const deployedCount = computed(() => scopedTasks.value.filter(t => normalizeStatus(t.status) === 'deployed').length)
+const blockedCount = computed(() => scopedTasks.value.filter(t => normalizeStatus(t.status) === 'blocked').length)
 
 // Contextual Action Bar integration
 const { setActions, clearActions } = useHeaderActions()
@@ -686,7 +720,7 @@ onMounted(() => {
         label: 'New Deliverable',
         icon: 'Plus',
         variant: 'primary',
-        shortcut: 'Ctrl+N',
+        shortcut: 'C',
         handler: () => openAddTask()
       }
     ])
@@ -699,38 +733,11 @@ onBeforeUnmount(() => {
 
 // Filter & Sort deliverables
 const filteredTasks = computed(() => {
-  let list = [...tasksList.value]
+  let list = [...scopedTasks.value]
 
   // Status Filter (Only applied in table mode; Kanban columns group by status)
   if (viewMode.value === 'table' && statusFilter.value !== 'all') {
     list = list.filter(t => normalizeStatus(t.status) === statusFilter.value)
-  }
-
-  // Project Filter
-  if (projectFilter.value !== 'all') {
-    list = list.filter(t => getProjectName(t).toLowerCase() === projectFilter.value.toLowerCase())
-  }
-
-  // Priority Filter
-  if (priorityFilter.value !== 'all') {
-    list = list.filter(t => (t.priority || 'medium').toLowerCase() === priorityFilter.value.toLowerCase())
-  }
-
-  // Tag Filter
-  if (tagFilter.value !== 'all') {
-    list = list.filter(t => (t.techTags || []).includes(tagFilter.value))
-  }
-
-  // Search Filter
-  if (search.value.trim()) {
-    const q = search.value.toLowerCase()
-    list = list.filter(t =>
-      t.name.toLowerCase().includes(q) ||
-      (t.description ?? '').toLowerCase().includes(q) ||
-      (t.taskId ?? '').toLowerCase().includes(q) ||
-      getProjectName(t).toLowerCase().includes(q) ||
-      (t.techTags ?? []).some(tag => tag.toLowerCase().includes(q))
-    )
   }
 
   // Sort

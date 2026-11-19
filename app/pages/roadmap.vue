@@ -200,7 +200,11 @@
           <div
             v-for="phase in CANONICAL_RELEASE_PHASES"
             :key="phase.id"
-            class="flex flex-col rounded-2xl bg-canvas border border-white/[0.06] p-3 space-y-3 min-h-[380px]"
+            class="flex flex-col rounded-2xl bg-canvas border p-3 space-y-3 min-h-[380px] transition-colors"
+            :class="dragOverPhase === phase.id ? 'border-accent/60 bg-accent/[0.04]' : 'border-white/[0.06]'"
+            @dragover.prevent="dragOverPhase = phase.id"
+            @dragleave="onColumnDragLeave($event, phase.id)"
+            @drop.prevent="onColumnDrop($event, phase.id)"
           >
             <!-- Column Header -->
             <div class="p-2 border-b border-white/[0.06] space-y-1">
@@ -236,7 +240,11 @@
               <article
                 v-for="project in getProjectsByPhase(phase.id)"
                 :key="project.id"
-                class="obs-card p-3.5 rounded-xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all space-y-2.5 shadow-sm group"
+                draggable="true"
+                class="obs-card p-3.5 rounded-xl bg-surface border border-white/[0.07] hover:border-white/[0.14] transition-all space-y-2.5 shadow-sm group cursor-grab active:cursor-grabbing"
+                :class="{ 'opacity-50 scale-[0.99]': draggingProjectId === project.id }"
+                @dragstart="onCardDragStart($event, project)"
+                @dragend="onCardDragEnd"
               >
                 <!-- Card Header: Title & Priority -->
                 <div class="space-y-1">
@@ -388,7 +396,7 @@
             <!-- Timeline Dot Marker -->
             <div class="absolute left-4 sm:left-8 -translate-x-1/2 mt-4 z-10">
               <div
-                class="w-4 h-4 rounded-full border-4 border-[#0B0C10] transition-transform hover:scale-125"
+                class="w-4 h-4 rounded-full border-4 border-canvas transition-transform hover:scale-125"
                 :class="classifyReleasePhase(project.releasePhase).phase === 'released'
                   ? 'bg-emerald-400 ring-4 ring-emerald-400/20'
                   : classifyReleasePhase(project.releasePhase).phase === 'backlog'
@@ -572,12 +580,19 @@
         </div>
       </div>
     </div>
+    <!-- PROJ-002: Add Project Modal Dialog -->
+    <AddProjectModal
+      v-if="showAddModal"
+      @close="showAddModal = false"
+      @create="onProjectCreated"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import NexuraIcon from '~~/components/ui/NexuraIcon.vue'
+import AddProjectModal from '~~/components/modals/project/AddProjectModal.vue'
 import { useWorkspaceStore } from '~/composables/useWorkspaceStore'
 import { useProjects } from '~/composables/useProjects'
 import { useHeaderActions } from '~/composables/useHeaderActions'
@@ -590,6 +605,9 @@ const projectsApi = useProjects()
 // View Filter & Search State
 const activeViewMode = ref<'board' | 'timeline'>('board')
 const searchQuery = ref('')
+const showAddModal = ref(false)
+const draggingProjectId = ref<string | null>(null)
+const dragOverPhase = ref<ReleasePhase | null>(null)
 
 // Contextual Action Bar integration
 const { setActions, clearActions } = useHeaderActions()
@@ -607,6 +625,15 @@ async function refreshRoadmap() {
 onMounted(async () => {
   watchEffect(() => {
     setActions([
+      {
+        id: 'new-project',
+        label: 'New Project',
+        icon: 'Plus',
+        variant: 'primary',
+        handler: () => {
+          showAddModal.value = true
+        }
+      },
       {
         type: 'segmented',
         id: 'roadmap-view',
@@ -795,6 +822,83 @@ async function onUpdateReleasePhase(project: Project, newPhase: ReleasePhase) {
     showFeedback('Failed to update release phase: ' + (err.message || 'Unknown error'), 'error')
   } finally {
     isUpdatingPhase.value[project.id] = false
+  }
+}
+
+// Drag and Drop Release Phase Transition Handling
+function onCardDragStart(e: DragEvent, project: Project) {
+  draggingProjectId.value = project.id
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', project.id)
+  }
+}
+
+function onCardDragEnd() {
+  draggingProjectId.value = null
+  dragOverPhase.value = null
+}
+
+function onColumnDragLeave(e: DragEvent, phaseId: ReleasePhase) {
+  const currentTarget = e.currentTarget as HTMLElement | null
+  const relatedTarget = e.relatedTarget as Node | null
+  if (currentTarget && relatedTarget && currentTarget.contains(relatedTarget)) {
+    return
+  }
+  if (dragOverPhase.value === phaseId) {
+    dragOverPhase.value = null
+  }
+}
+
+async function onColumnDrop(e: DragEvent, targetPhase: ReleasePhase) {
+  const projectId = e.dataTransfer?.getData('text/plain') || draggingProjectId.value
+  draggingProjectId.value = null
+  dragOverPhase.value = null
+  if (!projectId) return
+
+  const project = (workspaceStore.projects.value || []).find((p) => p.id === projectId)
+  if (!project) return
+
+  await onUpdateReleasePhase(project, targetPhase)
+}
+
+// Add Project Dialog Handling
+async function onProjectCreated(payload: {
+  name?: string
+  title?: string
+  description?: string
+  status?: 'active' | 'planned' | 'on-hold' | 'completed' | 'archived'
+  priority?: 'low' | 'medium' | 'high' | 'critical'
+  startDate?: string
+  dueDate?: string
+  githubRepo?: string
+  deployUrl?: string
+  techStack?: string[]
+}) {
+  const title = payload.title || payload.name || 'Untitled Project'
+  const newSlug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '') || `proj-${Date.now()}`
+
+  try {
+    await projectsApi.createProject({
+      slug: newSlug,
+      title,
+      description: payload.description,
+      status: payload.status || 'active',
+      priority: payload.priority || 'medium',
+      startDate: payload.startDate || null,
+      dueDate: payload.dueDate || null,
+      githubRepo: payload.githubRepo || null,
+      deployUrl: payload.deployUrl || null,
+      techStack: payload.techStack || []
+    })
+
+    showAddModal.value = false
+    showFeedback(`Project '${title}' created successfully.`)
+  } catch (err: any) {
+    showFeedback(`Failed to create project: ${err?.message || 'Unknown error'}`, 'error')
   }
 }
 

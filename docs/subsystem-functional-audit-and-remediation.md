@@ -1,7 +1,7 @@
 # NEXURA MANAGEMENT — DEEP SUBSYSTEM & FUNCTIONAL AUDIT
 **(Kanban, GitHub & DevOps, Tasks, Sprints, Scratchpad, Project Cockpit, Dashboard & Settings)**
 
-> **Status:** `DOCUMENTED FOR EXECUTOR ANALYSIS`  
+> **Status:** `VALIDATED — SYS-01 s/d SYS-13 & FINAL AUDIT CLEANUP (SYS-14 s/d SYS-17)`  
 > **Scope:** Seluruh subsistem fungsional Nexura Management (`d:\Project_Center\REWORK\Management`)  
 > **Keterkaitan Dokumen:** Dokumen ini melengkapi [master-refactoring-and-ui-enhancement-roadmap.md](./master-refactoring-and-ui-enhancement-roadmap.md) (fokus arsitektur folder, clean code, dan komponen UI `Base*.vue`) dengan audit mendalam terhadap **logika bisnis, alur interaksi, sinkronisasi data client-server, integrasi GitHub/DevOps, dan akurasi metrik**.  
 > **Aturan Tata Kelola:** Wajib mematuhi `.agents/rules/multi-agent-governance.md` (5-Phase Gate, Strict File Boundary per Role Eksekutor, dan Styling Freeze Rule).
@@ -345,7 +345,7 @@ Sesuai tata kelola `.agents/rules/multi-agent-governance.md` Bab 4 (Tahap C) dan
 4. **Batas Mutlak 14 File GitHub (`security-headers.spec.mjs:102`):**
    Folder `server/api/github/` dikunci tepat 14 file handler oleh test suite CI. Eksekutor **dilarang menambah file baru** di folder tersebut. Seluruh logika bypass/invalidation cache wajib diimplementasikan di dalam 14 file eksisting atau diletakkan di `server/utils/**`.
 5. **Styling & Layout Preservation:**
-   Tidak ada perombakan tema atau penghapusan visual Tailwind Dark Obsidian Bento (`#07080A`, `#111318`, `#818CF8`). Perubahan hanya dilakukan untuk menyambungkan binding reaktif, props, dan event handlers.
+   Tidak ada perombakan tema atau penghapusan visual Tailwind Neutral Dark Obsidian Bento (`#07080A`, `#111318`, aksen Micro-Emerald `#10B981`; sebelumnya `#818CF8`). Perubahan hanya dilakukan untuk menyambungkan binding reaktif, props, dan event handlers.
 
 ### 10.2. Scope Pekerjaan (In-Scope vs Out-of-Scope)
 - **In-Scope:**
@@ -689,10 +689,24 @@ Suite tes baru `tests/unit/subsystem-remediation.spec.mjs` dirancang oleh `qa-au
   3. Masalah dianalisis ulang bersama analis domain terkait sebelum mencoba kembali.
 
 ### 14.2. Kriteria Selesai (Definition of Done / DoD)
-Pekerjaan subsistem ini dinyatakan selesai dan siap diratifikasi (`ACCEPTED`) apabila:
-1. Seluruh 13 paket pekerjaan (`SYS-01` s/d `SYS-13`) terimplementasi 100% sesuai file boundaries.
-2. Seluruh 367 unit/contract tests eksisting tetap lulus (`PASS`) tanpa kegagalan (0 fail).
-3. Test suite baru `tests/unit/subsystem-remediation.spec.mjs` (16–18 assertions) lulus 100%.
-4. TypeScript typecheck (`npx vue-tsc --noEmit`) menghasilkan 0 errors.
-5. AST knowledge graph (`python -m graphify update .`) berhasil diperbarui dan sinkron.
-6. Project Owner memverifikasi fungsionalitas dan memberikan akseptasi akhir.
+Pekerjaan subsistem ini dinyatakan selesai (`VALIDATED`) apabila:
+1. Seluruh 13 paket pekerjaan (`SYS-01` s/d `SYS-13`) serta 4 paket penutupan akhir (`SYS-14` s/d `SYS-17`) terimplementasi 100% sesuai file boundaries.
+2. Seluruh suite unit/contract tests (`npm test` / `npm run test:coverage`, baseline akhir: 398 assertions di 29 file test termasuk `tests/unit/subsystem-remediation.spec.mjs`) lulus 100% (`0 fail`).
+3. TypeScript typecheck (`npm run typecheck` / `vue-tsc --noEmit`) dan production build (`npm run build`) menghasilkan 0 errors.
+4. AST knowledge graph (`graphify update .`) berhasil diperbarui dan sinkron.
+5. Project Owner memverifikasi fungsionalitas dan memberikan akseptasi akhir.
+
+---
+
+## 15. Status Penutupan Akhir (Final Closure & Remaining Items Disposition)
+
+Setelah `SYS-01` s/d `SYS-13` diselesaikan di Wave 1–3, audit lanjutan terhadap 6 temuan minor tersisa diputuskan secara eksplisit bersama Project Owner dengan disposisi sebagai berikut:
+
+| Kode | Item / Temuan | Status Akhir | File / Bukti Implementasi & QA |
+|:---:|:---|:---|:---|
+| `SYS-14` | **CI/CD Builds Tile Honesty & Live Workflows Aggregation** | `VALIDATED` | `components/dashboard/UnifiedHeroBanner.vue` (`ciStatusDotClass`, `ciSummaryTextClass`, non-pulsing `bg-zinc-600` saat `null`/kosong) & `components/dashboard/Dashboard.vue` (`syncDashboardCiMetrics()` dengan guard `session.isAuthenticated.value`). Validated via `TEST-SYS-14-CI-01`. |
+| `SYS-15` | **Shortcut Label Alignment (`'Ctrl+N'` -> `'C'`)** | `VALIDATED` | `app/pages/index.vue` & `app/pages/tasks.vue` diselaraskan dengan shortcut keyboard `'C'` di `app/app.vue`. Validated via `TEST-SYS-15-SHORTCUT-01`. |
+| `SYS-16` | **Scoped Status & Analytics Counters (`/tasks`)** | `VALIDATED` | `app/pages/tasks.vue` menambahkan computed `scopedTasks` (`projectFilter`, `priorityFilter`, `tagFilter`, `search` tanpa `statusFilter`) untuk `allCount..blockedCount` & `filteredTasks`. Validated via `TEST-SYS-16-SCOPED-COUNTS-01`. |
+| `SYS-17` | **Roadmap `+ New Project` Action & Phase Drag-and-Drop** | `VALIDATED` | `app/pages/roadmap.vue` menambahkan action `'new-project'`, `<AddProjectModal>`, `onProjectCreated()`, dan HTML5 drag-and-drop lintas 5 kolom `CANONICAL_RELEASE_PHASES` via `onUpdateReleasePhase()`. Validated via `TEST-SYS-17-ROADMAP-DND-01`. |
+| `SKIP-01` | **Kanban Same-Column Vertical Reordering (`sortOrder`/`position`)** | `SKIPPED BY DESIGN` | Sengaja dilewati atas persetujuan Project Owner untuk menghindari migrasi DDL kolom `position` tambahan yang tidak esensial; sorting tetap mengikuti urutan terkendali `preserveOrder`. |
+| `KEEP-01` | **Endpoint Legacy (`stats.get.ts` & `activities.get.ts`)** | `PRESERVED` | Dipertahankan secara eksplisit: `server/api/stats.get.ts` direferensikan oleh `tests/unit/route-security.spec.mjs`, sedangkan `server/api/activities.get.ts` diekspos oleh `composables/useTasks.ts` (`getActivities`). |

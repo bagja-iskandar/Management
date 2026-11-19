@@ -898,7 +898,7 @@
       "file_type": "code",
       "norm_label": "projectstat",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L747"
+      "source_location": "L769"
     },
     {
       "id": "app_pages_projects_index_activestatusfilter",
@@ -6762,7 +6762,7 @@
       "file_type": "code",
       "norm_label": "ensureprojectexpanded()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L631"
+      "source_location": "L653"
     },
     {
       "id": "components_layout_sidebar_isexpanded",
@@ -6774,7 +6774,7 @@
       "file_type": "code",
       "norm_label": "isexpanded()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L614"
+      "source_location": "L636"
     },
     {
       "id": "components_layout_sidebar_isprojectactive",
@@ -6786,7 +6786,7 @@
       "file_type": "code",
       "norm_label": "isprojectactive()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L657"
+      "source_location": "L679"
     },
     {
       "id": "components_layout_sidebar_isrouteactive",
@@ -6798,7 +6798,7 @@
       "file_type": "code",
       "norm_label": "isrouteactive()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L646"
+      "source_location": "L668"
     },
     {
       "id": "components_layout_sidebar_issubitemactive",
@@ -6810,7 +6810,7 @@
       "file_type": "code",
       "norm_label": "issubitemactive()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L662"
+      "source_location": "L684"
     },
     {
       "id": "components_layout_sidebar_onprojectclick",
@@ -6822,7 +6822,7 @@
       "file_type": "code",
       "norm_label": "onprojectclick()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L639"
+      "source_location": "L661"
     },
     {
       "id": "components_layout_sidebar_selectprojecttab",
@@ -6834,7 +6834,7 @@
       "file_type": "code",
       "norm_label": "selectprojecttab()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L667"
+      "source_location": "L689"
     },
     {
       "id": "components_layout_sidebar_toggleprojectexpand",
@@ -6846,7 +6846,7 @@
       "file_type": "code",
       "norm_label": "toggleprojectexpand()",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L618"
+      "source_location": "L640"
     },
     {
       "id": "app_pages_projects_index_closeeditmodal",
@@ -27410,7 +27410,7 @@
       "file_type": "code",
       "norm_label": "activesprintcode",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L730"
+      "source_location": "L752"
     },
     {
       "id": "components_layout_sidebar_currentrouteprojectslug",
@@ -27421,7 +27421,7 @@
       "file_type": "code",
       "norm_label": "currentrouteprojectslug",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L689"
+      "source_location": "L711"
     },
     {
       "id": "components_layout_sidebar_data_telemetry",
@@ -27432,7 +27432,7 @@
       "file_type": "code",
       "norm_label": "{ data: telemetry }",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L700"
+      "source_location": "L722"
     },
     {
       "id": "components_layout_sidebar_defaultprojects",
@@ -27443,7 +27443,7 @@
       "file_type": "code",
       "norm_label": "defaultprojects",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L740"
+      "source_location": "L762"
     },
     {
       "id": "components_layout_sidebar_displayedprojects",
@@ -27454,7 +27454,7 @@
       "file_type": "code",
       "norm_label": "displayedprojects",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L776"
+      "source_location": "L798"
     },
     {
       "id": "components_layout_sidebar_expandedprojects",
@@ -27465,7 +27465,7 @@
       "file_type": "code",
       "norm_label": "expandedprojects",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L612"
+      "source_location": "L634"
     },
     {
       "id": "components_layout_sidebar_githubratelimitdisplay",
@@ -27476,7 +27476,7 @@
       "file_type": "code",
       "norm_label": "githubratelimitdisplay",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L708"
+      "source_location": "L730"
     },
     {
       "id": "components_layout_sidebar_githubratelimitpercent",
@@ -27487,7 +27487,7 @@
       "file_type": "code",
       "norm_label": "githubratelimitpercent",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L715"
+      "source_location": "L737"
     },
     {
       "id": "components_layout_sidebar_issupabasehealthy",
@@ -27498,7 +27498,7 @@
       "file_type": "code",
       "norm_label": "issupabasehealthy",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L704"
+      "source_location": "L726"
     },
     {
       "id": "components_layout_sidebar_openaddtask",
@@ -27509,7 +27509,7 @@
       "file_type": "code",
       "norm_label": "{ openaddtask }",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L697"
+      "source_location": "L719"
     },
     {
       "id": "components_layout_sidebar_projectnav",
@@ -27520,7 +27520,7 @@
       "file_type": "code",
       "norm_label": "projectnav",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L610"
+      "source_location": "L632"
     },
     {
       "id": "components_layout_sidebar_projectstatsmap",
@@ -27531,7 +27531,7 @@
       "file_type": "code",
       "norm_label": "projectstatsmap",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L754"
+      "source_location": "L776"
     },
     {
       "id": "components_layout_sidebar_repos",
@@ -27542,7 +27542,7 @@
       "file_type": "code",
       "norm_label": "{ repos }",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L696"
+      "source_location": "L718"
     },
     {
       "id": "components_layout_sidebar_reposcount",
@@ -27553,7 +27553,7 @@
       "file_type": "code",
       "norm_label": "reposcount",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L728"
+      "source_location": "L750"
     },
     {
       "id": "components_layout_sidebar_route",
@@ -27564,7 +27564,7 @@
       "file_type": "code",
       "norm_label": "route",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L609"
+      "source_location": "L631"
     },
     {
       "id": "components_layout_sidebar_session",
@@ -27575,7 +27575,7 @@
       "file_type": "code",
       "norm_label": "session",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L695"
+      "source_location": "L717"
     },
     {
       "id": "components_layout_sidebar_taskscount",
@@ -27586,7 +27586,7 @@
       "file_type": "code",
       "norm_label": "taskscount",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L727"
+      "source_location": "L749"
     },
     {
       "id": "components_layout_sidebar_workspacestore",
@@ -27597,7 +27597,7 @@
       "file_type": "code",
       "norm_label": "workspacestore",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L722"
+      "source_location": "L744"
     },
     {
       "id": "project_context_design_2_color_tokens_tailwind_config_ts_css_variables",
@@ -35470,7 +35470,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L663",
+      "source_location": "L685",
       "weight": 1.0
     },
     {
@@ -35482,7 +35482,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L640",
+      "source_location": "L662",
       "weight": 1.0
     },
     {
@@ -35494,7 +35494,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L641",
+      "source_location": "L663",
       "weight": 1.0
     },
     {
@@ -35506,7 +35506,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L669",
+      "source_location": "L691",
       "weight": 1.0
     },
     {
@@ -44136,7 +44136,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L600",
+      "source_location": "L622",
       "weight": 1.0
     },
     {
@@ -52974,7 +52974,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L609",
+      "source_location": "L631",
       "weight": 1.0
     },
     {
@@ -52985,7 +52985,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L610",
+      "source_location": "L632",
       "weight": 1.0
     },
     {
@@ -52996,7 +52996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L612",
+      "source_location": "L634",
       "weight": 1.0
     },
     {
@@ -53007,7 +53007,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L614",
+      "source_location": "L636",
       "weight": 1.0
     },
     {
@@ -53018,7 +53018,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L618",
+      "source_location": "L640",
       "weight": 1.0
     },
     {
@@ -53029,7 +53029,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L631",
+      "source_location": "L653",
       "weight": 1.0
     },
     {
@@ -53040,7 +53040,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L639",
+      "source_location": "L661",
       "weight": 1.0
     },
     {
@@ -53051,7 +53051,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L646",
+      "source_location": "L668",
       "weight": 1.0
     },
     {
@@ -53062,7 +53062,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L657",
+      "source_location": "L679",
       "weight": 1.0
     },
     {
@@ -53073,7 +53073,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L662",
+      "source_location": "L684",
       "weight": 1.0
     },
     {
@@ -53084,7 +53084,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L667",
+      "source_location": "L689",
       "weight": 1.0
     },
     {
@@ -53095,7 +53095,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L689",
+      "source_location": "L711",
       "weight": 1.0
     },
     {
@@ -53106,7 +53106,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L695",
+      "source_location": "L717",
       "weight": 1.0
     },
     {
@@ -53117,7 +53117,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L696",
+      "source_location": "L718",
       "weight": 1.0
     },
     {
@@ -53128,7 +53128,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L697",
+      "source_location": "L719",
       "weight": 1.0
     },
     {
@@ -53139,7 +53139,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L700",
+      "source_location": "L722",
       "weight": 1.0
     },
     {
@@ -53150,7 +53150,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L704",
+      "source_location": "L726",
       "weight": 1.0
     },
     {
@@ -53161,7 +53161,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L708",
+      "source_location": "L730",
       "weight": 1.0
     },
     {
@@ -53172,7 +53172,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L715",
+      "source_location": "L737",
       "weight": 1.0
     },
     {
@@ -53183,7 +53183,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L722",
+      "source_location": "L744",
       "weight": 1.0
     },
     {
@@ -53194,7 +53194,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L727",
+      "source_location": "L749",
       "weight": 1.0
     },
     {
@@ -53205,7 +53205,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L728",
+      "source_location": "L750",
       "weight": 1.0
     },
     {
@@ -53216,7 +53216,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L730",
+      "source_location": "L752",
       "weight": 1.0
     },
     {
@@ -53227,7 +53227,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L740",
+      "source_location": "L762",
       "weight": 1.0
     },
     {
@@ -53238,7 +53238,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L747",
+      "source_location": "L769",
       "weight": 1.0
     },
     {
@@ -53249,7 +53249,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L754",
+      "source_location": "L776",
       "weight": 1.0
     },
     {
@@ -53260,7 +53260,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "components/layout/Sidebar.vue",
-      "source_location": "L776",
+      "source_location": "L798",
       "weight": 1.0
     },
     {
